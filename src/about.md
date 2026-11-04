@@ -6,36 +6,12 @@ description: "تعرّف على توريلو: دليل بحريني للمطاع
 langSwitchUrl: "/en/about.html"
 ---
 
-<section class="about-hero" aria-label="توريلو">
-  <p class="about-hero-note about-hero-lead">دليل بحريني يجمع المطاعم والكافيهات والمتاجر والأماكن ومحلات السيارات في مكان واحد.</p>
-  <p class="about-hero-note about-hero-side">يُحدَّث بشكل دوري، بالعربي والإنجليزي.</p>
-  <div class="about-badge" id="aboutBadge" data-drag-hint="اسحب البطاقة">
-    <div class="about-badge-strap" aria-hidden="true"></div>
-    <div class="about-badge-clip" aria-hidden="true"></div>
-    <div class="about-badge-holder">
-      <span class="about-badge-hole" aria-hidden="true"></span>
-      <div class="about-badge-card">
-        <p class="about-badge-name">توريلو</p>
-        <p class="about-badge-other" lang="en" dir="ltr">Torilu</p>
-        <dl class="about-badge-facts">
-          <dt>يجمع</dt>
-          <dd>مطاعم · كافيهات · متاجر · أماكن · سيارات</dd>
-          <dt>الشارات</dt>
-          <dd class="about-badge-chips">
-            <a class="about-chip about-chip-visited" href="#visited">✅ زُرته شخصياً</a>
-            <a class="about-chip about-chip-liked" href="#liked">👍 أعجبني</a>
-            <a class="about-chip about-chip-reviews" href="#reviews">ليس موقع تقييمات</a>
-          </dd>
-        </dl>
-      </div>
-    </div>
-  </div>
-  <div class="about-marquee" aria-hidden="true"><div class="about-marquee-track"><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span></div><div class="about-marquee-track"><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span></div></div>
+<section class="page-header">
+  <h1>عن توريلو</h1>
+  <p>دليل بحريني يجمع المطاعم والكافيهات والمتاجر والأماكن ومحلات السيارات في مكان واحد، ويُحدَّث بشكل دوري بالعربي والإنجليزي.</p>
 </section>
 
 <article class="prose">
-
-# عن موقع توريلو
 
 "توريلو" دليل بحريني يجمع في مكان واحد المطاعم والكافيهات والمخبوزات والمتاجر والأماكن ومحلات السيارات في البحرين، بالعربي والإنجليزي، بهدف توفير الوقت والجهد على الزائر.
 
@@ -57,19 +33,19 @@ langSwitchUrl: "/en/about.html"
 
 يمكنك حفظ ما يعجبك في «المفضلة» دون تسجيل دخول، وتُحفظ القائمة في متصفحك فقط. فلا يطلب الموقع منك حساباً ولا كلمة سر.
 
-<h2 id="visited">شارة "✅ زُرته شخصياً"</h2>
+<h2 id="visited">شارة «زُرته شخصياً»</h2>
 
-بعض البطاقات تحمل شارة "✅ زُرته شخصياً" — هذه الشارة تعني إن صاحب موقع توريلو زار هذا المكان بنفسه فعلياً، مو مجرد معلومة منقولة من الإنترنت. نضيفها تدريجياً كل ما زرنا مكاناً جديداً.
+بعض البطاقات تحمل شارة «زُرته شخصياً» — هذه الشارة تعني أن صاحب موقع توريلو زار هذا المكان بنفسه، فهي ليست مجرد معلومة منقولة من الإنترنت. نضيفها تدريجياً كلما زرنا مكاناً جديداً.
 
-<h2 id="liked">شارة "👍 أعجبني"</h2>
+<h2 id="liked">شارة «أعجبني»</h2>
 
-شارة توصية شخصية من صاحب الموقع — تظهر بس على الأماكن اللي عجبته فعلاً بعد ما جربها. عدم وجود الشارة ما يعني إن المكان سيئ، فقط يعني إنه ما وصلنا رأي شخصي عنه بعد.
+شارة توصية شخصية من صاحب الموقع، تظهر فقط على الأماكن التي أعجبته فعلاً بعد أن جرّبها. غياب الشارة لا يعني أن المكان سيئ، بل يعني أنه لم يتكوّن لدينا رأي شخصي عنه بعد.
 
 <h2 id="reviews">سياسة الآراء والتقييمات</h2>
 
 توريلو دليل يجمع المعلومات، وليس موقع تقييمات. وجود مطعم أو كافيه أو مخبز في الموقع لا يعني أننا نوصي به أو قيّمناه؛ أغلب البطاقات معلومات فقط: الاسم والموقع وطرق التواصل.
 
-الرأي الشخصي لا يظهر إلا إذا كان مكتوباً بوضوح وصراحة، مثل شارة «👍 أعجبني». ولا يُكتب رأي عن مكان إلا بعد أن يجرّبه صاحب الموقع بنفسه عدة مرات، بما يكفي ليعرف أغلب جوانبه: يتذوّق أكله، ويتعامل مع العاملين فيه.
+الرأي الشخصي لا يظهر إلا إذا كان مكتوباً بوضوح وصراحة، مثل شارة «أعجبني». ولا يُكتب رأي عن مكان إلا بعد أن يجرّبه صاحب الموقع بنفسه عدة مرات، بما يكفي ليعرف أغلب جوانبه: يتذوّق أكله، ويتعامل مع العاملين فيه.
 
 وإذا كان حول مكانٍ كلامٌ سلبي منتشر على الإنترنت، فالأرجح أننا لن نكتب عنه أي رأي، حتى لو كان رأياً إيجابياً، ما لم تكن تجربتنا الشخصية فيه كافية لذلك.
 

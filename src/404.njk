@@ -2,21 +2,20 @@
 layout: base.njk
 permalink: "404.html"
 title: "الصفحة غير موجودة | توريلو"
-description: "الصفحة اللي تدور عليها مو موجودة أو تم نقلها."
+description: "الصفحة التي تبحث عنها غير موجودة أو نُقلت."
 noindex: true
 ---
 <section class="page-header" id="notFoundHeader">
-  <h1>😕 404 — الصفحة مو موجودة</h1>
-  <p>الرابط اللي فتحته مو موجود أو تم نقله.</p>
+  <h1>404 — الصفحة غير موجودة</h1>
+  <p>الرابط الذي فتحته غير موجود أو نُقل.</p>
 </section>
 
 <div class="empty-state">
-  <span class="icon">🔍</span>
-  <p id="notFoundHint">جرّب ترجع للرئيسية، أو تصفّح أحد الأقسام من القائمة فوق.</p>
+  <p id="notFoundHint">ارجع إلى الرئيسية أو تصفّح أحد الأقسام من القائمة.</p>
 </div>
 
 <div class="text-center">
-  <a href="{{ '/index.html' | url }}" class="btn" id="notFoundHomeLink">🏠 الرجوع للرئيسية</a>
+  <a href="{{ '/index.html' | url }}" class="btn" id="notFoundHomeLink">الرجوع إلى الرئيسية</a>
 </div>
 
 <script src="{{ '/js/notfound.js' | url }}"></script>

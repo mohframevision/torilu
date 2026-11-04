@@ -35,10 +35,9 @@ Have a restaurant, store, or place you'd like added to the site? Or have a quest
 
   <div class="form-group">
     <label for="request_type">Request type</label>
-    <select id="request_type" name="request_type">{%- for entry in sections %}
+    <select id="request_type" name="request_type"><option value="General inquiry">General inquiry</option>{%- for entry in sections %}
 <option value="Add to {{ entry.title_en }}">Add to {{ entry.title_en }}</option>{%- endfor %}
-<option value="Report incorrect info">🚩 Report incorrect info</option>
-<option value="General inquiry">General inquiry</option></select>
+<option value="Report incorrect info">Report incorrect info</option></select>
   </div>
 
   <div class="form-group">

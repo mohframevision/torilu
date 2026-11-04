@@ -34,10 +34,9 @@ langSwitchUrl: "/en/contact.html"
 
   <div class="form-group">
     <label for="request_type">نوع الطلب</label>
-    <select id="request_type" name="request_type">{%- for entry in sections %}
+    <select id="request_type" name="request_type"><option value="استفسار عام">استفسار عام</option>{%- for entry in sections %}
 <option value="إضافة إلى {{ entry.title }}">إضافة إلى {{ entry.title }}</option>{%- endfor %}
-<option value="إبلاغ عن معلومة خاطئة">🚩 إبلاغ عن معلومة خاطئة</option>
-<option value="استفسار عام">استفسار عام</option></select>
+<option value="إبلاغ عن معلومة خاطئة">إبلاغ عن معلومة خاطئة</option></select>
   </div>
 
   <div class="form-group">

@@ -7,7 +7,7 @@ langSwitchUrl: "/restaurants/indomeez.html"
 
 ## About
 
-Indomeez is an Indomie-focused spot in Al Sayah, run by Yalla Mutabaq. Open daily from 5pm to 1am.
+Indomeez is an Indomie-focused spot in Al Sayah, run by Yalla Mutabaq. Open daily from 5pm to 1am. [Restaurant's Instagram](https://www.instagram.com/indomeez/)
 
 ## Menu & Prices
 
@@ -24,7 +24,3 @@ Indomeez is an Indomie-focused spot in Al Sayah, run by Yalla Mutabaq. Open dail
 - Creamy Tandoori: add chicken tandoori for +0.700 BHD.
 
 Prices are from the menu posted on the restaurant's account and may change.
-
-## Location
-
-[📍 Open on Google Maps](https://maps.app.goo.gl/NMyaLbfr4AnzpeWi8) · [Restaurant's Instagram](https://www.instagram.com/indomeez/)

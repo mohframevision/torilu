@@ -47,7 +47,3 @@ langSwitchUrl: "/en/restaurants/kabsatna-lmatna.html"
 - **تطبيقات التوصيل:** جاهز، كيتا، طلبات.
 - **إنستقرام:** [kabsatna_bh](https://www.instagram.com/kabsatna_bh/)، وفيه المنيو
   والأوقات.
-
-## الموقع
-
-[📍 افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/P8DGU3SmStLFGM7A9)

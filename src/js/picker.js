@@ -754,14 +754,9 @@ function createTrip(stage, { onStart, onDone }) {
     box.innerHTML = `
       <div class="trip-result-top"><span class="trip-result-icon">${escapeHtml(item.icon || "⭐")}</span><h2>${escapeHtml(itemTitle(item))}</h2></div>
       ${meta ? `<p class="trip-result-meta">${escapeHtml(meta)}</p>` : ""}
-      <div class="trip-result-actions">${buildActionsHtml(item)}${maps}</div>
-      <button type="button" class="trip-again">${t("try_again")}</button>`;
+      <div class="trip-result-actions">${buildActionsHtml(item)}${maps}</div>`;
     stage.append(box);
     wireItemActions(box, item);
-    box.querySelector(".trip-again").addEventListener("click", () => {
-      playClickSound();
-      go();
-    });
     running = false;
     onDone(item);
     TripSound.chime();

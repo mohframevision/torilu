@@ -1868,70 +1868,11 @@ a.photo-credit.card {
 
 /* ===== تذكير "اختيار اليوم" — بطاقة صغيرة بزاوية الشاشة، مو حاجز كامل
    العرض، وواضح إنها تُغلق بسهولة (زر ✕) ===== */
-.daily-pick-reminder {
-  display: none;
-  position: fixed;
-  bottom: 16px;
-  inset-inline-end: 16px;
-  z-index: 60;
-  max-width: 260px;
-  padding: 14px;
-  padding-inline-start: 34px;
-  background: color-mix(in srgb, var(--color-surface) 80%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card-hover);
-}
-
-@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
-  .daily-pick-reminder {
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-  }
-}
-
-.daily-pick-reminder.open {
-  display: block;
-}
-
-.daily-pick-reminder p {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--color-text);
-}
-
-.daily-pick-reminder a {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
-.daily-pick-reminder-close {
-  position: absolute;
-  top: 8px;
-  inset-inline-start: 10px;
-  background: none;
-  border: none;
-  font-size: 0.95rem;
-  line-height: 1;
-  cursor: pointer;
-  color: var(--color-text-muted);
-  padding: 4px;
-}
-
-.daily-pick-reminder-close:hover {
-  color: var(--color-text);
-}
 
 /* الشريط السفلي (.bottom-nav) يظهر بنفس نقطة الكسر ويحجز 60px من الأسفل —
    لازم القاعدتين هنا (بعد التعريف الأصلي) عشان يفوزوا بترتيب الـ cascade،
    قاعدة بنفس التخصيصية بمدية استعلام أسبق بالملف تُهزَم لو التعريف الأصلي
    بلا استعلام جاء بعدها بالملف */
-@media (max-width: 1300px) {
-
-  .daily-pick-reminder {
-    bottom: 76px;
-  }
-}
 
 /* ===== صفحة الإحصائيات ===== */
 .stats-embed {
@@ -2820,8 +2761,7 @@ a.photo-credit.card {
   .desc-toggle,
   .item-actions .btn,
   .filter-chip,
-  .near-me-btn,
-  .daily-pick-reminder-close {
+  .near-me-btn {
     min-width: 44px;
     min-height: 44px;
     display: inline-flex;
@@ -3219,8 +3159,7 @@ a.photo-credit.card {
 .in-app .site-footer,
 .in-app .bottom-nav,
 .in-app .breadcrumb,
-.in-app .page-header,
-.in-app .daily-pick-reminder {
+.in-app .page-header {
   display: none !important;
 }
 
@@ -3247,8 +3186,7 @@ a.photo-credit.card {
   html.touch .bottom-nav,
   html.touch .site-footer,
   html.touch .breadcrumb,
-  html.touch .page-header,
-  html.touch .daily-pick-reminder {
+  html.touch .page-header {
     display: none !important;
   }
 
@@ -3413,213 +3351,8 @@ a.photo-credit.card {
    البطاقة "هوية" توريلو، فمكانها الطبيعي صفحة التعريف. تتأرجح كبندول حقيقي
    (main.js initAboutBadge): تسحبها فتلحق إصبعك، تتركها فتتأرجح وتهدأ، وتهتز
    خفيفاً مع التمرير. الورقة داخلها فاتحة دائماً (شيء مادي، ما يتبع الثيم). */
-.about-hero {
-  --card-w: 228px;
-  --strap: 150px;
-  position: relative;
-  min-height: clamp(500px, 64vh, 640px);
-  margin: 8px 0 36px;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  background: var(--color-surface);
-  isolation: isolate;
-}
-
-.about-hero-note {
-  position: absolute;
-  top: 28px;
-  z-index: 2;
-  max-width: 220px;
-  margin: 0;
-  font-size: 0.82rem;
-  line-height: 1.45;
-  color: var(--color-text);
-}
-
-.about-hero-lead {
-  inset-inline-start: 30px;
-}
-
-.about-hero-side {
-  inset-inline-end: 30px;
-  text-align: end;
-  color: var(--color-text-muted, var(--color-text));
-}
-
-.about-badge {
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  z-index: 3;
-  width: var(--card-w);
-  margin-left: calc(var(--card-w) / -2);
-  transform: rotate(var(--swing, 0rad));
-  transform-origin: 50% 0;
-  will-change: transform;
-}
-
-.about-badge-strap {
-  width: 16px;
-  height: var(--strap);
-  margin: 0 auto;
-  border-radius: 0 0 4px 4px;
-  background: linear-gradient(90deg, #121212, #2c2c2c 45%, #161616);
-}
-
-.about-badge-clip {
-  width: 18px;
-  height: 26px;
-  margin: -4px auto -6px;
-  border: 3px solid #9a9a9a;
-  border-radius: 9px 9px 6px 6px;
-  background: transparent;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-}
-
-.about-badge-holder {
-  position: relative;
-  padding: 26px 12px 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.42);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    0 34px 46px -22px rgba(0, 0, 0, 0.38);
-  transform: rotate(var(--twist, 0rad));
-  transform-origin: 50% 0;
-  cursor: grab;
-  touch-action: none;
-  user-select: none;
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-}
-
-.about-badge-holder.grabbing {
-  cursor: grabbing;
-}
-
-.about-badge-hole {
-  position: absolute;
-  top: 9px;
-  left: 50%;
-  width: 46px;
-  height: 7px;
-  margin-left: -23px;
-  border-radius: var(--radius-pill);
-  background: rgba(0, 0, 0, 0.14);
-}
-
-.about-badge-card {
-  padding: 18px 16px 16px;
-  border-radius: var(--radius-sm);
-  background: #f7f6f1;
-  color: #141414;
-  text-align: start;
-}
-
-.about-badge-name {
-  margin: 0;
-  font-size: 2.7rem;
-  font-weight: 800;
-  line-height: 1.05;
-  color: #1b4d3e;
-}
-
-.about-badge-other {
-  margin: 0 0 22px;
-  font-size: 1.15rem;
-  line-height: 1.2;
-  color: #141414;
-}
-
-.about-badge-other:lang(en) {
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-}
-
-.about-badge-facts {
-  margin: 0;
-  font-size: 0.72rem;
-  line-height: 1.4;
-}
-
-.about-badge-facts dt {
-  font-size: 0.62rem;
-  color: #6b6b6b;
-}
-
-.about-badge-facts dd {
-  margin: 0 0 8px;
-}
-
-.about-badge-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.about-chip {
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-  color: #fff;
-  font-size: 0.62rem;
-  font-weight: 700;
-  line-height: 1.6;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.about-chip:focus-visible {
-  outline: 2px solid #141414;
-  outline-offset: 2px;
-}
-
-.about-chip-visited {
-  background: #1b4d3e;
-}
-
-.about-chip-liked {
-  background: #c93a26;
-}
-
-.about-chip-reviews {
-  background: #3b3fd1;
-}
-
-@media (hover: hover) {
-  .about-chip:hover {
-    filter: brightness(1.15);
-  }
-}
 
 /* الاسم الضخم: شريطان متطابقان يتحركان معاً، فلما يخلص الأول يكون الثاني مكانه */
-.about-marquee {
-  position: absolute;
-  bottom: -0.2em;
-  left: 0;
-  z-index: 1;
-  display: flex;
-  width: max-content;
-  direction: ltr;
-  font-size: clamp(96px, 16vw, 230px);
-  font-weight: 800;
-  line-height: 1;
-  color: var(--color-text);
-  white-space: nowrap;
-  pointer-events: none;
-  animation: about-marquee 46s linear infinite;
-}
-
-.about-marquee-track {
-  display: flex;
-  gap: 0.3em;
-  padding-inline-end: 0.3em;
-}
-
-.about-marquee-dot {
-  color: var(--color-primary);
-}
 
 @keyframes about-marquee {
   to {
@@ -3627,70 +3360,7 @@ a.photo-credit.card {
   }
 }
 
-@media (max-width: 600px) {
-  .about-hero {
-    --card-w: 188px;
-    --strap: 96px;
-    min-height: 590px;
-    border-radius: var(--radius);
-  }
-
-  .about-hero-note {
-    top: auto;
-    bottom: 108px;
-    max-width: 46%;
-    font-size: 0.74rem;
-  }
-
-  .about-hero-lead {
-    inset-inline-start: 16px;
-  }
-
-  .about-hero-side {
-    inset-inline-end: 16px;
-  }
-
-  .about-badge-name {
-    font-size: 2.2rem;
-  }
-
-  .about-badge-other {
-    margin-bottom: 14px;
-  }
-}
-
 /* الداكن: البلاستيك الشفاف فوق خلفية داكنة يطلع رمادي؛ نخفّف بياضه، والحزام أفتح شوي */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .about-badge-strap {
-    background: linear-gradient(90deg, #2a2a2a, #474747 45%, #2e2e2e);
-  }
-
-  :root:not([data-theme="light"]) .about-badge-holder {
-    border-color: rgba(255, 255, 255, 0.16);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.18),
-      0 34px 46px -22px rgba(0, 0, 0, 0.7);
-  }
-}
-
-:root[data-theme="dark"] .about-badge-strap {
-  background: linear-gradient(90deg, #2a2a2a, #474747 45%, #2e2e2e);
-}
-
-:root[data-theme="dark"] .about-badge-holder {
-  border-color: rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 34px 46px -22px rgba(0, 0, 0, 0.7);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-marquee {
-    animation: none;
-  }
-}
 
 /* ===== تبويب «تدرّب»: نوتات مكتوبة تنزل أعمدة فوق البيانو ===== */
 
@@ -3894,22 +3564,6 @@ li {
   .report-link {
     padding-block: 10px;
     margin-top: 0;
-  }
-
-  .about-chip {
-    min-height: 40px;
-  }
-}
-
-.about-chip {
-  display: inline-flex;
-  align-items: center;
-  padding-inline: 10px;
-}
-
-@media (pointer: coarse) {
-  .about-chip {
-    min-height: 44px;
   }
 }
 
@@ -4872,7 +4526,6 @@ li {
 .demo-cursor[hidden] { display: none; }
 .demo-cursor.press { scale: 0.7; }
 
-
 /* =====================================================================
    توريلو — شكل «د» (هادئ + جريدة)، اختيار صاحب الموقع 2026-11-05
    الترتيب والمساحة من «الهادئ» (مثل أبل)، والخط والخطوط الفاصلة ونقاط
@@ -4983,20 +4636,6 @@ h2,
 .d-hero .home-chips {
   margin: var(--space-4) 0 0;
 }
-.d-secs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 24px;
-  margin-top: var(--space-5);
-  font-size: 0.95rem;
-}
-.d-secs a {
-  color: var(--color-text-muted);
-  text-decoration: none;
-}
-.d-secs a:hover {
-  color: var(--color-primary);
-}
 .d-moon {
   width: 100%;
   max-width: 340px;
@@ -5042,7 +4681,11 @@ h2,
   padding: 34px 34px 28px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: var(--space-2);
+}
+.d-lead .d-meta {
+  margin-top: var(--space-3);
 }
 .d-lead-title {
   font-family: var(--font-serif);
@@ -5058,7 +4701,7 @@ h2,
 /* بطاقات الأماكن: بطاقة ناعمة، والاسم بخط الجريدة */
 .d-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
   gap: 18px;
 }
 .d-card {
@@ -5107,8 +4750,13 @@ h2,
 }
 .d-meta span {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
+  min-width: 0;
+}
+.d-meta svg {
+  flex: none;
+  margin-top: 3px;
 }
 
 /* محتار؟ — بين خطين مثل ركن في جريدة */
@@ -5140,12 +4788,6 @@ h2,
   text-decoration: none;
 }
 
-/* روابط الأقسام في الهيدر على الكمبيوتر، فما نكررها تحت البحث إلا على الجوال */
-@media (min-width: 1201px) {
-  .d-secs {
-    display: none;
-  }
-}
 @media (max-width: 760px) {
   .d-hero {
     grid-template-columns: 1fr;
@@ -5186,4 +4828,265 @@ h2,
 }
 .tag-icon {
   display: none;
+}
+
+/* ===== «د» — تصحيحات المراجعة (2026-11-05) ===== */
+
+/* الهيدر أهدأ: بحث و«اختار لي» موجودان بالشريط السفلي على الجوال */
+@media (max-width: 1300px) {
+  .site-header .header-search,
+  .site-header .icon-btn-picker {
+    display: none;
+  }
+  .main-nav .nav-home,
+  .main-nav .nav-only-mobile {
+    display: none;
+  }
+}
+/* بالرئيسية البحث الكبير موجود، فما نكرره بالهيدر */
+body:has(.d-hero) .site-header .header-search {
+  display: none;
+}
+.header-search:not(.active) {
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+.icon-btn.active {
+  background: var(--color-primary-fill);
+  border-color: var(--color-primary-fill);
+  color: #fff;
+}
+.nav-toggle.open {
+  transform: none;
+}
+/* الرابط النشط خط تحته بدل حبة زرقاء (زر أزرق واحد بالشاشة) */
+.main-nav a.active {
+  background: none;
+  color: var(--color-primary);
+  box-shadow: inset 0 -2px 0 var(--color-primary);
+  border-radius: 0;
+}
+@media (max-width: 560px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+}
+/* خط الحبر أنعم بالداكن (الأبيض الكامل قاسٍ على العين) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-ink-rule: color-mix(in srgb, var(--color-text) 55%, transparent);
+  }
+}
+:root[data-theme="dark"] {
+  --color-ink-rule: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.site-footer {
+  border-top: 3px double var(--color-ink-rule);
+  margin-top: 64px;
+}
+.footer-sound {
+  width: 32px;
+  height: 32px;
+}
+@media (max-width: 560px) {
+  .footer-links {
+    gap: 10px 18px;
+  }
+}
+
+/* زر «ابحث» داخل البحث الكبير هادئ، فيبقى «اختار لي» الزر الأزرق الوحيد */
+.d-hero .search-go {
+  background: transparent;
+  color: var(--color-primary);
+  box-shadow: none;
+}
+.d-hero .search-go:hover {
+  background: var(--color-primary-soft);
+}
+
+/* ===== صفحات الأقسام ===== */
+.page-header {
+  border-bottom: 3px double var(--color-ink-rule);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+main .search-box {
+  border-radius: var(--radius-pill);
+  box-shadow: 0 -12px 0 6px var(--color-bg), 0 10px 40px rgb(21 69 162 / 0.08);
+  border-color: var(--color-border);
+}
+.card-grid {
+  align-items: stretch;
+}
+.card-grid .item-card {
+  display: flex;
+  flex-direction: column;
+}
+.card-grid .item-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.card-grid .item-actions {
+  margin-top: auto;
+}
+.card-grid .report-link {
+  display: none;
+}
+.item-meta .tag:nth-child(n + 4) {
+  display: none;
+}
+.item-card.verified {
+  border-inline-start: 0;
+  background-image: none;
+}
+:root .verified-badge,
+:root .liked-badge,
+:root:not([data-theme="light"]) .verified-badge,
+:root:not([data-theme="light"]) .liked-badge {
+  background: none;
+  color: var(--color-primary);
+  border: 1px solid var(--color-ink-rule);
+  font-family: "Cairo", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 2px 10px;
+}
+.empty-state-icon {
+  display: none;
+}
+@media (max-width: 560px) {
+  .page-header p:not(.review-note) {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ===== صفحة المكان: عمود واحد، واقتباس جريدة، وجدول أسعار بخطوط لا بخلفيات ===== */
+.detail:not(.detail-wide) > * {
+  max-width: 760px;
+  margin-inline: auto;
+}
+.recommend-quote {
+  margin-block: 24px 8px;
+  background: none;
+  border: 0;
+  border-block: 1px solid var(--color-ink-rule);
+  border-radius: 0;
+  padding: 20px 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
+}
+.recommend-quote::before {
+  display: none;
+}
+.prose h2 {
+  border-top: 1px solid var(--color-ink-rule);
+  padding-top: var(--space-3);
+  margin-top: 40px;
+}
+.prose table {
+  border: 0;
+  border-radius: 0;
+}
+.prose th {
+  background: none;
+  border-bottom: 2px solid var(--color-ink-rule);
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+}
+.prose tbody tr:nth-child(even) {
+  background: none;
+}
+.prose td {
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 600px) {
+  .prose th,
+  .prose td {
+    padding: 9px 8px;
+    font-size: 0.88rem;
+  }
+}
+
+/* ===== اختار لي ===== */
+.picker-stage[class][data-vehicle] {
+  --frame: #1b2a4a;
+  --rim: #2c4a85;
+}
+.picker-stage.trip-night[class][data-vehicle] {
+  --frame: #0f1830;
+  --rim: #1f3566;
+}
+.trip-card,
+.trip-result-top {
+  background: linear-gradient(135deg, oklch(0.46 0.13 262), oklch(0.36 0.12 262));
+}
+.trip-card-icon,
+.trip-result-icon,
+.picker-category-icon {
+  display: none;
+}
+.trip-result-actions .btn.secondary:nth-child(n + 4) {
+  display: none;
+}
+.picker-category.active {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+  background: color-mix(in srgb, var(--color-primary) 6%, var(--color-surface));
+  color: var(--color-primary);
+}
+@media (max-width: 600px) {
+  .picker-category {
+    padding: 12px 6px;
+  }
+}
+
+/* ===== البحث ===== */
+.search-group h2 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  border-top: 3px double var(--color-ink-rule);
+  padding-top: var(--space-2);
+  margin: var(--space-6) 0 var(--space-3);
+}
+.search-row-icon {
+  display: none;
+}
+.search-row-text b {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+.search-more {
+  display: block;
+  margin: var(--space-3) auto 0;
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .search-row-text small {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+:root[data-theme="dark"] .search-row mark {
+  background: color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .search-row mark {
+    background: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  }
+}
+
+/* أول عنوان بالمقال تحت خطّي رأس الصفحة مباشرة: بلا خط ثالث ولا فراغ */
+.prose > h2:first-child {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
 }

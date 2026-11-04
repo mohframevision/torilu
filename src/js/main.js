@@ -606,40 +606,6 @@ function initThemeToggle() {
   });
 }
 
-/* ===== تذكير "اختيار اليوم" (بديل خفيف عن الإشعارات لا يعتمد على أي خدمة
-   خارجية) — لو الزائر ما زار الصفحة الرئيسية اليوم بعد وهو يتصفح صفحة ثانية
-   بالموقع، يظهر له تذكير صغير وغير مزعج. مو إشعار حقيقي (ما يوصله وهو خارج
-   الموقع)، بس يكمّل أي قناة توصيل ثانية لاحقاً بدل ما يكون بديل عنها ===== */
-function initDailyPickReminder() {
-  const SEEN_KEY = "daily_pick_seen_date";
-  const DISMISSED_KEY = "daily_pick_reminder_dismissed";
-  const today = new Date().toISOString().slice(0, 10);
-
-  if (document.getElementById("homeCarousel")) {
-    // إذا الزائر بالصفحة الرئيسية أصلاً، يعتبر اختيار اليوم "مشاهَد"
-    lsSet(SEEN_KEY, today);
-    return;
-  }
-
-  if (lsGet(SEEN_KEY) === today) return;
-  if (ssGet(DISMISSED_KEY)) return;
-  // مرة وحدة باليوم (أول صفحة فرعية فقط) — كانت تطلع بكل صفحة وتغطي البطاقات
-  const SHOWN_KEY = "daily_pick_reminder_shown";
-  if (lsGet(SHOWN_KEY) === today) return;
-
-  const banner = document.getElementById("dailyPickReminder");
-  const closeBtn = document.getElementById("dailyPickReminderClose");
-  if (!banner || !closeBtn) return;
-
-  lsSet(SHOWN_KEY, today);
-  banner.classList.add("open");
-
-  closeBtn.addEventListener("click", () => {
-    ssSet(DISMISSED_KEY, "1");
-    banner.classList.remove("open");
-  });
-}
-
 /* ===== قائمة الجوال ===== */
 function initNavToggle() {
   const toggles = document.querySelectorAll(".nav-toggle");
@@ -1367,7 +1333,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
       <div class="item-actions">
         ${buildActionsHtml(item)}
       </div>
-      <a class="report-link" href="${SITE_ROOT_PATH}${window.SITE_LANG === "en" ? "en/" : ""}contact.html?report=${encodeURIComponent(title)}&section=${encodeURIComponent(section)}">🚩 ${t("report_wrong_info")}</a>
+      <a class="report-link" href="${SITE_ROOT_PATH}${window.SITE_LANG === "en" ? "en/" : ""}contact.html?report=${encodeURIComponent(title)}&section=${encodeURIComponent(section)}">${t("report_wrong_info")}</a>
     </div>
   `;
 
@@ -2123,7 +2089,6 @@ function initWelcomePicker() {
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initSoundToggle();
-  initDailyPickReminder();
   initNavToggle();
   initHeaderScroll();
   initInstallPrompt();
@@ -2152,131 +2117,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSiteStats();
   }
 });
-
-/* ===== عن الموقع: بطاقة توريلو المعلّقة (بندول بسيط) =====
-   زاوية البطاقة theta حول نقطة التعليق فوق الحزام. بلا سحب: تسارع الجاذبية
-   -K·sin(theta) مع احتكاك، فتتأرجح وتهدأ. أثناء السحب: الزاوية تلحق اتجاه الإصبع
-   من نقطة التعليق، وسرعة اللحاق تصير زخم الإفلات. الحلقة تشتغل فقط وهي تتحرك. */
-function initAboutBadge() {
-  const badge = document.getElementById("aboutBadge");
-  const hero = badge?.closest(".about-hero");
-  const holder = badge?.querySelector(".about-badge-holder");
-  if (!badge || !hero || !holder) return;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const K = 14; // دورة تأرجح ~١٫٧ ثانية
-  const DAMP = reduce ? 12 : 1.5; // تقليل الحركة: ترجع لمكانها بلا تأرجح
-  const MAX = 1.2;
-  const clampAngle = (v, m) => Math.max(-m, Math.min(m, v));
-  let theta = 0;
-  let omega = 0;
-  let frame = 0;
-  let last = 0;
-  let drag = null;
-  holder.title = badge.dataset.dragHint || "";
-
-  function paint() {
-    badge.style.setProperty("--swing", theta.toFixed(4) + "rad");
-    badge.style.setProperty("--twist", clampAngle(-omega * 0.05, 0.22).toFixed(4) + "rad");
-  }
-  function step(now) {
-    const dt = Math.min(0.032, (now - last) / 1000) || 0.016;
-    last = now;
-    if (drag) {
-      const prev = theta;
-      theta += (drag.target - theta) * Math.min(1, dt * 16);
-      omega = (theta - prev) / dt;
-    } else {
-      omega += (-K * Math.sin(theta) - DAMP * omega) * dt;
-      theta += omega * dt;
-    }
-    theta = clampAngle(theta, MAX);
-    paint();
-    if (drag || Math.abs(theta) > 0.002 || Math.abs(omega) > 0.004) {
-      frame = requestAnimationFrame(step);
-    } else {
-      theta = omega = 0;
-      paint();
-      frame = 0;
-    }
-  }
-  const kick = () => {
-    if (frame) return;
-    last = performance.now();
-    frame = requestAnimationFrame(step);
-  };
-
-  // اتجاه الإصبع من نقطة التعليق (موجب = يمين). offsetTop بلا تكبير، فنضربه بنسبة
-  // تكبير الصفحة (zoom على الشاشات العريضة) عشان يطابق إحداثيات المؤشر
-  function pointerAngle(e) {
-    const r = hero.getBoundingClientRect();
-    const scale = r.width / hero.offsetWidth || 1;
-    const px = r.left + r.width / 2;
-    const py = r.top + badge.offsetTop * scale;
-    return Math.atan2(e.clientX - px, Math.max(1, e.clientY - py));
-  }
-
-  holder.addEventListener("pointerdown", (e) => {
-    if (e.button > 0) return;
-    drag = {
-      id: e.pointerId,
-      x: e.clientX,
-      y: e.clientY,
-      phi0: pointerAngle(e),
-      theta0: theta,
-      target: theta,
-      moved: false,
-    };
-    kick();
-  });
-  holder.addEventListener("pointermove", (e) => {
-    if (!drag || e.pointerId !== drag.id) return;
-    if (!drag.moved) {
-      if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 5) return;
-      // الالتقاط بعد أول حركة فقط: الضغطة العادية على الشارات تبقى رابطاً
-      drag.moved = true;
-      holder.setPointerCapture(e.pointerId);
-      holder.classList.add("grabbing");
-    }
-    // تدوير البطاقة بزاوية موجبة يحرّك أسفلها لليسار، فالاتجاه معكوس
-    drag.target = clampAngle(drag.theta0 - (pointerAngle(e) - drag.phi0), MAX);
-  });
-  const release = (e) => {
-    if (!drag || e.pointerId !== drag.id) return;
-    if (drag.moved) {
-      holder.classList.remove("grabbing");
-      // السحب انتهى فوق شارة؟ النقرة اللي تتبع الإفلات مباشرة ما تفتح رابطها
-      justDragged = true;
-      setTimeout(() => (justDragged = false), 0);
-    }
-    drag = null;
-    kick();
-  };
-  let justDragged = false;
-  holder.addEventListener("click", (e) => justDragged && e.preventDefault(), true);
-  holder.addEventListener("pointerup", release);
-  holder.addEventListener("pointercancel", release);
-
-  if (reduce) return;
-  // دخول: البطاقة تنزل مائلة شوي وتتأرجح لمكانها
-  theta = 0.42;
-  paint();
-  kick();
-  // التمرير يهزّها خفيفاً (القصور الذاتي: الصفحة تتحرك والبطاقة تتأخر)
-  let lastY = window.scrollY;
-  window.addEventListener(
-    "scroll",
-    () => {
-      const dy = window.scrollY - lastY;
-      lastY = window.scrollY;
-      const r = hero.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > window.innerHeight || drag) return;
-      omega = clampAngle(omega + dy * 0.004, 2.5);
-      kick();
-    },
-    { passive: true }
-  );
-}
-document.addEventListener("DOMContentLoaded", initAboutBadge);
 
 /* ===== «/» يفتح البحث من أي صفحة (عُرف Google وGitHub)؛ بصفحة البحث نفسها يركّز على الحقل ===== */
 document.addEventListener("keydown", (e) => {

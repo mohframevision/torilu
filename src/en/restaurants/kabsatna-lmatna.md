@@ -26,7 +26,3 @@ The owner appeared in an interview on Bahrain TV and explained what sets their k
 - **Direct delivery from the restaurant:** call 33488483.
 - **Delivery apps:** Jahez, Keeta, Talabat.
 - **Instagram:** [kabsatna_bh](https://www.instagram.com/kabsatna_bh/), with the menu and hours.
-
-## Location
-
-[📍 Open on Google Maps](https://maps.app.goo.gl/P8DGU3SmStLFGM7A9)

@@ -43,7 +43,7 @@ Everything is generous, so it makes a great lunch with the family.
 
 ## The Menu
 
-From the printed menu at the Jid Hafs branch (October 2026). Full prices are under the “Menu” button:
+From the printed menu at the Jid Hafs branch (October 2026). Full prices are in the “Menu & Prices” table at the end of the page:
 
 - **Starters:** hummus, tabbouleh, mutabal, yogurt with cucumber, hot salad, olive salad, Turkish salad, fattoush, mixed mezze, pickles, fries and vine leaves
 - **Grills:** a whole or half chicken, grilled breast, tikka and kebab (chicken and meat), chicken wings, lamb chops (reash), chelo kebab and the mixed grill in six sizes
@@ -70,7 +70,3 @@ From the printed menu at the Jid Hafs branch (October 2026). Full prices are und
 
 They offer **home delivery**: order through a branch's number. The
 restaurant's Instagram: [📸 @alshoalarestaurant](https://www.instagram.com/alshoalarestaurant/)
-
-## Location
-
-[📍 Open the Jid Hafs branch on Google Maps](https://maps.app.goo.gl/7PDbBM1rZ4nFH4fG8)

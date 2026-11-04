@@ -23,7 +23,3 @@ they like.
 ## Branches
 
 Jidhafs (two branches), Busaiteen, Riffa, and Hamad Town.
-
-## Location
-
-[📍 Open on Google Maps](https://maps.app.goo.gl/WkY84mBs7z2QeEBdA)

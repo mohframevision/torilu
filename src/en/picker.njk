@@ -2,7 +2,7 @@
 layout: base.njk
 lang: "en"
 permalink: "en/picker.html"
-title: "Pick for Me 🎲 | Torilu"
+title: "Pick for Me | Torilu"
 description: "Can't decide? Let Torilu pick randomly for you from any section."
 navActive: "picker"
 pageScript: "picker"
@@ -11,12 +11,12 @@ langSwitchUrl: "/picker.html"
 <div class="breadcrumb"><a href="{{ '/en/index.html' | url }}">Home</a> / Pick for me</div>
 <section class="page-header">
   <h1>Pick for Me</h1>
-  <p>Can't decide where to go or what to pick? Choose a section and press the button, let Torilu decide for you!</p>
+  <p>Can't decide where to go or what to pick? Choose a section, press the button, and let Torilu decide for you.</p>
 </section>
 
 <div class="picker-categories" id="pickerCategories"></div>
 <div class="picker-area">
-  <label for="pickerArea">📍 Where?</label>
+  <label for="pickerArea">Where?</label>
   <select id="pickerArea"></select>
 </div>
 
@@ -24,6 +24,6 @@ langSwitchUrl: "/picker.html"
   <div class="trip-bar">
     <button type="button" id="pickerSoundBtn" class="trip-round" aria-label="Sound">🔇</button>
     <button type="button" id="pickerVehicleBtn" class="trip-round" aria-label="Change vehicle">🚆</button>
-    <button id="pickerSpinBtn" class="btn picker-spin-btn" disabled>🎲 Pick for me!</button>
+    <button id="pickerSpinBtn" class="btn picker-spin-btn" disabled>Pick for me</button>
   </div>
 </div>

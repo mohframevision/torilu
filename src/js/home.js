@@ -79,7 +79,11 @@
     const tg = (item.tags || []).find((x) => typeof AREA_NAMES === "undefined" || !AREA_NAMES.includes(x));
     return tg ? (isEn && typeof TAGS_EN !== "undefined" && TAGS_EN[tg]) || tg : "";
   };
-  const secName = (section) => (isEn ? SITE_DATA[section].title_en || SITE_DATA[section].title : SITE_DATA[section].title);
+  // «مطاعم البحرين» → «مطاعم»: الاسم المختصر يكفي بسطر البطاقة الصغير
+  const secName = (section) => (isEn ? SITE_DATA[section].title_en || SITE_DATA[section].title : SITE_DATA[section].title).replace(/\s*(البحرين|in Bahrain)$/, "");
+  // فروع نفس المحل («كوجو - الجفير»، «كوجو - سار») ما تاخذ أكثر من بطاقة بنفس الصف
+  const brand = (it) => itemTitle(it).split(/\s+-\s+/)[0].trim();
+  const oneEach = (rows) => { const seen = new Set(); return rows.filter(([, it]) => !seen.has(brand(it)) && seen.add(brand(it))); };
   const hoursOf = (item) => (isEn ? item.hours_en || item.hours : item.hours) || "";
   const meta = (item) => {
     const area = areaOf(item), hours = hoursOf(item);
@@ -125,7 +129,7 @@
       if (!slot.tags.length || s !== "restaurants" || item.tags.some((tg) => slot.tags.includes(tg))) pool.push([s, item]);
     })
   );
-  const timeRow = shuffle(pool.filter(([, item]) => !shown.has(item.id))).slice(0, 6);
+  const timeRow = oneEach(shuffle(pool.filter(([, item]) => !shown.has(item.id)))).slice(0, 6);
   timeRow.forEach(([, item]) => shown.add(item.id));
   if (timeRow.length) {
     document.getElementById("homeTimeTitle").textContent = t(slot.title);
@@ -142,7 +146,7 @@
     })
   );
   newest.sort((a, b) => b[1].addedAt - a[1].addedAt);
-  const newRow = newest.filter(([, item]) => !shown.has(item.id)).slice(0, 6);
+  const newRow = oneEach(newest.filter(([, item]) => !shown.has(item.id))).slice(0, 6);
   if (newRow.length) {
     document.getElementById("homeNewRow").innerHTML = newRow.map(([s, item]) => card(s, item, s === "guides" ? t("home_article_badge") : t("home_new_badge"))).join("");
     document.getElementById("homeNew").hidden = false;

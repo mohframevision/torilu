@@ -7,36 +7,12 @@ description: "Learn about Torilu: a Bahraini guide to restaurants, cafes, stores
 langSwitchUrl: "/about.html"
 ---
 
-<section class="about-hero" aria-label="Torilu">
-  <p class="about-hero-note about-hero-lead">A Bahraini guide that gathers restaurants, cafes, stores, places and car shops in one place.</p>
-  <p class="about-hero-note about-hero-side">Updated regularly, in Arabic and English.</p>
-  <div class="about-badge" id="aboutBadge" data-drag-hint="Drag the badge">
-    <div class="about-badge-strap" aria-hidden="true"></div>
-    <div class="about-badge-clip" aria-hidden="true"></div>
-    <div class="about-badge-holder">
-      <span class="about-badge-hole" aria-hidden="true"></span>
-      <div class="about-badge-card">
-        <p class="about-badge-name">Torilu</p>
-        <p class="about-badge-other" lang="en">Bahrain</p>
-        <dl class="about-badge-facts">
-          <dt>Gathers</dt>
-          <dd>Restaurants · Cafes · Stores · Places · Cars</dd>
-          <dt>Badges</dt>
-          <dd class="about-badge-chips">
-            <a class="about-chip about-chip-visited" href="#visited">✅ Personally visited</a>
-            <a class="about-chip about-chip-liked" href="#liked">👍 Recommended</a>
-            <a class="about-chip about-chip-reviews" href="#reviews">Not a review site</a>
-          </dd>
-        </dl>
-      </div>
-    </div>
-  </div>
-  <div class="about-marquee" aria-hidden="true"><div class="about-marquee-track"><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span></div><div class="about-marquee-track"><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span></div></div>
+<section class="page-header">
+  <h1>About Torilu</h1>
+  <p>A Bahraini guide that gathers restaurants, cafes, stores, places and car shops in one place, updated regularly in Arabic and English.</p>
 </section>
 
 <article class="prose">
-
-# About Torilu
 
 Torilu is a Bahraini guide that gathers restaurants, cafes, bakeries, stores, places and car shops in Bahrain in one place, in Arabic and English.
 
@@ -58,11 +34,11 @@ No. The site grows every week with new places and by completing existing ones.
 
 You can save what you like to "Favorites" without signing in, and the list is stored in your browser only. The site never asks you for an account or a password.
 
-<h2 id="visited">The "✅ Personally visited" badge</h2>
+<h2 id="visited">The “Personally visited” badge</h2>
 
 This badge means the site owner has been to the place in person, beyond finding its details online. We add it each time we visit a new place.
 
-<h2 id="liked">The "👍 Recommended" badge</h2>
+<h2 id="liked">The “Recommended” badge</h2>
 
 The site owner's personal recommendation. It only appears on places they liked after trying them. A place without it isn't necessarily bad; we just haven't given an opinion on it yet.
 
@@ -70,7 +46,7 @@ The site owner's personal recommendation. It only appears on places they liked a
 
 Torilu gathers information about places; it doesn't review them. A restaurant, cafe or bakery being listed here doesn't mean we recommend it or have rated it; most cards are information only: the name, location and contact details.
 
-When we do give a personal opinion, it is labelled, like the "👍 Recommended" badge. The site owner has to try a place several times first, enough to know the food and how the staff treat customers.
+When we do give a personal opinion, it is labelled, like the “Recommended” badge. The site owner has to try a place several times first, enough to know the food and how the staff treat customers.
 
 If a place has a lot of negative attention online, we will most likely give no opinion on it, positive or negative, unless our own visits there are enough to support one.
 

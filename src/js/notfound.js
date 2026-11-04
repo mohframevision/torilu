@@ -12,16 +12,16 @@
   if (header) {
     var h1 = header.querySelector("h1");
     var p = header.querySelector("p");
-    if (h1) h1.textContent = "😕 404 — Page Not Found";
+    if (h1) h1.textContent = "404 — Page not found";
     if (p) p.textContent = "The link you opened doesn't exist or was moved.";
   }
 
   var hint = document.getElementById("notFoundHint");
-  if (hint) hint.textContent = "Try going back to the homepage, or browse a section from the menu above.";
+  if (hint) hint.textContent = "Go back to the homepage, or browse a section from the menu.";
 
   var homeLink = document.getElementById("notFoundHomeLink");
   if (homeLink) {
     homeLink.href = "/en/index.html";
-    homeLink.textContent = "🏠 Back to Home";
+    homeLink.textContent = "Back to Home";
   }
 })();

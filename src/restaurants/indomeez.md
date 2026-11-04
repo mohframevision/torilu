@@ -24,6 +24,7 @@ langSwitchUrl: "/en/restaurants/indomeez.html"
 
 «اندوميز» مطعم متخصص في الإندومي بالسايه، تابع لـ«يلا مطبق». يفتح يومياً من
 ٥ العصر إلى ١ بالليل.
+[إنستقرام المطعم](https://www.instagram.com/indomeez/)
 
 ## القائمة والأسعار
 
@@ -40,8 +41,3 @@ langSwitchUrl: "/en/restaurants/indomeez.html"
 - التندوري الكريمي تقدر تضيف له دجاج تندوري بـ٠.٧٠٠ د.ب زيادة.
 
 الأسعار من منيو المطعم المنشور على حسابه، وممكن تتغيّر.
-
-## الموقع
-
-[📍 افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/NMyaLbfr4AnzpeWi8) ·
-[إنستقرام المطعم](https://www.instagram.com/indomeez/)

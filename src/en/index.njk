@@ -24,11 +24,6 @@ langSwitchUrl: "/index.html"
       <button type="submit" class="search-go">{{ t.search_submit }}</button>
     </form>
     <div class="chip-row home-chips" id="homeChips"></div>
-    <nav class="d-secs" aria-label="{{ t.home_sections }}">
-      {%- for entry in sections %}{% if not entry.creators %}
-      <a href="{{ ('/en/' + entry.slug + '.html') | url }}">{{ entry.navLabel_en or entry.navLabel }}</a>
-      {%- endif %}{% endfor %}
-    </nav>
   </div>
   <div class="d-moon halftone" aria-hidden="true"></div>
 </section>

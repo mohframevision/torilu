@@ -174,7 +174,6 @@
            من غيابه #}
         <button class="icon-btn install-btn" id="installBtn" hidden title="{{ t.install_app }}" aria-label="{{ t.install_app }}">{{ icon("download") }}</button>
         <button class="theme-toggle" aria-label="{{ t.theme_toggle_aria }}" title="{{ t.theme_toggle }}"></button>
-        <button class="sound-toggle" aria-label="{{ t.sound_off }}" title="{{ t.sound_off }}">{{ icon("volume-off") }}</button>
         <button class="nav-toggle" aria-label="{{ t.nav_toggle_open }}" aria-expanded="false" aria-controls="main-nav">{{ icon("menu") }}</button>
       </div>
     </div>
@@ -193,6 +192,8 @@
         <a href="{{ ('/en/business.html' if lang == 'en' else '/business.html') | url }}">{{ 'List your business' if lang == 'en' else 'اعرض محلك' }}</a>
         <a href="{{ ('/en/privacy-policy.html' if lang == 'en' else '/privacy-policy.html') | url }}">{{ t.footer_privacy }}</a>
         <a href="{{ ('/en/terms.html' if lang == 'en' else '/terms.html') | url }}">{{ t.footer_terms }}</a>
+        {# زر أصوات الواجهة نزل للأسفل (شكل «د»: هيدر أهدأ)؛ main.js يربطه بالكلاس فما يتأثر بمكانه #}
+        <button class="sound-toggle footer-sound" aria-label="{{ t.sound_off }}" title="{{ t.sound_off }}">{{ icon("volume-off") }}</button>
         {% if social.youtubeUrl %}<a href="{{ social.youtubeUrl }}" target="_blank" rel="noopener noreferrer">{{ t.footer_youtube }}</a>{% endif %}
         {% if social.whatsappUrl %}<a href="{{ social.whatsappUrl }}" target="_blank" rel="noopener noreferrer">{{ t.footer_whatsapp }}</a>{% endif %}
       </div>
@@ -215,11 +216,6 @@
       <span class="bottom-nav-icon">{{ icon("heart-fill", 22) }}</span><span>{{ t.nav_favorites }}</span>
     </a>
   </nav>
-
-  <div class="daily-pick-reminder" id="dailyPickReminder" role="region" aria-label="{{ t.daily_pick_label }}">
-    <button type="button" class="daily-pick-reminder-close" id="dailyPickReminderClose" aria-label="{{ t.daily_pick_close }}">✕</button>
-    <p>{{ t.daily_pick_text_html | replace("{homeUrl}", (('/en/index.html' if lang == 'en' else '/index.html') | url)) | safe }}</p>
-  </div>
 
   {# إعدادات الصفحة كبيانات JSON (نوع application/json لا يُنفَّذ إطلاقاً، فما
      يحتاج أي استثناء بسياسة CSP). bootstrap.js يقرأها، وmain.js يشغّل دوال

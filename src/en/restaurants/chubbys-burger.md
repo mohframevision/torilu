@@ -7,7 +7,7 @@ langSwitchUrl: "/restaurants/chubbys-burger.html"
 
 ## About
 
-Chubby's Burger is a burger spot in Al Sayah, at the end of the food trucks street. Open weekdays 6:30pm to 12am, and weekends until 1am.
+Chubby's Burger is a burger spot in Al Sayah, at the end of the food trucks street. Open weekdays 6:30pm to 12am, and weekends until 1am. [Restaurant's Instagram](https://www.instagram.com/chubbys.bh/)
 
 ## Menu & Prices
 
@@ -32,7 +32,3 @@ Chubby's Burger is a burger spot in Al Sayah, at the end of the food trucks stre
 | Soft drink / Water | — | 0.400 BHD |
 
 All prices include VAT. They're from the menu posted on their account and may change.
-
-## Location
-
-[📍 Open on Google Maps](https://maps.app.goo.gl/oP3pgHQBrguFiPGU9) · [Restaurant's Instagram](https://www.instagram.com/chubbys.bh/)

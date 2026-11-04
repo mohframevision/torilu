@@ -1,8 +1,8 @@
 ---
 layout: base.njk
 permalink: "picker.html"
-title: "اختار لي 🎲 | توريلو"
-description: "محتار وش تختار؟ خلّي توريلو يختار لك عشوائياً من أي قسم تحبه."
+title: "اختار لي | توريلو"
+description: "محتار؟ دع توريلو يختار لك مكاناً عشوائياً من القسم الذي تحبه."
 navActive: "picker"
 pageScript: "picker"
 langSwitchUrl: "/en/picker.html"
@@ -10,12 +10,12 @@ langSwitchUrl: "/en/picker.html"
 <div class="breadcrumb"><a href="{{ '/index.html' | url }}">الرئيسية</a> / اختار لي</div>
 <section class="page-header">
   <h1>اختار لي</h1>
-  <p>محتار وين تروح أو وش تختار؟ اختر القسم واضغط الزر، وخلّي توريلو يقرر بدالك!</p>
+  <p>محتار إلى أين تذهب؟ اختر القسم واضغط الزر، ودع توريلو يقرّر عنك.</p>
 </section>
 
 <div class="picker-categories" id="pickerCategories"></div>
 <div class="picker-area">
-  <label for="pickerArea">📍 من وين؟</label>
+  <label for="pickerArea">من أين؟</label>
   <select id="pickerArea"></select>
 </div>
 
@@ -23,6 +23,6 @@ langSwitchUrl: "/en/picker.html"
   <div class="trip-bar">
     <button type="button" id="pickerSoundBtn" class="trip-round" aria-label="الصوت">🔇</button>
     <button type="button" id="pickerVehicleBtn" class="trip-round" aria-label="غيّر المركبة">🚆</button>
-    <button id="pickerSpinBtn" class="btn picker-spin-btn" disabled>🎲 اختر لي!</button>
+    <button id="pickerSpinBtn" class="btn picker-spin-btn" disabled>اختر لي</button>
   </div>
 </div>

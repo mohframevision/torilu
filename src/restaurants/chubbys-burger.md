@@ -25,6 +25,7 @@ langSwitchUrl: "/en/restaurants/chubbys-burger.html"
 
 «تشابيز برجر» مطعم برجر بالسايه، في نهاية شارع الفود تراكس. يفتح أيام الأسبوع من
 ٦:٣٠ المساء إلى ١٢ بالليل، والويكند إلى ١ بالليل.
+[إنستقرام المطعم](https://www.instagram.com/chubbys.bh/)
 
 ## القائمة والأسعار
 
@@ -49,8 +50,3 @@ langSwitchUrl: "/en/restaurants/chubbys-burger.html"
 | مشروب غازي / مياه معدنية | — | ٠.٤٠٠ د.ب |
 
 الأسعار تشمل ضريبة القيمة المضافة، وهي من المنيو المنشور على حسابهم، وممكن تتغيّر.
-
-## الموقع
-
-[📍 افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/oP3pgHQBrguFiPGU9) ·
-[إنستقرام المطعم](https://www.instagram.com/chubbys.bh/)

@@ -1,15 +1,18 @@
 ---
 layout: base.njk
 ---
+{% from "icon.njk" import icon as svgIcon %}
 {% set lang = lang or "ar" %}
 {% set t = i18n[lang] %}
 {% set homeUrl = ('/en/index.html' if lang == 'en' else '/index.html') %}
 {% set sectionUrl = (('/en/' if lang == 'en' else '/') + sectionSlug + '.html') %}
+{# شكل «د»: كل الصفحة بعمود واحد هادئ مثل الجريدة (العنوان والنص على نفس الحافة) #}
+<div class="detail{% if wideLayout %} detail-wide{% endif %}">
 <div class="breadcrumb"><a href="{{ homeUrl | url }}">{{ t.nav_home }}</a> / <a href="{{ sectionUrl | url }}">{{ sectionTitle }}</a> / {{ title }}</div>
 {% if image %}<img class="detail-hero-photo" src="{{ image }}" alt="{{ title }}" />{% if imageCredit %}<p class="photo-credit" dir="ltr">📷 {% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if lang != 'en' else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</p>{% endif %}{% endif %}
 {% if gallery %}<div class="photo-strip">{% for g in gallery %}<a href="{{ g }}" target="_blank" rel="noopener"><img src="{{ g }}" alt="{{ title }} {{ loop.index + 1 }}" loading="lazy" decoding="async" /></a>{% endfor %}</div>{% endif %}
 <section class="page-header">
-  <h1><span aria-hidden="true">{{ icon }}</span> {{ title }}</h1>
+  <h1>{{ title }}</h1>
   {# الدليل عند لحظة القرار: نفس شارات البطاقة، فوق زر الخريطة #}
   {% set src = page if (verified or liked) else ((collections.all | pageByUrl(langSwitchUrl)).data if lang == 'en' else page) %}
   {% set v = verified or (src and src.verified) %}{% set lk = liked or (src and src.liked) %}
@@ -17,19 +20,19 @@ layout: base.njk
   <div class="page-header-actions">
     {# الهدف الأول لزائر صفحة مكان: يروح له — فالخريطة الزر الأساسي والباقي ثانوي #}
     {% set mapsLink = links.maps if (links and links.maps) else (content | mapsUrl) %}
-    {% if mapsLink %}<a class="btn" href="{{ mapsLink }}" target="_blank" rel="noopener"><span aria-hidden="true">📍</span> {{ t.link_maps }}</a>{% endif %}
+    {% if mapsLink %}<a class="btn" href="{{ mapsLink }}" target="_blank" rel="noopener">{{ svgIcon("location-pin", 18) }} {{ t.link_maps }}</a>{% endif %}
     {% if audio %}
-    <button type="button" class="btn secondary article-listen-btn" data-audio-src="{{ audio | url }}">🔊 {{ t.article_listen }}</button>
+    <button type="button" class="btn secondary article-listen-btn" data-audio-src="{{ audio | url }}">{{ svgIcon("volume-up", 18) }} {{ t.article_listen }}</button>
     <audio class="article-audio-player hidden" controls preload="none"></audio>
     {% endif %}
-    <button type="button" class="btn secondary article-share-btn">📤 {{ t.article_share }}</button>
+    <button type="button" class="btn secondary article-share-btn">{{ svgIcon("share", 18) }} {{ t.article_share if sectionSlug == "guides" else t.place_share }}</button>
   </div>
 </section>
 {% if aiDisclosure %}
 {# قسم "تجارب الذكاء الاصطناعي" ألعاب/تجارب استكشافية، مو مقالات معلوماتية —
    إخلاء المسؤولية القانوني (guide_disclaimer) مصمم لمقال يحتوي معلومات
    يُعتمَد عليها، فما ينطبق هنا ويعطي انطباع رسمي زايد عن حجم الشي #}
-<div class="banner-note ai-disclosure">🤖 {{ aiDisclosure }}{% if sectionSlug != "ai-experiments" %} {{ t.guide_disclaimer }}{% endif %}</div>
+<div class="banner-note ai-disclosure">{{ aiDisclosure }}{% if sectionSlug != "ai-experiments" %} {{ t.guide_disclaimer }}{% endif %}</div>
 {% endif %}
 {% if video %}
 <div class="detail-video">
@@ -49,7 +52,19 @@ layout: base.njk
    وجداول لا نصاً يُقرأ، وحصرها بعرض النص يضيّع نصف الشاشة بالكمبيوتر #}
 <article class="prose{% if wideLayout %} prose-wide{% endif %}">
 {{ content | safe }}
+{#- المنيو بالأسعار: كان يُعرض بالبطاقة فقط، فصفحة المكان تبقى بلا أسعار. يُضاف إذا ما كتبه صاحب الموقع جدولاً بنفسه -#}
+{%- set arPage = (collections.all | pageByUrl(langSwitchUrl)) if lang == "en" else none %}
+{%- set mItems = menuItems or (arPage and arPage.data.menuItems) %}
+{%- if mItems and mItems.length and not ("<table" in content) %}
+<h2>{{ t.detail_menu_title }}</h2>
+<table class="detail-menu"><tbody>
+{%- for mi in mItems %}
+<tr><td>{{ (mi.name_en or mi.name) if lang == "en" else mi.name }}</td><td>{{ mi.price }}</td></tr>
+{%- endfor %}
+</tbody></table>
+{%- endif %}
 </article>
+</div>
 
 <script type="application/ld+json">
 {

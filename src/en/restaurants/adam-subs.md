@@ -21,7 +21,3 @@ too, and it's one of the best places for burgers and fillet steak.
 
 [📸 Instagram](https://www.instagram.com/adamsubs/) ·
 [🔗 Website](https://adamsubs.invopos.app)
-
-## Location
-
-[📍 Open on Google Maps](https://maps.app.goo.gl/tKwmtVSJeEhnRWdG7)
