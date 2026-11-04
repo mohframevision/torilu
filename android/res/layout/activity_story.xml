@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- "قصة هكوله" داخل التطبيق — نفس هوية شاشة "اختار لي" (غامرة، أخضر هكوله
+<!-- "قصة توريلو" داخل التطبيق — نفس هوية شاشة "اختار لي" (غامرة، أخضر توريلو
      الغامق). المحتوى يُبنى بالكود بـStoryActivity (أرقام حيّة من بيانات
      التطبيق، وحركات ظهور وأصوات تتبع القراءة). زر الإغلاق بشريط ثابت فوق
      لا عائم — العائم كان يغطي النص وقت التمرير. تحت زر الموسيقى منزلق صوت
@@ -113,7 +113,7 @@
             android:padding="5dp"
             android:background="@drawable/story_dock_bg">
 
-            <bh.mohframevision.hakolah.VolumeSlider
+            <bh.mohframevision.torilu.VolumeSlider
                 android:id="@+id/storySlider"
                 android:layout_width="44dp"
                 android:layout_height="150dp"

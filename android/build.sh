@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds هكوله (Hakolah) into an installable APK. No Gradle, no AGP — just the
+# Builds توريلو (Torilu) into an installable APK. No Gradle, no AGP — just the
 # SDK build-tools, same approach as StudyApp's android/build.sh.
 #
 # Unlike StudyApp, this project's path has Arabic characters + a space
@@ -16,9 +16,9 @@ SDK="/d/AndroidSdk"
 BT="$SDK/build-tools/34.0.0"
 PLATFORM="$SDK/platforms/android-36/android.jar"
 HERE="$(cd "$(dirname "$0")" && pwd)"
-SAFE="/tmp/hakolah-android-build"
+SAFE="/tmp/torilu-android-build"
 OUT="$SAFE/build"
-APK_NAME="hakolah.apk"
+APK_NAME="torilu.apk"
 
 rm -rf "$SAFE"
 mkdir -p "$SAFE" "$OUT/classes" "$OUT/gen"
@@ -60,9 +60,9 @@ PY
 echo "6/6 signing"
 if [ ! -f "$SAFE/debug.keystore" ]; then
   keytool -genkeypair -v -keystore "$(cygpath -w "$SAFE/debug.keystore")" \
-    -storepass android -keypass android -alias hakolah \
+    -storepass android -keypass android -alias torilu \
     -keyalg RSA -keysize 2048 -validity 10000 \
-    -dname "CN=Mohamed A. Abdali, O=Hakolah, C=BH" >/dev/null
+    -dname "CN=Mohamed A. Abdali, O=Torilu, C=BH" >/dev/null
 fi
 "$BT/zipalign.exe" -f 4 "$(cygpath -w "$OUT/merged.apk")" "$(cygpath -w "$OUT/aligned.apk")"
 "$BT/apksigner.bat" sign \

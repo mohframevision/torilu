@@ -1,9 +1,9 @@
 ---
-title: Privacy Policy | Hakolah
+title: Privacy Policy | Torilu
 layout: base.njk
 lang: "en"
 permalink: en/privacy-policy.html
-description: Hakolah's privacy policy and how we handle your data.
+description: Torilu's privacy policy and how we handle your data.
 langSwitchUrl: "/privacy-policy.html"
 ---
 
@@ -27,17 +27,13 @@ Your preferences, such as theme, sound and favorites, are stored only in your br
 
 When you tap "Near me" yourself, your browser asks for your location so places can be sorted by distance. This is calculated on your device only; your location is not stored or sent anywhere.
 
-## Microphone (optional)
-
-The Hakolah Sounds page asks for microphone access only when you press a record button yourself (to record your voice or an instrument you play, or to make an instrument from your voice). The recording stays on your device: it is saved in your browser only, never uploaded to any server, and never included in project share links. You can delete it at any time from the page itself, or revoke microphone access in your browser settings.
-
 ## Embedded video
 
 Some place pages include a YouTube video in its privacy-enhanced mode (youtube-nocookie.com), which loads only when you press play.
 
 ## External links
 
-The site contains links to external sites (tools, restaurants, stores, social media accounts). We're not responsible for the privacy policies or content on those sites. Some of these links (such as the Casa Souq link) are affiliate links: we may earn a small commission if you purchase through them, at no extra cost to you, and this is also noted next to the link itself.
+The site contains links to external sites (restaurants, stores, maps, social media accounts). We're not responsible for the privacy policies or content on those sites. Some of these links (such as the Casa Souq link) are affiliate links: we may earn a small commission if you purchase through them, at no extra cost to you, and this is also noted next to the link itself.
 
 ## Your data rights
 
@@ -45,6 +41,6 @@ Under Bahrain's Personal Data Protection Law (PDPL), you have the right to acces
 
 ## Contact us
 
-For any inquiry about this policy, you can reach us via the [contact page]({{ '/en/contact.html' | url }}) or directly by email: [mohframevision@outlook.com](mailto:mohframevision@outlook.com)
+For any inquiry about this policy, you can reach us via the [contact page]({{ '/en/contact.html' | url }}) or directly by email: [torilu.official@gmail.com](mailto:torilu.official@gmail.com)
 
 </article>

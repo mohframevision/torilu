@@ -5,7 +5,7 @@ const path = require("path");
 
 const SITE = process.argv[2] || "_site";
 // المسار الأساسي كما بـ.eleventy.js (pathPrefix) — تحتاج لتبقى مطابقة لو تغيّر هناك
-const BASE_PREFIX = "/hakolah";
+const BASE_PREFIX = "/torilu";
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {

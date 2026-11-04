@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,7 +30,7 @@ import org.json.JSONObject;
 // يحمل "tag" نصي (مثال "url:https://...")، وonClick وحد بالمحوّل نفسه يفكّه.
 class ItemAdapter extends BaseAdapter implements View.OnClickListener {
     // Activity لا Context عام — يحتاجها overridePendingTransition() عند فتح
-    // المقال/التجربة (نفس نمط HakolahApi.Callback: توقيع النوع نفسه يمنع
+    // المقال/التجربة (نفس نمط ToriluApi.Callback: توقيع النوع نفسه يمنع
     // الخطأ، لا فحص instanceof وقت التشغيل)
     private final Activity context;
     private final String section;
@@ -198,7 +198,7 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
             // أزرار هنا كانت تكرار يزحم القائمة
             holder.actions.removeAllViews();
         } else {
-            LinkButtons.build(context, holder.actions, item, HakolahApi.ORIGIN, this);
+            LinkButtons.build(context, holder.actions, item, ToriluApi.ORIGIN, this);
         }
         ((View) holder.actions.getParent()).setVisibility(holder.actions.getChildCount() > 0 ? View.VISIBLE : View.GONE);
         row.setTag(R.id.itemTitle, "open:" + position);

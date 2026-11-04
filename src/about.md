@@ -1,12 +1,12 @@
 ---
-title: عن الموقع | هكوله
+title: عن الموقع | توريلو
 layout: base.njk
 permalink: about.html
-description: "تعرّف على هكوله: دليل بحريني للمطاعم والكافيهات والمتاجر والأماكن ومحلات السيارات، مع منيو بالأسعار."
+description: "تعرّف على توريلو: دليل بحريني للمطاعم والكافيهات والمتاجر والأماكن ومحلات السيارات، مع منيو بالأسعار."
 langSwitchUrl: "/en/about.html"
 ---
 
-<section class="about-hero" aria-label="هكوله">
+<section class="about-hero" aria-label="توريلو">
   <p class="about-hero-note about-hero-lead">دليل بحريني يجمع المطاعم والكافيهات والمتاجر والأماكن ومحلات السيارات في مكان واحد.</p>
   <p class="about-hero-note about-hero-side">يُحدَّث بشكل دوري، بالعربي والإنجليزي.</p>
   <div class="about-badge" id="aboutBadge" data-drag-hint="اسحب البطاقة">
@@ -15,8 +15,8 @@ langSwitchUrl: "/en/about.html"
     <div class="about-badge-holder">
       <span class="about-badge-hole" aria-hidden="true"></span>
       <div class="about-badge-card">
-        <p class="about-badge-name">هكوله</p>
-        <p class="about-badge-other" lang="en" dir="ltr">Hakolah</p>
+        <p class="about-badge-name">توريلو</p>
+        <p class="about-badge-other" lang="en" dir="ltr">Torilu</p>
         <dl class="about-badge-facts">
           <dt>يجمع</dt>
           <dd>مطاعم · كافيهات · متاجر · أماكن · سيارات</dd>
@@ -30,16 +30,16 @@ langSwitchUrl: "/en/about.html"
       </div>
     </div>
   </div>
-  <div class="about-marquee" aria-hidden="true"><div class="about-marquee-track"><span>هكوله</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span><span>هكوله</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span><span>هكوله</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span></div><div class="about-marquee-track"><span>هكوله</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span><span>هكوله</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span><span>هكوله</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span></div></div>
+  <div class="about-marquee" aria-hidden="true"><div class="about-marquee-track"><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span></div><div class="about-marquee-track"><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>توريلو</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span></div></div>
 </section>
 
 <article class="prose">
 
-# عن موقع هكوله
+# عن موقع توريلو
 
-"هكوله" دليل بحريني يجمع في مكان واحد المطاعم والكافيهات والمخبوزات والمتاجر والأماكن ومحلات السيارات في البحرين، بالعربي والإنجليزي، بهدف توفير الوقت والجهد على الزائر.
+"توريلو" دليل بحريني يجمع في مكان واحد المطاعم والكافيهات والمخبوزات والمتاجر والأماكن ومحلات السيارات في البحرين، بالعربي والإنجليزي، بهدف توفير الوقت والجهد على الزائر.
 
-## ماذا ستجد في هكوله؟
+## ماذا ستجد في توريلو؟
 
 - **دليل الأماكن:** بطاقات فيها الموقع والخريطة والهاتف والساعات وحسابات التواصل، وفي كثير من المطاعم **منيو بالأسعار**.
 - **بحث ذكي:** تبحث باسم المكان أو نوع الأكل أو حتى باسم صنف داخل المنيو، وتفلتر حسب المنطقة والتصنيف.
@@ -53,13 +53,13 @@ langSwitchUrl: "/en/about.html"
 
 ## هل المحتوى الحالي نهائي؟
 
-لا، الموقع ينمو كل أسبوع بإضافة أماكن جديدة واستكمال القديمة وتحسين الأدوات.
+لا، الموقع ينمو كل أسبوع بإضافة أماكن جديدة واستكمال القديمة.
 
 يمكنك حفظ ما يعجبك في «المفضلة» دون تسجيل دخول، وتُحفظ القائمة في متصفحك فقط. فلا يطلب الموقع منك حساباً ولا كلمة سر.
 
 <h2 id="visited">شارة "✅ زُرته شخصياً"</h2>
 
-بعض البطاقات تحمل شارة "✅ زُرته شخصياً" — هذه الشارة تعني إن صاحب موقع هكوله زار هذا المكان بنفسه فعلياً، مو مجرد معلومة منقولة من الإنترنت. نضيفها تدريجياً كل ما زرنا مكاناً جديداً.
+بعض البطاقات تحمل شارة "✅ زُرته شخصياً" — هذه الشارة تعني إن صاحب موقع توريلو زار هذا المكان بنفسه فعلياً، مو مجرد معلومة منقولة من الإنترنت. نضيفها تدريجياً كل ما زرنا مكاناً جديداً.
 
 <h2 id="liked">شارة "👍 أعجبني"</h2>
 
@@ -67,7 +67,7 @@ langSwitchUrl: "/en/about.html"
 
 <h2 id="reviews">سياسة الآراء والتقييمات</h2>
 
-هكوله دليل يجمع المعلومات، وليس موقع تقييمات. وجود مطعم أو كافيه أو مخبز في الموقع لا يعني أننا نوصي به أو قيّمناه؛ أغلب البطاقات معلومات فقط: الاسم والموقع وطرق التواصل.
+توريلو دليل يجمع المعلومات، وليس موقع تقييمات. وجود مطعم أو كافيه أو مخبز في الموقع لا يعني أننا نوصي به أو قيّمناه؛ أغلب البطاقات معلومات فقط: الاسم والموقع وطرق التواصل.
 
 الرأي الشخصي لا يظهر إلا إذا كان مكتوباً بوضوح وصراحة، مثل شارة «👍 أعجبني». ولا يُكتب رأي عن مكان إلا بعد أن يجرّبه صاحب الموقع بنفسه عدة مرات، بما يكفي ليعرف أغلب جوانبه: يتذوّق أكله، ويتعامل مع العاملين فيه.
 
@@ -79,11 +79,11 @@ langSwitchUrl: "/en/about.html"
 
 <h2 id="privacy">خصوصيتك</h2>
 
-لا حسابات ولا كلمات سر في هكوله، ولا نجمع بياناتك الشخصية. التفاصيل الكاملة في [سياسة الخصوصية](/privacy-policy.html).
+لا حسابات ولا كلمات سر في توريلو، ولا نجمع بياناتك الشخصية. التفاصيل الكاملة في [سياسة الخصوصية](/privacy-policy.html).
 
 <h2 id="business">لأصحاب المحلات</h2>
 
-عندك مطعم أو كافيه؟ يمكنك [عرض محلك](/business.html) في هكوله مع منيو رقمي برمز QR وزر طلب عبر واتساب.
+عندك مطعم أو كافيه؟ يمكنك [عرض محلك](/business.html) في توريلو مع منيو رقمي برمز QR وزر طلب عبر واتساب.
 
 <h2 id="credits">حقوق الموسيقى والأصوات</h2>
 

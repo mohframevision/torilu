@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- نفس @keyframes cardIn بموقع هكوله: opacity 0→1 + translateY(14px)→0, 450ms -->
+<!-- نفس @keyframes cardIn بموقع توريلو: opacity 0→1 + translateY(14px)→0, 450ms -->
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:interpolator="@interpolator/site_ease">
     <alpha

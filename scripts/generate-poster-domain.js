@@ -1,4 +1,4 @@
-// أداة لمرة واحدة: بوستر "هكوله صار له دومينه الخاص" — منشور 1080x1080 وستوري
+// أداة لمرة واحدة: بوستر "توريلو صار له دومينه الخاص" — منشور 1080x1080 وستوري
 // 1080x1920 لإنستقرام، بنفس ستايل بقية البوسترات (خلفية زرقاء متدرجة، شعار،
 // QR). الدومين بنص LTR منفصل بصندوقه (مو داخل جملة عربية) عشان ما ينقلب ترتيبه.
 // تعتمد على opentype.js وqrcode (مش من ضمن devDependencies):
@@ -9,7 +9,7 @@ const sharp = require("sharp");
 const QRCode = require("qrcode");
 const { fitGlyphInRect } = require("./heh-glyph.js");
 
-const SITE_URL = "https://hakolah.com/";
+const SITE_URL = "https://torilu.com/";
 const outDir =
   require("path").join(__dirname, "..", "ملفات-العمل", "بوسترات");
 const FONT = 'font-family="Tahoma, Arial, sans-serif"';
@@ -36,11 +36,11 @@ function build(W, H, oy, qrBase64) {
     <circle cx="586" cy="${92 + oy}" r="14" fill="#f59e0b" />
     <g fill="#2563eb">${logoGlyph}</g>
 
-    <text x="540" y="${332 + oy}" ${FONT} font-size="100" font-weight="800" text-anchor="middle" fill="#ffffff">هكوله</text>
+    <text x="540" y="${332 + oy}" ${FONT} font-size="100" font-weight="800" text-anchor="middle" fill="#ffffff">توريلو</text>
     <text x="540" y="${424 + oy}" ${FONT} font-size="70" font-weight="800" text-anchor="middle" fill="#f59e0b">صار له دومينه الخاص!</text>
 
     <rect x="90" y="${480 + oy}" width="900" height="250" rx="36" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.45)" stroke-width="2" />
-    <text x="540" y="${618 + oy}" ${FONT} font-size="118" font-weight="900" text-anchor="middle" fill="#ffffff" direction="ltr" unicode-bidi="bidi-override">hakolah<tspan fill="#f59e0b">.com</tspan></text>
+    <text x="540" y="${618 + oy}" ${FONT} font-size="118" font-weight="900" text-anchor="middle" fill="#ffffff" direction="ltr" unicode-bidi="bidi-override">torilu<tspan fill="#f59e0b">.com</tspan></text>
     <text x="540" y="${688 + oy}" ${FONT} font-size="38" font-weight="700" text-anchor="middle" fill="#dbeafe">عنوان أقصر… تتذكره وتشاركه بسهولة</text>
 
     <text x="540" y="${792 + oy}" ${FONT} font-size="30" font-weight="600" text-anchor="middle" fill="#dbeafe">روابطك القديمة تشتغل تلقائياً، ما راح يضيع شي</text>

@@ -478,7 +478,7 @@ exports.render = function (data) {
   const config = {
     backend: {
       name: "github",
-      repo: "mohframevision/hakolah",
+      repo: "mohframevision/torilu",
       branch: "main",
     },
     media_folder: "src/assets/uploads",

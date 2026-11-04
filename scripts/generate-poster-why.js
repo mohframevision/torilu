@@ -1,4 +1,4 @@
-// أداة لمرة واحدة لتوليد بوستر "ليش هكوله؟" (1080x1080) — نفس ستايل
+// أداة لمرة واحدة لتوليد بوستر "ليش توريلو؟" (1080x1080) — نفس ستايل
 // البوسترات السابقة، يشرح سبب استخدام الموقع بنقاط مختصرة.
 // راعى قواعد اللغة المحفوظة بالذاكرة: بلا مصطلح إنجليزي وسط جملة عربية،
 // "+" قبل الرقم، إملاء صحيح ("زُر" لا "زور")، وكل جملة إلها معنى واضح لحالها.
@@ -11,7 +11,7 @@ const QRCode = require("qrcode");
 const { fitGlyphInRect } = require("./heh-glyph.js");
 
 const SIZE = 1080;
-const SITE_URL = "https://hakolah.com/";
+const SITE_URL = "https://torilu.com/";
 const outDir =
   require("path").join(__dirname, "..", "ملفات-العمل", "بوسترات");
 
@@ -69,7 +69,7 @@ async function main() {
     <circle cx="574" cy="156" r="9" fill="#f59e0b" />
     <g fill="#2563eb">${logoGlyph}</g>
 
-    <text x="540" y="350" font-family="${FONT}" font-size="76" font-weight="800" text-anchor="middle" fill="#ffffff">ليش هكوله؟</text>
+    <text x="540" y="350" font-family="${FONT}" font-size="76" font-weight="800" text-anchor="middle" fill="#ffffff">ليش توريلو؟</text>
     <text x="540" y="398" font-family="${FONT}" font-size="30" font-weight="600" text-anchor="middle" fill="#dbeafe" direction="rtl">5 أسباب تخلّيك تجرّبه الحين</text>
 
     ${rows}
@@ -79,16 +79,16 @@ async function main() {
     <rect x="470" y="876" width="140" height="140" rx="18" fill="#ffffff" />
     <image x="485" y="891" width="110" height="110" href="data:image/png;base64,${qrBase64}" />
 
-    <text x="540" y="1042" font-family="${FONT}" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">hakolah</text>
+    <text x="540" y="1042" font-family="${FONT}" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">torilu</text>
   </svg>
   `;
 
   await sharp(Buffer.from(svg), { density: 200 })
     .resize(SIZE, SIZE)
     .png()
-    .toFile(path.join(outDir, "poster-why-hakolah.png"));
+    .toFile(path.join(outDir, "poster-why-torilu.png"));
 
-  console.log("wrote poster-why-hakolah.png");
+  console.log("wrote poster-why-torilu.png");
 }
 
 main().catch((err) => {

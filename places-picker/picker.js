@@ -1,5 +1,5 @@
 /*
-  منتقي أماكن هكوله — أداة محلية لمراجعة قائمة OpenStreetMap مكاناً مكاناً،
+  منتقي أماكن توريلو — أداة محلية لمراجعة قائمة OpenStreetMap مكاناً مكاناً،
   تعبئة معلوماته، ثم تصدير ملف واحد يُضاف للموقع بأقل جهد.
 
   مستقلة تماماً عن الموقع: خارج src/ فلا يبنيها Eleventy، ولا تتصل بأي خادم.
@@ -8,7 +8,7 @@
   التصنيفات والأيقونات تأتي من src/sections/*.md عبر data.js المولّد، فلا
   يمكن اختيار تصنيف غير موجود بلوحة التحكم (وهذا كان يُفشل النشر سابقاً).
 */
-const STORE_KEY = "hakolah_places_picker_v1";
+const STORE_KEY = "torilu_places_picker_v1";
 const $ = (id) => document.getElementById(id);
 
 let entries = {}; // { [index]: {section, icon, ar, en, descAr, descEn, cats[], links, coords} }
@@ -345,7 +345,7 @@ function exportReady() {
       null,
       2
     ),
-    `hakolah-places-${ready.length}.json`
+    `torilu-places-${ready.length}.json`
   );
 }
 

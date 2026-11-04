@@ -14,7 +14,7 @@ const sharp = require("sharp");
 const SITE_DIR = path.join(__dirname, "..", "_site");
 const UPLOADS_DIR = path.join(SITE_DIR, "assets", "uploads");
 const IMAGE_MAX_WIDTH = 1600;
-const PHOTO_COPYRIGHT = "Copyright Mohamed - CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) - hakolah.com";
+const PHOTO_COPYRIGHT = "Copyright Mohamed - CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/) - torilu.com";
 const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 
 function walk(dir) {

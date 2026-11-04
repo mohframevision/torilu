@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "hakolah-eleventy",
+      "name": "torilu-eleventy",
       "runtimeExecutable": "cmd.exe",
       "runtimeArgs": ["/c", "set PATH=C:\\PROGRA~1\\nodejs;%PATH%&&C:\\PROGRA~1\\nodejs\\npm.cmd start"],
       "port": 8080

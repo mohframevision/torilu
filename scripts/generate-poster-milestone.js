@@ -1,5 +1,5 @@
 // أداة لمرة واحدة لتوليد بوستر "وصلنا لـ X عنصر" (1080x1080) لأجل انستقرام —
-// نفس ستايل generate-poster.js (خلفية زرقاء متدرجة، شعار هكوله، QR) بس
+// نفس ستايل generate-poster.js (خلفية زرقاء متدرجة، شعار توريلو، QR) بس
 // بدل حبوب الأقسام، رقم إحصائية كبير + دعوة لزيارة الموقع.
 // تعتمد على opentype.js وqrcode (مش من ضمن devDependencies):
 //   npm install opentype.js qrcode --no-save && node scripts/generate-poster-milestone.js
@@ -10,7 +10,7 @@ const QRCode = require("qrcode");
 const { fitGlyphInRect } = require("./heh-glyph.js");
 
 const SIZE = 1080;
-const SITE_URL = "https://hakolah.com/";
+const SITE_URL = "https://torilu.com/";
 const COUNT = "+160";
 const outDir =
   require("path").join(__dirname, "..", "ملفات-العمل", "بوسترات");
@@ -46,7 +46,7 @@ async function main() {
     <circle cx="586" cy="92" r="14" fill="#f59e0b" />
     <g fill="#2563eb">${logoGlyph}</g>
 
-    <text x="540" y="342" font-family="Tahoma, Arial, sans-serif" font-size="90" font-weight="800" text-anchor="middle" fill="#ffffff">هكوله</text>
+    <text x="540" y="342" font-family="Tahoma, Arial, sans-serif" font-size="90" font-weight="800" text-anchor="middle" fill="#ffffff">توريلو</text>
 
     <rect x="90" y="410" width="900" height="330" rx="36" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.45)" stroke-width="2" />
     <text x="540" y="560" font-family="Tahoma, Arial, sans-serif" font-size="190" font-weight="900" text-anchor="middle" fill="#f59e0b">${COUNT}</text>
@@ -58,7 +58,7 @@ async function main() {
     <rect x="470" y="855" width="140" height="140" rx="18" fill="#ffffff" />
     <image x="485" y="870" width="110" height="110" href="data:image/png;base64,${qrBase64}" />
 
-    <text x="540" y="1035" font-family="Tahoma, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">hakolah</text>
+    <text x="540" y="1035" font-family="Tahoma, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">torilu</text>
   </svg>
   `;
 

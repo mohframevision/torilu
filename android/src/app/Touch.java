@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.os.Build;
 import android.view.HapticFeedbackConstants;

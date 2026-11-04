@@ -1,8 +1,8 @@
 {
-  "name": "hakolah",
+  "name": "torilu",
   "version": "1.0.0",
   "private": true,
-  "description": "موقع هكوله — Eleventy + Sveltia CMS",
+  "description": "موقع توريلو — Eleventy + Sveltia CMS",
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy && node scripts/check-i18n-parity.js && node scripts/minify.js",

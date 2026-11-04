@@ -1,5 +1,5 @@
 /*
-  محرر بوسترات هكوله — يبني نفس تصميم scripts/generate-poster-bilingual.js
+  محرر بوسترات توريلو — يبني نفس تصميم scripts/generate-poster-bilingual.js
   لكن داخل المتصفح مع معاينة حية وتنزيل PNG.
 
   مستقل تماماً عن الموقع: خارج مجلد src/ فلا يبنيه Eleventy ولا يُنشر،
@@ -19,7 +19,7 @@ const PRESETS = {
   ar: {
     rtl: true,
     badge: "🎉 مجاني بالكامل",
-    brand: "هكوله",
+    brand: "توريلو",
     headline: "صار بالعربي والإنجليزي",
     sub: "نفس الموقع، نفس المحتوى — بلغتين",
     pill1: "العربية",
@@ -32,13 +32,13 @@ const PRESETS = {
       ["", ""],
     ],
     cta: "امسح وجرّب الحين مجاناً",
-    url: "https://hakolah.com/",
-    foot: "hakolah",
+    url: "https://torilu.com/",
+    foot: "torilu",
   },
   en: {
     rtl: false,
     badge: "🎉 100% Free",
-    brand: "Hakolah",
+    brand: "Torilu",
     headline: "Now in Arabic & English",
     sub: "Same site, same content — in both languages",
     pill1: "العربية",
@@ -51,8 +51,8 @@ const PRESETS = {
       ["", ""],
     ],
     cta: "Scan and try it free",
-    url: "https://hakolah.com/en/",
-    foot: "hakolah/en",
+    url: "https://torilu.com/en/",
+    foot: "torilu/en",
   },
 };
 
@@ -279,7 +279,7 @@ $("download").addEventListener("click", async () => {
     const blob = await toPngBlob();
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "hakolah-poster-" + (rtl ? "ar" : "en") + ".png";
+    a.download = "torilu-poster-" + (rtl ? "ar" : "en") + ".png";
     a.click();
     URL.revokeObjectURL(a.href);
     setStatus("✅ تم التنزيل (1080×1080)", true);

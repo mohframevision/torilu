@@ -8,7 +8,7 @@ const QRCode = require("qrcode");
 const { fitGlyphInRect } = require("./heh-glyph.js");
 
 const SIZE = 1080;
-const PICKER_URL = "https://hakolah.com/picker.html";
+const PICKER_URL = "https://torilu.com/picker.html";
 const outDir =
   require("path").join(__dirname, "..", "ملفات-العمل", "بوسترات");
 
@@ -58,21 +58,21 @@ async function main() {
     <circle cx="586" cy="118" r="14" fill="#f59e0b" />
     <g fill="#2563eb">${logoGlyph}</g>
 
-    <text x="540" y="368" font-family="Tahoma, Arial, sans-serif" font-size="100" font-weight="800" text-anchor="middle" fill="#ffffff">هكوله</text>
+    <text x="540" y="368" font-family="Tahoma, Arial, sans-serif" font-size="100" font-weight="800" text-anchor="middle" fill="#ffffff">توريلو</text>
     <text x="540" y="423" font-family="Tahoma, Arial, sans-serif" font-size="34" font-weight="600" text-anchor="middle" fill="#dbeafe">محتار وين تروح أو وش تختار؟ 🤔</text>
 
     <text x="540" y="660" font-size="220" text-anchor="middle">🎲</text>
 
     ${miniIcons}
 
-    <text x="540" y="800" font-family="Tahoma, Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#ffffff">بضغطة زر وحدة، هكوله يختار لك</text>
+    <text x="540" y="800" font-family="Tahoma, Arial, sans-serif" font-size="28" font-weight="700" text-anchor="middle" fill="#ffffff">بضغطة زر وحدة، توريلو يختار لك</text>
 
     <text x="540" y="850" font-family="Tahoma, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" fill="#ffffff">امسح وجرّب الحين مجاناً</text>
 
     <rect x="470" y="865" width="140" height="140" rx="18" fill="#ffffff" />
     <image x="485" y="880" width="110" height="110" href="data:image/png;base64,${qrBase64}" />
 
-    <text x="540" y="1045" font-family="Tahoma, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">hakolah/picker</text>
+    <text x="540" y="1045" font-family="Tahoma, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">torilu/picker</text>
   </svg>
   `;
 

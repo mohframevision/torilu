@@ -65,7 +65,7 @@
      متصفح كامل بدل ما يفتح كتطبيق مستقل #}
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="{{ 'Hakolah' if lang == 'en' else 'هكوله' }}" />
+  <meta name="apple-mobile-web-app-title" content="{{ 'Torilu' if lang == 'en' else 'توريلو' }}" />
 
   <meta property="og:type" content="{{ ogType }}" />
   <meta property="og:site_name" content="{{ site.name }}" />
@@ -130,7 +130,7 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": {{ (title | replace(" | هكوله", "") | replace(" | Hakolah", "")) | json | safe }},
+            "name": {{ (title | replace(" | توريلو", "") | replace(" | Torilu", "")) | json | safe }},
             "item": {{ pageUrl | json | safe }}
           }
         ]
@@ -145,7 +145,7 @@
 
   <header class="site-header" data-nosnippet>
     <div class="header-inner">
-      <a href="{{ (('/en/index.html' if lang == 'en' else '/index.html')) | url }}" class="logo"><span class="dot">●</span>{% if lang == "en" %}<span class="logo-word">Hako<span class="logo-tail">lah</span></span>{% else %}<span class="logo-word">هكو<span class="logo-tail">له</span></span>{% endif %}</a>
+      <a href="{{ (('/en/index.html' if lang == 'en' else '/index.html')) | url }}" class="logo"><span class="dot">●</span>{% if lang == "en" %}<span class="logo-word">Torilu</span>{% else %}<span class="logo-word">توريلو</span>{% endif %}</a>
       <nav class="main-nav" id="main-nav">
         {% set homeUrl = '/en/index.html' if lang == 'en' else '/index.html' %}
         <a href="{{ homeUrl | url }}" class="nav-home{% if navActive == "home" %} active{% endif %}"{% if navActive == "home" %} aria-current="page"{% endif %}>{{ t.nav_home }}</a>
@@ -242,7 +242,7 @@
   <script src="{{ '/js/bootstrap.js' | url }}?v={{ buildVersion }}"></script>
   <script src="{{ '/js/data.js' | url }}?v={{ buildVersion }}"></script>
   <script src="{{ '/js/main.js' | url }}?v={{ buildVersion }}"></script>
-  {# سكربت خاص بصفحة وحدة (مثل صوتيات هكوله) — ما ينزل مع بقية الصفحات #}
+  {# سكربت خاص بصفحة وحدة (مثل صوتيات توريلو) — ما ينزل مع بقية الصفحات #}
   {% if pageScript %}<script src="{{ ('/js/' + pageScript + '.js') | url }}?v={{ buildVersion }}"></script>{% endif %}
 </body>
 </html>

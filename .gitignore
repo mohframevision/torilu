@@ -10,14 +10,14 @@ osm-places.csv
 # بيانات منتقي الأماكن — تُولّد محلياً (scripts/build-places-picker.js)
 places-picker/data.js
 
-# لقطات شاشة مؤقتة من درايفر فحص الموقع (.claude/skills/run-hakolah) — لو بقيت
+# لقطات شاشة مؤقتة من درايفر فحص الموقع (.claude/skills/run-torilu) — لو بقيت
 # غير مُتجاهَلة، Eleventy dev server يراقب المجلد كامل (يحترم .gitignore بافتراضه
 # استثناءات المراقبة) فكل لقطة جديدة تُطلق إعادة تحميل كاملة للصفحة أثناء القيادة
 .claude/skills/*/screenshots/
 
-# تطبيق أندرويد هكوله: الـAPK نفسه مُخرَج بناء (android/build.sh يعيد إنتاجه)،
+# تطبيق أندرويد توريلو: الـAPK نفسه مُخرَج بناء (android/build.sh يعيد إنتاجه)،
 # يُسلَّم مباشرة للمستخدم بدل رفعه بالمستودع — نفس عرف StudyApp
-android/hakolah.apk
+android/torilu.apk
 
 # إعدادات Claude Code المحلية الخاصة بجهاز/جلسة المستخدم — ليست جزءاً من المشروع
 .claude/settings.local.json

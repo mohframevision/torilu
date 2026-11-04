@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,7 +10,7 @@ import java.util.Set;
 // تفضيل الصوت، المظهر، والمفضلة. كل شي محلي بالجهاز، بلا سيرفر — نفس مبدأ
 // الموقع تماماً (favorites/theme/sound كلها localStorage هناك).
 class Prefs {
-    private static final String FILE = "hakolah_prefs";
+    private static final String FILE = "torilu_prefs";
     private static final String KEY_SOUND = "sound_enabled";
     private static final String KEY_THEME = "theme_mode";
     private static final String KEY_FAVORITES = "favorites";

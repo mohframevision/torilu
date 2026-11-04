@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- "اختار لي" بروح Recollect بهوية هكوله: شاشة غامرة داكنة دائماً (مهما كان
+<!-- "اختار لي" بروح Recollect بهوية توريلو: شاشة غامرة داكنة دائماً (مهما كان
      مظهر التطبيق)، كرة أيقونات ثلاثية الأبعاد بالمنتصف فوقها شريط زجاجي،
      وتحتها عنوان قصير + أقسام + زر كبير. الكشف يطلع فوق الكرة نفسها. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -46,7 +46,7 @@
         android:layout_weight="1"
         android:clipChildren="false">
 
-        <bh.mohframevision.hakolah.OrbView
+        <bh.mohframevision.torilu.OrbView
             android:id="@+id/pickerOrb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

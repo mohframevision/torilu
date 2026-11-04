@@ -1,8 +1,8 @@
 ---
 layout: base.njk
 permalink: "contact.html"
-title: "تواصل معنا | هكوله"
-description: "تواصل معنا لطلب إضافة مطعم أو متجر أو أداة، أو لأي استفسار عن موقع هكوله."
+title: "تواصل معنا | توريلو"
+description: "تواصل معنا لطلب إضافة مطعم أو متجر أو مكان، أو لأي استفسار عن موقع توريلو."
 navActive: "contact"
 langSwitchUrl: "/en/contact.html"
 ---
@@ -10,7 +10,7 @@ langSwitchUrl: "/en/contact.html"
 
 # تواصل معنا
 
-عندك مطعم أو متجر أو أداة تبي تضيفها للموقع؟ أو عندك استفسار؟ عبّي النموذج تحت أو راسلنا مباشرة.
+عندك مطعم أو متجر أو مكان تبي تضيفها للموقع؟ أو عندك استفسار؟ عبّي النموذج تحت أو راسلنا مباشرة.
 
 </article>
 
@@ -18,8 +18,8 @@ langSwitchUrl: "/en/contact.html"
 
 <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="a2dc8bb2-0fb8-47a9-8b58-ad3245d3f5a3">
-  <input type="hidden" name="subject" value="رسالة جديدة من موقع هكوله">
-  <input type="hidden" name="from_name" value="نموذج تواصل هكوله">
+  <input type="hidden" name="subject" value="رسالة جديدة من موقع توريلو">
+  <input type="hidden" name="from_name" value="نموذج تواصل توريلو">
   <input type="checkbox" name="botcheck" class="hidden">
 
   <div class="form-group">
@@ -51,4 +51,4 @@ langSwitchUrl: "/en/contact.html"
   </button>
 </form>
 
-<p class="contact-direct">أو راسلنا مباشرة: <a href="mailto:mohframevision@outlook.com">mohframevision@outlook.com</a></p>
+<p class="contact-direct">أو راسلنا مباشرة: <a href="mailto:torilu.official@gmail.com">torilu.official@gmail.com</a></p>

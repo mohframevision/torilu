@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.app.Activity;
 import java.io.BufferedReader;
@@ -18,12 +18,12 @@ import org.json.JSONObject;
 //
 // بدون كلاسات مجهولة (anonymous) ولا lambdas هنا عمداً — d8 بهذي البيئة يفشل
 // عليها (نفس مشكلة StudyApp الموثّقة)، فكل شي كلاس علوي حقيقي.
-class HakolahApi {
+class ToriluApi {
     // مصدر واحد للنطاق — ItemAdapter يستخدم نفس الثابت لبناء روابط "التفاصيل"
     // بدل ما يكرّر نفس السلسلة النصية بملف ثانٍ
-    static final String ORIGIN = "https://hakolah.com/";
+    static final String ORIGIN = "https://torilu.com/";
     private static final String DATA_URL = ORIGIN + "app-data.json";
-    private static final String CACHE_FILE = "hakolah-data-cache.json";
+    private static final String CACHE_FILE = "torilu-data-cache.json";
 
     interface Callback {
         void onSuccess(JSONObject data, boolean fromCache);

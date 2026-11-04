@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -106,8 +106,8 @@ class SettingsPanel implements View.OnClickListener, CompoundButton.OnCheckedCha
             return;
         }
         if (id == R.id.storyRow) {
-            // صوت دخول هكوله (اندفاعة + أربيجيو) — نفس بطاقة هكوله بالموقع
-            Touch.feedback(v, Touch.CONFIRM, SoundPlayer.HAKOLAH);
+            // صوت دخول توريلو (اندفاعة + أربيجيو) — نفس بطاقة توريلو بالموقع
+            Touch.feedback(v, Touch.CONFIRM, SoundPlayer.TORILU);
             recreating = true; // صوت الفتح يكفي — بلا صوت إغلاق فوقه
             dialog.dismiss();
             activity.startActivity(new android.content.Intent(activity, StoryActivity.class));

@@ -123,7 +123,7 @@ module.exports = function (eleventyConfig) {
       includes: "_includes",
       data: "_data",
     },
-    // الموقع منشور على جذر دومين خاص (hakolah.com) — كان تحت مسار فرعي (github.io/hakolah/)
+    // الموقع منشور على جذر دومين خاص (torilu.com)
     // النطاق مباشرة — هذا يجعل فلتر url ينتج روابط صحيحة بغض النظر عن عمق الصفحة
     // (مثال: places/karbabad-beach.html) بدل روابط نسبية تنكسر بالصفحات المتداخلة.
     pathPrefix: "/",

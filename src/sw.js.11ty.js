@@ -9,7 +9,7 @@ exports.data = {
 exports.render = function (data) {
   return `/* مولَّد وقت البناء — لا تعدّله هنا، عدّل src/sw.js.11ty.js */
 const VERSION = ${JSON.stringify(String(data.buildVersion))};
-const CACHE = \`hakolah-\${VERSION}\`;
+const CACHE = \`torilu-\${VERSION}\`;
 const BASE = "/";
 const OFFLINE_AR = BASE + "offline.html";
 const OFFLINE_EN = BASE + "en/offline.html";

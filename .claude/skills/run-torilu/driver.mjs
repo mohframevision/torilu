@@ -1,4 +1,4 @@
-// REPL driver for the hakolah Eleventy site. Drives a headless Chromium
+// REPL driver for the torilu Eleventy site. Drives a headless Chromium
 // (Playwright) against the local dev server (`npm start`, port 8080).
 // Designed for agents: pipe commands to stdin, one per line.
 //

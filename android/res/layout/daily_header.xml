@@ -37,7 +37,7 @@
             android:textDirection="ltr" />
     </LinearLayout>
 
-    <bh.mohframevision.hakolah.CardStackView
+    <bh.mohframevision.torilu.CardStackView
         android:id="@+id/dailyStack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

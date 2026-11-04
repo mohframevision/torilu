@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -24,7 +24,7 @@ import java.util.Random;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-// "اختار لي" بروح Recollect بهوية هكوله: كرة ثلاثية الأبعاد من أيقونات
+// "اختار لي" بروح Recollect بهوية توريلو: كرة ثلاثية الأبعاد من أيقونات
 // العناصر (تلفّها بإصبعك)، وفوقها شريط زجاجي. الضغط على "اختار لي" يدوّر
 // الكرة بسرعة وتتباطأ والشريط يعرض العنصر اللي بالمقدمة، ثم تصغر الكرة
 // وتطلع بطاقة الاختيار بنابض، وحولها وسوم تطفو (القسم، التصنيفات).
@@ -302,7 +302,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Or
         actionsScroll.setLayoutParams(alp);
         LinearLayout actions = new LinearLayout(this);
         actions.setOrientation(LinearLayout.HORIZONTAL);
-        LinkButtons.build(this, actions, item, HakolahApi.ORIGIN, this);
+        LinkButtons.build(this, actions, item, ToriluApi.ORIGIN, this);
         // زر واحد فقط (الأساسي) — الباقي بصفحة المكان، والبطاقة نفسها تفتحها
         while (actions.getChildCount() > 1) actions.removeViewAt(actions.getChildCount() - 1);
         if (actions.getChildCount() == 1) ((LinearLayout.LayoutParams) actions.getChildAt(0).getLayoutParams()).setMarginEnd(0);

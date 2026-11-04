@@ -16,10 +16,10 @@ const outDir =
 const VARIANTS = {
   ar: {
     file: "poster-bilingual-ar.png",
-    url: "https://hakolah.com/",
+    url: "https://torilu.com/",
     dir: "rtl",
     badge: "🎉 مجاني بالكامل",
-    brand: "هكوله",
+    brand: "توريلو",
     headline: "صار بالعربي والإنجليزي",
     sub: "نفس الموقع، نفس المحتوى — بلغتين",
     features: [
@@ -29,15 +29,15 @@ const VARIANTS = {
       ["🔥", "الأكثر إعجاباً هذا الأسبوع"],
     ],
     cta: "امسح وجرّب الحين مجاناً",
-    foot: "hakolah",
+    foot: "torilu",
   },
   en: {
     file: "poster-bilingual-en.png",
     // بلا index.html — رابط أقصر يعني رمز QR أقل كثافة وأسهل مسحاً بالجوال
-    url: "https://hakolah.com/en/",
+    url: "https://torilu.com/en/",
     dir: "ltr",
     badge: "🎉 100% Free",
-    brand: "Hakolah",
+    brand: "Torilu",
     headline: "Now in Arabic & English",
     sub: "Same site, same content — in both languages",
     features: [
@@ -47,7 +47,7 @@ const VARIANTS = {
       ["🔥", "Most liked this week"],
     ],
     cta: "Scan and try it free",
-    foot: "hakolah/en",
+    foot: "torilu/en",
   },
 };
 

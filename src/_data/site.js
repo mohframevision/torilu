@@ -1,6 +1,6 @@
 module.exports = {
-  origin: "https://hakolah.com",
-  url: "https://hakolah.com",
-  name: "هكوله",
+  origin: "https://torilu.com",
+  url: "https://torilu.com",
+  name: "توريلو",
   locale: "ar_AR",
 };

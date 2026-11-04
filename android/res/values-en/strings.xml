@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- English UI strings — every key here must also exist in values/strings.xml -->
 <resources>
-    <string name="brand">Hakolah</string>
-    <string name="header_format">Hakolah — %1$s</string>
+    <string name="brand">Torilu</string>
+    <string name="header_format">Torilu — %1$s</string>
     <string name="nav_home">Home</string>
     <string name="nav_favorites">Favorites</string>
     <string name="nav_settings">Settings</string>
-    <string name="saved_to_downloads">Saved to Downloads (Hakolah folder)</string>
     <string name="close">Close</string>
 
     <string name="search_hint">Search…</string>
@@ -32,7 +31,7 @@
     <string name="nearest_branch">" — nearest branch: "</string>
 
     <string name="read_article">Read article</string>
-    <string name="share_suffix">" — on Hakolah 👇"</string>
+    <string name="share_suffix">" — on Torilu 👇"</string>
     <string name="share_title">Share</string>
     <string name="btn_details">Details</string>
     <string name="btn_visit">Visit</string>
@@ -47,11 +46,11 @@
 
     <string name="picker_title">Pick for me</string>
     <string name="picker_idle">Where to today?</string>
-    <string name="picker_headline">Let Hakolah choose for you</string>
+    <string name="picker_headline">Let Torilu choose for you</string>
     <string name="picker_sub">Pick a section, or leave it on All</string>
     <string name="picker_go">Pick for me</string>
     <string name="picker_spinning">Choosing for you…</string>
-    <string name="picker_result">Hakolah\'s pick for you</string>
+    <string name="picker_result">Torilu\'s pick for you</string>
     <string name="picker_again">Try again</string>
 
     <string name="settings_title">Settings</string>
@@ -64,21 +63,21 @@
     <string name="sound_enable">Enable sounds</string>
     <string name="about">About</string>
 
-    <string name="story_title">The Hakolah story</string>
+    <string name="story_title">The Torilu story</string>
     <string name="music_desc">Background music</string>
     <string name="music_pause">Pause background music</string>
     <string name="music_play">Play background music</string>
     <string name="contact_title">Contact us</string>
-    <string name="share_app_text">Hakolah — everything useful in Bahrain, in one place 👇</string>
+    <string name="share_app_text">Torilu — everything useful in Bahrain, in one place 👇</string>
 
-    <string name="story_intro">A Bahraini guide that gathers everything useful in one place: restaurants, cafés, stores, places, links and tools, and articles. For me, Hakolah is a turning point in what I know — new technologies I never dreamed I\'d hold in my hands.</string>
+    <string name="story_intro">A Bahraini guide that gathers everything useful in one place: restaurants, cafés, stores, places, and articles. For me, Torilu is a turning point in what I know — new technologies I never dreamed I\'d hold in my hands.</string>
     <string name="stat_items">real items</string>
     <string name="stat_sections">sections</string>
     <string name="stat_days">days since launch</string>
     <string name="stat_langs">languages: Arabic and English</string>
     <string name="story_how_title">How it started</string>
-    <string name="story_how_1">Hakolah started out of curiosity: I wanted to explore AI tools and their ability to write code, and see how far I could go. And I\'m genuinely amazed.</string>
-    <string name="story_how_2">Hakolah isn\'t the first site I\'ve built with AI — my personal website was the first — but it\'s the first thing I\'ve built with Claude Code specifically. A fascinating experience: I can make whatever I want with words and a little time. An indescribable feeling, and to this day I haven\'t lost the excitement or the passion.</string>
+    <string name="story_how_1">Torilu started out of curiosity: I wanted to explore AI tools and their ability to write code, and see how far I could go. And I\'m genuinely amazed.</string>
+    <string name="story_how_2">Torilu isn\'t the first site I\'ve built with AI — my personal website was the first — but it\'s the first thing I\'ve built with Claude Code specifically. A fascinating experience: I can make whatever I want with words and a little time. An indescribable feeling, and to this day I haven\'t lost the excitement or the passion.</string>
     <string name="story_stops_title">Milestones</string>
     <string-array name="story_stop_dates">
         <item>July 29, 2026</item>
@@ -87,13 +86,8 @@
         <item>August 8</item>
         <item>August 20</item>
         <item>August 26</item>
-        <item>September 4</item>
         <item>September 19</item>
         <item>September 27</item>
-        <item>September 28</item>
-        <item>September 30</item>
-        <item>October 5</item>
-        <item>October 7</item>
     </string-array>
     <string-array name="story_stop_texts">
         <item>The first version: sections, search, filters, favorites, and a control panel for adding content without writing code — plus the first real restaurant.</item>
@@ -102,13 +96,8 @@
         <item>Google AdSense rejected the site for \"low value content\" — and that same day, real detail pages were built for the items.</item>
         <item>The car shops section, followed by dozens of new restaurants and stores.</item>
         <item>\"Pick for me\" becomes an animated reveal that uncovers the suggestion piece by piece.</item>
-        <item>The \"AI Experiments\" section: small tools built with AI.</item>
-        <item>Work begins on a native Android app for Hakolah — the one in your hands right now.</item>
+        <item>Work begins on a native Android app for Torilu — the one in your hands right now.</item>
         <item>A new look for the app: a 3D \"Pick for me\" sphere, the \"Today\'s picks\" stack, calm sounds, and a full English version.</item>
-        <item>Hakolah Sounds grows from an experiment into a real tool: piano, recording, layers, and WAV, MP3 and MIDI export.</item>
-        <item>Hakolah moves to its own domain: hakolah.com.</item>
-        <item>The Practice tab: paste notes or open a MIDI file, and learn to play with falling bars and full sheet music.</item>
-        <item>New real instruments (accordion, celesta, mandolin), MIDI import and export, and lighter playback on older devices.</item>
     </string-array>
     <string name="story_learned_title">What I learned along the way</string>
     <string-array name="story_tech_titles">
@@ -132,10 +121,10 @@
     <string name="story_challenge_title">The challenge</string>
     <string name="story_challenge">A tough problem: I\'m building a project that takes part of my time without any income. But I\'ve come to understand that creating it is one step, making it work flawlessly is another, getting people to know it is a bigger step, and building an audience is bigger still — and growing the content matters too. So I\'m still working on it.</string>
     <string name="story_help_title">And I need your help</string>
-    <string name="story_help_text">If you have any suggestion for Hakolah, tell me. And if you like it, share it with someone who needs it.</string>
+    <string name="story_help_text">If you have any suggestion for Torilu, tell me. And if you like it, share it with someone who needs it.</string>
     <string name="story_help_suggest">Send a suggestion</string>
-    <string name="story_help_share">Share Hakolah</string>
-    <string name="story_sign">— Mohamed, maker of Hakolah</string>
+    <string name="story_help_share">Share Torilu</string>
+    <string name="story_sign">— Mohamed, maker of Torilu</string>
 
     <string name="back">Back</string>
     <string name="place_directions">Directions</string>
@@ -148,7 +137,7 @@
     <string name="menu_count">%1$d items</string>
     <string name="place_menu_all">See the full menu (%1$d)</string>
     <string name="place_about">About</string>
-    <string name="place_on_site">Open the page on hakolah.com</string>
+    <string name="place_on_site">Open the page on torilu.com</string>
     <string name="menu_search_hint">Search the menu…</string>
     <string name="menu_sort_cheap">Cheapest first</string>
     <string name="menu_empty">No item by that name</string>
@@ -157,7 +146,7 @@
     <string name="search_in">Search %1$s…</string>
     <string name="home_search_hint">Where to? A restaurant, a dish, a shop…</string>
     <string name="offline_note">Offline: showing the last data received</string>
-    <string name="home_new">New on Hakolah</string>
+    <string name="home_new">New on Torilu</string>
     <string name="search_intro">Search every section at once: place names, menu items and tags.</string>
     <string name="search_none">Nothing found by that name. Try another word.</string>
     <string name="search_count">%1$d results</string>

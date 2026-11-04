@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.content.Context;
 import android.media.AudioAttributes;
@@ -19,7 +19,7 @@ class SoundPlayer {
     static final int CLOSE = 5;
     static final int SUCCESS = 6;
     static final int SHIMMER = 7;
-    static final int HAKOLAH = 16;
+    static final int TORILU = 16;
     // نغمات سلّم ري الكبير الصاعد (8 درجات) — لصفحة القصة: كل قسم يطلع بنغمة أعلى
     private static final int NOTE_BASE = 8;
     private static final int COUNT = 17;
@@ -219,7 +219,7 @@ class SoundPlayer {
                 noise(b, 0, 0.25, 6000, 1.5, 0.012, 9000, 0.002);
                 break;
             }
-            case HAKOLAH: {
+            case TORILU: {
                 // اندفاعة هواء صاعدة ثم أربيجيو سريع
                 noise(b, 0, 0.35, 500, 0.9, 0.05, 5000, 0.25);
                 double[] notes = {D5, FS5, A5, D6};

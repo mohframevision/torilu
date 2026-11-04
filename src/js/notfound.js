@@ -6,7 +6,7 @@
 
   document.documentElement.lang = "en";
   document.documentElement.dir = "ltr";
-  document.title = "Page Not Found | Hakolah";
+  document.title = "Page Not Found | Torilu";
 
   var header = document.getElementById("notFoundHeader");
   if (header) {

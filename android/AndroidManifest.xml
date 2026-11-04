@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="bh.mohframevision.hakolah"
+    package="bh.mohframevision.torilu"
     android:versionCode="2"
     android:versionName="2.0">
 
@@ -9,12 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- "صوتك" بصوتيات هكوله: تسجيل صوت يصير آلة. يُطلب وقت الضغط على "سجّل" فقط -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
-        android:label="هكوله"
+        android:label="توريلو"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
@@ -30,7 +28,7 @@
             </intent-filter>
             <!-- بدون autoVerify عمداً: التحقق الرسمي (Digital Asset Links) يحتاج
                  بصمة شهادة التوقيع الحقيقية بمتجر Play، وهذي شهادة debug مؤقتة
-                 لحد الآن. بدون autoVerify يفتح رابط هكوله نافذة اختيار ("افتح
+                 لحد الآن. بدون autoVerify يفتح رابط توريلو نافذة اختيار ("افتح
                  بـ...") بدل فتح تلقائي فوري — تحسين حقيقي بردّ حال ما زال
                  يعمل صح. أضف autoVerify + assetlinks.json بالموقع بعد النشر
                  الفعلي بمتجر Play وتوفّر بصمة التوقيع النهائية. -->
@@ -40,18 +38,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:scheme="https"
-                    android:host="hakolah.com"
+                    android:host="torilu.com"
                     android:pathPrefix="/" />
-            </intent-filter>
-            <!-- الروابط القديمة المنشورة قبل الدومين (github.io/hakolah/...) تبقى تفتح التطبيق -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:scheme="https"
-                    android:host="mohframevision.github.io"
-                    android:pathPrefix="/hakolah/" />
             </intent-filter>
         </activity>
         <activity

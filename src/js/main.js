@@ -877,7 +877,7 @@ function nearestBranch(item, userCoords) {
 }
 
 /* ===== مشاركة عبر واتساب ===== */
-const SITE_ORIGIN = "https://hakolah.com/";
+const SITE_ORIGIN = "https://torilu.com/";
 const SITE_ROOT_PATH = "/";
 
 function initArticleShare() {
@@ -1140,7 +1140,7 @@ async function buildStoryImage({ icon, title, subtitle, photo }) {
 
   ctx.font = "800 46px Cairo, sans-serif";
   ctx.fillStyle = "#ffffff";
-  ctx.fillText(isRtl ? "● هكوله" : "● Hakolah", W / 2, H - 150);
+  ctx.fillText(isRtl ? "● توريلو" : "● Torilu", W / 2, H - 150);
   ctx.font = "500 32px Cairo, sans-serif";
   ctx.fillStyle = "rgba(255,255,255,0.75)";
   ctx.fillText(SITE_ORIGIN.replace(/^https?:\/\//, ""), W / 2, H - 100);
@@ -1159,7 +1159,7 @@ async function shareText(text, trackParams, card) {
     try {
       const blob = await buildStoryImage(card);
       if (blob) {
-        const candidate = new File([blob], "hakolah.png", { type: "image/png" });
+        const candidate = new File([blob], "torilu.png", { type: "image/png" });
         if (navigator.canShare({ files: [candidate] })) file = candidate;
       }
     } catch {
@@ -2153,7 +2153,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* ===== عن الموقع: بطاقة هكوله المعلّقة (بندول بسيط) =====
+/* ===== عن الموقع: بطاقة توريلو المعلّقة (بندول بسيط) =====
    زاوية البطاقة theta حول نقطة التعليق فوق الحزام. بلا سحب: تسارع الجاذبية
    -K·sin(theta) مع احتكاك، فتتأرجح وتهدأ. أثناء السحب: الزاوية تلحق اتجاه الإصبع
    من نقطة التعليق، وسرعة اللحاق تصير زخم الإفلات. الحلقة تشتغل فقط وهي تتحرك. */

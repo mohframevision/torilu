@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,7 +16,7 @@ import android.view.animation.OvershootInterpolator;
 // منزلق صوت عمودي مثل الجوال — نفس منزلق صفحة القصة بالموقع: سحب نسبي
 // (المستوى يتحرك من مكانه، ما يقفز لنقطة الإصبع)، ضغطة بلا سحب تقفز للنقطة،
 // نقرة بنغمة تعلى + اهتزاز عند كل 10٪، ومطّ مطاطي لو سحبت بعد الحد يرجع
-// بنابض. التعبئة بأخضر هكوله، والأيقونة تتبدّل (صامت/واطي/عالي).
+// بنابض. التعبئة بأخضر توريلو، والأيقونة تتبدّل (صامت/واطي/عالي).
 public class VolumeSlider extends View {
     interface Listener {
         void onLevel(float level, boolean dragging);

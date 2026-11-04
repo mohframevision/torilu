@@ -1,13 +1,13 @@
 ---
-title: About | Hakolah
+title: About | Torilu
 layout: base.njk
 lang: "en"
 permalink: en/about.html
-description: "Learn about Hakolah: a Bahraini guide to restaurants, cafes, stores, places and car shops, with priced menus."
+description: "Learn about Torilu: a Bahraini guide to restaurants, cafes, stores, places and car shops, with priced menus."
 langSwitchUrl: "/about.html"
 ---
 
-<section class="about-hero" aria-label="Hakolah">
+<section class="about-hero" aria-label="Torilu">
   <p class="about-hero-note about-hero-lead">A Bahraini guide that gathers restaurants, cafes, stores, places and car shops in one place.</p>
   <p class="about-hero-note about-hero-side">Updated regularly, in Arabic and English.</p>
   <div class="about-badge" id="aboutBadge" data-drag-hint="Drag the badge">
@@ -16,7 +16,7 @@ langSwitchUrl: "/about.html"
     <div class="about-badge-holder">
       <span class="about-badge-hole" aria-hidden="true"></span>
       <div class="about-badge-card">
-        <p class="about-badge-name">Hakolah</p>
+        <p class="about-badge-name">Torilu</p>
         <p class="about-badge-other" lang="en">Bahrain</p>
         <dl class="about-badge-facts">
           <dt>Gathers</dt>
@@ -31,16 +31,16 @@ langSwitchUrl: "/about.html"
       </div>
     </div>
   </div>
-  <div class="about-marquee" aria-hidden="true"><div class="about-marquee-track"><span>Hakolah</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span></div><div class="about-marquee-track"><span>Hakolah</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Hakolah</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span></div></div>
+  <div class="about-marquee" aria-hidden="true"><div class="about-marquee-track"><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span></div><div class="about-marquee-track"><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span><span>Torilu</span><span class="about-marquee-dot">·</span><span>Bahrain</span><span class="about-marquee-dot">·</span></div></div>
 </section>
 
 <article class="prose">
 
-# About Hakolah
+# About Torilu
 
-Hakolah is a Bahraini guide that gathers restaurants, cafes, bakeries, stores, places and car shops in Bahrain in one place, in Arabic and English.
+Torilu is a Bahraini guide that gathers restaurants, cafes, bakeries, stores, places and car shops in Bahrain in one place, in Arabic and English.
 
-## What will you find on Hakolah?
+## What will you find on Torilu?
 
 - **A guide to places:** cards with the location, map, phone, hours and contact accounts, and for many restaurants a **menu with prices**.
 - **Smart search:** search by place name, kind of food, or even the name of a dish inside a menu, and filter by area and category.
@@ -54,7 +54,7 @@ We collect place data from public sources: the places' own accounts, their order
 
 ## Is the current content final?
 
-No. The site grows every week with new places, completed old ones and better tools.
+No. The site grows every week with new places and by completing existing ones.
 
 You can save what you like to "Favorites" without signing in, and the list is stored in your browser only. The site never asks you for an account or a password.
 
@@ -68,7 +68,7 @@ The site owner's personal recommendation. It only appears on places they liked a
 
 <h2 id="reviews">Our policy on opinions and reviews</h2>
 
-Hakolah gathers information about places; it doesn't review them. A restaurant, cafe or bakery being listed here doesn't mean we recommend it or have rated it; most cards are information only: the name, location and contact details.
+Torilu gathers information about places; it doesn't review them. A restaurant, cafe or bakery being listed here doesn't mean we recommend it or have rated it; most cards are information only: the name, location and contact details.
 
 When we do give a personal opinion, it is labelled, like the "👍 Recommended" badge. The site owner has to try a place several times first, enough to know the food and how the staff treat customers.
 
@@ -80,11 +80,11 @@ We don't show ads. Some links are referral links that earn us a small commission
 
 <h2 id="privacy">Your privacy</h2>
 
-There are no accounts or passwords on Hakolah, and we don't collect your personal data. Full details are in the [privacy policy](/en/privacy-policy.html).
+There are no accounts or passwords on Torilu, and we don't collect your personal data. Full details are in the [privacy policy](/en/privacy-policy.html).
 
 <h2 id="business">For business owners</h2>
 
-Have a restaurant or cafe? You can [list your business](/en/business.html) on Hakolah with a QR digital menu and a WhatsApp order button.
+Have a restaurant or cafe? You can [list your business](/en/business.html) on Torilu with a QR digital menu and a WhatsApp order button.
 
 <h2 id="credits">Music and sound credits</h2>
 

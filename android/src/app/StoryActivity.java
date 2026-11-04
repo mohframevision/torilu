@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -26,7 +26,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-// "قصة هكوله" — نفس قصة صفحة الموقع الشخصي (hakolah-story.html) بصياغة تناسب
+// "قصة توريلو" — نفس قصة صفحة الموقع الشخصي (hakolah-story.html) بصياغة تناسب
 // التطبيق نفسه: الأرقام حيّة من بيانات التطبيق (مو مكتوبة يدوياً وتقدم)،
 // ومحطة التطبيق "بين يديك الآن" بدل "قادم قريباً". كل قسم يطلع وقت يوصله
 // التمرير بنغمة صاعدة، الأرقام تعدّ من صفر، ونقاط المحطات تضيء وحدة وحدة.

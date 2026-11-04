@@ -8,7 +8,7 @@ const QRCode = require("qrcode");
 const { fitGlyphInRect } = require("./heh-glyph.js");
 
 const SIZE = 1080;
-const SITE_URL = "https://hakolah.com/";
+const SITE_URL = "https://torilu.com/";
 const outDir =
   require("path").join(__dirname, "..", "ملفات-العمل", "بوسترات");
 
@@ -60,7 +60,7 @@ async function main() {
     <circle cx="586" cy="118" r="14" fill="#f59e0b" />
     <g fill="#2563eb">${logoGlyph}</g>
 
-    <text x="540" y="368" font-family="Tahoma, Arial, sans-serif" font-size="100" font-weight="800" text-anchor="middle" fill="#ffffff">هكوله</text>
+    <text x="540" y="368" font-family="Tahoma, Arial, sans-serif" font-size="100" font-weight="800" text-anchor="middle" fill="#ffffff">توريلو</text>
     <text x="540" y="423" font-family="Tahoma, Arial, sans-serif" font-size="36" font-weight="600" text-anchor="middle" fill="#dbeafe">كل شيء مفيد… في مكان واحد</text>
 
     ${pills}
@@ -70,7 +70,7 @@ async function main() {
     <rect x="470" y="855" width="140" height="140" rx="18" fill="#ffffff" />
     <image x="485" y="870" width="110" height="110" href="data:image/png;base64,${qrBase64}" />
 
-    <text x="540" y="1035" font-family="Tahoma, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">hakolah</text>
+    <text x="540" y="1035" font-family="Tahoma, Arial, sans-serif" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">torilu</text>
   </svg>
   `;
 

@@ -1,5 +1,5 @@
 // أداة لمرة واحدة لتوليد بوستر إنستقرام (1080x1080) لكل مقال بمصفوفة ARTICLES —
-// نفس ستايل البوسترات السابقة (خلفية زرقاء متدرجة، لوقو هكوله، QR)، بس بدل
+// نفس ستايل البوسترات السابقة (خلفية زرقاء متدرجة، لوقو توريلو، QR)، بس بدل
 // الترويج العام، يركّز على عنوان المقال وخطّافه، ورمز QR يوصل مباشرة لصفحة المقال.
 // مو جزء من بناء الموقع — تعتمد على opentype.js وqrcode (مش من devDependencies):
 //   npm install opentype.js qrcode --no-save && node scripts/generate-poster-articles.js
@@ -10,7 +10,7 @@ const QRCode = require("qrcode");
 const { fitGlyphInRect } = require("./heh-glyph.js");
 
 const SIZE = 1080;
-const SITE_BASE = "https://hakolah.com/guides/";
+const SITE_BASE = "https://torilu.com/guides/";
 const outDir =
   require("path").join(__dirname, "..", "ملفات-العمل", "بوسترات");
 
@@ -72,7 +72,7 @@ async function build(article) {
     <rect x="410" y="30" width="200" height="90" rx="30" fill="#ffffff" />
     <circle cx="486" cy="46" r="10" fill="#f59e0b" />
     <g fill="#2563eb">${logo}</g>
-    <text x="640" y="80" font-family="${FONT}" font-size="40" font-weight="800" text-anchor="start" fill="#ffffff">هكوله</text>
+    <text x="640" y="80" font-family="${FONT}" font-size="40" font-weight="800" text-anchor="start" fill="#ffffff">توريلو</text>
 
     <rect x="30" y="160" width="230" height="52" rx="26" fill="#f59e0b" />
     <text x="145" y="194" font-family="${FONT}" font-size="24" font-weight="800" text-anchor="middle" fill="#ffffff">${esc(article.badge)}</text>
@@ -89,7 +89,7 @@ async function build(article) {
     <rect x="470" y="850" width="140" height="140" rx="18" fill="#ffffff" />
     <image x="485" y="865" width="110" height="110" href="data:image/png;base64,${qr}" />
 
-    <text x="540" y="1035" font-family="${FONT}" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">hakolah</text>
+    <text x="540" y="1035" font-family="${FONT}" font-size="24" font-weight="600" text-anchor="middle" fill="#dbeafe">torilu</text>
   </svg>
   `;
 

@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,10 +15,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // الرئيسية: بحث شامل، مربعات الأقسام (نمط تطبيقات الخدمات مثل كريم)،
-// "اختيار اليوم" من كل أقسام الأماكن، و"جديد على هكوله". قائمة القسم نفسها
+// "اختيار اليوم" من كل أقسام الأماكن، و"جديد على توريلو". قائمة القسم نفسها
 // صارت SectionActivity. هنا الجلب الوحيد للبيانات، ومنه cachedSections لباقي الشاشات.
 // بلا كلاسات مجهولة ولا lambdas — d8 بهذي البيئة يفشل عليها.
-public class MainActivity extends Activity implements View.OnClickListener, HakolahApi.Callback, CardStackView.Listener {
+public class MainActivity extends Activity implements View.OnClickListener, ToriluApi.Callback, CardStackView.Listener {
     private View loadingView;
     private View errorView;
     private TextView errorText;
@@ -112,7 +112,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Hako
             loadingView.setVisibility(View.VISIBLE);
             errorView.setVisibility(View.GONE);
         }
-        HakolahApi.fetch(this, this);
+        ToriluApi.fetch(this, this);
     }
 
     @Override
@@ -150,12 +150,12 @@ public class MainActivity extends Activity implements View.OnClickListener, Hako
         errorView.setVisibility(View.VISIBLE);
     }
 
-    // رابط هكوله (مثلاً من الواتساب) يفتح القسم أو العنصر المطلوب فوق الرئيسية
+    // رابط توريلو (مثلاً من الواتساب) يفتح القسم أو العنصر المطلوب فوق الرئيسية
     private void handleDeepLink() {
         Uri data = getIntent().getData();
         if (data == null || data.getPath() == null) return;
         String path = data.getPath();
-        String rel = path.startsWith("/hakolah/") ? path.substring("/hakolah/".length()) : path.replaceFirst("^/", "");
+        String rel = path.replaceFirst("^/", "");
         if (rel.startsWith("en/")) rel = rel.substring(3);
         if (rel.isEmpty() || !rel.endsWith(".html")) return;
         if (rel.contains("/")) {
@@ -350,7 +350,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Hako
         dailyCount.setText((index + 1) + " / " + count);
     }
 
-    // ---- "جديد على هكوله": أحدث ما أضيف (addedAt)، بلا المخفي من القائمة ----
+    // ---- "جديد على توريلو": أحدث ما أضيف (addedAt)، بلا المخفي من القائمة ----
     private void buildNew() {
         newItems.clear();
         newSlugs.clear();

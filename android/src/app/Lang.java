@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.content.Context;
 import org.json.JSONObject;
@@ -53,7 +53,7 @@ final class Lang {
 
     // روابط الموقع: الصفحات الإنجليزية تحت en/ وبـslug إنجليزي أحياناً
     static String siteUrl(Context c, String path) {
-        return HakolahApi.ORIGIN + (en(c) ? "en/" : "") + path;
+        return ToriluApi.ORIGIN + (en(c) ? "en/" : "") + path;
     }
 
     static String detailPath(Context c, JSONObject item) {

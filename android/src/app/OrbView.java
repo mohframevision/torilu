@@ -1,4 +1,4 @@
-package bh.mohframevision.hakolah;
+package bh.mohframevision.torilu;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
 
-// كرة ثلاثية الأبعاد من أيقونات العناصر (فكرة Recollect بهوية هكوله، وبلا
+// كرة ثلاثية الأبعاد من أيقونات العناصر (فكرة Recollect بهوية توريلو، وبلا
 // صور — إيموجي العناصر نفسها داخل بلاطات زجاجية). النقاط موزّعة على الكرة
 // بلولب فيبوناتشي (توزيع متساوٍ بلا تكتّل)، تدور ببطء وحدها، وتلفّها بإصبعك
 // بقصور ذاتي. أثناء الاختيار تدور بسرعة وتتباطأ، ومع كل عنصر يصير بالمقدمة

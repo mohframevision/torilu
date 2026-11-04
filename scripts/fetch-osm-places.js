@@ -76,7 +76,7 @@ async function main() {
   const res = await fetch("https://overpass-api.de/api/interpreter", {
     method: "POST",
     body: "data=" + encodeURIComponent(QUERY),
-    headers: { "User-Agent": "hakolah-site/1.0 (mohframevision@outlook.com)" },
+    headers: { "User-Agent": "torilu-site/1.0 (mohframevision@outlook.com)" },
   });
   if (!res.ok) throw new Error("فشل الجلب: " + res.status);
   const data = await res.json();

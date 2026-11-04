@@ -2,8 +2,8 @@
 layout: base.njk
 lang: "en"
 permalink: "en/contact.html"
-title: "Contact Us | Hakolah"
-description: "Contact us to request adding a restaurant, store, or tool, or for any question about Hakolah."
+title: "Contact Us | Torilu"
+description: "Contact us to request adding a restaurant, store, or place, or for any question about Torilu."
 navActive: "contact"
 langSwitchUrl: "/contact.html"
 ---
@@ -11,7 +11,7 @@ langSwitchUrl: "/contact.html"
 
 # Contact Us
 
-Have a restaurant, store, or tool you'd like added to the site? Or have a question? Fill out the form below or email us directly.
+Have a restaurant, store, or place you'd like added to the site? Or have a question? Fill out the form below or email us directly.
 
 </article>
 
@@ -19,8 +19,8 @@ Have a restaurant, store, or tool you'd like added to the site? Or have a questi
 
 <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
   <input type="hidden" name="access_key" value="a2dc8bb2-0fb8-47a9-8b58-ad3245d3f5a3">
-  <input type="hidden" name="subject" value="New message from Hakolah">
-  <input type="hidden" name="from_name" value="Hakolah contact form">
+  <input type="hidden" name="subject" value="New message from Torilu">
+  <input type="hidden" name="from_name" value="Torilu contact form">
   <input type="checkbox" name="botcheck" class="hidden">
 
   <div class="form-group">
@@ -52,4 +52,4 @@ Have a restaurant, store, or tool you'd like added to the site? Or have a questi
   </button>
 </form>
 
-<p class="contact-direct">Or email us directly: <a href="mailto:mohframevision@outlook.com">mohframevision@outlook.com</a></p>
+<p class="contact-direct">Or email us directly: <a href="mailto:torilu.official@gmail.com">torilu.official@gmail.com</a></p>

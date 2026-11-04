@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <!-- مجموعة "عن التطبيق" — قصة هكوله -->
+        <!-- مجموعة "عن التطبيق" — قصة توريلو -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:clipChildren="false">
 
-            <bh.mohframevision.hakolah.OrbView
+            <bh.mohframevision.torilu.OrbView
                 android:id="@+id/pickerOrb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

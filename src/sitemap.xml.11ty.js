@@ -3,7 +3,7 @@ exports.data = {
   eleventyExcludeFromCollections: true,
 };
 
-const SITE_URL = "https://hakolah.com";
+const SITE_URL = "https://torilu.com";
 
 exports.render = function (data) {
   // كل قسم له تلقائياً نسخة إنجليزية (src/en/section.njk يولّدها بالـ pagination

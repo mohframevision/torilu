@@ -1,12 +1,12 @@
 ---
-name: run-hakolah
-description: Build, run, and drive the hakolah Eleventy site. Use when asked to start hakolah, build it, check i18n parity, take a screenshot of its UI, or interact with the running site (search, filters, favorites, the "اختار لي" picker, etc.).
+name: run-torilu
+description: Build, run, and drive the torilu Eleventy site. Use when asked to start torilu, build it, check i18n parity, take a screenshot of its UI, or interact with the running site (search, filters, favorites, the "اختار لي" picker, etc.).
 ---
 
 Eleventy static site (bilingual AR/EN Bahrain directory), served from the
-root (`/`) of hakolah.com via GitHub Pages. Drive it by starting the
+root (`/`) of torilu.com via GitHub Pages. Drive it by starting the
 dev server (`npm start`) then piping commands to
-`.claude/skills/run-hakolah/driver.mjs`, a small Playwright-based REPL
+`.claude/skills/run-torilu/driver.mjs`, a small Playwright-based REPL
 (same command style as `chromium-cli`: `nav` / `wait-for` / `click` /
 `screenshot` / ...). All paths below are relative to the repo root.
 
@@ -59,7 +59,7 @@ Then drive it — pipe a script to the driver's stdin (it queues and runs
 commands strictly in order):
 
 ```bash
-node .claude/skills/run-hakolah/driver.mjs <<'EOF'
+node .claude/skills/run-torilu/driver.mjs <<'EOF'
 launch
 nav http://localhost:8080/
 wait-for text=دليلك إلى أماكن البحرين
@@ -72,7 +72,7 @@ Verified interactive flow (the "اختار لي" random picker — the result ca
 `.trip-result` lands inside `#pickerStage` after the reel spin, ~3–6s):
 
 ```bash
-node .claude/skills/run-hakolah/driver.mjs <<'EOF'
+node .claude/skills/run-torilu/driver.mjs <<'EOF'
 launch
 nav http://localhost:8080/picker.html
 wait-for .picker-category
@@ -85,7 +85,7 @@ quit
 EOF
 ```
 
-Screenshots land in `.claude/skills/run-hakolah/screenshots/`.
+Screenshots land in `.claude/skills/run-torilu/screenshots/`.
 
 Driver commands:
 
@@ -124,8 +124,8 @@ clean (verified this session: `npm run lint` → no output/errors,
 ## Gotchas
 
 - **The site is served from the root (`pathPrefix: "/"` in `.eleventy.js`).**
-  Pages live at `http://localhost:8080/sounds.html`, `/en/index.html`, etc.
-  (`scripts/check-ux.js` still serves under `/hakolah/` internally — that's
+  Pages live at `http://localhost:8080/restaurants.html`, `/en/index.html`, etc.
+  (`scripts/check-ux.js` still serves under `/torilu/` internally — that's
   its own test server, not the real path.)
 - **Cloud sessions:** Chromium is preinstalled at `/opt/pw-browsers/chromium`;
   the driver uses it automatically (or set `CHROMIUM_PATH`). Don't run

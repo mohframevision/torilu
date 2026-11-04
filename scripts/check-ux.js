@@ -17,7 +17,7 @@ const os = require("os");
 
 const SITE = path.join(__dirname, "..", "_site");
 const PORT = 8123;
-const PREFIX = "/hakolah"; // pathPrefix المستخدم بالبناء (GitHub Pages)
+const PREFIX = "/torilu"; // pathPrefix المستخدم بالبناء (GitHub Pages)
 
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
@@ -70,7 +70,7 @@ async function main() {
   }
 
   const server = await startServer();
-  const profile = fs.mkdtempSync(path.join(os.tmpdir(), "hakolah-ux-"));
+  const profile = fs.mkdtempSync(path.join(os.tmpdir(), "torilu-ux-"));
   const chrome = spawn(chromePath, [
     "--headless=new",
     "--disable-gpu",
