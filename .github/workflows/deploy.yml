@@ -1,8 +1,7 @@
 name: بناء ونشر الموقع
 
+# توريلو: النشر يدوي فقط حتى يوم الإطلاق (بعدها يرجع push على main)
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
 
 permissions:
