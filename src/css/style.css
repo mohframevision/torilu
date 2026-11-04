@@ -1772,60 +1772,6 @@ a.photo-credit.card {
   );
 }
 
-.cazasouq-promo {
-  position: relative;
-  text-align: start;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-}
-
-.cazasouq-promo-note {
-  margin: 12px 0 0;
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-}
-
-.cazasouq-promo-label {
-  position: absolute;
-  top: 10px;
-  inset-inline-end: 12px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.cazasouq-promo-body {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-
-.cazasouq-promo-icon {
-  font-size: 2rem;
-  line-height: 1;
-}
-
-.cazasouq-promo-text h3 {
-  margin: 0 0 4px;
-  font-size: 1.05rem;
-  color: var(--color-text);
-}
-
-.cazasouq-promo-text p {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-.cazasouq-promo-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 /* ===== الفوتر ===== */
 .site-footer {
   border-top: 1px solid var(--color-border);
@@ -2927,96 +2873,12 @@ a.photo-credit.card {
 }
 
 /* ===== تجربة "موسيقى بيب هادئة" (قسم تجارب الذكاء الاصطناعي) ===== */
-.beep-experiment {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 32px 20px;
-  margin: 24px 0;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  text-align: center;
-}
-
-.beep-experiment .btn {
-  font-size: 1.05rem;
-  padding: 14px 28px;
-}
-
-.instrument-picker {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.beep-controls {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.beep-experiment .btn:disabled,
-.beep-experiment .filter-chip:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.beep-seed-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.beep-seed-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-}
-
-.beep-seed-input {
-  width: 150px;
-  padding: 7px 14px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-family: inherit;
-  font-size: 0.88rem;
-  text-align: center;
-  direction: ltr;
-}
-
-.beep-seed-input:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 1px;
-}
 
 /* اللوحة الكاملة أعرض من الجوال — تنزلق أفقياً داخل حاويتها بدل ما تكسر
    عرض الصفحة كلها */
-.beep-keys-scroll {
-  max-width: 100%;
-  overflow-x: auto;
-}
 
 /* سمة hidden لحالها ما تكفي: ‎.beep-keys‎ تضبط display:flex بنفس تخصيصية
    قاعدة المتصفح الافتراضية، وقواعد الصفحة تغلبها */
-.beep-keys-scroll[hidden],
-.beep-keys[hidden] {
-  display: none;
-}
-
-.beep-experiment-hint {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  margin: 0;
-}
 
 /* لوحة التحليل الموسيقي — تُملأ بالجافاسكربت بعد كل تشغيلة */
 /* ===== مصدر اللحم (بطاقات المطاعم) ===== */
@@ -3150,295 +3012,16 @@ a.photo-credit.card {
   }
 }
 
-.beep-analysis:empty {
-  display: none;
-}
-
-.beep-analysis {
-  width: 100%;
-  max-width: 460px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 14px 16px;
-  margin-top: 4px;
-  background: color-mix(in srgb, var(--color-text) 4%, transparent);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  font-size: 0.85rem;
-  text-align: start;
-}
-
-.beep-analysis-row {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.beep-analysis-row span {
-  color: var(--color-text-muted);
-  flex-shrink: 0;
-}
-
-.beep-analysis-row strong {
-  color: var(--color-text);
-  text-align: end;
-}
-
 /* أوكتافة بيانو حقيقية (7 بيضاء + 5 سوداء) — دايماً LTR بغض النظر عن لغة
    الصفحة، لأن مفاتيح البيانو تُقرأ يسار-لليمين عالمياً حتى بالصفحات العربية */
-.beep-keys {
-  direction: ltr;
-  position: relative;
-  display: flex;
-  width: 238px;
-  height: 90px;
-  margin: 4px 0;
-}
-
-.beep-white {
-  width: 34px;
-  height: 90px;
-  background: #ffffff;
-  border: 1px solid var(--color-border);
-  border-radius: 0 0 4px 4px;
-  transition: background 0.12s ease;
-}
-
-.beep-white.active {
-  background: color-mix(in srgb, var(--color-primary) 35%, white);
-}
-
-.beep-black {
-  position: absolute;
-  top: 0;
-  width: 20px;
-  height: 56px;
-  background: #1a1a1a;
-  border-radius: 0 0 3px 3px;
-  z-index: 2;
-  transition: background 0.12s ease;
-}
-
-.beep-black.active {
-  background: var(--color-primary);
-}
 
 /* اللوحة الكاملة (٤ أوكتافات) — مفاتيح أصغر عشان تدخل بالشاشة. المقاسات هنا
    لازم تطابق FULL_WHITE_W/FULL_BLACK_W بـ main.js لأن مواضع المفاتيح السوداء
    تُحسب هناك */
-.beep-keys-full {
-  height: 80px;
-}
-
-.beep-keys-full .beep-white {
-  width: 22px;
-  height: 80px;
-}
-
-.beep-keys-full .beep-black {
-  width: 13px;
-  height: 50px;
-}
 
 /* ===== محوّل الملفات ===== */
-.conv-kinds {
-  margin-bottom: 16px;
-}
-
-.conv-options[hidden] {
-  display: none;
-}
-
-.conv-option-note {
-  flex-basis: 100%;
-  margin: 0;
-  text-align: center;
-  font-size: 0.82rem;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-}
-
-.conv-check {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.conv-video-note {
-  display: block;
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-  margin-bottom: 8px;
-}
 
 /* شريط تقدّم تحويل الفيديو — التحويل بالزمن الحقيقي، فبدون مؤشّر يبان معلّقاً */
-.conv-progress {
-  width: min(260px, 60vw);
-  height: 6px;
-  border-radius: var(--radius-pill);
-  background: var(--color-border);
-  overflow: hidden;
-}
-
-.conv-progress span {
-  display: block;
-  width: 0;
-  height: 100%;
-  background: var(--color-primary);
-  transition: width 0.25s linear;
-}
-
-.conv-start {
-  margin-top: 4px;
-}
-
-.conv-privacy {
-  padding: 16px 18px;
-  margin-bottom: 20px;
-  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
-  border-radius: var(--radius);
-  font-size: 0.92rem;
-  line-height: 1.8;
-}
-
-.conv-privacy-proof {
-  color: var(--color-text-muted);
-  font-size: 0.86rem;
-}
-
-.conv-drop {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 36px 20px;
-  border: 2px dashed var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  text-align: center;
-  transition:
-    border-color 0.15s ease,
-    background 0.15s ease;
-}
-
-.conv-drop.dragging {
-  border-color: var(--color-primary);
-  background: color-mix(in srgb, var(--color-primary) 6%, var(--color-surface));
-}
-
-.conv-drop-text {
-  margin: 0;
-  font-weight: 600;
-}
-
-.conv-drop-hint {
-  margin: 0;
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-}
-
-.conv-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: flex-end;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.conv-option {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.conv-option[hidden] {
-  display: none;
-}
-
-.conv-option-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-}
-
-.conv-number {
-  width: 170px;
-  padding: 8px 14px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-family: inherit;
-  font-size: 0.88rem;
-}
-
-.conv-results {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 8px;
-}
-
-.conv-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 14px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-
-.conv-row-error {
-  border-color: color-mix(in srgb, #d33 45%, var(--color-border));
-}
-
-.conv-thumb {
-  width: 56px;
-  height: 56px;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  flex-shrink: 0;
-  background: color-mix(in srgb, var(--color-text) 6%, transparent);
-}
-
-.conv-row-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.conv-row-name {
-  font-weight: 700;
-  font-size: 0.9rem;
-  overflow-wrap: anywhere;
-}
-
-.conv-row-meta {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  margin-top: 3px;
-}
-
-.conv-good {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
-.conv-warn {
-  color: #c77700;
-  font-weight: 700;
-}
-
-.conv-download {
-  flex-shrink: 0;
-}
 
 /* صفحة أداة لا مقال: تاخذ عرض الحاوية كامل بدل 760px.
    لكن النص القارئ داخلها يبقى ضيقاً — السطر بعرض الحاوية يتعب العين لأنها
@@ -3448,243 +3031,23 @@ a.photo-credit.card {
   max-width: none;
 }
 
-.prose-wide > p,
-.prose-wide > .calc-intro,
-.prose-wide > .conv-privacy {
+.prose-wide > p {
   max-width: 760px;
   margin-inline: auto;
 }
 
 /* عمودان بالشاشات العريضة: الإدخال بجهة والنتائج بجهة، فتشوف الأرقام
    تتغيّر وأنت تسجّل بدل ما تنزل لها */
-@media (min-width: 1000px) {
-  .calc-layout {
-    display: grid;
-    grid-template-columns: minmax(340px, 420px) 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-}
 
 /* ===== حاسبة المصروفات ===== */
 /* الشرح مطوي افتراضياً: الأداة نفسها هي المطلوب، والشرح ياخذ نص شاشة
    بالجوال قبل ما يوصل المستخدم لأول زر */
-.calc-intro {
-  margin: 16px 0;
-  padding: 12px 16px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-}
-
-.calc-intro summary {
-  cursor: pointer;
-  font-weight: 700;
-  color: var(--color-primary);
-  list-style: none;
-}
-
-.calc-intro summary::-webkit-details-marker {
-  display: none;
-}
-
-.calc-intro summary::after {
-  content: " ▾";
-  font-size: 0.75rem;
-}
-
-.calc-intro[open] summary::after {
-  content: " ▴";
-}
-
-.calc-intro p {
-  margin: 12px 0 0;
-  font-size: 0.9rem;
-  line-height: 1.8;
-}
-
-.calc-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin: 20px 0;
-}
-
-.calc-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.calc-field-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-}
-
-.calc-input {
-  width: 150px;
-  padding: 8px 14px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-family: inherit;
-  font-size: 0.88rem;
-}
-
-.calc-input-wide {
-  width: 220px;
-}
-
-.calc-type-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
 
 /* بطاقة الرصيد الحالي — الجواب الأول اللي يدوّر عليه أي واحد، فتجي فوق كل
    شي وبأكبر خط بالصفحة */
-.calc-balance-card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  padding: 20px;
-  margin: 20px 0;
-  text-align: center;
-}
-
-.calc-balance-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-}
-
-.calc-balance-value {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 6px 0;
-}
-
-.calc-balance-formula {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-}
-
-.calc-balance-settings {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--color-border);
-  text-align: start;
-}
-
-.calc-analysis {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-bottom: 24px;
-}
-
-.calc-analysis-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.calc-analysis-strong {
-  background: var(--color-surface);
-  border-radius: var(--radius);
-  font-weight: 700;
-}
-
-.calc-analysis-label {
-  flex-grow: 1;
-  font-size: 0.9rem;
-}
-
-.calc-analysis-value {
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.calc-analysis-note {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  width: 100%;
-}
 
 /* لوحة المبلغ: كبيرة وملوّنة حسب النوع (دخل/مصروف) — تلقيمها بلمسات
    الآلة الحاسبة تحتها لا بلوحة مفاتيح نظام التشغيل */
-.calc-amount-display {
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  padding: 16px 20px;
-  transition:
-    border-color 0.15s ease,
-    background 0.15s ease;
-}
-
-.calc-amount-display.calc-type-income {
-  border-color: var(--color-primary);
-  background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
-}
-
-.calc-amount-display.calc-type-expense {
-  border-color: var(--color-danger);
-  background: color-mix(in srgb, var(--color-danger) 8%, var(--color-surface));
-}
-
-.calc-amount-pending {
-  min-height: 1.2em;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  text-align: center;
-  direction: ltr;
-}
-
-.calc-amount-main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  direction: ltr;
-}
-
-.calc-amount-value {
-  font-size: 2.4rem;
-  font-weight: 700;
-  min-width: 1ch;
-}
-
-.calc-amount-currency {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-}
-
-.calc-backspace {
-  margin-inline-start: auto;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: var(--radius-pill);
-  background: var(--color-border);
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-.calc-shake {
-  animation: calc-shake 0.35s;
-}
 
 @keyframes calc-shake {
   0%,
@@ -3699,305 +3062,13 @@ a.photo-credit.card {
   }
 }
 
-.calc-keypad {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.calc-key {
-  padding: 16px 0;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-family: inherit;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.calc-key:active {
-  background: var(--color-border);
-}
-
-.calc-key-op {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
-.calc-cat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
-  gap: 10px;
-}
-
-.calc-cat-tile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 12px 6px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  font-family: inherit;
-  cursor: pointer;
-}
-
-.calc-cat-tile-icon {
-  font-size: 1.4rem;
-}
-
-.calc-cat-tile-label {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-  text-align: center;
-}
-
-.calc-cat-tile.active {
-  border-color: var(--color-primary);
-  background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
-}
-
-.calc-cat-tile.active .calc-cat-tile-label {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
-.calc-cat-tile-add {
-  border-style: dashed;
-}
-
 /* زر الإضافة لاصق بأسفل الشاشة ما دام النموذج معروضاً — بالجوال النموذج
    أطول من شاشتين (لوحة أرقام + شبكة فئات)، وكان الزر بآخره فما يلقاه أحد.
    62 = فوق تذكير اختيار اليوم (60) لأنه الفعل الأساسي بالصفحة، وتحت بانر
    الكوكيز (65) والشريط السفلي (70) فما يغطّيهما */
-.calc-add-btn {
-  width: 100%;
-  position: sticky;
-  bottom: 16px;
-  z-index: 62;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-}
 
 @media (max-width: 1300px) {
   /* فوق الشريط السفلي (60px) لا تحته */
-  .calc-add-btn {
-    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-.calc-filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.calc-alltime {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.88rem;
-  cursor: pointer;
-}
-
-.calc-summary {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.calc-summary-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 14px;
-  text-align: center;
-}
-
-.calc-summary-label {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  margin-bottom: 4px;
-}
-
-.calc-summary-value {
-  font-size: 1.15rem;
-  font-weight: 700;
-}
-
-.calc-positive {
-  color: var(--color-primary);
-}
-
-.calc-negative {
-  color: var(--color-danger);
-}
-
-.calc-breakdown {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-.calc-cat-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.calc-cat-name {
-  width: 110px;
-  flex-shrink: 0;
-  font-size: 0.85rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.calc-cat-bar {
-  flex-grow: 1;
-  height: 8px;
-  border-radius: var(--radius-pill);
-  background: var(--color-border);
-  overflow: hidden;
-}
-
-.calc-cat-bar span {
-  display: block;
-  height: 100%;
-  background: var(--color-primary);
-  border-radius: var(--radius-pill);
-}
-
-.calc-cat-amount {
-  flex-shrink: 0;
-  font-size: 0.85rem;
-  font-weight: 700;
-  min-width: 80px;
-  text-align: end;
-}
-
-.calc-empty-note {
-  text-align: center;
-  color: var(--color-text-muted);
-  padding: 20px 0;
-}
-
-.calc-entries {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.calc-entry {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-
-.calc-entry-info {
-  flex-grow: 1;
-  min-width: 0;
-}
-
-.calc-entry-category {
-  font-weight: 600;
-}
-
-.calc-entry-meta {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  margin-top: 2px;
-}
-
-.calc-entry-amount {
-  flex-shrink: 0;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.calc-entry-delete {
-  flex-shrink: 0;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  opacity: 0.6;
-  padding: 4px;
-}
-
-.calc-entry-delete:hover {
-  opacity: 1;
-}
-
-.calc-actions-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.calc-toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--color-text);
-  color: var(--color-surface);
-  padding: 12px 18px;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
-  z-index: 200;
-}
-
-.calc-toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: auto;
-}
-
-.calc-toast-action {
-  background: none;
-  border: none;
-  color: inherit;
-  font-weight: 700;
-  text-decoration: underline;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-}
-
-@media (max-width: 560px) {
-  .calc-summary {
-    grid-template-columns: 1fr;
-  }
-
-  .calc-input,
-  .calc-input-wide {
-    width: 100%;
-  }
 }
 
 /* شارة القسم على البطاقة — تظهر فقط حين تختلط الأقسام (الرئيسية/المفضلة) */
@@ -4027,451 +3098,29 @@ a.photo-credit.card {
 
 /* زر اختيار الملفات فوق تذكير "اختيار اليوم" (60): التذكير ترويج، وهذا
    الفعل الأساسي بصفحة الأداة — وكان يبلع الضغطة فيبدو المحوّل معطّلاً */
-.conv-drop .btn {
-  position: relative;
-  z-index: 62;
-}
 
 /* ===== اختبار سرعة الكتابة ===== */
-.type-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin: 20px 0;
-}
-
-.type-stat {
-  padding: 14px 10px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  text-align: center;
-}
-
-.type-stat-label {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-}
-
-.type-stat-value {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-.type-stat-unit {
-  font-size: 0.7rem;
-  color: var(--color-text-muted);
-}
-
-.type-prompt {
-  padding: 20px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  font-size: 1.3rem;
-  line-height: 2.2;
-}
-
-.type-ok {
-  color: var(--color-primary);
-}
-
-.type-bad {
-  color: var(--color-danger);
-  text-decoration: underline wavy;
-}
 
 /* الحرف التالي — علامة بصرية تقول "أنت هنا" بلا تحريك النص */
-.type-next {
-  background: color-mix(in srgb, var(--color-primary) 22%, transparent);
-  border-radius: 3px;
-}
-
-.type-input {
-  width: 100%;
-  margin-top: 16px;
-  padding: 14px 16px;
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-family: inherit;
-  font-size: 1.1rem;
-  line-height: 1.9;
-  resize: vertical;
-}
-
-.type-input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-}
-
-.type-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px;
-  margin-top: 14px;
-}
-
-.type-hint {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-@media (max-width: 560px) {
-  .type-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .type-prompt {
-    font-size: 1.1rem;
-  }
-}
-
-.type-levels {
-  margin-bottom: 4px;
-}
 
 /* ===== تجربة الموسيقى: أدوات التعلّم (أبعاد الصوت، النوتة، تدريب الأذن) ===== */
-.beep-params,
-.beep-staff-wrap,
-.beep-quiz {
-  width: 100%;
-  max-width: 560px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 16px;
-  background: color-mix(in srgb, var(--color-text) 4%, transparent);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-
-.beep-staff-wrap[hidden] {
-  display: none;
-}
-
-.beep-params-title {
-  margin: 0;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-align: center;
-}
-
-.beep-param {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-.beep-param-note,
-.beep-quiz-result {
-  margin: 0;
-  font-size: 0.85rem;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-  text-align: center;
-}
-
-.beep-quiz-result {
-  font-weight: 700;
-  color: var(--color-text);
-  min-height: 1.5em;
-}
-
-.quiz-btn:disabled {
-  opacity: 0.55;
-  cursor: default;
-}
 
 /* النوتة تُقرأ يسار-لليمين عالمياً حتى بصفحة عربية — نفس قاعدة لوحة البيانو */
-.beep-staff-scroll {
-  direction: ltr;
-  width: 100%;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  background: color-mix(in srgb, var(--color-surface) 90%, white);
-  border-radius: calc(var(--radius) / 2);
-}
-
-.beep-staff-scroll svg {
-  display: block;
-}
-
-.st-line,
-.st-bar,
-.st-stem {
-  stroke: var(--color-text);
-  stroke-width: 1;
-}
-
-.st-stem {
-  stroke-width: 1.3;
-}
-
-.st-head {
-  fill: var(--color-text);
-  stroke: var(--color-text);
-  stroke-width: 1.4;
-  transition: fill 0.12s ease, stroke 0.12s ease;
-}
-
-.st-head.hollow {
-  fill: none;
-}
-
-.st-clef,
-.st-acc,
-.st-rest {
-  fill: var(--color-text);
-  font-family: "Segoe UI Symbol", "Noto Music", "Noto Sans Symbols 2", "Apple Symbols", serif;
-}
-
-.st-clef {
-  font-size: 44px;
-}
-
-.st-acc {
-  font-size: 16px;
-}
-
-.st-rest {
-  font-size: 22px;
-}
-
-.st-note.on .st-head,
-.st-note.on .st-stem,
-.st-rest.on {
-  fill: var(--color-primary);
-  stroke: var(--color-primary);
-}
-
-.st-note.on .st-head.hollow {
-  fill: none;
-}
-
-.beep-chord {
-  margin: 0;
-  min-height: 1.5em;
-  font-weight: 700;
-  font-size: 0.9rem;
-}
 
 /* ===== تجربة الموسيقى: المسرح (التشغيل + ما ينعزف) واللوحات المطوية ===== */
-.beep-stage {
-  width: 100%;
-  max-width: 560px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 16px;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-card);
-}
 
 /* داخل المسرح النوتة جزء منه، مو بطاقة ثانية فوق بطاقة */
-.beep-stage .beep-staff-wrap {
-  padding: 0;
-  background: none;
-  border: 0;
-}
-
-.beep-stage .beep-staff-scroll {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-}
 
 /* منزلق الصوت: خط رفيع ينتفخ عند المستوى كقطرة ماء متصلة به (sounds.js يبني الشكل
    ويضع --level من ٠ إلى ١). المنزلق الأصلي فوقه شفاف للمس والكيبورد */
-.beep-volume {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: min(100%, 300px);
-  direction: ltr;
-}
-
-.beep-volume input {
-  flex: 1;
-  height: 28px;
-  margin: 0;
-  accent-color: var(--color-primary);
-  cursor: pointer;
-}
-
-.vol-wrap {
-  --drop: 18px;
-  position: relative;
-  display: flex;
-  flex: 1;
-  align-items: center;
-  min-width: 0;
-}
-
-.vol-wrap input {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  background: transparent;
-  appearance: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.vol-wrap input::-webkit-slider-runnable-track {
-  height: 28px;
-  background: transparent;
-}
-
-.vol-wrap input::-webkit-slider-thumb {
-  width: var(--drop);
-  height: 28px;
-  background: transparent;
-  appearance: none;
-}
-
-.vol-wrap input::-moz-range-track {
-  background: transparent;
-}
-
-.vol-wrap input::-moz-range-thumb {
-  width: var(--drop);
-  height: 28px;
-  border: 0;
-  background: transparent;
-}
-
-.vol-wrap input:focus-visible {
-  outline: none;
-}
-
-.vol-goo,
-.vol-liquid,
-.vol-track {
-  position: absolute;
-  pointer-events: none;
-}
-
-.vol-goo {
-  inset: 0;
-}
-
-.vol-track {
-  inset-inline: 2px;
-  top: calc(50% - 2px);
-  height: 4px;
-  border-radius: var(--radius-pill);
-  background: var(--color-border);
-}
 
 /* الخط الممتلئ والقطرة داخل فلتر واحد: يذوبان ببعض فيصير الاتصال منحنياً ناعماً */
-.vol-liquid {
-  inset: -6px 0;
-  filter: url(#volGoo);
-}
-
-.vol-fill,
-.vol-drop {
-  position: absolute;
-  background: var(--color-primary);
-}
-
-.vol-fill {
-  left: 2px;
-  top: calc(50% - 2.5px);
-  width: calc(var(--drop) / 2 + (100% - var(--drop)) * var(--level, 0.8) - 2px);
-  height: 5px;
-  border-radius: var(--radius-pill);
-}
-
-.vol-drop {
-  left: calc((100% - var(--drop)) * var(--level, 0.8));
-  top: calc(50% - var(--drop) / 2);
-  width: var(--drop);
-  height: var(--drop);
-  border-radius: 50%;
-  transition: transform 0.18s ease;
-}
-
-.vol-wrap:active .vol-drop,
-.vol-wrap:has(input:focus-visible) .vol-drop {
-  transform: scale(1.18);
-}
-
-.vol-wrap:has(input:focus-visible) .vol-track {
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 45%, transparent);
-}
-
-.vol-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
 
 /* بعد النزول بالصفحة: حبة صغيرة بزاوية الشاشة تحت الهيدر، شبه شفافة لين تلمسها */
-.beep-volume.is-floating {
-  position: fixed;
-  top: var(--float-top, 72px);
-  right: 12px;
-  z-index: 40;
-  width: 190px;
-  padding: 4px 12px;
-  gap: 6px;
-  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  font-size: 0.85rem;
-  opacity: 0.88;
-  animation: vol-float-in 0.22s ease;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-}
-
-html[dir="rtl"] .beep-volume.is-floating {
-  right: auto;
-  left: 12px;
-}
-
-.beep-volume.is-floating:hover,
-.beep-volume.is-floating:focus-within {
-  opacity: 1;
-}
 
 /* مطويّ: دائرة صغيرة بأيقونة السمّاعة فقط */
-.beep-volume.is-floating.is-folded {
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  justify-content: center;
-  cursor: pointer;
-}
-
-html.touch .sounds-top .beep-volume.is-floating.is-folded {
-  width: 40px;
-  padding: 0;
-}
-
-.beep-volume.is-folded > span:first-child {
-  display: none;
-}
 
 /* مخفي بصرياً لا display:none — عشان يبقى يوصله الكيبورد وقارئ الشاشة */
-.beep-volume.is-folded .vol-wrap {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-}
 
 @keyframes vol-float-in {
   from {
@@ -4480,134 +3129,13 @@ html.touch .sounds-top .beep-volume.is-floating.is-folded {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .beep-volume.is-floating,
-  .vol-drop {
-    animation: none;
-    transition: none;
-  }
-}
-
 /* مكان المنزلق محجوز وهو طافٍ (وإلا قفز المحتوى)، ومخفي غير كذا عشان ما يضيف فجوة */
-.beep-volume-spot {
-  display: none;
-  flex: none;
-}
-
-.beep-volume-spot.holding {
-  display: block;
-}
-
-.beep-panel,
-.beep-more {
-  width: 100%;
-  max-width: 560px;
-}
-
-.beep-panel {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-}
-
-.beep-panel > summary,
-.beep-more > summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 14px 16px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  cursor: pointer;
-  list-style: none;
-}
-
-.beep-more > summary {
-  justify-content: center;
-  padding: 4px;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-.beep-panel > summary::-webkit-details-marker,
-.beep-more > summary::-webkit-details-marker {
-  display: none;
-}
-
-.beep-panel > summary::after {
-  content: "⌄";
-  color: var(--color-text-muted);
-  transition: transform 0.2s ease;
-}
-
-.beep-panel[open] > summary::after {
-  transform: rotate(180deg);
-}
-
-.beep-panel > summary {
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-.beep-panel > summary::after {
-  margin-inline-start: auto;
-}
 
 /* الاختيار الحالي بسطر تحت العنوان — جنبه يزاحمه ويكسره على الجوال */
-.beep-panel-now {
-  order: 3;
-  flex-basis: 100%;
-  text-align: start;
-  font-weight: 400;
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-}
-
-.beep-panel[open] {
-  padding-bottom: 14px;
-}
-
-.beep-panel[open] > :not(summary) {
-  margin: 0 12px 10px;
-}
-
-.beep-more[open] > p {
-  margin-top: 6px;
-}
 
 /* الأبعاد الأربعة كمفاتيح مقطّعة: سطر لكل بُعد بدل كبسولات متفرقة */
-.beep-panel .beep-params {
-  padding: 0;
-  background: none;
-  border: 0;
-  max-width: none;
-  width: auto;
-}
 
-.beep-param {
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.beep-param .instrument-picker {
-  gap: 0;
-  flex-wrap: nowrap;
-  padding: 3px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background: var(--color-bg);
-}
-
-.beep-param .filter-chip {
-  border: 0;
-  padding: 6px 12px;
-  white-space: nowrap;
-}
-
-.beep-param .filter-chip:not(.active, :hover) {
+:hover) {
   background: transparent;
 }
 
@@ -4616,78 +3144,13 @@ html.touch .sounds-top .beep-volume.is-floating.is-folded {
    دائماً داكنة (بالوضعين)، تدرّج أخضر هكوله من شبه أسود لأخضر عميق، توهّج
    ناعم من تحت، وبطاقات زجاجية. الرموز تُعاد تعريفها داخل الحاوية فكل ما
    بداخلها (أزرار، لوحات، نوتة، تحليل) يتبعها تلقائياً */
-.beep-experiment {
-  --color-text: #ffffff;
-  --color-text-muted: rgba(255, 255, 255, 0.74);
-  --color-surface: rgba(255, 255, 255, 0.08);
-  --color-bg: rgba(255, 255, 255, 0.06);
-  --color-border: rgba(255, 255, 255, 0.2);
-  --color-primary: var(--green-500);
-  --color-primary-fill: var(--green-600);
-  --color-primary-dark: #236b51;
-  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.35);
-  color: var(--color-text);
-  background:
-    radial-gradient(520px 360px at 50% 100%, rgba(63, 164, 128, 0.4), transparent 70%),
-    linear-gradient(180deg, #06120e 0%, #0d2b22 50%, #17513f 100%);
-  border-color: rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-xl);
-  color-scheme: dark;
-}
-
-.beep-experiment .beep-stage,
-.beep-experiment .beep-panel,
-.beep-experiment .beep-analysis,
-.beep-experiment .beep-quiz {
-  background: linear-gradient(180deg, rgba(26, 74, 59, 0.95), rgba(14, 44, 35, 0.95));
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
-}
 
 /* رقائق زجاجية، والمختارة خضراء مضيئة بحدّ فاتح */
-.beep-experiment .filter-chip {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-.beep-experiment .filter-chip.active,
-.beep-experiment .filter-chip:hover {
-  background: var(--color-primary-fill);
-  border-color: var(--green-300);
-  color: #fff;
-}
 
 /* تفاعل محسوس: الزر يرتفع ويتوهّج تحت الماوس، وينضغط عند النقر. التوهّج بس
    لأجهزة الماوس (hover: hover) — باللمس كان بيعلق على آخر زر انلمس */
-.beep-experiment .filter-chip,
-.sounds-tab {
-  transition:
-    background 0.18s ease,
-    color 0.18s ease,
-    border-color 0.18s ease,
-    box-shadow 0.18s ease,
-    transform 0.15s ease;
-}
-
-@media (hover: hover) {
-  .beep-experiment .filter-chip:hover:not(:disabled),
-  .sounds-tab:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(63, 164, 128, 0.35);
-  }
-}
-
-.beep-experiment .filter-chip:active:not(:disabled),
-.sounds-tab:active {
-  transform: scale(0.96);
-}
 
 /* تبديل "اعزف / ألّف / تعلّم" بظهور ناعم بدل القفزة — بس عند التبديل (.switched)، لا وقت فتح الصفحة */
-.sounds-tool.switched .sounds-pane:not([hidden]) {
-  animation: sounds-pane-in 0.25s ease;
-}
 
 @keyframes sounds-pane-in {
   from {
@@ -4696,248 +3159,17 @@ html.touch .sounds-top .beep-volume.is-floating.is-folded {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sounds-pane:not([hidden]) {
-    animation: none;
-  }
-}
-
-.beep-help {
-  width: 100%;
-  text-align: center;
-}
-
-.beep-help > summary {
-  cursor: pointer;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.beep-help[open] > summary {
-  margin-bottom: 8px;
-}
-
 /* زر التشغيل = زر "لف" بالتطبيق: كبسولة بتدرّج أخضر وتوهّج */
-.beep-experiment #beepMelodyPlay {
-  background: linear-gradient(90deg, var(--green-600), var(--green-550));
-  border: 1px solid rgba(111, 200, 164, 0.5);
-  box-shadow: 0 8px 24px rgba(63, 164, 128, 0.35);
-}
-
-.beep-experiment .btn.secondary {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-}
-
-.beep-experiment .beep-staff-scroll {
-  background: rgba(0, 0, 0, 0.22);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-.beep-experiment .beep-white {
-  border-color: rgba(0, 0, 0, 0.25);
-}
-
-.beep-experiment .beep-white.active,
-.beep-experiment .beep-black.active {
-  box-shadow: 0 0 14px rgba(111, 200, 164, 0.8);
-}
-
-.beep-experiment .st-note.on .st-head,
-.beep-experiment .st-note.on .st-stem,
-.beep-experiment .st-rest.on {
-  fill: var(--green-300);
-  stroke: var(--green-300);
-  filter: drop-shadow(0 0 4px rgba(111, 200, 164, 0.9));
-}
-
-.beep-experiment .st-note.on .st-head.hollow {
-  fill: none;
-}
 
 /* ===== اعزف بنفسك: بيانو بالكيبورد ===== */
-.beep-experiment .beep-play {
-  width: 100%;
-  max-width: 560px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 16px;
-  background: linear-gradient(180deg, rgba(26, 74, 59, 0.95), rgba(14, 44, 35, 0.95));
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
-}
-
-.beep-play kbd {
-  display: inline-block;
-  min-width: 1.5em;
-  padding: 0 5px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-bottom-width: 2px;
-  border-radius: var(--radius-xs);
-  background: rgba(255, 255, 255, 0.1);
-  font-family: inherit;
-  font-size: 0.8rem;
-  color: #fff;
-  direction: ltr;
-}
-
-.beep-play-octave {
-  direction: ltr; /* Z يسار وX يمين مثل الكيبورد نفسه */
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 700;
-}
 
 /* ١١ مفتاح أبيض بعرض متساوٍ، والسوداء فوق الحدود بينها (--i = ترتيبها) */
-.beep-play-keys {
-  position: relative;
-  direction: ltr;
-  display: grid;
-  grid-template-columns: repeat(var(--whites, 11), 1fr);
-  width: 100%;
-  height: 150px;
-  touch-action: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.pk-white,
-.pk-black {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 2px;
-  padding: 0 0 8px;
-  border: 0;
-  font-family: inherit;
-  cursor: pointer;
-  transition: transform 0.06s ease, background 0.08s ease, box-shadow 0.08s ease;
-}
-
-.pk-white {
-  grid-row: 1;
-  grid-column: calc(var(--i) + 1);
-  margin: 0 1px;
-  background: linear-gradient(180deg, #f4f4f4, #ffffff 70%, #e8e8e8);
-  border-radius: 0 0 8px 8px;
-  color: #1a1a1a;
-  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.12);
-}
-
-.pk-black {
-  position: absolute;
-  top: 0;
-  z-index: 2;
-  left: calc(100% / var(--whites, 11) * var(--i));
-  width: calc(100% / var(--whites, 11) * 0.62);
-  height: 60%;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, #2a2a2a, #111);
-  border-radius: 0 0 6px 6px;
-  color: #fff;
-  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.12);
-}
-
-.pk-white b,
-.pk-black b {
-  font-size: 0.85rem;
-}
-
-.pk-white small,
-.pk-black small {
-  font-size: 0.6rem;
-  opacity: 0.6;
-}
 
 /* المضغوط ينزل شوي ويتوهّج بأخضر هكوله */
-.pk-white.down {
-  background: linear-gradient(180deg, #cfeee0, #a8dcc5);
-  box-shadow: 0 0 18px rgba(111, 200, 164, 0.8);
-  transform: translateY(2px);
-}
-
-.pk-black.down {
-  background: linear-gradient(180deg, var(--green-500), var(--green-600));
-  box-shadow: 0 0 16px rgba(111, 200, 164, 0.9);
-  transform: translateX(-50%) translateY(2px);
-}
 
 /* بالجوال المفتاح الأسود أضيق من اسم مثل "Sol♯" — يكفي الحرف */
-@media (max-width: 560px) {
-  .pk-black small {
-    display: none;
-  }
-}
 
 /* ===== صوتيات هكوله: شريط علوي مشترك + تبويبات ===== */
-.sounds-top {
-  width: 100%;
-  max-width: 560px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.sounds-tabs {
-  display: flex;
-  gap: 4px;
-  padding: 4px;
-  border-radius: var(--radius-pill);
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.sounds-tab {
-  padding: 9px 18px;
-  white-space: nowrap;
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: transparent;
-  color: rgba(255, 255, 255, 0.75);
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.sounds-tab.active {
-  background: linear-gradient(90deg, var(--green-600), var(--green-550));
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(63, 164, 128, 0.35);
-}
-
-.sounds-tab:focus-visible {
-  outline: 2px solid var(--green-300);
-  outline-offset: 2px;
-}
-
-.sounds-pane {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.sounds-pane[hidden] {
-  display: none;
-}
-
-.sounds-lesson .beep-param-note {
-  text-align: start;
-}
-
-.beep-param-note strong {
-  color: #fff;
-}
 
 .custom-sound {
   display: flex;
@@ -4966,56 +3198,12 @@ html.touch .sounds-top .beep-volume.is-floating.is-folded {
   padding-bottom: 0;
 }
 
-.in-app .beep-experiment {
-  margin-top: 8px;
-}
-
 /* ===== صوتيات هكوله: بيانو يتكيّف مع الشاشة (أفقي بالجوال / شاشة طويلة) ===== */
-.sounds-tool .beep-play {
-  max-width: 900px;
-}
 
 /* ارتفاع المفاتيح يتبع عرضها (نسبة قريبة من البيانو الحقيقي) بدل ١٥٠px ثابتة */
-.sounds-tool .beep-play-keys {
-  height: auto;
-  aspect-ratio: 11 / 4;
-  max-height: 60vh;
-}
-
-.beep-play-keys[data-labels="letters"] .pk-white b,
-.beep-play-keys[data-labels="solfege"] .pk-white b {
-  font-size: clamp(0.85rem, 2.2vw, 1.5rem);
-}
-
-.beep-play-keys[data-labels="letters"] .pk-black b,
-.beep-play-keys[data-labels="solfege"] .pk-black b {
-  font-size: clamp(0.62rem, 1.5vw, 1rem);
-}
 
 /* جوال عمودي: نسبة ١١/٤ تعطي مفاتيح بارتفاع ~١٠٠px فتنزل السوداء فوق حروف
    البيضاء وتتداخل معها — نطوّلها، ونخفي اسم النغمة بالسوداء لأنها أضيق منه */
-@media (max-width: 600px) and (orientation: portrait) {
-  .sounds-tool .beep-play-keys {
-    aspect-ratio: auto;
-    max-height: none;
-    height: clamp(170px, 45vw, 260px);
-  }
-
-  .sounds-tool .pk-black small {
-    display: none;
-  }
-}
-
-.beep-play-octave #beepFullscreen[hidden] {
-  display: none;
-}
-
-.sounds-tool:fullscreen {
-  overflow-y: auto;
-  justify-content: center;
-  border-radius: 0;
-  margin: 0;
-}
 
 /* الجوال بالوضع الأفقي: الأشرطة والعناوين كانت تغطي الشاشة والمفاتيح تحت الطيّة.
    نخفي كل شي غير الأداة (يرجع كله بإرجاع الجوال عمودياً)، ونعطي المفاتيح كل
@@ -5037,140 +3225,13 @@ html.touch .sounds-top .beep-volume.is-floating.is-folded {
   html.touch .container {
     padding-block: 6px;
   }
-
-  html.touch .sounds-tool {
-    margin: 0;
-    padding: 8px 12px;
-    gap: 6px;
-    border-radius: var(--radius);
-  }
-
-  html.touch .sounds-top {
-    max-width: none;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  html.touch .sounds-top .beep-volume {
-    flex: 1;
-    width: auto;
-    padding-top: 6px;
-  }
-
-  html.touch .sounds-top .beep-volume.is-floating {
-    flex: none;
-    width: 170px;
-    padding: 4px 12px;
-  }
-
-  html.touch .sounds-top .beep-panel {
-    flex: 1;
-    max-width: none;
-  }
-
-  html.touch .sounds-top .beep-panel > summary {
-    padding: 8px 14px;
-  }
-
-  html.touch .sounds-tab {
-    padding: 6px 14px;
-    font-size: 0.85rem;
-  }
-
-  html.touch .sounds-tool .beep-play {
-    max-width: none;
-    padding: 6px 10px 8px;
-    gap: 6px;
-    border-radius: var(--radius);
-  }
-
-  html.touch .sounds-tool .beep-help > .beep-param-note {
-    display: none;
-  }
-
-  html.touch .sounds-tool .beep-play-keys {
-    aspect-ratio: auto;
-    max-height: none;
-    height: max(110px, calc(100dvh - 190px));
-  }
 }
 
 /* شاشة طويلة (كمبيوتر مقلوب أو تابلت عمودي): المفاتيح أكبر */
-@media (min-width: 900px) and (orientation: portrait) {
-  .sounds-tool .beep-play {
-    max-width: 1000px;
-  }
-
-  .sounds-tool .beep-play-keys {
-    aspect-ratio: 11 / 5;
-    max-height: 45vh;
-  }
-}
 
 /* أفقي بالجوال، ضغط ثاني: الصفوف الأربعة فوق المفاتيح تصير صفّين جنب بعض */
-@media (orientation: landscape) and (max-height: 520px) {
-  html.touch .sounds-tool {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-
-  html.touch .sounds-tool > .sounds-top {
-    flex: 1 1 200px;
-    width: auto;
-  }
-
-  html.touch .sounds-tool > .sounds-pane {
-    flex-basis: 100%;
-  }
-
-  html.touch .sounds-top .beep-panel > summary {
-    flex-wrap: nowrap;
-    padding: 6px 12px;
-  }
-
-  html.touch .sounds-top .beep-panel-now {
-    order: 0;
-    flex-basis: auto;
-    margin-inline-start: auto;
-  }
-
-  html.touch .sounds-tool .beep-play {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    column-gap: 14px;
-  }
-
-  html.touch .sounds-tool .beep-play-keys {
-    flex-basis: 100%;
-    height: max(110px, calc(100dvh - 148px));
-  }
-}
-
-@media (orientation: landscape) and (max-height: 520px) and (max-width: 720px) {
-  html.touch .sounds-tool .beep-play-keys {
-    height: max(100px, calc(100dvh - 205px));
-  }
-}
 
 /* ===== تسجيل العزف ===== */
-.beep-rec-time {
-  min-width: 4.5em;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.beep-experiment .filter-chip.recording {
-  background: rgba(200, 55, 55, 0.9);
-  border-color: #f3a3a3;
-  color: #fff;
-  animation: rec-pulse 1.2s ease-in-out infinite;
-}
 
 @keyframes rec-pulse {
   50% {
@@ -5178,48 +3239,10 @@ html.touch .sounds-top .beep-volume.is-floating.is-folded {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .beep-experiment .filter-chip.recording {
-    animation: none;
-  }
-}
-
-.beep-rec-take {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-.beep-rec-take[hidden] {
-  display: none;
-}
-
-.beep-rec-take .filter-chip:disabled {
-  opacity: 0.5;
-}
-
 /* أفقي بالجوال: صف أزرار التسجيل يظهر تحت المفاتيح بعد التسجيل — نصغّر المفاتيح
    بمقداره عشان الصفحة ما تحتاج تمرير */
-@media (orientation: landscape) and (max-height: 520px) {
-  html.touch .beep-play:has(.beep-rec-take:not([hidden])) .beep-play-keys {
-    height: max(90px, calc(100dvh - 205px));
-  }
-}
 
 /* صف الأوكتاف صار فيه زر التسجيل ووقته: نمنع كسر النص ونخفي الوقت وهو فاضي */
-.beep-play-octave {
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.beep-play-octave .filter-chip {
-  white-space: nowrap;
-}
-
-.beep-rec-time:empty {
-  display: none;
-}
 
 /* ===== طبقات التسجيل ===== */
 
@@ -5243,86 +3266,15 @@ html.touch .sounds-top .beep-volume.is-floating.is-folded {
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
 
-.instrument-group-title {
-  margin: 8px 8px 2px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  text-align: start;
-}
-
 /* قائمة نصية مدمجة بدل المربعات: الأسماء متتالية كسطر نص ينكسر حسب العرض، والمختارة
    خضراء. كانت المربعات تأخذ مساحة كبيرة وتزحم العين (ملاحظة مستخدم) */
-.instrument-group-chips {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
 /* "آخر ما استخدمت" تبقى كبسولات متجاورة فوق القائمة */
-.instrument-recent .instrument-group-chips {
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.instrument-btn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 8px;
-  border: 0;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: rgba(255, 255, 255, 0.86);
-  font: inherit;
-  font-size: 0.9rem;
-  line-height: 1.25;
-  text-align: start;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-@media (hover: hover) {
-  .instrument-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-  }
-}
-
-.instrument-btn:focus-visible {
-  outline: 2px solid var(--green-300);
-  outline-offset: -2px;
-}
-
-@media (max-width: 520px) {
-  .instrument-btn {
-    padding: 4px 6px;
-    font-size: 0.86rem;
-  }
-}
 
 /* اللمس: سطر أطول شوي عشان الإصبع ما يضغط الآلة المجاورة */
-@media (pointer: coarse) {
-  .instrument-btn {
-    padding-block: 7px;
-  }
-}
 
 /* أول اختيار لآلة مسجّلة: تحميل تسجيلاتها (ثانية تقريباً) */
-.instrument-btn.loading {
-  opacity: 0.6;
-  cursor: progress;
-}
-
-.instrument-btn.active {
-  background: rgba(63, 164, 128, 0.22);
-  color: #8fe0be;
-  font-weight: 700;
-}
 
 /* نقطة صغيرة = صوت آلة حقيقية مسجّلة (نفس رمز سطر الشرح فوق القائمة) */
-.instrument-btn[data-real]::before,
 .real-dot {
   content: "";
   display: inline-block;
@@ -5333,212 +3285,18 @@ html.touch .sounds-top .beep-volume.is-floating.is-folded {
   background: var(--green-300);
 }
 
-.instrument-legend {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-}
-
-.instrument-recent {
-  padding-bottom: 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-}
-
 /* شارة "جديد": كلمة صغيرة بجانب الاسم (sounds.js يضع is-new لـ٣٠ يوماً) */
-.instrument-btn.is-new::after {
-  content: "جديد";
-  color: #fbbf24;
-  font-size: 0.62rem;
-  font-weight: 800;
-}
-
-html[lang="en"] .instrument-btn.is-new::after {
-  content: "New";
-}
 
 /* width: 100% مع هامش .beep-panel الجانبي (12px) كانت تطلّع المربع برا اللوحة */
-.instrument-search {
-  width: calc(100% - 24px);
-  padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  font-family: inherit;
-  font-size: 0.95rem;
-}
-
-.instrument-search::placeholder {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.instrument-search:focus {
-  outline: 2px solid var(--green-300);
-  outline-offset: 1px;
-}
-
-.instrument-none {
-  margin: 4px 0;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-
-.instrument-none[hidden],
-.instrument-btn[hidden],
-.instrument-group[hidden],
-.ip-row[hidden] {
-  display: none;
-}
 
 /* ===== قائمة الآلات المنسدلة (على طريقة BandLab) ===== */
-.instrument-slot {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.instrument-dd {
-  position: relative;
-  width: 100%;
-  max-width: 560px;
-}
-
-.instrument-dd[hidden] {
-  display: none;
-}
-
-.instrument-bar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.07);
-}
-
-.ib-label {
-  padding-inline: 6px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  white-space: nowrap;
-}
-
-.ib-current {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 14px;
-  border: 0;
-  border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.25);
-  color: #fff;
-  font: inherit;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.ib-current:hover,
-.ib-current[aria-expanded="true"] {
-  background: rgba(63, 164, 128, 0.3);
-}
-
-.ib-current .beep-panel-now {
-  order: 0;
-  flex: 1;
-  flex-basis: auto;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-align: start;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.ib-caret {
-  flex: none;
-  transition: transform 0.2s ease;
-}
-
-.ib-current[aria-expanded="true"] .ib-caret {
-  transform: rotate(180deg);
-}
-
-.ib-step,
-.ip-close,
-.ip-preview {
-  flex: none;
-  border: 0;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.ib-step {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-sm);
-  font-size: 1rem;
-}
-
-.ib-step:hover,
-.ip-preview:hover,
-.ip-close:hover {
-  background: rgba(63, 164, 128, 0.45);
-}
-
-.instrument-pop {
-  position: absolute;
-  z-index: 60;
-  inset-inline-start: 0;
-  width: min(460px, 100%);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: var(--radius-md);
-  background: #0e2a22;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
-  text-align: start;
-  animation: ipIn 0.14s ease-out;
-}
-
-.instrument-pop[hidden] {
-  display: none;
-}
 
 /* display:flex على .custom-sound كان يلغي سمة hidden فيبقى القسم ظاهراً دايماً */
 .custom-sound[hidden] {
   display: none;
 }
 
-.instrument-pop.up {
-  bottom: calc(100% + 6px);
-}
-
-.instrument-pop.down {
-  top: calc(100% + 6px);
-}
-
 /* لا مساحة كافية لا فوق الشريط ولا تحته (جوال أفقي): نافذة بملء الشاشة */
-.instrument-pop.sheet {
-  position: fixed;
-  inset: 6px;
-  width: auto;
-  max-height: none;
-  z-index: 95;
-}
 
 @keyframes ipIn {
   from {
@@ -5547,502 +3305,25 @@ html[lang="en"] .instrument-btn.is-new::after {
   }
 }
 
-.ip-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ip-head strong {
-  white-space: nowrap;
-  font-size: 0.95rem;
-}
-
-.ip-head .instrument-search {
-  flex: 1;
-  width: auto;
-  min-width: 0;
-  padding: 8px 14px;
-}
-
-.ip-close {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-}
-
-.ip-body {
-  display: flex;
-  flex: 1;
-  gap: 8px;
-  min-height: 0;
-}
-
-.ip-cats {
-  display: flex;
-  flex: none;
-  flex-direction: column;
-  gap: 2px;
-  width: 108px;
-  padding-inline-end: 6px;
-  overflow-y: auto;
-  border-inline-end: 1px solid rgba(255, 255, 255, 0.12);
-  scrollbar-width: thin;
-}
-
-.ip-cats button {
-  padding: 7px 8px;
-  border: 0;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: rgba(255, 255, 255, 0.75);
-  font: inherit;
-  font-size: 0.85rem;
-  text-align: start;
-  cursor: pointer;
-}
-
-.ip-cats button:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.ip-cats button.active {
-  background: rgba(63, 164, 128, 0.22);
-  color: #fff;
-  font-weight: 800;
-}
-
-.ip-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ip-preview {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-}
-
-.ip-preview.loading {
-  opacity: 0.55;
-  cursor: progress;
-}
-
-.ip-row .instrument-btn {
-  flex: 1;
-  padding: 9px 10px;
-  font-size: 0.95rem;
-}
-
-.ip-row .instrument-btn.active {
-  box-shadow: inset 3px 0 0 var(--green-300);
-}
-
-[dir="rtl"] .ip-row .instrument-btn.active {
-  box-shadow: inset -3px 0 0 var(--green-300);
-}
-
 /* جوال عمودي: الأقسام تصير شريطاً أفقياً فوق القائمة */
-@media (max-width: 560px) {
-  .ip-body {
-    flex-direction: column;
-  }
-
-  .ip-cats {
-    flex-direction: row;
-    width: auto;
-    padding: 0 0 6px;
-    overflow-x: auto;
-    overflow-y: visible;
-    border-inline-end: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  }
-
-  .ip-cats button {
-    flex: none;
-    white-space: nowrap;
-  }
-}
 
 /* ===== تمرين التأليف (Piper) ===== */
-.piper-bar {
-  width: 100%;
-  height: 6px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.15);
-  overflow: hidden;
-}
-
-.piper-bar > span {
-  display: block;
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, var(--green-600), var(--green-300));
-}
-
-.piper-list,
-.piper-tech {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-align: start;
-}
-
-.piper-list li {
-  display: flex;
-  gap: 12px;
-  padding: 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.05);
-  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.piper-list li.on {
-  background: rgba(63, 164, 128, 0.28);
-  border-color: var(--green-300);
-  box-shadow: 0 0 16px rgba(111, 200, 164, 0.4);
-}
-
-.piper-time {
-  flex: none;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-  padding-top: 2px;
-}
-
-.piper-list li > div {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.piper-inst {
-  font-size: 0.85rem;
-  color: var(--green-300);
-}
-
-.piper-list small {
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.piper-tech li {
-  font-size: 0.85rem;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .piper-list li {
-    transition: none;
-  }
-}
 
 /* ===== الجدول الزمني للطبقات ===== */
 /* عمود أرقام المسارات يسار المسارات، والمسطرة والمقاطع والخط الأبيض داخل "الممرات".
    خطوط الشبكة: خفيفة كل ضربة، وأوضح كل مازورة */
-.beep-timeline {
-  position: relative;
-  width: 100%;
-  display: flex;
-  direction: ltr;
-}
-
-.beep-lanes {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.16) 1px, transparent 1px),
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size:
-    var(--bar, 120px) 100%,
-    var(--beat, 30px) 100%;
-}
-
-.beep-ruler {
-  position: relative;
-  height: 18px;
-  direction: ltr;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.beep-tick {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  padding-inline-start: 3px;
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
 
 /* الصف صار عمودياً: رأس (الاسم + كتم/حذف) ثم مسار الكتلة */
 
-.beep-clip {
-  position: absolute;
-  top: 3px;
-  bottom: 3px;
-  border-radius: var(--radius-sm);
-  background: hsl(var(--h) 50% 36%);
-  border: 1px solid hsl(var(--h) 60% 62%);
-  overflow: hidden;
-  cursor: grab;
-  touch-action: none; /* السحب الأفقي على الجوال ما يمرّر الصفحة */
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.beep-clip canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.beep-clip.dragging {
-  cursor: grabbing;
-  z-index: 2;
-  box-shadow: 0 0 14px hsl(var(--h) 70% 60% / 0.7);
-}
-
-.beep-clip:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 1px;
-}
-
-.beep-playhead {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  margin-left: -1px;
-  background: #fff;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
-  pointer-events: none;
-  z-index: 3;
-}
-
-.beep-playhead[hidden] {
-  display: none;
-}
-
 /* ===== لوحة المسارات ===== */
-.beep-board {
-  position: relative;
-  direction: ltr;
-  min-height: 44px;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent calc(var(--rowh, 44px) - 1px),
-    rgba(255, 255, 255, 0.14) calc(var(--rowh, 44px) - 1px),
-    rgba(255, 255, 255, 0.14) var(--rowh, 44px)
-  );
-  cursor: crosshair;
-}
-
-.beep-clip {
-  bottom: auto; /* الارتفاع والمسار بأنماط مضمّنة */
-}
-
-.beep-clip.selected {
-  outline: 2px solid #fff;
-  outline-offset: 0;
-  z-index: 2;
-}
-
-.beep-clip.muted {
-  opacity: 0.35;
-}
-
-.beep-clip-label {
-  position: absolute;
-  top: 1px;
-  left: 4px;
-  font-size: 0.75rem;
-  line-height: 1;
-  pointer-events: none;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-}
-
-.beep-playhead.idle {
-  background: var(--green-300);
-  box-shadow: 0 0 6px rgba(111, 200, 164, 0.8);
-}
-
-.beep-clip-tools {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-}
-
-.beep-clip-tools .filter-chip:disabled {
-  opacity: 0.4;
-}
-
-.beep-ruler {
-  cursor: col-resize;
-  touch-action: none;
-}
 
 /* ===== قائمة الاختصارات ===== */
-.beep-shortcuts {
-  width: 100%;
-}
-
-.beep-shortcuts > summary {
-  cursor: pointer;
-  padding: 6px;
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  list-style: none;
-}
-
-.beep-shortcuts > summary::-webkit-details-marker {
-  display: none;
-}
-
-.beep-shortcut-list {
-  margin: 6px 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: start;
-}
-
-.beep-shortcut-list li {
-  display: flex;
-  gap: 10px;
-  align-items: baseline;
-  font-size: 0.82rem;
-  line-height: 1.7;
-}
-
-.beep-key-combo {
-  flex: none;
-  min-width: 8.5em;
-}
-
-.beep-shortcut-list kbd {
-  display: inline-block;
-  min-width: 1.5em;
-  padding: 0 5px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-bottom-width: 2px;
-  border-radius: var(--radius-xs);
-  background: rgba(255, 255, 255, 0.1);
-  font-family: inherit;
-  font-size: 0.78rem;
-  color: #fff;
-  text-align: center;
-}
 
 /* ===== تقصير/تطويل المقطع + سحب المؤشر ===== */
-.beep-timeline {
-  user-select: none;
-  -webkit-user-select: none; /* بلا تظليل الأرقام أثناء السحب */
-}
-
-.beep-handle {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: min(14px, 30%); /* أعرض قليلاً: أسهل للإمساك بالماوس والإصبع */
-  z-index: 3;
-  cursor: ew-resize;
-  touch-action: none;
-}
-
-.beep-handle.left {
-  left: 0;
-  border-radius: 8px 0 0 8px;
-}
-
-.beep-handle.right {
-  right: 0;
-  border-radius: 0 8px 8px 0;
-}
-
-.beep-handle::after {
-  content: "";
-  position: absolute;
-  top: 25%;
-  bottom: 25%;
-  width: 3px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.55);
-}
-
-.beep-handle.left::after {
-  left: 3px;
-}
-
-.beep-handle.right::after {
-  right: 3px;
-}
-
-.beep-clip.selected .beep-handle::after,
-.beep-handle:hover::after {
-  background: #fff;
-}
-
-.beep-handle:hover {
-  background: rgba(255, 255, 255, 0.18);
-}
 
 /* مقبض الخط الأبيض: دائرة صغيرة برأسه تُمسك وتُسحب */
-.beep-playhead-knob {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 14px;
-  height: 14px;
-  margin-left: -7px;
-  border-radius: 50%;
-  background: inherit;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
-  pointer-events: auto;
-  cursor: ew-resize;
-  touch-action: none;
-}
 
 /* ===== الاستوديو: شريط سريع (دواسة، مترونوم، سرعة، MIDI) ===== */
-.beep-quickbar,
-.beep-add-row,
-.beep-transport {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-
-.beep-quickbar .filter-chip,
-.beep-add-row .filter-chip,
-.beep-transport .filter-chip {
-  white-space: nowrap;
-}
-
-.beep-add-row label.filter-chip {
-  cursor: pointer;
-}
 
 #beepMidi {
   max-width: 14em;
@@ -6050,469 +3331,24 @@ html[lang="en"] .instrument-btn.is-new::after {
   text-overflow: ellipsis;
 }
 
-.beep-tempo {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.beep-tempo .filter-chip {
-  min-width: 2.2em;
-  padding-inline: 0;
-  justify-content: center;
-  font-weight: 800;
-}
-
-.beep-tempo-value {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-}
-
-.beep-tempo-value input {
-  width: 3.4em;
-  padding: 5px 2px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.25);
-  color: #fff;
-  font: inherit;
-  font-size: 1rem;
-  font-weight: 800;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-  appearance: textfield;
-  -moz-appearance: textfield;
-}
-
-.beep-tempo-value input::-webkit-outer-spin-button,
-.beep-tempo-value input::-webkit-inner-spin-button {
-  margin: 0;
-  -webkit-appearance: none;
-}
-
-.beep-tempo-value input:focus-visible {
-  outline: 2px solid var(--green-300);
-  outline-offset: 1px;
-}
-
 /* ===== الإعدادات (المقام، اللوحة، الميزان، الشبكة) وإيقاعات الطبلة ===== */
-.beep-settings[open],
-.beep-drums {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.beep-drums {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius);
-  background: rgba(0, 0, 0, 0.18);
-}
-
-.beep-drums[hidden] {
-  display: none;
-}
-
-.beep-setting {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 6px 10px;
-}
-
-.beep-setting-label {
-  margin: 0;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-}
-
-.beep-settings .beep-param-note,
-.beep-drums .beep-param-note {
-  margin: 0;
-  max-width: 46em;
-}
 
 /* ===== المفاتيح: المقام (خارج المقام باهت + نقطة القرار) واللوحة الكاملة ===== */
-.beep-keys-wrap {
-  width: 100%;
-  direction: ltr; /* التمرير الأفقي يبدأ من اليسار (La0) حتى بالصفحة العربية */
-}
-
-.pk-white.off {
-  background: linear-gradient(180deg, #b9c4bf, #c9d2ce 70%, #aeb9b4);
-  color: rgba(26, 26, 26, 0.55);
-}
-
-.pk-black.off {
-  background: linear-gradient(180deg, #4a524f, #3a413e);
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.pk-white.tonic::before,
-.pk-black.tonic::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  margin-bottom: 2px;
-  border-radius: 50%;
-  background: var(--green-500);
-  box-shadow: 0 0 6px rgba(111, 200, 164, 0.9);
-}
 
 /* بيانو كامل: ٥٢ مفتاحاً أبيض بعرض أدنى ٢٢px، وأوسع من الشاشة يتمرّر أفقياً.
    نافذة الكيبورد (الحروف) معلّمة بخط أخضر فوقها */
-.beep-keys-wrap.full {
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-color: var(--green-500) rgba(255, 255, 255, 0.1);
-  padding-bottom: 6px;
-}
-
-.beep-keys-wrap.full::-webkit-scrollbar {
-  height: 10px;
-}
-
-.beep-keys-wrap.full::-webkit-scrollbar-track {
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.beep-keys-wrap.full::-webkit-scrollbar-thumb {
-  border-radius: var(--radius-pill);
-  background: var(--green-500);
-}
-
-.sounds-tool .beep-play-keys.full {
-  min-width: calc(52 * 22px);
-  aspect-ratio: auto;
-  height: 170px;
-  max-height: none;
-}
-
-.beep-play-keys.full .pk-white,
-.beep-play-keys.full .pk-black {
-  padding-bottom: 5px;
-}
-
-.beep-play-keys.full .pk-white {
-  margin: 0 0.5px;
-  border-radius: 0 0 5px 5px;
-}
-
-.beep-play-keys.full .pk-white b,
-.beep-play-keys.full .pk-black b {
-  font-size: 0.68rem;
-}
-
-.beep-play-keys.full .pk-white small {
-  font-size: 0.55rem;
-}
-
-.beep-play-keys.full .pk-white.reach {
-  box-shadow:
-    inset 0 4px 0 var(--green-500),
-    inset 0 -4px 0 rgba(0, 0, 0, 0.12);
-}
-
-.beep-play-keys.full .pk-black.reach {
-  box-shadow:
-    inset 0 3px 0 var(--green-300),
-    inset 0 -3px 0 rgba(255, 255, 255, 0.12);
-}
 
 /* ===== عمود أرقام المسارات ===== */
-.beep-gutter {
-  flex: none;
-  width: 30px;
-  padding-top: 18px; /* بارتفاع المسطرة */
-  display: flex;
-  flex-direction: column;
-}
-
-.beep-gutter-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.18);
-  color: rgba(255, 255, 255, 0.8);
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.beep-gutter-row:first-child {
-  border-top-left-radius: 8px;
-}
-
-.beep-gutter-row:hover,
-.beep-gutter-row:focus-visible {
-  background: rgba(63, 164, 128, 0.35);
-  outline: none;
-}
-
-.beep-gutter-row.muted {
-  color: rgba(255, 255, 255, 0.35);
-  text-decoration: line-through;
-}
-
-.beep-gutter-row.solo {
-  background: rgba(240, 190, 70, 0.35);
-}
 
 /* مقاطع الإيقاع والصوت بلون ثابت يميّزها عن مقاطع النغمات */
-.beep-clip.drums canvas,
-.beep-clip.audio canvas {
-  opacity: 0.85;
-}
 
 /* ===== أتمتة الصوت: خط فوق المسار ===== */
-.beep-auto {
-  position: absolute;
-  left: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: visible;
-}
-
-.beep-auto polyline {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 2;
-  stroke-linejoin: round;
-  opacity: 0.85;
-}
-
-.beep-auto circle {
-  fill: var(--gold);
-  stroke: #1a1a1a;
-  stroke-width: 1;
-}
-
-.beep-auto.editing {
-  z-index: 4;
-  pointer-events: auto;
-  cursor: crosshair;
-  touch-action: none;
-  background: rgba(240, 190, 70, 0.1);
-  outline: 1px dashed rgba(240, 190, 70, 0.7);
-}
-
-.beep-auto.editing circle {
-  cursor: grab;
-}
 
 /* ===== محرّر النغمات ===== */
 /* عناصر الاستوديو العريضة (محرّر بشبكة طويلة، جدول، خلاط) لا تمدّ الصندوق خارج الشاشة:
    عنصر flex حدّه الأدنى عرض محتواه افتراضياً، والتمرير يصير داخلها هي */
-.beep-rec-take > *,
-.beep-play > * {
-  min-width: 0;
-  max-width: 100%;
-}
-
-.beep-editor {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius);
-  background: rgba(0, 0, 0, 0.25);
-}
-
-.beep-editor[hidden] {
-  display: none;
-}
-
-.beep-editor-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 6px 8px;
-}
-
-.beep-editor-bar strong {
-  flex: 1 1 100%;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.beep-ed-vel {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-}
-
-.beep-editor-scroll {
-  max-height: 300px;
-  overflow: auto;
-  overscroll-behavior: contain;
-  border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.3);
-  direction: ltr;
-}
-
-.beep-editor-grid {
-  position: relative;
-  min-width: 100%;
-  touch-action: none;
-  user-select: none;
-  -webkit-user-select: none;
-  cursor: crosshair;
-}
-
-.ed-row {
-  position: absolute;
-  left: 46px;
-  right: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.ed-row.black {
-  background: rgba(0, 0, 0, 0.22);
-}
-
-.ed-key {
-  position: sticky;
-  left: 0;
-  z-index: 3;
-  width: 46px;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  padding-inline-start: 5px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background: #e9eeec;
-  color: #1a1a1a;
-  font-size: 0.62rem;
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.ed-key.black {
-  background: #2a2f2d;
-  color: #e9eeec;
-}
-
-.beep-editor-grid.drums .ed-key {
-  background: #1f3d33;
-  color: #fff;
-  font-size: 0.72rem;
-}
-
-.ed-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.05);
-  pointer-events: none;
-}
-
-.ed-line.beat {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.ed-line.bar {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.ed-end {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.28);
-  border-left: 2px dashed rgba(255, 255, 255, 0.35);
-  pointer-events: none;
-}
-
-.ed-note {
-  position: absolute;
-  z-index: 2;
-  border-radius: 4px;
-  background: rgba(111, 200, 164, var(--a, 0.9));
-  border: 1px solid #c9f0e0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  cursor: grab;
-}
-
-.ed-note::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  bottom: 2px;
-  right: 1px;
-  width: 3px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.6);
-  cursor: ew-resize;
-}
-
-.beep-editor-grid.drums .ed-note::after {
-  display: none;
-}
-
-.ed-note.sel {
-  background: rgba(240, 190, 70, var(--a, 0.9));
-  border-color: #fff;
-  z-index: 3;
-}
-
-.ed-note.outside {
-  opacity: 0.35;
-}
 
 /* ===== الخلاط ===== */
-.beep-mixer[open] {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.beep-mix-strips {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 300px));
-  justify-content: center;
-  align-items: start; /* فتح مؤثرات شريط ما يمطّ جيرانه */
-  gap: 8px;
-}
-
-.mix-strip {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-md);
-  background: rgba(0, 0, 0, 0.22);
-  text-align: start;
-}
-
-.mix-strip.flash {
-  animation: mix-flash 1s ease;
-}
 
 @keyframes mix-flash {
   20% {
@@ -6521,330 +3357,22 @@ html[lang="en"] .instrument-btn.is-new::after {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .mix-strip.flash {
-    animation: none;
-  }
-}
-
-.mix-head {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.mix-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.8em;
-  height: 1.8em;
-  border-radius: var(--radius-sm);
-  background: rgba(63, 164, 128, 0.45);
-  font-weight: 800;
-}
-
-.mix-name {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.mix-head .filter-chip {
-  padding: 4px 9px;
-}
-
-.mix-solo.active {
-  background: rgba(200, 150, 40, 0.85) !important;
-  border-color: var(--gold) !important;
-}
-
-.mix-row {
-  display: grid;
-  grid-template-columns: 7.5em 1fr;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-}
-
-.mix-fx > summary {
-  cursor: pointer;
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-  text-align: center;
-}
-
-.mix-fx[open] {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.mix-tone {
-  min-width: 0;
-  padding: 4px 8px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font: inherit;
-}
-
 /* منحنى طابع الصوت: خط الصفر خافت والمنحنى بلون التمييز */
-.mix-tone-curve {
-  width: 100%;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.25);
-}
-
-.mix-tone-curve[hidden] {
-  display: none;
-}
-
-.mix-tone-curve line {
-  stroke: var(--color-text-muted);
-  stroke-opacity: 0.35;
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-
-.mix-tone-curve path {
-  fill: none;
-  stroke: var(--green-500);
-  stroke-width: 2;
-  vector-effect: non-scaling-stroke;
-}
-
-.mix-fx .instrument-picker {
-  justify-content: center;
-}
-
-.mix-fx .beep-param-note {
-  margin: 0;
-  font-size: 0.75rem;
-}
 
 /* منزلقات الخلاط والمحرّر: نفس شكل منزلق الصوت بالأعلى بحجم أصغر */
-.mix-strip input[type="range"],
-.beep-ed-vel input[type="range"] {
-  direction: ltr; /* الأقل يسار والأكثر يمين حتى بالعربي — مثل منزلق الصوت بالأعلى */
-  width: 100%;
-  min-width: 90px;
-  height: 22px;
-  margin: 0;
-  background: transparent;
-  appearance: none;
-  cursor: pointer;
-}
-
-.mix-strip input[type="range"]::-webkit-slider-runnable-track,
-.beep-ed-vel input[type="range"]::-webkit-slider-runnable-track {
-  height: 6px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.mix-strip input[type="range"]::-moz-range-track,
-.beep-ed-vel input[type="range"]::-moz-range-track {
-  height: 6px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.mix-strip input[type="range"]::-webkit-slider-thumb,
-.beep-ed-vel input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  margin-top: -5px;
-  border-radius: 50%;
-  background: var(--green-500);
-  border: 2px solid #c9f0e0;
-}
-
-.mix-strip input[type="range"]::-moz-range-thumb,
-.beep-ed-vel input[type="range"]::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--green-500);
-  border: 2px solid #c9f0e0;
-}
-
-.beep-ed-vel input[type="range"]:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
-
-.mix-strip input[type="range"]:focus-visible,
-.beep-ed-vel input[type="range"]:focus-visible {
-  outline: 2px solid var(--green-300);
-  outline-offset: 2px;
-  border-radius: var(--radius-pill);
-}
-
-.beep-master {
-  padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.beep-credit {
-  margin: 4px 0 0;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.5);
-  text-align: center;
-}
 
 /* أفقي بالجوال: الشريط السريع رموز فقط، وعنوانا "طريقة العزف" و"الإعدادات" بسطر
    واحد — عشان المفاتيح تبقى كاملة بالشاشة بلا تمرير مثل قبل */
 @media (orientation: landscape) and (max-height: 520px) {
-  html.touch .beep-quickbar .qb-text {
-    display: none;
-  }
 
   /* صف إضافي فوق المفاتيح (الشريط السريع) = ٢٤px أقل من الحساب الأصلي */
-  html.touch .sounds-tool .beep-play-keys {
-    height: max(110px, calc(100dvh - 172px));
-  }
-
-  html.touch .beep-play:has(.beep-rec-take:not([hidden])) .beep-play-keys {
-    height: max(90px, calc(100dvh - 229px));
-  }
-
-  html.touch .sounds-tool .beep-help:not([open]) {
-    width: auto;
-  }
-
-  html.touch .sounds-tool .beep-quickbar {
-    gap: 6px;
-  }
-}
-
-@media (orientation: landscape) and (max-height: 520px) and (max-width: 720px) {
-  html.touch .sounds-tool .beep-play-keys {
-    height: max(100px, calc(100dvh - 229px));
-  }
 }
 
 /* ===== مزامنة الفيديو ===== */
-.beep-video {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius);
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.beep-video[hidden],
-.beep-video video[hidden],
-.beep-video-missing[hidden] {
-  display: none;
-}
-
-.beep-video video {
-  width: 100%;
-  max-height: min(380px, 50vh);
-  border-radius: var(--radius-sm);
-  background: #000;
-}
-
-.beep-video-missing {
-  margin: 0;
-  padding: 18px 12px;
-  border: 1px dashed rgba(255, 255, 255, 0.35);
-  border-radius: var(--radius-sm);
-  text-align: center;
-  color: var(--gold);
-}
-
-.beep-video-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 6px 8px;
-}
-
-.beep-video-bar .filter-chip {
-  white-space: nowrap;
-}
-
-.beep-timecode {
-  padding: 5px 10px;
-  border-radius: var(--radius-sm);
-  background: #000;
-  color: var(--green-300);
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  font-variant-numeric: tabular-nums;
-}
-
-.beep-video .beep-param-note {
-  margin: 0;
-  max-width: 46em;
-}
 
 /* شريط إطارات الفيديو أعلى المسارات */
-.beep-film {
-  display: block;
-  height: 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-  cursor: col-resize;
-  touch-action: none;
-}
-
-.beep-film[hidden] {
-  display: none;
-}
-
-.beep-gutter.has-film {
-  padding-top: 59px; /* المسطرة ١٨ + الإطارات ٤٠ + الحد */
-}
 
 /* علامات القطع: خط ذهبي عبر الجدول وراية مرقّمة بالمسطرة */
-.beep-markers {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.beep-marker {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  border-left: 2px solid rgba(240, 190, 70, 0.85);
-}
-
-.beep-marker-flag {
-  position: absolute;
-  top: 0;
-  left: -1px;
-  min-width: 18px;
-  height: 17px;
-  padding: 0 4px;
-  border: 0;
-  border-radius: 0 6px 6px 0;
-  background: var(--gold);
-  color: #1a1a1a;
-  font: inherit;
-  font-size: 0.68rem;
-  font-weight: 800;
-  line-height: 17px;
-  pointer-events: auto;
-  cursor: pointer;
-}
 
 /* روابط داخل الصفحة (#reviews مثلاً): العنوان ينزل تحت الهيدر الثابت بدل ما يختفي خلفه */
 .prose [id] {
@@ -7135,401 +3663,63 @@ html[lang="en"] .instrument-btn.is-new::after {
 }
 
 /* ===== تبويب «تدرّب»: نوتات مكتوبة تنزل أعمدة فوق البيانو ===== */
-@media (max-width: 440px) {
-  .sounds-tabs {
-    max-width: 100%;
-    gap: 2px;
-  }
-
-  .sounds-tab {
-    padding: 9px 8px;
-    font-size: 0.82rem;
-  }
-}
-
-.song-lib,
-.song-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.song-lib select {
-  max-width: 100%;
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-sm);
-  background: #0e2a22;
-  color: #fff;
-  font: inherit;
-}
-
-.song-editor {
-  width: 100%;
-}
-
-.song-editor .instrument-search {
-  width: 100%;
-  margin: 8px 0;
-  border-radius: var(--radius-sm);
-}
-
-.song-text {
-  width: 100%;
-  min-height: 9em;
-  padding: 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-sm);
-  background: rgba(0, 0, 0, 0.25);
-  color: #fff;
-  font: 0.95rem/1.6 ui-monospace, Consolas, monospace;
-  resize: vertical;
-}
-
-.song-status {
-  min-height: 1.4em;
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.song-lyric {
-  min-height: 1.5em;
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-align: center;
-}
-
-.song-keys-slot {
-  width: 100%;
-}
 
 /* بدء أغنية يمرّر الصفحة لين أسفل المفاتيح؛ الشريط السفلي الثابت (60px) ما يغطيها */
-.song-keys-slot .beep-play-keys {
-  scroll-margin-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
-}
-
-.song-lane {
-  position: relative;
-  height: clamp(160px, 32vh, 280px);
-  margin-top: 6px;
-  overflow: hidden;
-  border-radius: 12px 12px 0 0;
-  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px calc(100% / var(--whites, 14))), #0b2019; /* خط عند حد كل مفتاح أبيض؛ لون ثابت لأنها تطلع برا البطاقة على الجوال */
-}
-
-.song-lane[hidden] {
-  display: none;
-}
 
 /* المسار كله يتحرك بتحويل واحد كل إطار؛ أسفله = خط الضرب */
-.song-track {
-  position: absolute;
-  inset: auto 0 0;
-  height: 0;
-  will-change: transform;
-}
-
-.song-hitline {
-  position: absolute;
-  inset: auto 0 0;
-  height: 3px;
-  background: var(--green-300);
-  box-shadow: 0 0 10px rgba(111, 200, 164, 0.9);
-}
-
-.song-bar {
-  position: absolute;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  overflow: hidden;
-  padding-bottom: 2px;
-  border-radius: var(--radius-xs);
-  background: linear-gradient(180deg, var(--green-300), var(--green-500));
-  color: #08261b;
-  font-size: 0.65rem;
-  font-weight: 800;
-  transition: opacity 0.2s ease;
-}
-
-.song-bar.black {
-  background: linear-gradient(180deg, #4f8fd9, #2f63a8);
-  color: #fff;
-}
-
-.song-bar.now {
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-}
-
-.song-bar.done {
-  opacity: 0.25;
-}
-
-.pk-white.want {
-  background: linear-gradient(180deg, #fff6c9, #ffe27a);
-  box-shadow: 0 0 16px rgba(255, 214, 90, 0.9);
-}
-
-.pk-black.want {
-  background: linear-gradient(180deg, #d9a92b, #a87a10);
-}
-
-.pk-white.miss,
-.pk-black.miss {
-  background: #e05a5a;
-}
-
-@media (orientation: landscape) and (max-height: 520px) {
-  .song-lane {
-    height: 34vh;
-  }
-}
 
 /* تبويب «تدرّب» يركّز على الأغنية: من أدوات العزف الحر يبقى أسماء المفاتيح وMIDI وملء الشاشة
    والمقام فقط (الأوكتاف يتضبط على نطاق الأغنية، والسرعة من أزرار التدريب) */
-#songKeysSlot :is(#beepOctDown, #beepOctUp, #beepOctLabel, #beepRecToggle, #beepRecTime, #beepPedal, #beepMetro, .beep-tempo) {
+#songKeysSlot :is(#beepOctDown,
+#beepOctUp,
+#beepOctLabel,
+#beepRecToggle,
+#beepRecTime,
+#beepPedal,
+#beepMetro {
   display: none;
 }
 
 /* ملف MIDI: أزرار المسارات (يد يمين/يسار...) بدل صندوق الكتابة */
-.song-tracks {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-}
-
-.song-tracks .beep-setting-label {
-  margin: 0;
-  text-align: center;
-}
-
-.song-tracks[hidden] {
-  display: none;
-}
 
 /* نطاق أغنية عريض (أكثر من ٣ أوكتافات): المفاتيح تنضغط داخل عرض الشاشة وأسماؤها أصغر */
-.beep-play-keys.dense .pk-white,
-.beep-play-keys.dense .pk-black {
-  min-width: 0;
-  overflow: hidden;
-}
-
-.beep-play-keys.dense .pk-white b,
-.beep-play-keys.dense .pk-black b {
-  font-size: 0.55rem;
-}
-
-.beep-play-keys.dense small {
-  display: none;
-}
-
-.beep-play-keys.dense .pk-black b {
-  display: none;
-}
 
 /* «تدرّب»: البيانو بعرض الصفحة كله (بدل حد ٩٠٠px) فيكبر مع الشاشة، وباقي الأدوات تبقى
    بعرض مريح للقراءة. طول المفاتيح من عرض المفتاح نفسه (نسبة البيانو الحقيقي ~١:٦) بدل
    نسبة ثابتة للوحة كلها، فما تصير المفاتيح أطول من الشاشة لما يتوسع البيانو */
-.sounds-tool .song-practice {
-  max-width: none;
-}
-
-.song-practice > :not(.song-keys-slot) {
-  max-width: min(100%, 868px);
-}
-
-.song-keys-slot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  container-type: inline-size;
-}
-
-.sounds-tool .song-keys-slot .beep-play-keys {
-  aspect-ratio: auto;
-  max-height: none;
-  height: clamp(170px, calc(100cqi / var(--whites, 15) * 6), 42vh);
-}
 
 /* جوال: الأعمدة والمفاتيح تطلع من حواف البطاقات لحافة الشاشة (عنصر أعرض من أبيه بـflex مركّز يتوزع
    على الجهتين). على الشاشات العريضة لا: هناك zoom على الصفحة يكبّر 100vw */
-@media (max-width: 700px) {
-  .song-keys-slot .beep-keys-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .song-keys-slot :is(.song-lane, .beep-play-keys) {
-    flex: none;
-    width: calc(100vw - 8px);
-  }
-}
 
 /* «تدرّب»: الشريط الزمني فوق الأعمدة — ⏮ من البداية، الوقت الحالي، سحب لأي نقطة، الطول */
-.song-timeline {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 868px;
-  margin: 6px auto 0;
-  font-size: 0.85rem;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-text-muted);
-}
-
-.song-timeline[hidden] {
-  display: none;
-}
-
-.song-timeline input[type="range"] {
-  flex: 1 1 140px;
-  min-width: 0;
-  accent-color: var(--green-300);
-  cursor: pointer;
-}
-
-.song-timeline .filter-chip {
-  padding: 4px 12px;
-}
 
 /* صف «اللوحة» صار ظاهراً فوق البيانو (كان مدفوناً داخل الإعدادات). عنوان الإعدادات يتبدّل:
    في «اعزف» = المقام وإعدادات التسجيل، وفي «تدرّب» = المقام فقط (التسجيل والميزان والشبكة
    ما لها معنى هناك، ونطاق اللوحة تحدده الأغنية أو زر «بسّط اللوحة») */
-.sum-practice,
-#songKeysSlot .sum-play,
-#songKeysSlot .beep-board-row,
-#songKeysSlot .beep-setting:has(#beepMeter, #beepGrid, #beepCountIn) {
+#beepGrid,
+#beepCountIn) {
   display: none;
-}
-
-#songKeysSlot .sum-practice {
-  display: inline;
 }
 
 /* ===== «تدرّب»: مجموعات الأوكتاف بألوان للطالب (تحت أزرق، الوسط أخضر، فوق أصفر، والأبعد بنفسجي/وردي)
    على المفاتيح البيضاء ومربعات المعاينة، واسم المجموعة على Do أولها ===== */
-#songKeysSlot .pk-white:is([data-oct="4"]) { --oct: #d9f3e6; }
-#songKeysSlot .pk-white[data-oct="3"] { --oct: #dde9fa; }
-#songKeysSlot .pk-white[data-oct="5"] { --oct: #faefd4; }
-#songKeysSlot .pk-white:is([data-oct="2"], [data-oct="7"]) { --oct: #ece2fa; }
-#songKeysSlot .pk-white:is([data-oct="1"], [data-oct="6"]) { --oct: #f7dfea; }
+[data-oct="7"]) { --oct: #ece2fa; }
+[data-oct="6"]) { --oct: #f7dfea; }
 
-#songKeysSlot .pk-white:not(.down, .want, .miss, .off) {
+.want,
+.miss,
+.off) {
   background: linear-gradient(180deg, var(--oct, #f4f4f4), #ffffff 70%, var(--oct, #e8e8e8));
 }
-
-#songKeysSlot .pk-white[data-group] {
-  position: relative;
-  border-inline-start: 2px solid rgba(0, 0, 0, 0.25);
-}
-
-#songKeysSlot .pk-white[data-group]::after {
-  content: attr(data-group);
-  position: absolute;
-  top: 62%;
-  inset-inline: 0;
-  font-size: 0.6rem;
-  font-weight: 800;
-  color: rgba(0, 0, 0, 0.55);
-  text-align: center;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-#songKeysSlot .beep-play-keys.dense .pk-white[data-group]::after {
-  font-size: 0.5rem;
-}
-
-.song-write,
-.song-chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.song-write[hidden],
-.song-chips[hidden] {
-  display: none;
-}
-
-.song-chips {
-  max-height: 160px;
-  overflow-y: auto;
-  direction: ltr;
-}
-
-.song-chip {
-  padding: 3px 9px;
-  border: 0;
-  border-radius: var(--radius-sm);
-  background: var(--oct, #d9f3e6);
-  color: #10251d;
-  font: 700 0.8rem/1.4 ui-monospace, Consolas, monospace;
-  cursor: pointer;
-}
-
-.song-chip[data-oct="3"] { --oct: #dde9fa; }
-.song-chip[data-oct="5"] { --oct: #faefd4; }
-.song-chip:is([data-oct="2"], [data-oct="7"]) { --oct: #ece2fa; }
-.song-chip:is([data-oct="1"], [data-oct="6"]) { --oct: #f7dfea; }
+[data-oct="7"]) { --oct: #ece2fa; }
+[data-oct="6"]) { --oct: #f7dfea; }
 
 /* «تدرّب»: النوتة الموسيقية فوق الأعمدة — اللي انعزف يبهت، والجاية تضيء (.on من المدرج الأصلي) */
-.song-staff {
-  margin-top: 6px;
-}
-
-.st-bass {
-  font-size: 32px;
-}
-
-.st-note.done {
-  opacity: 0.35;
-}
 
 /* اسم النغمة داخل رأسها (طريقة دكتور المقرر لتسهيل القراءة) */
-.st-name {
-  font: 800 8px/1 system-ui, sans-serif;
-  fill: #0e2a22;
-  text-anchor: middle;
-  dominant-baseline: central;
-  pointer-events: none;
-}
-
-.st-name.solfa {
-  font-size: 5.5px;
-}
-
-.st-name.hollow {
-  fill: var(--color-text);
-}
-
-.beep-experiment .st-note.on .st-name.hollow {
-  fill: var(--green-300);
-}
 
 /* ===== «اعزف» على طريقة BandLab: شريط أدوات فوق، الاستوديو بالنص، ولوحة البيانو تحت بعرض
    الصفحة كلها؛ فوق المفاتيح سطر واحد: الآلة، الأسماء، اللوحة، الأوكتاف، الدواسة، MIDI ===== */
-main.container:has(.sounds-tool) {
-  max-width: none; /* الأداة تاخذ عرض الشاشة بدل ١٣٢٠px حتى على الشاشات الكبيرة */
-}
-
-.sounds-tool .beep-play {
-  max-width: none;
-}
 
 .play-toolbar {
   display: flex;
@@ -7551,257 +3741,45 @@ main.container:has(.sounds-tool) {
 }
 
 /* في «اعزف» زر الشريط يفتحها، فعنوانها مكرر */
-#panePlay .beep-play > details > summary {
-  display: none;
-}
-
-#panePlay .beep-play > details:not([open]) {
-  display: none;
-}
-
-.piano-panel {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.piano-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px 14px;
-}
-
-.piano-head .instrument-slot {
-  width: auto;
-  flex: 1 1 300px;
-  max-width: 420px;
-}
-
-.piano-head .beep-setting {
-  flex-wrap: nowrap;
-  gap: 6px;
-}
-
-.piano-head .beep-setting .filter-chip {
-  padding: 5px 10px;
-  font-size: 0.82rem;
-  white-space: nowrap;
-}
-
-.piano-oct {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 700;
-}
 
 /* شاشة كمبيوتر: مفاتيح بارتفاع مريح (مثل BandLab ~ ثلث الشاشة) بدل نسبة ثابتة تطوّلها مع العرض */
-@media (min-width: 700px) and (min-height: 521px) {
-  .sounds-tool #panePlay .beep-play-keys {
-    aspect-ratio: auto;
-    max-height: none;
-    height: clamp(180px, 32vh, 340px);
-  }
-}
 
 /* جوال عمودي: البيانو مباشرة بعد الشريط (الاستوديو تحته)، وشريط الآلة أقرب شي للمفاتيح */
-@media (max-width: 600px) and (orientation: portrait) {
-  .sounds-tool #panePlay .beep-play > .play-toolbar {
-    order: -2;
-  }
-
-  .sounds-tool #panePlay .beep-play > .piano-panel {
-    order: -1;
-  }
-
-  .piano-head {
-    justify-content: center;
-  }
-
-  .piano-head .instrument-slot {
-    order: 9;
-    flex-basis: 100%;
-    max-width: none;
-  }
-
-  .piano-head .beep-setting {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
-.piano-more {
-  display: none;
-}
 
 /* عناوين الأسماء/اللوحة مخفية فوق البيانو (الأزرار واضحة بنفسها، ولها aria-label) عشان يكفي سطر واحد */
-.piano-head .beep-setting-label {
-  display: none;
-}
-
-@media (max-width: 1500px) {
-
-  .piano-head .instrument-slot {
-    flex-basis: 260px;
-  }
-}
 
 /* شاشة ضيقة (جوال/تابلت): سطر البيانو = الآلة + الأوكتاف + الدواسة + ⋯، والشريط أيقونات */
 @media (max-width: 900px), (orientation: landscape) and (max-height: 520px) {
-  .piano-more {
-    display: inline-flex;
-  }
 
-  .piano-head:not(.open) :is(.beep-labels-row, #beepMidi, #beepFullscreen) {
+  #beepMidi,
+  #beepFullscreen) {
     display: none;
   }
 
-  .piano-head .qb-text,
   .play-toolbar .qb-text {
     display: none;
-  }
-
-  .sounds-tool #panePlay .beep-play > .play-toolbar {
-    order: -2;
-  }
-
-  .sounds-tool #panePlay .beep-play > .piano-panel {
-    order: -1;
-  }
-
-  .piano-head {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 1500px) {
-  .piano-head {
-    column-gap: 8px;
-  }
-
-  .piano-head .instrument-slot {
-    flex-basis: 240px;
   }
 }
 
 /* جوال عمودي: الشريط وسطر البيانو كل واحد سطر واحد — أزرار أصغر، وبلا كلمة BPM */
 @media (max-width: 600px) and (orientation: portrait) {
-  .play-toolbar,
-  .piano-head {
+  .play-toolbar {
     gap: 4px;
   }
 
-  .play-toolbar .filter-chip,
-  .piano-head .filter-chip {
+  .play-toolbar .filter-chip {
     padding: 6px 9px;
-  }
-
-  .play-toolbar .beep-tempo-value span {
-    display: none;
-  }
-
-  .play-toolbar .beep-tempo-value input {
-    width: 3.2em;
-  }
-}
-
-@media (max-width: 1800px) {
-  .piano-head .ib-label {
-    display: none;
   }
 }
 
 /* جوال: المفاتيح تطلع من حواف البطاقات لحافة الشاشة (مثل «تدرّب»)؛ اللوحة الكاملة لا،
    لأنها تتمرّر أفقياً والتوسيط يخفي بدايتها */
-@media (max-width: 700px), (orientation: landscape) and (max-height: 520px) {
-  #panePlay .beep-keys-wrap:not(.full) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #panePlay .beep-keys-wrap:not(.full) .beep-play-keys {
-    flex: none;
-    width: calc(100vw - 8px);
-  }
-}
 
 /* ===== الصوتيات على الكمبيوتر: أداة بأحجام حقيقية مثل BandLab (بلا تكبير الصفحة، أزرار
    مضغوطة، التبويبات والصوت بسطر واحد، وبلا بطاقة داخل بطاقة) ===== */
 @media (min-width: 901px) and (min-height: 521px) {
-  main.container:has(.sounds-tool) {
-    padding-inline: 12px;
-  }
 
-  main:has(.sounds-tool) .page-header {
-    padding: 12px 0 6px;
-  }
-
-  main:has(.sounds-tool) .page-header h1 {
-    margin: 0;
-    font-size: 1.3rem;
-  }
-
-  main:has(.sounds-tool) .page-header p {
-    font-size: 0.85rem;
-  }
-
-  .sounds-tool {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px 16px;
-    margin: 6px 0 16px;
-    padding: 10px 14px 14px;
-    border-radius: var(--radius-md);
-  }
-
-  .sounds-tool > .sounds-tabs {
-    order: 1;
-  }
-
-  .sounds-tool > .sounds-top {
-    order: 2;
-    width: 240px;
-  }
-
-  .sounds-tool > .sounds-pane {
-    order: 3;
-    flex: 1 0 100%;
-  }
-
-  .sounds-tab {
-    padding: 6px 14px;
-    font-size: 0.86rem;
-  }
-
-  .sounds-tool .filter-chip {
-    padding: 5px 11px;
-    border-radius: var(--radius-sm);
-    font-size: 0.82rem;
-  }
-
-  .sounds-tool .btn {
-    padding: 8px 18px;
-    border-radius: var(--radius-sm);
-    font-size: 0.9rem;
-  }
-
-  .sounds-tool :is(#panePlay, #panePractice) > .beep-play {
-    padding: 0;
-    gap: 8px;
-    border: 0;
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-  }
-
-  .play-toolbar,
-  .piano-head {
+  .play-toolbar {
     padding: 6px 8px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-sm);
@@ -7811,136 +3789,32 @@ main.container:has(.sounds-tool) {
   .play-toolbar {
     justify-content: flex-start;
   }
-
-  .piano-head .instrument-bar {
-    padding: 2px 4px;
-    border-radius: var(--radius-sm);
-  }
-
-  .piano-head .ib-current {
-    padding: 5px 10px;
-  }
-
-  .piano-head .ib-step {
-    width: 30px;
-    height: 30px;
-  }
-
-  .sounds-tool #panePlay .beep-play-keys {
-    height: clamp(190px, 30vh, 300px);
-  }
 }
 
 /* سطر البيانو مثل BandLab: الآلة والأسماء واللوحة بطرف، والأوكتاف والدواسة وMIDI بالطرف الثاني */
 @media (min-width: 901px) {
-  .piano-head {
-    justify-content: flex-start;
-  }
 
   /* الهامش على صف اللوحة لا على الأوكتاف: الأوكتاف اتجاهه ltr فينعكس عنده inline-start */
-  .piano-head .beep-board-row {
-    margin-inline-end: auto;
-  }
 }
 
 /* المدرج: أعلام الثُّمن وأرقام المازورات */
-.st-flag {
-  fill: none;
-  stroke: var(--color-text);
-  stroke-width: 1.6;
-}
-
-.beep-experiment .st-note.on .st-flag {
-  stroke: var(--green-300);
-}
-
-.st-barno {
-  font: 600 9px/1 system-ui, sans-serif;
-  fill: var(--color-text-muted);
-}
 
 /* 🔁 تكرار مقطع: خانتا «من مازورة / إلى» بجانب الشريط الزمني */
-.song-loop {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  white-space: nowrap;
-}
-
-.song-loop[hidden] {
-  display: none;
-}
-
-.song-loop input {
-  width: 3.4em;
-  padding: 3px 4px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-xs);
-  background: rgba(0, 0, 0, 0.3);
-  color: #fff;
-  font: inherit;
-  text-align: center;
-}
 
 /* ===== صقل الصوتيات (مراجعة make-interfaces-feel-better) ===== */
 /* أرقام ثابتة العرض: الأوكتاف وعدد النغمات ما يحرّكون اللي جنبهم */
-#beepOctLabel,
-.song-status {
+#beepOctLabel {
   font-variant-numeric: tabular-nums;
 }
 
 /* منطقة ضغط: ٤٠ بكسل على الكمبيوتر و٤٤ على اللمس */
-.sounds-tool .ib-step,
-.sounds-tool .ip-preview,
-.sounds-tool .ip-close {
-  min-width: 40px;
-  min-height: 40px;
-}
-
-.sounds-tool .song-chip,
-.sounds-tool .beep-tempo .filter-chip {
-  min-width: 40px;
-  min-height: 40px;
-}
-
-.sounds-tool .song-chip {
-  padding: 6px 10px;
-}
 
 @media (min-width: 901px) and (min-height: 521px) {
-  .sounds-tool .play-toolbar .filter-chip,
-  .sounds-tool .piano-head .filter-chip,
-  .sounds-tool .song-practice .filter-chip {
-    min-height: 40px;
-  }
 
   /* زوايا متداخلة: الخارجي = الداخلي + الهامش */
-  .sounds-tool {
-    border-radius: var(--radius);
-  }
 
-  .play-toolbar,
-  .piano-head {
+  .play-toolbar {
     border-radius: var(--radius-md);
-  }
-
-  .piano-head .ib-current {
-    border-radius: var(--radius-sm);
-  }
-}
-
-.instrument-pop {
-  border-radius: var(--radius);
-}
-
-@media (pointer: coarse) {
-  .sounds-tool :is(.ib-step, .ip-preview, .ip-close, .beep-tempo .filter-chip) {
-    min-width: 44px;
-    min-height: 44px;
-  }
-
-  .sounds-tool .song-chip {
-    min-height: 44px;
   }
 }
 
@@ -8023,27 +3897,11 @@ li {
 }
 
 /* عنوان «كيف يشتغل؟» بصفحات التجارب: منطقة ضغط (كان ٢٩ بكسل) */
-.calc-intro > summary {
-  display: flex;
-  align-items: center;
-  min-height: 40px;
-}
-
-@media (pointer: coarse) {
-  .calc-intro > summary {
-    min-height: 44px;
-  }
-}
 
 @media (pointer: coarse) {
   .logo,
-  .calc-backspace,
   .btn {
     min-height: 44px;
-  }
-
-  .calc-backspace {
-    min-width: 44px;
   }
 }
 
@@ -8067,44 +3925,12 @@ li {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
-.beep-video video {
-  width: auto;
-  max-width: 100%;
-  max-height: 32vh;
-}
-
 @media (max-width: 900px) and (orientation: portrait), (orientation: landscape) and (max-height: 520px) {
-  .sounds-tool #panePlay .beep-play > #beepVideoBox {
-    order: -1;
-  }
-
-  .beep-video video {
-    max-height: 26vh;
-  }
 
   /* شريط أزرار الفيديو بسطر واحد يتمرر أفقياً بدل ٥ أسطر تدفع البيانو تحت */
-  .beep-video-bar {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .beep-video-bar .instrument-picker {
-    flex-wrap: nowrap;
-  }
-
-  .beep-video-bar > *,
-  .beep-video-bar .instrument-picker > * {
-    flex: none; /* بحجمها الطبيعي — الصف يتمرر بدل ما تنضغط وتتداخل حروفها */
-  }
 }
 
 @media (orientation: landscape) and (max-height: 520px) {
-  .beep-video video {
-    max-height: 29vh;
-  }
 
   #beepVideoBox:not([hidden]) {
     top: 0;
@@ -8112,54 +3938,12 @@ li {
 }
 
 /* مستطيل التحديد بمحرّر النغمات (السحب على مكان فارغ) */
-.ed-marquee {
-  position: absolute;
-  z-index: 4;
-  border: 1px solid var(--green-300);
-  border-radius: 3px;
-  background: rgba(111, 200, 164, 0.15);
-  pointer-events: none;
-}
 
 /* «نزّل مشروعك:» قبل أزرار التصدير — كانت WAV/MP3/MIDI أسماء صيغ بس وما يبان إنها تحميل */
-.beep-dl-label {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  white-space: nowrap;
-}
 
 /* اسحب وأفلت: إطار متقطع ورسالة فوق التبويب وقت سحب ملف عليه */
-.sounds-pane {
-  position: relative;
-}
-
-.sounds-pane.drop-on::after {
-  content: attr(data-drop);
-  position: absolute;
-  inset: 0;
-  z-index: 90;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px dashed var(--green-300);
-  border-radius: var(--radius-md);
-  background: rgba(8, 30, 23, 0.82);
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 800;
-  pointer-events: none;
-}
 
 /* مستطيل تحديد المقاطع بالجدول (السحب على مكان فارغ) */
-.beep-marquee {
-  position: absolute;
-  z-index: 6;
-  border: 1px solid var(--green-300);
-  border-radius: 3px;
-  background: rgba(111, 200, 164, 0.15);
-  pointer-events: none;
-}
 
 /* ===== الجوال بالعرض: «اعزف» يصير تطبيقاً بكامل الشاشة (تخطيط Perfect Piano) =====
    سطر علوي رفيع (التبويبات أيقونات + التسجيل والمترونوم والسرعة والطبقات)، تحته سطر
@@ -8167,7 +3951,6 @@ li {
    الطبقات فوق المفاتيح، و⚙️/⌨️ يفتحان لوحتيهما فوق كل شي. العناصر نفسها بلا نقل:
    الأغلفة الوسيطة display: contents فتصير كلها خانات بشبكة واحدة */
 .phone-only,
-.oct-map,
 .phone-rotate {
   display: none;
 }
@@ -8186,259 +3969,42 @@ li {
 }
 
 @media (orientation: landscape) and (max-height: 520px) {
-  html.touch body:has(.sounds-tool #panePlay:not([hidden])) {
-    overflow: hidden;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) {
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    grid-template-rows: auto auto auto auto auto minmax(0, 1fr);
-    grid-template-areas:
-      "tabs bar"
-      "head head"
-      "add add"
-      "extra extra"
-      "layers layers"
-      "keys keys";
-    gap: 4px 8px;
-    height: 100dvh;
-    margin: 0;
-    padding: 4px max(8px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
-    border-radius: 0;
-    overflow: hidden;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) :is(#panePlay, .beep-play, .piano-panel) {
-    display: contents;
-  }
 
   /* مخفي بهذا الوضع: شريط الصوت (أزرار الجوال تكفي)، والفيديو، والشكر (ظاهر بالوضع العمودي)،
      والتلميحات الطويلة، واختصارات الكيبورد */
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) :is(.sounds-top, #beepVideoBox, .beep-credit, .phone-rotate, #beepShortcuts, #beepTimelineHint, #beepRecTake > .beep-param-note),
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) :is(#beepHelp, #beepSettings):not([open]) {
+  #beepVideoBox,
+  .phone-rotate,
+  #beepShortcuts,
+  #beepTimelineHint,
+  #beepSettings):not([open]) {
     display: none !important;
   }
 
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .sounds-tabs {
-    grid-area: tabs;
-    align-self: center;
-    justify-self: start;
-    width: auto;
-    max-width: none;
-    margin: 0;
-    padding: 2px;
-    gap: 2px;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .sounds-tab {
-    padding: 6px 10px;
-    font-size: 1rem;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .tab-text {
-    display: none;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .play-toolbar {
-    grid-area: bar;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    gap: 4px;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) :is(.play-toolbar, .piano-head) .filter-chip {
-    min-height: 36px;
-    padding: 4px 10px;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .phone-only {
-    display: inline-flex;
-  }
-
-  html.touch .sounds-tool.layers-open:has(#panePlay:not([hidden])) #beepLayersBtn {
-    background: #2e8b67;
-    border-color: var(--green-300);
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .beep-tempo-value span {
-    display: none;
-  }
-
   /* سطر البيانو: الآلة، الخريطة بين زرّي الأوكتاف، الدواسة، ملء الشاشة، ⋯ */
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .piano-head {
-    grid-area: head;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 4px 6px;
-    margin: 0;
-    padding: 0;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .piano-head .instrument-slot {
-    flex: 0 1 230px;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .piano-head:not(.open) .beep-board-row {
-    display: none;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .piano-oct {
-    flex: 1 1 200px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    min-width: 0;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepOctLabel {
-    display: none;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepFullscreen:not([hidden]) {
-    display: inline-flex;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .oct-map {
-    position: relative;
-    display: block;
-    flex: 1;
-    height: 34px;
-    border-radius: var(--radius-xs);
-    overflow: hidden;
-    cursor: pointer;
-    touch-action: none;
-    background:
-      repeating-linear-gradient(90deg, transparent 0 calc(100% / 52 - 1px), rgba(0, 0, 0, 0.35) calc(100% / 52 - 1px) calc(100% / 52)),
-      #e9eeec;
-  }
 
   /* النافذة الظاهرة على الخريطة: كل شي برّاها باهت */
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .oct-map-win {
-    position: absolute;
-    inset-block: 0;
-    border: 2px solid var(--green-500);
-    border-radius: 4px;
-    box-shadow: 0 0 0 999px rgba(10, 30, 22, 0.55);
-    transition: left 0.15s ease, width 0.15s ease;
-  }
 
   /* الطبقات: فوق المفاتيح، بارتفاع محدود وتمرير داخلي. معها صف «أضف» (إيقاع، صوتك،
      مؤثرات، ملفات) بسطر واحد يتمرّر، ولوحتا الإيقاع والمؤثرات لما تنفتحان */
-  html.touch .sounds-tool:has(#panePlay:not([hidden])):not(.layers-open) :is(#beepRecTake, .beep-add-row, #beepDrums, #beepSfx) {
+  #beepDrums,
+  #beepSfx) {
     display: none;
   }
 
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .beep-add-row {
-    grid-area: add;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 4px;
-    margin: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .beep-add-row .filter-chip {
-    flex: none;
-    min-height: 34px;
-    padding: 4px 10px;
-    white-space: nowrap;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) :is(#beepDrums, #beepSfx) {
+  #beepSfx) {
     grid-area: extra;
     max-height: 38dvh;
     margin: 0;
     overflow-y: auto;
   }
 
-  html.touch .sounds-tool.layers-open:has(#panePlay:not([hidden])) #beepRecTake:not([hidden]) {
-    grid-area: layers;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 6px;
-    max-height: 42dvh;
-    margin: 0;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
-
   /* والطبقات مفتوحة: سطر الآلة والخريطة يختفي (يرجع بإقفالها) عشان تبقى المفاتيح
      تنلمس، و▶️ وأزرار التنزيل أول شي، وأدوات المقطع أصغر — كلها بسطر واحد يتمرّر */
-  html.touch .sounds-tool.layers-open:has(#panePlay:not([hidden])) .piano-head {
-    display: none;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepRecTake > :is(.beep-transport, .beep-clip-tools) {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 4px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepRecTake > * {
-    flex: none;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepRecTake > .beep-transport {
-    order: -3;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepRecTake > .beep-clip-tools {
-    order: -2;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepRecTake > .beep-timeline {
-    order: -1;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepRecTake > :is(.beep-transport, .beep-clip-tools) > * {
-    flex: none;
-    white-space: nowrap;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) #beepRecTake > :is(.beep-transport, .beep-clip-tools) .filter-chip {
-    min-height: 32px;
-    padding: 3px 9px;
-    font-size: 0.82rem;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .beep-keys-wrap {
-    grid-area: keys;
-    min-height: 0;
-    height: 100%;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .beep-keys-wrap:not(.full) .beep-play-keys {
-    width: 100%;
-  }
-
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .beep-play-keys,
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .beep-play:has(.beep-rec-take:not([hidden])) .beep-play-keys {
-    height: 100%;
-    max-height: none;
-    aspect-ratio: auto;
-  }
 
   /* الكاملة: مفاتيح بعرض إصبع (٥٢ × ٥٢px) وتتمرّر، والخريطة تتبعها */
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) .beep-play-keys.full {
-    min-width: calc(52 * 52px);
-  }
 
   /* ⚙️ و⌨️: لوحة فوق كل شي بتمرير داخلي، تُقفل بنفس الزر */
-  html.touch .sounds-tool:has(#panePlay:not([hidden])) :is(#beepHelp, #beepSettings)[open] {
+  #beepSettings)[open] {
     position: fixed;
     inset: 52px max(8px, env(safe-area-inset-right)) 8px max(8px, env(safe-area-inset-left));
     z-index: 5;
@@ -8454,21 +4020,6 @@ li {
 
 /* قانون هيك: «اعزف» فيه زر أساسي واحد بعد المفاتيح — ⏺ سجّل. أحمر ممتلئ وعريض، وبقية
    أزرار الشريط هادئة (بلا خلفية) فما فيه زرّان بنفس الأهمية. وقت التسجيل يبقى أحمر وينبض */
-.beep-experiment .play-toolbar #beepRecToggle {
-  background: oklch(0.56 0.19 27);
-  border-color: oklch(0.72 0.14 25);
-  color: #fff;
-  font-weight: 700;
-}
-
-.beep-experiment .play-toolbar #beepRecToggle:hover:not(:disabled) {
-  background: oklch(0.6 0.2 27);
-}
-
-.beep-experiment .play-toolbar .filter-chip:not(#beepRecToggle):not(.active):not(:hover):not([aria-pressed="true"]):not([aria-expanded="true"]) {
-  background: transparent;
-  border-color: rgba(255, 255, 255, 0.14);
-}
 
 /* قانون هيك: الرئيسية كان ما فيها إجراء أساسي — زر واحد بارز تحت العنوان */
 .hero .hero-cta {
@@ -8523,96 +4074,18 @@ li {
 }
 
 /* فقاعة دعم الموقع (رابط كازاسوق بالعمولة) */
-.support-bubble {
-  position: fixed; inset-inline-start: 16px; bottom: calc(76px + env(safe-area-inset-bottom)); z-index: 85;
-  width: 54px; height: 54px; border-radius: 50%; border: 0; cursor: pointer; font-size: 26px; color: #fff;
-  background: linear-gradient(135deg, oklch(0.55 0.2 300), var(--color-primary-fill));
-  box-shadow: 0 8px 24px oklch(0.45 0.2 300 / 0.45);
-  animation: support-float 4s ease-in-out infinite;
-}
-.support-bubble[data-pos="1"] { inset-inline-start: auto; inset-inline-end: 16px; }
-.support-bubble[data-pos="2"] { inset-inline-start: auto; inset-inline-end: 16px; bottom: 50%; }
-.support-bubble[data-pos="3"] { bottom: 50%; }
-.support-hide { border: 0; background: none; color: var(--color-text-muted); font: inherit; font-size: .85em; text-decoration: underline; cursor: pointer; }
 @keyframes support-float {
   25% { transform: translate(3px, -8px) rotate(-6deg); }
   50% { transform: translate(0, -14px) rotate(0); box-shadow: 0 18px 34px oklch(0.45 0.2 300 / 0.35); }
   75% { transform: translate(-3px, -8px) rotate(6deg); }
 }
-@media (prefers-reduced-motion: reduce) { .support-bubble { animation: none; } }
-.support-card {
-  width: calc((100vw - 48px) / var(--page-zoom, 1)); max-width: 640px; height: fit-content; max-height: calc((100vh - 160px) / var(--page-zoom, 1)); margin: auto;
-  border: 0; border-radius: var(--radius-xl); padding: 0; overflow: hidden;
-  background: var(--color-surface); color: var(--color-text); text-align: center;
-  box-shadow: 0 30px 80px rgba(0,0,0,.35);
-}
-.support-card[open] { display: flex; flex-direction: column; overflow-y: auto; animation: support-in .35s cubic-bezier(.2,.9,.3,1.2); }
 @keyframes support-in { from { opacity: 0; transform: translateY(24px) scale(.96); } }
-.support-card::backdrop { background: rgba(0,0,0,.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-.support-close {
-  position: absolute; top: 14px; inset-inline-end: 14px; z-index: 1; width: 40px; height: 40px; border-radius: 50%;
-  border: 0; background: rgba(255,255,255,.18); color: #fff; font-size: 18px; cursor: pointer;
-}
-.support-hero {
-  flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-  padding: 28px 24px 20px; color: #fff;
-  background: radial-gradient(circle at 20% 0%, oklch(0.62 0.2 300 / .9), transparent 60%),
-              linear-gradient(160deg, oklch(0.4 0.16 290), var(--color-primary-fill));
-}
-.support-emoji { font-size: 52px; line-height: 1; filter: drop-shadow(0 10px 24px rgba(0,0,0,.35)); }
-.support-tag { padding: 4px 14px; border-radius: var(--radius-pill); background: rgba(255,255,255,.18); font-size: .85em; font-weight: 700; }
-.support-hero h2 { margin: 0; font-size: clamp(1.4rem, 3vw, 1.9rem); color: #fff; }
-.support-hero p { margin: 0; max-width: 520px; line-height: 1.7; font-size: .95em; opacity: .95; }
-.support-body { flex: 0 0 auto; padding: 16px 20px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.support-features { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; max-width: 720px; }
-.support-features li {
-  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 8px; border-radius: var(--radius-md);
-  background: var(--color-bg); font-weight: 700; font-size: .82em; line-height: 1.4;
-}
-.support-features span { font-size: 22px; }
-.support-quote { margin: 0; font-style: italic; color: var(--color-text-muted); }
-.support-go {
-  display: inline-block; padding: 11px 32px; border-radius: var(--radius-pill); font-weight: 800; font-size: 1em; color: #fff; text-decoration: none;
-  background: linear-gradient(135deg, oklch(0.5 0.2 300), var(--color-primary-fill));
-  box-shadow: 0 10px 28px oklch(0.45 0.2 300 / .4); transition: transform .15s;
-}
-.support-go:hover { transform: translateY(-2px); }
-.support-note { margin: 0; font-size: .8em; color: var(--color-text-muted); }
-@media (max-width: 600px) {
-  .support-features li { padding: 10px 6px; font-size: .78em; }
-  .support-features span { font-size: 22px; }
-}
 
 /* تطبيق الكمبيوتر: شريط الكيبوردات المتعددة، وكل كيبورد يلوّن مفاتيحه بلونه */
-.kb-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin: 6px 0 10px;
-  font-size: 0.85rem;
-}
-.kb-chip {
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  border: 2px solid var(--kb);
-  background: color-mix(in oklch, var(--kb) 14%, transparent);
-}
-.kb-hint {
-  opacity: 0.75;
-}
 [data-kb="0"] { --kb: oklch(0.78 0.12 165); }
 [data-kb="1"] { --kb: oklch(0.7 0.14 250); }
 [data-kb="2"] { --kb: oklch(0.75 0.15 60); }
 [data-kb="3"] { --kb: oklch(0.7 0.17 350); }
-.pk-white.down[data-kb] {
-  background: linear-gradient(180deg, color-mix(in oklch, var(--kb) 45%, white), var(--kb));
-  box-shadow: 0 0 18px var(--kb);
-}
-.pk-black.down[data-kb] {
-  background: var(--kb);
-  box-shadow: 0 0 16px var(--kb);
-}
 
 /* ===== رسوم المقالات المصنوعة بالكود (SVG) =====
    ألوانها من متغيّرات الموقع نفسها، فتتبع الوضع الفاتح والداكن تلقائياً. الاتجاه داخل
@@ -8637,92 +4110,6 @@ li {
   text-align: center;
   font-size: 0.88rem;
   color: var(--color-text-muted);
-}
-.viz-t {
-  fill: var(--color-text);
-}
-.viz-s {
-  fill: var(--color-text-muted);
-  font-size: 11.5px;
-}
-.viz-b {
-  font-weight: 700;
-}
-.viz-hi {
-  fill: var(--color-primary);
-  font-weight: 700;
-}
-.viz-on {
-  fill: #fff;
-  font-size: 12.5px;
-}
-.viz-inv {
-  fill: var(--color-surface);
-  font-size: 13px;
-}
-.viz-accent {
-  fill: var(--color-primary);
-}
-.viz-muted {
-  fill: color-mix(in oklch, var(--color-text) 22%, transparent);
-}
-.viz-ink {
-  fill: var(--color-text);
-}
-.viz-card {
-  fill: color-mix(in oklch, var(--color-primary) 8%, var(--color-surface));
-  stroke: color-mix(in oklch, var(--color-primary) 55%, transparent);
-}
-.viz-card-on {
-  fill: color-mix(in oklch, var(--color-primary) 20%, var(--color-surface));
-  stroke: var(--color-primary);
-}
-.viz-line {
-  stroke: var(--color-primary);
-  stroke-width: 2;
-}
-.viz-water {
-  fill: color-mix(in oklch, oklch(0.7 0.09 220) 30%, var(--color-surface));
-  stroke: oklch(0.6 0.08 220);
-}
-.viz-axis {
-  stroke: var(--color-text-muted);
-}
-.viz-thick {
-  stroke-width: 4;
-}
-.viz-beam {
-  stroke: var(--color-text);
-  stroke-width: 4;
-}
-.viz-curve {
-  fill: none;
-  stroke: var(--color-primary);
-  stroke-width: 3;
-}
-.viz-compare {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-3);
-}
-.viz-compare > div {
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--space-3);
-  line-height: 1.9;
-}
-.viz-compare b {
-  display: block;
-}
-.viz-no {
-  background: color-mix(in oklch, var(--color-danger) 10%, var(--color-surface));
-}
-.viz-yes {
-  background: color-mix(in oklch, var(--color-primary) 12%, var(--color-surface));
-}
-@media (max-width: 600px) {
-  .viz-compare {
-    grid-template-columns: 1fr;
-  }
 }
 /* الجوال: الرسم يصغر بالـ viewBox فيصغر نصّه حتى ما ينقرأ — حد أدنى للعرض وتمرير أفقي */
 @media (max-width: 600px) {
@@ -9263,96 +4650,11 @@ li {
 
 /* ===== محوّل الملفات: تلميع الشكل ===== */
 /* زر التحميل رابط داخل المقال: كان ياخذ لون الروابط فيختفي نصه على الزر الأخضر */
-.prose a.btn,
-a.conv-download {
+.prose a.btn {
   color: #fff;
   text-decoration: none;
 }
-.conv-drop {
-  padding: 40px 20px;
-  gap: 12px;
-}
-.conv-drop:hover {
-  border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
-}
-.conv-options {
-  max-width: 760px;
-  margin: 20px auto;
-  padding: 18px 20px;
-  gap: 18px 28px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-.conv-option-note {
-  padding: 10px 14px;
-  border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--color-text) 4%, transparent);
-  text-align: start;
-}
-.conv-option-note::before {
-  content: "💡 ";
-}
-.conv-results {
-  max-width: 760px;
-  margin-inline: auto;
-}
-.conv-row {
-  padding: 14px 16px;
-}
-.conv-row-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 4px;
-}
-.conv-meta-line {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-.conv-badge {
-  padding: 1px 9px;
-  border-radius: var(--radius-pill);
-  font-size: 0.75rem;
-  background: color-mix(in srgb, currentColor 14%, transparent);
-}
 /* الصيغ المدعومة: سطر واحد يتمدّد */
-.conv-formats {
-  max-width: 760px;
-  margin: 0 auto 16px;
-}
-.conv-fmt-list {
-  margin: 12px 0 0;
-}
-.conv-fmt-list dt {
-  margin-top: 12px;
-  font-weight: 700;
-}
-.conv-fmt-list dd {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin: 6px 0 0;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-.conv-fmt-label {
-  min-width: 72px;
-  font-weight: 700;
-}
-.conv-fmt {
-  padding: 2px 9px;
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-size: 0.78rem;
-  font-weight: 600;
-  direction: ltr;
-}
 
 /* أشرطة التمرير: هوية واحدة لكل الموقع (كانت بعض الأشرطة تظهر بيضاء بالوضع الداكن
    لأنها تضبط scrollbar-width فقط بدون لون). القواعد الخاصة بكل عنصر أعلاه تتغلب
@@ -9471,68 +4773,6 @@ a.conv-download {
 }
 
 /* ===== مجموعات "روابط وأدوات": بلاطات مدمجة (13 مجموعة ما تصير جداراً قبل النتائج) ===== */
-.tool-hub {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 14px 0 22px;
-}
-.tool-hub .hub-card {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 14px;
-  border-radius: var(--radius-pill);
-  text-align: start;
-  white-space: nowrap;
-}
-.tool-hub .hub-card-icon {
-  font-size: 1.4rem;
-  margin: 0;
-}
-.tool-hub .hub-card-label {
-  margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.35;
-}
-.tool-picks {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 14px 18px;
-  margin-bottom: 18px;
-}
-.tool-picks h2,
-.tool-groups-more h2 {
-  font-size: 1rem;
-  margin: 0 0 8px;
-}
-.tool-picks ul {
-  margin: 0;
-  padding-inline-start: 18px;
-  line-height: 1.9;
-}
-.tool-groups-more {
-  margin: 28px 0 10px;
-}
-@media (max-width: 600px) {
-  .tool-hub {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  .tool-hub .hub-card {
-    white-space: normal;
-    border-radius: var(--radius-md);
-    padding: 10px 12px;
-  }
-  .tool-hub .hub-card-label {
-    font-size: 0.86rem;
-  }
-}
-.tool-guide-link a {
-  color: var(--color-primary);
-  font-weight: 600;
-}
 
 /* ===== قسم الأعمال + المنيو الرقمي ===== */
 .biz-grid, .menu-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); margin: 8px 0 18px; }

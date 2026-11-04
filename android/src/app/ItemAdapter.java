@@ -171,19 +171,18 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
             holder.tags.setVisibility(View.GONE);
         }
 
-        // مقال (أدلة) أو تجربة: زر قراءة واحد. أي مكان آخر (حتى اللي له مقال،
+        // مقال: زر قراءة واحد. أي مكان آخر (حتى اللي له مقال،
         // مثل مطاعم بصفحة) يعرض أزرار الاتصال والخريطة، والكرت كله يفتح صفحته
-        boolean isExperiment = "ai-experiments".equals(itemSection);
-        if (isExperiment || isArticle(item)) {
+        if (isArticle(item)) {
             holder.actions.removeAllViews();
             TextView readBtn = new TextView(context);
-            readBtn.setText(context.getString(isExperiment ? R.string.open_experiment : R.string.read_article));
+            readBtn.setText(context.getString(R.string.read_article));
             readBtn.setTextSize(14f);
             readBtn.setTypeface(null, android.graphics.Typeface.BOLD);
             readBtn.setTextColor(0xFFFFFFFF);
             readBtn.setBackgroundResource(R.drawable.btn_pill_primary);
             readBtn.setCompoundDrawablePadding(LinkButtons.dp(context, 6));
-            LinkButtons.setStartIcon(readBtn, isExperiment ? R.drawable.ic_science : R.drawable.ic_menu_book, 0xFFFFFFFF);
+            LinkButtons.setStartIcon(readBtn, R.drawable.ic_menu_book, 0xFFFFFFFF);
             int padH = LinkButtons.dp(context, 24);
             int padV = LinkButtons.dp(context, 8);
             readBtn.setPadding(padH, padV, padH, padV);
@@ -301,11 +300,7 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
     // makeScaleUpAnimation من الإطار نفسه، بلا مكتبة. بلا كرت: فتح فوري كالعادة
     static void open(Activity a, JSONObject item, String section, View from) {
         Intent intent;
-        if ("ai-experiments".equals(section)) {
-            intent = new Intent(a, WebViewActivity.class);
-            intent.putExtra(WebViewActivity.EXTRA_TITLE, Lang.title(a, item));
-            intent.putExtra(WebViewActivity.EXTRA_URL, Lang.detailUrl(a, item));
-        } else if (isArticle(item)) {
+        if (isArticle(item)) {
             intent = new Intent(a, ArticleActivity.class);
             intent.putExtra(ArticleActivity.EXTRA_TITLE, Lang.title(a, item));
             intent.putExtra(ArticleActivity.EXTRA_CONTENT, Lang.content(a, item));

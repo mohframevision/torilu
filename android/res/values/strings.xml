@@ -8,8 +8,6 @@
     <string name="nav_home">الرئيسية</string>
     <string name="nav_favorites">المفضلة</string>
     <string name="nav_settings">الإعدادات</string>
-    <string name="nav_sounds">صوتيات</string>
-    <string name="sounds_title">صوتيات هكوله</string>
     <string name="saved_to_downloads">تم الحفظ في التنزيلات (مجلد Hakolah)</string>
     <string name="close">إغلاق</string>
 
@@ -35,7 +33,6 @@
     <string name="dist_km">%1$.1f كم</string>
     <string name="nearest_branch">" — أقرب فرع: "</string>
 
-    <string name="open_experiment">افتح التجربة</string>
     <string name="read_article">قراءة المقال</string>
     <string name="share_suffix">" — على موقع هكوله 👇"</string>
     <string name="share_title">مشاركة</string>

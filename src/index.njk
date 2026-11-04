@@ -43,8 +43,6 @@ langSwitchUrl: "/en/index.html"
     {% for entry in sections %}{% if not entry.creators %}
     <a class="mini-section" href="{{ ('/' + entry.slug + '.html') | url }}"><span aria-hidden="true">{{ entry.icon }}</span>{{ entry.navLabel }}</a>
     {% endif %}{% endfor %}
-    <a class="mini-section" href="{{ '/creators.html' | url }}"><span aria-hidden="true">🎨</span>للمبدعين</a>
-    <a class="mini-section" href="{{ '/sounds.html' | url }}"><span aria-hidden="true">🎹</span>{{ i18n.ar.nav_sounds_short }}</a>
   </div>
 </section>
 

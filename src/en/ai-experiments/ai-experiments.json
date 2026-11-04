@@ -1,9 +1,0 @@
-{
-  "layout": "detail-item.njk",
-  "lang": "en",
-  "navActive": "ai-experiments",
-  "sectionSlug": "ai-experiments",
-  "sectionTitle": "Tools",
-  "permalink": "en/ai-experiments/{{ page.fileSlug }}.html",
-  "eleventyExcludeFromCollections": true
-}

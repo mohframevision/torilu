@@ -20,7 +20,6 @@ class BottomNav implements View.OnClickListener {
     static final String PICKER = "picker";
     static final String FAVORITES = "favorites";
     static final String SEARCH = "search";
-    static final String SOUNDS = "sounds";
 
     private final Activity activity;
     private final String active;
@@ -40,7 +39,6 @@ class BottomNav implements View.OnClickListener {
         addTab(container, R.drawable.ic_search, activity.getString(R.string.nav_search), SEARCH);
         addFab(container, PICKER);
         addTab(container, R.drawable.ic_favorite_fill, activity.getString(R.string.nav_favorites), FAVORITES);
-        addTab(container, R.drawable.ic_music_note, activity.getString(R.string.nav_sounds), SOUNDS);
     }
 
     private void addTab(LinearLayout container, int iconRes, String label, String tag) {
@@ -95,8 +93,7 @@ class BottomNav implements View.OnClickListener {
             return;
         }
         Intent next;
-        if (SOUNDS.equals(tag)) next = WebViewActivity.soundsIntent(activity);
-        else if (SEARCH.equals(tag)) next = new Intent(activity, SearchActivity.class);
+        if (SEARCH.equals(tag)) next = new Intent(activity, SearchActivity.class);
         else if (PICKER.equals(tag)) next = new Intent(activity, PickerActivity.class);
         else next = new Intent(activity, FavoritesActivity.class);
         activity.startActivity(next);

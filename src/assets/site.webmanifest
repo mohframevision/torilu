@@ -47,12 +47,6 @@
       "short_name": "المفضلة",
       "description": "الأماكن اللي حفظتها",
       "url": "/favorites.html"
-    },
-    {
-      "name": "حاسبة المصروفات",
-      "short_name": "الحاسبة",
-      "description": "سجّل دخلك ومصروفاتك",
-      "url": "/ai-experiments/expense-calculator.html"
     }
   ]
 }

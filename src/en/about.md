@@ -3,7 +3,7 @@ title: About | Hakolah
 layout: base.njk
 lang: "en"
 permalink: en/about.html
-description: "Learn about Hakolah: a Bahraini guide to restaurants, cafes, stores, places and car shops, with priced menus and tools for creators."
+description: "Learn about Hakolah: a Bahraini guide to restaurants, cafes, stores, places and car shops, with priced menus."
 langSwitchUrl: "/about.html"
 ---
 
@@ -46,8 +46,7 @@ Hakolah is a Bahraini guide that gathers restaurants, cafes, bakeries, stores, p
 - **Smart search:** search by place name, kind of food, or even the name of a dish inside a menu, and filter by area and category.
 - **"Pick for me":** if you can't decide where to eat, it chooses a place for you with a simple game.
 - **"Near me":** sorts places by how close they are to you (if you allow location, and we don't store it).
-- **Articles and guides:** practical guides, some on topics everyone deals with, like protecting your accounts.
-- **For creators:** a separate portal with [free apps and tools](/en/creators.html) for video editing, design and audio, AI experiments, and the Hakolah Sounds tool.
+- **Articles:** stories and guides about society and its places, written with care.
 
 ## How do we collect the information?
 
@@ -81,7 +80,7 @@ We don't show ads. Some links are referral links that earn us a small commission
 
 <h2 id="privacy">Your privacy</h2>
 
-There are no accounts or passwords on Hakolah, and we don't collect your personal data. Full details are in the [privacy policy](/en/privacy-policy.html). And if you'd like to know how to protect your own accounts, we have a [detailed guide](/en/guides/himaya-hisabatik-alraqmiya.html).
+There are no accounts or passwords on Hakolah, and we don't collect your personal data. Full details are in the [privacy policy](/en/privacy-policy.html).
 
 <h2 id="business">For business owners</h2>
 

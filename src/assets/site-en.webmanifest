@@ -47,12 +47,6 @@
       "short_name": "Favorites",
       "description": "The places you saved",
       "url": "/en/favorites.html"
-    },
-    {
-      "name": "Expense calculator",
-      "short_name": "Calculator",
-      "description": "Log your income and expenses",
-      "url": "/en/ai-experiments/expense-calculator.html"
     }
   ]
 }

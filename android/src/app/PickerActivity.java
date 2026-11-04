@@ -127,7 +127,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Or
         categoriesWrap.addView(chip);
     }
 
-    // "الكل": كل الأقسام ما عدا التجارب (أدوات تفاعلية، مو مكان تروح له)
+    // "الكل": كل الأقسام
     private void selectCategory(String slug, View chipView) {
         selected = slug;
         pool.clear();
@@ -135,7 +135,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Or
         if (sections != null && order != null) {
             for (int i = 0; i < order.length(); i++) {
                 String s = order.optString(i);
-                if (ALL.equals(slug) ? "ai-experiments".equals(s) : !s.equals(slug)) continue;
+                if (!ALL.equals(slug) && !s.equals(slug)) continue;
                 JSONObject section = sections.optJSONObject(s);
                 JSONArray items = section == null ? null : section.optJSONArray("items");
                 if (items == null) continue;

@@ -33,19 +33,10 @@ exports.render = function (data) {
     `en/car-shops/${t.slug}.html`,
   ]);
 
-  // صفحات مجموعات "روابط وأدوات" (tool-group.njk) — نفس فجوة car-shop-type
-  const toolGroupPairs = (data.toolGroups || []).map((g) => [
-    `links-tools/${g.slug}.html`,
-    `en/links-tools/${g.slug}.html`,
-  ]);
-
   const bilingualPairs = [
     ["", "en/index.html"],
     ["favorites.html", "en/favorites.html"],
     ["picker.html", "en/picker.html"],
-    ["sounds.html", "en/sounds.html"],
-    ["dilmo.html", "en/dilmo.html"],
-    ["creators.html", "en/creators.html"],
     ["business.html", "en/business.html"],
     // صفحة البحث (search.njk/en/search.njk) كانت مفقودة من الخريطة منذ إضافتها
     // بكومِت ed9eecf — نفس فئة فجوة car-shop-type: صفحة ثابتة جديدة لم تُضَف
@@ -60,7 +51,6 @@ exports.render = function (data) {
     ...EN_SECTION_SLUGS.map((slug) => [`${slug}.html`, `en/${slug}.html`]),
     ...detailPagePairs,
     ...carShopTypePairs,
-    ...toolGroupPairs,
   ];
 
   /*

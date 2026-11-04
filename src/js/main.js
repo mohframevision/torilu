@@ -2278,39 +2278,10 @@ function initAboutBadge() {
 }
 document.addEventListener("DOMContentLoaded", initAboutBadge);
 
-// فقاعة الدعم: كل ضغطة تنقلها لزاوية أخرى؛ تختفي للأبد فقط إذا طلب المستخدم ذلك من البطاقة
-(() => {
-  const bubble = document.getElementById("supportBubble");
-  const card = document.getElementById("supportCard");
-  if (!bubble || !card) return;
-  if (lsGet("supportHidden")) {
-    bubble.remove();
-    return;
-  }
-  let pos = Number(lsGet("supportPos")) % 4 || 0;
-  bubble.dataset.pos = pos;
-  bubble.addEventListener("click", () => {
-    pos = (pos + 1) % 4;
-    lsSet("supportPos", pos);
-    card.showModal();
-  });
-  card.addEventListener("close", () => {
-    bubble.dataset.pos = pos;
-  });
-  card.addEventListener("click", (e) => {
-    if (e.target.closest("[data-hide]")) {
-      lsSet("supportHidden", "1");
-      bubble.remove();
-      card.close();
-    } else if (e.target.closest("[data-close]")) card.close();
-  });
-})();
-
 /* ===== «/» يفتح البحث من أي صفحة (عُرف Google وGitHub)؛ بصفحة البحث نفسها يركّز على الحقل ===== */
 document.addEventListener("keydown", (e) => {
   if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.target.closest("input, textarea, select, [contenteditable]")) return;
-  if (document.getElementById("piano") || document.querySelector(".sounds-tool")) return; // صفحة الصوتيات: المفاتيح للعزف
   e.preventDefault();
   const field = document.getElementById("searchInput");
   if (field) return field.focus();

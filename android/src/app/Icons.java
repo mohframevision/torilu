@@ -14,7 +14,6 @@ final class Icons {
 
     private static final Map<String, Integer> SECTION = new HashMap<>();
     private static final Map<String, Integer> ILLUS = new HashMap<>();
-    private static final Map<String, Integer> GROUP = new HashMap<>();
     private static final Map<String, Integer> EMOJI = new HashMap<>();
 
     static {
@@ -24,9 +23,6 @@ final class Icons {
         SECTION.put("stores", R.drawable.ic_s_shopping_bag);
         SECTION.put("car-shops", R.drawable.ic_s_directions_car);
         SECTION.put("places", R.drawable.ic_s_landscape);
-        SECTION.put("links-tools", R.drawable.ic_s_link);
-        SECTION.put("guides", R.drawable.ic_s_article);
-        SECTION.put("ai-experiments", R.drawable.ic_s_science);
 
         ILLUS.put("shawarma", R.drawable.ic_s_kebab_dining);
         ILLUS.put("burger", R.drawable.ic_s_lunch_dining);
@@ -62,19 +58,6 @@ final class Icons {
         ILLUS.put("upholstery", R.drawable.ic_s_airline_seat_recline_normal);
         ILLUS.put("caracc", R.drawable.ic_s_car_repair);
 
-        GROUP.put("الملفات والكمبيوتر", R.drawable.ic_s_folder);
-        GROUP.put("الذكاء الاصطناعي والترجمة", R.drawable.ic_s_translate);
-        GROUP.put("التصميم والرسم", R.drawable.ic_s_palette);
-        GROUP.put("التعلّم والحياة اليومية", R.drawable.ic_s_school);
-        GROUP.put("الصوت والموسيقى", R.drawable.ic_music_note);
-        GROUP.put("المونتاج والفيديو", R.drawable.ic_s_movie);
-        GROUP.put("الأمان والخصوصية", R.drawable.ic_s_shield);
-        GROUP.put("البرمجة والألعاب وثلاثي الأبعاد", R.drawable.ic_s_code);
-        GROUP.put("مجتمعات وقنوات للتعلّم", R.drawable.ic_s_groups);
-        GROUP.put("الصور ولقطات الشاشة", R.drawable.ic_s_image);
-        GROUP.put("المستندات وملفات PDF", R.drawable.ic_s_description);
-        GROUP.put("الملاحظات والتنظيم", R.drawable.ic_s_sticky_note_2);
-        GROUP.put("مكتبات مجانية", R.drawable.ic_s_local_library);
 
         // الإيموجي الحالي بالمقالات والأماكن والتجارب → أيقونة بنفس المعنى
         emoji("🗂️", R.drawable.ic_s_folder);
@@ -111,7 +94,6 @@ final class Icons {
 
     static int item(JSONObject item, String slug) {
         Integer r = ILLUS.get(item.optString("illus", ""));
-        if (r == null) r = GROUP.get(item.optString("group", ""));
         if (r == null) r = EMOJI.get(item.optString("icon", "").replace("️", ""));
         return r != null ? r : section(slug);
     }

@@ -42,15 +42,6 @@ public class WebViewActivity extends Activity implements View.OnClickListener {
     private ValueCallback<Uri[]> pendingFiles;
     private PermissionRequest pendingMic;
 
-    // صوتيات هكوله: ?app=1 يخفي هيدر الموقع وفوتره (للتطبيق شريطه الخاص)
-    static Intent soundsIntent(Context c) {
-        Intent intent = new Intent(c, WebViewActivity.class);
-        intent.putExtra(EXTRA_TITLE, c.getString(R.string.sounds_title));
-        intent.putExtra(EXTRA_URL, Lang.siteUrl(c, "sounds.html") + "?app=1");
-        intent.putExtra(EXTRA_TAB, BottomNav.SOUNDS);
-        return intent;
-    }
-
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Prefs.wrapThemeContext(newBase));

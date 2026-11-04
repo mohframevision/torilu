@@ -55,12 +55,12 @@ module.exports = [
     },
   },
   {
-    // main.js وملفات الصفحات (picker/converter/expense/typing) بنفس الصفحة بلا وحدات: كل واحد يستخدم دوال الثاني العامة
+    // main.js وملفات الصفحات (picker/search/home) بنفس الصفحة بلا وحدات: كل واحد يستخدم دوال الثاني العامة
     files: ["src/js/main.js"],
     languageOptions: { globals: { initRandomPicker: "readonly" } },
   },
   {
-    files: ["src/js/picker.js", "src/js/converter.js", "src/js/expense.js", "src/js/typing.js", "src/js/search.js", "src/js/home.js"],
+    files: ["src/js/picker.js", "src/js/search.js", "src/js/home.js"],
     languageOptions: {
       globals: Object.fromEntries(
         ["t", "itemTitle", "sectionLabel", "playSound", "playClickSound", "playSuccessSound", "isSoundEnabled", "getAudioContext", "tagLabel", "LINK_META", "buildActionsHtml", "wireItemActions", "showToast", "nearestBranch", "lsGet", "lsSet", "audioBufferToWav", "audioBufferToMp3", "loadLameEncoder", "itemDesc", "escapeHtml", "safeUrl", "levenshtein"].map((n) => [n, "readonly"])

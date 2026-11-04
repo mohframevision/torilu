@@ -6,8 +6,6 @@
     <string name="nav_home">Home</string>
     <string name="nav_favorites">Favorites</string>
     <string name="nav_settings">Settings</string>
-    <string name="nav_sounds">Sounds</string>
-    <string name="sounds_title">Hakolah Sounds</string>
     <string name="saved_to_downloads">Saved to Downloads (Hakolah folder)</string>
     <string name="close">Close</string>
 
@@ -33,7 +31,6 @@
     <string name="dist_km">%1$.1f km</string>
     <string name="nearest_branch">" — nearest branch: "</string>
 
-    <string name="open_experiment">Open experiment</string>
     <string name="read_article">Read article</string>
     <string name="share_suffix">" — on Hakolah 👇"</string>
     <string name="share_title">Share</string>
