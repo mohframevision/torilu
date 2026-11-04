@@ -1581,7 +1581,7 @@ function renderSection(section, typeFilter) {
     visibleTags.forEach((tag) => {
       const chip = document.createElement("button");
       chip.className = "filter-chip";
-      chip.textContent = tagIcon(tag) ? `${tagIcon(tag)} ${tagLabel(tag)}` : tagLabel(tag);
+      chip.textContent = tagLabel(tag); // شكل «د»: بلا إيموجي
       chip.dataset.tag = tag;
       chip.setAttribute("aria-pressed", "false");
       chip.addEventListener("click", () => {

@@ -88,6 +88,7 @@
   {# الخط صار مستضافاً عندنا (@font-face بـ style.css) — نُحمّله مسبقاً لأنه
      يُكتشف متأخراً داخل ملف CSS، فبلا preload يتأخر ظهور النص بخطه #}
   <link rel="preload" href="{{ ('/assets/fonts/cairo-latin.woff2' if lang == 'en' else '/assets/fonts/cairo-arabic.woff2') | url }}" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="{{ ('/assets/fonts/amiri-latin.woff2' if lang == 'en' else '/assets/fonts/amiri-arabic.woff2') | url }}" as="font" type="font/woff2" crossorigin />
   {# صورة العنصر الرئيسية (LCP بصفحات التفاصيل) — أولوية تحميل عالية لأنها
      غالباً أكبر عنصر مرئي بالصفحة. لا أثر مرئي، ملف عادي مسبقاً في <img>
      بجسم الصفحة (detail-item.njk)، هذا فقط يبدأ تحميله أبكر. #}
@@ -145,7 +146,7 @@
 
   <header class="site-header" data-nosnippet>
     <div class="header-inner">
-      <a href="{{ (('/en/index.html' if lang == 'en' else '/index.html')) | url }}" class="logo"><span class="dot">●</span>{% if lang == "en" %}<span class="logo-word">Torilu</span>{% else %}<span class="logo-word">توريلو</span>{% endif %}</a>
+      <a href="{{ (('/en/index.html' if lang == 'en' else '/index.html')) | url }}" class="logo"><span class="logo-word">{{ "Torilu" if lang == "en" else "توريلو" }}</span><span class="logo-dot" aria-hidden="true">.</span></a>
       <nav class="main-nav" id="main-nav">
         {% set homeUrl = '/en/index.html' if lang == 'en' else '/index.html' %}
         <a href="{{ homeUrl | url }}" class="nav-home{% if navActive == "home" %} active{% endif %}"{% if navActive == "home" %} aria-current="page"{% endif %}>{{ t.nav_home }}</a>

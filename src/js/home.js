@@ -39,12 +39,16 @@
       query: isEn ? "Shawarma" : "شاورما",
     },
   };
+  // التاريخ أعلى الرئيسية مثل الجريدة (بتقويم البحرين)
+  const dateEl = document.getElementById("homeDate");
+  if (dateEl) dateEl.textContent = new Intl.DateTimeFormat(isEn ? "en-GB" : "ar-BH", { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(new Date());
   const h = new Date().getHours();
   const slot = SLOTS[h >= 5 && h < 11 ? "morning" : h >= 11 && h < 16 ? "noon" : h >= 16 && h < 20 ? "evening" : "night"];
 
   // أزرار سريعة: وقت اليوم + كراج (حاجة مستعجلة بأي وقت)
-  const chips = [...slot.chips, isEn ? "🔧 Garage" : "🔧 كراج"];
-  chipsBox.innerHTML = chips.map((c) => `<a class="filter-chip" href="${searchUrl(c.replace(/^\S+\s/, ""))}">${escapeHtml(c)}</a>`).join("");
+  // شكل «د»: كلمات بلا إيموجي (الإيموجي كان يعطي إحساساً طفولياً)
+  const chips = [...slot.chips, isEn ? "🔧 Garage" : "🔧 كراج"].map((c) => c.replace(/^\S+\s/, ""));
+  chipsBox.innerHTML = chips.map((c) => `<a class="filter-chip" href="${searchUrl(c)}">${escapeHtml(c)}</a>`).join("");
 
   // ترتيب يومي ثابت: بذرة من التاريخ (mulberry32)
   const d = new Date();
@@ -70,37 +74,59 @@
     const a = (item.tags || []).find((tg) => typeof AREA_NAMES !== "undefined" && AREA_NAMES.includes(tg));
     return a ? (isEn && typeof TAGS_EN !== "undefined" && TAGS_EN[a]) || a : "";
   };
-  // لون خلفية هادئ ثابت لكل مكان (من اسمه) — تمييز بصري بلا صور
-  const TINTS = ["#f3ead9", "#e6efe9", "#f0e4e4", "#ece6f3", "#e3edf2", "#f1efe2"];
-  const tint = (s) => TINTS[[...s].reduce((n, ch) => n + ch.charCodeAt(0), 0) % TINTS.length];
   // سطر صغير مفيد: المنطقة ونوع المكان («برجر · سار») بدل اسم القسم المكرر بكل بطاقة
   const typeOf = (item) => {
     const tg = (item.tags || []).find((x) => typeof AREA_NAMES === "undefined" || !AREA_NAMES.includes(x));
     return tg ? (isEn && typeof TAGS_EN !== "undefined" && TAGS_EN[tg]) || tg : "";
   };
+  const secName = (section) => (isEn ? SITE_DATA[section].title_en || SITE_DATA[section].title : SITE_DATA[section].title);
+  const hoursOf = (item) => (isEn ? item.hours_en || item.hours : item.hours) || "";
+  const meta = (item) => {
+    const area = areaOf(item), hours = hoursOf(item);
+    return `<span class="d-meta">${area ? `<span>${ICON_PIN}${escapeHtml(area)}</span>` : ""}${hours ? `<span>${ICON_CLOCK}${escapeHtml(hours)}</span>` : ""}</span>`;
+  };
+  const ICON_PIN = '<svg viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>';
+  const ICON_CLOCK = '<svg viewBox="0 -960 960 960" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"/></svg>';
+  // بطاقة «د»: سطر صغير بالأزرق (القسم · النوع)، والاسم بخط الجريدة، والوصف، والمنطقة والساعات
   const card = (section, item, badge) => {
-    const sub = [typeOf(item), areaOf(item)].filter(Boolean).join(" · ") || (isEn ? SITE_DATA[section].title_en || SITE_DATA[section].title : SITE_DATA[section].title);
-    return `<a class="home-card" href="${hrefOf(section, item)}">
-      ${badge ? `<span class="home-card-badge">${badge}</span>` : ""}
-      <span class="home-card-icon${item.image ? " photo" : item.illus ? " illus" : ""}" style="--tint:${tint(item.id || item.title)}">${
-        item.image
-          ? `<img src="${escapeHtml(item.image)}" alt="" loading="lazy" decoding="async" />`
-          : item.illus
-            ? `<img src="/assets/illus/${escapeHtml(item.illus)}.webp" alt="" width="80" height="80" loading="lazy" decoding="async" />`
-            : escapeHtml(item.icon || "📍")
-      }</span>
-      <span class="home-card-text"><b>${escapeHtml(itemTitle(item))}</b><small>${escapeHtml(sub)}</small></span>
+    const kicker = [badge || secName(section), typeOf(item)].filter(Boolean).join(" · ");
+    return `<a class="d-card" href="${hrefOf(section, item)}">
+      <small class="d-kicker">${escapeHtml(kicker)}</small>
+      <b class="d-title">${escapeHtml(itemTitle(item))}</b>
+      <span class="d-desc">${escapeHtml(itemDesc(item) || "")}</span>
+      ${meta(item)}
     </a>`;
   };
 
-  // صف الوقت
+  // مكان الأسبوع: «مميز» يختاره صاحب الموقع أولاً، وإلا مكان بمنيو كامل يتبدّل كل أسبوع (نفس الأسبوع = نفس المكان)
+  const leadPool = [];
+  ["restaurants", "cafes", "bakeries"].forEach((s) => (SITE_DATA[s]?.items || []).forEach((item) => item.desc && item.hours && leadPool.push([s, item])));
+  const featured = leadPool.filter(([, item]) => item.featured);
+  const withMenu = leadPool.filter(([, item]) => item.menuCount >= 10);
+  const choices = featured.length ? featured : withMenu.length ? withMenu : leadPool;
+  const shown = new Set(); // ما يتكرر مكان بين مكان الأسبوع والصفّين
+  if (choices.length) {
+    const week = Math.floor((Date.now() / 86400000 + 3) / 7); // يتبدّل كل أحد
+    const [ls, lead] = choices[week % choices.length];
+    shown.add(lead.id);
+    const menuLine = lead.menuCount ? `<span class="d-lead-menu">${escapeHtml(t("home_menu_count").replace("{n}", lead.menuCount))}</span>` : "";
+    const box = document.getElementById("homeLeadCard");
+    box.href = hrefOf(ls, lead);
+    box.innerHTML = `<span class="d-lead-art" aria-hidden="true"><span class="halftone"></span></span>
+      <span class="d-lead-text"><small class="d-kicker">${escapeHtml([secName(ls), typeOf(lead)].filter(Boolean).join(" · "))}</small>
+      <b class="d-lead-title">${escapeHtml(itemTitle(lead))}</b><span class="d-desc">${escapeHtml(itemDesc(lead) || "")}</span>${menuLine}${meta(lead)}</span>`;
+    document.getElementById("homeLead").hidden = false;
+  }
+
+  // صف الوقت (بلا مكان الأسبوع، وبلا تكرار بين الصفّين)
   const pool = [];
   slot.sections.forEach((s) =>
     (SITE_DATA[s]?.items || []).forEach((item) => {
       if (!slot.tags.length || s !== "restaurants" || item.tags.some((tg) => slot.tags.includes(tg))) pool.push([s, item]);
     })
   );
-  const timeRow = shuffle(pool).slice(0, 10);
+  const timeRow = shuffle(pool.filter(([, item]) => !shown.has(item.id))).slice(0, 6);
+  timeRow.forEach(([, item]) => shown.add(item.id));
   if (timeRow.length) {
     document.getElementById("homeTimeTitle").textContent = t(slot.title);
     document.getElementById("homeTimeAll").href = searchUrl(slot.query);
@@ -116,7 +142,7 @@
     })
   );
   newest.sort((a, b) => b[1].addedAt - a[1].addedAt);
-  const newRow = newest.slice(0, 10);
+  const newRow = newest.filter(([, item]) => !shown.has(item.id)).slice(0, 6);
   if (newRow.length) {
     document.getElementById("homeNewRow").innerHTML = newRow.map(([s, item]) => card(s, item, s === "guides" ? t("home_article_badge") : t("home_new_badge"))).join("");
     document.getElementById("homeNew").hidden = false;

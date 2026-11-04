@@ -9,39 +9,47 @@ pageScript: "home"
 langSwitchUrl: "/index.html"
 ---
 {% from "icon.njk" import icon %}
-<h1 class="home-title">Your guide to places in Bahrain</h1>
+{# الرئيسية بشكل «د» (هادئ + جريدة): سؤال كبير بخط الجريدة والبحث تحته، ودائرة نقاط بحبر أزرق،
+   ثم «مكان الأسبوع» كخبر رئيسي، وصف حسب الوقت، و«جديد في توريلو»، و«محتار؟».
+   الصفوف يملؤها home.js من بيانات data.js؛ بلا جافاسكربت يبقى البحث وروابط الأقسام شغّالة #}
+{% set t = i18n.en %}
+<div class="d-dateline"><span id="homeDate"></span><span>{{ t.home_tagline }}</span></div>
+<section class="d-hero">
+  <div class="d-hero-text">
+    <h1 class="d-hero-title">{{ t.home_hero_title }}</h1>
+    <p class="d-hero-sub">{{ t.home_hero_sub }}</p>
+    <form class="search-box home-search" role="search" action="{{ '/en/search.html' | url }}">
+      <span class="search-box-icon">{{ icon("search", 20) }}</span>
+      <input type="search" name="q" placeholder="{{ t.search_placeholder }}" aria-label="{{ t.search_aria }}" autocomplete="off" enterkeyhint="search" />
+      <button type="submit" class="search-go">{{ t.search_submit }}</button>
+    </form>
+    <div class="chip-row home-chips" id="homeChips"></div>
+    <nav class="d-secs" aria-label="{{ t.home_sections }}">
+      {%- for entry in sections %}{% if not entry.creators %}
+      <a href="{{ ('/en/' + entry.slug + '.html') | url }}">{{ entry.navLabel_en or entry.navLabel }}</a>
+      {%- endif %}{% endfor %}
+    </nav>
+  </div>
+  <div class="d-moon halftone" aria-hidden="true"></div>
+</section>
 
-<form class="search-box home-search" role="search" action="{{ '/en/search.html' | url }}">
-  <span class="search-box-icon">{{ icon("search", 20) }}</span>
-  <input type="search" name="q" placeholder="{{ i18n.en.search_placeholder }}" aria-label="{{ i18n.en.search_aria }}" autocomplete="off" enterkeyhint="search" />
-  <button type="submit" class="search-go">{{ i18n.en.search_submit }}</button>
-</form>
-<p class="home-hint">{{ i18n.en.search_hint }}</p>
-<div class="chip-row home-chips" id="homeChips"></div>
-
-<a class="home-pick" href="{{ '/en/picker.html' | url }}">
-  <span class="home-pick-icon">🎲</span>
-  <span class="home-pick-text"><b>{{ i18n.en.home_pick_title }}</b><small>{{ i18n.en.home_pick_desc }}</small></span>
-  <span class="home-pick-go">{{ i18n.en.home_pick_btn }}</span>
-</a>
+<section class="home-row" id="homeLead" hidden>
+  <div class="d-head"><h2>{{ t.home_lead }}</h2></div>
+  <a class="d-lead" id="homeLeadCard" href="/en/"></a>
+</section>
 
 <section class="home-row" id="homeTime" hidden>
-  <div class="home-row-head"><h2 id="homeTimeTitle"></h2><a id="homeTimeAll" href="{{ '/en/search.html' | url }}">{{ i18n.en.home_see_all }} ›</a></div>
-  <div class="home-cards" id="homeTimeRow"></div>
+  <div class="d-head"><h2 id="homeTimeTitle"></h2><a id="homeTimeAll" href="{{ '/en/search.html' | url }}">{{ t.home_see_all }}</a></div>
+  <div class="d-list" id="homeTimeRow"></div>
 </section>
 
 <section class="home-row" id="homeNew" hidden>
-  <div class="home-row-head"><h2>{{ i18n.en.home_new }}</h2></div>
-  <div class="home-cards" id="homeNewRow"></div>
+  <div class="d-head"><h2>{{ t.home_new }}</h2></div>
+  <div class="d-list" id="homeNewRow"></div>
 </section>
 
-<section class="home-row">
-  <div class="home-row-head"><h2>{{ i18n.en.home_sections }}</h2></div>
-  <div class="mini-sections">
-    {% for entry in sections %}{% if not entry.creators %}
-    <a class="mini-section" href="{{ ('/en/' + entry.slug + '.html') | url }}"><span>{{ entry.icon }}</span>{{ entry.navLabel_en }}</a>
-    {% endif %}{% endfor %}
-  </div>
+<section class="d-pick">
+  <h2>{{ t.home_pick_title }}</h2>
+  <p>{{ t.home_pick_desc }}</p>
+  <a class="btn d-pick-btn" href="{{ '/en/picker.html' | url }}">{{ icon("dice", 20) }}{{ t.home_pick_btn }}</a>
 </section>
-
-{# إعلان كازاسوق (ألعاب) انشال من الدليل المحلي: ما يناسب نيّة زائر المطاعم والمحلات #}

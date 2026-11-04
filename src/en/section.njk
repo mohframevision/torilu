@@ -21,7 +21,7 @@ eleventyComputed:
 {% import "item-card.njk" as cards %}
 <div class="breadcrumb"><a href="{{ '/en/index.html' | url }}">{{ t.nav_home }}</a> / {{ sectionEntry.title_en }}</div>
 <section class="page-header">
-  <h1>{{ sectionEntry.icon }} {{ sectionEntry.title_en }}</h1>
+  <h1>{{ sectionEntry.title_en }}</h1>
   <p>{{ sectionEntry.description_en }}</p>
   {% if sectionEntry.slug in ["restaurants", "cafes", "bakeries"] %}<p class="review-note">ℹ️ {{ t.review_note }} <a href="{{ '/en/about.html#reviews' | url }}">{{ t.review_note_link }}</a></p>{% endif %}
 </section>
