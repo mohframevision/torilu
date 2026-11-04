@@ -7,9 +7,11 @@ description: "Torilu's terms of use: what the service is, the limits of our liab
 langSwitchUrl: "/terms.html"
 ---
 
-<article class="prose">
+<section class="page-header">
+  <h1>Terms of Use</h1>
+</section>
 
-# Terms of Use
+<article class="prose">
 
 By using Torilu, you agree to the following terms:
 

@@ -11,6 +11,7 @@ eleventyComputed:
   navActive: "car-shops"
   section: "car-shops"
   typeFilter: "{{ shopType.label | safe }}"
+  noindex: "{{ '' if (collections['car-shops'] | carShopCount(shopType.label)) else 'noindex' }}"
   langSwitchUrl: "/en/car-shops/{{ shopType.slug }}.html"
 ---
 {# قوالب المحتوى تُعرض قبل القالب الأب (base.njk)، فمتغيّر t المعرّف هناك مو
@@ -23,8 +24,8 @@ eleventyComputed:
   {{ shopType.label }}
 </div>
 <section class="page-header">
-  <h1><span aria-hidden="true">{{ shopType.icon }}</span> {{ shopType.label }}</h1>
-  <p class="type-tip">💡 {{ shopType.tip }}</p>
+  <h1>{{ shopType.label }}</h1>
+  <p class="type-tip">{{ shopType.tip }}</p>
 </section>
 
 <input type="text" class="search-box" placeholder="ابحث بين محلات {{ shopType.label }}…" aria-label="البحث في {{ shopType.label }}" />

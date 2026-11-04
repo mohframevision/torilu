@@ -19,5 +19,5 @@ too, and it's one of the best places for burgers and fillet steak.
 
 ## Contact & Ordering
 
-[📸 Instagram](https://www.instagram.com/adamsubs/) ·
-[🔗 Website](https://adamsubs.invopos.app)
+[Instagram](https://www.instagram.com/adamsubs/) ·
+[Website](https://adamsubs.invopos.app)

@@ -82,5 +82,5 @@ recommendation: كرسبر برجر اللحم — بصل مقلي مكرمّل 
 
 ## التواصل والطلب
 
-[📸 إنستقرام](https://www.instagram.com/adamsubs/) ·
-[🔗 الموقع الإلكتروني](https://adamsubs.invopos.app)
+[إنستقرام](https://www.instagram.com/adamsubs/) ·
+[الموقع الإلكتروني](https://adamsubs.invopos.app)

@@ -14,10 +14,7 @@ class Prefs {
     private static final String KEY_SOUND = "sound_enabled";
     private static final String KEY_THEME = "theme_mode";
     private static final String KEY_FAVORITES = "favorites";
-    private static final String KEY_MUSIC = "music_enabled";
     private static final String KEY_LANG = "lang";
-    private static final String KEY_MUSIC_LEVEL = "music_level";
-    private static final String KEY_MUSIC_DOCK = "music_dock_open";
     static final String LANG_AR = "ar";
     static final String LANG_EN = "en";
 
@@ -38,32 +35,6 @@ class Prefs {
 
     static void setSoundEnabled(Context context, boolean enabled) {
         sp(context).edit().putBoolean(KEY_SOUND, enabled).apply();
-    }
-
-    // موسيقى صفحة القصة: تتبع إعداد الأصوات ما لم يختار المستخدم صراحة
-    static boolean isMusicEnabled(Context context) {
-        return sp(context).getBoolean(KEY_MUSIC, isSoundEnabled(context));
-    }
-
-    static void setMusicEnabled(Context context, boolean enabled) {
-        sp(context).edit().putBoolean(KEY_MUSIC, enabled).apply();
-    }
-
-    static float getMusicLevel(Context context) {
-        return sp(context).getFloat(KEY_MUSIC_LEVEL, 0.7f);
-    }
-
-    static void setMusicLevel(Context context, float level) {
-        sp(context).edit().putFloat(KEY_MUSIC_LEVEL, level).apply();
-    }
-
-    // منزلق الصوت مطوي افتراضياً — يطفو فوق نص القصة فما نغطيه إلا بطلب
-    static boolean isMusicDockOpen(Context context) {
-        return sp(context).getBoolean(KEY_MUSIC_DOCK, false);
-    }
-
-    static void setMusicDockOpen(Context context, boolean open) {
-        sp(context).edit().putBoolean(KEY_MUSIC_DOCK, open).apply();
     }
 
     // العربية افتراضياً (هوية التطبيق) — الإنجليزية من الإعدادات

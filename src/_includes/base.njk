@@ -150,9 +150,9 @@
       <nav class="main-nav" id="main-nav">
         {% set homeUrl = '/en/index.html' if lang == 'en' else '/index.html' %}
         <a href="{{ homeUrl | url }}" class="nav-home{% if navActive == "home" %} active{% endif %}"{% if navActive == "home" %} aria-current="page"{% endif %}>{{ t.nav_home }}</a>
-        {% for entry in sections %}{% if not entry.creators %}
+        {% for entry in sections %}
         <a href="{{ (('/en/' if lang == 'en' else '/') + entry.slug + '.html') | url }}"{% if navActive == entry.slug %} class="active" aria-current="page"{% endif %}>{{ entry.navLabel_en if lang == 'en' else entry.navLabel }}</a>
-        {% endif %}{% endfor %}
+        {% endfor %}
         {# على الجوال تختفي أيقونة المفضلة من الهيدر (ضيق) وتظهر هنا داخل
            القائمة المنسدلة بدل ما تزدحم مع الشعار. "اختار لي" ما تحتاج نسخة
            هنا لأنها تبقى ظاهرة بالهيدر حتى على أضيق الشاشات (انظر icon-btn-picker) #}
@@ -192,8 +192,6 @@
         <a href="{{ ('/en/business.html' if lang == 'en' else '/business.html') | url }}">{{ 'List your business' if lang == 'en' else 'اعرض محلك' }}</a>
         <a href="{{ ('/en/privacy-policy.html' if lang == 'en' else '/privacy-policy.html') | url }}">{{ t.footer_privacy }}</a>
         <a href="{{ ('/en/terms.html' if lang == 'en' else '/terms.html') | url }}">{{ t.footer_terms }}</a>
-        {# زر أصوات الواجهة نزل للأسفل (شكل «د»: هيدر أهدأ)؛ main.js يربطه بالكلاس فما يتأثر بمكانه #}
-        <button class="sound-toggle footer-sound" aria-label="{{ t.sound_off }}" title="{{ t.sound_off }}">{{ icon("volume-off") }}</button>
         {% if social.youtubeUrl %}<a href="{{ social.youtubeUrl }}" target="_blank" rel="noopener noreferrer">{{ t.footer_youtube }}</a>{% endif %}
         {% if social.whatsappUrl %}<a href="{{ social.whatsappUrl }}" target="_blank" rel="noopener noreferrer">{{ t.footer_whatsapp }}</a>{% endif %}
       </div>

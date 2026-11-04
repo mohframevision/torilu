@@ -3,10 +3,10 @@ slug: car-shops
 title: "محلات السيارات"
 navLabel: السيارات
 icon: 🚗
-description: "دليل محلات السيارات في البحرين — غسيل، إكسسوارات، كراج، وكالات، قطع غيار، وإطارات، مبوّب حسب النوع لتصل إلى ما تحتاجه بسرعة."
+description: "دليل محلات السيارات في البحرين، مبوّب حسب النوع لتصل إلى ما تحتاجه بسرعة."
 title_en: "Car Shops"
 navLabel_en: "Car Shops"
-description_en: "A guide to car shops in Bahrain: washes, accessories, garages, dealerships, parts and tires, organized by type."
+description_en: "A guide to car shops in Bahrain, organized by type so you can find what you need quickly."
 searchPlaceholder: 'ابحث عن محل سيارات…'
 searchPlaceholder_en: "Search for a car shop…"
 order: 7

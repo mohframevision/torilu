@@ -6,13 +6,10 @@ description: "تواصل معنا لطلب إضافة مطعم أو متجر أ�
 navActive: "contact"
 langSwitchUrl: "/en/contact.html"
 ---
-<article class="prose">
-
-# تواصل معنا
-
-عندك مطعم أو متجر أو مكان تبي تضيفها للموقع؟ أو عندك استفسار؟ عبّي النموذج تحت أو راسلنا مباشرة.
-
-</article>
+<section class="page-header">
+  <h1>تواصل معنا</h1>
+  <p>هل تعرف مطعماً أو متجراً أو مكاناً تودّ أن نضيفه؟ أو لديك سؤال؟ املأ النموذج أدناه أو راسلنا مباشرة.</p>
+</section>
 
 <div id="formMessage" class="form-message hidden" role="status" aria-live="polite"></div>
 
@@ -34,8 +31,9 @@ langSwitchUrl: "/en/contact.html"
 
   <div class="form-group">
     <label for="request_type">نوع الطلب</label>
-    <select id="request_type" name="request_type"><option value="استفسار عام">استفسار عام</option>{%- for entry in sections %}
-<option value="إضافة إلى {{ entry.title }}">إضافة إلى {{ entry.title }}</option>{%- endfor %}
+    <select id="request_type" name="request_type"><option value="استفسار عام">استفسار عام</option>{%- for entry in sections %}{% if entry.slug != "guides" %}
+<option value="إضافة إلى {{ entry.title }}">إضافة إلى {{ entry.title }}</option>{% endif %}{%- endfor %}
+<option value="اقتراح قصة لمقال">اقتراح قصة لمقال</option>
 <option value="إبلاغ عن معلومة خاطئة">إبلاغ عن معلومة خاطئة</option></select>
   </div>
 

@@ -75,17 +75,91 @@ final class Ui {
         }
     }
 
-    // خط العناوين (المسيري، نفس مصمم Cairo) — شخصية للعناوين الكبيرة، والنص
-    // العادي يبقى Cairo. getFont من API 26؛ الأقدم يبقى Cairo عريضاً
+    // HTML المحتوى (مقال أو نبذة مكان) لـTextView: عناوين <h2> بخط الجريدة،
+    // والروابط النسبية (/contact.html) تفتح صفحة الموقع داخل التطبيق — URLSpan
+    // العادي يرسلها لـACTION_VIEW بلا scheme فلا يحدث شيء
+    static CharSequence html(Context c, String html) {
+        String marked = html.replaceAll("(?s)(<h2[^>]*>)(.*?)(</h2>)", "$1<tt>$2</tt>$3");
+        android.text.SpannableStringBuilder b = new android.text.SpannableStringBuilder(
+                android.text.Html.fromHtml(marked, android.text.Html.FROM_HTML_MODE_COMPACT));
+        for (android.text.style.TypefaceSpan t : b.getSpans(0, b.length(), android.text.style.TypefaceSpan.class)) {
+            if (!"monospace".equals(t.getFamily())) continue;
+            int s = b.getSpanStart(t), e = b.getSpanEnd(t);
+            b.removeSpan(t);
+            if (android.os.Build.VERSION.SDK_INT >= 28) {
+                try {
+                    b.setSpan(new android.text.style.TypefaceSpan(c.getResources().getFont(R.font.amiri)), s, e, 0);
+                } catch (Exception ignored) {
+                }
+            }
+        }
+        for (android.text.style.URLSpan u : b.getSpans(0, b.length(), android.text.style.URLSpan.class)) {
+            String href = u.getURL();
+            if (href == null || href.contains(":") || href.startsWith("#")) continue;
+            String path = href.replaceFirst("^/", "");
+            if (path.startsWith("en/")) path = path.substring(3); // siteUrl يضيفها حسب لغة التطبيق
+            int s = b.getSpanStart(u), e = b.getSpanEnd(u);
+            b.removeSpan(u);
+            b.setSpan(new SiteLink(path), s, e, 0);
+        }
+        return b;
+    }
+
+    private static final class SiteLink extends android.text.style.ClickableSpan {
+        private final String path;
+
+        SiteLink(String path) {
+            this.path = path;
+        }
+
+        @Override
+        public void onClick(View w) {
+            Context c = w.getContext();
+            android.content.Intent i = new android.content.Intent(c, WebViewActivity.class);
+            i.putExtra(WebViewActivity.EXTRA_TITLE, c.getString(R.string.brand));
+            i.putExtra(WebViewActivity.EXTRA_URL, Lang.siteUrl(c, path));
+            c.startActivity(i);
+        }
+    }
+
+    // خط الجريدة (Amiri) للشعار والعناوين وأسماء الأماكن — نفس --font-serif
+    // بالموقع، عريضاً كما يرسمه المتصفح. النص العادي يبقى Cairo. getFont من
+    // API 26؛ الأقدم يبقى Cairo عريضاً
     static void display(TextView t) {
         if (android.os.Build.VERSION.SDK_INT >= 26) {
             try {
-                t.setTypeface(t.getResources().getFont(R.font.elmessiri_bold));
+                t.setTypeface(Typeface.create(t.getResources().getFont(R.font.amiri), Typeface.BOLD));
                 return;
             } catch (Exception ignored) {
             }
         }
         t.setTypeface(null, Typeface.BOLD);
+    }
+
+    // عنوان قسم مثل الجريدة: خط مزدوج بلون الحبر فوقه، والعنوان بخط Amiri
+    static LinearLayout head(Context c, CharSequence title) {
+        LinearLayout box = new LinearLayout(c);
+        box.setOrientation(LinearLayout.VERTICAL);
+        View rule = new View(c);
+        rule.setBackgroundResource(R.drawable.rule_double);
+        box.addView(rule, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(c, 4)));
+        TextView t = text(c, title, 24, c.getColor(R.color.text), false);
+        display(t);
+        t.setPadding(0, dp(c, 8), 0, 0);
+        box.addView(t);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.topMargin = dp(c, 32);
+        lp.bottomMargin = dp(c, 14);
+        box.setLayoutParams(lp);
+        return box;
+    }
+
+    // السطر الصغير الأزرق فوق الاسم (القسم · النوع) — .d-kicker بالموقع
+    static TextView kicker(Context c, CharSequence s) {
+        TextView t = text(c, s, 12.5f, c.getColor(R.color.brand_accent), true);
+        t.setMaxLines(1);
+        t.setEllipsize(android.text.TextUtils.TruncateAt.END);
+        return t;
     }
 
     static android.graphics.drawable.GradientDrawable rounded(Context c, int color, float radiusDp) {
@@ -96,7 +170,7 @@ final class Ui {
     }
 
     // أيقونة خطية داخل مربع بزوايا ناعمة. لون واحد هادي للكل (بلا ألوان
-    // لكل قسم): العين ترتاح، والأخضر محجوز للأزرار المهمة والحالة النشطة
+    // لكل قسم): العين ترتاح، والأزرق محجوز للأزرار المهمة والحالة النشطة
     static ImageView iconTile(Context c, int iconRes, int sizeDp, int bgColor, int iconColor) {
         ImageView v = new ImageView(c);
         v.setImageResource(iconRes);
@@ -111,7 +185,7 @@ final class Ui {
 
     // ---- حافة لحافة (إجباري من Android 15/16 مع targetSdk 35+) ----
     // التطبيق يرسم تحت شريط الحالة وشريط التنقّل، وكل شاشة تعطي لونَي الحافتين:
-    // لون = شريط بنفس اللون بارتفاع الشريط الفعلي (رأس أخضر، سطح الشريط السفلي...)،
+    // لون = شريط بنفس اللون بارتفاع الشريط الفعلي (سطح الشريط السفلي...)،
     // 0 = الخلفية نفسها تمتد تحت الشريط والمحتوى يُزاح بـpadding (شاشات التدرّج الداكن).
     // أيقونات الشريط فاتحة أو داكنة حسب اللون تحتها. بلا AndroidX.
     static void edgeToEdge(android.app.Activity a, int topColor, int bottomColor) {

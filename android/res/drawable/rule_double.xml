@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- الخط المزدوج فوق عناوين الأقسام (border-top: 3px double بالموقع) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="top" android:height="1dp">
+        <shape><solid android:color="@color/ink_rule" /></shape>
+    </item>
+    <item android:gravity="bottom" android:height="1dp">
+        <shape><solid android:color="@color/ink_rule" /></shape>
+    </item>
+</layer-list>

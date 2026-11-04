@@ -37,7 +37,8 @@
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:textColor="@color/text"
-            android:textSize="17sp"
+            android:textSize="19sp"
+            android:fontFamily="@font/amiri"
             android:textStyle="bold"
             android:maxLines="1"
             android:ellipsize="end" />

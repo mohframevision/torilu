@@ -23,7 +23,7 @@ Karbabad Beach is where many people in Bahrain go for a quiet evening by the sea
 
 The easiest way to get an exact location is to open it directly on Google Maps:
 
-[📍 Open location on Google Maps](https://maps.app.goo.gl/ynCiWn1kEQo7wrXz7)
+[Open location on Google Maps](https://maps.app.goo.gl/ynCiWn1kEQo7wrXz7)
 
 The place is easily reachable by car.
 

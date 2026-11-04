@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- الداكن: الأزرق الفاتح #81AAF7 للنص والأيقونات، والخلفيات الممتلئة بأزرق
+     أغمق (#3A64B8) ليبقى النص الأبيض فوقها مقروءاً (5.7:1) — نفس
+     color-primary-fill بالموقع -->
 <resources>
-    <!-- خلفية لنص أبيض (أزرار، رقاقات، الهيدر): #3FA480 كان 3.07:1 مع الأبيض -->
-    <color name="brand_primary">#2A7F60</color>
-    <color name="brand_accent">#3FA480</color>
-    <color name="bg">#121212</color>
-    <color name="surface">#1C1C1C</color>
-    <color name="text">#F0F0F0</color>
-    <color name="text_muted">#A0A0A0</color>
-    <color name="border">#2E2E2E</color>
+    <color name="brand_primary">#3A64B8</color>
+    <color name="brand_accent">#81AAF7</color>
+    <color name="bg">#0D0F15</color>
+    <color name="surface">#15181F</color>
+    <color name="text">#EBE7E0</color>
+    <color name="text_muted">#999FA8</color>
+    <color name="border">#2A2E36</color>
+    <color name="ink_rule">#878685</color>
     <color name="white">#FFFFFF</color>
-    <color name="secondary_btn_bg">#1AF0F0F0</color>
+    <color name="secondary_btn_bg">#00000000</color>
     <color name="ripple_on_primary">#33FFFFFF</color>
-    <color name="ripple_on_secondary">#26FFFFFF</color>
-    <color name="search_box_bg">#C71C1C1C</color>
-    <color name="tonal">#20382F</color>
-    <color name="on_tonal">#A8DCC6</color>
-    <!-- سطح محايد للحقول ومربعات الأيقونات والأزرار الثانوية (بلا لون) -->
-    <color name="field">#262626</color>
+    <color name="ripple_on_secondary">#2681AAF7</color>
+    <color name="search_box_bg">#15181F</color>
+    <color name="tonal">#1D2D4C</color>
+    <color name="on_tonal">#81AAF7</color>
+    <color name="field">#1B1F27</color>
 </resources>

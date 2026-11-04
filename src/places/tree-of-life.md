@@ -59,4 +59,4 @@ imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Bahrain_Tree_of_Life_15
 
 ## طريقة الوصول
 
-[📍 افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/faqnTdWoLAzvYi7QA)
+[افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/faqnTdWoLAzvYi7QA)

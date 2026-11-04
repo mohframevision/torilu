@@ -7,13 +7,10 @@ description: "Contact us to request adding a restaurant, store, or place, or for
 navActive: "contact"
 langSwitchUrl: "/contact.html"
 ---
-<article class="prose">
-
-# Contact Us
-
-Have a restaurant, store, or place you'd like added to the site? Or have a question? Fill out the form below or email us directly.
-
-</article>
+<section class="page-header">
+  <h1>Contact Us</h1>
+  <p>Have a restaurant, store, or place you'd like added to the site? Or have a question? Fill out the form below or email us directly.</p>
+</section>
 
 <div id="formMessage" class="form-message hidden" role="status" aria-live="polite"></div>
 
@@ -35,8 +32,9 @@ Have a restaurant, store, or place you'd like added to the site? Or have a quest
 
   <div class="form-group">
     <label for="request_type">Request type</label>
-    <select id="request_type" name="request_type"><option value="General inquiry">General inquiry</option>{%- for entry in sections %}
-<option value="Add to {{ entry.title_en }}">Add to {{ entry.title_en }}</option>{%- endfor %}
+    <select id="request_type" name="request_type"><option value="General inquiry">General inquiry</option>{%- for entry in sections %}{% if entry.slug != "guides" %}
+<option value="Add to {{ entry.title_en }}">Add to {{ entry.title_en }}</option>{% endif %}{%- endfor %}
+<option value="Suggest a story for an article">Suggest a story for an article</option>
 <option value="Report incorrect info">Report incorrect info</option></select>
   </div>
 

@@ -28,7 +28,11 @@ exports.render = function (data) {
   // كانت مفقودة بالكامل من الخريطة — ما فيها لا داخل detailPagePairs (مو صفحة
   // عنصر) ولا EN_SECTION_SLUGS (مو صفحة قسم رئيسي). 16 رابطاً (8 أنواع × لغتين)
   // اكتُشف غيابها بزاوية SEO (تعمّق فعلي)، راجع سجل المشاكل.
-  const carShopTypePairs = (data.carShopTypes || []).map((t) => [
+  // الأنواع الفارغة (بلا محلات بعد) مخفية من البوابة وعليها noindex، فلا تدخل الخريطة
+  const carShops = (data.collections && data.collections["car-shops"]) || [];
+  const hasShops = (label) =>
+    carShops.some((e) => (e.data.categories || []).concat(e.data.categoriesCustom || []).includes(label));
+  const carShopTypePairs = (data.carShopTypes || []).filter((t) => hasShops(t.label)).map((t) => [
     `car-shops/${t.slug}.html`,
     `en/car-shops/${t.slug}.html`,
   ]);

@@ -86,6 +86,10 @@ module.exports = function (eleventyConfig) {
   // "<" يصير <: نص فيه </script> ما يقدر يقفل وسم السكربت اللي حوله
   eleventyConfig.addFilter("json", (value) => JSON.stringify(value).replace(/</g, "\\u003c"));
   // رسمة نوع المكان لبطاقة عنصر (src/_data/illus.js) — فلتر لأن الماكرو ما يشوف البيانات العامة
+  // عدد محلات نوع معيّن (بوابة محلات السيارات تُخفي الأنواع الفارغة، وصفحتها تُستثنى من الفهرسة)
+  eleventyConfig.addFilter("carShopCount", (entries, label) =>
+    (entries || []).filter((e) => (e.data.categories || []).concat(e.data.categoriesCustom || []).includes(label)).length
+  );
   eleventyConfig.addFilter("illusFor", (categories, section) => require("./src/_data/illus.js").illusFor(section, categories));
   // صفحة من مجموعة برابطها (العربي مكتوب أحياناً بلا ترميز) — الإنجليزية تقرا شارات صفحتها العربية منها
   eleventyConfig.addFilter("pageByUrl", (pages, url) => url && (pages || []).find((p) => decodeURI(p.url) === decodeURI(url)));

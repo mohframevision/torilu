@@ -111,9 +111,16 @@ class ToriluApi {
         public void run() {
             String fresh = fetchFresh();
             if (fresh != null) {
-                writeCache(activity, fresh);
-                deliver(fresh, false);
-                return;
+                // تحقّق قبل الحفظ: صفحة تسجيل دخول واي فاي أو تحدٍّ من Cloudflare
+                // ترجع 200 بـHTML، فلا تمسح النسخة الجيدة المحفوظة
+                try {
+                    JSONObject obj = new JSONObject(fresh);
+                    writeCache(activity, fresh);
+                    activity.runOnUiThread(new DeliverResult(callback, obj, null, false));
+                    return;
+                } catch (Exception e) {
+                    // ليس JSON — نرجع للنسخة المحفوظة
+                }
             }
             String cached = readCache(activity);
             if (cached != null) {

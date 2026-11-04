@@ -1,0 +1,42 @@
+{#- جريدة توريلو: صفحة المقالات كصفحة أولى لجريدة — ترويسة، ثم أحدث مقال خبراً رئيسياً،
+    والباقي أعمدة موجزات. قائمة ثابتة بالـHTML (لمحركات البحث)، وليست .card-grid
+    فلا يعيد main.js رسمها، وبلا بحث ولا فلاتر: المقالات قليلة، والجريدة تُتصفَّح. -#}
+{% from "newspaper.njk" import npDate %}
+{% set isEn = lang == "en" %}
+{% set articles = collections.guides | sort(true, false, "data.dateAdded") %}
+<div class="breadcrumb"><a href="{{ ('/en/index.html' if isEn else '/index.html') | url }}">{{ t.nav_home }}</a> / {{ sectionEntry.title_en if isEn else sectionEntry.title }}</div>
+<header class="np-masthead">
+  <p class="np-dateline"><span>{{ "Bahrain" if isEn else "البحرين" }}</span>{% if articles.length %}<span>{{ "Last updated" if isEn else "آخر تحديث" }} {{ npDate(articles[0].data.dateAdded, lang) }}</span>{% endif %}</p>
+  <h1 class="np-nameplate">{{ "Torilu Articles" if isEn else "مقالات توريلو" }}</h1>
+  <p class="np-motto">{{ sectionEntry.description_en if isEn else sectionEntry.description }}</p>
+</header>
+{% for entry in articles %}
+{%- set d = entry.data %}
+{%- set cat = (d.categories or [])[0] %}
+{%- set href = (('/en/guides/' + (d.slug_en or entry.fileSlug)) if isEn else ('/guides/' + entry.fileSlug)) + '.html' %}
+{%- set kicker %}{% if cat %}<span>{{ (tags_en[cat] or cat) if isEn else cat }}</span>{% endif %}{{ npDate(d.dateAdded, lang) }}{% endset %}
+{%- if loop.first %}
+<article class="np-lead">
+  <div class="np-lead-text">
+    <p class="np-kicker">{{ kicker | safe }}</p>
+    <h2 class="np-lead-title"><a href="{{ href | url }}">{{ (d.title_en or d.title) if isEn else d.title }}</a></h2>
+    <p class="np-lead-deck">{{ (d.desc_en or d.desc) if isEn else d.desc }}</p>
+    <a class="np-more" href="{{ href | url }}">{{ "Read the article" if isEn else "اقرأ المقال" }}</a>
+  </div>
+  <div class="np-lead-art" aria-hidden="true"><div class="halftone"></div></div>
+</article>
+{%- if articles.length > 1 %}
+<h2 class="np-briefs-head">{{ "More articles" if isEn else "مقالات أخرى" }}</h2>
+<div class="np-briefs">
+{%- endif %}
+{%- else %}
+  <article class="np-brief">
+    <p class="np-kicker">{{ kicker | safe }}</p>
+    <h3><a href="{{ href | url }}">{{ (d.title_en or d.title) if isEn else d.title }}</a></h3>
+    <p>{{ (d.desc_en or d.desc) if isEn else d.desc }}</p>
+  </article>
+{%- endif %}
+{%- if loop.last and articles.length > 1 %}
+</div>
+{%- endif %}
+{% endfor %}

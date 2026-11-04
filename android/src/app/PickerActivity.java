@@ -57,7 +57,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Or
     private final List<ObjectAnimator> bobs = new ArrayList<>();
 
     // الشاشة غامرة وداكنة دائماً مهما كان مظهر التطبيق — ألوان "الليل" هنا
-    // هي اللي تناسب الخلفية الخضراء الغامقة (أزرار ثانوية، شريط سفلي)
+    // هي اللي تناسب الخلفية الزرقاء الغامقة (أزرار ثانوية، شريط سفلي)
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Prefs.wrapNightContext(newBase));
@@ -270,8 +270,8 @@ public class PickerActivity extends Activity implements View.OnClickListener, Or
 
         TextView title = new TextView(this);
         title.setText(Lang.title(this, item));
-        title.setTextSize(22f);
-        title.setTypeface(null, android.graphics.Typeface.BOLD);
+        title.setTextSize(28f);
+        Ui.display(title);
         title.setTextColor(0xFFFFFFFF);
         title.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams tlp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

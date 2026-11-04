@@ -507,7 +507,8 @@ public class SectionActivity extends Activity implements View.OnClickListener, T
 
     private void updateNearMeButton() {
         nearMeButton.setActivated(sortByDistance);
-        nearMeButton.setText(getString(sortByDistance ? R.string.near_active : R.string.near));
+        // مفعّل: علامة إغلاق صغيرة بعد الكلمة (بدل الرمز ✕ داخل النص)
+        nearMeButton.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_location_on_small, 0, sortByDistance ? R.drawable.ic_close_small : 0, 0);
         int color = sortByDistance ? getColor(R.color.white) : getColor(R.color.text);
         nearMeButton.setTextColor(color);
         nearMeButton.setCompoundDrawableTintList(android.content.res.ColorStateList.valueOf(color));

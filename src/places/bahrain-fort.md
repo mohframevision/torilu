@@ -45,4 +45,4 @@ imageCreditUrl: "https://unsplash.com/photos/hEPkfOY7ibY"
 
 أسهل طريقة توصلك بدقة هي فتح الموقع مباشرة على خرائط قوقل:
 
-[📍 افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/jgtvKxwTCjbaq9Qb7)
+[افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/jgtvKxwTCjbaq9Qb7)

@@ -7,7 +7,7 @@ import org.json.JSONObject;
 // أيقونات خطية موحّدة (Material Symbols Outlined) بدل الإيموجي بالتطبيق كله:
 // الإيموجي ثلاثي الأبعاد ومختلف الأساليب، والأيقونات بلغة وحدة ولون واحد.
 // بيانات الموقع تبقى بإيموجيها؛ الاختيار هنا بالترتيب: نوع المكان (illus) ←
-// مجموعة الأداة (group) ← الإيموجي القديم نفسه ← أيقونة القسم.
+// الإيموجي القديم نفسه ← أيقونة القسم.
 // عنصر جديد بنوع غير معروف يأخذ أيقونة قسمه تلقائياً، بلا تعديل كود.
 final class Icons {
     private Icons() {}
@@ -23,6 +23,7 @@ final class Icons {
         SECTION.put("stores", R.drawable.ic_s_shopping_bag);
         SECTION.put("car-shops", R.drawable.ic_s_directions_car);
         SECTION.put("places", R.drawable.ic_s_landscape);
+        SECTION.put("guides", R.drawable.ic_menu_book);
 
         ILLUS.put("shawarma", R.drawable.ic_s_kebab_dining);
         ILLUS.put("burger", R.drawable.ic_s_lunch_dining);
@@ -59,27 +60,11 @@ final class Icons {
         ILLUS.put("caracc", R.drawable.ic_s_car_repair);
 
 
-        // الإيموجي الحالي بالمقالات والأماكن والتجارب → أيقونة بنفس المعنى
-        emoji("🗂️", R.drawable.ic_s_folder);
-        emoji("🎵", R.drawable.ic_music_note);
-        emoji("🧠", R.drawable.ic_s_psychology);
-        emoji("🧭", R.drawable.ic_s_explore);
-        emoji("🎥", R.drawable.ic_s_videocam);
-        emoji("💡", R.drawable.ic_s_lightbulb);
-        emoji("💻", R.drawable.ic_s_computer);
-        emoji("🎬", R.drawable.ic_s_movie);
-        emoji("🧪", R.drawable.ic_s_science);
-        emoji("🛡️", R.drawable.ic_s_shield);
-        emoji("🔊", R.drawable.ic_volume_up);
-        emoji("🎨", R.drawable.ic_s_palette);
-        emoji("🎙️", R.drawable.ic_s_mic);
+        // إيموجي الأماكن بالبيانات → أيقونة بنفس المعنى
         emoji("🏛️", R.drawable.ic_s_account_balance);
         emoji("🌅", R.drawable.ic_s_wb_twilight);
         emoji("🛍️", R.drawable.ic_s_shopping_bag);
         emoji("🌳", R.drawable.ic_s_park);
-        emoji("⌨️", R.drawable.ic_s_keyboard);
-        emoji("🧮", R.drawable.ic_s_calculate);
-        emoji("🔄", R.drawable.ic_s_sync);
     }
 
     // الإيموجي يجي أحياناً بمحدد الشكل (U+FE0F) وأحياناً بدونه — نوحّده

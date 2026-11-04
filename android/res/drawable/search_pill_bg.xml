@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- مربع البحث بالرئيسية (شريط بحث Material 3: ارتفاع 56dp، حبة كاملة) -->
+<!-- بحث الرئيسية: حبة كاملة على سطح فاتح، والظل الناعم من elevation بالتخطيط -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/ripple_on_secondary">
     <item>
         <shape>
-            <solid android:color="@color/field" />
-            <corners android:radius="28dp" />
+            <solid android:color="@color/surface" />
+            <stroke android:width="1dp" android:color="@color/border" />
+            <corners android:radius="29dp" />
         </shape>
     </item>
 </ripple>

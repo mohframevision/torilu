@@ -164,14 +164,12 @@
       const name = isEn && e.menu.name_en ? e.menu.name_en : e.menu.name;
       const sub = [areaLabel(it), e.secName].filter(Boolean).join(" · ");
       return `<a class="search-row" href="${hrefOf(e.section, it)}" data-q="${escapeHtml(input.value.trim())}">
-        <span class="search-row-icon">${escapeHtml(it.icon || "🍽️")}</span>
         <span class="search-row-text"><b>${escapeHtml(itemTitle(it))}</b><small>«${mark(name, query)}» · ${escapeHtml(sub)}</small></span>
         ${e.menu.price ? `<span class="search-price">${escapeHtml(e.menu.price)}</span>` : ""}
       </a>`;
     }
     const sub = [e.secName, areaLabel(it)].filter(Boolean).join(" · ");
     return `<a class="search-row" href="${hrefOf(e.section, it)}" data-q="${escapeHtml(input.value.trim())}">
-      <span class="search-row-icon">${escapeHtml(it.icon || "📍")}</span>
       <span class="search-row-text"><b>${mark(itemTitle(it), query)}</b><small>${escapeHtml(sub)}${itemDesc(it) ? " — " + escapeHtml(itemDesc(it).slice(0, 90)) : ""}</small></span>
     </a>`;
   }
@@ -215,7 +213,7 @@
       <p class="search-none-title">${escapeHtml(t("search_none_title").replace("{q}", query))}</p>
       <p>${t("search_none_tip")}</p>
       <div class="chip-row">${pop.map((p) => `<button type="button" class="filter-chip" data-q="${escapeHtml(p)}">${escapeHtml(p)}</button>`).join("")}</div>
-      <a class="btn" href="${isEn ? "/en/" : "/"}picker.html">🎲 ${t("home_pick_btn")}</a>
+      <a class="btn" href="${isEn ? "/en/" : "/"}picker.html">${t("home_pick_btn")}</a>
     </div>`;
   }
 
@@ -278,7 +276,7 @@
     const items = getRecent();
     $("searchRecentBlock").hidden = !items.length;
     $("searchRecent").innerHTML = items
-      .map((q) => `<li><button type="button" class="search-recent-q" data-q="${escapeHtml(q)}">🕘 ${escapeHtml(q)}</button><button type="button" class="search-recent-x" data-del="${escapeHtml(q)}" aria-label="${t("search_remove")} ${escapeHtml(q)}">✕</button></li>`)
+      .map((q) => `<li><button type="button" class="search-recent-q" data-q="${escapeHtml(q)}">${escapeHtml(q)}</button><button type="button" class="search-recent-x" data-del="${escapeHtml(q)}" aria-label="${t("search_remove")} ${escapeHtml(q)}">✕</button></li>`)
       .join("");
   }
   $("searchRecentClear").addEventListener("click", () => {
@@ -289,8 +287,7 @@
   /* ===== الكلمات المقترحة ===== */
   const chip = (label, q) => `<button type="button" class="filter-chip" data-q="${escapeHtml(q)}">${escapeHtml(label)}</button>`;
   $("searchPopular").innerHTML = ((isEn ? S.popular_en : S.popular) || []).map((p) => chip(p, p)).join("");
-  // «🍳 فطور» يبحث عن «فطور» (بلا الرمز)
-  $("searchTry").innerHTML = ((isEn ? S.try_en : S.try) || []).map((p) => chip(p, p.replace(/^\S+\s/, ""))).join("");
+  $("searchTry").innerHTML = ((isEn ? S.try_en : S.try) || []).map((p) => chip(p, p)).join("");
 
   /* ===== النقرات ===== */
   document.querySelector(".search-page").addEventListener("click", (e) => {

@@ -60,13 +60,13 @@ From the printed menu at the Jid Hafs branch (October 2026). Full prices are in 
 
 - **Jid Hafs**: we tried it, and it's our favorite
   - Address: Block 422, Road 80, Building 912
-  - 📞 17552044
+  - Phone: **17552044**
 - **Jid Ali**: we tried it
-  - 📞 17683378
+  - Phone: **17683378**
 - **Muharraq**: we haven't tried it yet
-  - 📞 17333676
+  - Phone: **17333676**
 
 ## Delivery and Contact
 
 They offer **home delivery**: order through a branch's number. The
-restaurant's Instagram: [📸 @alshoalarestaurant](https://www.instagram.com/alshoalarestaurant/)
+restaurant's Instagram: [@alshoalarestaurant](https://www.instagram.com/alshoalarestaurant/)

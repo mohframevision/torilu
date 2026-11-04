@@ -9,7 +9,7 @@ langSwitchUrl: "/en/search.html"
 ---
 {% from "icon.njk" import icon %}
 <div class="search-page">
-  <h1 class="sr-only"><span aria-hidden="true">🔍</span> {{ i18n.ar.nav_search }}</h1>
+  <h1 class="search-title">{{ i18n.ar.nav_search }}</h1>
   <form class="search-box" id="searchForm" role="search" action="{{ '/search.html' | url }}">
     <span class="search-box-icon">{{ icon("search", 20) }}</span>
     <input type="search" name="q" id="searchInput" placeholder="{{ i18n.ar.search_placeholder }}" aria-label="{{ i18n.ar.search_aria }}" autocomplete="off" enterkeyhint="search" />
@@ -35,7 +35,7 @@ langSwitchUrl: "/en/search.html"
       <h2>{{ i18n.ar.search_browse }}</h2>
       <div class="mini-sections">
         {% for entry in sections %}
-        <a class="mini-section" href="{{ ('/' + entry.slug + '.html') | url }}"><span aria-hidden="true">{{ entry.icon }}</span>{{ entry.navLabel }}</a>
+        <a class="mini-section" href="{{ ('/' + entry.slug + '.html') | url }}">{{ entry.navLabel }}</a>
         {% endfor %}
       </div>
     </div>

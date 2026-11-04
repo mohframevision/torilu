@@ -8,7 +8,7 @@ module.exports = [
     label: "غسيل",
     label_en: "Wash",
     icon: "🚿",
-    tip: "غسيل خارجي بس، ولا داخلي وتلميع كمان؟ حدد وش تبي قبل ما تسأل عن السعر",
+    tip: "غسيل خارجي فقط، أم داخلي وتلميع أيضاً؟ حدّد ما تريده قبل أن تسأل عن السعر.",
     tip_en: "Just an exterior wash, or interior and polish too? Know what you need before asking for a price.",
   },
   {
@@ -16,7 +16,7 @@ module.exports = [
     label: "إكسسوارات السيارات",
     label_en: "Car Accessories",
     icon: "🎨",
-    tip: "قبل ما تشتري، تأكد القطعة تناسب موديل سيارتك بالضبط",
+    tip: "قبل أن تشتري، تأكد أن القطعة تناسب طراز سيارتك بالضبط.",
     tip_en: "Before you buy, make sure the part fits your exact car model.",
   },
   {
@@ -24,7 +24,7 @@ module.exports = [
     label: "كراج",
     label_en: "Garage",
     icon: "🔧",
-    tip: "وصف العطل بالتفصيل (كهرباء ولا ميكانيك) يسهّل عليك المقارنة بين الكراجات",
+    tip: "وصف العطل بالتفصيل (كهربائي أم ميكانيكي) يسهّل عليك المقارنة بين الكراجات.",
     tip_en: "Describing the issue in detail (electrical or mechanical) makes it easier to compare garages.",
   },
   {
@@ -32,7 +32,7 @@ module.exports = [
     label: "وكالة",
     label_en: "Dealership",
     icon: "🏢",
-    tip: "الوكالة الأنسب غالباً وكالة نفس ماركة سيارتك — صيانة أصلية وضمان",
+    tip: "الوكالة الأنسب غالباً هي وكالة ماركة سيارتك نفسها: صيانة أصلية وضمان.",
     tip_en: "Usually the best choice is your car's own brand dealership — original parts and warranty.",
   },
   {
@@ -40,7 +40,7 @@ module.exports = [
     label: "قطع غيار",
     label_en: "Parts",
     icon: "⚙️",
-    tip: "اسأل عن الفرق بين القطعة الأصلية والتجارية قبل ما تقرر",
+    tip: "اسأل عن الفرق بين القطعة الأصلية والتجارية قبل أن تقرر.",
     tip_en: "Ask about the difference between original and aftermarket parts before deciding.",
   },
   {
@@ -48,7 +48,7 @@ module.exports = [
     label: "معرض سيارات",
     label_en: "Car Showroom",
     icon: "🚗",
-    tip: "قارن بين أكثر من معرض قبل ما تشتري، واسأل عن سجل الصيانة لو السيارة مستعملة",
+    tip: "قارن بين أكثر من معرض قبل أن تشتري، واسأل عن سجل الصيانة إن كانت السيارة مستعملة.",
     tip_en: "Compare more than one showroom before buying, and ask for the maintenance history if the car is used.",
   },
   {
@@ -56,7 +56,7 @@ module.exports = [
     label: "تنجيد",
     label_en: "Upholstery",
     icon: "🛋️",
-    tip: "اسأل عن نوع القماش أو الجلد المستخدم وفترة الضمان قبل ما توافق",
+    tip: "اسأل عن نوع القماش أو الجلد المستخدم ومدة الضمان قبل أن توافق.",
     tip_en: "Ask about the fabric or leather type used and the warranty period before agreeing.",
   },
   {
@@ -64,7 +64,7 @@ module.exports = [
     label: "إطارات",
     label_en: "Tires",
     icon: "🛞",
-    tip: "جهّز مقاس إطاراتك (مكتوب على جنب الإطار) قبل ما تتواصل",
+    tip: "جهّز مقاس إطاراتك (مكتوب على جانب الإطار) قبل أن تتواصل.",
     tip_en: "Have your tire size ready (printed on the tire's sidewall) before you contact them.",
   },
 ];

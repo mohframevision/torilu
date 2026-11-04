@@ -80,7 +80,8 @@ public class MenuActivity extends Activity implements View.OnClickListener, Text
         back.setTag("back");
         back.setOnClickListener(this);
         bar.addView(back, new LinearLayout.LayoutParams(dp(48), dp(48)));
-        TextView title = Ui.text(this, getString(R.string.place_menu) + " · " + Lang.title(this, item), 18, getColor(R.color.text), true);
+        TextView title = Ui.text(this, getString(R.string.place_menu) + " · " + Lang.title(this, item), 21, getColor(R.color.text), false);
+        Ui.display(title);
         title.setMaxLines(1);
         title.setEllipsize(android.text.TextUtils.TruncateAt.END);
         LinearLayout.LayoutParams tlp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
@@ -88,9 +89,9 @@ public class MenuActivity extends Activity implements View.OnClickListener, Text
         bar.addView(title, tlp);
         root.addView(bar);
 
-        LinearLayout tools = new LinearLayout(this);
-        tools.setGravity(Gravity.CENTER_VERTICAL);
-        tools.setPadding(dp(16), dp(12), dp(16), dp(4));
+        LinearLayout controls = new LinearLayout(this);
+        controls.setGravity(Gravity.CENTER_VERTICAL);
+        controls.setPadding(dp(16), dp(12), dp(16), dp(4));
         EditText search = new EditText(this);
         search.setHint(R.string.menu_search_hint);
         search.setSingleLine(true);
@@ -103,7 +104,7 @@ public class MenuActivity extends Activity implements View.OnClickListener, Text
         search.setCompoundDrawablePadding(dp(8));
         search.setCompoundDrawableTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.text_muted)));
         search.addTextChangedListener(this);
-        tools.addView(search, new LinearLayout.LayoutParams(0, dp(48), 1f));
+        controls.addView(search, new LinearLayout.LayoutParams(0, dp(48), 1f));
         sortChip = Ui.text(this, getString(R.string.menu_sort_cheap), 13.5f, getColor(R.color.text), false);
         sortChip.setBackgroundResource(R.drawable.filter_chip_bg);
         sortChip.setGravity(Gravity.CENTER);
@@ -113,8 +114,8 @@ public class MenuActivity extends Activity implements View.OnClickListener, Text
         Touch.springy(sortChip, 0.92f);
         LinearLayout.LayoutParams slp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(48));
         slp.setMarginStart(dp(8));
-        tools.addView(sortChip, slp);
-        root.addView(tools);
+        controls.addView(sortChip, slp);
+        root.addView(controls);
 
         emptyView = Ui.text(this, getString(R.string.menu_empty), 15, getColor(R.color.text_muted), false);
         emptyView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

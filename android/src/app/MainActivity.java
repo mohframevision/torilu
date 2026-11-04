@@ -14,32 +14,27 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-// الرئيسية: بحث شامل، مربعات الأقسام (نمط تطبيقات الخدمات مثل كريم)،
-// "اختيار اليوم" من كل أقسام الأماكن، و"جديد على توريلو". قائمة القسم نفسها
+// الرئيسية بشكل «د» (نفس ترتيب الموقع): سؤال كبير وبحث، الأقسام، «مكان الأسبوع»
+// كخبر رئيسي، «جديد في توريلو»، و«محتار؟» بزر أزرق واحد. قائمة القسم نفسها
 // صارت SectionActivity. هنا الجلب الوحيد للبيانات، ومنه cachedSections لباقي الشاشات.
 // بلا كلاسات مجهولة ولا lambdas — d8 بهذي البيئة يفشل عليها.
-public class MainActivity extends Activity implements View.OnClickListener, ToriluApi.Callback, CardStackView.Listener {
+public class MainActivity extends Activity implements View.OnClickListener, ToriluApi.Callback {
     private View loadingView;
     private View errorView;
     private TextView errorText;
     private View homeScroll;
-    private LinearLayout categoryGrid;
-    private android.widget.FrameLayout dailyHolder;
-    private CardStackView dailyStack;
-    private TextView dailyCount;
-    private LinearLayout newRow;
+    private LinearLayout homeSections;
     private String createdLang;
-    private final List<JSONObject> dailyItems = new ArrayList<>();
-    private final List<String> dailySlugs = new ArrayList<>();
-    private final List<JSONObject> newItems = new ArrayList<>();
-    private final List<String> newSlugs = new ArrayList<>();
+    // كل بطاقة بالرئيسية تحمل رقمها هنا (tag "item:i")
+    private final List<JSONObject> shownItems = new ArrayList<>();
+    private final List<String> shownSlugs = new ArrayList<>();
 
     private JSONObject sections;
     private JSONArray sectionOrder;
     private long lastFetchTime;
     private boolean deepLinkHandled;
     private static final long STALE_AFTER_MS = 30 * 60 * 1000;
-    private static final int NEW_COUNT = 10;
+    private static final int NEW_COUNT = 6;
 
     static JSONObject cachedSections;
     static JSONObject cachedTagsEn;
@@ -60,23 +55,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         errorView = findViewById(R.id.errorView);
         errorText = findViewById(R.id.errorText);
         homeScroll = findViewById(R.id.homeScroll);
-        categoryGrid = findViewById(R.id.categoryGrid);
-        dailyHolder = findViewById(R.id.dailyHolder);
-        newRow = findViewById(R.id.newRow);
-        View daily = getLayoutInflater().inflate(R.layout.daily_header, dailyHolder, false);
-        dailyHolder.addView(daily);
-        dailyStack = daily.findViewById(R.id.dailyStack);
-        dailyCount = daily.findViewById(R.id.dailyCount);
-        dailyStack.setListener(this);
+        homeSections = findViewById(R.id.homeSections);
         findViewById(R.id.retryButton).setOnClickListener(this);
         findViewById(R.id.settingsButton).setOnClickListener(this);
         View pill = findViewById(R.id.searchPill);
         pill.setOnClickListener(this);
         Touch.springy(pill, 0.97f);
         BottomNav.attach(this, findViewById(R.id.bottomNav), BottomNav.HOME);
-        Ui.display((TextView) findViewById(R.id.homeGreeting));
-        Ui.display((TextView) daily.findViewById(R.id.dailyTitle));
-        Ui.display((TextView) findViewById(R.id.newTitle));
+        TextView mark = findViewById(R.id.homeWordmark);
+        mark.setText(wordmark(this));
+        Ui.display(mark);
+        Ui.display((TextView) findViewById(R.id.homeHero));
         SoundPlayer.warmUp();
         loadData();
     }
@@ -88,22 +77,24 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
             recreate();
             return;
         }
-        greet();
+        dateline();
         if (sections != null && System.currentTimeMillis() - lastFetchTime > STALE_AFTER_MS) loadData();
     }
 
-    // التاريخ والتحية وسؤال البحث حسب ساعة اليوم — تتحدث كل رجوع للشاشة.
-    // نصوص فقط: ما ندّعي إن مكاناً مفتوح (الساعات نص حر، وما نخترع معلومة)
-    private void greet() {
-        java.util.Calendar now = java.util.Calendar.getInstance();
-        int h = now.get(java.util.Calendar.HOUR_OF_DAY);
+    // سطر التاريخ مثل الجريدة: «الأربعاء 5 نوفمبر 2026 · دليل أماكن البحرين»
+    private void dateline() {
         java.util.Locale locale = new java.util.Locale(Prefs.getLang(this));
-        ((TextView) findViewById(R.id.homeDate)).setText(
-                new java.text.SimpleDateFormat("EEEE d MMMM", locale).format(now.getTime()));
-        ((TextView) findViewById(R.id.homeGreeting)).setText(
-                h >= 5 && h < 12 ? R.string.greet_morning : h >= 12 && h < 17 ? R.string.greet_afternoon : R.string.greet_evening);
-        ((TextView) findViewById(R.id.searchPill)).setText(
-                h >= 5 && h < 11 ? R.string.ask_breakfast : h >= 11 && h < 16 ? R.string.ask_lunch : h >= 16 ? R.string.ask_dinner : R.string.ask_night);
+        String date = new java.text.SimpleDateFormat("EEEE d MMMM yyyy", locale).format(new java.util.Date());
+        ((TextView) findViewById(R.id.homeDate)).setText(date + "  ·  " + getString(R.string.home_tagline));
+    }
+
+    // «توريلو.» — الاسم بلون النص والنقطة بأزرق الحبر (.logo-dot)
+    static CharSequence wordmark(Context c) {
+        String name = c.getString(R.string.brand);
+        android.text.SpannableString s = new android.text.SpannableString(name + ".");
+        s.setSpan(new android.text.style.ForegroundColorSpan(c.getColor(R.color.brand_accent)),
+                name.length(), name.length() + 1, android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return s;
     }
 
     private void loadData() {
@@ -130,9 +121,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         cachedSectionOrder = sectionOrder;
         cachedTagsEn = data.optJSONObject("tagsEn");
         findViewById(R.id.offlineNote).setVisibility(fromCache ? View.VISIBLE : View.GONE);
-        buildGrid();
-        buildDaily();
-        buildNew();
+        buildHome();
         loadingView.setVisibility(View.GONE);
         errorView.setVisibility(View.GONE);
         homeScroll.setVisibility(View.VISIBLE);
@@ -165,7 +154,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
             String slug = parts[1].substring(0, parts[1].length() - 5);
             for (int i = 0; items != null && i < items.length(); i++) {
                 JSONObject item = items.optJSONObject(i);
-                if (item != null && slug.equals(item.optString("id", ""))) {
+                // الرابط الإنجليزي قد يحمل اسماً غير المعرّف (detailUrlEn)
+                if (item != null && (slug.equals(item.optString("id", ""))
+                        || rel.equals(item.optString("detailUrl", ""))
+                        || rel.equals(item.optString("detailUrlEn", "")))) {
                     ItemAdapter.open(this, item, parts[0]);
                     return;
                 }
@@ -185,7 +177,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
     }
 
     // قسم أماكن = عناصره لها إحداثيات (مطاعم، كافيهات، متاجر...) — بعكس الروابط
-    // والمقالات والأدوات. يتقدّم بالشبكة ومنه "اختيار اليوم"
+    // والمقالات. يتقدّم بشبكة الأقسام
     static boolean isPlaceSection(JSONObject section) {
         JSONArray items = section == null ? null : section.optJSONArray("items");
         for (int i = 0; items != null && i < items.length(); i++) {
@@ -210,9 +202,22 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         return places;
     }
 
+    private void buildHome() {
+        homeSections.removeAllViews();
+        shownItems.clear();
+        shownSlugs.clear();
+        homeSections.addView(Ui.head(this, getString(R.string.home_sections)));
+        buildGrid();
+        buildLead();
+        buildNew();
+        buildPick();
+    }
+
     // ---- مربعات الأقسام: 3 بكل صف ----
     private void buildGrid() {
-        categoryGrid.removeAllViews();
+        LinearLayout grid = new LinearLayout(this);
+        grid.setOrientation(LinearLayout.VERTICAL);
+        homeSections.addView(grid);
         List<String> slugs = orderedSlugs();
         LinearLayout row = null;
         for (int i = 0; i < slugs.size(); i++) {
@@ -220,7 +225,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
                 row = new LinearLayout(this);
                 LinearLayout.LayoutParams rlp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 if (i > 0) rlp.topMargin = dp(10);
-                categoryGrid.addView(row, rlp);
+                grid.addView(row, rlp);
             }
             row.addView(tile(slugs.get(i)), tileParams(i % 3));
         }
@@ -234,18 +239,23 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         return lp;
     }
 
+    // مربع هادئ: أيقونة خطية بالأزرق بلا مربع ملوّن خلفها، والاسم تحتها
     private View tile(String slug) {
         JSONObject sec = sections.optJSONObject(slug);
         LinearLayout t = new LinearLayout(this);
         t.setOrientation(LinearLayout.VERTICAL);
         t.setGravity(Gravity.CENTER_HORIZONTAL);
         t.setBackgroundResource(R.drawable.tile_bg);
-        t.setPadding(dp(6), dp(14), dp(6), dp(12));
+        t.setPadding(dp(6), dp(16), dp(6), dp(14));
         t.setTag("sec:" + slug);
         t.setOnClickListener(this);
         t.setContentDescription(Lang.title(this, sec));
         Touch.springy(t, 0.94f);
-        t.addView(Ui.iconTile(this, Icons.section(slug), 52, getColor(R.color.field), getColor(R.color.text)));
+        android.widget.ImageView icon = new android.widget.ImageView(this);
+        icon.setImageResource(Icons.section(slug));
+        icon.setColorFilter(getColor(R.color.brand_accent));
+        icon.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        t.addView(icon, new LinearLayout.LayoutParams(dp(28), dp(28)));
         TextView label = Ui.text(this, shortTitle(Lang.title(this, sec)), 13.5f, getColor(R.color.text), true);
         label.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         label.setMaxLines(2);
@@ -259,152 +269,192 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         return title.replace(" البحرين", "").replace(" in Bahrain", "").replace("Bahrain ", "");
     }
 
-    // ---- "اختيار اليوم": ثابت لليوم، من كل أقسام الأماكن ----
-    private void buildDaily() {
+    // ---- «مكان الأسبوع»: نفس اختيار الموقع (home.js) — «مميز» أولاً، وإلا مكان
+    // بمنيو كامل (10 أصناف فأكثر)، وإلا أي مكان له وصف وساعات؛ يتبدّل كل اثنين (منتصف ليل UTC = 3 فجراً بتوقيت البحرين)، مثل home.js بالموقع ----
+    private void buildLead() {
         List<JSONObject> pool = new ArrayList<>();
         List<String> poolSlugs = new ArrayList<>();
-        for (String slug : orderedSlugs()) {
+        List<JSONObject> featured = new ArrayList<>();
+        List<String> featuredSlugs = new ArrayList<>();
+        List<JSONObject> withMenu = new ArrayList<>();
+        List<String> withMenuSlugs = new ArrayList<>();
+        for (String slug : new String[]{"restaurants", "cafes", "bakeries"}) {
             JSONObject sec = sections.optJSONObject(slug);
-            if (!isPlaceSection(sec)) continue;
-            JSONArray items = sec.optJSONArray("items");
-            for (int i = 0; i < items.length(); i++) {
+            JSONArray items = sec == null ? null : sec.optJSONArray("items");
+            for (int i = 0; items != null && i < items.length(); i++) {
                 JSONObject item = items.optJSONObject(i);
-                if (item == null) continue;
+                if (item == null || item.optString("desc", "").isEmpty() || item.optString("hours", "").isEmpty()) continue;
                 pool.add(item);
                 poolSlugs.add(slug);
+                if (item.optBoolean("featured")) {
+                    featured.add(item);
+                    featuredSlugs.add(slug);
+                }
+                JSONArray menu = item.optJSONArray("menuItems");
+                if (menu != null && menu.length() >= 10) {
+                    withMenu.add(item);
+                    withMenuSlugs.add(slug);
+                }
             }
         }
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        long seed = cal.get(java.util.Calendar.YEAR) * 10000L + (cal.get(java.util.Calendar.MONTH) + 1) * 100L + cal.get(java.util.Calendar.DAY_OF_MONTH);
-        java.util.Random rnd = new java.util.Random(seed);
-        for (int i = pool.size() - 1; i > 0; i--) {
-            int j = rnd.nextInt(i + 1);
-            JSONObject t = pool.get(i);
-            pool.set(i, pool.get(j));
-            pool.set(j, t);
-            String ts = poolSlugs.get(i);
-            poolSlugs.set(i, poolSlugs.get(j));
-            poolSlugs.set(j, ts);
-        }
-        dailyItems.clear();
-        dailySlugs.clear();
-        List<View> views = new ArrayList<>();
-        for (int i = 0; i < Math.min(6, pool.size()); i++) {
-            dailyItems.add(pool.get(i));
-            dailySlugs.add(poolSlugs.get(i));
-            views.add(buildDailyCard(pool.get(i), poolSlugs.get(i), i));
-        }
-        // ارتفاع موحّد = أطول بطاقة (خط كبير بإعدادات الجوال كان يقص الزر)
-        int width = getResources().getDisplayMetrics().widthPixels - dp(32);
-        int tallest = 0;
-        for (View v : views) {
-            v.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-            tallest = Math.max(tallest, v.getMeasuredHeight());
-        }
-        for (View v : views) v.getLayoutParams().height = tallest;
-        dailyStack.setCards(views);
-        dailyHolder.setVisibility(views.size() >= 2 ? View.VISIBLE : View.GONE);
-    }
+        List<JSONObject> choices = !featured.isEmpty() ? featured : !withMenu.isEmpty() ? withMenu : pool;
+        List<String> choiceSlugs = !featured.isEmpty() ? featuredSlugs : !withMenu.isEmpty() ? withMenuSlugs : poolSlugs;
+        if (choices.isEmpty()) return;
+        int week = (int) Math.floor((System.currentTimeMillis() / 86400000.0 + 3) / 7);
+        int pick = week % choices.size();
+        JSONObject lead = choices.get(pick);
+        String slug = choiceSlugs.get(pick);
 
-    // بطاقة "اختيار اليوم": سطح أبيض هادي بنفس لغة باقي البطاقات (كانت تدرّجاً
-    // أخضر يسرق العين من كل الشاشة). البطاقة كلها تفتح صفحة المكان
-    private View buildDailyCard(JSONObject item, String slug, int index) {
-        JSONObject section = sections.optJSONObject(slug);
+        homeSections.addView(Ui.head(this, getString(R.string.home_lead)));
         LinearLayout card = new LinearLayout(this);
         card.setOrientation(LinearLayout.VERTICAL);
-        card.setBackgroundResource(R.drawable.daily_card_bg);
-        card.setElevation(dp(3));
-        int pad = dp(20);
-        card.setPadding(pad, pad, pad, pad);
-        card.setLayoutParams(new android.widget.FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-        LinearLayout top = new LinearLayout(this);
-        top.setGravity(Gravity.CENTER_VERTICAL);
-        top.addView(Ui.iconTile(this, Icons.item(item, slug), 48, getColor(R.color.field), getColor(R.color.text)));
-        TextView badge = Ui.text(this, shortTitle(Lang.title(this, section)), 13, getColor(R.color.text_muted), false);
-        LinearLayout.LayoutParams blp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
-        blp.setMarginStart(dp(12));
-        top.addView(badge, blp);
-        card.addView(top);
-
-        TextView title = Ui.text(this, Lang.title(this, item), 20, getColor(R.color.text), false);
+        card.setBackgroundResource(R.drawable.card_bg);
+        card.setElevation(dp(2));
+        card.setClipToOutline(true);
+        // نقاط الحبر على أزرق ناعم فوق الخبر (.d-lead-art)
+        HalftoneView art = new HalftoneView(this);
+        art.setBackgroundColor(getColor(R.color.tonal));
+        card.addView(art, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(160)));
+        LinearLayout text = new LinearLayout(this);
+        text.setOrientation(LinearLayout.VERTICAL);
+        text.setPadding(dp(22), dp(20), dp(22), dp(20));
+        text.addView(Ui.kicker(this, kickerOf(lead, slug, null)));
+        TextView title = Ui.text(this, Lang.title(this, lead), 30, getColor(R.color.text), false);
         Ui.display(title);
-        title.setMaxLines(1);
-        title.setEllipsize(android.text.TextUtils.TruncateAt.END);
-        title.setPadding(0, dp(14), 0, 0);
-        card.addView(title);
-
-        TextView desc = Ui.text(this, Lang.desc(this, item), 14, getColor(R.color.text_muted), false);
+        title.setPadding(0, dp(4), 0, 0);
+        text.addView(title);
+        TextView desc = Ui.text(this, Lang.desc(this, lead), 14.5f, getColor(R.color.text_muted), false);
         desc.setMaxLines(3);
         desc.setEllipsize(android.text.TextUtils.TruncateAt.END);
         desc.setPadding(0, dp(4), 0, 0);
-        card.addView(desc);
-
-        card.setTag("daily:" + index);
-        card.setOnClickListener(this);
-        return card;
+        text.addView(desc);
+        JSONArray menu = lead.optJSONArray("menuItems");
+        if (menu != null && menu.length() > 0) {
+            TextView m = Ui.text(this, getString(R.string.home_menu_count, menu.length()), 14, getColor(R.color.brand_accent), true);
+            m.setPadding(0, dp(10), 0, 0);
+            text.addView(m);
+        }
+        addMeta(text, lead);
+        card.addView(text);
+        tagCard(card, lead, slug);
+        homeSections.addView(card);
     }
 
-    @Override
-    public void onTopChanged(int index, int count) {
-        dailyCount.setText((index + 1) + " / " + count);
-    }
-
-    // ---- "جديد على توريلو": أحدث ما أضيف (addedAt)، بلا المخفي من القائمة ----
+    // ---- «جديد في توريلو»: أحدث ما أضيف (addedAt)، بلا المخفي، وبلا تكرار مكان الأسبوع ----
     private void buildNew() {
-        newItems.clear();
-        newSlugs.clear();
+        List<JSONObject> newItems = new ArrayList<>();
+        List<String> newSlugs = new ArrayList<>();
         for (String slug : orderedSlugs()) {
             JSONArray items = sections.optJSONObject(slug).optJSONArray("items");
             for (int i = 0; i < items.length(); i++) {
                 JSONObject item = items.optJSONObject(i);
-                if (item == null || item.isNull("addedAt") || item.optString("addedAt", "").isEmpty() || item.optBoolean("hideFromNewest")) continue;
+                if (item == null || item.optLong("addedAt", 0) <= 0 || item.optBoolean("hideFromNewest") || shownItems.contains(item)) continue;
                 // إدراج مرتّب تنازلياً بالتاريخ (بلا Comparator: يكسر d8 هنا)
-                String date = item.optString("addedAt");
+                long date = item.optLong("addedAt");
                 int at = newItems.size();
-                while (at > 0 && newItems.get(at - 1).optString("addedAt").compareTo(date) < 0) at--;
+                while (at > 0 && newItems.get(at - 1).optLong("addedAt") < date) at--;
                 newItems.add(at, item);
                 newSlugs.add(at, slug);
             }
         }
-        while (newItems.size() > NEW_COUNT) {
-            newItems.remove(newItems.size() - 1);
-            newSlugs.remove(newSlugs.size() - 1);
+        if (newItems.isEmpty()) return;
+        homeSections.addView(Ui.head(this, getString(R.string.home_new)));
+        for (int i = 0; i < Math.min(NEW_COUNT, newItems.size()); i++) {
+            String slug = newSlugs.get(i);
+            String badge = getString("guides".equals(slug) ? R.string.home_article_badge : R.string.home_new_badge);
+            homeSections.addView(card(newItems.get(i), slug, badge));
         }
-        newRow.removeAllViews();
-        for (int i = 0; i < newItems.size(); i++) newRow.addView(newCard(i));
-        int vis = newItems.isEmpty() ? View.GONE : View.VISIBLE;
-        findViewById(R.id.newTitle).setVisibility(vis);
-        findViewById(R.id.newScroll).setVisibility(vis);
-        Ui.scrollToStart((android.widget.HorizontalScrollView) findViewById(R.id.newScroll));
     }
 
-    private View newCard(int i) {
-        JSONObject item = newItems.get(i);
-        JSONObject sec = sections.optJSONObject(newSlugs.get(i));
+    // بطاقة «د» (.d-card): سطر أزرق صغير، الاسم بخط الجريدة، الوصف، والساعات
+    private View card(JSONObject item, String slug, String badge) {
         LinearLayout c = new LinearLayout(this);
         c.setOrientation(LinearLayout.VERTICAL);
-        c.setBackgroundResource(R.drawable.tile_bg);
-        c.setPadding(dp(14), dp(14), dp(14), dp(14));
-        c.setTag("new:" + i);
-        c.setOnClickListener(this);
-        Touch.springy(c, 0.95f);
-        c.addView(Ui.iconTile(this, Icons.item(item, newSlugs.get(i)), 44, getColor(R.color.field), getColor(R.color.text)));
-        TextView title = Ui.text(this, Lang.title(this, item), 15, getColor(R.color.text), true);
+        c.setBackgroundResource(R.drawable.card_bg);
+        c.setElevation(dp(2));
+        c.setPadding(dp(22), dp(18), dp(22), dp(18));
+        c.addView(Ui.kicker(this, kickerOf(item, slug, badge)));
+        TextView title = Ui.text(this, Lang.title(this, item), 22, getColor(R.color.text), false);
+        Ui.display(title);
         title.setMaxLines(2);
-        title.setPadding(0, dp(10), 0, 0);
-        c.addView(title, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
-        TextView where = Ui.text(this, shortTitle(Lang.title(this, sec)), 12.5f, getColor(R.color.text_muted), false);
-        where.setMaxLines(1);
-        c.addView(where);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dp(150), dp(150));
-        lp.setMarginEnd(dp(10));
+        title.setEllipsize(android.text.TextUtils.TruncateAt.END);
+        title.setPadding(0, dp(2), 0, 0);
+        c.addView(title);
+        String d = Lang.desc(this, item);
+        if (!d.isEmpty()) {
+            TextView desc = Ui.text(this, d, 14, getColor(R.color.text_muted), false);
+            desc.setMaxLines(2);
+            desc.setEllipsize(android.text.TextUtils.TruncateAt.END);
+            c.addView(desc);
+        }
+        addMeta(c, item);
+        tagCard(c, item, slug);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.bottomMargin = dp(14);
         c.setLayoutParams(lp);
         return c;
     }
 
+    // «مطاعم · برجر»: الشارة (جديد/مقال) أو القسم، ثم النوع (أول تصنيف)
+    private String kickerOf(JSONObject item, String slug, String badge) {
+        String first = badge != null ? badge : shortTitle(Lang.title(this, sections.optJSONObject(slug)));
+        JSONArray tags = item.optJSONArray("tags");
+        String type = tags == null || tags.length() == 0 ? "" : Lang.tag(this, tags.optString(0));
+        return type.isEmpty() ? first : first + " · " + type;
+    }
+
+    private void addMeta(LinearLayout box, JSONObject item) {
+        String hours = Lang.hours(this, item);
+        if (hours.isEmpty()) return;
+        TextView h = Ui.text(this, hours, 12.5f, getColor(R.color.text_muted), false);
+        h.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_schedule_small, 0, 0, 0);
+        h.setCompoundDrawableTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.text_muted)));
+        h.setCompoundDrawablePadding(dp(4));
+        h.setMaxLines(1);
+        h.setEllipsize(android.text.TextUtils.TruncateAt.END);
+        h.setPadding(0, dp(8), 0, 0);
+        box.addView(h);
+    }
+
+    private void tagCard(View card, JSONObject item, String slug) {
+        card.setTag("item:" + shownItems.size());
+        shownItems.add(item);
+        shownSlugs.add(slug);
+        card.setOnClickListener(this);
+        Touch.springy(card, 0.98f);
+    }
+
+    // ---- «محتار؟» بين خطين مثل ركن في جريدة، وزر أزرق واحد ----
+    private void buildPick() {
+        LinearLayout box = Ui.head(this, getString(R.string.home_pick_title));
+        box.setGravity(Gravity.CENTER_HORIZONTAL);
+        TextView h = (TextView) box.getChildAt(1);
+        h.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        h.setPadding(0, dp(24), 0, 0);
+        h.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TextView d = Ui.text(this, getString(R.string.home_pick_desc), 14.5f, getColor(R.color.text_muted), false);
+        d.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        box.addView(d, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TextView go = Ui.text(this, getString(R.string.picker_go), 15, getColor(R.color.white), true);
+        go.setBackgroundResource(R.drawable.btn_pill_primary);
+        go.setPadding(dp(28), dp(12), dp(28), dp(12));
+        go.setCompoundDrawablePadding(dp(8));
+        LinkButtons.setStartIcon(go, R.drawable.ic_casino_small, getColor(R.color.white));
+        go.setTag("picker");
+        go.setOnClickListener(this);
+        Touch.springy(go);
+        LinearLayout.LayoutParams glp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        glp.topMargin = dp(18);
+        glp.bottomMargin = dp(28);
+        box.addView(go, glp);
+        View rule = new View(this);
+        rule.setBackgroundColor(getColor(R.color.ink_rule));
+        box.addView(rule, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(1)));
+        homeSections.addView(box);
+    }
+
     // نص البحث لكل عنصر باللغتين: الاسم والوصف + التصنيفات + الكلمات المفتاحية
-    // (روابط وأدوات) + أسماء أصناف المنيو — نفس نطاق بحث الموقع. يُحسب مرة
+    // + أسماء أصناف المنيو — نفس نطاق بحث الموقع. يُحسب مرة
     // ويُخزَّن بالعنصر نفسه بدل إعادة بنائه مع كل حرف
     static String searchText(JSONObject item) {
         String cached = item.optString("_search", "");
@@ -459,16 +509,14 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
             Touch.feedback(v, Touch.TAP, SoundPlayer.OPEN);
             startActivity(SectionActivity.intent(this, value.substring(4), null));
             overridePendingTransition(0, 0);
-        } else if (value.startsWith("daily:")) {
-            int i = Integer.parseInt(value.substring(6));
-            if (i < dailyItems.size()) {
-                Touch.feedback(v, Touch.TAP, SoundPlayer.OPEN);
-                ItemAdapter.open(this, dailyItems.get(i), dailySlugs.get(i), v);
-            }
-        } else if (value.startsWith("new:")) {
-            int i = Integer.parseInt(value.substring(4));
+        } else if (value.startsWith("item:")) {
+            int i = Integer.parseInt(value.substring(5));
             Touch.feedback(v, Touch.TAP, SoundPlayer.OPEN);
-            ItemAdapter.open(this, newItems.get(i), newSlugs.get(i), v);
+            ItemAdapter.open(this, shownItems.get(i), shownSlugs.get(i), v);
+        } else if ("picker".equals(value)) {
+            Touch.feedback(v, Touch.CONFIRM, SoundPlayer.OPEN);
+            startActivity(new android.content.Intent(this, PickerActivity.class));
+            overridePendingTransition(0, 0);
         } else if (value.startsWith("url:") || value.startsWith("tel:")) {
             Touch.feedback(v, Touch.TAP, SoundPlayer.TAP);
             LinkButtons.handleClick(this, value);

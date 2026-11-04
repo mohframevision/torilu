@@ -33,7 +33,12 @@ const PRECACHE = [
   BASE + "js/bootstrap.js?v=" + VERSION,
   BASE + "js/data.js?v=" + VERSION,
   BASE + "js/main.js?v=" + VERSION,
+  // الرئيسية تحتاج home.js لتملأ صفوفها، وخط Amiri لشعار وعناوين شكل «د»
+  BASE + "js/home.js?v=" + VERSION,
   BASE + "assets/fonts/cairo-arabic.woff2",
+  BASE + "assets/fonts/cairo-latin.woff2",
+  BASE + "assets/fonts/amiri-arabic.woff2",
+  BASE + "assets/fonts/amiri-latin.woff2",
 ];
 
 self.addEventListener("install", (event) => {

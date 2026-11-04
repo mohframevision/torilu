@@ -48,8 +48,8 @@ Factory، من بين أكثر من 130 محلاً ومطعماً آخر، مو�
 
 أسهل طريقة توصلك بدقة هي فتح الموقع مباشرة على خرائط قوقل:
 
-[📍 افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/oJ7tan2ndcUaS9heA)
+[افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/oJ7tan2ndcUaS9heA)
 
 ## روابط
 
-[🌐 الموقع الرسمي لمجمع الأفنيوز](https://www.the-avenues.com/bahrain/en)
+[الموقع الرسمي لمجمع الأفنيوز](https://www.the-avenues.com/bahrain/en)

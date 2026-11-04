@@ -27,4 +27,4 @@ The site museum opened in 2008. Its 5 halls run in chronological order through t
 
 The easiest way to get an exact location is to open it directly on Google Maps:
 
-[📍 Open location on Google Maps](https://maps.app.goo.gl/jgtvKxwTCjbaq9Qb7)
+[Open location on Google Maps](https://maps.app.goo.gl/jgtvKxwTCjbaq9Qb7)

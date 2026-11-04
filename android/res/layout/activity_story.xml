@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- "قصة توريلو" داخل التطبيق — نفس هوية شاشة "اختار لي" (غامرة، أخضر توريلو
+<!-- "قصة توريلو" داخل التطبيق — نفس هوية شاشة "اختار لي" (غامرة، أزرق الحبر
      الغامق). المحتوى يُبنى بالكود بـStoryActivity (أرقام حيّة من بيانات
-     التطبيق، وحركات ظهور وأصوات تتبع القراءة). زر الإغلاق بشريط ثابت فوق
-     لا عائم — العائم كان يغطي النص وقت التمرير. تحت زر الموسيقى منزلق صوت
-     مثل الجوال يطفو فوق المحتوى وينطوي. -->
+     التطبيق، وحركات ظهور تتبع القراءة). زر الإغلاق بشريط ثابت فوق
+     لا عائم — العائم كان يغطي النص وقت التمرير. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +17,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:background="#FF06120E">
+            android:background="#FF070B16">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -28,20 +27,6 @@
                 android:text="@string/story_title"
                 android:textColor="#CCFFFFFF"
                 android:textSize="15sp" />
-
-            <!-- تشغيل/إيقاف موسيقى الخلفية الهادئة -->
-            <ImageView
-                android:id="@+id/storyMusic"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="68dp"
-                android:padding="11dp"
-                android:src="@drawable/ic_music_note"
-                android:contentDescription="@string/music_desc"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/glass_circle" />
 
             <ImageView
                 android:id="@+id/storyClose"
@@ -76,61 +61,5 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="56dp" />
         </ScrollView>
-    </LinearLayout>
-
-    <!-- عدّة الصوت: رقم المستوى (يطلع وقت السحب) + عمود: منزلق + سهم طي -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="68dp"
-        android:orientation="horizontal"
-        android:clipChildren="false">
-
-        <TextView
-            android:id="@+id/storyVolTip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:paddingStart="11dp"
-            android:paddingEnd="11dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:background="@drawable/glass_pill"
-            android:textColor="#FFFFFFFF"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:textDirection="ltr"
-            android:alpha="0" />
-
-        <LinearLayout
-            android:id="@+id/storyDock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:background="@drawable/story_dock_bg">
-
-            <bh.mohframevision.torilu.VolumeSlider
-                android:id="@+id/storySlider"
-                android:layout_width="44dp"
-                android:layout_height="150dp"
-                android:layout_marginBottom="4dp"
-                android:contentDescription="@string/music_desc" />
-
-            <ImageView
-                android:id="@+id/storyDockFold"
-                android:layout_width="44dp"
-                android:layout_height="30dp"
-                android:padding="5dp"
-                android:src="@drawable/ic_expand_less"
-                android:tint="#CCFFFFFF"
-                android:contentDescription="@string/music_desc"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless" />
-        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

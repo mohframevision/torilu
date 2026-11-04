@@ -17,8 +17,8 @@ Waffle cone ice cream from **400 fils**, plus other options.
 
 ## Contact
 
-[📸 Instagram](https://www.instagram.com/meltose.bh/)
+[Instagram](https://www.instagram.com/meltose.bh/)
 
 ## Location
 
-[📍 Open on Google Maps](https://maps.app.goo.gl/JZz5MmHPuBq41GUY9)
+[Open on Google Maps](https://maps.app.goo.gl/JZz5MmHPuBq41GUY9)

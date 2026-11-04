@@ -7,13 +7,15 @@ description: Torilu's privacy policy and how we handle your data.
 langSwitchUrl: "/privacy-policy.html"
 ---
 
-<article class="prose">
+<section class="page-header">
+  <h1>Privacy Policy</h1>
+</section>
 
-# Privacy Policy
+<article class="prose">
 
 ## Data we collect
 
-None. The site has no sign-in, runs no server of its own, uses no tracking or visitor analytics, and shows no ads. Every page comes from the site itself, and nothing about you is sent anywhere, except what you write yourself in the contact form.
+None. The site has no sign-in, runs no server of its own, uses no tracking or visitor analytics, and shows no ads. Every page comes from the site itself, and nothing about you is sent anywhere, except what you write yourself in the contact form, or say if you use voice search.
 
 ## Contact form
 
@@ -21,15 +23,19 @@ When you send a message from the [contact page]({{ '/en/contact.html' | url }}),
 
 ## What is stored in your browser
 
-Your preferences, such as theme, sound and favorites, are stored only in your browser (localStorage) and are never sent anywhere. You can delete them at any time by clearing this site's data in your browser settings.
+Your preferences, such as theme, favorites, recent searches and your "Pick for me" vehicle, are stored only in your browser (localStorage) and are never sent anywhere. You can delete them at any time by clearing this site's data in your browser settings.
 
 ## Location (optional)
 
 When you tap "Near me" yourself, your browser asks for your location so places can be sorted by distance. This is calculated on your device only; your location is not stored or sent anywhere.
 
+## Voice search (optional)
+
+When you tap the microphone yourself, your browser turns your speech into text using its own speech service (in Chrome, for example, Google processes it on its servers). Your voice never reaches Torilu, we keep none of it, and the microphone works only when you tap the button.
+
 ## Embedded video
 
-Some place pages include a YouTube video in its privacy-enhanced mode (youtube-nocookie.com), which loads only when you press play.
+Some pages include a YouTube video in its privacy-enhanced mode (youtube-nocookie.com). It loads when you scroll to it, and in this mode YouTube does not store information about your viewing unless you play the video.
 
 ## External links
 

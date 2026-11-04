@@ -159,6 +159,7 @@ function buildSiteData(data, options = {}) {
           .map((mi) => ({ name: mi.name, name_en: mi.name_en || "", price: mi.price || "" })),
         featured: Boolean(entry.data.featured),
         sponsored: Boolean(entry.data.sponsored),
+        affiliate: Boolean(entry.data.affiliate),
         verified: Boolean(entry.data.verified),
         liked: Boolean(entry.data.liked),
         hideFromNewest: Boolean(entry.data.hideFromNewest),
@@ -212,7 +213,6 @@ function buildSiteData(data, options = {}) {
       title_en: meta.title_en,
       icon: meta.icon,
       hasDetailPages: Boolean(meta.hasDetailPages),
-      creators: Boolean(meta.creators),
       items,
     };
   }

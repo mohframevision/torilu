@@ -36,4 +36,4 @@ Daily from 5am to 11pm.
 
 ## Location
 
-[📍 Open on Google Maps](https://maps.app.goo.gl/D7aGQU5GAxKDB3jx6)
+[Open on Google Maps](https://maps.app.goo.gl/D7aGQU5GAxKDB3jx6)

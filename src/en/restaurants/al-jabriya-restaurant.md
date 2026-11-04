@@ -24,9 +24,9 @@ Busaiteen, Jidhafs, and other locations.
 
 ## Contact & Ordering
 
-[📸 Instagram](https://www.instagram.com/aljabriya.restaurant/) ·
-[🔗 Link page](https://beacons.ai/aljabriya.restaur)
+[Instagram](https://www.instagram.com/aljabriya.restaurant/) ·
+[Link page](https://beacons.ai/aljabriya.restaur)
 
 ## Location
 
-[📍 Open on Google Maps](https://maps.app.goo.gl/rCYERPHQJHAdxvpy6)
+[Open on Google Maps](https://maps.app.goo.gl/rCYERPHQJHAdxvpy6)

@@ -86,7 +86,8 @@
         android:gravity="center"
         android:text="@string/picker_headline"
         android:textColor="#FFFFFFFF"
-        android:textSize="22sp"
+        android:textSize="28sp"
+        android:fontFamily="@font/amiri"
         android:textStyle="bold" />
 
     <TextView

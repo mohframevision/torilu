@@ -54,7 +54,7 @@
 .hm-row { display: flex; align-items: center; gap: 0.3em; padding: 0.35em 0; border-bottom: 1px solid var(--line); }
 .hm-n { flex: 1; min-width: 0; font-weight: 700; font-size: 1.05em; line-height: 1.25; }
 .hm-n i { display: block; font-style: normal; font-weight: 400; font-size: 0.72em; color: var(--muted); text-align: start; }
-.hm-fire { font-size: 0.8em; }
+.hm-fire { width: 0.62em; height: 0.82em; vertical-align: -0.05em; fill: var(--accent); }
 .hm-extras { margin-top: 0.4em; padding-top: 0.3em; border-top: 1.5px dashed var(--ink); }
 .hm-row.extra .hm-n, .hm-row.extra .hm-n i { color: var(--accent); }
 

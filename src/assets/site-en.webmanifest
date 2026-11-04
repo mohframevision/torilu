@@ -1,14 +1,14 @@
 {
   "name": "Torilu",
   "short_name": "Torilu",
-  "description": "A directory of links, tools, restaurants, stores, and places — everything useful in one site.",
+  "description": "A guide to places in Bahrain: restaurants, cafes, bakeries, stores and places, all checked, with priced menus.",
   "start_url": "/en/index.html",
   "scope": "/",
   "display": "standalone",
   "lang": "en",
   "dir": "ltr",
-  "background_color": "#ffffff",
-  "theme_color": "#2563eb",
+  "background_color": "#faf6ef",
+  "theme_color": "#1545a2",
   "icons": [
     {
       "src": "/assets/android-chrome-192x192.png",

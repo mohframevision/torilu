@@ -14,23 +14,21 @@ langSwitchUrl: "/about.html"
 
 <article class="prose">
 
-Torilu is a Bahraini guide that gathers restaurants, cafes, bakeries, stores, places and car shops in Bahrain in one place, in Arabic and English.
-
 ## What will you find on Torilu?
 
 - **A guide to places:** cards with the location, map, phone, hours and contact accounts, and for many restaurants a **menu with prices**.
 - **Smart search:** search by place name, kind of food, or even the name of a dish inside a menu, and filter by area and category.
 - **"Pick for me":** if you can't decide where to eat, it chooses a place for you with a simple game.
 - **"Near me":** sorts places by how close they are to you (if you allow location, and we don't store it).
-- **Articles:** stories and guides about society and its places, written with care.
+- **Articles:** stories and guides about the community and its places, written with care.
 
 ## How do we collect the information?
 
-We collect place data from public sources: the places' own accounts, their ordering systems and some open maps, then organize it with AI assistance, and the site owner reviews it. Some cards are still being completed and may lack a menu or hours; we fill them in gradually. If you see outdated or wrong information, please tell us so we can fix it.
+We collect place data from public sources: the places' own accounts, their ordering systems and some open maps, then organize it with AI assistance, and the site owner reviews it. We don't publish a place until its details are complete. If you see outdated or wrong information, please tell us so we can fix it.
 
 ## Is the current content final?
 
-No. The site grows every week with new places and by completing existing ones.
+No. We keep adding new places.
 
 You can save what you like to "Favorites" without signing in, and the list is stored in your browser only. The site never asks you for an account or a password.
 
@@ -52,7 +50,7 @@ If a place has a lot of negative attention online, we will most likely give no o
 
 <h2 id="ads">Ads and paid links</h2>
 
-We don't show ads. Some links are referral links that earn us a small commission if you buy through them, which we state clearly. Any place that pays to be featured is labelled "Ad", and doesn't rise in search or in "Pick for me" because of it.
+We don't show ads, and no place pays to appear on Torilu or to rank higher in search or in "Pick for me". The only commission link is the Cazasouq store link, and it says so next to it.
 
 <h2 id="privacy">Your privacy</h2>
 
@@ -60,18 +58,10 @@ There are no accounts or passwords on Torilu, and we don't collect your personal
 
 <h2 id="business">For business owners</h2>
 
-Have a restaurant or cafe? You can [list your business](/en/business.html) on Torilu with a QR digital menu and a WhatsApp order button.
-
-<h2 id="credits">Music and sound credits</h2>
-
-The "Pick for me" page uses music and sound effects licensed from Uppbeat. Here are the credits:
-
-<p dir="ltr">Music: 'Sleepover' by Richard Smithson on <a href="https://uppbeat.io/c/richard-smithson" rel="noopener">Uppbeat</a></p>
-
-The train, car, boat, plane and wind sounds come from the Uppbeat sound effects library. Full details are in the [credits file](/assets/audio/CREDITS.txt).
+Do you have a restaurant or cafe? You can [list your business](/en/business.html) on Torilu with a QR digital menu and a WhatsApp order button.
 
 <h2 id="osm">Where some place data comes from</h2>
 
-Some places (whose details are still being completed) took their names, locations and some contact details from <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a>, an open map built by volunteers and licensed under the ODbL. © OpenStreetMap contributors. We review and complete this data gradually, and some of it may be out of date, so if you spot a mistake, please tell us.
+Some places took their names, locations and some contact details from <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a>, an open map built by volunteers and licensed under the ODbL. © OpenStreetMap contributors. We review this data before publishing it, and some of it may change over time, so if you spot a mistake, please tell us.
 
 </article>

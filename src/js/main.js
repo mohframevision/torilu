@@ -202,7 +202,6 @@ function initSearchSuggestions(searchInput, items, onSelect) {
       .map(
         (item) =>
           `<div class="search-suggestion" data-id="${escapeHtml(item.id)}">
-            <span>${escapeHtml(item.icon || "⭐")}</span>
             <span>${escapeHtml(itemTitle(item))}</span>
           </div>`
       )
@@ -242,7 +241,7 @@ function initContactForm() {
     if (typeSelect) typeSelect.value = t("contact_report_option");
     if (messageField) {
       const section = params.get("section") || "";
-      const sectionSuffix = section ? ` (${t("contact_report_section_label")}: ${section})` : "";
+      const sectionSuffix = section ? ` (${t("contact_report_section_label")}: ${sectionLabel(section)})` : "";
       messageField.value = `${t("contact_report_regarding")}: ${reportItem}${sectionSuffix}\n\n${t("contact_report_wrong_info_label")}: `;
       messageField.focus();
     }
@@ -317,219 +316,9 @@ function initContactForm() {
   });
 }
 
-/* ===== مؤثرات صوتية (اختيارية، معطّلة افتراضياً) =====
-   مجموعة أصوات مولَّدة بالكود بالكامل (Web Audio، بلا ملفات)، مبنية على
-   تحليل أصوات pacomepertant.com: نغمات منخفضة (~440Hz لا 650-900)، بداية
-   ناعمة بدل قفزة فورية (القفزة تسبب "طقّة")، نغمة تحتية أخفض بأوكتاف أو
-   اثنين تعطي دفء، انحدار بسيط بالنبرة، كل النغمات من سلّم ري الكبير (D)،
-   صدى غرفة خفيف على الكل، وصوت مختلف لكل نوع فعل. */
-const SOUND_KEY = "site_sound_pref";
-let audioCtx = null;
-let sfxBus = null;
-let noiseBuffer = null;
-
-// نوتات سلّم ري الكبير الخماسي (Hz)
-const NOTE = { D3: 146.83, D4: 293.66, A4: 440, D5: 587.33, "F#5": 739.99, A5: 880, D6: 1174.66 };
-
-function isSoundEnabled() {
-  return lsGet(SOUND_KEY) === "on";
-}
-
-function getAudioContext() {
-  if (!audioCtx) {
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    audioCtx = new AudioContextClass();
-  }
-  if (audioCtx.state === "suspended") audioCtx.resume();
-  return audioCtx;
-}
-
-// صدى غرفة: نبضة ضجيج تخفت أُسّياً بدل ملف impulse — يعطي إحساس "مساحة"
-function makeRoomImpulse(ctx, seconds) {
-  const len = Math.floor(ctx.sampleRate * seconds);
-  const buf = ctx.createBuffer(2, len, ctx.sampleRate);
-  for (let c = 0; c < 2; c++) {
-    const d = buf.getChannelData(c);
-    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.5);
-  }
-  return buf;
-}
-
-// مسار مشترك لكل الأصوات: تنعيم الحدّة (lowpass) + خليط جاف/صدى
-function getSfxBus(ctx) {
-  if (sfxBus) return sfxBus;
-  sfxBus = ctx.createGain();
-  const soften = ctx.createBiquadFilter();
-  soften.type = "lowpass";
-  soften.frequency.value = 4500;
-  const dry = ctx.createGain();
-  dry.gain.value = 0.85;
-  const verb = ctx.createConvolver();
-  verb.buffer = makeRoomImpulse(ctx, 1.4);
-  const wet = ctx.createGain();
-  wet.gain.value = 0.22;
-  sfxBus.connect(soften);
-  soften.connect(dry).connect(ctx.destination);
-  soften.connect(verb).connect(wet).connect(ctx.destination);
-  return sfxBus;
-}
-
-// نغمة واحدة: بداية ناعمة (attack) ثم خفوت أُسّي، مع انحدار نبرة (glide) اختياري
-function voice(
-  ctx,
-  bus,
-  { freq, at = 0, attack = 0.004, decay = 0.08, gain = 0.06, glide = 1, pan = 0 }
-) {
-  const t0 = ctx.currentTime + at;
-  const end = t0 + attack + decay;
-  const osc = ctx.createOscillator();
-  osc.frequency.setValueAtTime(freq, t0);
-  if (glide !== 1) osc.frequency.exponentialRampToValueAtTime(freq * glide, end);
-  const g = ctx.createGain();
-  g.gain.setValueAtTime(0.0001, t0);
-  g.gain.exponentialRampToValueAtTime(gain, t0 + attack);
-  g.gain.exponentialRampToValueAtTime(0.0001, end);
-  osc.connect(g);
-  if (pan && ctx.createStereoPanner) {
-    const p = ctx.createStereoPanner();
-    p.pan.value = pan;
-    g.connect(p).connect(bus);
-  } else {
-    g.connect(bus);
-  }
-  osc.start(t0);
-  osc.stop(end + 0.02);
-}
-
-// ضجيج مفلتر: "تكّة" قصيرة جداً، أو "وووش" لو تحرّك تردده (sweepTo)
-function noise(ctx, bus, { at = 0, dur = 0.01, freq = 3000, q = 0.8, gain = 0.05, sweepTo = 0 }) {
-  if (!noiseBuffer) {
-    noiseBuffer = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
-    const d = noiseBuffer.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-  }
-  const t0 = ctx.currentTime + at;
-  const src = ctx.createBufferSource();
-  src.buffer = noiseBuffer;
-  const f = ctx.createBiquadFilter();
-  f.type = "bandpass";
-  f.Q.value = q;
-  f.frequency.setValueAtTime(freq, t0);
-  if (sweepTo) f.frequency.exponentialRampToValueAtTime(sweepTo, t0 + dur);
-  const g = ctx.createGain();
-  g.gain.setValueAtTime(0.0001, t0);
-  g.gain.exponentialRampToValueAtTime(gain, t0 + Math.min(0.002, dur / 3));
-  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-  src.connect(f).connect(g).connect(bus);
-  src.start(t0);
-  src.stop(t0 + dur + 0.02);
-}
-
-const SOUNDS = {
-  // ضغطة عامة: قصيرة ومنخفضة، بنبرة تتغيّر ±3% كل مرة عشان ما تحس بالتكرار
-  tap(ctx, bus) {
-    const f = NOTE.A4 * (1 + (Math.random() - 0.5) * 0.06);
-    voice(ctx, bus, { freq: f, decay: 0.07, gain: 0.07, glide: 0.88 });
-    voice(ctx, bus, { freq: f * 1.7, decay: 0.04, gain: 0.018 });
-    voice(ctx, bus, { freq: f / 2, decay: 0.09, gain: 0.03 });
-  },
-  tick(ctx, bus) {
-    noise(ctx, bus, { dur: 0.006, freq: 3000, gain: 0.07 });
-  },
-  // تفعيل (مفضلة، "الأقرب مني"، إشعارات): نغمتان صاعدتان فوق نغمة دافئة عميقة
-  on(ctx, bus) {
-    voice(ctx, bus, { freq: NOTE.D5, decay: 0.35, gain: 0.06 });
-    voice(ctx, bus, { freq: NOTE.D3, decay: 0.5, gain: 0.05 });
-    voice(ctx, bus, { freq: NOTE.A5, at: 0.07, decay: 0.3, gain: 0.035, pan: 0.15 });
-  },
-  off(ctx, bus) {
-    voice(ctx, bus, { freq: NOTE.A4, decay: 0.25, gain: 0.05, glide: 0.94 });
-    voice(ctx, bus, { freq: NOTE.A4 / 4, decay: 0.3, gain: 0.04 });
-    voice(ctx, bus, { freq: NOTE.D4, at: 0.06, decay: 0.22, gain: 0.03, pan: -0.15 });
-  },
-  // فتح نافذة/قائمة: وتر ري الكبير يتفتّح نوتة نوتة
-  open(ctx, bus) {
-    [NOTE.D5, NOTE["F#5"], NOTE.A5].forEach((freq, i) =>
-      voice(ctx, bus, {
-        freq,
-        at: i * 0.045,
-        attack: 0.01,
-        decay: 0.6,
-        gain: 0.03,
-        pan: (i - 1) * 0.2,
-      })
-    );
-    voice(ctx, bus, { freq: NOTE.D3, decay: 0.5, gain: 0.03 });
-  },
-  // إغلاق: "وووش" نازل + ارتطام عميق ناعم
-  close(ctx, bus) {
-    noise(ctx, bus, { dur: 0.12, freq: 1800, sweepTo: 400, q: 0.7, gain: 0.035 });
-    voice(ctx, bus, { freq: 130, decay: 0.3, gain: 0.07, glide: 0.8 });
-  },
-  copy(ctx, bus) {
-    voice(ctx, bus, { freq: NOTE.D5, decay: 0.12, gain: 0.045 });
-    voice(ctx, bus, { freq: NOTE.A5, at: 0.06, decay: 0.14, gain: 0.04 });
-  },
-  // مشاركة: "وووش" صاعد ثم نغمة خفيفة
-  share(ctx, bus) {
-    noise(ctx, bus, { dur: 0.18, freq: 500, sweepTo: 3000, q: 1, gain: 0.03 });
-    voice(ctx, bus, { freq: NOTE.A5, at: 0.1, decay: 0.25, gain: 0.035 });
-  },
-  // نتيجة (اختار لي/خطة اليوم): وتر كامل يرن ويتوزع يمين/يسار
-  success(ctx, bus) {
-    [NOTE.D5, NOTE["F#5"], NOTE.A5, NOTE.D6].forEach((freq, i) =>
-      voice(ctx, bus, {
-        freq,
-        at: i * 0.06,
-        attack: 0.02,
-        decay: 1.0,
-        gain: 0.03,
-        pan: -0.3 + i * 0.2,
-      })
-    );
-    voice(ctx, bus, { freq: NOTE.D3, decay: 0.8, gain: 0.04 });
-  },
-};
-
-function playSound(name) {
-  if (!isSoundEnabled()) return;
-  const ctx = getAudioContext();
-  SOUNDS[name](ctx, getSfxBus(ctx));
-}
-
-function playClickSound() {
-  playSound("tap");
-}
-
-function playSuccessSound() {
-  playSound("success");
-}
-
-function initSoundToggle() {
-  const btn = document.querySelector(".sound-toggle");
-  if (!btn) return;
-
-  function apply(enabled) {
-    btn.classList.toggle("active", enabled);
-    btn.innerHTML = enabled ? TOGGLE_ICON_SVG.volumeOn : TOGGLE_ICON_SVG.volumeOff;
-    const label = enabled ? t("sound_on") : t("sound_off");
-    btn.setAttribute("aria-label", label);
-    btn.title = label;
-  }
-
-  apply(isSoundEnabled());
-
-  btn.addEventListener("click", () => {
-    const next = !isSoundEnabled();
-    lsSet(SOUND_KEY, next ? "on" : "off");
-    apply(next);
-    if (next) playSound("on");
-  });
-}
-
-/* ===== أيقونات SVG مضمّنة لأزرار الهيدر التبديلية (مظهر/صوت) =====
+/* ===== أيقونات SVG مضمّنة لأزرار الهيدر التبديلية (المظهر) =====
    نفس أيقونات Material Symbols المستخدَمة بـicon.njk (القوالب) — هنا لازم
-   نص جافاسكربت خام بدل الماكرو لأن الحالة (فاتح/داكن/تلقائي، مفعّل/مطفأ)
+   نص جافاسكربت خام بدل الماكرو لأن الحالة (فاتح/داكن/تلقائي)
    تتغيّر وقت التشغيل لا وقت البناء. fill="currentColor" يخلّيها تتبع لون
    الزر تلقائياً بدل لون إيموجي ثابت لا يتجاوب مع hover/active. */
 const TOGGLE_ICON_SVG = {
@@ -537,15 +326,15 @@ const TOGGLE_ICON_SVG = {
     '<svg width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></svg>',
   dark: '<svg width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/></svg>',
   auto: '<svg width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M312-320h64l32-92h146l32 92h62L512-680h-64L312-320Zm114-144 52-150h4l52 150H426Zm54 436L346-160H160v-186L28-480l132-134v-186h186l134-132 134 132h186v186l132 134-132 134v186H614L480-28Zm0-112 100-100h140v-140l100-100-100-100v-140H580L480-820 380-720H240v140L140-480l100 100v140h140l100 100Zm0-340Z"/></svg>',
-  volumeOn:
-    '<svg width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/></svg>',
-  volumeOff:
-    '<svg width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"/></svg>',
 };
 
 /* ===== أيقونات SVG مضمّنة لبطاقة العنصر (نفس مصدر icon.njk) — هنا نص خام
    لأن buildItemCard/buildActionsHtml تبني HTML كسلاسل نصية وقت التشغيل ===== */
 const ICON_SVG = {
+  heart:
+    '<svg width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg>',
+  "heart-fill":
+    '<svg width="20" height="20" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg>',
   share:
     '<svg width="16" height="16" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M720-80q-50 0-85-35t-35-85q0-7 1-14.5t3-13.5L322-392q-17 15-38 23.5t-44 8.5q-50 0-85-35t-35-85q0-50 35-85t85-35q23 0 44 8.5t38 23.5l282-164q-2-6-3-13.5t-1-14.5q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35q-23 0-44-8.5T638-672L356-508q2 6 3 13.5t1 14.5q0 7-1 14.5t-3 13.5l282 164q17-15 38-23.5t44-8.5q50 0 85 35t35 85q0 50-35 85t-85 35Zm0-640q17 0 28.5-11.5T760-760q0-17-11.5-28.5T720-800q-17 0-28.5 11.5T680-760q0 17 11.5 28.5T720-720ZM240-440q17 0 28.5-11.5T280-480q0-17-11.5-28.5T240-520q-17 0-28.5 11.5T200-480q0 17 11.5 28.5T240-440Zm480 280q17 0 28.5-11.5T760-200q0-17-11.5-28.5T720-240q-17 0-28.5 11.5T680-200q0 17 11.5 28.5T720-160Zm0-600ZM240-480Zm480 280Z"/></svg>',
   schedule:
@@ -602,7 +391,6 @@ function initThemeToggle() {
       lsSet(KEY, next);
     }
     apply(next);
-    playClickSound();
   });
 }
 
@@ -611,16 +399,23 @@ function initNavToggle() {
   const toggles = document.querySelectorAll(".nav-toggle");
   const nav = document.querySelector(".main-nav");
   if (!toggles.length || !nav) return;
-  toggles.forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("open");
-      toggles.forEach((btn) => {
-        btn.classList.toggle("open", isOpen);
-        btn.setAttribute("aria-expanded", String(isOpen));
-        btn.setAttribute("aria-label", isOpen ? t("nav_toggle_close") : t("nav_toggle_open"));
-      });
-      playSound(isOpen ? "open" : "close");
+  function setOpen(isOpen) {
+    nav.classList.toggle("open", isOpen);
+    toggles.forEach((btn) => {
+      btn.classList.toggle("open", isOpen);
+      btn.setAttribute("aria-expanded", String(isOpen));
+      btn.setAttribute("aria-label", isOpen ? t("nav_toggle_close") : t("nav_toggle_open"));
     });
+  }
+  toggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => setOpen(!nav.classList.contains("open")));
+  });
+  // Escape يغلق القائمة كما يغلق نافذة المنيو وكشف «اختار لي»، ويعيد التركيز للزر
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape" || !nav.classList.contains("open")) return;
+    setOpen(false);
+    const visible = [...toggles].find((btn) => btn.offsetParent !== null) || toggles[0];
+    visible.focus();
   });
 }
 
@@ -749,10 +544,14 @@ function initAutoUpdateCheck() {
     }
   }
 
-  checkVersion();
-  setInterval(checkVersion, 5 * 60 * 1000);
+  // بلا اتصال لا نطلب version.json (كل طلب يفشل ويملأ الـconsole بأخطاء)؛
+  // نفحص حين يعود الاتصال
+  const checkIfOnline = () => navigator.onLine && checkVersion();
+  checkIfOnline();
+  setInterval(checkIfOnline, 5 * 60 * 1000);
+  window.addEventListener("online", checkVersion);
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") checkVersion();
+    if (document.visibilityState === "visible") checkIfOnline();
     else reloadWhenSafe();
   });
 }
@@ -798,9 +597,11 @@ const LINK_META = {
   menu: { icon: ICON_SVG["menu-book"], labelKey: "link_menu" },
 };
 
-// ترتيب ثابت للأزرار بغض النظر عن ترتيب الحقول باللوحة — رابط الموقع (website)
-// دايماً أول زر وبتنسيق أساسي (بارز)، والباقي أزرار ثانوية بعده
-const LINK_ORDER = ["website", "phone", "maps", "instagram", "menu"];
+// ترتيب ثابت للأزرار بغض النظر عن ترتيب الحقول باللوحة. الخريطة أولاً وهي الزر
+// الأزرق الوحيد (موجودة لكل مكان تقريباً، فيبقى الزر نفسه بكل بطاقة بالشبكة،
+// ومثل صفحة المكان: الهدف أن يروح له). بعدها رابطان ثانويان كحد أقصى
+const LINK_ORDER = ["maps", "phone", "website", "instagram", "menu"];
+const MAX_SECONDARY_ACTIONS = 2;
 
 /* ===== ترتيب "قريب مني" حسب المسافة ===== */
 function haversineKm(lat1, lng1, lat2, lng2) {
@@ -859,7 +660,6 @@ function initArticleShare() {
     const icon = match ? match[1] : "🧭";
     const title = match ? heading.slice(match[0].length).trim() : heading;
     shareText(text, { section: (window.PAGE || {}).section || "" }, { icon, title });
-    playSound("share");
   });
 }
 
@@ -874,107 +674,7 @@ function initArticleListen() {
     player.classList.remove("hidden");
     if (player.paused) player.play();
     else player.pause();
-    playClickSound();
   });
-}
-
-/* ===== مرمّزات صوتية مشتركة =====
-   يستعملها مصدّر الموسيقى ومحوّل الملفات معاً، فمكانها هنا لا داخل أحدهما */
-
-function audioBufferToWav(buffer) {
-  const channels = buffer.numberOfChannels;
-  const samples = buffer.length;
-  const blockAlign = channels * 2;
-  const dataSize = samples * blockAlign;
-  const view = new DataView(new ArrayBuffer(44 + dataSize));
-  const writeText = (offset, text) => {
-    for (let i = 0; i < text.length; i++) view.setUint8(offset + i, text.charCodeAt(i));
-  };
-
-  writeText(0, "RIFF");
-  view.setUint32(4, 36 + dataSize, true);
-  writeText(8, "WAVE");
-  writeText(12, "fmt ");
-  view.setUint32(16, 16, true);
-  view.setUint16(20, 1, true); // PCM
-  view.setUint16(22, channels, true);
-  view.setUint32(24, buffer.sampleRate, true);
-  view.setUint32(28, buffer.sampleRate * blockAlign, true);
-  view.setUint16(32, blockAlign, true);
-  view.setUint16(34, 16, true);
-  writeText(36, "data");
-  view.setUint32(40, dataSize, true);
-
-  const data = [];
-  for (let c = 0; c < channels; c++) data.push(buffer.getChannelData(c));
-  let offset = 44;
-  for (let i = 0; i < samples; i++) {
-    for (let c = 0; c < channels; c++) {
-      const value = Math.max(-1, Math.min(1, data[c][i]));
-      view.setInt16(offset, value < 0 ? value * 0x8000 : value * 0x7fff, true);
-      offset += 2;
-    }
-  }
-  return new Blob([view.buffer], { type: "audio/wav" });
-}
-
-/* MP3 يحتاج مرمّزاً — المتصفحات ما ترمّزه أصلاً (MediaRecorder يعطي webm أو
-   mp4 لا mp3). نستضيف lamejs عندنا لا من CDN عشان تبقى سياسة CSP صارمة
-   (script-src 'self')، ونحمّله فقط عند الطلب: 156 كيلوبايت ما تُنزَّل على أي
-   زائر لا يصدّر MP3.
-   lamejs مرخّص LGPL-3.0 — يُشحن كملف مستقل بلا تعديل ومعه نص رخصته
-   بـ src/js/vendor/lamejs-LICENSE.txt. */
-let lamePromise = null;
-function loadLameEncoder() {
-  if (window.lamejs) return Promise.resolve(window.lamejs);
-  if (!lamePromise) {
-    lamePromise = new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = `${SITE_ROOT_PATH}js/vendor/lame.min.js`;
-      script.onload = () => resolve(window.lamejs);
-      script.onerror = () => {
-        lamePromise = null;
-        reject(new Error("lame load failed"));
-      };
-      document.head.appendChild(script);
-    });
-  }
-  return lamePromise;
-}
-
-function floatToPcm16(channel) {
-  const out = new Int16Array(channel.length);
-  for (let i = 0; i < channel.length; i++) {
-    const value = Math.max(-1, Math.min(1, channel[i]));
-    out[i] = value < 0 ? value * 0x8000 : value * 0x7fff;
-  }
-  return out;
-}
-
-/* onProgress اختياري: ترميز MP3 لملف طويل يشغّل الخيط الرئيسي ثوانيَ طويلة،
-   فنسلّمه التقدّم ونفسح المجال للرسم كل عدد من الكتل */
-async function audioBufferToMp3(buffer, kbps = 192, onProgress) {
-  const lame = await loadLameEncoder();
-  const stereo = buffer.numberOfChannels > 1;
-  const left = floatToPcm16(buffer.getChannelData(0));
-  const right = stereo ? floatToPcm16(buffer.getChannelData(1)) : null;
-
-  const encoder = new lame.Mp3Encoder(stereo ? 2 : 1, buffer.sampleRate, kbps);
-  const chunks = [];
-  const BLOCK = 1152; // حجم إطار MP3 القياسي
-  for (let i = 0; i < left.length; i += BLOCK) {
-    const encoded = stereo
-      ? encoder.encodeBuffer(left.subarray(i, i + BLOCK), right.subarray(i, i + BLOCK))
-      : encoder.encodeBuffer(left.subarray(i, i + BLOCK));
-    if (encoded.length > 0) chunks.push(encoded);
-    if (onProgress && (i / BLOCK) % 400 === 0) {
-      onProgress(i / left.length);
-      await new Promise((r) => setTimeout(r, 0));
-    }
-  }
-  const flushed = encoder.flush();
-  if (flushed.length > 0) chunks.push(flushed);
-  return new Blob(chunks, { type: "audio/mpeg" });
 }
 
 function buildShareUrl(section, item) {
@@ -1174,19 +874,16 @@ function buildMeatSourceHtml(item) {
   if (age) parts.push(age);
   return `
       <details class="meat-source">
-        <summary>🥩 ${t("meat_source_label")}</summary>
+        <summary>${t("meat_source_label")}</summary>
         <p class="meat-source-text">${escapeHtml(text)}</p>
         <p class="meat-source-meta">${parts.join(" · ")}</p>
       </details>`;
 }
 
 function buildActionsHtml(item) {
-  // صفحة التفاصيل زر أساسي، والباقي (هاتف/خريطة/منيو...) يبقى ثانوي جنبه
-  let detailHtml = "";
-  if (item.detailUrl) {
-    const href = window.SITE_LANG === "en" && item.detailUrlEn ? item.detailUrlEn : item.detailUrl;
-    detailHtml = `<a class="btn" href="${href}">${ICON_SVG["menu-book"]} ${t("read_details")}</a>`;
-  }
+  // زر أزرق واحد (أول رابط بالترتيب، غالباً الخريطة)، ثم صفحة التفاصيل والمنيو
+  // التفاعلي إن وُجدا، ثم الباقي — وما بعد الرابطين الثانويين لا يظهر بالبطاقة
+  const isEn = window.SITE_LANG === "en";
   // قائمة الطعام التفاعلية تحل محل زر صورة المنيو العادي، لا تظهران معاً
   const hasStructuredMenu = item.menuCount > 0 || (Array.isArray(item.menuItems) && item.menuItems.length > 0);
   const links = { ...(item.links || (item.url ? { website: item.url } : {})) };
@@ -1194,36 +891,39 @@ function buildActionsHtml(item) {
   const orderedKeys = Object.keys(links)
     .filter((key) => links[key])
     .sort((a, b) => LINK_ORDER.indexOf(a) - LINK_ORDER.indexOf(b));
-  let html = orderedKeys
-    .map((key, i) => {
-      const url = links[key];
-      const meta = LINK_META[key] || { icon: "🔗", labelKey: "link_generic" };
-      const metaLabel = t(meta.labelKey);
-      const cls = i === 0 && !detailHtml ? "btn" : "btn secondary";
-      if (key === "phone") {
-        // يدعم أكثر من رقم بالحقل الواحد (مفصولة بفاصلة) — مثل رقم واتساب
-        // ورقم اتصال عادي مختلفين — بزر مستقل لكل رقم بدل ما نجبر عنصر واحد بس
-        const numbers = url
-          .split(",")
-          .map((n) => n.trim())
-          .filter(Boolean);
-        return numbers
-          .map((num, idx) => {
-            const label = numbers.length > 1 ? `${metaLabel} ${idx + 1}` : metaLabel;
-            return `<button type="button" class="${cls} phone-copy-btn" data-phone="${escapeHtml(num)}">${meta.icon} ${escapeHtml(label)}</button>`;
-          })
-          .join("");
-      }
-      const cta = window.SITE_LANG === "en" ? item.cta_en || item.cta : item.cta;
-      const label = key === "website" && cta ? cta : metaLabel;
-      return `<a class="${cls}" href="${safeUrl(url)}" target="_blank" rel="noopener noreferrer">${meta.icon} ${escapeHtml(label)}</a>`;
-    })
-    .join("");
-  if (hasStructuredMenu) {
-    const cls = orderedKeys.length || detailHtml ? "btn secondary" : "btn";
-    html += `<button type="button" class="${cls} menu-open-btn">${ICON_SVG["menu-book"]} ${t("link_menu")}</button>`;
+  const linkBtn = (key, cls) => {
+    const url = links[key];
+    const meta = LINK_META[key] || { icon: ICON_SVG.language, labelKey: "link_generic" };
+    const metaLabel = t(meta.labelKey);
+    if (key === "phone") {
+      // يدعم أكثر من رقم بالحقل الواحد (مفصولة بفاصلة) — زر لكل رقم
+      const numbers = url
+        .split(",")
+        .map((n) => n.trim())
+        .filter(Boolean);
+      return numbers.map((num, idx) => {
+        const label = numbers.length > 1 ? `${metaLabel} ${idx + 1}` : metaLabel;
+        return `<button type="button" class="${idx ? "btn secondary" : cls} phone-copy-btn" data-phone="${escapeHtml(num)}">${meta.icon} ${escapeHtml(label)}</button>`;
+      });
+    }
+    const cta = isEn ? item.cta_en || item.cta : item.cta;
+    const label = key === "website" && cta ? cta : metaLabel;
+    const rel = key === "website" && item.affiliate ? "noopener noreferrer sponsored" : "noopener noreferrer";
+    return [`<a class="${cls}" href="${safeUrl(url)}" target="_blank" rel="${rel}">${meta.icon} ${escapeHtml(label)}</a>`];
+  };
+  const [primaryKey, ...restKeys] = orderedKeys;
+  const primary = primaryKey ? linkBtn(primaryKey, "btn") : [];
+  const secondary = [];
+  if (item.detailUrl) {
+    const href = isEn && item.detailUrlEn ? item.detailUrlEn : item.detailUrl;
+    secondary.push(`<a class="btn secondary" href="${href}">${ICON_SVG["menu-book"]} ${t("read_details")}</a>`);
   }
-  return detailHtml + html;
+  if (hasStructuredMenu)
+    secondary.push(`<button type="button" class="btn secondary menu-open-btn">${ICON_SVG["menu-book"]} ${t("link_menu")}</button>`);
+  restKeys.forEach((key) => secondary.push(...linkBtn(key, "btn secondary")));
+  // بلا أي رابط: أول زر ثانوي يصير هو الأساسي، فلا تبقى البطاقة بلا زر أزرق
+  if (!primary.length && secondary.length) secondary[0] = secondary[0].replace('class="btn secondary', 'class="btn');
+  return primary.concat(secondary.slice(0, MAX_SECONDARY_ACTIONS + (primary.length ? 0 : 1))).join("");
 }
 
 /* ===== رسالة تأكيد عابرة (Toast) ===== */
@@ -1244,10 +944,10 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove("open"), 2000);
 }
 
-// ترتيب التثبيت أول القائمة: الممول فوق المميز فوق الباقي. الترتيب الأصلي
+// المميز يُثبَّت أول القائمة (لا مكان يدفع ليظهر أو يتقدّم). الترتيب الأصلي
 // محفوظ داخل كل مرتبة لأن Array.sort ثابت (stable) بكل المتصفحات الحديثة
 function pinRank(item) {
-  return (item.sponsored ? 2 : 0) + (item.featured ? 1 : 0);
+  return item.featured ? 1 : 0;
 }
 
 /* ===== توهّج دخول خفيف عند ظهور البطاقة بمجال الرؤية (قائمة طويلة تظل حيّة
@@ -1282,7 +982,7 @@ function sectionBadge(section) {
   if (!label) return "";
   const span = document.createElement("span");
   span.textContent = label;
-  return `<span class="section-badge">${meta.icon || ""} ${span.innerHTML}</span>`;
+  return `<span class="section-badge">${span.innerHTML}</span>`;
 }
 
 /* ===== بناء بطاقة عنصر واحدة ===== */
@@ -1293,7 +993,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   card.className = [
     "item-card",
     "scroll-reveal",
-    item.sponsored ? "sponsored" : item.featured ? "featured" : "",
+    item.featured ? "featured" : "",
     item.verified ? "verified" : "",
   ]
     .filter(Boolean)
@@ -1307,8 +1007,8 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   const isLongDesc = desc.length > 100;
 
   card.innerHTML = `
-    ${item.image ? `<img class="item-photo" src="${escapeHtml(item.image)}" alt="${escapeHtml(title)}" loading="${index < 4 ? "eager" : "lazy"}" decoding="async" />${item.imageCredit ? `<a class="photo-credit card" dir="ltr" href="${escapeHtml(item.imageCreditUrl)}" target="_blank" rel="noopener">📷 ${escapeHtml(item.imageCredit)}</a>` : ""}` : ""}
-    ${item.sponsored ? `<span class="sponsored-badge">${t("sponsored_badge")}</span>` : item.featured ? `<span class="featured-badge">${t("featured_badge")}</span>` : ""}
+    ${item.image ? `<img class="item-photo" src="${escapeHtml(item.image)}" alt="${escapeHtml(title)}" loading="${index < 4 ? "eager" : "lazy"}" decoding="async" />${item.imageCredit ? `<a class="photo-credit card" dir="ltr" href="${escapeHtml(item.imageCreditUrl)}" target="_blank" rel="noopener">${escapeHtml(item.imageCredit)}</a>` : ""}` : ""}
+    ${item.featured ? `<span class="featured-badge">${t("featured_badge")}</span>` : ""}
     <div class="item-body">
       ${sectionBadge(section)}
       <div class="item-top">
@@ -1316,13 +1016,13 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
         <div class="item-top-actions">
           <button class="share-btn" title="${t("share_whatsapp")}" aria-label="${t("share_whatsapp")}">${ICON_SVG.share}</button>
           <button class="fav-btn ${fav ? "active" : ""}" title="${fav ? t("fav_remove") : t("fav_add")}" aria-label="${fav ? t("fav_remove") : t("fav_add")}" aria-pressed="${fav}">
-            ${fav ? "♥" : "♡"}
+            ${fav ? ICON_SVG["heart-fill"] : ICON_SVG.heart}
           </button>
         </div>
       </div>
       <h3><bdi>${escapeHtml(title)}</bdi>${item.verified ? ` <span class="verified-badge" title="${t("verified_badge")}">${t("verified_badge")}</span>` : ""}${item.liked ? ` <span class="liked-badge" title="${t("liked_badge")}">${t("liked_badge")}</span>` : ""}</h3>
       <p class="item-desc${isLongDesc ? " clamped" : ""}">${escapeHtml(desc)}</p>
-      ${isLongDesc ? `<button class="desc-toggle" aria-expanded="false">${t("read_more")}</button>` : ""}
+      ${isLongDesc && !item.detailUrl ? `<button class="desc-toggle" aria-expanded="false">${t("read_more")}</button>` : ""}
       ${itemHours(item) ? `<p class="item-hours">${ICON_SVG.schedule} ${escapeHtml(itemHours(item))}</p>` : ""}
       <div class="item-meta">
         ${item.isNew ? `<span class="tag new-tag">${t("new_badge")}</span>` : ""}
@@ -1333,6 +1033,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
       <div class="item-actions">
         ${buildActionsHtml(item)}
       </div>
+      ${item.affiliate ? `<p class="affiliate-note">${t("promo_affiliate_note")}</p>` : ""}
       <a class="report-link" href="${SITE_ROOT_PATH}${window.SITE_LANG === "en" ? "en/" : ""}contact.html?report=${encodeURIComponent(title)}&section=${encodeURIComponent(section)}">${t("report_wrong_info")}</a>
     </div>
   `;
@@ -1341,7 +1042,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   favBtn.addEventListener("click", () => {
     const nowFav = toggleFavorite(section, item.id);
     favBtn.classList.toggle("active", nowFav);
-    favBtn.textContent = nowFav ? "♥" : "♡";
+    favBtn.innerHTML = nowFav ? ICON_SVG["heart-fill"] : ICON_SVG.heart;
     const label = nowFav ? t("fav_remove") : t("fav_add");
     favBtn.title = label;
     favBtn.setAttribute("aria-label", label);
@@ -1349,7 +1050,6 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
     favBtn.classList.remove("pop");
     void favBtn.offsetWidth;
     favBtn.classList.add("pop");
-    playSound(nowFav ? "on" : "off");
   });
 
   const shareBtn = card.querySelector(".share-btn");
@@ -1366,7 +1066,6 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
         photo: item.image,
       }
     );
-    playSound("share");
   });
 
   const descToggle = card.querySelector(".desc-toggle");
@@ -1380,7 +1079,6 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
         card.classList.add("just-expanded");
         setTimeout(() => card.classList.remove("just-expanded"), 900);
       }
-      playSound(expanded ? "open" : "tap");
     });
   }
 
@@ -1402,35 +1100,14 @@ function wireItemActions(root, item) {
         return;
       }
       showToast(t("phone_copied"));
-      playSound("copy");
     });
   });
   const menuBtn = root.querySelector(".menu-open-btn");
   if (menuBtn) {
     menuBtn.addEventListener("click", () => {
-      playSound("open");
       openMenuOverlay(item);
     });
   }
-}
-
-/* ===== تتبّع الأقسام اللي تصفّحها الزائر (محلياً، بدون تسجيل دخول) — يغذّي
-   مؤشر "استكشفت X من Y قسم" بالرئيسية (مبدأ Zeigarnik: العقل ما ينسى الشي الناقص) ===== */
-const EXPLORED_KEY = "site_explored_sections_v1";
-
-function getExploredSections() {
-  try {
-    return JSON.parse(lsGet(EXPLORED_KEY)) || {};
-  } catch {
-    return {};
-  }
-}
-
-function markSectionExplored(section) {
-  const explored = getExploredSections();
-  if (explored[section]) return;
-  explored[section] = true;
-  lsSet(EXPLORED_KEY, JSON.stringify(explored));
 }
 
 /* ===== عرض قسم كامل: بحث + فلاتر + شبكة بطاقات =====
@@ -1493,8 +1170,6 @@ function renderSection(section, typeFilter) {
   const data = SITE_DATA[section];
   if (!data) return;
 
-  markSectionExplored(section);
-
   const grid = document.querySelector(".card-grid");
   const searchInput = document.querySelector(".search-box");
   const filtersWrap = document.querySelector(".filters");
@@ -1536,7 +1211,6 @@ function renderSection(section, typeFilter) {
       for (const k in active) delete active[k];
       updateActiveChip();
       renderGrid();
-      playClickSound();
     });
     filtersWrap.appendChild(allChip);
 
@@ -1556,7 +1230,6 @@ function renderSection(section, typeFilter) {
         else active[kind] = tag;
         updateActiveChip();
         renderGrid();
-        playClickSound();
       });
       filtersWrap.appendChild(chip);
     });
@@ -1572,7 +1245,6 @@ function renderSection(section, typeFilter) {
         filtersExpanded = !filtersExpanded;
         renderFilters();
         updateActiveChip();
-        playClickSound();
       });
       filtersWrap.appendChild(toggleChip);
     }
@@ -1630,13 +1302,11 @@ function renderSection(section, typeFilter) {
       grid.innerHTML = isSectionEmpty
         ? `
         <div class="empty-state full-row">
-          <span class="icon">🧭</span>
           <p>${t("empty_section")}</p>
         </div>
       `
         : `
         <div class="empty-state full-row">
-          <span class="icon">🔍</span>
           <p>${t("empty_search")}</p>
         </div>
       `;
@@ -1664,7 +1334,6 @@ function renderSection(section, typeFilter) {
         nearMeBtn.setAttribute("aria-pressed", "false");
         nearMeBtn.textContent = t("near_me");
         renderGrid();
-        playSound("off");
         return;
       }
       if (!navigator.geolocation) {
@@ -1680,7 +1349,6 @@ function renderSection(section, typeFilter) {
           nearMeBtn.setAttribute("aria-pressed", "true");
           nearMeBtn.textContent = t("near_me_active");
           renderGrid();
-          playSound("on");
           // بالجوال القائمة تحت الشاشة: ننزل لأول بطاقة ونقول كم وحدة ترتّبت، عشان يبان إن شي تغيّر
           const sorted = grid.querySelectorAll(".distance-tag").length;
           showToast(t("near_me_sorted").replace("{n}", sorted));
@@ -1731,7 +1399,7 @@ function renderFavoritesPage() {
   if (collected.length === 0) {
     grid.innerHTML = `
       <div class="empty-state full-row">
-        <span class="icon">♡</span>
+        <span class="icon">${ICON_SVG.heart.replace(/"20"/g, '"40"')}</span>
         <p>${t("favorites_empty_html")}</p>
       </div>
     `;
@@ -1741,133 +1409,6 @@ function renderFavoritesPage() {
   collected.forEach(({ section, item }, index) =>
     grid.appendChild(buildItemCard(section, item, index))
   );
-}
-
-/* ===== اختيار اليوم: عنصر واحد ثابت طوال اليوم، يتغيّر تلقائياً كل يوم
-   (نفس الاختيار لكل الزوار بنفس اليوم — يعتمد على تاريخ اليوم كبذرة ثابتة،
-   بدون عشوائية حقيقية ولا خادم، فيدور على كل العناصر بالتناوب بمرور الأيام) ===== */
-// مفتاح اختيار اليوم — يستعمله شريط "أحدث الإضافات" ليتفادى تكرار نفس
-// البطاقة مرّتين بنفس الصف
-let FEATURED_PICK_KEY = "";
-
-function renderFeaturedPick() {
-  const container = document.getElementById("homeCarousel");
-  if (!container) return;
-
-  const allItems = [];
-  Object.keys(SITE_DATA).forEach((section) => {
-    (SITE_DATA[section].items || []).forEach((item) => {
-      allItems.push({ section, item });
-    });
-  });
-
-  if (allItems.length === 0) {
-    container.innerHTML = `
-      <div class="empty-state">
-        <span class="icon">🎯</span>
-        <p>${t("stay_tuned")}</p>
-      </div>
-    `;
-    return;
-  }
-
-  const daysSinceEpoch = Math.floor(Date.now() / 86400000);
-  const { section, item } = allItems[daysSinceEpoch % allItems.length];
-  FEATURED_PICK_KEY = `${section}:${item.id}`;
-
-  const wrapper = document.createElement("div");
-  wrapper.className = "carousel-item";
-  wrapper.innerHTML = `<span class="carousel-label">🎯 ${t("daily_pick_label")}</span><div class="featured-pick-frame"></div>`;
-  wrapper.querySelector(".featured-pick-frame").appendChild(buildItemCard(section, item, 0));
-  container.prepend(wrapper);
-}
-
-function renderNewestSection() {
-  const container = document.getElementById("homeCarousel");
-  if (container) renderNewestItems(container);
-}
-
-function renderNewestItems(container) {
-  const all = [];
-  Object.keys(SITE_DATA).forEach((section) => {
-    (SITE_DATA[section].items || []).forEach((item) => {
-      if (item.hideFromNewest) return;
-      if (item.addedAt && `${section}:${item.id}` !== FEATURED_PICK_KEY)
-        all.push({ section, item });
-    });
-  });
-  if (!all.length) return;
-
-  all
-    .sort((a, b) => b.item.addedAt - a.item.addedAt)
-    .slice(0, 6)
-    .forEach(({ section, item }, index) => {
-      const wrapper = document.createElement("div");
-      wrapper.className = "carousel-item";
-      wrapper.innerHTML = `<span class="carousel-label">🆕 ${t("newest_label")}</span>`;
-      wrapper.appendChild(buildItemCard(section, item, index));
-      container.appendChild(wrapper);
-    });
-}
-
-/* ===== رقم حقيقي بالهيرو (الصفحة الرئيسية) — عدد العناصر الفعلي بكل
-   الأقسام، محسوب من SITE_DATA (المولَّد من ملفات src/<section>/*.md وقت
-   البناء) لا رقم مكتوب يدوياً — فيتحدّث تلقائياً كل ما أضفنا محل جديد بدون
-   الحاجة نعدّل أي نص بالموقع ===== */
-function renderSiteStats() {
-  const el = document.getElementById("siteStatsLine");
-  if (!el) return;
-
-  const total = Object.values(SITE_DATA).reduce(
-    (sum, section) => sum + (section.items || []).length,
-    0
-  );
-  if (total === 0) return;
-
-  el.textContent = `${t("site_stats_prefix")} ${total} ${t("site_stats_suffix")}`;
-}
-
-/* ===== مؤشر "استكشفت X من Y قسم" (الصفحة الرئيسية) — يشجع الزائر يكمل تصفح
-   باقي الأقسام بدل ما يوقف بقسم وحد (مبدأ Zeigarnik) ===== */
-function renderExploreProgress() {
-  const container = document.getElementById("exploreProgress");
-  if (!container) return;
-
-  const totalSections = Object.keys(SITE_DATA);
-  const explored = getExploredSections();
-  const exploredSections = totalSections.filter((s) => explored[s]);
-  const total = totalSections.length;
-  const count = exploredSections.length;
-
-  if (total === 0) return;
-
-  document.querySelectorAll(".section-card[data-section]").forEach((card) => {
-    if (explored[card.dataset.section]) card.classList.add("explored");
-  });
-
-  if (count === 0) {
-    container.innerHTML = "";
-    return;
-  }
-
-  const percent = Math.round((count / total) * 100);
-  const isComplete = count >= total;
-
-  container.innerHTML = `
-    <p class="explore-progress-text">
-      ${
-        isComplete
-          ? t("explore_complete")
-          : `🧭 ${t("explore_progress_verb")} ${count} ${t("explore_progress_of")} ${total} ${t("explore_progress_sections")}`
-      }
-    </p>
-    <div class="explore-progress-bar"><div class="explore-progress-fill"></div></div>
-  `;
-
-  // العرض يُضبط عبر CSSOM بعد الإدراج — سمة style مضمّنة بالـ HTML ممنوعة
-  // بسياسة CSP (style-src-attr)، أما ضبط الخاصية بجافاسكربت فمسموح
-  const fill = container.querySelector(".explore-progress-fill");
-  if (fill) fill.style.width = `${percent}%`;
 }
 
 /* عدّاد الزيارات القديم (‎/track و/stats بالـ Worker) أُزيل — Google Analytics
@@ -1944,7 +1485,6 @@ function openMenuOverlay(item) {
   closeBtn.textContent = "✕";
   closeBtn.setAttribute("aria-label", t("daily_pick_close"));
   closeBtn.addEventListener("click", () => {
-    playSound("close");
     close();
   });
   overlay.appendChild(closeBtn);
@@ -1953,7 +1493,7 @@ function openMenuOverlay(item) {
   const card = document.createElement("div");
   card.className = "menu-card";
   card.innerHTML = `
-    <h3>${escapeHtml(item.icon || "🍽️")} ${escapeHtml(itemTitle(item))}</h3>
+    <h3>${escapeHtml(itemTitle(item))}</h3>
     <ul class="menu-items" aria-live="polite"><li aria-busy="true">…</li></ul>
   `;
   overlay.appendChild(card);
@@ -2025,7 +1565,7 @@ function renderDayPlan() {
     stage.innerHTML = "";
 
     if (!current.length) {
-      stage.innerHTML = `<div class="empty-state full-row"><span class="icon">🧭</span><p>${t("empty_section")}</p></div>`;
+      stage.innerHTML = `<div class="empty-state full-row"><p>${t("empty_section")}</p></div>`;
       if (shareBtn) shareBtn.classList.add("hidden");
       return;
     }
@@ -2037,7 +1577,7 @@ function renderDayPlan() {
 
       const head = document.createElement("div");
       head.className = "plan-step-head";
-      head.innerHTML = `<span class="plan-step-icon">${step.icon}</span><span class="plan-step-label">${t("plan_" + step.key)}</span>`;
+      head.innerHTML = `<span class="plan-step-label">${t("plan_" + step.key)}</span>`;
       row.appendChild(head);
 
       row.appendChild(buildItemCard(step.slug, step.item, i));
@@ -2045,11 +1585,9 @@ function renderDayPlan() {
     });
 
     if (shareBtn) shareBtn.classList.remove("hidden");
-    playSuccessSound();
   }
 
   btn.addEventListener("click", () => {
-    playClickSound();
     draw();
   });
 
@@ -2066,7 +1604,6 @@ function renderDayPlan() {
           subtitle: current.map((s) => itemTitle(s.item)).join(" · "),
         }
       );
-      playSound("share");
     });
   }
 
@@ -2079,7 +1616,6 @@ function initWelcomePicker() {
   if (!picks.length || !nextBtn) return;
   let i = 0;
   nextBtn.addEventListener("click", () => {
-    playClickSound();
     picks[i].classList.remove("active");
     i = (i + 1) % picks.length;
     picks[i].classList.add("active");
@@ -2088,7 +1624,6 @@ function initWelcomePicker() {
 
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
-  initSoundToggle();
   initNavToggle();
   initHeaderScroll();
   initInstallPrompt();
@@ -2110,12 +1645,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page.picker) initRandomPicker();
   if (page.plan) renderDayPlan();
   if (page.welcome) initWelcomePicker();
-  if (page.home) {
-    renderFeaturedPick();
-    renderNewestSection();
-    renderExploreProgress();
-    renderSiteStats();
-  }
 });
 
 /* ===== «/» يفتح البحث من أي صفحة (عُرف Google وGitHub)؛ بصفحة البحث نفسها يركّز على الحقل ===== */

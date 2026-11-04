@@ -1,0 +1,10 @@
+{#- جريدة توريلو: تاريخ بصيغة الجريدة («5 نوفمبر 2026» / «5 November 2026») من حقل dateAdded -#}
+{% macro npDate(value, lang) -%}
+{%- set iso = value | isoDate -%}
+{%- if iso -%}
+{%- set p = iso.split("-") -%}
+{%- set months = ["January","February","March","April","May","June","July","August","September","October","November","December"] if lang == "en" else ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"] -%}
+<time datetime="{{ iso }}">{{ p[2] | int }} {{ months[(p[1] | int) - 1] }} {{ p[0] }}</time>
+{%- endif -%}
+{%- endmacro %}
+

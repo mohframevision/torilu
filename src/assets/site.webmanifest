@@ -1,14 +1,14 @@
 {
   "name": "توريلو",
   "short_name": "توريلو",
-  "description": "دليل روابط وأدوات ومطاعم ومتاجر وأماكن — كل شيء مفيد في موقع واحد.",
+  "description": "دليل أماكن البحرين: مطاعم وكافيهات ومخابز ومتاجر وأماكن متحقَّق منها، مع المنيو بالأسعار.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "lang": "ar",
   "dir": "rtl",
-  "background_color": "#ffffff",
-  "theme_color": "#2563eb",
+  "background_color": "#faf6ef",
+  "theme_color": "#1545a2",
   "icons": [
     {
       "src": "/assets/android-chrome-192x192.png",
@@ -45,7 +45,7 @@
     {
       "name": "المفضلة",
       "short_name": "المفضلة",
-      "description": "الأماكن اللي حفظتها",
+      "description": "الأماكن التي حفظتها",
       "url": "/favorites.html"
     }
   ]

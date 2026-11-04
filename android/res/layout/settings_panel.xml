@@ -22,10 +22,8 @@
             android:text="@string/settings_title"
             android:textStyle="bold"
             android:textColor="@color/text"
-            android:textSize="17sp"
-            android:drawableStart="@drawable/ic_settings_small"
-            android:drawableTint="@color/text"
-            android:drawablePadding="8dp" />
+            android:textSize="22sp"
+            android:fontFamily="@font/amiri" />
 
         <ImageView
             android:id="@+id/settingsCloseButton"

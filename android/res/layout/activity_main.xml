@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- الرئيسية: بحث شامل فوق، مربعات الأقسام، "اختيار اليوم"، و"جديد على توريلو".
+<!-- الرئيسية بشكل «د»: الشعار وسطر التاريخ، سؤال كبير بخط الجريدة والبحث تحته،
+     ثم الأقسام و«مكان الأسبوع» و«جديد في توريلو» و«محتار؟» (نفس ترتيب الموقع).
      كل قسم يفتح قائمته بشاشة خاصة (SectionActivity). المحتوى يُبنى بالكود
      بعد الجلب (الأقسام بيانات من الموقع، مو قائمة ثابتة) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -77,41 +78,27 @@
                 android:paddingEnd="16dp"
                 android:paddingBottom="24dp">
 
+                <!-- الشعار «توريلو.» بخط الجريدة، والإعدادات بهدوء على الطرف -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="14dp">
+                    android:paddingTop="10dp">
 
-                    <!-- التاريخ صغيراً بلون الهوية، وتحته تحية حسب الوقت بخط العناوين -->
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/homeWordmark"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/homeDate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/brand_accent"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/homeGreeting"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/text"
-                            android:textSize="30sp" />
-                    </LinearLayout>
+                        android:textColor="@color/text"
+                        android:textSize="30sp" />
 
                     <ImageView
                         android:id="@+id/settingsButton"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
+                        android:layout_marginEnd="-12dp"
                         android:padding="12dp"
                         android:src="@drawable/ic_settings"
                         android:tint="@color/text_muted"
@@ -121,19 +108,63 @@
                         android:background="?android:attr/selectableItemBackgroundBorderless" />
                 </LinearLayout>
 
+                <!-- سطر التاريخ مثل الجريدة، بين خط رفيع فوقه وتحته -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/ink_rule" />
+
+                <TextView
+                    android:id="@+id/homeDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/ink_rule" />
+
+                <TextView
+                    android:id="@+id/homeHero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/home_hero_title"
+                    android:textColor="@color/text"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/home_hero_sub"
+                    android:textColor="@color/text_muted"
+                    android:textSize="15sp" />
+
+                <!-- بحث كبير مستدير بظل ناعم (.d-hero .home-search) -->
                 <TextView
                     android:id="@+id/searchPill"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginBottom="6dp"
                     android:background="@drawable/search_pill_bg"
+                    android:elevation="6dp"
                     android:gravity="center_vertical|start"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
                     android:text="@string/home_search_hint"
                     android:textColor="@color/text_muted"
-                    android:textSize="16sp"
+                    android:textSize="15.5sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:drawableStart="@drawable/ic_search"
-                    android:drawableTint="@color/on_tonal"
+                    android:drawableTint="@color/brand_accent"
                     android:drawablePadding="12dp"
                     android:clickable="true"
                     android:focusable="true" />
@@ -148,47 +179,12 @@
                     android:textSize="13sp"
                     android:visibility="gone" />
 
+                <!-- الأقسام، مكان الأسبوع، جديد في توريلو، محتار؟ — تُبنى بالكود بعد الجلب -->
                 <LinearLayout
-                    android:id="@+id/categoryGrid"
+                    android:id="@+id/homeSections"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:orientation="vertical" />
-
-                <FrameLayout
-                    android:id="@+id/dailyHolder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:clipChildren="false" />
-
-                <TextView
-                    android:id="@+id/newTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_new"
-                    android:textColor="@color/text"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
-
-                <HorizontalScrollView
-                    android:id="@+id/newScroll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="-16dp"
-                    android:layout_marginEnd="-16dp"
-                    android:clipToPadding="false"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:scrollbars="none">
-
-                    <LinearLayout
-                        android:id="@+id/newRow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
-                </HorizontalScrollView>
             </LinearLayout>
         </ScrollView>
     </FrameLayout>

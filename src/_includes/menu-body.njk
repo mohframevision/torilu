@@ -14,7 +14,7 @@
   </header>
   {%- if d.stars %}
   <div class="hm-stars">
-    <h3>🔥 {{ 'الأشهر عندنا' if ar else 'Our most loved' }}{% if ar %} <small>Our most loved</small>{% endif %}</h3>
+    <h3>{{ 'الأشهر عندنا' if ar else 'Our most loved' }}{% if ar %} <small>Our most loved</small>{% endif %}</h3>
     {%- for s in d.stars %}
     <div class="hm-star">
       {%- if s.img %}<img src="{{ s.img | url }}" alt="" loading="lazy" width="56" height="56" />{% endif %}
@@ -26,7 +26,7 @@
   {%- endif %}
   {%- macro row(it, sec, extra, ar) -%}
   <li class="hm-row{% if extra %} extra{% endif %}">
-    <span class="hm-n">{{ it.ar if ar else it.en }}{% if it.fire %} <span class="hm-fire" title="{{ 'حار أو الأكثر طلباً' if ar else 'Spicy or most loved' }}">🔥</span>{% endif %}{% if ar %}<i dir="ltr">{{ it.en }}</i>{% endif %}</span>
+    <span class="hm-n">{{ it.ar if ar else it.en }}{% if it.fire %} <svg class="hm-fire" viewBox="0 0 12 16" role="img" aria-label="{{ 'حار أو الأكثر طلباً' if ar else 'Spicy or most loved' }}"><title>{{ 'حار أو الأكثر طلباً' if ar else 'Spicy or most loved' }}</title><path d="M6 0C6.6 3 11 5.6 11 10a5 5 0 0 1-10 0c0-2.4 1.3-4 2.6-5.2.2 1.6.9 2.6 1.9 3C5.2 5.4 5 2.6 6 0Z"/></svg>{% endif %}{% if ar %}<i dir="ltr">{{ it.en }}</i>{% endif %}</span>
     {%- for p in it.p %}
     {%- set col = ((sec.cols[loop.index0] if ar else sec.cols_en[loop.index0]) if sec.cols and it.p.length > 1 else '') %}
     <span class="hm-p" data-item data-name="{{ it.ar if ar else it.en }}{% if col %} ({{ col }}){% endif %}" data-price="{{ p | replace('+', '') }}">

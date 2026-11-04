@@ -67,7 +67,7 @@ Prices are from the menu posted on their account and may change.
 
 ## Location
 
-- [📍 Al Sayah truck](https://maps.google.com/?q=26.266176,50.594105)
-- [📍 Al Dair branch](https://maps.google.com/?q=26.285549,50.626980)
-- [📍 Tubli branch](https://goo.gl/maps/jXMXHPTVsxT2)
+- [Al Sayah truck](https://maps.google.com/?q=26.266176,50.594105)
+- [Al Dair branch](https://maps.google.com/?q=26.285549,50.626980)
+- [Tubli branch](https://goo.gl/maps/jXMXHPTVsxT2)
 - [Instagram](https://www.instagram.com/sweets88.bh/)

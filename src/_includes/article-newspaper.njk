@@ -1,0 +1,40 @@
+{#- جريدة توريلو: صفحة المقال تُقرأ كجريدة على الشاشة — تصنيف وتاريخ، عنوان كبير بخط الجريدة،
+    مقدمة، توقيع، ثم النص بعمود قراءة مريح وكلمته الأولى كبيرة (الحرف الأول المنفصل يكسر وصل
+    الحروف العربية)، وعلامة نهاية، وملاحظة التحرير هادئة في الآخر بدل صندوق تحت العنوان. -#}
+{% from "icon.njk" import icon as svgIcon %}
+{% from "newspaper.njk" import npDate %}
+{% set isEn = lang == "en" %}
+{% set arData = (collections.all | pageByUrl(langSwitchUrl)).data if isEn else none %}
+{% set when = dateAdded or (arData and arData.dateAdded) %}
+{% set cat = (categories or (arData and arData.categories) or [])[0] %}
+<div class="detail np-article">
+<div class="breadcrumb"><a href="{{ homeUrl | url }}">{{ t.nav_home }}</a> / <a href="{{ sectionUrl | url }}">{{ sectionTitle }}</a></div>
+<header class="page-header np-head">
+  <p class="np-kicker">{% if cat %}<span>{{ (tags_en[cat] or cat) if isEn else cat }}</span>{% endif %}{{ npDate(when, lang) }}</p>
+  <h1>{{ title }}</h1>
+  {% if desc %}<p class="np-deck">{{ desc }}</p>{% endif %}
+  <div class="np-byline">
+    <span>{{ "By" if isEn else "بقلم" }} <b>{{ "Torilu" if isEn else "توريلو" }}</b></span>
+    <button type="button" class="btn secondary article-share-btn">{{ svgIcon("share", 16) }} {{ t.article_share }}</button>
+  </div>
+</header>
+{% if image %}<img class="detail-hero-photo" src="{{ image }}" alt="{{ title }}" />{% if imageCredit %}<p class="photo-credit" dir="ltr">{% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if not isEn else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</p>{% endif %}{% endif %}
+{% if video %}
+<div class="detail-video">
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ video }}" title="{{ title }}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+{% endif %}
+{% if audio %}
+<p class="np-listen">
+  <button type="button" class="btn secondary article-listen-btn" data-audio-src="{{ audio | url }}">{{ svgIcon("volume-up", 16) }} {{ t.article_listen }}</button>
+  <audio class="article-audio-player hidden" controls preload="none"></audio>
+</p>
+{% endif %}
+<article class="prose np-body">
+{#- الكلمة الأولى من أول فقرة بخط الجريدة وأكبر -#}
+{{ content.replace(r/<p>([^\s<]+)/, '<p><span class="np-first">$1</span>') | safe }}
+</article>
+{% if aiDisclosure %}
+<aside class="np-note"><b>{{ "Editor's note:" if isEn else "ملاحظة التحرير:" }}</b> {{ aiDisclosure }} {{ t.guide_disclaimer }}</aside>
+{% endif %}
+</div>

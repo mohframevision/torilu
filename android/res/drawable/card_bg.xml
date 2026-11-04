@@ -3,5 +3,5 @@
      بالتخطيط اللي يستخدم هذا الدروابل) -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/surface" />
-    <corners android:radius="18dp" />
+    <corners android:radius="22dp" />
 </shape>

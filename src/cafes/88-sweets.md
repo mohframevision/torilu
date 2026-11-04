@@ -84,7 +84,7 @@ langSwitchUrl: "/en/cafes/88-sweets.html"
 
 ## الموقع
 
-- [📍 عربة السايه](https://maps.google.com/?q=26.266176,50.594105)
-- [📍 فرع الدير](https://maps.google.com/?q=26.285549,50.626980)
-- [📍 فرع توبلي](https://goo.gl/maps/jXMXHPTVsxT2)
+- [عربة السايه](https://maps.google.com/?q=26.266176,50.594105)
+- [فرع الدير](https://maps.google.com/?q=26.285549,50.626980)
+- [فرع توبلي](https://goo.gl/maps/jXMXHPTVsxT2)
 - [إنستقرام المحل](https://www.instagram.com/sweets88.bh/)

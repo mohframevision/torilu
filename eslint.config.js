@@ -18,8 +18,6 @@ module.exports = [
       "ملفات-العمل/**",
       "node_modules/**",
       "poster-editor/vendor/**",
-      // مكتبة ترميز MP3 خارجية (lamejs) تُشحن كما هي بلا تعديل
-      "src/js/vendor/**",
       "places-picker/data.js",
       ".claude/skills/**",
     ],
@@ -63,7 +61,7 @@ module.exports = [
     files: ["src/js/picker.js", "src/js/search.js", "src/js/home.js"],
     languageOptions: {
       globals: Object.fromEntries(
-        ["t", "itemTitle", "sectionLabel", "playSound", "playClickSound", "playSuccessSound", "isSoundEnabled", "getAudioContext", "tagLabel", "LINK_META", "buildActionsHtml", "wireItemActions", "showToast", "nearestBranch", "lsGet", "lsSet", "audioBufferToWav", "audioBufferToMp3", "loadLameEncoder", "itemDesc", "escapeHtml", "safeUrl", "levenshtein"].map((n) => [n, "readonly"])
+        ["t", "itemTitle", "sectionLabel", "playSound", "playClickSound", "playSuccessSound", "isSoundEnabled", "getAudioContext", "tagLabel", "LINK_META", "buildActionsHtml", "wireItemActions", "showToast", "nearestBranch", "lsGet", "lsSet", "TOGGLE_ICON_SVG", "itemDesc", "escapeHtml", "safeUrl", "levenshtein"].map((n) => [n, "readonly"])
       ),
     },
   },

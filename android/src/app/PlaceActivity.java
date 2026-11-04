@@ -103,10 +103,15 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
         LinearLayout body = new LinearLayout(this);
         body.setOrientation(LinearLayout.VERTICAL);
         body.setPadding(dp(16), 0, dp(16), 0);
-        body.addView(Ui.iconTile(this, Icons.item(item, section), 64, getColor(R.color.field), getColor(R.color.text)));
-        TextView title = Ui.text(this, Lang.title(this, item), 27, getColor(R.color.text), false);
+        // سطر أزرق صغير (القسم · النوع) فوق الاسم بخط الجريدة — بلا أيقونة
+        JSONObject sec = MainActivity.cachedSections == null ? null : MainActivity.cachedSections.optJSONObject(section);
+        String kick = sec == null ? "" : MainActivity.shortTitle(Lang.title(this, sec));
+        JSONArray kt = item.optJSONArray("tags");
+        if (kt != null && kt.length() > 0) kick = kick.isEmpty() ? Lang.tag(this, kt.optString(0)) : kick + " · " + Lang.tag(this, kt.optString(0));
+        if (!kick.isEmpty()) body.addView(Ui.kicker(this, kick));
+        TextView title = Ui.text(this, Lang.title(this, item), 34, getColor(R.color.text), false);
         Ui.display(title);
-        title.setPadding(0, dp(12), 0, 0);
+        title.setPadding(0, dp(4), 0, 0);
         body.addView(title);
         String desc = Lang.desc(this, item);
         if (!desc.isEmpty()) {
@@ -173,7 +178,7 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
         return row.getChildCount() == 0 ? null : row;
     }
 
-    // أول إجراء (الاتصال عادة) هو الأساسي: دائرة خضراء ممتلئة — الوحيد الملوّن
+    // أول إجراء (الاتصال عادة) هو الأساسي: دائرة زرقاء ممتلئة — الوحيد الملوّن
     // بالصفحة. الباقي دوائر محايدة
     private void addAction(LinearLayout row, int icon, String label, String tag) {
         boolean primary = row.getChildCount() == 0;
@@ -255,8 +260,9 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
         int n = Math.min(MENU_PREVIEW, menu.length());
         for (int i = 0; i < n; i++) box.addView(MenuActivity.row(this, menu.optJSONObject(i)));
         if (menu.length() > n) {
-            TextView all = Ui.text(this, getString(R.string.place_menu_all, menu.length()), 15, getColor(R.color.white), true);
-            all.setBackgroundResource(R.drawable.btn_pill_primary);
+            // ثانوي هادئ: الأساسي الوحيد بالصفحة هو أول إجراء (الاتصال)
+            TextView all = Ui.text(this, getString(R.string.place_menu_all, menu.length()), 15, getColor(R.color.brand_accent), true);
+            all.setBackgroundResource(R.drawable.btn_pill_secondary);
             all.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             all.setPadding(dp(16), dp(12), dp(16), dp(12));
             all.setTag("menu");
@@ -272,7 +278,7 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
         String html = Lang.content(this, item);
         if (html.isEmpty()) return;
         LinearLayout box = block(root, getString(R.string.place_about));
-        TextView body = Ui.text(this, Html.fromHtml(flattenTables(html), Html.FROM_HTML_MODE_COMPACT), 15.5f, getColor(R.color.text), false);
+        TextView body = Ui.text(this, Ui.html(this, flattenTables(html)), 15.5f, getColor(R.color.text), false);
         body.setLinkTextColor(getColor(R.color.brand_accent));
         body.setMovementMethod(LinkMovementMethod.getInstance());
         body.setPadding(dp(12), 0, dp(12), 0);
@@ -294,15 +300,17 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
                 .replaceAll("(?i)</?(table|thead|tbody|tr|td|th)[^>]*>", "");
     }
 
-    // كتلة بعنوان اختياري: بطاقة سطح بزوايا 20dp بعرض الشاشة مع هامش
+    // كتلة بعنوان اختياري: بطاقة سطح بزوايا 22dp بعرض الشاشة مع هامش
     private LinearLayout block(LinearLayout root, String heading) {
         LinearLayout wrap = new LinearLayout(this);
         wrap.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams wlp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         wlp.setMargins(dp(16), dp(14), dp(16), 0);
         if (heading != null) {
-            TextView h = Ui.text(this, heading, 17, getColor(R.color.text), true);
-            h.setPadding(dp(4), 0, dp(4), dp(8));
+            // عنوان مثل الجريدة: خط مزدوج فوقه وخط Amiri
+            LinearLayout h = Ui.head(this, heading);
+            ((LinearLayout.LayoutParams) h.getLayoutParams()).topMargin = dp(18);
+            ((LinearLayout.LayoutParams) h.getLayoutParams()).bottomMargin = dp(10);
             wrap.addView(h);
         }
         LinearLayout box = new LinearLayout(this);
@@ -329,7 +337,7 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
     private void applyFav() {
         boolean on = Prefs.isFavorite(this, section, item.optString("id", ""));
         favBtn.setImageResource(on ? R.drawable.ic_favorite_fill : R.drawable.ic_favorite_outline);
-        favBtn.setColorFilter(on ? 0xFFE0245E : getColor(R.color.text));
+        favBtn.setColorFilter(on ? getColor(R.color.brand_accent) : getColor(R.color.text));
     }
 
     private int dp(float v) {

@@ -2,27 +2,44 @@
    وعناصر القسم المختار بطاقات تطفو بالهوا وتمر من الشباك، لين توقف المركبة على وحدة
    و"يطلّع راسه" من الشباك فتقرّب البطاقة وتصير النتيجة.
    تُحمَّل بصفحة picker.html فقط (pageScript)، بعد main.js، وتستخدم دواله العامة (t،
-   itemTitle، sectionLabel، tagLabel، buildActionsHtml، wireItemActions، isSoundEnabled،
-   getAudioContext، playClickSound، lsGet/lsSet). main.js يستدعي initRandomPicker.
+   itemTitle، sectionLabel، tagLabel، buildActionsHtml، wireItemActions، lsGet/lsSet). main.js يستدعي initRandomPicker.
 
    الأداء (أجهزة قديمة وجوالات): كل الحركة transform/opacity بـrAF على طبقات GPU — بلا
    blur ولا mix-blend-mode ولا صور. البطاقات اللي برا الشاشة ما تنرسم، والحركة الهادية
    وقت الانتظار تتوقف لما المشهد يطلع من الشاشة. حبيبات الفيلم بلاطة 128px تُرسم مرة
    وحدة، والقمر كذلك. */
 
-// مسار السكربت نفسه — منه نبني مسار الأصوات بغض النظر عن مسار الموقع الأساسي
-const PICKER_SCRIPT_URL = document.currentScript?.src || location.href;
-const PICKER_AUDIO = (name) =>
-  new URL(`../assets/audio/picker/${name}.mp3`, PICKER_SCRIPT_URL).href;
-
 // كل مركبة لها طريقة وقوف: over = كم تتعدى الهدف (بكسل) قبل ما ترجع له، settle = مدة
 // الرجوع. القارب ينزلق أطول ويتمايل، والطيارة تبطأ بنعومة بلا رجوع تقريباً.
-// stopAt: صوت الوقوف يبدأ لما تنزل السرعة تحت هالنسبة (0 = عند الوقوف نفسه)
+// أيقونات المركبات: خطوط SVG مرسومة يدوياً بلون الزر (currentColor)، لا إيموجي
+const TRIP_ICON = (d) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const TRIP_VEHICLES = {
-  train: { icon: "🚆", dur: 4200, over: 14, settle: 500, stopAt: 0.35 },
-  car: { icon: "🚗", dur: 4000, over: 26, settle: 650, stopAt: 0.2 },
-  boat: { icon: "🛥️", dur: 4800, over: 60, settle: 1300, rock: 1, stopAt: 0.12 },
-  plane: { icon: "✈️", dur: 4400, over: 8, settle: 900, rock: 0.5, stopAt: 0 },
+  train: {
+    icon: TRIP_ICON('<rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 10h14M9 21l2-4M15 21l-2-4"/><circle cx="9" cy="13.5" r=".8"/><circle cx="15" cy="13.5" r=".8"/>'),
+    dur: 4200,
+    over: 14,
+    settle: 500,
+  },
+  car: {
+    icon: TRIP_ICON('<path d="M5 11l1.6-4.2A2 2 0 0 1 8.5 5.5h7a2 2 0 0 1 1.9 1.3L19 11"/><rect x="3" y="11" width="18" height="6" rx="2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>'),
+    dur: 4000,
+    over: 26,
+    settle: 650,
+  },
+  boat: {
+    icon: TRIP_ICON('<path d="M3 15h18l-2.5 4h-13z"/><path d="M12 3v12M12 4.5 18 12h-6"/>'),
+    dur: 4800,
+    over: 60,
+    settle: 1300,
+    rock: 1,
+  },
+  plane: {
+    icon: TRIP_ICON('<path d="M21 14.5 13 10V4.5a1 1 0 0 0-2 0V10l-8 4.5v2l8-2.5V18l-2 1.5V21l3-1 3 1v-1.5L13 18v-4l8 2.5z"/>'),
+    dur: 4400,
+    over: 8,
+    settle: 900,
+    rock: 0.5,
+  },
 };
 const TRIP_VEHICLE_KEY = "pickerVehicle";
 const TRIP_BOB_MS = 900 * 2 * Math.PI; // دورة تمايل البطاقات: نفس sin(t/900)
@@ -61,139 +78,6 @@ function tripTween(ms, fn, done) {
     else done?.();
   })(t0);
 }
-
-/* ===== الصوت =====
-   يتبع زر الصوت العام بالهيدر (مطفأ افتراضياً). يتحمّل فقط بعد أول ضغطة على "اختر لي!"
-   وأصوات المركبة الحالية بس. صوت المركبة حلقة واحدة: ارتفاعها وحدّتها (playbackRate)
-   يتبعون السرعة، فتسمع التسارع والفرملة بنفس الملف. الموسيقى بعنصر <audio> (تشتغل
-   وهي تتحمّل)، والمؤثرات أخفض منها. الحقوق بصفحة "من نحن" (#credits). */
-const TripSound = (() => {
-  let ctx = null;
-  let sfx = null;
-  let master = null;
-  let loopSrc = null;
-  let loopGain = null;
-  let music = null;
-  let musicGain = null;
-  const cache = {};
-
-  function init() {
-    if (ctx) return true;
-    try {
-      ctx = getAudioContext();
-    } catch {
-      return false;
-    }
-    master = ctx.createGain();
-    master.gain.value = 0.8;
-    master.connect(ctx.destination);
-    sfx = ctx.createGain();
-    sfx.gain.value = 0.22;
-    sfx.connect(master);
-    return true;
-  }
-  const load = (name) =>
-    (cache[name] ||= fetch(PICKER_AUDIO(name))
-      .then((r) => r.arrayBuffer())
-      .then((b) => ctx.decodeAudioData(b))
-      .catch(() => null));
-
-  function play(name, gain = 1, rate = 1) {
-    if (!ctx || !isSoundEnabled()) return;
-    load(name).then((buf) => {
-      if (!buf) return;
-      const src = ctx.createBufferSource();
-      src.buffer = buf;
-      src.playbackRate.value = rate;
-      const g = ctx.createGain();
-      g.gain.value = gain;
-      src.connect(g).connect(sfx);
-      src.start();
-    });
-  }
-
-  function stopLoop(fade = 1.2) {
-    if (!loopSrc) return;
-    const src = loopSrc;
-    loopSrc = null;
-    loopGain.gain.setTargetAtTime(0, ctx.currentTime, fade / 4);
-    src.stop(ctx.currentTime + fade);
-  }
-
-  function startMusic() {
-    if (!music) {
-      music = new Audio(PICKER_AUDIO("music"));
-      music.loop = true;
-      musicGain = ctx.createGain();
-      musicGain.gain.value = 0;
-      ctx.createMediaElementSource(music).connect(musicGain).connect(master);
-      musicGain.gain.setTargetAtTime(0.25, ctx.currentTime, 0.8);
-    }
-    if (music.paused) music.play().catch(() => {});
-  }
-
-  async function start(vehicle, isRunning) {
-    if (!isSoundEnabled() || !init()) return;
-    startMusic();
-    stopLoop(0.1);
-    load(`${vehicle}-stop`);
-    ["whoosh", "headout", "wind"].forEach(load);
-    const buf = await load(`${vehicle}-loop`);
-    if (!buf || !isRunning()) return;
-    loopSrc = ctx.createBufferSource();
-    loopSrc.buffer = buf;
-    loopSrc.loop = true;
-    loopGain = ctx.createGain();
-    loopGain.gain.value = 0;
-    loopSrc.connect(loopGain).connect(sfx);
-    loopSrc.start();
-  }
-
-  function speed(v) {
-    if (!loopSrc) return;
-    loopGain.gain.setTargetAtTime(0.15 + 0.55 * v, ctx.currentTime, 0.1);
-    loopSrc.playbackRate.setTargetAtTime(0.8 + 0.35 * v, ctx.currentTime, 0.1);
-  }
-
-  // نغمة النجاح: جرسين ناعمين (D5 ثم A5)، كل جرس نغمة أساسية + توافقيات الجرس الخافتة
-  function chime() {
-    if (!ctx || !isSoundEnabled()) return;
-    const lp = ctx.createBiquadFilter();
-    lp.type = "lowpass";
-    lp.frequency.value = 3200;
-    lp.connect(sfx);
-    [
-      [587.33, 0],
-      [880, 0.13],
-    ].forEach(([f, at]) => {
-      [
-        [1, 0.22],
-        [2.76, 0.045],
-        [5.4, 0.015],
-      ].forEach(([k, gain]) => {
-        const t0 = ctx.currentTime + at;
-        const o = ctx.createOscillator();
-        o.frequency.value = f * k;
-        const g = ctx.createGain();
-        g.gain.setValueAtTime(0.0001, t0);
-        g.gain.exponentialRampToValueAtTime(gain, t0 + 0.012);
-        g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.8 / k ** 0.3);
-        o.connect(g).connect(lp);
-        o.start(t0);
-        o.stop(t0 + 2);
-      });
-    });
-  }
-
-  // الزائر طفّى الصوت من الهيدر: نوقف الموسيقى والمحرك فوراً
-  function silence() {
-    if (!ctx) return;
-    stopLoop(0.2);
-    music?.pause();
-  }
-
-  return { start, speed, play, stopLoop, chime, silence };
-})();
 
 // شريط SVG مكرر مرتين: ننقله نص عرضه ونرجع = حركة لا نهائية بلا فراغ
 function tripStrip(path, fill) {
@@ -375,7 +259,7 @@ function createTrip(stage, { onStart, onDone }) {
     el.className = "trip-card";
     const hue = Math.floor(Math.random() * 360);
     el.style.setProperty("--h", hue);
-    el.innerHTML = `<span class="trip-card-icon">${escapeHtml(item.icon || "⭐")}</span><span class="trip-card-title">${escapeHtml(itemTitle(item))}</span>`;
+    el.innerHTML = `<span class="trip-card-icon">${escapeHtml(item.icon || "⭐")}</span><span class="trip-card-title" dir="auto">${escapeHtml(itemTitle(item))}</span>`;
     const sh = document.createElement("div");
     sh.className = "trip-shadow";
     lanes[z].sh.append(sh);
@@ -654,7 +538,6 @@ function createTrip(stage, { onStart, onDone }) {
     deckWinner = null;
     const cam0 = cam;
     onStart();
-    TripSound.start(vehicle, () => running);
     if (reduceMotion) {
       cam = TRIP_DIST;
       render(0, 0);
@@ -663,29 +546,11 @@ function createTrip(stage, { onStart, onDone }) {
     }
     const V = TRIP_VEHICLES[vehicle];
     const t0 = performance.now();
-    let braked = false;
-    let lastWhoosh = 0;
     (function frame(now) {
       const t = Math.min(1, (now - t0) / V.dur);
       const [p, v] = TRIP_CURVE(t);
       cam = cam0 + (TRIP_DIST + over - cam0) * p;
       render(now, v);
-      TripSound.speed(v);
-      if (!braked && V.stopAt && t > 0.3 && v < V.stopAt) {
-        braked = true;
-        TripSound.play(`${vehicle}-stop`, 0.8);
-      }
-      // "ووش" لما بطاقة قريبة تعدّي نص الشباك — بحد أدنى 140ms بينها
-      const mid = W / 2;
-      for (const c of cards) {
-        if (c.lane.depth !== 1) continue;
-        const side = c.x - cam > mid;
-        if (c.side !== undefined && c.side !== side && v > 0.2 && now - lastWhoosh > 140) {
-          lastWhoosh = now;
-          TripSound.play("whoosh", 0.1 + 0.2 * v, 0.9 + Math.random() * 0.2);
-        }
-        c.side = side;
-      }
       if (t < 1) requestAnimationFrame(frame);
       else stop(winner);
     })(t0);
@@ -712,10 +577,6 @@ function createTrip(stage, { onStart, onDone }) {
         cardsBox.append(winner.el);
         winner.sh.style.transform = `translate3d(${W / 2}px, ${H * 0.62 + H * 0.38 * 0.65}px, 0)`;
         cardsBox.firstChild.append(winner.sh);
-        if (TRIP_VEHICLES[vehicle].stopAt === 0) TripSound.play(`${vehicle}-stop`, 0.7);
-        TripSound.stopLoop(1.5);
-        TripSound.play("headout", 0.6);
-        TripSound.play("wind", 0.45);
         tripTween(
           850,
           (t) => {
@@ -759,11 +620,15 @@ function createTrip(stage, { onStart, onDone }) {
     wireItemActions(box, item);
     running = false;
     onDone(item);
-    TripSound.chime();
     box.querySelector("a, button")?.focus({ preventScroll: true });
-    if (reduceMotion) return;
+    // البطاقات الباهتة خلف النتيجة تختفي كلها: كانت تتراكب وأسماؤها فوق بعض
+    const hideLanes = (o) => {
+      for (const L of lanes) L.el.style.opacity = L.sh.style.opacity = o;
+    };
+    if (reduceMotion) return hideLanes(0);
     box.style.opacity = 0;
     tripTween(500, (t) => {
+      hideLanes(0.3 * (1 - t));
       box.style.opacity = Math.min(1, t * 3);
       box.style.scale = 0.75 + 0.25 * tripBack(t);
       winner.el.style.opacity = 1 - Math.min(1, t * 3);
@@ -793,7 +658,6 @@ function initRandomPicker() {
   const categoriesWrap = document.getElementById("pickerCategories");
   const spinBtn = document.getElementById("pickerSpinBtn");
   const vehicleBtn = document.getElementById("pickerVehicleBtn");
-  const soundBtn = document.getElementById("pickerSoundBtn");
   const stage = document.getElementById("pickerStage");
   const areaSelect = document.getElementById("pickerArea");
   if (!categoriesWrap || !spinBtn || !stage || !areaSelect) return;
@@ -819,7 +683,6 @@ function initRandomPicker() {
     .map(
       (key) => `
       <button class="picker-category" data-section="${key}" aria-pressed="false">
-        <span class="picker-category-icon">${SITE_DATA[key].icon}</span>
         <span>${sectionLabel(key)}</span>
       </button>`
     )
@@ -870,7 +733,6 @@ function initRandomPicker() {
     applyPool();
   }
   areaSelect.addEventListener("change", () => {
-    playClickSound();
     if (areaSelect.value !== "near") return applyPool();
     if (!navigator.geolocation) return resetArea(t("geolocation_unsupported"));
     spinBtn.disabled = true;
@@ -895,7 +757,6 @@ function initRandomPicker() {
     btn.addEventListener("click", () => {
       if (trip.isRunning()) return;
       choose(btn);
-      playClickSound();
     });
   });
   // قانون هيك: الزر يشتغل من أول لحظة — المطاعم مختارة افتراضياً (أكثر قسم يُسأل عنه)
@@ -907,7 +768,7 @@ function initRandomPicker() {
   const vehicles = Object.keys(TRIP_VEHICLES);
   function setVehicle(v) {
     trip.setVehicle(v);
-    vehicleBtn.textContent = TRIP_VEHICLES[v].icon;
+    vehicleBtn.innerHTML = TRIP_VEHICLES[v].icon;
     const label = `${t("picker_vehicle")}: ${t(`picker_vehicle_${v}`)}`;
     vehicleBtn.setAttribute("aria-label", label);
     vehicleBtn.title = label;
@@ -919,30 +780,11 @@ function initRandomPicker() {
     const next = vehicles[(vehicles.indexOf(current) + 1) % vehicles.length];
     setVehicle(next);
     lsSet(TRIP_VEHICLE_KEY, next);
-    playClickSound();
   });
-
-  // زر الصوت بالمشهد يضغط زر الصوت العام بالهيدر (نفس الإعداد بكل الموقع)
-  const headerSound = document.querySelector(".sound-toggle");
-  function syncSound() {
-    const on = isSoundEnabled();
-    soundBtn.textContent = on ? "🔊" : "🔇";
-    soundBtn.setAttribute("aria-label", on ? t("sound_on") : t("sound_off"));
-    soundBtn.title = soundBtn.getAttribute("aria-label");
-    if (!on) TripSound.silence();
-  }
-  if (headerSound) {
-    soundBtn.addEventListener("click", () => headerSound.click());
-    headerSound.addEventListener("click", syncSound);
-    syncSound();
-  } else {
-    soundBtn.hidden = true;
-  }
 
   if (preset) choose(preset);
 
   spinBtn.addEventListener("click", () => {
-    playClickSound();
     stage.scrollIntoView({ block: "center", behavior: "smooth" });
     trip.go();
   });

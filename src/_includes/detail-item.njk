@@ -6,10 +6,13 @@ layout: base.njk
 {% set t = i18n[lang] %}
 {% set homeUrl = ('/en/index.html' if lang == 'en' else '/index.html') %}
 {% set sectionUrl = (('/en/' if lang == 'en' else '/') + sectionSlug + '.html') %}
+{% if sectionSlug == "guides" %}
+{% include "article-newspaper.njk" %}
+{% else %}
 {# شكل «د»: كل الصفحة بعمود واحد هادئ مثل الجريدة (العنوان والنص على نفس الحافة) #}
 <div class="detail{% if wideLayout %} detail-wide{% endif %}">
 <div class="breadcrumb"><a href="{{ homeUrl | url }}">{{ t.nav_home }}</a> / <a href="{{ sectionUrl | url }}">{{ sectionTitle }}</a> / {{ title }}</div>
-{% if image %}<img class="detail-hero-photo" src="{{ image }}" alt="{{ title }}" />{% if imageCredit %}<p class="photo-credit" dir="ltr">📷 {% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if lang != 'en' else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</p>{% endif %}{% endif %}
+{% if image %}<img class="detail-hero-photo" src="{{ image }}" alt="{{ title }}" />{% if imageCredit %}<p class="photo-credit" dir="ltr">{% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if lang != 'en' else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</p>{% endif %}{% endif %}
 {% if gallery %}<div class="photo-strip">{% for g in gallery %}<a href="{{ g }}" target="_blank" rel="noopener"><img src="{{ g }}" alt="{{ title }} {{ loop.index + 1 }}" loading="lazy" decoding="async" /></a>{% endfor %}</div>{% endif %}
 <section class="page-header">
   <h1>{{ title }}</h1>
@@ -19,7 +22,8 @@ layout: base.njk
   {% if v or lk %}<p class="detail-badges">{% if v %}<span class="verified-badge">{{ t.verified_badge }}</span>{% endif %} {% if lk %}<span class="liked-badge">{{ t.liked_badge }}</span>{% endif %}</p>{% endif %}
   <div class="page-header-actions">
     {# الهدف الأول لزائر صفحة مكان: يروح له — فالخريطة الزر الأساسي والباقي ثانوي #}
-    {% set mapsLink = links.maps if (links and links.maps) else (content | mapsUrl) %}
+    {% set arTwin = (collections.all | pageByUrl(langSwitchUrl)) if lang == "en" else none %}
+    {% set mapsLink = links.maps if (links and links.maps) else ((content | mapsUrl) or (arTwin and arTwin.data.links and arTwin.data.links.maps)) %}
     {% if mapsLink %}<a class="btn" href="{{ mapsLink }}" target="_blank" rel="noopener">{{ svgIcon("location-pin", 18) }} {{ t.link_maps }}</a>{% endif %}
     {% if audio %}
     <button type="button" class="btn secondary article-listen-btn" data-audio-src="{{ audio | url }}">{{ svgIcon("volume-up", 18) }} {{ t.article_listen }}</button>
@@ -64,7 +68,10 @@ layout: base.njk
 </tbody></table>
 {%- endif %}
 </article>
+{# الوعد «كل معلومة متحقَّق منها» يحتاج طريقاً لتصحيحها: رابط هادئ واحد #}
+<p class="detail-report"><a class="report-link" href="{{ ('/en/contact.html' if lang == 'en' else '/contact.html') | url }}?report={{ title | urlencode }}&amp;section={{ sectionSlug }}">{{ t.report_wrong_info }}</a></p>
 </div>
+{% endif %}
 
 <script type="application/ld+json">
 {

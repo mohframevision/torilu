@@ -33,4 +33,4 @@ These are not the only options in the area; around the tree there are other rest
 
 ## Getting There
 
-[📍 Open the location on Google Maps](https://maps.app.goo.gl/faqnTdWoLAzvYi7QA)
+[Open the location on Google Maps](https://maps.app.goo.gl/faqnTdWoLAzvYi7QA)

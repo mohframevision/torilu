@@ -28,8 +28,8 @@ A Hilton Garden Inn inside the mall looks over Bahrain Bay. The mall also has an
 
 The easiest way to get an exact location is to open it directly on Google Maps:
 
-[📍 Open location on Google Maps](https://maps.app.goo.gl/oJ7tan2ndcUaS9heA)
+[Open location on Google Maps](https://maps.app.goo.gl/oJ7tan2ndcUaS9heA)
 
 ## Links
 
-[🌐 The Avenues Bahrain official website](https://www.the-avenues.com/bahrain/en)
+[The Avenues Bahrain official website](https://www.the-avenues.com/bahrain/en)

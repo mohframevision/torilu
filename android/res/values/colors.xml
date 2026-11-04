@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- شكل «د» (نفس رموز الموقع بـstyle.css): أزرق الحبر على ورق دافئ.
+     brand_primary = خلفية ممتلئة عليها نص أبيض (أزرار، الرقاقة النشطة)،
+     brand_accent = الأزرق كنص/أيقونة (السطر الصغير فوق الاسم، الروابط). -->
 <resources>
-    <color name="brand_primary">#1B4D3E</color>
-    <!-- لون النص/الأيقونة الأخضر: #3FA480 على الأبيض كان 3.07:1 (أقل من 4.5 للنص الصغير) -->
-    <color name="brand_accent">#2A7F60</color>
-    <!-- أبيض دافئ يميل للبيج (لا رمادي بارد): الشاشة أهدأ وأقرب -->
-    <color name="bg">#F6F3EE</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="text">#1A1A1A</color>
-    <color name="text_muted">#555555</color>
-    <color name="border">#E4E4E0</color>
+    <color name="brand_primary">#1545A2</color>
+    <color name="brand_accent">#1545A2</color>
+    <color name="bg">#FAF6EF</color>
+    <color name="surface">#FFFDFA</color>
+    <color name="text">#1A1F29</color>
+    <color name="text_muted">#5D646F</color>
+    <color name="border">#DEDAD2</color>
+    <!-- خطوط الجريدة (الخط المزدوج فوق عناوين الأقسام) بلون الحبر -->
+    <color name="ink_rule">#1A1F29</color>
     <color name="white">#FFFFFF</color>
-    <color name="secondary_btn_bg">#0F1A1A1A</color>
+    <color name="secondary_btn_bg">#00000000</color>
     <color name="ripple_on_primary">#33FFFFFF</color>
-    <color name="ripple_on_secondary">#1A000000</color>
-    <color name="search_box_bg">#C7FFFFFF</color>
-    <!-- خلفية خافتة بلون الهوية (أزرار الإجراءات، الشارات) والنص عليها -->
-    <color name="tonal">#E2EFE9</color>
-    <color name="on_tonal">#1B4D3E</color>
-    <!-- سطح محايد للحقول ومربعات الأيقونات والأزرار الثانوية (بلا لون) -->
-    <color name="field">#ECE8E1</color>
+    <color name="ripple_on_secondary">#141545A2</color>
+    <color name="search_box_bg">#FFFDFA</color>
+    <!-- أزرق ناعم (color-primary-soft بالموقع): مؤشر التبويب النشط وخلفية رسم مكان الأسبوع -->
+    <color name="tonal">#DBE9FF</color>
+    <color name="on_tonal">#1545A2</color>
+    <!-- سطح غائر محايد (color-sunk بالموقع) للحقول والدوائر الثانوية -->
+    <color name="field">#F0ECE4</color>
 </resources>

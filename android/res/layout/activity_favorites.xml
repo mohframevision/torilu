@@ -24,11 +24,9 @@
             android:layout_weight="1"
             android:text="@string/favorites_title"
             android:textColor="@color/text"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:drawableStart="@drawable/ic_favorite_fill_small"
-            android:drawableTint="@color/text"
-            android:drawablePadding="8dp" />
+            android:textSize="26sp"
+            android:fontFamily="@font/amiri"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

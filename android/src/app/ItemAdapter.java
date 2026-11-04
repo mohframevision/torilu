@@ -24,7 +24,7 @@ import org.json.JSONObject;
 // إنستقرام. أول زر بنفس تنسيق .btn (حبة ملوّنة بارزة)، والباقي .btn.secondary
 // (خلفية فاتحة خافتة) — تماماً زي الموقع. عربي فقط بهذي النسخة (V1).
 // المفضلة والمشاركة محليان بالكامل (Prefs/ACTION_SEND)، بلا سيرفر — نفس مبدأ
-// المفضلة بالموقع (localStorage). "أعجبني" (عدّاد Cloudflare) مؤجل عمداً.
+// المفضلة بالموقع (localStorage). لا إعجابات ولا عدّادات (قرار المالك: بلا خادم).
 //
 // بدون lambdas ولا كلاسات مجهولة عمداً — d8 بهذي البيئة يفشل عليها. كل زر
 // يحمل "tag" نصي (مثال "url:https://...")، وonClick وحد بالمحوّل نفسه يفكّه.
@@ -81,7 +81,6 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
     // كلاس أعلى (مو مجهول) يخزّن مراجع عناصر الصف — نفس نمط ViewHolder
     // المعتاد بـListView، يمنع إعادة findViewById() وinflate() بكل سكرول
     private static class ViewHolder {
-        ImageView icon;
         TextView title;
         ImageView favBtn;
         TextView desc;
@@ -97,7 +96,6 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
         if (convertView == null) {
             row = LayoutInflater.from(context).inflate(R.layout.item_row, parent, false);
             holder = new ViewHolder();
-            holder.icon = row.findViewById(R.id.itemIcon);
             holder.title = row.findViewById(R.id.itemTitle);
             holder.favBtn = row.findViewById(R.id.favButton);
             holder.desc = row.findViewById(R.id.itemDesc);
@@ -128,9 +126,6 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
 
         JSONObject item = items.get(position);
         String id = item.optString("id", "");
-        holder.icon.setImageResource(Icons.item(item, itemSection(item)));
-        holder.icon.setColorFilter(context.getColor(R.color.text));
-        holder.icon.setBackgroundResource(R.drawable.icon_tile_bg);
         holder.title.setText(highlightMatch(Lang.title(context, item)));
         String itemSection = itemSection(item);
         holder.favBtn.setTag("fav:" + position);
@@ -240,7 +235,7 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
 
     private void applyFavStyle(ImageView btn, boolean active) {
         btn.setImageResource(active ? R.drawable.ic_favorite_fill : R.drawable.ic_favorite_outline);
-        btn.setColorFilter(active ? 0xFFE0245E : context.getColor(R.color.text_muted));
+        btn.setColorFilter(active ? context.getColor(R.color.brand_accent) : context.getColor(R.color.text_muted));
     }
 
     @Override
@@ -291,7 +286,7 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
         return true;
     }
 
-    // نقطة فتح واحدة لأي عنصر من أي شاشة (القائمة، اختيار اليوم، المفضلة، اختار لي، الروابط)
+    // نقطة فتح واحدة لأي عنصر من أي شاشة (القائمة، الرئيسية، المفضلة، اختار لي)
     static void open(Activity a, JSONObject item, String section) {
         open(a, item, section, null);
     }
@@ -305,6 +300,10 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
             intent.putExtra(ArticleActivity.EXTRA_TITLE, Lang.title(a, item));
             intent.putExtra(ArticleActivity.EXTRA_CONTENT, Lang.content(a, item));
             intent.putExtra(ArticleActivity.EXTRA_DETAIL_URL, Lang.detailPath(a, item));
+            intent.putExtra(ArticleActivity.EXTRA_DECK, Lang.desc(a, item));
+            intent.putExtra(ArticleActivity.EXTRA_ADDED, item.optLong("addedAt", 0));
+            JSONArray tags = item.optJSONArray("tags");
+            intent.putExtra(ArticleActivity.EXTRA_TAG, tags == null || tags.length() == 0 ? "" : Lang.tag(a, tags.optString(0)));
         } else {
             intent = PlaceActivity.intent(a, item, section);
         }

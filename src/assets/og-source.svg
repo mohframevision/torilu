@@ -1,18 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1d4ed8" />
-      <stop offset="100%" stop-color="#2563eb" />
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="url(#bg)" />
-
-  <rect x="470" y="120" width="260" height="260" rx="56" fill="#ffffff" />
-  <circle cx="672" cy="164" r="22" fill="#f59e0b" />
-  <g fill="#2563eb">
-    <g transform="translate(467.903 355.775) scale(0.556833)"><path d="M424 0L32.50 0L32.50-60L76.50-60Q66-69.50 59.25-86.75Q52.50-104 52.50-130Q52.50-159 68-185Q83.50-210.50 110-225.25Q136.50-240 167-240Q201-240 226.25-226Q251.50-212 265.75-187.50Q280-163 280-131L280-60L349.50-60L349.50-152.50Q349.50-216.50 318-250.25Q286.50-284 227-284Q189.50-284 161-279.50Q132.50-275 105.50-265L88.50-322Q123-334 156-339Q189-344 227-344Q325.50-344 374.75-296.50Q424-249 424-159L424 0M189.50-60L205.50-60L205.50-128Q205.50-154 196.50-165.75Q187.50-177.50 167.50-177.50Q150.50-177.50 139.75-163.25Q129-149 129-127Q129-60 189.50-60" /></g>
-  </g>
-
-  <text x="600" y="470" font-family="Tahoma, Arial, sans-serif" font-size="90" font-weight="800" fill="#ffffff" text-anchor="middle">توريلو</text>
-  <text x="600" y="530" font-family="Tahoma, Arial, sans-serif" font-size="34" font-weight="600" fill="#dbeafe" text-anchor="middle">كل شيء مفيد… في موقع واحد</text>
+  <!-- صورة المشاركة (1200×630) — مولَّدة من E:\توريلو\الهوية\export.py.
+       الخطوط تُحمَّل من مجلد fonts بجانبها (Amiri للاسم، Cairo للسطر). -->
+  <style>
+    @font-face { font-family: Amiri; font-weight: 700; src: url(fonts/amiri-arabic.woff2); }
+    @font-face { font-family: Cairo; src: url(fonts/cairo-arabic.woff2); }
+    .w { font: 700 168px Amiri, serif; fill: #1a1f29; }
+    .t { font: 600 46px Cairo, sans-serif; fill: #5b5f68; }
+  </style>
+  <rect width="1200" height="630" fill="#faf6ef"/>
+  <g transform="translate(70 105)"><defs><pattern id="pog" width="10.50" height="10.50" patternUnits="userSpaceOnUse"><circle cx="5.25" cy="5.25" r="3.57" fill="#1545a2"/></pattern><radialGradient id="gog" cx="0.38" cy="0.36" r="0.7"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0.15"/></radialGradient><mask id="mog"><circle cx="210.0" cy="210.0" r="151.2" fill="url(#gog)"/></mask></defs><rect width="420" height="420" fill="url(#pog)" mask="url(#mog)" opacity="0.5"/></g>
+  <line x1="80" y1="70" x2="1120" y2="70" stroke="#1a1f29" stroke-width="1.5"/>
+  <line x1="80" y1="560" x2="1120" y2="560" stroke="#1a1f29" stroke-width="1.5"/>
+  <line x1="80" y1="566" x2="1120" y2="566" stroke="#1a1f29" stroke-width="1.5"/>
+  <text class="w" x="1110" y="340" text-anchor="start" direction="rtl">توريلو<tspan fill="#1545a2">.</tspan></text>
+  <text class="t" x="1110" y="440" text-anchor="start" direction="rtl">دليل أماكن البحرين</text>
 </svg>

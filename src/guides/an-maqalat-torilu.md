@@ -3,12 +3,12 @@ title: "ماذا ستقرأ هنا؟ عن مقالات توريلو"
 icon: "📝"
 desc: "مقالات توريلو قصص وأدلة عن المجتمع وأماكنه في البحرين: من يقف خلف المكان، وأين تذهب ولماذا، وما الحكاية وراء ما نأكله. هنا نشرح كيف نكتبها وبماذا نلتزم."
 title_en: "What Will You Read Here? About Torilu's Articles"
-desc_en: "Torilu's articles are stories and guides about society and its places in Bahrain: who stands behind a place, where to go and why, and the story behind what we eat. Here we explain how we write them and what we commit to."
+desc_en: "Torilu's articles are stories and guides about the community and its places in Bahrain: who stands behind a place, where to go and why, and the story behind what we eat. Here we explain how we write them and what we commit to."
 categories:
   - عن توريلو
 dateAdded: 2026-11-05
 langSwitchUrl: "/en/guides/an-maqalat-torilu.html"
-aiDisclosure: "مسودة كتبها الذكاء الاصطناعي (Claude) بطلب صاحب الموقع وعلى أساس فكرته، ثم راجعها وعدّلها صاحب الموقع."
+aiDisclosure: "كُتب هذا المقال بمساعدة الذكاء الاصطناعي (Claude) على أساس فكرة صاحب الموقع."
 ---
 
 ## لماذا نكتب؟

@@ -28,9 +28,9 @@ Hajiyat, Al Khamis, and other locations.
 
 ## Contact
 
-[📸 Instagram](https://www.instagram.com/almanarbakery/?hl=ar) ·
-[🔗 Link page](https://linktr.ee/almanarbakery)
+[Instagram](https://www.instagram.com/almanarbakery/?hl=ar) ·
+[Link page](https://linktr.ee/almanarbakery)
 
 ## Location
 
-[📍 Open on Google Maps](https://maps.app.goo.gl/sqbUCYybzr3XY6sG9)
+[Open on Google Maps](https://maps.app.goo.gl/sqbUCYybzr3XY6sG9)

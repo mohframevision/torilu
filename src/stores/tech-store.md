@@ -6,9 +6,10 @@ title_en: Cazasouq
 desc_en: Cazasouq is a Bahraini company specializing in gaming devices, computer accessories, and gaming equipment, in addition to maintenance and custom PC-building services.
 categories:
   - إلكترونيات
-featured: true
-cta: تسوق الآن 🛒
-cta_en: Shop now 🛒
+# رابط بعمولة: يُكتب الإفصاح بجانبه ويأخذ rel="sponsored"
+affiliate: true
+cta: تسوق الآن
+cta_en: Shop now
 links:
   website: https://cazasouq.idevaffiliate.com/692.html
   maps: https://maps.app.goo.gl/854kR4X4eXbb2hyq5

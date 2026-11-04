@@ -18,6 +18,9 @@ public class ArticleActivity extends Activity implements View.OnClickListener {
     static final String EXTRA_TITLE = "title";
     static final String EXTRA_CONTENT = "content";
     static final String EXTRA_DETAIL_URL = "detailUrl";
+    static final String EXTRA_DECK = "deck";
+    static final String EXTRA_ADDED = "addedAt";
+    static final String EXTRA_TAG = "tag";
 
     private String title;
     private String detailUrl;
@@ -37,19 +40,43 @@ public class ArticleActivity extends Activity implements View.OnClickListener {
         String contentHtml = getIntent().getStringExtra(EXTRA_CONTENT);
         detailUrl = getIntent().getStringExtra(EXTRA_DETAIL_URL);
 
-        ((TextView) findViewById(R.id.articleHeaderTitle)).setText(title == null ? "" : title);
+        // الرأس يحمل الشعار «توريلو.» — العنوان نفسه كبير تحته، فلا نكرره
+        ((TextView) findViewById(R.id.articleHeaderTitle)).setText(MainActivity.wordmark(this));
         TextView titleView = findViewById(R.id.articleTitle);
         titleView.setText(title == null ? "" : title);
         Ui.display(titleView);
+        ((TextView) findViewById(R.id.articleKicker)).setText(kicker());
+        String deck = getIntent().getStringExtra(EXTRA_DECK);
+        if (deck != null && !deck.isEmpty()) {
+            TextView deckView = findViewById(R.id.articleDeck);
+            deckView.setText(deck);
+            deckView.setVisibility(View.VISIBLE);
+        }
 
         TextView body = findViewById(R.id.articleBody);
         if (contentHtml != null && !contentHtml.isEmpty()) {
-            body.setText(Html.fromHtml(contentHtml, Html.FROM_HTML_MODE_COMPACT));
+            body.setText(Ui.html(this, contentHtml));
             body.setMovementMethod(LinkMovementMethod.getInstance());
         }
 
         findViewById(R.id.articleCloseButton).setOnClickListener(this);
         findViewById(R.id.articleShareButton).setOnClickListener(this);
+    }
+
+    // سطر الجريدة كالموقع: «عن توريلو · 5 نوفمبر 2026» (التاريخ بتوقيت UTC مثل isoDate)
+    private String kicker() {
+        String tag = getIntent().getStringExtra(EXTRA_TAG);
+        long added = getIntent().getLongExtra(EXTRA_ADDED, 0);
+        String date = "";
+        if (added > 0) {
+            java.util.Calendar cal = java.util.Calendar.getInstance(java.util.TimeZone.getTimeZone("UTC"));
+            cal.setTimeInMillis(added);
+            date = cal.get(java.util.Calendar.DAY_OF_MONTH) + " "
+                    + getResources().getStringArray(R.array.np_months)[cal.get(java.util.Calendar.MONTH)] + " "
+                    + cal.get(java.util.Calendar.YEAR);
+        }
+        if (tag == null || tag.isEmpty()) return date.isEmpty() ? getString(R.string.home_article_badge) : date;
+        return date.isEmpty() ? tag : tag + " · " + date;
     }
 
     @Override

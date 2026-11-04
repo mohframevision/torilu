@@ -42,7 +42,8 @@
             android:layout_height="wrap_content"
             android:text="@string/brand"
             android:textColor="@color/text"
-            android:textSize="20sp"
+            android:textSize="24sp"
+            android:fontFamily="@font/amiri"
             android:textStyle="bold" />
     </LinearLayout>
 
