@@ -1,14 +1,14 @@
 ---
 slug: guides
-title: "مقالات وأدلة"
-navLabel: مقالات وأدلة
+title: "مقالات"
+navLabel: مقالات
 icon: 🧭
-description: "مقالات وأدلة عملية: أدوات تقنية وتصميم ومونتاج، ونصائح تسويق وأعمال — مشروحة بالعربي وبتجربة فعلية."
-title_en: "Guides & Articles"
-navLabel_en: "Guides"
-description_en: "Practical guides and articles on tech, design and editing tools, and marketing and business, written from hands-on use."
-searchPlaceholder_en: "Search for a guide or article…"
-searchPlaceholder: ابحث عن دليل أو مقال…
+description: "قصص وأدلة عن المجتمع وأماكنه في البحرين، مكتوبة من زيارات حقيقية ومن مصادر موثوقة."
+title_en: "Articles"
+navLabel_en: "Articles"
+description_en: "Stories and guides about society and its places in Bahrain, written from real visits and reliable sources."
+searchPlaceholder_en: "Search articles…"
+searchPlaceholder: ابحث في المقالات…
 order: 2
 hasDetailPages: true
 iconOptions:
@@ -35,7 +35,7 @@ categoryOptions:
   - نقل ومواصلات
   - ميزانية
   - للزوار
-  - تقنية وبرمجيات
-  - تصميم ومونتاج
-  - تسويق وأعمال
+  - قصص الناس
+  - ثقافة الأكل
+  - عن توريلو
 ---
