@@ -57,9 +57,11 @@
     {%- endif %}
     {#- قائمة الطعام التفاعلية: نسخة <details> بلا جافاسكربت هنا (تقرأها
         محركات البحث)، وmain.js يستبدلها ببطاقة منبثقة متحركة بعد التحميل —
-        نفس مبدأ مصدر اللحم أعلاه، اسم وسعر بس بلا صور (قرار صريح). -#}
+        نفس مبدأ مصدر اللحم أعلاه، اسم وسعر بس بلا صور (قرار صريح).
+        المكان اللي له صفحة تفاصيل: منيوه كاملاً هناك (place-newspaper.njk)، فلا نكرّره
+        بصفحة القسم — main.js يجيبه من js/menus.js عند الفتح. -#}
     {%- set menuItems = d.menuItems or [] %}
-    {%- if menuItems.length %}
+    {%- if menuItems.length and not (hasDetailPages or d.hasDetailPage) %}
     <details class="menu-list">
       <summary>{{ t.link_menu }}</summary>
       <ul class="menu-items">

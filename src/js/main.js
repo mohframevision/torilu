@@ -1546,10 +1546,18 @@ function openMenuOverlay(item) {
   `;
   overlay.appendChild(card);
   // الأصناف تتحمّل عند الفتح (js/menus.js) — القائمة تظهر فوراً بنقاط تحميل ثم تتعبّى
+  // فشل التحميل (بلا اتصال مثلاً): رسالة بدل قائمة فاضية، والفتح التالي يعيد المحاولة
   window
     .loadMenus()
-    .catch(() => {})
-    .then(() => {
+    .then(
+      () => true,
+      () => false
+    )
+    .then((ok) => {
+      if (!ok) {
+        card.querySelector(".menu-items").innerHTML = `<li>${escapeHtml(t("menu_load_failed"))}</li>`;
+        return;
+      }
       const rows = window
         .menuOf(item)
         .map((mi) => {

@@ -3289,9 +3289,13 @@ a.photo-credit.card {
   border-bottom: none;
 }
 
+/* السعر لا يُعصر، لكن الأسعار المتعددة الطويلة («0.900 / 1.700 / … BD») تلتف عند
+   نصف السطر بدل أن تعصر الاسم كلمةً بسطر وتخرج من حافة البطاقة */
 .menu-item-price {
   color: var(--color-text-muted);
-  white-space: nowrap;
+  flex-shrink: 0;
+  max-width: 50%;
+  text-align: end;
   font-variant-numeric: tabular-nums;
 }
 
@@ -6041,7 +6045,10 @@ main .search-box {
 }
 .np-menu b {
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  /* مثل .menu-item-price: الأسعار المتعددة الطويلة تلتف بدل أن تخرج من العمود */
+  flex-shrink: 0;
+  max-width: 50%;
+  text-align: end;
 }
 /* صندوق المعلومات: عمود جانبي بخطوط */
 .np-facts {
