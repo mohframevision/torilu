@@ -2150,13 +2150,13 @@ a.photo-credit.card {
 .pk-center {
   position: absolute;
   left: 50%;
-  top: var(--cy-moon);
+  top: max(var(--cy-moon), var(--moon-min, 0px));
   width: 0;
   height: 0;
   transition: top 0.5s var(--ease);
 }
 .pk[data-step="wheel"] .pk-center {
-  top: var(--cy-wheel);
+  top: max(var(--cy-wheel), var(--wheel-min, 0px));
 }
 .pk:is([data-step="ball"], [data-step="clip"]) .pk-center {
   top: var(--cy-ball);
@@ -6464,4 +6464,27 @@ main .search-box {
 }
 .np-tools .np-tool[hidden] {
   display: none;
+}
+/* شاشة قصيرة جداً (جوال بالعرض): عنوان أصغر وبلا السطر الثاني حتى تتّسع العجلة */
+@media (max-height: 460px) {
+  .pk-prompt h1 {
+    font-size: 1.7rem;
+  }
+  .pk-prompt p {
+    display: none;
+  }
+}
+@media (max-height: 460px) {
+  .pk[data-step="wheel"] .pk-prompt {
+    opacity: 0;
+    visibility: hidden;
+    transition: none;
+  }
+}
+/* جوال بالعرض: الشاشة أقصر من أن تتّسع للعجلة مع الشريط السفلي، فيختفي الشريط في هذه الصفحة
+   (القائمة في الهيدر تبقى) */
+@media (max-height: 460px) and (orientation: landscape) {
+  body:has(.pk) .bottom-nav {
+    display: none;
+  }
 }

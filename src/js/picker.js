@@ -287,10 +287,33 @@ function initRandomPicker() {
   function fit() {
     const z = parseFloat(document.documentElement.style.zoom) || 1;
     const h = window.innerHeight / z - (header?.offsetHeight || 0) - (bottomNav?.offsetHeight || 0);
-    root.style.setProperty("--pk-h", `${Math.max(520, Math.round(h))}px`);
+    root.style.setProperty("--pk-h", `${Math.max(240, Math.round(h))}px`);
+    // لا يغطي القمر ولا العجلة سطرَي العنوان بأي مقاس: مركزهما لا يرتفع فوق
+    // (أسفل العنوان + نصف القطعة + فراغ)، وإن ضاق المسرح يطول بقدر الحاجة
+    for (const v of ["--b", "--p", "--R"]) root.style.removeProperty(v);
+    const cs = getComputedStyle(root);
+    const px = (v) => parseFloat(cs.getPropertyValue(v)) || 0;
+    // بشاشة قصيرة جداً يختفي العنوان وقت العجلة (CSS)، فلا يُحسب
+    const hidden = getComputedStyle(prompt).visibility === "hidden";
+    const below = hidden ? 0 : prompt.offsetTop + prompt.offsetHeight;
+    // شاشة قصيرة (جوال بالعرض، لابتوب منخفض): تصغر العجلة والقمر حتى يتّسعا فوق الشريط السفلي
+    const room = h - below - 20 - 24;
+    const k = Math.min(1, Math.max(0.4, room / (2 * px("--R") + px("--p"))));
+    if (k < 1) for (const v of ["--b", "--p", "--R"]) root.style.setProperty(v, `${Math.round(px(v) * k)}px`);
+    const cs2 = getComputedStyle(root);
+    const q = (v) => parseFloat(root.style.getPropertyValue(v) || cs2.getPropertyValue(v)) || 0;
+    const moonMin = below + q("--b") / 2 + 36;
+    const wheelMin = below + q("--R") + q("--p") / 2 + 20;
+    root.style.setProperty("--moon-min", `${Math.round(moonMin)}px`);
+    root.style.setProperty("--wheel-min", `${Math.round(wheelMin)}px`);
+    const need = Math.max(moonMin + q("--b") / 2 + 70, wheelMin + q("--R") + q("--p") / 2 + 24);
+    if (need > root.offsetHeight) root.style.setProperty("--pk-h", `${Math.ceil(need)}px`);
   }
   fit();
   window.addEventListener("resize", fit);
+  document.fonts?.ready.then(fit);
+  new MutationObserver(fit).observe(prompt, { childList: true, subtree: true, characterData: true });
+  new MutationObserver(fit).observe(root, { attributes: true, attributeFilter: ["data-step"] });
 
   // الأقسام: «أي شيء» = كل الأقسام معاً؛ القسم الفارغ يختفي زرّه
   const secItems = (k) => SITE_DATA[k]?.items || [];
