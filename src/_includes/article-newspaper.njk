@@ -9,6 +9,12 @@
 {% set cat = (categories or (arData and arData.categories) or [])[0] %}
 <div class="detail np-article">
 <div class="breadcrumb"><a href="{{ homeUrl | url }}">{{ t.nav_home }}</a> / <a href="{{ sectionUrl | url }}">{{ sectionTitle }}</a></div>
+<div class="np-sheet">
+<div class="np-mast" aria-hidden="true">
+  <div class="np-mast-row"><span>{{ "Bahrain" if isEn else "البحرين" }}</span><span>{{ npDate(when, lang) }}</span><span>{{ "Articles" if isEn else "مقالات" }}</span></div>
+  <p class="np-mast-name">{{ "Torilu" if isEn else "توريلو" }}<i>.</i></p>
+  <div class="np-mast-row"><span>{{ "A guide to places in Bahrain" if isEn else "دليل أماكن البحرين" }}</span></div>
+</div>
 <header class="page-header np-head">
   <p class="np-kicker">{% if cat %}<span>{{ (tags_en[cat] or cat) if isEn else cat }}</span>{% endif %}{{ npDate(when, lang) }}</p>
   <h1>{{ title }}</h1>
@@ -37,4 +43,5 @@
 {% if aiDisclosure %}
 <aside class="np-note"><b>{{ "Editor's note:" if isEn else "ملاحظة التحرير:" }}</b> {{ aiDisclosure }} {{ t.guide_disclaimer }}</aside>
 {% endif %}
+</div>
 </div>
