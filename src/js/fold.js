@@ -7,7 +7,8 @@
   if (!sheet || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const lang = window.SITE_LANG || "ar";
-  const hint = (window.I18N && window.I18N[lang] && window.I18N[lang].fold_hint) || "";
+  const T = (window.I18N && window.I18N[lang]) || {};
+  const hint = T.fold_hint || "";
   const title = (sheet.querySelector("h1") || {}).textContent || "";
 
   // الوجه الأمامي لكل قطعة: نسخة صامتة من أعلى الورقة نفسها، فتطابق الورقة الحقيقية لما تنفتح
@@ -59,6 +60,40 @@
   fold.setAttribute("aria-label", hint);
   fold.appendChild(paper);
 
+  // شريط صغير فوق الورقة: زر الصوت (يُحفظ) وزر «اطوِ الجريدة» (يظهر بعد الفتح)
+  const SOUND_KEY = "torilu_fold_sound";
+  let soundOn = true;
+  try {
+    soundOn = localStorage.getItem(SOUND_KEY) !== "off";
+  } catch {
+    /* تخزين محجوب: الصوت مفعّل افتراضياً */
+  }
+  const tools = document.createElement("div");
+  tools.className = "np-tools";
+  const soundBtn = document.createElement("button");
+  soundBtn.type = "button";
+  soundBtn.className = "btn secondary np-tool";
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.className = "btn secondary np-tool";
+  closeBtn.textContent = T.fold_close || "";
+  closeBtn.hidden = true;
+  function paintSound() {
+    soundBtn.textContent = soundOn ? T.fold_sound_on : T.fold_sound_off;
+    soundBtn.setAttribute("aria-pressed", String(soundOn));
+  }
+  paintSound();
+  soundBtn.addEventListener("click", () => {
+    soundOn = !soundOn;
+    try {
+      localStorage.setItem(SOUND_KEY, soundOn ? "on" : "off");
+    } catch {
+      /* لا شيء */
+    }
+    paintSound();
+  });
+  tools.append(closeBtn, soundBtn);
+
   // المقاسات من الورقة نفسها (offset* بوحدات CSS، فتصحّ مع zoom الشاشات العريضة)
   function measure() {
     const W = sheet.offsetWidth;
@@ -79,7 +114,7 @@
   }
   measure();
   sheet.classList.add("np-folded");
-  sheet.before(fold);
+  sheet.before(tools, fold);
   measure();
   window.addEventListener("resize", measure);
 
@@ -115,7 +150,8 @@
     src.start(t0);
   }
   function sound() {
-    // الموقع ما فيه إعداد لإيقاف الأصوات؛ هذا الصوت يُشغَّل فقط من ضغطة الزائر نفسها وبصوت خافت
+    // يُشغَّل فقط من ضغطة الزائر نفسها وبصوت خافت، وزر الصوت فوق الورقة يطفئه
+    if (!soundOn) return;
     try {
       ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
       ctx.resume();
@@ -142,11 +178,41 @@
         sheet.tabIndex = -1;
         sheet.focus({ preventScroll: true });
       }
-      setTimeout(() => fold.remove(), 400);
+      setTimeout(() => {
+        fold.hidden = true;
+        closeBtn.hidden = false;
+        busy = false;
+      }, 400);
       // بعد ما تنفتح بثلاث ثوانٍ تتلاشى علامات الطيّ فما تزعج القارئ
       setTimeout(() => sheet.classList.add("np-clean"), 3000);
     }, 2050);
   }
+  // الطيّ من جديد: نفس الحركة بالعكس — تظهر الطيّات مفتوحة فوق الورقة ثم تنطوي
+  function close() {
+    if (busy) return;
+    busy = true;
+    closeBtn.hidden = true;
+    tools.scrollIntoView({ behavior: "smooth", block: "start" });
+    sheet.classList.remove("np-clean");
+    fold.classList.add("is-half", "is-open", "is-gone");
+    fold.hidden = false;
+    measure();
+    window.addEventListener("resize", measure);
+    void fold.offsetWidth;
+    fold.classList.remove("is-gone");
+    setTimeout(() => {
+      sheet.classList.add("np-folded");
+      measure();
+      sound();
+      fold.classList.remove("is-open");
+      setTimeout(() => fold.classList.remove("is-half"), 1050);
+      setTimeout(() => {
+        busy = false;
+        if (closeBtn === document.activeElement) fold.focus({ preventScroll: true });
+      }, 2100);
+    }, 400);
+  }
+  closeBtn.addEventListener("click", close);
   fold.addEventListener("click", open);
   fold.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {

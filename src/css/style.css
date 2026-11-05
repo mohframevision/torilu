@@ -6112,3 +6112,18 @@ main .search-box {
     opacity: 0.55;
   }
 }
+/* شريط الجريدة: «اطوِ الجريدة» وزر الصوت فوق الورقة */
+.np-tools {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: var(--space-3);
+  scroll-margin-top: 90px;
+}
+.np-tools .np-tool {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+}
+.np-tools .np-tool[hidden] {
+  display: none;
+}
