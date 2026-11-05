@@ -14,6 +14,32 @@ pageScript: fold
 {% include "place-newspaper.njk" %}
 {% endif %}
 
+{#- مكان: نوعه في Schema.org حسب القسم، من بياناته فقط (العربية للصفحة الإنجليزية) -#}
+{% set ldTypes = {restaurants:"Restaurant", cafes:"CafeOrCoffeeShop", bakeries:"Bakery", stores:"Store", "car-shops":"AutomotiveBusiness", places:"TouristAttraction"} %}
+{% set ldType = ldTypes[sectionSlug] %}
+{% if ldType %}
+{% set twin = (collections.all | pageByUrl(langSwitchUrl)) if lang == "en" else none %}
+{% set d0 = twin.data if twin else {} %}
+{% set lk = links or d0.links or {} %}
+{% set la = lat or d0.lat %}{% set ln = lng or d0.lng %}
+{% set cc = coords or d0.coords %}
+{% if not la and cc %}{% set la = cc.split(",")[0] | trim %}{% set ln = cc.split(",")[1] | trim %}{% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ ldType }}",
+  "name": {{ title | json | safe }},
+  "description": {{ desc | json | safe }},
+  "url": {{ (site.origin + (page.url | url)) | json | safe }},
+  {% if image %}"image": {{ (site.origin + image) | json | safe }},{% endif %}
+  {% set ph = (lk.phone | string).split(",")[0] | trim if lk.phone else "" %}
+  {% if ph %}"telephone": {{ (("+" if ph.startsWith("973") and ph.length > 8 else "+973") + ph) | json | safe }},{% endif %}
+  {% if la and ln %}"geo": {"@type": "GeoCoordinates", "latitude": {{ la }}, "longitude": {{ ln }}},{% endif %}
+  {% if lk.maps %}"hasMap": {{ lk.maps | json | safe }},{% endif %}
+  "address": {"@type": "PostalAddress", "addressCountry": "BH"}
+}
+</script>
+{% else %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -29,3 +55,4 @@ pageScript: fold
   }
 }
 </script>
+{% endif %}

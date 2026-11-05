@@ -39,7 +39,7 @@
      بدون unsafe-inline. يُحمَّل بدون defer/async فيشتغل قبل أول رسم للصفحة
      (يمنع "وميض" المظهر الفاتح قبل تطبيق المظهر الداكن المحفوظ) #}
   <script src="{{ '/js/theme-init.js' | url }}"></script>
-  {% set metaDescription = description or desc %}
+  {% set metaDescription = (description or desc or "") | truncate(150, false, "…") %}
   {% set pageUrl = site.origin + (page.url | url) %}
   {% set ogType = "article" if sectionSlug else "website" %}
   {% set ogImageUrl = site.origin + image if image else site.origin + ('/assets/og-image.png' | url) %}
