@@ -63,4 +63,7 @@ menuItems:
   - name: "ماء"
     name_en: "Water"
     price: "0.100 BD"
+hasDetailPage: true
+slug_en: chickpeas-truck
+langSwitchUrl: "/en/restaurants/chickpeas-truck.html"
 ---

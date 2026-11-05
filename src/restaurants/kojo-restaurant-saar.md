@@ -570,4 +570,7 @@ menuItems:
   - name: "كوكاكولا دايت"
     name_en: "Diet Coca Cola"
     price: "1.100 BD"
+hasDetailPage: true
+slug_en: kojo-restaurant-saar
+langSwitchUrl: "/en/restaurants/kojo-restaurant-saar.html"
 ---

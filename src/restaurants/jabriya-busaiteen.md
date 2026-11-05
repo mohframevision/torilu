@@ -425,4 +425,7 @@ menuItems:
   - name: "ربيع"
     name_en: "Rabia Pastry"
     price: "1.500 BD"
+hasDetailPage: true
+slug_en: jabriya-busaiteen
+langSwitchUrl: "/en/restaurants/jabriya-busaiteen.html"
 ---

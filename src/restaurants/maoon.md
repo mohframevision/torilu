@@ -124,4 +124,7 @@ menuItems:
   - name: "كيكة الجوكلت"
     name_en: "Chocolate Cake"
     price: "1.200 BD"
+hasDetailPage: true
+slug_en: maoon
+langSwitchUrl: "/en/restaurants/maoon.html"
 ---

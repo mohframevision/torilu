@@ -188,4 +188,7 @@ menuItems:
   - name: "بوكس إضافي (محرّم)"
     name_en: "Muharram Extra Box"
     price: "0.050 BD"
+hasDetailPage: true
+slug_en: yummies
+langSwitchUrl: "/en/restaurants/yummies.html"
 ---

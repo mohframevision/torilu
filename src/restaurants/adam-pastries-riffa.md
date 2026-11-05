@@ -79,4 +79,7 @@ menuItems:
   - name: "بطاطس"
     name_en: "French Fries"
     price: "0.800 BD"
+hasDetailPage: true
+slug_en: adam-pastries-riffa
+langSwitchUrl: "/en/restaurants/adam-pastries-riffa.html"
 ---

@@ -3298,6 +3298,17 @@ a.photo-credit.card {
   text-align: end;
   font-variant-numeric: tabular-nums;
 }
+/* الأسعار نص لاتيني («0.900 / 1.700 / 2.100 BD») يُقرأ من اليسار مثل أحجامه («S / M / L»)؛
+   بدون هذا يقلبه الاتجاه العربي فيصير «BD 2.100 / 1.700 / 0.900». المحاذاة كما كانت: طرف السطر */
+.menu-item-price,
+.np-menu b {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+[dir="rtl"] .menu-item-price,
+[dir="rtl"] .np-menu b {
+  text-align: left;
+}
 
 /* ===== بطاقة القائمة المنبثقة (بعد تشغيل الجافاسكربت) — تستخدم نفس حاجز
    الشاشة الكاملة .picker-reveal-overlay الموجود أصلاً، بلا تكرار CSS ===== */
@@ -4475,7 +4486,10 @@ li {
   padding: 0 2px;
 }
 .search-price {
-  flex: none;
+  /* الأسعار المتعددة («1.200 / … / 4.800 BD») تلتف داخل الشارة بدل أن تعصر الاسم وتغطيه على 320px */
+  flex: 0 1 auto;
+  max-width: 45%;
+  text-align: center;
   padding: 5px 9px;
   border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--color-primary) 12%, transparent);

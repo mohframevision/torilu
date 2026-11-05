@@ -56,6 +56,11 @@ const SLUG_ALIASES = {
   "restaurants/adam-subs-1.html": "restaurants/adam-subs.html",
   "restaurants/مطعم-الشعلة.html": "restaurants/al-shola-restaurant.html",
   "bakeries/مخبز-الجزيرة.html": "bakeries/al-jazira-bakery.html",
+  "restaurants/مدينة-الشواء.html": "restaurants/madinat-al-shiwa.html",
+  "restaurants/مطبخ-سفرة-الصفار.html": "restaurants/sufrat-alsaffar-jeblat-hebshi.html",
+  "restaurants/مطعم-الزهور.html": "restaurants/al-zuhoor-restaurant.html",
+  "restaurants/مطعم-المحور.html": "restaurants/al-mihwar-restaurant.html",
+  "restaurants/مطعم-قصر-الطير.html": "restaurants/bird-palace-musalla.html",
 };
 
 const allHtml = walk(SITE)

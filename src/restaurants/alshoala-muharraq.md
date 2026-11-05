@@ -259,4 +259,7 @@ menuItems:
   - name: "بيتزا مارغريتا (وسط)"
     name_en: "Margherita Pizza (Medium)"
     price: "1.700 BD"
+hasDetailPage: true
+slug_en: alshoala-muharraq
+langSwitchUrl: "/en/restaurants/alshoala-muharraq.html"
 ---

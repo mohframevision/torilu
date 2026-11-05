@@ -265,4 +265,7 @@ menuItems:
   - name: "زجاجة أفوكادو (١ لتر)"
     name_en: "Avocado Bottle (1 L)"
     price: "2.600 BD"
+hasDetailPage: true
+slug_en: sandwichat-alkarama
+langSwitchUrl: "/en/restaurants/sandwichat-alkarama.html"
 ---

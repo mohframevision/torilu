@@ -129,4 +129,7 @@ menuItems:
   - name: "مياه"
     name_en: "Water"
     price: "0.400 BD"
+hasDetailPage: true
+slug_en: soul
+langSwitchUrl: "/en/restaurants/soul.html"
 ---

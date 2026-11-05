@@ -64,7 +64,7 @@
 {%- if gi >= 0 and gal[gi] and not loop.last %}{{ npPic(gal[gi], gi) }}{% endif %}
 {%- endfor %}
 {%- set used = parts.length - 1 - (0 if parts[0] | trim else 1) %}
-{%- if gal.length > used %}<div class="np-photo-grid">{% for g in gal %}{% if loop.index0 >= used %}{{ npPic(g, 0) }}{% endif %}{% endfor %}</div>{% endif %}
+{%- if gal.length and gal.length > used %}<div class="np-photo-grid">{% for g in gal %}{% if loop.index0 >= used %}{{ npPic(g, 0) }}{% endif %}{% endfor %}</div>{% endif %}
 {#- المنيو بالأسعار من حقل menuItems: قائمة أسعار جريدة بنقاط بين الاسم والسعر، إذا ما كتبه صاحب الموقع جدولاً بنفسه -#}
 {%- set mItems = menuItems or ad.menuItems %}
 {%- if mItems and mItems.length and not ("<table" in content) %}

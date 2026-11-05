@@ -761,4 +761,7 @@ menuItems:
   - name: "خبز تركي"
     name_en: "Turkish Bread"
     price: "0.100 BD"
+hasDetailPage: true
+slug_en: almatam-allubnani-riffa
+langSwitchUrl: "/en/restaurants/almatam-allubnani-riffa.html"
 ---

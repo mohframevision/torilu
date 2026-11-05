@@ -68,4 +68,7 @@ menuItems:
   - name: "عصائر معلبة"
     name_en: "Canned Juice"
     price: "0.600 BD"
+hasDetailPage: true
+slug_en: khan-baghdad
+langSwitchUrl: "/en/restaurants/khan-baghdad.html"
 ---

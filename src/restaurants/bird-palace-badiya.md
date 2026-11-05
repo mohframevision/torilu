@@ -984,4 +984,7 @@ menuItems:
     name_en: "Oreo Dessert"
     price: "1.000 BD"
 dateAdded: 2026-10-19
+hasDetailPage: true
+slug_en: bird-palace-badiya
+langSwitchUrl: "/en/restaurants/bird-palace-badiya.html"
 ---

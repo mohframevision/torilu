@@ -104,4 +104,7 @@ menuItems:
   - name: "فيمتو"
     name_en: "Vimto"
     price: "0.400 BD"
+hasDetailPage: true
+slug_en: sufrat-alsaffar-isa-town
+langSwitchUrl: "/en/restaurants/sufrat-alsaffar-isa-town.html"
 ---

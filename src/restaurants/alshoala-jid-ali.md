@@ -259,4 +259,7 @@ menuItems:
   - name: "بيتزا مارغريتا (وسط)"
     name_en: "Margherita Pizza (Medium)"
     price: "1.700 BD"
+hasDetailPage: true
+slug_en: alshoala-jid-ali
+langSwitchUrl: "/en/restaurants/alshoala-jid-ali.html"
 ---

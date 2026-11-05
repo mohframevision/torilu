@@ -103,4 +103,7 @@ menuItems:
   - name: "جلاب"
     name_en: "Jellab"
     price: "0.850 BD"
+hasDetailPage: true
+slug_en: manakish-gibran
+langSwitchUrl: "/en/restaurants/manakish-gibran.html"
 ---
