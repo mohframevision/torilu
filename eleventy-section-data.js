@@ -17,6 +17,8 @@ function sectionDirData(slug, sectionHasDetailPages, sectionTitle) {
       navActive: (data) => (hasDetail(data) ? slug : undefined),
       sectionSlug: (data) => (hasDetail(data) ? slug : undefined),
       sectionTitle: (data) => (hasDetail(data) ? sectionTitle : undefined),
+      // الجريدة المطويّة (js/fold.js) — الـlayout هنا محسوب فما تنتقل بيانات رأس detail-item.njk
+      pageScript: (data) => (hasDetail(data) ? "fold" : data.pageScript),
     },
   };
 }

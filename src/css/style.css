@@ -5418,7 +5418,17 @@ main .search-box {
 .detail.np-article > .np-sheet {
   max-width: 1120px;
 }
+/* شدّة علامات الطيّ (1 ظاهرة، 0 ورقة نظيفة) — مسجّلة عشان تتلاشى بانتقال ناعم */
+@property --crease {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+:root {
+  --np-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .27 0 0 0 0 .2 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 .np-sheet {
+  --crease: 1;
   --color-text: #1d1b17;
   --color-text-muted: #4f4a40;
   --color-primary: #1545a2;
@@ -5455,10 +5465,10 @@ main .search-box {
   pointer-events: none;
   mix-blend-mode: multiply;
   background:
-    linear-gradient(180deg, transparent 48.8%, rgb(60 45 20 / 0.10) 49.7%, rgb(60 45 20 / 0.22) 50%, rgb(255 255 255 / 0) 50.2%, rgb(60 45 20 / 0.06) 51.2%, transparent 52.4%),
-    linear-gradient(90deg, transparent 49.5%, rgb(60 45 20 / 0.08) 49.95%, transparent 50.6%),
+    linear-gradient(180deg, transparent 48.8%, rgb(60 45 20 / calc(0.1 * var(--crease))) 49.7%, rgb(60 45 20 / calc(0.22 * var(--crease))) 50%, rgb(255 255 255 / 0) 50.2%, rgb(60 45 20 / calc(0.06 * var(--crease))) 51.2%, transparent 52.4%),
+    linear-gradient(90deg, transparent 49.5%, rgb(60 45 20 / calc(0.08 * var(--crease))) 49.95%, transparent 50.6%),
     radial-gradient(120% 90% at 50% 50%, transparent 60%, rgb(80 60 30 / 0.10)),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .27 0 0 0 0 .2 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    var(--np-grain);
 }
 /* لمعة خفيفة على الوجه العلوي من الطيّة (فوق كل شيء أيضاً) */
 .np-sheet::before {
@@ -5468,45 +5478,7 @@ main .search-box {
   z-index: 5;
   pointer-events: none;
   mix-blend-mode: screen;
-  background: linear-gradient(180deg, transparent 50.1%, rgb(255 255 255 / 0.28) 50.35%, transparent 51.2%);
-}
-
-/* الجريدة تنفتح عند دخول المكان أو المقال: تبدأ مطويّة نصفين ثم تنبسط */
-.np-sheet:not(.np-front) {
-  transform-origin: 50% 0;
-  animation: np-unfold 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-.np-sheet:not(.np-front)::after {
-  animation: np-crease 0.9s ease-out both;
-}
-@keyframes np-unfold {
-  0% {
-    transform: perspective(1600px) translateY(24px) rotateX(-62deg) scaleY(0.55);
-    opacity: 0;
-  }
-  35% {
-    opacity: 1;
-  }
-  70% {
-    transform: perspective(1600px) rotateX(4deg) scaleY(1.01);
-  }
-  100% {
-    transform: none;
-  }
-}
-@keyframes np-crease {
-  0% {
-    box-shadow: inset 0 -40vh 60px -20px rgb(40 30 10 / 0.45);
-  }
-  100% {
-    box-shadow: inset 0 0 0 0 transparent;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .np-sheet:not(.np-front),
-  .np-sheet:not(.np-front)::after {
-    animation: none;
-  }
+  background: linear-gradient(180deg, transparent 50.1%, rgb(255 255 255 / calc(0.28 * var(--crease))) 50.35%, transparent 51.2%);
 }
 
 /* الترويسة: اسم الجريدة بين سطرين */
@@ -5844,4 +5816,299 @@ main .search-box {
 }
 .np-photo-grid .np-inline-photo {
   margin: 0 0 1em;
+}
+
+/* =====================================================================
+   الجريدة مطويّة (طلب صاحب الموقع 2026-11-05): صفحة المكان والمقال تبدأ جريدة مطويّة
+   مرتين (نصف بالطول ثم نصف بالعرض) وعليها «اضغط لفتح الجريدة»؛ بالضغط تنفتح طيّة بعد طيّة
+   بصوت ورق هادئ، وبعد ثوانٍ تتلاشى علامات الطيّ. js/fold.js يبني الطيّات كطبقات زينة فوق
+   الورقة الحقيقية (تبقى بالصفحة لمحركات البحث وقارئ الشاشة) — بلا JS أو مع تقليل الحركة
+   تظهر الورقة مفتوحة مباشرة.
+   ===================================================================== */
+.np-sheet.np-clean {
+  --crease: 0;
+  transition: --crease 1.5s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .np-sheet:not(.np-front) {
+    --crease: 0;
+  }
+}
+.detail.np-article:has(> .np-fold) {
+  position: relative;
+}
+/* وهي مطويّة: الورقة الحقيقية شفافة ومقصوصة لارتفاع الجريدة (ما تترك فراغاً طويلاً) */
+:root .np-sheet.np-folded {
+  max-height: calc(var(--fold-h) * 2);
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+}
+.np-sheet.np-folded > *,
+.np-sheet.np-folded::before,
+.np-sheet.np-folded::after {
+  opacity: 0;
+}
+
+/* --w/--h نصف عرض الورقة ونصف ارتفاعها، --s تكبير الربع المطويّ، --dx/--dy توسيطه */
+.detail.np-article > .np-fold {
+  position: absolute;
+  z-index: 2;
+  top: var(--y);
+  left: var(--x);
+  width: calc(var(--w) * 2);
+  max-width: none;
+  height: calc(var(--h) * 2);
+  margin: 0;
+  perspective: 2400px;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.35s ease;
+}
+.np-fold.is-gone {
+  opacity: 0;
+  pointer-events: none;
+}
+:root[data-theme="dark"] .np-fold {
+  filter: brightness(0.86) sepia(0.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .np-fold {
+    filter: brightness(0.86) sepia(0.12);
+  }
+}
+.np-fold-paper {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform-origin: 75% 0;
+  transform: translate(var(--dx), var(--dy)) scale(var(--s)) rotate(-1.2deg);
+  transition: transform 1s cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+.np-fold:hover:not(.is-half) .np-fold-paper,
+.np-fold:focus-visible .np-fold-paper {
+  transform: translate(var(--dx), calc(var(--dy) - 4px)) scale(var(--s)) rotate(-0.6deg);
+}
+.np-fold.is-half .np-fold-paper {
+  transform: translate(var(--dx), 0) scale(var(--s1));
+}
+.np-fold.is-open .np-fold-paper {
+  transform: none;
+}
+/* سماكة الطبقات المطويّة وظلّها على الطاولة — تصير ظلّ الورقة المفتوحة */
+.np-fold-paper::before {
+  content: "";
+  position: absolute;
+  left: var(--w);
+  top: 0;
+  width: var(--w);
+  height: var(--h);
+  transform: translateZ(-1px);
+  box-shadow:
+    -1px 1px 0 #e7e0d0,
+    -2px 2px 0 #cfc6b0,
+    -3px 3px 0 #ebe5d7,
+    -4px 4px 0 #c9bfa7,
+    -6px 10px 22px rgb(40 30 10 / 0.35);
+  transition:
+    all 1s cubic-bezier(0.45, 0.05, 0.25, 1),
+    box-shadow 0.4s ease;
+}
+.np-fold.is-half .np-fold-paper::before {
+  height: calc(var(--h) * 2);
+  box-shadow: 0 18px 50px -18px rgb(40 30 10 / 0.35);
+}
+.np-fold.is-open .np-fold-paper::before {
+  left: 0;
+  width: calc(var(--w) * 2);
+}
+.np-fold:focus-visible .np-fold-paper::before {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 6px;
+}
+
+/* النصفان، والطيّة السفلى في كل نصف */
+.np-half,
+.np-flap,
+.np-piece {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+.np-half {
+  top: 0;
+  width: var(--w);
+  height: 100%;
+}
+.np-half.r {
+  left: var(--w);
+}
+.np-half.l {
+  left: 0;
+  transform-origin: 100% 50%;
+  transform: rotateY(180deg) translateZ(-1px);
+  transition: transform 0.95s cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+.np-piece,
+.np-flap {
+  left: 0;
+  width: 100%;
+  height: var(--h);
+}
+.np-piece {
+  top: 0;
+}
+.np-flap {
+  top: var(--h);
+  transform-origin: 50% 0;
+  transition: transform 0.95s cubic-bezier(0.45, 0.05, 0.25, 1);
+}
+.np-half.r > .np-flap {
+  transform: rotateX(180deg) translateZ(-3px);
+}
+.np-half.l > .np-flap {
+  transform: rotateX(-180deg) translateZ(1px);
+}
+.np-fold.is-half .np-half > .np-flap,
+.np-fold.is-open .np-half.l {
+  transform: none;
+}
+
+/* وجها كل قطعة: الأمامي جزء من صفحة الجريدة نفسها، والخلفي ظهر الورقة */
+.np-face,
+.np-back {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.np-back {
+  transform: rotateY(180deg);
+  background-color: #efe8da;
+  /* ظهر الورقة: سطور الطباعة من الوجه الآخر باهتة */
+  background-image:
+    var(--np-grain),
+    repeating-linear-gradient(180deg, rgb(60 45 20 / 0.07) 0 2px, transparent 2px 9px);
+  background-size:
+    auto,
+    100% 100%;
+  background-clip: padding-box;
+  border: calc(var(--w) * 0.06) solid #efe8da;
+}
+.np-flap > .np-back {
+  transform: rotateX(180deg);
+}
+/* كل قطعة تعرض جزءها من الصفحة: النصف الأيمن يزيح النسخة يساراً، والطيّة السفلى للأعلى */
+.np-half.r {
+  --ox: calc(var(--w) * -1);
+}
+.np-flap {
+  --oy: calc(var(--h) * -1);
+}
+.np-fold .np-fold-face.np-fold-face {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--w) * 2);
+  max-width: none;
+  height: calc(var(--h) * 2);
+  translate: var(--ox, 0) var(--oy, 0);
+  margin: 0;
+  overflow: hidden;
+  filter: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+/* ظلّ يمرّ على الطيّة وهي تدور (يغمق في منتصف الدوران ثم يزول) */
+.np-face::after,
+.np-back::after,
+.np-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(180deg, rgb(40 30 10 / 0.55), rgb(40 30 10 / 0.15));
+}
+.np-half.l > * > ::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(270deg, rgb(40 30 10 / 0.5), rgb(40 30 10 / 0.12));
+}
+.np-fold.is-half .np-flap > ::after {
+  animation: np-shade 0.95s ease-in-out;
+}
+.np-fold.is-open .np-half.l > * > ::before {
+  animation: np-shade 0.95s ease-in-out;
+}
+@keyframes np-shade {
+  50% {
+    opacity: 1;
+  }
+}
+
+/* الوجه الخارجي للجريدة المطويّة: اسم الجريدة والعنوان ودعوة للضغط */
+.np-cover {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform: rotateX(180deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--w) * 0.07);
+  color: #1d1b17;
+  text-align: center;
+  background-color: #f2ecdf;
+  background-image:
+    var(--np-grain), linear-gradient(0deg, rgb(60 45 20 / 0.18), transparent 7%),
+    linear-gradient(90deg, rgb(60 45 20 / 0.16), transparent 6%);
+}
+.np-cover-name {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: calc(var(--h) * 0.2);
+  line-height: 1.1;
+  padding-bottom: calc(var(--w) * 0.02);
+  border-bottom: 3px double #1d1b17;
+}
+.np-cover-name i {
+  font-style: normal;
+  color: #1545a2;
+}
+.np-cover-title {
+  margin-top: calc(var(--w) * 0.05);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: calc(var(--h) * 0.085);
+  line-height: 1.35;
+  max-height: 4.05em;
+  overflow: hidden;
+}
+.np-cover-lines {
+  flex: 1;
+  margin-top: calc(var(--w) * 0.05);
+  background:
+    linear-gradient(90deg, transparent 48.5%, rgb(29 27 23 / 0.35) 48.5% 49.5%, transparent 49.5%),
+    repeating-linear-gradient(180deg, rgb(29 27 23 / 0.16) 0 3px, transparent 3px 10px);
+  mask-image: linear-gradient(180deg, #000 30%, transparent);
+}
+.np-cover-hint {
+  margin-top: calc(var(--w) * 0.03);
+  font-size: max(11px, calc(var(--h) * 0.05));
+  font-weight: 700;
+  color: #1545a2;
+  animation: np-hint 2.4s ease-in-out infinite;
+}
+@keyframes np-hint {
+  50% {
+    opacity: 0.55;
+  }
 }
