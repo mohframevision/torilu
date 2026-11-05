@@ -44,15 +44,27 @@
   <figcaption>{{ title }}{% if imageCredit %} — <span class="photo-credit" dir="ltr">{% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if not isEn else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</span>{% endif %}</figcaption>
 </figure>
 {% endif %}
-{% if gallery %}<div class="photo-strip">{% for g in gallery %}<a href="{{ g }}" target="_blank" rel="noopener"><img src="{{ g }}" alt="{{ title }} {{ loop.index + 1 }}" loading="lazy" decoding="async" /></a>{% endfor %}</div>{% endif %}
 {% if video %}
 <div class="detail-video">
   <iframe src="https://www.youtube-nocookie.com/embed/{{ video }}" title="{{ title }}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 {% endif %}
 {% if recommendation %}<blockquote class="recommend-quote">{{ recommendation }}</blockquote>{% endif %}
+{#- صور المعرض موزّعة بين فقرات المقال كما في الجرايد: صورة بعد كل قسم، بالتناوب بين صورة
+    بعرض الورقة وصورة بعرض العمود، ولكل صورة سطر تعليق بالإسناد. ما يزيد عن الأقسام يأتي في الآخر -#}
+{%- set gal = gallery or [] %}
+{%- set parts = (content ~ "").split("<h2") %}
+{%- macro npPic(src, n) -%}
+<figure class="np-inline-photo{{ ' np-wide' if n % 2 == 1 else '' }}"><a href="{{ src }}" target="_blank" rel="noopener"><img src="{{ src }}" alt="{{ title }} {{ n + 1 }}" loading="lazy" decoding="async" /></a><figcaption>{{ title }}{% if imageCredit %} — <span class="photo-credit" dir="ltr">{{ imageCredit }}</span>{% endif %}</figcaption></figure>
+{%- endmacro %}
 <article class="prose np-body">
-{{ content | safe }}
+{%- for part in parts %}
+{{ ("<h2" ~ part if not loop.first else part) | safe }}
+{%- set gi = loop.index0 - (0 if parts[0] | trim else 1) %}
+{%- if gi >= 0 and gal[gi] and not loop.last %}{{ npPic(gal[gi], gi) }}{% endif %}
+{%- endfor %}
+{%- set used = parts.length - 1 - (0 if parts[0] | trim else 1) %}
+{%- if gal.length > used %}<div class="np-photo-grid">{% for g in gal %}{% if loop.index0 >= used %}{{ npPic(g, 0) }}{% endif %}{% endfor %}</div>{% endif %}
 {#- المنيو بالأسعار من حقل menuItems: قائمة أسعار جريدة بنقاط بين الاسم والسعر، إذا ما كتبه صاحب الموقع جدولاً بنفسه -#}
 {%- set mItems = menuItems or ad.menuItems %}
 {%- if mItems and mItems.length and not ("<table" in content) %}

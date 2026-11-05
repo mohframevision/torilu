@@ -1694,7 +1694,7 @@ document.addEventListener("keydown", (e) => {
 (function photoLightbox() {
   // الصورة الرئيسية تتكبّر حتى لو المكان بلا معرض صور
   const hero = document.querySelector(".detail-hero-photo");
-  if (!hero && !document.querySelector(".photo-strip")) return;
+  if (!hero && !document.querySelector(".photo-strip, .np-inline-photo")) return;
   const dlg = document.createElement("dialog");
   dlg.className = "photo-lightbox";
   dlg.innerHTML = '<button type="button" class="photo-lightbox-close">✕</button><img alt="" />';
@@ -1773,7 +1773,7 @@ document.addEventListener("keydown", (e) => {
     });
   }
   document.addEventListener("click", (e) => {
-    const link = e.target.closest(".photo-strip a");
+    const link = e.target.closest(".photo-strip a, .np-inline-photo a");
     const img = link ? link.querySelector("img") : e.target.closest(".detail-hero-photo");
     if (!img) return;
     e.preventDefault();
