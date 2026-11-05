@@ -245,6 +245,7 @@
   });
   $("searchForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    sfx("tap");
     clearTimeout(timer);
     run();
     remember(input.value);

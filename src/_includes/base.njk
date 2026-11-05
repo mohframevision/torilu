@@ -173,6 +173,8 @@
            الموقع قابل للتثبيت (beforeinstallprompt). زر تثبيت لا يعمل أسوأ
            من غيابه #}
         <button class="icon-btn install-btn" id="installBtn" hidden title="{{ t.install_app }}" aria-label="{{ t.install_app }}">{{ icon("download") }}</button>
+        {# أصوات الموقع (js/sfx.js): مطفأة افتراضياً، الأيقونة الظاهرة حسب data-on #}
+        <button class="sound-toggle" type="button" data-on="false" aria-label="{{ t.sound_off }}" title="{{ t.sound_off }}">{{ icon("volume-off") }}{{ icon("volume-up") }}</button>
         <button class="theme-toggle" aria-label="{{ t.theme_toggle_aria }}" title="{{ t.theme_toggle }}"></button>
         <button class="nav-toggle" aria-label="{{ t.nav_toggle_open }}" aria-expanded="false" aria-controls="main-nav">{{ icon("menu") }}</button>
       </div>
@@ -236,6 +238,7 @@
   </script>
   <script src="{{ '/js/bootstrap.js' | url }}?v={{ buildVersion }}"></script>
   <script src="{{ '/js/data.js' | url }}?v={{ buildVersion }}"></script>
+  <script src="{{ '/js/sfx.js' | url }}?v={{ buildVersion }}"></script>
   <script src="{{ '/js/main.js' | url }}?v={{ buildVersion }}"></script>
   {# سكربت خاص بصفحة وحدة (مثل صوتيات توريلو) — ما ينزل مع بقية الصفحات #}
   {% if pageScript %}<script src="{{ ('/js/' + pageScript + '.js') | url }}?v={{ buildVersion }}"></script>{% endif %}

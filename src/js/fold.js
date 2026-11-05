@@ -60,39 +60,15 @@
   fold.setAttribute("aria-label", hint);
   fold.appendChild(paper);
 
-  // شريط صغير فوق الورقة: زر الصوت (يُحفظ) وزر «اطوِ الجريدة» (يظهر بعد الفتح)
-  const SOUND_KEY = "torilu_fold_sound";
-  let soundOn = true;
-  try {
-    soundOn = localStorage.getItem(SOUND_KEY) !== "off";
-  } catch {
-    /* تخزين محجوب: الصوت مفعّل افتراضياً */
-  }
+  // شريط صغير فوق الورقة: زر «اطوِ الجريدة» (يظهر بعد الفتح)
   const tools = document.createElement("div");
   tools.className = "np-tools";
-  const soundBtn = document.createElement("button");
-  soundBtn.type = "button";
-  soundBtn.className = "btn secondary np-tool";
   const closeBtn = document.createElement("button");
   closeBtn.type = "button";
   closeBtn.className = "btn secondary np-tool";
   closeBtn.textContent = T.fold_close || "";
   closeBtn.hidden = true;
-  function paintSound() {
-    soundBtn.textContent = soundOn ? T.fold_sound_on : T.fold_sound_off;
-    soundBtn.setAttribute("aria-pressed", String(soundOn));
-  }
-  paintSound();
-  soundBtn.addEventListener("click", () => {
-    soundOn = !soundOn;
-    try {
-      localStorage.setItem(SOUND_KEY, soundOn ? "on" : "off");
-    } catch {
-      /* لا شيء */
-    }
-    paintSound();
-  });
-  tools.append(closeBtn, soundBtn);
+  tools.append(closeBtn);
 
   // المقاسات من الورقة نفسها (offset* بوحدات CSS، فتصحّ مع zoom الشاشات العريضة)
   function measure() {
@@ -118,49 +94,8 @@
   measure();
   window.addEventListener("resize", measure);
 
-  // صوت ورق ينفرد: ضجيج مفلتر بحبيبات خشخشة عشوائية، منخفض وبلا حدّة — يُولَّد بالمتصفح
-  let ctx;
-  function rustle(at, dur) {
-    const n = Math.floor(ctx.sampleRate * dur);
-    const buf = ctx.createBuffer(1, n, ctx.sampleRate);
-    const d = buf.getChannelData(0);
-    let env = 0;
-    let target = 0;
-    for (let i = 0; i < n; i++) {
-      if (i % 180 === 0) target = Math.random() < 0.25 ? Math.random() : Math.random() * 0.25;
-      env += (target - env) * 0.02;
-      d[i] = (Math.random() * 2 - 1) * env;
-    }
-    const src = ctx.createBufferSource();
-    src.buffer = buf;
-    const band = ctx.createBiquadFilter();
-    band.type = "bandpass";
-    band.frequency.value = 1600;
-    band.Q.value = 0.6;
-    const low = ctx.createBiquadFilter();
-    low.type = "lowpass";
-    low.frequency.value = 3800;
-    const g = ctx.createGain();
-    const t0 = ctx.currentTime + at;
-    g.gain.setValueAtTime(0.0001, t0);
-    g.gain.exponentialRampToValueAtTime(0.11, t0 + 0.12);
-    g.gain.setValueAtTime(0.11, t0 + dur * 0.6);
-    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-    src.connect(band).connect(low).connect(g).connect(ctx.destination);
-    src.start(t0);
-  }
-  function sound() {
-    // يُشغَّل فقط من ضغطة الزائر نفسها وبصوت خافت، وزر الصوت فوق الورقة يطفئه
-    if (!soundOn) return;
-    try {
-      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
-      ctx.resume();
-      rustle(0, 0.9);
-      rustle(1.05, 0.95);
-    } catch {
-      /* بلا صوت إن ما دعمه المتصفح */
-    }
-  }
+  // خشخشة الجريدة وهي تنفرد: من أصوات الموقع (sfx.js)، وتتبع زر السمّاعة بالهيدر
+  const sound = () => window.toriluSfx && window.toriluSfx.play("fold");
 
   let busy = false;
   function open() {

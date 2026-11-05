@@ -54,6 +54,9 @@ function storageCall(area, method, ...args) {
 const lsGet = (key) => storageCall("localStorage", "getItem", key);
 // الكتابة ترجّع true لو نجحت فعلاً — حاسبة المصروفات تنبّه المستخدم لو بياناته ما انحفظت
 const lsSet = (key, value) => storageCall("localStorage", "setItem", key, value) !== null;
+
+// أصوات الموقع (js/sfx.js، صامتة إلا لو فعّلها الزائر بزر السمّاعة)
+const sfx = (name) => window.toriluSfx && window.toriluSfx.play(name);
 const lsRemove = (key) => storageCall("localStorage", "removeItem", key);
 const ssGet = (key) => storageCall("sessionStorage", "getItem", key);
 const ssSet = (key, value) => storageCall("sessionStorage", "setItem", key, value) !== null;
@@ -391,6 +394,7 @@ function initThemeToggle() {
       lsSet(KEY, next);
     }
     apply(next);
+    sfx("theme");
   });
 }
 
@@ -400,6 +404,7 @@ function initNavToggle() {
   const nav = document.querySelector(".main-nav");
   if (!toggles.length || !nav) return;
   function setOpen(isOpen) {
+    sfx(isOpen ? "open" : "close");
     nav.classList.toggle("open", isOpen);
     toggles.forEach((btn) => {
       btn.classList.toggle("open", isOpen);
@@ -430,6 +435,7 @@ function initSectionFilter() {
   filter.addEventListener("click", (event) => {
     const btn = event.target.closest(".section-filter-btn");
     if (!btn) return;
+    sfx("tap");
     const group = btn.dataset.group;
     filter
       .querySelectorAll(".section-filter-btn")
@@ -648,7 +654,8 @@ const SITE_ORIGIN = "https://torilu.com/";
 const SITE_ROOT_PATH = "/";
 
 function initArticleShare() {
-  const btn = document.querySelector(".article-share-btn");
+  // نسخ الجريدة المطوية (fold.js) تسبق الأصل بالصفحة، فنتخطاها
+  const btn = document.querySelector(".article-share-btn:not(.np-fold *)");
   if (!btn) return;
   btn.addEventListener("click", () => {
     const text = `${document.title}\n${location.href}`;
@@ -664,8 +671,8 @@ function initArticleShare() {
 }
 
 function initArticleListen() {
-  const btn = document.querySelector(".article-listen-btn");
-  const player = document.querySelector(".article-audio-player");
+  const btn = document.querySelector(".article-listen-btn:not(.np-fold *)");
+  const player = document.querySelector(".article-audio-player:not(.np-fold *)");
   if (!btn || !player) return;
   btn.addEventListener("click", () => {
     // يتحمّل الملف بأول ضغطة بس (preload="none" بالقالب) — ما يحمّل صوت
@@ -820,6 +827,7 @@ async function buildStoryImage({ icon, title, subtitle, photo }) {
    الملفات (أغلب أجهزة الحاسوب) ترجع تلقائياً لمشاركة نصية، وإلا لفتح واتساب
    مباشرة كما كانت الحال قبل هذي الميزة كلها */
 async function shareText(text, trackParams, card) {
+  sfx("share");
   let file = null;
   if (card && navigator.canShare) {
     try {
@@ -1041,6 +1049,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   const favBtn = card.querySelector(".fav-btn");
   favBtn.addEventListener("click", () => {
     const nowFav = toggleFavorite(section, item.id);
+    sfx(nowFav ? "favOn" : "favOff");
     favBtn.classList.toggle("active", nowFav);
     favBtn.innerHTML = nowFav ? ICON_SVG["heart-fill"] : ICON_SVG.heart;
     const label = nowFav ? t("fav_remove") : t("fav_add");
@@ -1075,6 +1084,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
       const expanded = descEl.classList.toggle("clamped") === false;
       descToggle.textContent = expanded ? t("read_less") : t("read_more");
       descToggle.setAttribute("aria-expanded", String(expanded));
+      sfx(expanded ? "open" : "close");
       if (expanded) {
         card.classList.add("just-expanded");
         setTimeout(() => card.classList.remove("just-expanded"), 900);
@@ -1099,6 +1109,7 @@ function wireItemActions(root, item) {
         showToast(`${t("phone_copy_failed")} ${phone}`);
         return;
       }
+      sfx("copy");
       showToast(t("phone_copied"));
     });
   });
@@ -1208,6 +1219,7 @@ function renderSection(section, typeFilter) {
     allChip.dataset.tag = "all";
     allChip.setAttribute("aria-pressed", "true");
     allChip.addEventListener("click", () => {
+      sfx("tap");
       for (const k in active) delete active[k];
       updateActiveChip();
       renderGrid();
@@ -1225,6 +1237,7 @@ function renderSection(section, typeFilter) {
       chip.dataset.tag = tag;
       chip.setAttribute("aria-pressed", "false");
       chip.addEventListener("click", () => {
+        sfx("tap");
         const kind = tagKind(tag);
         if (active[kind] === tag) delete active[kind];
         else active[kind] = tag;
@@ -1242,6 +1255,7 @@ function renderSection(section, typeFilter) {
         : `${t("filters_show_more")} (+${tagsList.length - FILTER_CHIP_LIMIT}) ▼`;
       toggleChip.setAttribute("aria-expanded", String(filtersExpanded));
       toggleChip.addEventListener("click", () => {
+        sfx("tap");
         filtersExpanded = !filtersExpanded;
         renderFilters();
         updateActiveChip();
@@ -1328,6 +1342,7 @@ function renderSection(section, typeFilter) {
   if (nearMeBtn && !hasLocations) nearMeBtn.remove();
   else if (nearMeBtn) {
     nearMeBtn.addEventListener("click", () => {
+      sfx("tap");
       if (sortByDistance) {
         sortByDistance = false;
         nearMeBtn.classList.remove("active");
@@ -1487,6 +1502,7 @@ function openMenuOverlay(item) {
   const trigger = document.activeElement;
   const overlay = document.createElement("div");
   overlay.className = "picker-reveal-overlay menu-overlay";
+  sfx("open");
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", `${t("link_menu")} — ${itemTitle(item)}`);
@@ -1495,6 +1511,7 @@ function openMenuOverlay(item) {
   const restoreBackground = hideBackgroundFromAT(overlay);
 
   function close() {
+    sfx("close");
     overlay.remove();
     document.body.style.overflow = "";
     restoreBackground();
@@ -1620,6 +1637,7 @@ function renderDayPlan() {
 
   btn.addEventListener("click", () => {
     draw();
+    sfx("success");
   });
 
   if (shareBtn) {
@@ -1647,6 +1665,7 @@ function initWelcomePicker() {
   if (!picks.length || !nextBtn) return;
   let i = 0;
   nextBtn.addEventListener("click", () => {
+    sfx("tap");
     picks[i].classList.remove("active");
     i = (i + 1) % picks.length;
     picks[i].classList.add("active");
@@ -1734,6 +1753,7 @@ document.addEventListener("keydown", (e) => {
       /* نكمل حتى لو فشل */
     }
     dlg.showModal();
+    sfx("open");
     if (still) return;
     busy = true;
     thumb.style.visibility = "hidden";
@@ -1747,6 +1767,7 @@ document.addEventListener("keydown", (e) => {
 
   async function close() {
     if (busy) return;
+    sfx("close");
     if (!still && thumb) {
       busy = true;
       thumb.style.visibility = "hidden";

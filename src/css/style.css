@@ -416,6 +416,7 @@ img {
    (بيضاوي بارتفاع، ومربّع بزوايا 8px بارتفاع ثاني) فتبان غير مرتّبة */
 .lang-switch,
 .theme-toggle,
+.sound-toggle,
 .nav-toggle,
 .icon-btn {
   display: inline-flex;
@@ -440,6 +441,7 @@ img {
 
 .lang-switch:hover,
 .theme-toggle:hover,
+.sound-toggle:hover,
 .nav-toggle:hover,
 .icon-btn:hover {
   border-color: var(--color-primary);
@@ -448,6 +450,7 @@ img {
 
 .lang-switch:active,
 .theme-toggle:active,
+.sound-toggle:active,
 .nav-toggle:active,
 .icon-btn:active {
   transform: scale(0.96); /* أقل من 0.95 يحس مبالغ */
@@ -463,6 +466,7 @@ img {
 /* كل الأزرار الأيقونية مربّعة بنفس المقاس — الأيقونة وحدها تكفي والشرح
    يجي من title/aria-label، فيضل الهيدر مرتّب ومتساوي */
 .theme-toggle,
+.sound-toggle,
 .nav-toggle,
 .icon-btn {
   width: var(--control-height);
@@ -475,6 +479,12 @@ img {
 }
 
 .lang-short {
+  display: none;
+}
+
+/* زر الأصوات: أيقونة «مطفأ» أو «مفعّل» حسب data-on */
+.sound-toggle[data-on="true"] svg:first-child,
+.sound-toggle:not([data-on="true"]) svg:last-child {
   display: none;
 }
 
@@ -6112,7 +6122,7 @@ main .search-box {
     opacity: 0.55;
   }
 }
-/* شريط الجريدة: «اطوِ الجريدة» وزر الصوت فوق الورقة */
+/* شريط الجريدة: «اطوِ الجريدة» فوق الورقة */
 .np-tools {
   display: flex;
   justify-content: flex-end;

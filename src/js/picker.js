@@ -594,6 +594,7 @@ function createTrip(stage, { onStart, onDone }) {
   }
 
   function reveal(winner) {
+    sfx("success");
     const item = winner.item;
     // متغيّر محلي: "جرّب مرة ثانية" وسط حركة الظهور يصفّر result قبل ما تخلص الحركة
     const box = document.createElement("div");
@@ -756,6 +757,7 @@ function initRandomPicker() {
   categoriesWrap.querySelectorAll(".picker-category").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (trip.isRunning()) return;
+      sfx("tap");
       choose(btn);
     });
   });
@@ -776,6 +778,7 @@ function initRandomPicker() {
   const saved = lsGet(TRIP_VEHICLE_KEY);
   setVehicle(TRIP_VEHICLES[saved] ? saved : "train");
   vehicleBtn.addEventListener("click", () => {
+    sfx("tap");
     const current = stage.dataset.vehicle;
     const next = vehicles[(vehicles.indexOf(current) + 1) % vehicles.length];
     setVehicle(next);
@@ -785,6 +788,7 @@ function initRandomPicker() {
   if (preset) choose(preset);
 
   spinBtn.addEventListener("click", () => {
+    sfx("tap");
     stage.scrollIntoView({ block: "center", behavior: "smooth" });
     trip.go();
   });
