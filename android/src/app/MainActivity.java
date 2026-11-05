@@ -209,6 +209,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         homeSections.addView(Ui.head(this, getString(R.string.home_sections)));
         buildGrid();
         buildLead();
+        buildTime();
         buildNew();
         buildPick();
     }
@@ -338,6 +339,81 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         card.addView(text);
         tagCard(card, lead, slug);
         homeSections.addView(card);
+    }
+
+    // ---- صف حسب وقت اليوم (للصباح/للغداء/للعصر/للعشاء والسهر): نفس home.js بالموقع —
+    // نفس الأقسام والتصنيفات، ترتيب يتبدّل كل يوم ببذرة التاريخ (mulberry32)، فرع واحد
+    // لكل محل، 6 بطاقات، وبلا تكرار مكان الأسبوع ----
+    private void buildTime() {
+        int h = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY);
+        int title;
+        String[] secs;
+        String[] tags;
+        if (h >= 5 && h < 11) {
+            title = R.string.home_morning;
+            secs = new String[]{"bakeries", "cafes", "restaurants"};
+            tags = new String[]{"إفطار", "معجنات", "كرك", "قهوة مختصة"};
+        } else if (h >= 11 && h < 16) {
+            title = R.string.home_noon;
+            secs = new String[]{"restaurants"};
+            tags = new String[]{"مشاوي", "بحريني", "مندي", "لبناني", "مأكولات بحرية", "عراقي", "تركي", "كبسة"};
+        } else if (h >= 16 && h < 20) {
+            title = R.string.home_evening;
+            secs = new String[]{"cafes", "bakeries"};
+            tags = new String[0];
+        } else {
+            title = R.string.home_night;
+            secs = new String[]{"restaurants", "bakeries"};
+            tags = new String[]{"شاورما", "برجر", "سندويشات", "وجبات سريعة", "مشاوي", "حلويات", "آيسكريم"};
+        }
+        List<String> tagList = java.util.Arrays.asList(tags);
+        List<JSONObject> pool = new ArrayList<>();
+        List<String> poolSlugs = new ArrayList<>();
+        for (String slug : secs) {
+            JSONObject sec = sections.optJSONObject(slug);
+            JSONArray items = sec == null ? null : sec.optJSONArray("items");
+            for (int i = 0; items != null && i < items.length(); i++) {
+                JSONObject item = items.optJSONObject(i);
+                if (item == null || shownItems.contains(item)) continue;
+                // التصنيفات تقيّد المطاعم فقط (المخبز والكافيه يناسبان أي وقت بقسمهما)
+                if (tagList.isEmpty() || !"restaurants".equals(slug) || hasAny(item.optJSONArray("tags"), tagList)) {
+                    pool.add(item);
+                    poolSlugs.add(slug);
+                }
+            }
+        }
+        // ترتيب يومي ثابت: نفس اليوم = نفس الترتيب
+        java.util.Calendar d = java.util.Calendar.getInstance();
+        int[] seed = {d.get(java.util.Calendar.YEAR) * 1000 + d.get(java.util.Calendar.MONTH) * 40 + d.get(java.util.Calendar.DAY_OF_MONTH)};
+        for (int i = pool.size() - 1; i > 0; i--) {
+            int j = (int) Math.floor(mulberry(seed) * (i + 1));
+            java.util.Collections.swap(pool, i, j);
+            java.util.Collections.swap(poolSlugs, i, j);
+        }
+        List<String> brands = new ArrayList<>();
+        List<View> cards = new ArrayList<>();
+        for (int i = 0; i < pool.size() && cards.size() < NEW_COUNT; i++) {
+            String brand = Lang.title(this, pool.get(i)).split("\\s+-\\s+")[0].trim();
+            if (brands.contains(brand)) continue;
+            brands.add(brand);
+            cards.add(card(pool.get(i), poolSlugs.get(i), null));
+        }
+        if (cards.isEmpty()) return;
+        homeSections.addView(Ui.head(this, getString(title)));
+        for (View c : cards) homeSections.addView(c);
+    }
+
+    private static boolean hasAny(JSONArray tags, List<String> wanted) {
+        for (int i = 0; tags != null && i < tags.length(); i++) if (wanted.contains(tags.optString(i))) return true;
+        return false;
+    }
+
+    // mulberry32 بنفس حساب home.js (Math.imul = ضرب int بجافا)
+    static double mulberry(int[] s) {
+        s[0] += 0x6d2b79f5;
+        int x = (s[0] ^ (s[0] >>> 15)) * (1 | s[0]);
+        x = (x + (x ^ (x >>> 7)) * (61 | x)) ^ x;
+        return ((x ^ (x >>> 14)) & 0xffffffffL) / 4294967296.0;
     }
 
     // ---- «جديد في توريلو»: أحدث ما أضيف (addedAt)، بلا المخفي، وبلا تكرار مكان الأسبوع ----

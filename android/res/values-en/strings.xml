@@ -102,6 +102,10 @@
     <string name="home_tagline">A guide to places in Bahrain</string>
     <string name="home_sections">Sections</string>
     <string name="home_lead">Place of the week</string>
+    <string name="home_morning">For the morning</string>
+    <string name="home_noon">For lunch</string>
+    <string name="home_evening">For the afternoon</string>
+    <string name="home_night">For dinner &amp; late night</string>
     <string name="home_menu_count">Full menu with prices: %1$d items</string>
     <string name="home_new_badge">New</string>
     <string name="home_article_badge">Article</string>

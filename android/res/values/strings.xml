@@ -104,6 +104,10 @@
     <string name="home_tagline">دليل أماكن البحرين</string>
     <string name="home_sections">الأقسام</string>
     <string name="home_lead">مكان الأسبوع</string>
+    <string name="home_morning">للصباح</string>
+    <string name="home_noon">للغداء</string>
+    <string name="home_evening">للعصر</string>
+    <string name="home_night">للعشاء والسهر</string>
     <string name="home_menu_count">المنيو كامل بالأسعار · عدد الأصناف: %1$d</string>
     <string name="home_new_badge">جديد</string>
     <string name="home_article_badge">مقال</string>
