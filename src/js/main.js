@@ -1377,10 +1377,41 @@ function renderSection(section, typeFilter) {
   }
 }
 
+/* ===== نقل المفضلة من هكوله (كل موقع له تخزينه الخاص) =====
+   favorites.html#import=<base64url(JSON ["section/id", ...])> — يُدمج ثم يُمسح الرابط.
+   لا يُقبل إلا عنصر موجود فعلاً بـSITE_DATA، وبحد أقصى 500. */
+function importFavoritesFromHash() {
+  const m = location.hash.match(/^#import=([A-Za-z0-9_-]{1,40000})$/);
+  if (!m) return;
+  history.replaceState(null, "", location.pathname + location.search);
+  let list;
+  try {
+    const b64 = m[1].replace(/-/g, "+").replace(/_/g, "/");
+    const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+    list = JSON.parse(new TextDecoder().decode(bytes));
+  } catch {
+    return;
+  }
+  if (!Array.isArray(list)) return;
+  const favs = getFavorites();
+  for (const key of list.slice(0, 500)) {
+    if (typeof key !== "string" || key.length > 200) continue;
+    const slash = key.indexOf("/");
+    const section = key.slice(0, slash);
+    const id = key.slice(slash + 1);
+    if (slash < 1 || !Object.hasOwn(SITE_DATA, section)) continue;
+    if (!SITE_DATA[section].items.some((item) => item.id === id)) continue;
+    if (!favs[section]) favs[section] = {};
+    favs[section][id] = true;
+  }
+  saveFavorites(favs);
+}
+
 /* ===== عرض صفحة المفضلة (تجميع من كل الأقسام) ===== */
 function renderFavoritesPage() {
   const grid = document.querySelector(".card-grid");
   if (!grid) return;
+  importFavoritesFromHash();
 
   const favs = getFavorites();
   const collected = [];

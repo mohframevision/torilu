@@ -9,68 +9,7 @@ layout: base.njk
 {% if sectionSlug == "guides" %}
 {% include "article-newspaper.njk" %}
 {% else %}
-{# شكل «د»: كل الصفحة بعمود واحد هادئ مثل الجريدة (العنوان والنص على نفس الحافة) #}
-<div class="detail{% if wideLayout %} detail-wide{% endif %}">
-<div class="breadcrumb"><a href="{{ homeUrl | url }}">{{ t.nav_home }}</a> / <a href="{{ sectionUrl | url }}">{{ sectionTitle }}</a> / {{ title }}</div>
-{% if image %}<img class="detail-hero-photo" src="{{ image }}" alt="{{ title }}" />{% if imageCredit %}<p class="photo-credit" dir="ltr">{% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if lang != 'en' else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</p>{% endif %}{% endif %}
-{% if gallery %}<div class="photo-strip">{% for g in gallery %}<a href="{{ g }}" target="_blank" rel="noopener"><img src="{{ g }}" alt="{{ title }} {{ loop.index + 1 }}" loading="lazy" decoding="async" /></a>{% endfor %}</div>{% endif %}
-<section class="page-header">
-  <h1>{{ title }}</h1>
-  {# الدليل عند لحظة القرار: نفس شارات البطاقة، فوق زر الخريطة #}
-  {% set src = page if (verified or liked) else ((collections.all | pageByUrl(langSwitchUrl)).data if lang == 'en' else page) %}
-  {% set v = verified or (src and src.verified) %}{% set lk = liked or (src and src.liked) %}
-  {% if v or lk %}<p class="detail-badges">{% if v %}<span class="verified-badge">{{ t.verified_badge }}</span>{% endif %} {% if lk %}<span class="liked-badge">{{ t.liked_badge }}</span>{% endif %}</p>{% endif %}
-  <div class="page-header-actions">
-    {# الهدف الأول لزائر صفحة مكان: يروح له — فالخريطة الزر الأساسي والباقي ثانوي #}
-    {% set arTwin = (collections.all | pageByUrl(langSwitchUrl)) if lang == "en" else none %}
-    {% set mapsLink = links.maps if (links and links.maps) else ((content | mapsUrl) or (arTwin and arTwin.data.links and arTwin.data.links.maps)) %}
-    {% if mapsLink %}<a class="btn" href="{{ mapsLink }}" target="_blank" rel="noopener">{{ svgIcon("location-pin", 18) }} {{ t.link_maps }}</a>{% endif %}
-    {% if audio %}
-    <button type="button" class="btn secondary article-listen-btn" data-audio-src="{{ audio | url }}">{{ svgIcon("volume-up", 18) }} {{ t.article_listen }}</button>
-    <audio class="article-audio-player hidden" controls preload="none"></audio>
-    {% endif %}
-    <button type="button" class="btn secondary article-share-btn">{{ svgIcon("share", 18) }} {{ t.article_share if sectionSlug == "guides" else t.place_share }}</button>
-  </div>
-</section>
-{% if aiDisclosure %}
-{# قسم "تجارب الذكاء الاصطناعي" ألعاب/تجارب استكشافية، مو مقالات معلوماتية —
-   إخلاء المسؤولية القانوني (guide_disclaimer) مصمم لمقال يحتوي معلومات
-   يُعتمَد عليها، فما ينطبق هنا ويعطي انطباع رسمي زايد عن حجم الشي #}
-<div class="banner-note ai-disclosure">{{ aiDisclosure }}{% if sectionSlug != "ai-experiments" %} {{ t.guide_disclaimer }}{% endif %}</div>
-{% endif %}
-{% if video %}
-<div class="detail-video">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/{{ video }}"
-    title="{{ title }}"
-    loading="lazy"
-    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe>
-</div>
-{% endif %}
-{% if recommendation %}
-<blockquote class="recommend-quote">{{ recommendation }}</blockquote>
-{% endif %}
-{# صفحات الأدوات (لا المقالات) تحتاج عرض الحاوية كامل: فيها لوحات وشبكات
-   وجداول لا نصاً يُقرأ، وحصرها بعرض النص يضيّع نصف الشاشة بالكمبيوتر #}
-<article class="prose{% if wideLayout %} prose-wide{% endif %}">
-{{ content | safe }}
-{#- المنيو بالأسعار: كان يُعرض بالبطاقة فقط، فصفحة المكان تبقى بلا أسعار. يُضاف إذا ما كتبه صاحب الموقع جدولاً بنفسه -#}
-{%- set arPage = (collections.all | pageByUrl(langSwitchUrl)) if lang == "en" else none %}
-{%- set mItems = menuItems or (arPage and arPage.data.menuItems) %}
-{%- if mItems and mItems.length and not ("<table" in content) %}
-<h2>{{ t.detail_menu_title }}</h2>
-<table class="detail-menu"><tbody>
-{%- for mi in mItems %}
-<tr><td>{{ (mi.name_en or mi.name) if lang == "en" else mi.name }}</td><td>{{ mi.price }}</td></tr>
-{%- endfor %}
-</tbody></table>
-{%- endif %}
-</article>
-{# الوعد «كل معلومة متحقَّق منها» يحتاج طريقاً لتصحيحها: رابط هادئ واحد #}
-<p class="detail-report"><a class="report-link" href="{{ ('/en/contact.html' if lang == 'en' else '/contact.html') | url }}?report={{ title | urlencode }}&amp;section={{ sectionSlug }}">{{ t.report_wrong_info }}</a></p>
-</div>
+{% include "place-newspaper.njk" %}
 {% endif %}
 
 <script type="application/ld+json">

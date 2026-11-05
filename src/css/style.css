@@ -5574,3 +5574,167 @@ main .search-box {
 .np-sheet .np-head .np-kicker time {
   display: none;
 }
+
+/* =====================================================================
+   صفحة المكان ورقة جريدة (طلب صاحب الموقع 2026-11-05): نفس ورقة المقال وترويسته،
+   اسم المكان عنوان كبير، صورة جريدة بخط وتعليق إسناد، والمعلومات العملية صندوق
+   مسطّر بجانب النص (فوقه على الجوال). بلا صورة: قمر نقاط الطباعة مكانها.
+   ===================================================================== */
+.np-place .np-byline {
+  flex-wrap: wrap;
+}
+.np-sheet a.btn:not(.secondary) {
+  color: #fff;
+}
+.np-place .np-byline .btn {
+  margin: 0;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+.np-byline-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.np-sheet .np-byline .article-listen-btn {
+  background: transparent;
+  border-color: var(--color-ink-rule);
+  color: var(--color-text);
+}
+.np-place-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 34px;
+  margin-top: var(--space-4);
+}
+.np-place-main > :first-child {
+  margin-top: 0;
+}
+.np-photo {
+  margin: 0;
+  border-bottom: 1px solid var(--color-ink-rule);
+  padding-bottom: 6px;
+}
+.np-sheet .detail-hero-photo {
+  display: block;
+  max-height: 480px;
+  margin: 0;
+  border-radius: 0;
+}
+.np-photo figcaption {
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+.np-photo figcaption .photo-credit {
+  font-size: 0.78rem;
+}
+.np-sheet .photo-strip img {
+  height: 96px;
+  border-radius: 0;
+}
+.np-sheet .detail-video {
+  border-radius: 0;
+}
+.np-place .np-body {
+  columns: 2 300px;
+}
+.np-place .np-body:has(table) {
+  columns: auto;
+}
+.np-place .np-body table {
+  break-inside: avoid;
+}
+/* المنيو: قائمة أسعار جريدة — الاسم ثم نقاط حتى السعر */
+.np-menu {
+  list-style: none;
+  padding: 0 !important;
+}
+.np-menu li {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 0.35em;
+}
+.np-menu li::marker {
+  content: none;
+}
+.np-menu i {
+  flex: 1;
+  min-width: 16px;
+  border-bottom: 2px dotted var(--color-border);
+}
+.np-sheet .np-body .np-menu li {
+  text-align: start;
+}
+.np-menu b {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* صندوق المعلومات: عمود جانبي بخطوط */
+.np-facts {
+  align-self: start;
+  border-inline-start: 1px solid var(--color-border);
+  padding-inline-start: 24px;
+}
+.np-facts h2 {
+  margin: 0 0 6px;
+  padding-top: 8px;
+  border-top: 4px double var(--color-ink-rule);
+  font-size: 1.2rem;
+}
+.np-facts dl {
+  margin: 0;
+}
+.np-facts dt {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.np-facts dd {
+  margin: 2px 0 0;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+.np-facts .np-lead-art {
+  margin-bottom: var(--space-4);
+}
+.np-sheet .detail-report {
+  max-width: none;
+  margin-top: var(--space-4);
+  font-style: normal;
+}
+@media (max-width: 760px) {
+  .np-place-cols {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  /* الصورة أولاً، ثم الأوقات والهاتف قبل النص الطويل والمنيو */
+  .np-place-main {
+    display: contents;
+  }
+  .np-place-main > * {
+    margin-block: 0;
+    min-width: 0;
+  }
+  .np-photo,
+  .np-sheet .photo-strip {
+    order: -2;
+  }
+  .np-facts {
+    order: -1;
+    border-inline-start: 0;
+    padding-inline-start: 0;
+  }
+  .np-facts .np-lead-art {
+    float: inline-end;
+    width: 96px;
+    margin: 0 14px 8px 0;
+    margin-inline: 14px 0;
+  }
+}

@@ -1,0 +1,86 @@
+{#- جريدة توريلو: صفحة المكان ورقة جريدة مثل المقال (.np-sheet) — ترويسة بالقسم والمنطقة،
+    اسم المكان عنواناً كبيراً، الوصف مقدمة، الصورة صورة جريدة بتعليق الإسناد، والمعلومات
+    العملية صندوق مسطّر بجانب النص. بلا صورة: قمر نقاط الطباعة (شعار توريلو) بدل فراغ. -#}
+{% from "newspaper.njk" import npDate %}
+{% set isEn = lang == "en" %}
+{% set arTwin = (collections.all | pageByUrl(langSwitchUrl)) if isEn else none %}
+{% set ad = arTwin.data if arTwin else {} %}
+{% set lk = links or ad.links or {} %}
+{% set cats = categories or ad.categories or [] %}
+{% set when = dateAdded or ad.dateAdded %}
+{#- أول تصنيف هو منطقة (set داخل for لا يخرج منها بـNunjucks، فنجمعها نصاً) -#}
+{% set areaList %}{% for c in cats %}{% if areas[c] %}{{ c }}|{% endif %}{% endfor %}{% endset %}
+{% set area = areaList.split("|")[0] %}
+{% set hrs = (hours_en or ad.hours_en) if isEn else hours %}
+{% set mapsLink = lk.maps or (content | mapsUrl) %}
+{% set v = verified or ad.verified %}{% set liked2 = liked or ad.liked %}
+<div class="detail np-article np-place">
+<div class="breadcrumb"><a href="{{ homeUrl | url }}">{{ t.nav_home }}</a> / <a href="{{ sectionUrl | url }}">{{ sectionTitle }}</a> / {{ title }}</div>
+<div class="np-sheet">
+<div class="np-mast" aria-hidden="true">
+  <div class="np-mast-row"><span>{% if area %}{{ (tags_en[area] or area) if isEn else area }}{{ ", " if isEn else "، " }}{% endif %}{{ "Bahrain" if isEn else "البحرين" }}</span><span>{{ sectionTitle }}</span>{% if when %}<span>{{ npDate(when, lang) }}</span>{% endif %}</div>
+  <p class="np-mast-name">{{ "Torilu" if isEn else "توريلو" }}<i>.</i></p>
+  <div class="np-mast-row"><span>{{ "A guide to places in Bahrain" if isEn else "دليل أماكن البحرين" }}</span></div>
+</div>
+<header class="page-header np-head">
+  {% if v or liked2 %}<p class="np-kicker">{% if v %}<span>{{ t.verified_badge }}</span>{% endif %}{% if liked2 %}<span>{{ t.liked_badge }}</span>{% endif %}</p>{% endif %}
+  <h1>{{ title }}</h1>
+  {% if desc %}<p class="np-deck">{{ desc }}</p>{% endif %}
+  <div class="np-byline">
+    {# الهدف الأول لزائر صفحة مكان: يروح له — فالخريطة الزر الأساسي والباقي ثانوي #}
+    {% if mapsLink %}<a class="btn" href="{{ mapsLink }}" target="_blank" rel="noopener">{{ svgIcon("location-pin", 16) }} {{ t.link_maps }}</a>{% else %}<span></span>{% endif %}
+    <span class="np-byline-acts">
+    {% if audio %}<button type="button" class="btn secondary article-listen-btn" data-audio-src="{{ audio | url }}">{{ svgIcon("volume-up", 16) }} {{ t.article_listen }}</button>{% endif %}
+    <button type="button" class="btn secondary article-share-btn">{{ svgIcon("share", 16) }} {{ t.place_share }}</button>
+    </span>
+  </div>
+  {% if audio %}<audio class="article-audio-player hidden" controls preload="none"></audio>{% endif %}
+</header>
+<div class="np-place-cols">
+<div class="np-place-main">
+{% if image %}
+<figure class="np-photo">
+  <img class="detail-hero-photo" src="{{ image }}" alt="{{ title }}" />
+  <figcaption>{{ title }}{% if imageCredit %} — <span class="photo-credit" dir="ltr">{% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if not isEn else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</span>{% endif %}</figcaption>
+</figure>
+{% endif %}
+{% if gallery %}<div class="photo-strip">{% for g in gallery %}<a href="{{ g }}" target="_blank" rel="noopener"><img src="{{ g }}" alt="{{ title }} {{ loop.index + 1 }}" loading="lazy" decoding="async" /></a>{% endfor %}</div>{% endif %}
+{% if video %}
+<div class="detail-video">
+  <iframe src="https://www.youtube-nocookie.com/embed/{{ video }}" title="{{ title }}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+{% endif %}
+{% if recommendation %}<blockquote class="recommend-quote">{{ recommendation }}</blockquote>{% endif %}
+<article class="prose np-body">
+{{ content | safe }}
+{#- المنيو بالأسعار من حقل menuItems: قائمة أسعار جريدة بنقاط بين الاسم والسعر، إذا ما كتبه صاحب الموقع جدولاً بنفسه -#}
+{%- set mItems = menuItems or ad.menuItems %}
+{%- if mItems and mItems.length and not ("<table" in content) %}
+<h2>{{ t.detail_menu_title }}</h2>
+<ul class="detail-menu np-menu">
+{%- for mi in mItems %}
+<li><span>{{ (mi.name_en or mi.name) if isEn else mi.name }}</span><i aria-hidden="true"></i><b>{{ mi.price }}</b></li>
+{%- endfor %}
+</ul>
+{%- endif %}
+</article>
+</div>
+<aside class="np-facts">
+{% if not image %}<figure class="np-lead-art" aria-hidden="true"><img src="{{ '/assets/icon-square.svg' | url }}" alt="" width="512" height="512" /></figure>{% endif %}
+<h2>{{ "At a glance" if isEn else "معلومات المكان" }}</h2>
+<dl>
+  {% if hrs %}<dt>{{ "Hours" if isEn else "الأوقات" }}</dt><dd>{{ hrs }}</dd>{% endif %}
+  {% set kinds = [] %}{% for c in cats %}{% if not areas[c] %}{% set kinds = (kinds.push((tags_en[c] or c) if isEn else c), kinds) %}{% endif %}{% endfor %}
+  {% if kinds.length %}<dt>{{ "Type" if isEn else "النوع" }}</dt><dd>{{ kinds.slice(0, 4).join(", " if isEn else "، ") }}</dd>{% endif %}
+  {% if area %}<dt>{{ "Area" if isEn else "المنطقة" }}</dt><dd>{{ (tags_en[area] or area) if isEn else area }}</dd>{% endif %}
+  {% if lk.phone %}<dt>{{ "Phone" if isEn else "الهاتف" }}</dt><dd><a href="tel:{{ lk.phone.split(',')[0] }}" dir="ltr">{{ lk.phone.split(',')[0] }}</a></dd>{% endif %}
+  {% if mapsLink %}<dt>{{ "Location" if isEn else "الموقع" }}</dt><dd><a href="{{ mapsLink }}" target="_blank" rel="noopener">{{ "Google Maps" if isEn else "خرائط قوقل" }}</a></dd>{% endif %}
+  {% if lk.instagram %}<dt>{{ "Instagram" if isEn else "إنستقرام" }}</dt><dd><a href="{{ lk.instagram }}" target="_blank" rel="noopener" dir="ltr">@{{ lk.instagram.replace(r/^https?:\/\/(?:www\.)?instagram\.com\/([^\/?]+).*$/, "$1") }}</a></dd>{% endif %}
+  {% if lk.website %}<dt>{{ "Website" if isEn else "الموقع الإلكتروني" }}</dt><dd><a href="{{ lk.website }}" target="_blank" rel="noopener">{{ t.link_website }}</a></dd>{% endif %}
+</dl>
+</aside>
+</div>
+{# الوعد «كل معلومة متحقَّق منها» يحتاج طريقاً لتصحيحها: رابط هادئ واحد #}
+<p class="np-note detail-report"><a class="report-link" href="{{ ('/en/contact.html' if isEn else '/contact.html') | url }}?report={{ title | urlencode }}&amp;section={{ sectionSlug }}">{{ t.report_wrong_info }}</a></p>
+</div>
+</div>

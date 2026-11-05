@@ -1,7 +1,9 @@
 name: بناء ونشر الموقع
 
-# توريلو: النشر يدوي فقط حتى يوم الإطلاق (بعدها يرجع push على main)
+# توريلو: يُنشر تلقائياً مع كل push على main، ويبقى التشغيل اليدوي متاحاً
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
