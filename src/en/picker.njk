@@ -8,21 +8,24 @@ navActive: "picker"
 pageScript: "picker"
 langSwitchUrl: "/picker.html"
 ---
-<div class="breadcrumb"><a href="{{ '/en/index.html' | url }}">Home</a> / Pick for me</div>
-<section class="page-header">
-  <h1>Pick for Me</h1>
-  <p>Can't decide where to go or what to pick? Choose a section, press the button, and let Torilu decide for you.</p>
-</section>
-
-<div class="picker-categories" id="pickerCategories"></div>
-<div class="picker-area">
-  <label for="pickerArea">Where?</label>
-  <select id="pickerArea"></select>
-</div>
-
-<div class="picker-stage" id="pickerStage">
-  <div class="trip-bar">
-    <button type="button" id="pickerVehicleBtn" class="trip-round" aria-label="Change vehicle"></button>
-    <button id="pickerSpinBtn" class="btn picker-spin-btn" disabled>Pick for me</button>
+{% set pickOrder = ["restaurants", "cafes", "bakeries", "any", "stores", "places", "car-shops"] %}
+<section class="pk" id="picker" data-step="moon">
+  <div class="pk-prompt">
+    <h1 id="pkTitle">Where shall we go today?</h1>
+    <p id="pkSub">Tap the moon and let Torilu choose.</p>
   </div>
-</div>
+  <div class="pk-center">
+    <div class="pk-wheel" id="pkWheel" role="group" aria-labelledby="pkTitle" inert>
+      {% for slug in pickOrder %}{% if slug == "any" %}<button type="button" class="pk-petal" data-section="any"><span class="pk-glyph"></span><span class="pk-petal-label">Anything</span></button>{% else %}{% for s in sections %}{% if s.slug == slug %}<button type="button" class="pk-petal" data-section="{{ s.slug }}"><span class="pk-glyph"></span><span class="pk-petal-label">{{ s.navLabel_en }}</span></button>{% endif %}{% endfor %}{% endif %}{% endfor %}
+    </div>
+    <button type="button" class="pk-moon" id="pkMoon" aria-expanded="false" aria-controls="pkWheel"><span class="pk-moon-disc"><img src="{{ '/assets/moon-paper.svg' | url }}" alt="" width="512" height="512" /></span><span class="pk-moon-label">Pick for me</span></button>
+    <div class="pk-ball" id="pkBall" aria-hidden="true"></div>
+  </div>
+  <p class="pk-searching" id="pkSearching">Finding you a place…</p>
+  <div class="pk-result" id="pkResult"></div>
+  <div class="pk-tools" id="pkTools">
+    <button type="button" class="pk-chip" id="pkChip">Change section</button>
+    <select id="pickerArea" class="pk-area" aria-label="Where?"></select>
+  </div>
+  <p class="sr-only" id="pkLive" aria-live="polite"></p>
+</section>

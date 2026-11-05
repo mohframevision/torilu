@@ -1,292 +1,397 @@
-/* "اختار لي" — رحلة فوق البحر: الزائر راكب مركبة (قطار/سيارة/قارب/طيارة يختارها بنفسه)،
-   وعناصر القسم المختار بطاقات تطفو بالهوا وتمر من الشباك، لين توقف المركبة على وحدة
-   و"يطلّع راسه" من الشباك فتقرّب البطاقة وتصير النتيجة.
+/* «اختار لي» — زر واحد (القمر) يفتح عجلة الأقسام، والقسم المختار يتكوّر كرة ورق جريدة
+   تتمايل ثم تنفرد قصاصة فيها المكان. «غيره» يكوّر القصاصة ويفرد غيرها.
+   الشكل كله في CSS (.pk بـstyle.css) وخطوة الصفحة بـdata-step؛ هنا الحالة والاختيار
+   والرسوم المولّدة (رموز نقطية، كرة، آثار تكسير). ألوان الرسوم متغيّرات CSS، فتتبع
+   الوضع الداكن بلا إعادة رسم.
    تُحمَّل بصفحة picker.html فقط (pageScript)، بعد main.js، وتستخدم دواله العامة (t،
-   itemTitle، sectionLabel، tagLabel، buildActionsHtml، wireItemActions، lsGet/lsSet). main.js يستدعي initRandomPicker.
+   itemTitle، itemDesc، itemHours، tagLabel، sectionLabel، escapeHtml، safeUrl، sfx،
+   showToast، nearestBranch). main.js يستدعي initRandomPicker. */
 
-   الأداء (أجهزة قديمة وجوالات): كل الحركة transform/opacity بـrAF على طبقات GPU — بلا
-   blur ولا mix-blend-mode ولا صور. البطاقات اللي برا الشاشة ما تنرسم، والحركة الهادية
-   وقت الانتظار تتوقف لما المشهد يطلع من الشاشة. حبيبات الفيلم بلاطة 128px تُرسم مرة
-   وحدة، والقمر كذلك. */
+const PK_KEYS = ["restaurants", "cafes", "bakeries", "places", "stores", "car-shops"];
 
-// كل مركبة لها طريقة وقوف: over = كم تتعدى الهدف (بكسل) قبل ما ترجع له، settle = مدة
-// الرجوع. القارب ينزلق أطول ويتمايل، والطيارة تبطأ بنعومة بلا رجوع تقريباً.
-// أيقونات المركبات: خطوط SVG مرسومة يدوياً بلون الزر (currentColor)، لا إيموجي
-const TRIP_ICON = (d) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
-const TRIP_VEHICLES = {
-  train: {
-    icon: TRIP_ICON('<rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 10h14M9 21l2-4M15 21l-2-4"/><circle cx="9" cy="13.5" r=".8"/><circle cx="15" cy="13.5" r=".8"/>'),
-    dur: 4200,
-    over: 14,
-    settle: 500,
+// رموز الأقسام: شكل ممتلئ بنقاط نصف تونية + خط خارجي (--knock = لون خلفية الزر)
+const PK_SHAPES = {
+  restaurants: {
+    fill: '<circle cx="24" cy="25" r="12.5"/>',
+    line: '<circle cx="24" cy="25" r="12.5"/><circle cx="24" cy="25" r="8" stroke-opacity=".55"/><path d="M5.5 11v8.5a2.5 2.5 0 0 0 5 0V11M8 11v29"/><path d="M42.5 40V11c-3 1.5-4.5 6-4.5 11v6h4.5"/>',
   },
-  car: {
-    icon: TRIP_ICON('<path d="M5 11l1.6-4.2A2 2 0 0 1 8.5 5.5h7a2 2 0 0 1 1.9 1.3L19 11"/><rect x="3" y="11" width="18" height="6" rx="2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>'),
-    dur: 4000,
-    over: 26,
-    settle: 650,
+  cafes: {
+    fill: '<path d="M9 19h24v9a12 12 0 0 1-24 0z"/>',
+    line: '<path d="M9 19h24v9a12 12 0 0 1-24 0z"/><path d="M33 22h3a5 5 0 0 1 0 10h-3.5"/><path d="M6 43.5h30"/><path d="M16 14c-2-2.5 2-4.5 0-8M24 14c-2-2.5 2-4.5 0-8" stroke-opacity=".7"/>',
   },
-  boat: {
-    icon: TRIP_ICON('<path d="M3 15h18l-2.5 4h-13z"/><path d="M12 3v12M12 4.5 18 12h-6"/>'),
-    dur: 4800,
-    over: 60,
-    settle: 1300,
-    rock: 1,
+  bakeries: {
+    fill: '<path d="M6 34c0-12 8-20 18-20s18 8 18 20v3.5H6z"/>',
+    line: '<path d="M6 34c0-12 8-20 18-20s18 8 18 20v3.5H6z"/><path d="M15 21.5l4.5 6M23 18.5l4.5 6.5M31 20l4 6" stroke-opacity=".75"/><path d="M3.5 41.5h41"/>',
   },
-  plane: {
-    icon: TRIP_ICON('<path d="M21 14.5 13 10V4.5a1 1 0 0 0-2 0V10l-8 4.5v2l8-2.5V18l-2 1.5V21l3-1 3 1v-1.5L13 18v-4l8 2.5z"/>'),
-    dur: 4400,
-    over: 8,
-    settle: 900,
-    rock: 0.5,
+  places: {
+    fill: '<path d="M24 5a14 14 0 0 1 14 14c0 10.5-14 24-14 24S10 29.5 10 19A14 14 0 0 1 24 5z"/>',
+    line: '<path d="M24 5a14 14 0 0 1 14 14c0 10.5-14 24-14 24S10 29.5 10 19A14 14 0 0 1 24 5z"/><circle cx="24" cy="19" r="5" style="fill:var(--knock)"/>',
+  },
+  stores: {
+    fill: '<path d="M9 17h30l-2.2 24H11.2z"/>',
+    line: '<path d="M9 17h30l-2.2 24H11.2z"/><path d="M17 21v-7a7 7 0 0 1 14 0v7"/>',
+  },
+  "car-shops": {
+    fill: '<path d="M5 33v-6l4.5-9.5A4 4 0 0 1 13.1 15h21.8a4 4 0 0 1 3.6 2.5L43 27v6z"/>',
+    line: '<path d="M5 33v-6l4.5-9.5A4 4 0 0 1 13.1 15h21.8a4 4 0 0 1 3.6 2.5L43 27v6z"/><path d="M8 27h32" stroke-opacity=".6"/><circle cx="14" cy="34" r="4.5" style="fill:var(--knock)"/><circle cx="34" cy="34" r="4.5" style="fill:var(--knock)"/>',
+  },
+  any: {
+    fill: '<rect x="8" y="8" width="32" height="32" rx="7" transform="rotate(-8 24 24)"/>',
+    line: '<rect x="8" y="8" width="32" height="32" rx="7" transform="rotate(-8 24 24)"/><g stroke="none" style="fill:var(--knock)" transform="rotate(-8 24 24)"><circle cx="16.5" cy="16.5" r="3"/><circle cx="24" cy="24" r="3"/><circle cx="31.5" cy="31.5" r="3"/></g>',
   },
 };
-const TRIP_VEHICLE_KEY = "pickerVehicle";
-const TRIP_BOB_MS = 900 * 2 * Math.PI; // دورة تمايل البطاقات: نفس sin(t/900)
-const TRIP_DIST = 5200; // مسافة الرحلة بوحدات الطبقة القريبة
-// ثلاث طبقات عمق: البعيد صغير وبطيء وقريب من الأفق، القريب كبير وسريع
-const TRIP_LANES = [
-  { depth: 0.35, y: 0.4, gap: 330 },
-  { depth: 0.62, y: 0.27, gap: 400 },
-  { depth: 1, y: 0.47, gap: 470 },
-];
 
-// منحنى السرعة: تسارع سريع ثم فرملة طويلة ناعمة؛ نجمّعه مسبقاً لجدول مسافات
-const TRIP_CURVE = (() => {
-  const n = 400;
-  const v = [];
-  const acc = [0];
-  for (let i = 0; i < n; i++) v.push(Math.min(1, i / n / 0.1) * (1 - i / n) ** 2.2);
-  for (let i = 0; i < n; i++) acc.push(acc[i] + v[i]);
-  const vMax = Math.max(...v);
-  return (t) => {
-    const i = Math.min(n - 1, Math.floor(t * n));
-    return [acc[i] / acc[n], v[i] / vMax];
+const PK_ICONS = {
+  go: '<svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M516-120 402-402 120-516v-56l720-268-268 720h-56Zm26-148 162-436-436 162 196 78 78 196Zm-34-240Z"/></svg>',
+  page: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8.5L19 8v12.5H6z"/><path d="M14 3.5V8h5M9 12h7M9 15.5h7"/></svg>',
+  again: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4v4.5H15"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+};
+
+// عشوائي ثابت البذرة: نفس البذرة = نفس الشكل
+function pkRng(seed) {
+  let s = seed >>> 0;
+  return () => {
+    s = (s + 0x6d2b79f5) >>> 0;
+    let x = s;
+    x = Math.imul(x ^ (x >>> 15), x | 1);
+    x ^= x + Math.imul(x ^ (x >>> 7), x | 61);
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
   };
-})();
+}
+let pkUid = 0;
+const f1 = (v) => v.toFixed(1);
 
-const tripEase = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
-const tripBack = (t) => 1 + 2.4 * (t - 1) ** 3 + 1.4 * (t - 1) ** 2;
-
-// كل الحركات بـrAF (مو CSS transitions) عشان تمشي على نفس الساعة
-function tripTween(ms, fn, done) {
-  const t0 = performance.now();
-  (function frame(now) {
-    const t = Math.min(1, (now - t0) / ms);
-    fn(t);
-    if (t < 1) requestAnimationFrame(frame);
-    else done?.();
-  })(t0);
+function pkGlyph(key) {
+  const g = PK_SHAPES[key] || PK_SHAPES.any;
+  const id = `pkg${++pkUid}`;
+  let dots = "";
+  for (let y = 1.55, row = 0; y < 50; y += 2.68, row++) {
+    for (let x = row % 2 ? 1.55 : 0; x < 50; x += 3.1) {
+      dots += `<circle cx="${f1(x)}" cy="${f1(y)}" r="${(0.35 + (x / 48 + y / 48) / 2).toFixed(2)}"/>`;
+    }
+  }
+  return `<svg viewBox="0 0 48 48" aria-hidden="true"><defs><mask id="${id}"><g fill="#fff">${g.fill}</g></mask></defs><g mask="url(#${id})" fill="currentColor">${dots}</g><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">${g.line}</g></svg>`;
 }
 
-// شريط SVG مكرر مرتين: ننقله نص عرضه ونرجع = حركة لا نهائية بلا فراغ
-function tripStrip(path, fill) {
-  const svg = `<svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="${path}" fill="${fill}"/></svg>`;
-  return svg + svg;
-}
-
-// القمر: قرص يغمق عند الحافة + بحار قمرية رمادية + فوهات صغيرة + حبيبات سطح
-function tripMoonTexture() {
-  const N = 128;
-  const r = N / 2;
-  const c = document.createElement("canvas");
-  c.width = c.height = N;
-  const g = c.getContext("2d");
-  const base = g.createRadialGradient(r * 0.8, r * 0.75, r * 0.1, r, r, r);
-  base.addColorStop(0, "#f6f3e8");
-  base.addColorStop(0.7, "#dcd8cb");
-  base.addColorStop(1, "#a9a597");
-  g.fillStyle = base;
-  g.beginPath();
-  g.arc(r, r, r - 1, 0, Math.PI * 2);
-  g.fill();
-  g.save();
-  g.clip();
-  g.filter = "blur(2.5px)";
-  g.fillStyle = "rgba(110, 108, 100, .38)";
-  for (const [x, y, rx, ry, rot] of [
-    [0.38, 0.32, 0.16, 0.11, 0.4],
-    [0.55, 0.28, 0.12, 0.09, 0],
-    [0.6, 0.45, 0.14, 0.1, 0.6],
-    [0.33, 0.52, 0.1, 0.13, 0],
-    [0.47, 0.62, 0.09, 0.07, 0],
-    [0.7, 0.6, 0.07, 0.06, 0],
-  ]) {
-    g.beginPath();
-    g.ellipse(x * N, y * N, rx * N, ry * N, rot, 0, Math.PI * 2);
-    g.fill();
-  }
-  g.filter = "none";
-  for (let i = 0; i < 40; i++) {
-    const x = Math.random() * N;
-    const y = Math.random() * N;
-    const cr = 1 + Math.random() * 3;
-    g.fillStyle = "rgba(80, 78, 72, .18)";
-    g.beginPath();
-    g.arc(x, y, cr, 0, Math.PI * 2);
-    g.fill();
-    g.fillStyle = "rgba(255, 255, 255, .12)";
-    g.beginPath();
-    g.arc(x - cr * 0.3, y - cr * 0.3, cr * 0.6, 0, Math.PI * 2);
-    g.fill();
-  }
-  g.restore();
-  const img = g.getImageData(0, 0, N, N);
-  for (let i = 0; i < img.data.length; i += 4) {
-    const n = (Math.random() - 0.5) * 14;
-    img.data[i] += n;
-    img.data[i + 1] += n;
-    img.data[i + 2] += n;
-  }
-  g.putImageData(img, 0, 0);
-  return c.toDataURL();
-}
-
-// بلاطة حبيبات الفيلم
-function tripGrainTexture() {
-  const c = document.createElement("canvas");
-  c.width = c.height = 128;
-  const g = c.getContext("2d");
-  const img = g.createImageData(128, 128);
-  for (let i = 0; i < img.data.length; i += 4) {
-    img.data[i] = img.data[i + 1] = img.data[i + 2] = Math.random() * 255;
-    img.data[i + 3] = 255;
-  }
-  g.putImageData(img, 0, 0);
-  return c.toDataURL();
-}
-
-const TRIP_CLOUD_SVG =
-  '<svg viewBox="0 0 220 100" aria-hidden="true"><g fill="var(--cl)"><ellipse cx="62" cy="64" rx="50" ry="28"/><ellipse cx="112" cy="46" rx="54" ry="40"/><ellipse cx="162" cy="62" rx="46" ry="30"/><rect x="24" y="62" width="176" height="30" rx="15"/></g><ellipse cx="112" cy="88" rx="86" ry="9" fill="var(--cl2)" opacity=".6"/></svg>';
-
-function createTrip(stage, { onStart, onDone }) {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const scene = document.createElement("div");
-  scene.className = "trip-scene";
-  scene.setAttribute("aria-hidden", "true");
-  scene.innerHTML = `
-    <div class="trip-view">
-      <div class="trip-sky"></div><div class="trip-sun"></div>
-      <div class="trip-band trip-islands"></div>
-      <div class="trip-sea"></div>
-      <div class="trip-band trip-waves1"></div>
-      <div class="trip-band trip-waves2"></div>
-      <div class="trip-clouds trip-cfar"></div>
-      <div class="trip-carpet"></div>
-      <div class="trip-cards"></div>
-      <div class="trip-clouds trip-cnear"></div>
-      <div class="trip-band trip-fg"></div>
-    </div>
-    <svg class="trip-frame" aria-hidden="true"><path fill-rule="evenodd"/></svg>
-    <div class="trip-window"></div>
-    <div class="trip-grain"></div>`;
-  stage.prepend(scene);
-  const $ = (cls) => scene.querySelector(`.trip-${cls}`);
-  const view = $("view");
-  const cardsBox = $("cards");
-  const win = $("window");
-  const frame = $("frame");
-  const fg = $("fg");
-  const bands = { islands: $("islands"), waves1: $("waves1"), waves2: $("waves2") };
-
-  bands.islands.innerHTML = tripStrip(
-    "M0 100 L0 80 Q60 60 120 78 L180 82 Q260 40 330 76 L520 84 Q600 55 680 80 L760 86 Q860 50 930 78 L1000 82 L1000 100Z",
-    "var(--isl)"
-  );
-  const wave =
-    "M0 50 Q62 20 125 50 T250 50 T375 50 T500 50 T625 50 T750 50 T875 50 T1000 50 L1000 100 L0 100Z";
-  bands.waves1.innerHTML = tripStrip(wave, "var(--wv1)");
-  bands.waves2.innerHTML = tripStrip(wave, "var(--wv2)");
-  stage.style.setProperty("--trip-grain", `url(${tripGrainTexture()})`);
-  stage.style.setProperty("--trip-moon", `url(${tripMoonTexture()})`);
-
-  // الغيوم (مشهد الطيارة): كل غيمة عنصر بحجمه الطبيعي، يلف من جديد لما يطلع من الشاشة.
-  // البعيدة صغيرة وبطيئة فوق؛ القريبة كبيرة وسريعة عند حافة بساط الغيوم
-  const clouds = [];
-  function addClouds(box, n, depth, y0, y1, s0, s1) {
+// حلقة نقاط بنصف قطر r داخل مربع 200 (المقاس الفعلي من CSS)
+function pkHalo(cls, rings) {
+  let c = "";
+  for (const [r, n, dot, op] of rings) {
     for (let i = 0; i < n; i++) {
-      const el = document.createElement("div");
-      el.className = "trip-cloud";
-      el.innerHTML = TRIP_CLOUD_SVG;
-      box.append(el);
-      clouds.push({
-        el,
-        x0: (i + Math.random() * 0.6) / n,
-        depth,
-        y: y0 + Math.random() * (y1 - y0),
-        s: s0 + Math.random() * (s1 - s0),
-      });
+      const a = (i / n) * Math.PI * 2;
+      const k = 0.55 + 0.45 * Math.sin(a * 3 + 1);
+      c += `<circle cx="${f1(100 + r * Math.cos(a))}" cy="${f1(100 + r * Math.sin(a))}" r="${(dot * k).toFixed(2)}" opacity="${op}"/>`;
     }
   }
-  addClouds($("cfar"), 6, 0.18, 0.1, 0.42, 0.5, 1);
-  addClouds($("cnear"), 6, 1.3, 0.58, 0.62, 1.4, 2);
+  return `<svg class="${cls}" viewBox="0 0 200 200" aria-hidden="true"><g fill="currentColor">${c}</g></svg>`;
+}
 
-  let vehicle = "train";
+// كرة ورق جريدة: حافة مضلّعة، وجوه مثلثة بإضاءة من أعلى اليسار، وعلى أغلب الوجوه
+// بقايا طباعة (أعمدة سطور، عناوين عريضة، كلمات) — عشان تُقرأ جريدة لا حجراً
+function pkBall(seed, words) {
+  const R = pkRng(seed);
+  const id = `pkb${++pkUid}`;
+  const n = 17;
+  const edge = [];
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2 + R() * 0.25;
+    const r = 78 + R() * 16 - Math.abs(Math.sin(a)) * 4;
+    edge.push([r * Math.cos(a), r * Math.sin(a) * 0.93]);
+  }
+  const blob = `M${edge.map((p) => p.map(f1).join(" ")).join("L")}Z`;
+  const rings = [[[(R() - 0.5) * 14, (R() - 0.5) * 14]]];
+  for (const [k, rr] of [
+    [6, 30],
+    [11, 58],
+    [17, 100],
+  ]) {
+    const ring = [];
+    const off = R() * 6;
+    for (let i = 0; i < k; i++) {
+      const a = ((i + off + (R() - 0.5) * 0.5) / k) * Math.PI * 2;
+      const r = rr * (0.85 + R() * 0.3);
+      ring.push([r * Math.cos(a), r * Math.sin(a)]);
+    }
+    rings.push(ring);
+  }
+  const ang = (p) => Math.atan2(p[1], p[0]);
+  const tris = [];
+  for (let j = 0; j < rings.length - 1; j++) {
+    const A = rings[j].slice().sort((p, q) => ang(p) - ang(q));
+    const B = rings[j + 1].slice().sort((p, q) => ang(p) - ang(q));
+    if (A.length === 1) {
+      for (let i = 0; i < B.length; i++) tris.push([A[0], B[i], B[(i + 1) % B.length]]);
+      continue;
+    }
+    let ia = 0;
+    let ib = 0;
+    for (let s = 0; s < A.length + B.length; s++) {
+      const a0 = A[ia % A.length];
+      const b0 = B[ib % B.length];
+      const na = ang(A[(ia + 1) % A.length]) + (ia + 1 >= A.length ? Math.PI * 2 : 0);
+      const nb = ang(B[(ib + 1) % B.length]) + (ib + 1 >= B.length ? Math.PI * 2 : 0);
+      if ((na <= nb && ia < A.length) || ib >= B.length) {
+        tris.push([a0, A[(ia + 1) % A.length], b0]);
+        ia++;
+      } else {
+        tris.push([a0, B[(ib + 1) % B.length], b0]);
+        ib++;
+      }
+    }
+  }
+  let facets = "";
+  let print = "";
+  let clips = "";
+  let creases = "";
+  tris.forEach((t, k) => {
+    const cx = (t[0][0] + t[1][0] + t[2][0]) / 3;
+    const cy = (t[0][1] + t[1][1] + t[2][1]) / 3;
+    const light = (-cx * 0.55 - cy * 0.8) / 100;
+    const v = Math.max(0, Math.min(1, 0.6 + light * 0.45 + (R() - 0.5) * 0.7));
+    const pts = t.map((p) => p.map(f1).join(",")).join(" ");
+    const col = `color-mix(in srgb,var(--bh) ${Math.round(v * 100)}%,var(--bl))`;
+    facets += `<polygon points="${pts}" style="fill:${col};stroke:${col}" stroke-width=".6"/>`;
+    if (R() < 0.55) creases += `M${f1(t[0][0])} ${f1(t[0][1])}L${f1(t[1][0])} ${f1(t[1][1])}`;
+    const roll = R();
+    if (roll > 0.72) return;
+    const cid = `${id}f${k}`;
+    clips += `<clipPath id="${cid}"><polygon points="${pts}"/></clipPath>`;
+    const rot = Math.round((R() - 0.5) * 150);
+    const op = (0.3 + R() * 0.25) * (0.55 + v * 0.6);
+    let ink = "";
+    if (roll < 0.18) {
+      // كلمة بخط الجريدة
+      const w = words[Math.floor(R() * words.length)];
+      ink = `<text x="${f1(cx)}" y="${f1(cy + 4)}" text-anchor="middle" font-family="Amiri, serif" font-weight="700" font-size="${f1(10 + R() * 5)}">${w}</text>`;
+    } else if (roll < 0.3) {
+      // عنوان عريض فوق عمود
+      ink = `<rect x="${f1(cx - 22)}" y="${f1(cy - 9)}" width="${f1(30 + R() * 14)}" height="3.4" rx="1"/>`;
+      for (let L = 0; L < 4; L++) ink += `<rect x="${f1(cx - 22)}" y="${f1(cy - 2 + L * 3.6)}" width="${f1(28 + R() * 18)}" height="1.1"/>`;
+    } else {
+      // عمودا سطور مطبوعة
+      for (let L = -3; L <= 3; L++) {
+        const y = f1(cy + L * 3.6);
+        ink += `<rect x="${f1(cx - 26)}" y="${y}" width="${f1(16 + R() * 6)}" height="1.1"/><rect x="${f1(cx - 4)}" y="${y}" width="${f1(14 + R() * 12)}" height="1.1"/>`;
+      }
+    }
+    print += `<g clip-path="url(#${cid})" transform="rotate(${rot} ${f1(cx)} ${f1(cy)})" opacity="${op.toFixed(2)}">${ink}</g>`;
+  });
+  return `<svg viewBox="-110 -110 220 220" aria-hidden="true">
+  <defs><clipPath id="${id}c"><path d="${blob}"/></clipPath>${clips}
+    <filter id="${id}r" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="${seed % 97}"/><feDisplacementMap in="SourceGraphic" scale="7"/></filter>
+    <radialGradient id="${id}s" cx="38%" cy="32%" r="78%"><stop offset="0" style="stop-color:var(--bsh1)"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" style="stop-color:var(--bsh2)"/></radialGradient>
+    <radialGradient id="${id}d"><stop offset="0" style="stop-color:var(--bshadow)"/><stop offset="1" style="stop-color:var(--bshadow)" stop-opacity="0"/></radialGradient></defs>
+  <ellipse cx="12" cy="103" rx="74" ry="11" fill="url(#${id}d)" style="opacity:var(--bshadow-op)"/>
+  <g class="pk-ball-body"><g filter="url(#${id}r)" transform="rotate(-9)">
+    <g clip-path="url(#${id}c)">${facets}
+      <g style="fill:var(--bprint);opacity:var(--bprint-op)">${print}</g>
+      <path d="${creases}" fill="none" style="stroke:var(--bcrease)" stroke-width=".7"/>
+      <path d="${creases}" fill="none" style="stroke:var(--bcrease-hi)" stroke-width=".6" transform="translate(.7 .7)"/>
+      <rect x="-110" y="-110" width="220" height="220" fill="url(#${id}s)"/></g>
+    <path d="${blob}" fill="none" style="stroke:var(--bcrease)" stroke-width=".8"/>
+  </g></g></svg>`;
+}
+
+// آثار تكسير على القصاصة: شبكة مثلثات بإضاءة عشوائية + خطوط طيّ؛ الألوان والشدة من CSS
+function pkCreases(w, h, seed) {
+  const R = pkRng(seed);
+  const id = `pkc${++pkUid}`;
+  const cols = Math.max(4, Math.round(w / 95));
+  const rows = Math.max(5, Math.round(h / 95));
+  const P = [];
+  for (let j = 0; j <= rows; j++) {
+    P.push([]);
+    for (let i = 0; i <= cols; i++) {
+      const ex = i === 0 || i === cols;
+      const ey = j === 0 || j === rows;
+      P[j].push([
+        (i / cols) * w + (ex ? 0 : (R() - 0.5) * (w / cols) * 0.8),
+        (j / rows) * h + (ey ? 0 : (R() - 0.5) * (h / rows) * 0.8),
+      ]);
+    }
+  }
+  let white = "";
+  let dark = "";
+  let lines = "";
+  const poly = (t, o) => `<polygon points="${t.map((p) => p.map(f1).join(",")).join(" ")}" fill-opacity="${o.toFixed(2)}"/>`;
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+      const a = P[j][i];
+      const b = P[j][i + 1];
+      const c = P[j + 1][i + 1];
+      const d = P[j + 1][i];
+      const tr = R() < 0.5 ? [[a, b, c], [a, c, d]] : [[a, b, d], [b, c, d]];
+      for (const t of tr) {
+        const v = R();
+        if (v > 0.5) white += poly(t, (v - 0.5) * 2);
+        else dark += poly(t, (0.5 - v) * 2);
+      }
+      if (R() < 0.45) lines += `M${f1(a[0])} ${f1(a[1])}L${f1(c[0])} ${f1(c[1])}`;
+      if (R() < 0.3) lines += `M${f1(b[0])} ${f1(b[1])}L${f1(d[0])} ${f1(d[1])}`;
+    }
+  }
+  const folds = `M0 ${f1(h * 0.36)}L${w} ${f1(h * 0.31)}M${f1(w * 0.58)} 0L${f1(w * 0.53)} ${h}`;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--cg1)"/><stop offset="1" style="stop-color:var(--cg2)"/></linearGradient></defs>
+    <g class="pk-cw">${white}</g><g class="pk-ck">${dark}</g>
+    <path class="pk-cl" d="${lines}"/><path class="pk-cl hi" d="${lines}" transform="translate(1 1)"/>
+    <path class="pk-cf" d="${folds}"/><path class="pk-cf hi" d="${folds}" transform="translate(1.2 1.2)"/>
+    <rect width="100%" height="100%" fill="url(#${id})"/></svg>`;
+}
+
+// حافة ممزقة: نقاط محيط المستطيل بالنسب المئوية (نفس عددها دائماً، فتتحوّل لكرة وتعود)
+function pkTorn(seed) {
+  const R = pkRng(seed);
+  const k = 26;
+  const pts = [];
+  for (let i = 0; i <= k; i++) pts.push([(i / k) * 100, R() * 0.9]);
+  for (let i = 0; i <= k; i++) pts.push([100 - R() * 0.5, (i / k) * 100]);
+  for (let i = k; i >= 0; i--) pts.push([(i / k) * 100, 100 - R() * 0.9]);
+  for (let i = k; i >= 0; i--) pts.push([R() * 0.5, (i / k) * 100]);
+  return pts;
+}
+// نفس النقاط ملمومة حول المركز بنصف قطر r (بكسل) وحافة مضلّعة — شكل الكرة
+function pkBlob(pts, w, h, r, seed) {
+  const R = pkRng(seed);
+  return pts.map(([x, y]) => {
+    const a = Math.atan2((y - 50) * h, (x - 50) * w);
+    const rr = r * (0.82 + R() * 0.3);
+    return [50 + ((rr * Math.cos(a)) / w) * 100, 50 + ((rr * Math.sin(a)) / h) * 100];
+  });
+}
+const pkPoly = (pts) => `polygon(${pts.map(([x, y]) => `${x.toFixed(2)}% ${y.toFixed(2)}%`).join(",")})`;
+
+function initRandomPicker() {
+  const root = document.getElementById("picker");
+  if (!root) return;
+  const $ = (id) => document.getElementById(id);
+  const moon = $("pkMoon");
+  const wheel = $("pkWheel");
+  const ballBox = $("pkBall");
+  const resultBox = $("pkResult");
+  const chip = $("pkChip");
+  const areaSelect = $("pickerArea");
+  const live = $("pkLive");
+  const prompt = root.querySelector(".pk-prompt");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isEn = window.SITE_LANG === "en";
+  const BALL_WORDS = isEn
+    ? ["Torilu", "Bahrain", "Today", "News", "Manama", "Menu"]
+    : ["توريلو", "البحرين", "اليوم", "أخبار", "المنامة", "قهوة"];
+
+  // ارتفاع المسرح = الشاشة ناقص الهيدر والشريط السفلي (تحت zoom الشاشات العريضة
+  // نقسم innerHeight على نسبة التكبير، لأن مقاسات CSS قبل التكبير)
+  const header = document.querySelector(".site-header");
+  const bottomNav = document.querySelector(".bottom-nav");
+  function fit() {
+    const z = parseFloat(document.documentElement.style.zoom) || 1;
+    const h = window.innerHeight / z - (header?.offsetHeight || 0) - (bottomNav?.offsetHeight || 0);
+    root.style.setProperty("--pk-h", `${Math.max(520, Math.round(h))}px`);
+  }
+  fit();
+  window.addEventListener("resize", fit);
+
+  // الأقسام: «أي شيء» = كل الأقسام معاً؛ القسم الفارغ يختفي زرّه
+  const secItems = (k) => SITE_DATA[k]?.items || [];
+  const sectionOf = new Map();
+  for (const k of PK_KEYS) for (const it of secItems(k)) sectionOf.set(it, k);
+  const itemsFor = (k) => (k === "any" ? PK_KEYS.flatMap(secItems) : secItems(k));
+  const petals = [...wheel.querySelectorAll(".pk-petal")].filter((b) => {
+    if (itemsFor(b.dataset.section).length) return true;
+    b.remove();
+    return false;
+  });
+  const labelOf = {};
+  petals.forEach((b, i) => {
+    const a = (i / petals.length) * Math.PI * 2;
+    b.style.setProperty("--x", Math.sin(a).toFixed(4));
+    b.style.setProperty("--y", (-Math.cos(a)).toFixed(4));
+    b.style.setProperty("--i", i);
+    b.querySelector(".pk-glyph").innerHTML = pkGlyph(b.dataset.section);
+    labelOf[b.dataset.section] = b.textContent.trim();
+  });
+  root.style.setProperty("--n", petals.length);
+  wheel.insertAdjacentHTML("afterbegin", pkHalo("pk-ring", [[95, 90, 0.75, 0.55]]));
+  moon.insertAdjacentHTML(
+    "afterbegin",
+    pkHalo("pk-halo", [
+      [66, 54, 0.9, 0.32],
+      [80, 72, 0.6, 0.18],
+    ])
+  );
+
+  let step = "moon";
+  let section = null;
+  let busy = false;
+  let current = null; // { clip, wrap, torn } القصاصة الظاهرة
+  const later = (ms, fn) => setTimeout(fn, reduceMotion ? Math.min(ms, 250) : ms);
+
+  function setStep(s) {
+    step = s;
+    root.dataset.step = s;
+    wheel.inert = s !== "wheel";
+    moon.inert = s === "ball" || s === "clip";
+  }
+  function setPrompt(q, s) {
+    $("pkTitle").textContent = t(q);
+    $("pkSub").textContent = t(s);
+    prompt.classList.remove("swap");
+    void prompt.offsetWidth;
+    prompt.classList.add("swap");
+  }
+
+  function openWheel() {
+    sfx("open");
+    petals.forEach((b) => b.classList.remove("sel"));
+    setStep("wheel");
+    setPrompt("picker_q2", "picker_s2");
+    moon.setAttribute("aria-expanded", "true");
+    moon.setAttribute("aria-label", t("picker_close"));
+    (petals.find((b) => b.dataset.section === section) || petals[0]).focus({ preventScroll: true });
+  }
+  function closeWheel() {
+    sfx("close");
+    setStep("moon");
+    setPrompt("picker_q1", "picker_s1");
+    moon.setAttribute("aria-expanded", "false");
+    moon.removeAttribute("aria-label");
+    moon.focus({ preventScroll: true });
+  }
+  moon.addEventListener("click", () => busy || (step === "wheel" ? closeWheel() : openWheel()));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && step === "wheel" && !busy) closeWheel();
+  });
+
+  // ===== منطق الاختيار (كما كان): المنطقة، والأقرب لي، وكيس الخلط بالمحل =====
+  const NEAR_COUNT = 8;
   let items = [];
-  let cards = [];
-  let cam = 0;
-  let over = 0;
-  let running = false;
-  let idleFrame = 0;
-  let visible = true;
-  let result = null;
-  // المقاس محفوظ (ResizeObserver) بدل قراءة clientWidth كل إطار — القراءة بعد كتابة
-  // transform تجبر المتصفح يعيد التخطيط (forced synchronous layout) بكل إطار
-  let W = stage.clientWidth;
-  let H = stage.clientHeight;
-  // "حارات": كل طبقة عمق حاوية وحدة تتحرك (transform واحد)، والبطاقات ثابتة داخلها —
-  // بدل ما نحرك كل بطاقة وظلها لوحدهم بكل إطار (60+ كتابة ← 6)
-  let lanes = [];
-  // البطاقات اللي تتحرك وقت الانتظار هي نفسها بطاقات الرحلة الجاية (مبنية ومرسومة
-  // مسبقاً) — فالضغطة ما تبني 45 عنصر وترسمهم بنفس اللحظة، والمشهد ما "ينط" لورا
-  let deckWinner = null;
-
-  // أقرب طبقة للعين (تمر أسرع من البطاقات): أعمدة وسلك القطار، أو سياج جسر السيارة
-  function drawForeground() {
-    let d = "";
-    if (vehicle === "train") {
-      d =
-        "M247 0 h5 v100 h-5z M747 0 h5 v100 h-5z M0 9 Q250 15 500 9 T1000 9 v1.2 Q750 16.2 500 10.2 T0 10.2z";
-    } else if (vehicle === "car") {
-      d = "M0 68 h1000 v2.4 h-1000z M0 75 h1000 v1.6 h-1000z";
-      for (let x = 0; x < 1000; x += 40) d += ` M${x} 68 h3 v32 h-3z`;
-    }
-    fg.innerHTML = d ? tripStrip(d, vehicle === "train" ? "#3b4148" : "#8b939c") : "";
+  let nearPool = [];
+  function fillAreas() {
+    const list = itemsFor(section);
+    const counts = {};
+    list.forEach((it) =>
+      (it.tags || []).forEach((tg) => AREA_NAMES.includes(tg) && (counts[tg] = (counts[tg] || 0) + 1))
+    );
+    const hasLoc = list.some((it) => (it.lat != null && it.lng != null) || it.branches?.length);
+    areaSelect.innerHTML = [
+      `<option value="">${t("picker_area_all").replace("{n}", list.length)}</option>`,
+      hasLoc ? `<option value="near">${t("picker_area_near")}</option>` : "",
+      ...Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .map(([area, n]) => `<option value="${escapeHtml(area)}">${escapeHtml(tagLabel(area))} (${n})</option>`),
+    ].join("");
   }
-
-  function makeCard(item, lane, x, z) {
-    const el = document.createElement("div");
-    el.className = "trip-card";
-    const hue = Math.floor(Math.random() * 360);
-    el.style.setProperty("--h", hue);
-    el.innerHTML = `<span class="trip-card-icon">${escapeHtml(item.icon || "⭐")}</span><span class="trip-card-title" dir="auto">${escapeHtml(itemTitle(item))}</span>`;
-    const sh = document.createElement("div");
-    sh.className = "trip-shadow";
-    lanes[z].sh.append(sh);
-    lanes[z].el.append(el);
-    const phase = Math.random() * 6.28;
-    // التمايل نفسه (sin بدورة 900ms×2π) لكن كـCSS animation يشغّلها المعالج الرسومي
-    el.style.animationDelay = `${Math.round((-phase / 6.28) * TRIP_BOB_MS)}ms`;
-    return {
-      el,
-      sh,
-      item,
-      lane,
-      x,
-      hue,
-      z,
-      phase,
-      dy: (Math.random() - 0.5) * 0.08,
-    };
+  function applyPool() {
+    const list = itemsFor(section);
+    const v = areaSelect.value;
+    items = v === "near" ? nearPool : v ? list.filter((it) => (it.tags || []).includes(v)) : list;
+    bag = [];
   }
-
-  const pick = () => items[Math.floor(Math.random() * items.length)];
 
   // الفائز: عدالة + "عشوائية يحسّها الناس عشوائية" —
-  // 1) بالمحل مو بالفرع: محل له 5 فروع كان حظه 5 أضعاف محل بفرع واحد. نجمع الفروع
-  //    باسم المحل (اللي قبل " - " بالعنوان) ونختار محل ثم فرع منه.
-  // 2) كيس خلط (shuffle bag): كل المحلات تطلع مرة قبل ما يتكرر أي محل، وما يطلع نفس
-  //    المحل مرتين ورا بعض حتى بين كيس وكيس.
+  // 1) بالمحل مو بالفرع: نجمع الفروع باسم المحل (اللي قبل " - " بالعنوان) ونختار محل ثم فرع منه.
+  // 2) كيس خلط: كل المحلات تطلع مرة قبل ما يتكرر أي محل، وما يطلع نفس المحل مرتين ورا بعض.
   let bag = [];
   let lastBrand = null;
   const brandOf = (it) => (it.title || "").split(" - ")[0].trim();
@@ -311,437 +416,208 @@ function createTrip(stage, { onStart, onDone }) {
     return g[Math.floor(Math.random() * g.length)];
   }
 
-  // يبني البطاقات على طول الرحلة؛ الفائزة بالطبقة القريبة، موقعها يجيها بالضبط بنص الشباك
-  // آخر الرحلة، وأي بطاقة قريبة تغطيها تنشال
-  function build() {
-    cardsBox.textContent = "";
-    cards = [];
-    const shWrap = document.createElement("div");
-    shWrap.className = "trip-lane-shadows";
-    cardsBox.append(shWrap);
-    lanes = TRIP_LANES.map((lane, z) => {
-      const sh = document.createElement("div");
-      const el = document.createElement("div");
-      sh.className = el.className = "trip-lane";
-      el.style.zIndex = z;
-      el.dataset.z = z;
-      shWrap.append(sh);
-      cardsBox.append(el);
-      return { lane, sh, el, trail: -1 };
-    });
-    TRIP_LANES.forEach((lane, z) => {
-      const span = (TRIP_DIST + W * 2) * lane.depth + W;
-      for (
-        let x = -W * 0.2 + Math.random() * lane.gap;
-        x < span;
-        x += lane.gap * (0.8 + Math.random() * 0.5)
-      ) {
-        cards.push(makeCard(pick(), lane, x, z));
-      }
-    });
-    const near = TRIP_LANES[2];
-    const winner = makeCard(pickWinner(), near, W / 2 + TRIP_DIST, 2);
-    winner.dy = 0;
-    cards = cards.filter((c) => {
-      if (c.lane !== near || Math.abs(c.x - winner.x) > near.gap * 0.7) return true;
-      c.el.remove();
-      c.sh.remove();
-      return false;
-    });
-    cards.push(winner);
-    placeCards();
-    return winner;
+  // ===== الكرة والقصاصة =====
+  function showBall() {
+    ballBox.innerHTML = pkBall(Math.floor(Math.random() * 1e9), BALL_WORDS);
+    setStep("ball");
+    later(380, () => sfx("crumple"));
   }
-
-  // مكان كل بطاقة داخل حارتها: يتحسب مرة (وعند تغيّر المقاس)، مو كل إطار
-  function placeCards() {
-    const horizon = H * 0.62;
-    for (const c of cards) {
-      if (c.free) continue;
-      const s = 0.45 + 0.55 * c.lane.depth;
-      c.el.style.transform = `translate3d(${W - c.x}px, ${H * (c.lane.y + c.dy)}px, 0) scale(${s})`;
-      c.sh.style.transform = `translate3d(${W - c.x}px, ${horizon + (H - horizon) * (0.15 + 0.5 * c.lane.depth)}px, 0) scale(${s})`;
-    }
-  }
-
-  // جدار المركبة: شكل SVG واحد بحجم المشهد فيه فتحة بشكل الشباك بالضبط (من
-  // border-radius المحسوب نفسه). كان box-shadow بانتشار 2000px = طبقة 4300×4450px
-  // (~19 ميجابكسل، ٨٠ ضعف المشهد) تكبر 1.9× لحظة الكشف
-  function drawFrame() {
-    const st = stage.getBoundingClientRect();
-    const r = win.getBoundingClientRect();
-    if (!st.width || !r.width) return;
-    const cs = getComputedStyle(win);
-    // كل شي بإحداثيات المستطيل الظاهر (بالكسور) و viewBox بنفس المقاس مع
-    // preserveAspectRatio=none — فالفتحة تنطبق على الشباك بالبكسل. z = تكبير الصفحة
-    // (CSS zoom) لأن border-radius المحسوب بوحدات ما قبل التكبير
-    const z = st.width / (stage.offsetWidth || st.width);
-    let x = r.left - st.left;
-    let y = r.top - st.top;
-    let w = r.width;
-    let h = r.height;
-    const px = (u, side) => (u.endsWith("%") ? (parseFloat(u) / 100) * side : (parseFloat(u) || 0) * z);
-    const rad = (v) => {
-      const [a, b = a] = v.split(" ");
-      return [px(a, w), px(b, h)];
-    };
-    let corners = [
-      cs.borderTopLeftRadius,
-      cs.borderTopRightRadius,
-      cs.borderBottomRightRadius,
-      cs.borderBottomLeftRadius,
-    ].map(rad);
-    const [tl0, tr0, br0, bl0] = corners;
-    // نفس قاعدة CSS: لو مجموع نصفي قطرين أكبر من الضلع، كل الأنصاف تصغر بنفس النسبة
-    const f = Math.min(
-      1,
-      w / (tl0[0] + tr0[0] || 1),
-      w / (bl0[0] + br0[0] || 1),
-      h / (tl0[1] + bl0[1] || 1),
-      h / (tr0[1] + br0[1] || 1)
-    );
-    // الفتحة أصغر بـ2px من الشباك من كل جهة: حافتها (anti-aliasing) تنطبق تحت الحافة
-    // المعتمة للشباك (inset 10px)، فما يطلع خط شعري من المنظر بين الجدار والحافة
-    const d = 2 * z;
-    corners = corners.map(([a, b]) => [Math.max(0, a * f - d), Math.max(0, b * f - d)]);
-    const [tl, tr, br, bl] = corners;
-    const cx = x + w / 2;
-    const cy = y + h / 2;
-    x += d;
-    y += d;
-    w -= 2 * d;
-    h -= 2 * d;
-    frame.setAttribute("viewBox", `0 0 ${st.width} ${st.height}`);
-    frame.setAttribute("preserveAspectRatio", "none");
-    frame.style.transformOrigin = `${cx / z}px ${cy / z}px`;
-    frame.firstChild.setAttribute(
-      "d",
-      `M0 0H${st.width}V${st.height}H0Z` +
-        `M${x + tl[0]} ${y}H${x + w - tr[0]}A${tr[0]} ${tr[1]} 0 0 1 ${x + w} ${y + tr[1]}` +
-        `V${y + h - br[1]}A${br[0]} ${br[1]} 0 0 1 ${x + w - br[0]} ${y + h}` +
-        `H${x + bl[0]}A${bl[0]} ${bl[1]} 0 0 1 ${x} ${y + h - bl[1]}` +
-        `V${y + tl[1]}A${tl[0]} ${tl[1]} 0 0 1 ${x + tl[0]} ${y}Z`
-    );
-  }
-
-  function render(time, speed) {
-    // تمايل القارب/الطيارة: transform واحد للمنظر كله داخل الشباك
-    const rock = TRIP_VEHICLES[vehicle].rock || 0;
-    view.style.transform = rock
-      ? `rotate(${Math.sin(time / 1400) * 0.8 * rock}deg) translateY(${Math.sin(time / 1100) * 4 * rock}px)`
-      : "";
-    // الحركة من اليمين لليسار؛ ذيل السرعة يطول مع السرعة (اتجاهه عكس الحركة)
-    for (const L of lanes) {
-      L.el.style.transform = L.sh.style.transform = `translate3d(${cam * L.lane.depth}px,0,0)`;
-      const trail = Math.round(Math.min(0.8, speed * L.lane.depth) * 20) / 20;
-      if (trail !== L.trail) {
-        L.trail = trail;
-        L.el.style.setProperty("--trail", trail);
-      }
-    }
-    // البطاقات برا الشاشة تنشال من الرسم (display:none) — نكتب بس لما تتغير حالتها،
-    // فما في كتابة كل إطار، والبعيدة ما تاخذ طبقة ولا حركة تمايل
-    for (const c of cards) {
-      if (c.free) continue;
-      const sx = c.x - cam * c.lane.depth;
-      const out = sx < -200 || sx > W + 200;
-      if (out !== c.out) {
-        c.out = out;
-        c.el.classList.toggle("off", out);
-        c.sh.classList.toggle("off", out);
-      }
-    }
-    // الطبقات: كل وحدة بسرعة مختلفة حسب بعدها (parallax)
-    const loop = (v) => -(((v % W) + W) % W);
-    bands.islands.style.transform = `translate3d(${loop(-cam * 0.05)}px,0,0)`;
-    bands.waves1.style.transform = `translate3d(${loop(-cam * 0.3)}px,0,0)`;
-    bands.waves2.style.transform = `translate3d(${loop(-cam * 0.7)}px,0,0)`;
-    fg.style.transform = `translate3d(${loop(-cam * 1.6)}px,0,0)`;
-    if (vehicle === "plane") {
-      const span = W + 600;
-      for (const c of clouds) {
-        const sx = ((((c.x0 * span - cam * c.depth) % span) + span) % span) - 300;
-        c.el.style.transform = `translate3d(${W - sx}px, ${c.y * H}px, 0) scale(${c.s})`;
-      }
-    }
-  }
-
-  // وقت الانتظار المشهد يمشي ببطء (حي بس هادي) — ويتوقف لما يطلع من الشاشة
-  function idle(now) {
-    idleFrame = 0;
-    if (running || !visible) return;
-    cam += 0.25;
-    render(now, 0);
-    idleFrame = requestAnimationFrame(idle);
-  }
-  function resumeIdle() {
-    if (!idleFrame && !running && visible && !reduceMotion) idleFrame = requestAnimationFrame(idle);
-  }
-  new IntersectionObserver(([entry]) => {
-    visible = entry.isIntersecting;
-    resumeIdle();
-  }).observe(stage);
-  new ResizeObserver(() => {
-    W = stage.clientWidth;
-    H = stage.clientHeight;
-    placeCards();
-    if (!win.style.transform) drawFrame();
-    render(performance.now(), 0);
-  }).observe(stage);
-
-  function clearResult() {
-    result?.remove();
-    result = null;
-    win.style.cssText = "";
-    frame.style.transform = frame.style.opacity = "";
-    fg.style.opacity = "";
-  }
-
-  function setVehicle(v) {
-    vehicle = v;
-    stage.dataset.vehicle = v;
-    drawForeground();
-    drawFrame();
-    render(performance.now(), 0);
-  }
-
-  function setItems(list) {
-    items = list;
-    bag = [];
-    if (running) return;
-    clearResult();
-    cam = 0;
-    deckWinner = null;
-    if (items.length) deckWinner = build();
-    else {
-      cardsBox.textContent = "";
-      cards = [];
-      lanes = [];
-    }
-    render(performance.now(), 0);
-    resumeIdle();
-  }
-
-  function go() {
-    if (running || !items.length) return;
-    running = true;
-    cancelAnimationFrame(idleFrame);
-    idleFrame = 0;
-    over = TRIP_VEHICLES[vehicle].over;
-    // نكمل من مكان المشهد الحالي لو بطاقات الانتظار لسا ما وصلت نص الطريق
-    const fresh = deckWinner && !result && cam < TRIP_DIST * 0.3;
-    if (!fresh) {
-      clearResult();
-      cam = 0;
-    }
-    const winner = fresh ? deckWinner : build();
-    deckWinner = null;
-    const cam0 = cam;
-    onStart();
-    if (reduceMotion) {
-      cam = TRIP_DIST;
-      render(0, 0);
-      reveal(winner);
-      return;
-    }
-    const V = TRIP_VEHICLES[vehicle];
-    const t0 = performance.now();
-    (function frame(now) {
-      const t = Math.min(1, (now - t0) / V.dur);
-      const [p, v] = TRIP_CURVE(t);
-      cam = cam0 + (TRIP_DIST + over - cam0) * p;
-      render(now, v);
-      if (t < 1) requestAnimationFrame(frame);
-      else stop(winner);
-    })(t0);
-  }
-
-  function stop(winner) {
-    // الوقوف: تتعدى الهدف شوي ثم ترجع له بنعومة، مثل المركبة لما توقف
-    tripTween(
-      TRIP_VEHICLES[vehicle].settle,
-      (t) => {
-        cam = TRIP_DIST + over * (1 - tripEase(t));
-        render(performance.now(), 0);
-      },
-      () => {
-        // "طلّة الراس": الشباك يكبر ويطلع برا المشهد (ومعه الأعمدة/السياج)، باقي
-        // البطاقات تبهت، والفائزة تقرّب للنص
-        const y0 = H * winner.lane.y;
-        // الفائزة تطلع من حارتها لطبقة فوق الكل (مكانها بالشاشة نفسه)، فالحارات
-        // تبهت كلها مرة وحدة بدل بطاقة بطاقة
-        winner.free = true;
-        winner.el.style.zIndex = 3;
-        winner.el.style.setProperty("--trail", 0);
-        winner.el.style.transform = `translate3d(${W / 2}px, ${y0}px, 0)`;
-        cardsBox.append(winner.el);
-        winner.sh.style.transform = `translate3d(${W / 2}px, ${H * 0.62 + H * 0.38 * 0.65}px, 0)`;
-        cardsBox.firstChild.append(winner.sh);
-        tripTween(
-          850,
-          (t) => {
-            const e = tripEase(t);
-            win.style.transform = frame.style.transform = `scale(${1 + 0.9 * e})`;
-            win.style.opacity = frame.style.opacity = 1 - e;
-            fg.style.opacity = 1 - e;
-            for (const L of lanes) L.el.style.opacity = L.sh.style.opacity = 1 - 0.7 * e;
-            winner.el.style.transform = `translate3d(${W / 2}px, ${y0 + (H * 0.46 - y0) * e}px, 0) scale(${1 + 0.7 * e})`;
-          },
-          () => reveal(winner)
-        );
-      }
-    );
-  }
-
-  function reveal(winner) {
-    sfx("success");
-    const item = winner.item;
-    // متغيّر محلي: "جرّب مرة ثانية" وسط حركة الظهور يصفّر result قبل ما تخلص الحركة
-    const box = document.createElement("div");
-    result = box;
-    box.className = "trip-result";
-    box.setAttribute("role", "group");
-    box.setAttribute("aria-label", itemTitle(item));
-    box.style.setProperty("--h", winner.hue);
-    const meta = (item.tags || [])
-      .slice(0, 2)
-      .map((tag) => tagLabel(tag))
-      .join(" · ");
-    // "اقرأ التفاصيل" + الخريطة للعناصر اللي لها صفحة تفاصيل، وإلا أزرار العنصر العادية
-    // الخريطة صارت ضمن buildActionsHtml لكل العناصر؛ هنا بس لو ما لها رابط بالبيانات
-    const maps =
-      item.mapsUrl && !item.links?.maps
-        ? `<a class="btn secondary" href="${safeUrl(item.mapsUrl)}" target="_blank" rel="noopener noreferrer">${LINK_META.maps.icon} ${t("link_maps")}</a>`
-        : "";
-    box.innerHTML = `
-      <div class="trip-result-top"><span class="trip-result-icon">${escapeHtml(item.icon || "⭐")}</span><h2>${escapeHtml(itemTitle(item))}</h2></div>
-      ${meta ? `<p class="trip-result-meta">${escapeHtml(meta)}</p>` : ""}
-      <div class="trip-result-actions">${buildActionsHtml(item)}${maps}</div>`;
-    stage.append(box);
-    wireItemActions(box, item);
-    running = false;
-    onDone(item);
-    box.querySelector("a, button")?.focus({ preventScroll: true });
-    // البطاقات الباهتة خلف النتيجة تختفي كلها: كانت تتراكب وأسماؤها فوق بعض
-    const hideLanes = (o) => {
-      for (const L of lanes) L.el.style.opacity = L.sh.style.opacity = o;
-    };
-    if (reduceMotion) return hideLanes(0);
-    box.style.opacity = 0;
-    tripTween(500, (t) => {
-      hideLanes(0.3 * (1 - t));
-      box.style.opacity = Math.min(1, t * 3);
-      box.style.scale = 0.75 + 0.25 * tripBack(t);
-      winner.el.style.opacity = 1 - Math.min(1, t * 3);
-    });
-  }
-
-  // يتبع مظهر الموقع: اختيار صريح (data-theme) أولاً، وإلا إعداد الجهاز
-  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  const applyTheme = () => {
-    const pref = document.documentElement.dataset.theme;
-    stage.classList.toggle(
-      "trip-night",
-      pref === "dark" || (pref !== "light" && darkQuery.matches)
-    );
+  const zoomOf = () => parseFloat(document.documentElement.style.zoom) || 1;
+  const centerOf = (el) => {
+    const r = el.getBoundingClientRect();
+    const z = zoomOf();
+    return [(r.left + r.width / 2) / z, (r.top + r.height / 2) / z];
   };
-  applyTheme();
-  darkQuery.addEventListener?.("change", applyTheme);
-  new MutationObserver(applyTheme).observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["data-theme"],
-  });
 
-  return { setVehicle, setItems, go, isRunning: () => running };
-}
-
-function initRandomPicker() {
-  const categoriesWrap = document.getElementById("pickerCategories");
-  const spinBtn = document.getElementById("pickerSpinBtn");
-  const vehicleBtn = document.getElementById("pickerVehicleBtn");
-  const stage = document.getElementById("pickerStage");
-  const areaSelect = document.getElementById("pickerArea");
-  if (!categoriesWrap || !spinBtn || !stage || !areaSelect) return;
-
-  // أقسام "وين أروح" بس، بترتيب الأهم — المقالات والتجارب ما لها معنى بالقرعة
-  const sectionKeys = ["restaurants", "cafes", "bakeries", "places", "stores", "car-shops"].filter(
-    (key) => (SITE_DATA[key]?.items || []).length > 0
-  );
-  const trip = createTrip(stage, {
-    onStart: () => {
-      spinBtn.disabled = true;
-      vehicleBtn.disabled = true;
-      areaSelect.disabled = true;
-    },
-    onDone: () => {
-      spinBtn.disabled = false;
-      vehicleBtn.disabled = false;
-      areaSelect.disabled = false;
-    },
-  });
-
-  categoriesWrap.innerHTML = sectionKeys
-    .map(
-      (key) => `
-      <button class="picker-category" data-section="${key}" aria-pressed="false">
-        <span>${sectionLabel(key)}</span>
-      </button>`
-    )
-    .join("");
-
-  function choose(btn) {
-    categoriesWrap.querySelectorAll(".picker-category").forEach((b) => {
-      b.classList.toggle("active", b === btn);
-      b.setAttribute("aria-pressed", String(b === btn));
+  function clipHtml(item) {
+    const sec = sectionOf.get(item);
+    const secLabel = escapeHtml(labelOf[sec] || sectionLabel(sec));
+    const area = (item.tags || []).find((tg) => AREA_NAMES.includes(tg));
+    const areaLabel = area ? escapeHtml(tagLabel(area)) : "";
+    const hours = escapeHtml(itemHours(item));
+    const desc = escapeHtml(itemDesc(item));
+    const maps = item.links?.maps || item.mapsUrl || "";
+    const page =
+      (isEn && item.detailUrlEn) || item.detailUrl || `${sec}.html?q=${encodeURIComponent(itemTitle(item))}`;
+    const date = new Date().toLocaleDateString(isEn ? "en-GB" : "ar-BH", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     });
-    section = btn.dataset.section;
-    fillAreas();
-    applyPool();
+    const fact = (cls, k, v) => `<div class="${cls}"><dt>${t(k)}</dt><dd>${v}</dd></div>`;
+    const goCls = maps ? "pk-sub" : "pk-go";
+    return `
+      <div class="pk-creases"></div>
+      <header class="pk-mast"><span class="pk-mast-pick">${t("picker_yours")} · ${secLabel}</span><span class="pk-logo">${isEn ? "Torilu" : "توريلو"}<i>.</i></span><span class="pk-mast-date">${escapeHtml(date)}</span></header>
+      <p class="pk-kicker">${secLabel}${areaLabel ? `<i></i>${areaLabel}` : ""}</p>
+      <h2 class="pk-name" id="pkName" tabindex="-1">${escapeHtml(itemTitle(item))}</h2>
+      <div class="pk-body">
+        ${desc ? `<p class="pk-lead">${desc}</p>` : ""}
+        <dl class="pk-facts">${areaLabel ? fact("pk-f-area", "picker_f_area", areaLabel) : ""}${hours ? fact("pk-f-hours", "picker_f_hours", PK_ICONS.clock + hours) : ""}${fact("pk-f-sec", "picker_f_section", secLabel)}</dl>
+      </div>
+      <div class="pk-acts">${maps ? `<a class="pk-go" href="${safeUrl(maps)}" target="_blank" rel="noopener noreferrer">${PK_ICONS.go}${t("picker_go")}</a>` : ""}<a class="${goCls}" href="${escapeHtml(page)}">${PK_ICONS.page}${t("picker_page")}</a><button type="button" class="pk-sub pk-again">${PK_ICONS.again}${t("picker_again")}</button></div>
+      <div class="pk-crumple"></div>`;
   }
 
-  // المنطقة: «اختار لي» يختار من منطقتك أو من أقرب الأماكن لك، مو من كل البحرين
-  const NEAR_COUNT = 8;
-  let section = null;
-  let nearPool = [];
-  function fillAreas() {
-    const items = SITE_DATA[section].items;
-    const counts = {};
-    items.forEach((it) =>
-      (it.tags || []).forEach(
-        (tg) => AREA_NAMES.includes(tg) && (counts[tg] = (counts[tg] || 0) + 1)
-      )
-    );
-    const hasLoc = items.some((it) => (it.lat != null && it.lng != null) || it.branches?.length);
-    areaSelect.innerHTML = [
-      `<option value="">${t("picker_area_all").replace("{n}", items.length)}</option>`,
-      hasLoc ? `<option value="near">${t("picker_area_near")}</option>` : "",
-      ...Object.entries(counts)
-        .sort((a, b) => b[1] - a[1])
-        .map(([area, n]) => `<option value="${area}">${tagLabel(area)} (${n})</option>`),
-    ].join("");
+  // الكرة تنفرد قصاصة: clip-path من شكل الكرة (بمكانها) إلى الحافة الممزقة
+  function unfold(item) {
+    const from = centerOf(ballBox);
+    const wrap = document.createElement("div");
+    wrap.className = "pk-clipwrap";
+    const clip = document.createElement("article");
+    clip.className = "pk-clip";
+    clip.setAttribute("aria-labelledby", "pkName");
+    clip.innerHTML = clipHtml(item);
+    wrap.append(clip);
+    resultBox.replaceChildren(wrap);
+    setStep("clip");
+    const w = clip.offsetWidth;
+    const h = clip.offsetHeight;
+    const seed = Math.floor(Math.random() * 1e9);
+    clip.querySelector(".pk-creases").innerHTML = pkCreases(w, h, seed);
+    clip.querySelector(".pk-crumple").innerHTML = pkCreases(w, h, seed + 7);
+    const torn = pkTorn(seed);
+    clip.style.clipPath = pkPoly(torn);
+    current = { clip, torn, w, h, seed };
+    clip.querySelector(".pk-again").addEventListener("click", again);
+    const to = centerOf(clip);
+    current.dx = from[0] - to[0];
+    current.dy = from[1] - to[1];
+    live.textContent = t("picker_result").replace("{name}", itemTitle(item));
+    later(420, () => sfx("success"));
+    const done = () => {
+      busy = false;
+      areaSelect.disabled = false;
+      (clip.querySelector(".pk-go") || clip.querySelector("a")).focus({ preventScroll: true });
+    };
+    if (reduceMotion) {
+      clip.animate({ opacity: [0, 1] }, 250);
+      return done();
+    }
+    crumpleFrames(current, false).onfinish = done;
   }
-  function applyPool() {
-    const items = SITE_DATA[section].items;
-    const v = areaSelect.value;
-    const pool =
-      v === "near" ? nearPool : v ? items.filter((it) => (it.tags || []).includes(v)) : items;
-    trip.setItems(pool);
-    spinBtn.disabled = trip.isRunning() || !pool.length;
+
+  // حركة واحدة بالاتجاهين: كرة ← مجعّدة ← مفرودة (reverse = تكوير)
+  function crumpleFrames(c, reverse) {
+    const r = (parseFloat(getComputedStyle(root).getPropertyValue("--ball")) || 220) * 0.4;
+    const ball = pkBlob(c.torn, c.w, c.h, r, c.seed);
+    const R = pkRng(c.seed + 3);
+    const mid = c.torn.map(([x, y], i) => [
+      ball[i][0] + (x - ball[i][0]) * 0.62 + (R() - 0.5) * 7,
+      ball[i][1] + (y - ball[i][1]) * 0.62 + (R() - 0.5) * 7,
+    ]);
+    const frames = [
+      { clipPath: pkPoly(ball), transform: `translate(${c.dx}px, ${c.dy}px) rotate(14deg) scale(.96)`, offset: 0 },
+      { clipPath: pkPoly(mid), transform: `translate(${c.dx * 0.25}px, ${c.dy * 0.25}px) rotate(-4deg) scale(1.01)`, offset: 0.5 },
+      { clipPath: pkPoly(c.torn), transform: "none", offset: 1 },
+    ];
+    const opts = { duration: reverse ? 520 : 1150, easing: reverse ? "cubic-bezier(.5,0,.75,0)" : "cubic-bezier(.3,.75,.3,1)", fill: "both" };
+    const crumple = c.clip.querySelector(".pk-crumple");
+    const lines = c.clip.querySelectorAll(".pk-clip > :not(.pk-creases, .pk-crumple)");
+    if (reverse) {
+      frames.reverse().forEach((f, i) => (f.offset = [0, 0.5, 1][i]));
+      crumple.animate({ opacity: [0, 1, 1] }, opts);
+      lines.forEach((el) => el.animate({ opacity: [1, 0.6, 0] }, opts));
+    } else {
+      crumple.animate({ opacity: [1, 0.85, 0] }, opts);
+      lines.forEach((el) => el.animate({ opacity: [0, 0.5, 1] }, opts));
+    }
+    return c.clip.animate(frames, opts);
   }
+
+  // اختيار جديد: (القصاصة الحالية تتكوّر أولاً) ← كرة تتمايل ← تنفرد قصاصة جديدة
+  function pickNow() {
+    if (!items.length) return;
+    busy = true;
+    areaSelect.disabled = true;
+    const winner = pickWinner();
+    const go = () => {
+      showBall();
+      later(1050, () => unfold(winner));
+    };
+    if (step === "clip" && current && !reduceMotion) {
+      sfx("crumple");
+      const anim = crumpleFrames(current, true);
+      anim.onfinish = go;
+    } else go();
+  }
+  function again() {
+    if (busy) return;
+    sfx("tap");
+    pickNow();
+  }
+
+  function setChip() {
+    chip.innerHTML = `${pkGlyph(section)}<span>${escapeHtml(labelOf[section])}</span>`;
+    chip.setAttribute("aria-label", `${t("picker_change")}: ${labelOf[section]}`);
+    chip.title = t("picker_change");
+  }
+
+  // عودة الأزرار للمركز بنقاط حبر خلفها
+  function trails() {
+    if (reduceMotion) return;
+    const center = root.querySelector(".pk-center");
+    const n = petals.length;
+    const made = [];
+    petals.forEach((_, i) => {
+      const a = (i / n) * Math.PI * 2 + 0.3;
+      [
+        [0.96, 0.11, 0.5, 40],
+        [0.8, 0.08, 0.32, 110],
+        [0.64, 0.055, 0.2, 180],
+      ].forEach(([k, s, o, d]) => {
+        const dot = document.createElement("i");
+        dot.className = "pk-trail";
+        dot.style.cssText = `--tx:${(Math.sin(a) * k).toFixed(3)};--ty:${(-Math.cos(a) * k).toFixed(3)};--s:calc(var(--p) * ${s});--o:${o};--d:${d + (n - 1 - i) * 22}ms`;
+        center.append(dot);
+        made.push(dot);
+      });
+    });
+    setTimeout(() => made.forEach((d) => d.remove()), 1200);
+  }
+
+  petals.forEach((b) => {
+    b.addEventListener("click", () => {
+      if (busy || step !== "wheel") return;
+      sfx("tap");
+      busy = true;
+      section = b.dataset.section;
+      b.classList.add("sel");
+      fillAreas();
+      applyPool();
+      setChip();
+      moon.setAttribute("aria-expanded", "false");
+      moon.removeAttribute("aria-label");
+      trails();
+      // الزر المختار يبقى أزرق لحظة ثم يعود مع البقية
+      later(120, pickNow);
+    });
+  });
+
+  chip.addEventListener("click", () => {
+    if (busy) return;
+    resultBox.replaceChildren();
+    current = null;
+    openWheel();
+  });
+
   function resetArea(msg) {
     showToast(msg);
     areaSelect.value = "";
     applyPool();
   }
   areaSelect.addEventListener("change", () => {
-    if (areaSelect.value !== "near") return applyPool();
+    if (areaSelect.value !== "near") {
+      applyPool();
+      return again();
+    }
     if (!navigator.geolocation) return resetArea(t("geolocation_unsupported"));
-    spinBtn.disabled = true;
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         if (areaSelect.value !== "near") return;
         const me = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        nearPool = SITE_DATA[section].items
+        nearPool = itemsFor(section)
           .map((it) => ({ it, near: nearestBranch(it, me) }))
           .filter((x) => x.near)
           .sort((a, b) => a.near.km - b.near.km)
@@ -749,47 +625,12 @@ function initRandomPicker() {
           .map((x) => x.it);
         applyPool();
         showToast(t("picker_area_near_done").replace("{n}", nearPool.length));
+        if (items.length) again();
       },
       () => resetArea(t("geolocation_denied")),
       { enableHighAccuracy: false, timeout: 10000 }
     );
   });
-  categoriesWrap.querySelectorAll(".picker-category").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (trip.isRunning()) return;
-      sfx("tap");
-      choose(btn);
-    });
-  });
-  // قانون هيك: الزر يشتغل من أول لحظة — المطاعم مختارة افتراضياً (أكثر قسم يُسأل عنه)
-  const preset =
-    categoriesWrap.querySelector('[data-section="restaurants"]') ||
-    categoriesWrap.querySelector(".picker-category");
 
-  // المركبة: يختارها الزائر بنفسه، وتنحفظ له
-  const vehicles = Object.keys(TRIP_VEHICLES);
-  function setVehicle(v) {
-    trip.setVehicle(v);
-    vehicleBtn.innerHTML = TRIP_VEHICLES[v].icon;
-    const label = `${t("picker_vehicle")}: ${t(`picker_vehicle_${v}`)}`;
-    vehicleBtn.setAttribute("aria-label", label);
-    vehicleBtn.title = label;
-  }
-  const saved = lsGet(TRIP_VEHICLE_KEY);
-  setVehicle(TRIP_VEHICLES[saved] ? saved : "train");
-  vehicleBtn.addEventListener("click", () => {
-    sfx("tap");
-    const current = stage.dataset.vehicle;
-    const next = vehicles[(vehicles.indexOf(current) + 1) % vehicles.length];
-    setVehicle(next);
-    lsSet(TRIP_VEHICLE_KEY, next);
-  });
-
-  if (preset) choose(preset);
-
-  spinBtn.addEventListener("click", () => {
-    sfx("tap");
-    stage.scrollIntoView({ block: "center", behavior: "smooth" });
-    trip.go();
-  });
+  setStep("moon");
 }

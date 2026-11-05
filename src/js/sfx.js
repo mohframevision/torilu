@@ -115,6 +115,13 @@
       paper(c, o, t, { dur: 0.05, from: 1800, to: 1300, q: 0.9, gain: 0.1, attack: 0.004, grain: 0.3 });
       bell(c, o, t, 0.03, 880, 0.045, 0.5);
     },
+    // ورقة تتكوّر بين الأصابع («اختار لي»): خمس طقطقات ورق قصيرة متقاربة، بلا نغمة
+    crumple(c, o, t) {
+      for (let i = 0; i < 5; i++) {
+        const f = 1300 + Math.random() * 1500;
+        paper(c, o, t, { at: i * 0.1 + Math.random() * 0.04, dur: 0.08 + Math.random() * 0.06, from: f, to: f * 0.7, q: 0.8, gain: 0.1 - i * 0.012, attack: 0.006, grain: 1 });
+      }
+    },
     // الجريدة تنفرد طيّتين (fold.js): خشخشتان أطول
     fold(c, o, t) {
       paper(c, o, t, { dur: 0.9, from: 1600, q: 0.6, gain: 0.07, attack: 0.12, hold: 0.6, grain: 1 });

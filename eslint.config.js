@@ -61,7 +61,7 @@ module.exports = [
     files: ["src/js/picker.js", "src/js/search.js", "src/js/home.js"],
     languageOptions: {
       globals: Object.fromEntries(
-        ["t", "itemTitle", "sectionLabel", "sfx", "tagLabel", "LINK_META", "buildActionsHtml", "wireItemActions", "showToast", "nearestBranch", "lsGet", "lsSet", "TOGGLE_ICON_SVG", "itemDesc", "escapeHtml", "safeUrl", "levenshtein"].map((n) => [n, "readonly"])
+        ["t", "itemTitle", "sectionLabel", "sfx", "tagLabel", "LINK_META", "buildActionsHtml", "wireItemActions", "showToast", "nearestBranch", "lsGet", "lsSet", "TOGGLE_ICON_SVG", "itemDesc", "itemHours", "escapeHtml", "safeUrl", "levenshtein"].map((n) => [n, "readonly"])
       ),
     },
   },

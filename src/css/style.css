@@ -2033,608 +2033,980 @@ a.photo-credit.card {
   font-weight: 700;
 }
 
-/* ===== اختار لي (اختيار عشوائي) ===== */
-/* شبكة خلايا متساوية (3 أعمدة = صفّين للأقسام الستة) بدل flex-wrap اللي كان
-   يعطي كل بطاقة عرض نصّها فتطلع صفوف بأعراض مختلفة */
-.picker-categories {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 10px 0 30px;
-}
-
-.picker-category {
+/* ===== «اختار لي»: قمر ← عجلة أقسام ← كرة جريدة ← قصاصة (picker.js) =====
+   خطوة الصفحة بـdata-step على .pk (moon / wheel / ball / clip)، والحركة كلها
+   transform/opacity بانتقالات CSS، عدا فرد القصاصة (clip-path بـWAAPI). المقاسات
+   متغيّرات لكل شاشة: --b القمر، --p زر القسم، --R نصف قطر العجلة، --ball الكرة. */
+.pk {
+  --b: 132px;
+  --p: 82px;
+  --R: 116px;
+  --ball: 220px;
+  --cy-moon: 48%;
+  --cy-wheel: 60%;
+  --cy-ball: 42%;
+  --prompt-top: 40px;
+  --ink: #1545a2;
+  --news: #f2ecdf;
+  --news-ink: #2a2f39;
+  /* كرة الجريدة وآثار التكسير (فاتح) */
+  --bl: rgb(178 166 142);
+  --bh: rgb(252 249 241);
+  --bprint: #26231f;
+  --bprint-op: 1;
+  --bshadow: #4a3c22;
+  --bshadow-op: 0.22;
+  --bcrease: rgb(92 76 46 / 0.32);
+  --bcrease-hi: rgb(255 255 255 / 0.75);
+  --bsh1: rgb(255 255 255 / 0.35);
+  --bsh2: rgb(60 47 23 / 0.38);
+  --cw: 0.16;
+  --ck: 0.045;
+  --ckf: #5a4826;
+  --cline: rgb(96 78 44 / 0.16);
+  --cline-hi: rgb(255 255 255 / 0.7);
+  --cfold: rgb(96 78 44 / 0.2);
+  --cfold-hi: rgb(255 255 255 / 0.85);
+  --cg1: rgb(255 255 255 / 0.3);
+  --cg2: rgb(107 84 38 / 0.1);
+  --crw: 0.55;
+  --crk: 0.16;
+  --clip-shadow: drop-shadow(0 18px 22px rgb(60 48 25 / 0.18)) drop-shadow(0 2px 3px rgb(60 48 25 / 0.12));
+  --pk-on: var(--ink);
+  --pk-on-text: #faf6ef;
+  position: relative;
+  min-height: var(--pk-h, calc(100svh - 141px));
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 18px 22px;
-  min-width: 110px;
-  border-radius: var(--radius);
-  border: 1px solid transparent;
-  box-shadow: var(--shadow-card);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-weight: 700;
-  font-size: 0.92rem;
-  cursor: pointer;
-  font-family: inherit;
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    box-shadow 0.18s ease;
+  justify-content: center;
+  padding: 24px 0;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
 }
-
-@media (max-width: 600px) {
-  .picker-category {
-    min-width: 0;
-    padding: 14px 6px;
-    font-size: 0.85rem;
+@media (min-width: 600px) {
+  .pk {
+    --b: 210px;
+    --p: 136px;
+    --R: 200px;
+    --ball: 340px;
+    --cy-moon: 48%;
+    --cy-wheel: 54%;
+    --cy-ball: 44%;
+    --prompt-top: 110px;
+  }
+}
+@media (min-width: 1100px) {
+  .pk {
+    --b: 196px;
+    --p: 124px;
+    --R: 182px;
+    --ball: 320px;
+    --cy-moon: 52%;
+    --cy-wheel: 57%;
+    --cy-ball: 44%;
+    --prompt-top: 64px;
+  }
+}
+/* شاشات عريضة قصيرة (لوحي بالعرض، نافذة منخفضة): عجلة أصغر لا تصطدم بالعنوان */
+@media (min-width: 600px) and (max-height: 820px) {
+  .pk {
+    --b: 168px;
+    --p: 108px;
+    --R: 158px;
+    --ball: 280px;
+    --cy-wheel: 58%;
+    --prompt-top: 40px;
   }
 }
 
-.picker-area {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: -14px auto 22px;
-  font-weight: 700;
+.pk-prompt {
+  position: absolute;
+  top: var(--prompt-top);
+  inset-inline: 0;
+  text-align: center;
+  transition:
+    opacity 0.3s var(--ease),
+    visibility 0.3s;
+}
+.pk-prompt h1 {
+  margin: 0;
+  font: 700 clamp(2.1rem, 6vw, 3.9rem) / 1.35 var(--font-serif);
+  color: var(--color-text);
+}
+.pk-prompt p {
+  margin: 6px 0 0;
+  font-size: clamp(0.95rem, 1.6vw, 1.07rem);
+  color: var(--color-text-muted);
+}
+.pk-prompt.swap {
+  animation: pkFade 0.35s var(--ease) both;
+}
+.pk:is([data-step="ball"], [data-step="clip"]) .pk-prompt {
+  opacity: 0;
+  visibility: hidden;
 }
 
-.picker-area select {
-  min-height: 44px;
-  padding: 0 14px;
-  border-radius: var(--radius);
-  /* --color-border-strong بدل --color-border العادي: هذا الحد هو الوسيلة
-     الوحيدة لتمييز حدود القائمة بالحالة العادية (بلا تركيز) — WCAG 1.4.11 */
-  border: 1px solid var(--color-border-strong);
-  box-shadow: var(--shadow-card);
-  background: var(--color-surface);
+.pk-center {
+  position: absolute;
+  left: 50%;
+  top: var(--cy-moon);
+  width: 0;
+  height: 0;
+  transition: top 0.5s var(--ease);
+}
+.pk[data-step="wheel"] .pk-center {
+  top: var(--cy-wheel);
+}
+.pk:is([data-step="ball"], [data-step="clip"]) .pk-center {
+  top: var(--cy-ball);
+}
+
+/* القمر: زر حبر أزرق ثابت اللون بالوضعين، وحوله حلقتا نقاط */
+.pk-moon {
+  position: absolute;
+  left: calc(var(--b) / -2);
+  top: calc(var(--b) / -2);
+  width: var(--b);
+  height: var(--b);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
   color: var(--color-text);
   font: inherit;
-  font-weight: 600;
-  max-width: 70vw;
-}
-
-.picker-category-icon {
-  font-size: 1.8rem;
-}
-
-.picker-category:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.picker-category.active {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
-  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
-}
-
-.picker-spin-btn {
-  font-size: 1.15rem;
-  padding: 16px 42px;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--color-primary) 35%, transparent);
+  cursor: pointer;
+  z-index: 2;
   transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
-    background 0.18s ease;
+    transform 0.45s cubic-bezier(0.34, 1.4, 0.5, 1),
+    opacity 0.25s,
+    visibility 0.25s;
 }
-
-.picker-spin-btn:not(:disabled):hover {
-  transform: translateY(-2px) scale(1.03);
+.pk-moon:focus-visible {
+  outline: none;
 }
-
-.picker-spin-btn:not(:disabled):active {
-  transform: scale(0.96);
+.pk-moon:focus-visible .pk-moon-disc {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 6px;
 }
-
-.picker-spin-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* ===== "اختار لي": رحلة فوق البحر (picker.js) =====
-   المشهد كله داخل .picker-stage، وهو container: مقاسات الشبابيك بـcqw/cqh فتتبع حجم
-   المشهد لا الشاشة. الحركة كلها transform من JS؛ هنا الألوان والأشكال بس. ألوان المنظر
-   ثابتة (منظر لا واجهة)، والوضع الداكن = نفس المكان بالليل (.trip-night). */
-.picker-stage {
-  --frame: #16362c;
-  --rim: #24503f;
-  --sky1: #7fc3e8;
-  --sky2: #bfe3f2;
-  --sky3: #fde7c8;
-  --sun: #fffbea;
-  --sunA: rgba(255, 244, 214, 0.7);
-  --sunB: rgba(255, 226, 180, 0.2);
-  --sea1: #3d9cc4;
-  --sea2: #1f6f99;
-  --sea3: #15567a;
-  --isl: #6a9cae;
-  --wv1: #8fd0ea;
-  --wv2: #bfe6f5;
-  --cl: #fff;
-  --cl1: #f4f8fb;
-  --cl2: #dfe9f1;
-  /* halation: الضوء "ينزف" بلون أحمر برتقالي على الحواف الداكنة — ظلال ثابتة */
-  --halo: rgba(255, 120, 70, 0.28);
-  position: relative;
-  container-type: size;
-  height: clamp(460px, calc(74vh / var(--page-zoom, 1)), 780px);
-  margin-bottom: 40px;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  isolation: isolate;
-  background: var(--frame);
-}
-
-.picker-stage.trip-night {
-  --frame: #0c1d18;
-  --rim: #1d3f33;
-  --sky1: #0b1630;
-  --sky2: #1b2c52;
-  --sky3: #3a3f6b;
-  --sea1: #18385a;
-  --sea2: #0f2742;
-  --sea3: #0a1b30;
-  --isl: #26364f;
-  --wv1: #2f5b80;
-  --wv2: #4a7aa0;
-  --halo: rgba(255, 140, 110, 0.14);
-}
-
-/* أشكال الشبابيك وألوان إطاراتها: كل مركبة بفتحة مختلفة (border-radius بس، بلا صور) */
-.picker-stage[data-vehicle="car"] {
-  --frame: #23262b;
-  --rim: #3a3f46;
-}
-.picker-stage[data-vehicle="boat"] {
-  --frame: #1d3557;
-  --rim: #c9a24a;
-  --sx: calc(50% - min(86cqw, 72cqh) * 0.22);
-  --sy: calc(46% - min(86cqw, 72cqh) * 0.28);
-}
-.picker-stage[data-vehicle="plane"] {
-  --frame: #dfe3e8;
-  --rim: #c3c9d0;
-  --sky1: #4f9fd8;
-  --sky2: #9fd0f0;
-  --sky3: #e6f3fb;
-  --sx: calc(50% - min(62cqw, 50cqh) * 0.14);
-  --sy: calc(46% - 70cqh * 0.3);
-}
-.picker-stage.trip-night[data-vehicle="car"] {
-  --frame: #121417;
-  --rim: #2a2e33;
-}
-.picker-stage.trip-night[data-vehicle="boat"] {
-  --frame: #0f1d33;
-  --rim: #8c7136;
-}
-.picker-stage.trip-night[data-vehicle="plane"] {
-  --frame: #2a2e34;
-  --rim: #3a4048;
-  --sky1: #070f24;
-  --sky2: #15254a;
-  --sky3: #2a3560;
-  --cl: #4a5672;
-  --cl1: #39445e;
-  --cl2: #232c42;
-}
-
-.trip-scene,
-.trip-view {
+.pk-moon-disc {
   position: absolute;
   inset: 0;
-}
-.trip-scene {
-  overflow: hidden;
-}
-.trip-view {
-  inset: -3%;
-  will-change: transform;
-}
-
-.trip-sky {
-  position: absolute;
-  inset: 0 0 38% 0;
-  background: linear-gradient(var(--sky1), var(--sky2) 70%, var(--sky3));
-}
-.trip-sea {
-  position: absolute;
-  inset: 62% 0 0 0;
-  background: linear-gradient(var(--sea1), var(--sea2) 60%, var(--sea3));
-}
-
-/* الشمس ناعمة بلا قرص واضح؛ مركزها محسوب على فتحة كل شباك فتبان داخلها دايماً */
-.trip-sun {
-  position: absolute;
-  left: var(--sx, 24%);
-  top: var(--sy, 20%);
-  translate: -50% -50%;
-  width: 180px;
-  height: 180px;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--sun) 0%, var(--sun) 8%, var(--sunA) 20%, var(--sunB) 40%, rgba(255, 220, 170, 0) 70%);
+  background: var(--ink);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.25) inset,
+    0 -10px 24px rgb(0 0 0 / 0.18) inset,
+    0 22px 44px -16px rgb(21 69 162 / 0.55),
+    0 4px 10px -4px rgb(21 69 162 / 0.4);
+  transition:
+    background-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    transform 0.25s var(--ease);
 }
-.trip-night .trip-sun {
-  width: 62px;
-  height: 62px;
-  background: var(--trip-moon) center / 100% 100% no-repeat;
-  box-shadow: 0 0 30px 5px rgba(205, 215, 255, 0.14);
+.pk-moon:hover .pk-moon-disc {
+  transform: scale(1.03);
+}
+.pk-moon:active .pk-moon-disc {
+  transform: scale(0.97);
+}
+.pk-moon-disc img {
+  width: 74%;
+  height: 74%;
+  transition:
+    opacity 0.25s,
+    transform 0.45s var(--ease);
+}
+/* × يُرسم بالـCSS فوق القرص: يظهر حين يصير القمر زر إغلاق */
+.pk-moon-disc::before,
+.pk-moon-disc::after {
+  content: "";
+  position: absolute;
+  left: 33%;
+  top: calc(50% - 2px);
+  width: 34%;
+  height: 4px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity 0.2s,
+    transform 0.4s var(--ease);
+}
+.pk-moon-label {
+  position: absolute;
+  top: calc(100% + 34px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 1.07rem;
+  color: var(--color-primary);
+  transition: opacity 0.2s;
+}
+.pk-halo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--b) * 1.9);
+  height: calc(var(--b) * 1.9);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  color: var(--color-primary);
+  transition:
+    opacity 0.3s,
+    transform 0.5s var(--ease);
+}
+.pk[data-step="wheel"] .pk-moon {
+  transform: scale(0.52);
+}
+.pk[data-step="wheel"] .pk-moon-disc {
+  background: var(--news);
+  box-shadow:
+    inset 0 0 0 2px rgb(26 31 41 / 0.12),
+    0 8px 20px -10px rgb(26 31 41 / 0.3);
+}
+.pk[data-step="wheel"] .pk-moon-disc img {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+.pk[data-step="wheel"] .pk-moon-disc::before {
+  opacity: 1;
+  transform: rotate(45deg);
+}
+.pk[data-step="wheel"] .pk-moon-disc::after {
+  opacity: 1;
+  transform: rotate(-45deg);
+}
+.pk[data-step="wheel"] :is(.pk-moon-label, .pk-halo) {
+  opacity: 0;
+}
+.pk[data-step="wheel"] .pk-halo {
+  transform: translate(-50%, -50%) scale(0.6);
+}
+.pk:is([data-step="ball"], [data-step="clip"]) .pk-moon {
+  transform: scale(0);
+  opacity: 0;
+  visibility: hidden;
 }
 
-/* الطبقات المتحركة: شريط عريض يتحرك بـtransform بس (طبقة GPU، بلا إعادة رسم) */
-.trip-band {
+/* العجلة: الأزرار تحت القمر وهي مغلقة، وتتفتّح لمواضعها بتتابع نابض هادئ */
+.pk-wheel {
   position: absolute;
   left: 0;
-  width: 200%;
-  will-change: transform;
-}
-.trip-band svg {
-  float: left;
-  width: 50%;
-  height: 100%;
-}
-.trip-islands {
-  top: calc(62% - 34px);
-  height: 36px;
-}
-.trip-waves1 {
-  top: 64%;
-  height: 40px;
-  opacity: 0.55;
-}
-.trip-waves2 {
-  top: 76%;
-  height: 60px;
-  opacity: 0.45;
-}
-.trip-fg {
   top: 0;
-  height: 100%;
-  z-index: 5;
-  display: none;
 }
-.picker-stage:is([data-vehicle="train"], [data-vehicle="car"]) .trip-fg {
-  display: block;
-}
-
-.trip-cards,
-.trip-lane-shadows,
-.trip-lane {
+.pk-ring {
   position: absolute;
-  inset: 0;
-}
-.trip-lane .off {
-  display: none;
-}
-/* كل حارة (طبقة عمق) تتحرك كوحدة وحدة؛ البطاقات ثابتة داخلها */
-.trip-lane {
-  will-change: transform;
-}
-.trip-card {
-  position: absolute;
-  top: 0;
   left: 0;
-  width: 170px;
-  height: 104px;
-  margin: -52px 0 0 -85px;
+  top: 0;
+  width: calc(var(--R) * 2.1);
+  height: calc(var(--R) * 2.1);
+  color: var(--color-primary);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  transition:
+    opacity 0.3s,
+    transform 0.5s var(--ease);
+}
+.pk[data-step="wheel"] .pk-ring {
+  opacity: 0.7;
+  transform: translate(-50%, -50%) scale(1);
+  transition-delay: 0.12s;
+}
+.pk-petal {
+  --knock: var(--color-surface);
+  position: absolute;
+  left: calc(var(--p) / -2);
+  top: calc(var(--p) / -2);
+  width: var(--p);
+  height: var(--p);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  padding: 8px 12px;
-  border-radius: var(--radius);
-  color: #fff;
-  text-align: center;
-  background: linear-gradient(135deg, oklch(0.56 0.12 var(--h)), oklch(0.44 0.1 calc(var(--h) + 40)));
+  gap: 1px;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-family: inherit;
+  cursor: pointer;
   box-shadow:
-    0 10px 24px rgba(0, 40, 60, 0.25),
-    0 0 16px 2px var(--halo);
-  /* التمايل: نفس sin(t/900) بخاصية translate المستقلة — على المعالج الرسومي بلا JS */
-  animation: tripBob 2827ms cubic-bezier(0.37, 0, 0.63, 1) infinite alternate both;
+    0 0 0 1px rgb(26 31 41 / 0.07),
+    0 10px 24px -10px rgb(26 31 41 / 0.28),
+    0 2px 4px rgb(26 31 41 / 0.05);
+  opacity: 0;
+  transform: scale(0.3);
+  transition:
+    transform 0.34s cubic-bezier(0.5, 0, 0.75, 0) calc((var(--n) - 1 - var(--i)) * 22ms),
+    opacity 0.22s calc((var(--n) - 1 - var(--i)) * 22ms + 0.1s),
+    background-color 0.2s,
+    box-shadow 0.2s;
 }
-/* قيم ثابتة لكل حارة (7px × عمقها): var() داخل keyframes يمنع تشغيلها على المعالج
-   الرسومي ويرجعها للخيط الرئيسي كل إطار */
-.trip-lane[data-z="0"] .trip-card {
-  animation-name: tripBob0;
+.pk[data-step="wheel"] .pk-petal {
+  opacity: 1;
+  transform: translate(calc(var(--R) * var(--x)), calc(var(--R) * var(--y)));
+  transition:
+    transform 0.6s cubic-bezier(0.34, 1.42, 0.5, 1) calc(var(--i) * 42ms + 30ms),
+    opacity 0.2s calc(var(--i) * 42ms + 30ms),
+    background-color 0.2s,
+    box-shadow 0.2s;
 }
-.trip-lane[data-z="1"] .trip-card {
-  animation-name: tripBob1;
+.pk-petal:hover {
+  box-shadow:
+    0 0 0 1px rgb(21 69 162 / 0.25),
+    0 14px 28px -12px rgb(26 31 41 / 0.32);
 }
-@keyframes tripBob {
-  from {
-    translate: 0 -7px;
-  }
-  to {
-    translate: 0 7px;
-  }
+.pk-petal:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
 }
-@keyframes tripBob1 {
-  from {
-    translate: 0 -4.34px;
-  }
-  to {
-    translate: 0 4.34px;
-  }
+.pk-petal.sel {
+  --knock: var(--pk-on);
+  background: var(--pk-on);
+  color: var(--pk-on-text);
+  box-shadow:
+    0 0 0 5px rgb(21 69 162 / 0.14),
+    0 14px 28px -12px rgb(21 69 162 / 0.6);
 }
-@keyframes tripBob0 {
-  from {
-    translate: 0 -2.45px;
-  }
-  to {
-    translate: 0 2.45px;
-  }
+.pk-glyph svg {
+  display: block;
+  width: calc(var(--p) * 0.4);
+  height: calc(var(--p) * 0.4);
 }
-/* أثر السرعة: ذيل شفاف خلف البطاقة بدل filter: blur */
-.trip-card::after {
-  content: "";
+.pk-petal-label {
+  max-width: calc(var(--p) * 0.84);
+  font-weight: 600;
+  font-size: calc(var(--p) * 0.145);
+  line-height: 1.2;
+  text-align: center;
+  color: var(--color-text);
+}
+.pk-petal.sel .pk-petal-label {
+  color: var(--pk-on-text);
+}
+.pk-trail {
   position: absolute;
-  inset: 38% -90% 38% 96%;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-  opacity: var(--trail, 0);
-}
-.trip-card-icon {
-  font-size: 30px;
-  line-height: 1.1;
-}
-.trip-card-title {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 15px;
-  font-weight: 800;
-  line-height: 1.25;
-}
-/* ظل البطاقة على الماء: بيضاوي ثابت، أرخص من أي blur */
-.trip-shadow {
-  position: absolute;
-  top: 0;
   left: 0;
-  width: 120px;
-  height: 14px;
-  margin: -7px 0 0 -60px;
+  top: 0;
+  width: var(--s);
+  height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
   border-radius: 50%;
-  background: radial-gradient(rgba(0, 30, 50, 0.35), rgba(0, 30, 50, 0) 70%);
+  background: var(--color-primary);
+  opacity: 0;
+  transform: translate(calc(var(--R) * var(--tx)), calc(var(--R) * var(--ty)));
+  animation: pkTrail 0.8s var(--ease) var(--d) both;
+  pointer-events: none;
+}
+@keyframes pkTrail {
+  20% {
+    opacity: var(--o);
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
-/* مشهد الطيارة: غيوم وبساط غيوم بدل البحر */
-.trip-clouds,
-.trip-carpet {
+/* كرة ورق الجريدة: تنكوّر من المركز ثم تتمايل حتى تنفرد */
+.pk-ball {
   position: absolute;
-  inset: 0;
-  display: none;
+  left: calc(var(--ball) / -2);
+  top: calc(var(--ball) / -2);
+  width: var(--ball);
+  height: var(--ball);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.2);
+  transition:
+    opacity 0.18s,
+    transform 0.25s var(--ease);
 }
-.trip-carpet {
-  inset: 62% 0 0 0;
-  background: linear-gradient(var(--cl1) 45%, var(--cl2));
+.pk[data-step="ball"] .pk-ball {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.2s 0.2s,
+    transform 0.55s cubic-bezier(0.34, 1.5, 0.5, 1) 0.2s;
 }
-.picker-stage[data-vehicle="plane"] :is(.trip-clouds, .trip-carpet) {
+.pk-ball svg {
   display: block;
-}
-.picker-stage[data-vehicle="plane"] :is(.trip-islands, .trip-sea, .trip-waves1, .trip-waves2, .trip-shadow) {
-  display: none;
-}
-.trip-cloud {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100px;
-  margin: -50px 0 0 -110px;
-  will-change: transform;
-}
-.trip-cloud svg {
   width: 100%;
   height: 100%;
   overflow: visible;
 }
-/* القريبة بنفس لون البساط وبلا ظل، فتذوب فيه وتكسّر حافته المستقيمة */
-.trip-cnear .trip-cloud svg > ellipse {
+.pk[data-step="ball"] .pk-ball-body {
+  transform-box: fill-box;
+  transform-origin: 50% 60%;
+  animation: pkWobble 0.45s ease-in-out 0.3s infinite alternate;
+}
+@keyframes pkWobble {
+  0% {
+    transform: rotate(-6deg) translateY(1px);
+  }
+  100% {
+    transform: rotate(6deg) translateY(-3px);
+  }
+}
+.pk-searching {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(var(--cy-ball) + var(--ball) / 2 + 18px);
+  margin: 0;
+  text-align: center;
+  font: 700 clamp(1.2rem, 2.4vw, 1.65rem) / 1.4 var(--font-serif);
+  color: var(--color-text);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
+}
+.pk[data-step="ball"] .pk-searching {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.35s;
+}
+
+/* تحت النتيجة: رقاقة القسم (ترجع للعجلة) ومنطقة الاختيار */
+.pk-tools {
   display: none;
-}
-.trip-cnear .trip-cloud g {
-  fill: var(--cl1);
-}
-
-/* جدار المركبة: SVG بحجم المشهد فيه فتحة بشكل الشباك بالضبط (picker.js يرسمها من
-   border-radius الشباك نفسه). كان box-shadow بانتشار 2000px = طبقة ~4300×4450px */
-.trip-frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  fill: var(--frame);
-  will-change: transform, opacity;
-}
-
-/* إطار الشباك: الحافة والظل الداخلي (inset، ما يكبّر الطبقة) */
-.trip-window {
-  position: absolute;
-  inset: 7% 5% 17% 5%;
-  border-radius: 42px;
-  pointer-events: none;
-  box-shadow:
-    inset 0 0 0 10px var(--rim),
-    inset 0 8px 30px rgba(0, 0, 0, 0.25);
-  will-change: transform, opacity;
-}
-.trip-window::before,
-.trip-window::after {
-  content: "";
-  position: absolute;
-  border-radius: inherit;
-}
-.trip-window::before {
-  inset: 10px;
-  background: linear-gradient(115deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 35%);
-}
-.trip-window::after {
-  inset: 0;
-  box-shadow: 0 0 26px 4px var(--halo);
-}
-.picker-stage[data-vehicle="car"] .trip-window {
-  inset: 9% 6% 19% 6%;
-  border-radius: 40px 160px 26px 26px;
-}
-.picker-stage[data-vehicle="boat"] .trip-window {
-  inset: auto;
-  left: 50%;
-  top: 46%;
-  width: min(86cqw, 72cqh);
-  aspect-ratio: 1;
-  translate: -50% -50%;
-  border-radius: 50%;
-}
-.picker-stage[data-vehicle="plane"] .trip-window {
-  inset: auto;
-  left: 50%;
-  top: 46%;
-  width: min(62cqw, 50cqh);
-  height: 70cqh;
-  translate: -50% -50%;
-  border-radius: 46% / 32%;
-}
-
-/* حبيبات الفيلم: بلاطة ضجيج تتولد مرة وحدة، وطبقتها تنط بخطوات (steps) — بلا
-   mix-blend-mode ولا إعادة رسم، فتكلفتها شبه صفر حتى على الأجهزة القديمة */
-.trip-grain {
-  position: absolute;
-  inset: -128px;
-  z-index: 20;
-  pointer-events: none;
-  opacity: 0.06;
-  background-image: var(--trip-grain);
-  animation: tripGrain 0.5s steps(1) infinite;
-  will-change: transform;
-}
-@keyframes tripGrain {
-  25% {
-    transform: translate(-37px, 22px);
-  }
-  50% {
-    transform: translate(19px, -41px);
-  }
-  75% {
-    transform: translate(-53px, -11px);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .trip-grain,
-  .trip-card {
-    animation: none;
-  }
-}
-
-.trip-bar {
-  -webkit-tap-highlight-color: transparent;
-  position: absolute;
-  inset: auto 0 0 0;
-  z-index: 21;
-  height: 15%;
-  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
 }
-.trip-bar .picker-spin-btn {
-  padding: 12px 34px;
-  font-size: 1.05rem;
+.pk[data-step="ball"] .pk-tools {
+  display: flex;
+  position: absolute;
+  inset-inline: 0;
+  top: calc(var(--cy-ball) + var(--ball) / 2 + 64px);
+  pointer-events: none;
+  animation: pkFade 0.3s 0.4s both;
 }
-.trip-round {
-  width: 48px;
-  height: 48px;
-  flex: none;
-  border-radius: 50%;
-  border: 2px solid var(--green-500);
-  background: rgba(255, 255, 255, 0.12);
-  font-size: 22px;
-  line-height: 1;
+.pk[data-step="clip"] .pk-tools {
+  display: flex;
+  margin-top: 22px;
+  animation: pkFadeIn 0.35s 0.8s both;
+}
+.pk-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
 }
-.trip-round:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.pk-chip svg {
+  width: 18px;
+  height: 18px;
 }
-.trip-round:focus-visible {
-  outline: 3px solid #fde7c8;
-  outline-offset: 3px;
+.pk-area {
+  min-height: 34px;
+  max-width: 100%;
+  padding: 0 4px;
+  border: 0;
+  border-bottom: 1px dashed var(--color-border-strong);
+  border-radius: 0;
+  background: none;
+  color: var(--color-text-muted);
+  font: inherit;
+  cursor: pointer;
 }
-
-/* النتيجة: بطاقة وحدة بلون البطاقة الفائزة، والأزرار بعرضها */
-.trip-result {
-  position: absolute;
-  left: 50%;
-  top: 44%;
-  z-index: 22;
-  width: min(380px, calc(100% - 32px));
-  translate: -50% -50%;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
+.pk-area option {
   background: var(--color-surface);
   color: var(--color-text);
-  box-shadow: 0 30px 70px rgba(0, 30, 50, 0.35);
 }
-.trip-result-top {
-  padding: 20px 18px 14px;
-  text-align: center;
-  color: #fff;
-  background: linear-gradient(135deg, oklch(0.56 0.12 var(--h)), oklch(0.44 0.1 calc(var(--h) + 40)));
+.pk-chip:focus-visible,
+.pk-area:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
-.trip-result-icon {
-  font-size: 52px;
-  line-height: 1.1;
+
+/* القصاصة: ورقة جريدة بحافة ممزقة وآثار تكسير خفيفة */
+.pk-result {
+  display: none;
+  width: 100%;
 }
-.trip-result-top h2 {
-  margin: 4px 0 0;
-  font-size: 1.45rem;
-  text-wrap: balance;
+.pk[data-step="clip"] .pk-result {
+  display: block;
 }
-.trip-result-meta {
-  margin: 12px 18px 0;
-  text-align: center;
+.pk-clipwrap {
+  width: min(340px, 100%);
+  margin: 0 auto;
+  transform: rotate(-1.2deg);
+  filter: var(--clip-shadow);
+}
+.pk-clip {
+  position: relative;
+  padding: 22px 24px;
+  background: var(--news);
+  color: var(--color-text);
+  overflow: hidden;
+}
+.pk-clip > :not(.pk-creases, .pk-crumple) {
+  position: relative;
+  z-index: 2;
+}
+.pk-creases,
+.pk-crumple {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.pk-creases svg,
+.pk-crumple svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pk-crumple {
+  z-index: 3;
+  opacity: 0;
+  --cw: var(--crw);
+  --ck: var(--crk);
+}
+.pk-cw {
+  fill: #fff;
+  opacity: var(--cw);
+}
+.pk-ck {
+  fill: var(--ckf);
+  opacity: var(--ck);
+}
+.pk-cl {
+  fill: none;
+  stroke: var(--cline);
+  stroke-width: 0.9;
+}
+.pk-cl.hi {
+  stroke: var(--cline-hi);
+}
+.pk-cf {
+  fill: none;
+  stroke: var(--cfold);
+  stroke-width: 1.1;
+}
+.pk-cf.hi {
+  stroke: var(--cfold-hi);
+  stroke-width: 1.4;
+}
+.pk-mast {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 3px double color-mix(in srgb, var(--color-text) 75%, transparent);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+.pk-logo {
+  order: -1;
+  font: 700 1.4rem/1 var(--font-serif);
+  color: var(--color-text);
+}
+.pk-logo i {
+  font-style: normal;
+  color: var(--color-primary);
+}
+.pk-mast-date {
+  display: none;
+}
+.pk-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 4px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--color-primary);
+}
+.pk-kicker i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.pk-name {
+  margin: 0;
+  padding-top: 0.12em;
+  font: 700 2.85rem/1.15 var(--font-serif);
+  overflow-wrap: anywhere;
+}
+.pk-name:focus {
+  outline: none;
+}
+.pk-body {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in srgb, var(--color-text) 35%, transparent);
+  display: flex;
+  flex-direction: column;
+}
+.pk-lead {
+  order: 2;
+  margin: 8px 0 0;
+  font-size: 1.03rem;
+  line-height: 1.85;
+  color: var(--news-ink);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+.pk-facts {
+  margin: 0;
+}
+.pk-facts dt {
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--color-text-muted);
 }
-.trip-result-actions {
+.pk-facts dd {
+  margin: 0;
+  font: 700 1.2rem/1.4 var(--font-serif);
+}
+/* الجوال: سطر الدوام فقط (المنطقة والقسم بالسطر الأزرق فوق الاسم) */
+.pk-facts > div:not(.pk-f-hours) {
+  display: none;
+}
+.pk-f-hours dt {
+  display: none;
+}
+.pk-f-hours dd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.pk-f-hours dd svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+.pk-acts {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  padding: 14px 18px 10px;
-}
-.trip-result-actions .btn {
-  flex: 1 1 40%;
   justify-content: center;
-  padding-inline: 12px;
-  white-space: nowrap;
+  gap: 4px 26px;
+  margin-top: 20px;
+  padding-top: 18px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-primary) 55%, transparent) 1.1px, transparent 1.6px) 0 0 / 8px 6px repeat-x;
 }
-.trip-result-actions .btn.secondary {
-  background: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
+.pk-go {
+  flex: 1 1 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 30px;
+  border-radius: var(--radius-pill);
+  background: var(--pk-on);
+  color: var(--pk-on-text);
+  font-weight: 700;
+  font-size: 1.07rem;
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.2) inset,
+    0 12px 22px -12px rgb(21 69 162 / 0.7);
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s;
 }
-.trip-again {
-  -webkit-tap-highlight-color: transparent;
-  display: block;
-  margin: 0 auto 14px;
-  padding: 6px 12px;
+.pk-go:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.2) inset,
+    0 16px 26px -12px rgb(21 69 162 / 0.75);
+}
+.pk-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 4px;
   border: 0;
   background: none;
-  font: inherit;
-  font-weight: 700;
-  color: var(--color-primary);
-  text-decoration: underline;
+  color: var(--color-text);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.92rem;
   cursor: pointer;
+}
+.pk-sub:hover {
+  color: var(--color-primary);
+}
+.pk-go svg,
+.pk-sub svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+.pk-go:focus-visible,
+.pk-sub:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* لوحي/شاشة طولية: صف من ثلاث حقائق تحت الاسم */
+@media (min-width: 600px) {
+  .pk-clipwrap {
+    width: min(700px, 100%);
+    transform: rotate(-1deg);
+  }
+  .pk-clip {
+    padding: 36px 48px 40px;
+  }
+  .pk-mast {
+    font-size: 0.85rem;
+  }
+  .pk-logo {
+    font-size: 1.75rem;
+  }
+  .pk-mast-date {
+    display: inline;
+  }
+  .pk-mast-pick {
+    order: 1;
+  }
+  .pk-kicker {
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+  }
+  .pk-name {
+    font-size: 4.75rem;
+  }
+  .pk-body {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .pk-facts {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    border-block: 1px solid color-mix(in srgb, var(--color-text) 25%, transparent);
+  }
+  .pk-facts > div,
+  .pk-facts > div:not(.pk-f-hours) {
+    display: block;
+    padding: 12px 0;
+  }
+  .pk-facts > div + div {
+    border-inline-start: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+    padding-inline-start: 18px;
+  }
+  .pk-f-hours dt {
+    display: block;
+  }
+  .pk-f-hours dd {
+    display: block;
+    font: 700 1.2rem/1.4 var(--font-serif);
+  }
+  .pk-f-hours dd svg {
+    display: none;
+  }
+  .pk-lead {
+    margin-top: 20px;
+    font-size: 1.15rem;
+  }
+  .pk-acts {
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 26px;
+  }
+  .pk-go {
+    flex: 0 0 auto;
+  }
+}
+/* الشاشة العريضة: جريدة — الوصف بعمود والحقائق بعمود */
+@media (min-width: 1100px) {
+  .pk-clipwrap {
+    width: min(900px, 100%);
+    transform: rotate(-0.8deg);
+  }
+  .pk-clip {
+    padding: 42px 64px 44px;
+  }
+  .pk-mast {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    font-size: 0.88rem;
+  }
+  .pk-logo {
+    order: 0;
+    font-size: 2.1rem;
+  }
+  .pk-mast-pick {
+    order: -1;
+  }
+  .pk-mast-date {
+    order: 1;
+    text-align: end;
+  }
+  .pk-kicker {
+    font-size: 0.94rem;
+    margin: 30px 0 14px;
+  }
+  .pk-name {
+    font-size: 5.75rem;
+    line-height: 1.1;
+  }
+  .pk-body {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 44px;
+    margin-top: 26px;
+    padding-top: 26px;
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 35%, transparent);
+  }
+  .pk-lead {
+    order: 0;
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.9;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+  }
+  .pk-facts {
+    display: grid;
+    grid-auto-flow: row;
+    align-content: start;
+    gap: 14px;
+    border-block: 0;
+    border-inline-start: 1px solid color-mix(in srgb, var(--color-text) 30%, transparent);
+    padding-inline-start: 28px;
+  }
+  .pk-facts > div,
+  .pk-facts > div:not(.pk-f-hours),
+  .pk-facts > div + div {
+    padding: 0;
+    border: 0;
+  }
+  .pk-facts dd,
+  .pk-f-hours dd {
+    font-size: 1.4rem;
+  }
+  .pk-acts {
+    gap: 26px;
+    margin-top: 34px;
+    padding-top: 26px;
+    background: none;
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+  }
+  .pk-go {
+    min-height: 58px;
+    padding: 0 34px;
+    font-size: 1.12rem;
+  }
+  .pk-sub {
+    font-size: 1rem;
+  }
+}
+
+@keyframes pkFade {
+  from {
+    opacity: 0;
+  }
+}
+/* اسم ثانٍ لنفس الحركة: تبديل الاسم يعيد تشغيلها حين تنتقل الأدوات من تحت الكرة لتحت القصاصة */
+@keyframes pkFadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+/* الوضع الداكن: ورق ليلي، وآثار تكسير أخف من الفاتح */
+:root[data-theme="dark"] .pk {
+  --news: #1c1f27;
+  --news-ink: #d6d2ca;
+  --bl: rgb(52 56 66);
+  --bh: rgb(118 122 132);
+  --bprint: #d4d7de;
+  --bprint-op: 0.85;
+  --bshadow: #000;
+  --bshadow-op: 0.7;
+  --bcrease: rgb(0 0 0 / 0.45);
+  --bcrease-hi: rgb(255 255 255 / 0.12);
+  --bsh1: rgb(255 255 255 / 0.06);
+  --bsh2: rgb(0 0 0 / 0.55);
+  --cw: 0.02;
+  --ck: 0.1;
+  --ckf: #000;
+  --cline: rgb(0 0 0 / 0.25);
+  --cline-hi: rgb(255 255 255 / 0.03);
+  --cfold: rgb(0 0 0 / 0.3);
+  --cfold-hi: rgb(255 255 255 / 0.04);
+  --cg1: rgb(255 255 255 / 0.02);
+  --cg2: rgb(0 0 0 / 0.15);
+  --crw: 0.06;
+  --crk: 0.32;
+  --clip-shadow: drop-shadow(0 22px 30px rgb(0 0 0 / 0.6)) drop-shadow(0 0 1px rgb(255 255 255 / 0.08));
+  --pk-on: var(--blue-300);
+  --pk-on-text: #0d0f15;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pk {
+    --news: #1c1f27;
+    --news-ink: #d6d2ca;
+    --bl: rgb(52 56 66);
+    --bh: rgb(118 122 132);
+    --bprint: #d4d7de;
+    --bprint-op: 0.85;
+    --bshadow: #000;
+    --bshadow-op: 0.7;
+    --bcrease: rgb(0 0 0 / 0.45);
+    --bcrease-hi: rgb(255 255 255 / 0.12);
+    --bsh1: rgb(255 255 255 / 0.06);
+    --bsh2: rgb(0 0 0 / 0.55);
+    --cw: 0.02;
+    --ck: 0.1;
+    --ckf: #000;
+    --cline: rgb(0 0 0 / 0.25);
+    --cline-hi: rgb(255 255 255 / 0.03);
+    --cfold: rgb(0 0 0 / 0.3);
+    --cfold-hi: rgb(255 255 255 / 0.04);
+    --cg1: rgb(255 255 255 / 0.02);
+    --cg2: rgb(0 0 0 / 0.15);
+    --crw: 0.06;
+    --crk: 0.32;
+    --clip-shadow: drop-shadow(0 22px 30px rgb(0 0 0 / 0.6)) drop-shadow(0 0 1px rgb(255 255 255 / 0.08));
+    --pk-on: var(--blue-300);
+    --pk-on-text: #0d0f15;
+  }
+}
+
+/* حركة مخففة: تلاشٍ بسيط بلا قفز ولا تمايل ولا تكوير */
+@media (prefers-reduced-motion: reduce) {
+  .pk *,
+  .pk *::before,
+  .pk *::after {
+    transition-property: opacity, visibility !important;
+    transition-duration: 0.2s !important;
+    transition-delay: 0s !important;
+    animation: none !important;
+  }
 }
 
 /* ===== خطة اليوم ===== */
@@ -4982,39 +5354,6 @@ main .search-box {
   }
 }
 
-/* ===== اختار لي ===== */
-.picker-stage[class][data-vehicle] {
-  --frame: #1b2a4a;
-  --rim: #2c4a85;
-}
-.picker-stage.trip-night[class][data-vehicle] {
-  --frame: #0f1830;
-  --rim: #1f3566;
-}
-.trip-card,
-.trip-result-top {
-  background: linear-gradient(135deg, oklch(0.46 0.13 262), oklch(0.36 0.12 262));
-}
-.trip-card-icon,
-.trip-result-icon,
-.picker-category-icon {
-  display: none;
-}
-.trip-result-actions .btn.secondary:nth-child(n + 4) {
-  display: none;
-}
-.picker-category.active {
-  border-color: var(--color-primary);
-  box-shadow: var(--shadow-card);
-  background: color-mix(in srgb, var(--color-primary) 6%, var(--color-surface));
-  color: var(--color-primary);
-}
-@media (max-width: 600px) {
-  .picker-category {
-    padding: 12px 6px;
-  }
-}
-
 /* ===== البحث ===== */
 .search-group h2 {
   font-family: var(--font-serif);
@@ -5373,17 +5712,6 @@ main .search-box {
   padding: 8px 4px;
   border-radius: 0;
   border-bottom: 1px solid currentColor;
-}
-
-/* أزرار مشهد «اختار لي»: أيقونات SVG بيضاء بحلقة محايدة بدل الأخضر */
-.trip-round {
-  display: inline-grid;
-  place-items: center;
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.4);
-}
-.trip-round:hover {
-  border-color: rgba(255, 255, 255, 0.75);
 }
 
 /* مسافة أعلى الصفحة: مسار التنقل وصفحة البحث لا يلتصقان بخط الهيدر */
