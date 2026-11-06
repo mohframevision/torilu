@@ -2,7 +2,7 @@
 slug: "restaurants"
 title: "مطاعم البحرين"
 icon: "🍽️"
-description: "دليل مطاعم البحرين، كل مطعم فيه متحقَّق منه، مرتّبة حسب نوع المطبخ والمنطقة: برجر، شاورما، مشاوي، بحري، هندي وغيرها."
+description: "دليل مطاعم البحرين كما هي فعلاً، مرتّبة حسب نوع المطبخ والمنطقة: برجر، شاورما، مشاوي، بحري، هندي وغيرها."
 title_en: "Restaurants in Bahrain"
 navLabel_en: "Restaurants"
 description_en: "A guide to restaurants in Bahrain, each one checked, sorted by cuisine and area: burgers, shawarma, grills, seafood, Indian and more."
