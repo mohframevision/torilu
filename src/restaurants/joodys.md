@@ -17,12 +17,12 @@ meatSource:
   text_en: "Burgers from Al Zaeem, Saudi chicken breasts, and frozen items from Al Duaisi and Al Helli."
   via: instagram
   checked: 2026-11-06
-lat: 26.2030873
-lng: 50.5310057
+lat: 26.203136
+lng: 50.530606
 cta: ''
 links:
   phone: '17000875, 36881822'
-  maps: https://maps.app.goo.gl/TvduhLy2wiTjxkrp9
+  maps: https://maps.app.goo.gl/bUz4tWQVy4rcbCNY7
   instagram: https://www.instagram.com/joodys_bh/
 menuItems:
   - name: "فلافل"
@@ -184,4 +184,4 @@ recommendation: مطعم جديد بالسهلة بسندويشات رخيصة �
 
 ## الموقع
 
-[📍 افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/TvduhLy2wiTjxkrp9)
+[📍 افتح الموقع على خرائط قوقل](https://maps.app.goo.gl/bUz4tWQVy4rcbCNY7)

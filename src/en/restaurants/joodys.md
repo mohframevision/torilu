@@ -26,4 +26,4 @@ quantities for a gathering or event order.
 
 ## Location
 
-[📍 Open on Google Maps](https://maps.app.goo.gl/TvduhLy2wiTjxkrp9)
+[📍 Open on Google Maps](https://maps.app.goo.gl/bUz4tWQVy4rcbCNY7)
