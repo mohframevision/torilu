@@ -34,13 +34,17 @@ langSwitchUrl: "/en/contact.html"
     <select id="request_type" name="request_type"><option value="استفسار عام">استفسار عام</option>{%- for entry in sections %}{% if entry.slug != "guides" %}
 <option value="إضافة إلى {{ entry.title }}">إضافة إلى {{ entry.title }}</option>{% endif %}{%- endfor %}
 <option value="اقتراح قصة لمقال">اقتراح قصة لمقال</option>
-<option value="إبلاغ عن معلومة خاطئة">إبلاغ عن معلومة خاطئة</option></select>
+<option value="إبلاغ عن معلومة خاطئة">إبلاغ عن معلومة خاطئة</option>
+<option value="تصحيح معلومات محل">تصحيح معلومات محل</option>
+<option value="إزالة محل من توريلو">إزالة محل من توريلو</option></select>
   </div>
 
   <div class="form-group">
     <label for="message">الرسالة *</label>
     <textarea id="message" name="message" required placeholder="اكتب رسالتك هنا… (اسم المكان، رابط الموقع/الخرائط/إنستقرام إن وجد)" minlength="5" maxlength="5000"></textarea>
   </div>
+
+  <p id="ownerRemoveNote" class="biz-note" hidden>قبل الإزالة أتأكّد من المحل نفسه عبر رقمه أو حسابه الرسمي في إنستقرام الظاهرَين في صفحته على توريلو، لا عبر الرقم المكتوب في النموذج، كي لا يُزيل أحدٌ محلاً ليس له.</p>
 
   <button type="submit" id="submitBtn" class="btn">
     <span id="btnText">إرسال</span>

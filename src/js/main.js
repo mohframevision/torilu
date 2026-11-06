@@ -237,17 +237,23 @@ function initContactForm() {
   // تعبئة تلقائية لو الزائر جا من زر "🚩 إبلاغ عن خطأ" بأي بطاقة عنصر
   // (رابط بصيغة contact.html?report=اسم-العنصر&section=قسم)
   const params = new URLSearchParams(location.search);
+  // ‎?owner=correct|remove‎ من زرّي «محلك في توريلو؟» بصفحة business (مع ‎?report=‎ إن جاء من صفحة مكان)
   const reportItem = params.get("report");
-  if (reportItem) {
+  const owner = ["correct", "remove"].includes(params.get("owner")) ? params.get("owner") : "";
+  if (reportItem || owner) {
     const typeSelect = form.querySelector('[name="request_type"]');
     const messageField = form.querySelector('[name="message"]');
-    if (typeSelect) typeSelect.value = t("contact_report_option");
+    if (typeSelect) typeSelect.value = t(owner ? `contact_owner_${owner}` : "contact_report_option");
     if (messageField) {
       const section = params.get("section") || "";
       const sectionSuffix = section ? ` (${t("contact_report_section_label")}: ${sectionLabel(section)})` : "";
-      messageField.value = `${t("contact_report_regarding")}: ${reportItem}${sectionSuffix}\n\n${t("contact_report_wrong_info_label")}: `;
+      const about = reportItem ? `${reportItem}${sectionSuffix}` : "";
+      messageField.value = owner
+        ? `${t(`contact_owner_${owner}`)}\n${t("contact_owner_place_label")}: ${about}\n\n${owner === "correct" ? `${t("contact_owner_correct_label")}: ` : ""}`
+        : `${t("contact_report_regarding")}: ${about}\n\n${t("contact_report_wrong_info_label")}: `;
       messageField.focus();
     }
+    if (owner === "remove") document.getElementById("ownerRemoveNote")?.removeAttribute("hidden");
   }
 
   const formMessage = document.getElementById("formMessage");

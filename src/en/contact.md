@@ -35,13 +35,17 @@ langSwitchUrl: "/contact.html"
     <select id="request_type" name="request_type"><option value="General inquiry">General inquiry</option>{%- for entry in sections %}{% if entry.slug != "guides" %}
 <option value="Add to {{ entry.title_en }}">Add to {{ entry.title_en }}</option>{% endif %}{%- endfor %}
 <option value="Suggest a story for an article">Suggest a story for an article</option>
-<option value="Report incorrect info">Report incorrect info</option></select>
+<option value="Report incorrect info">Report incorrect info</option>
+<option value="Correct a place's info">Correct a place's info</option>
+<option value="Remove a place from Torilu">Remove a place from Torilu</option></select>
   </div>
 
   <div class="form-group">
     <label for="message">Message *</label>
     <textarea id="message" name="message" required placeholder="Write your message here… (place name, website/maps/Instagram link if available)" minlength="5" maxlength="5000"></textarea>
   </div>
+
+  <p id="ownerRemoveNote" class="biz-note" hidden>Before removing anything, I confirm with the business itself through the phone number or official Instagram shown on its Torilu page, not the number typed in this form, so nobody can remove a place that isn't theirs.</p>
 
   <button type="submit" id="submitBtn" class="btn">
     <span id="btnText">Send</span>

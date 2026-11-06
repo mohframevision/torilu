@@ -23,7 +23,10 @@
   <div class="np-mast-row"><span>{{ "A guide to places in Bahrain" if isEn else "دليل أماكن البحرين" }}</span></div>
 </div>
 <header class="page-header np-head">
-  {% if v or liked2 %}<p class="np-kicker">{% if v %}<span>{{ t.verified_badge }}</span>{% endif %}{% if liked2 %}<span>{{ t.liked_badge }}</span>{% endif %}</p>{% endif %}
+  {% if v %}<p class="np-kicker"><span>{{ t.verified_badge }}</span></p>{% endif %}
+  {#- ختم «أعجبني»: بجانب رأي صاحب الموقع، أو تحت العنوان إن لم يكتب رأياً -#}
+  {% set stamp %}<img class="liked-stamp" src="/assets/stamp-liked.svg" alt="{{ t.liked_stamp_alt }}" width="100" height="100" decoding="async" />{% endset %}
+  {% if liked2 and not recommendation %}{{ stamp | safe }}{% endif %}
   <h1>{{ title }}</h1>
   {% if desc %}<p class="np-deck">{{ desc }}</p>{% endif %}
   <div class="np-byline">
@@ -50,7 +53,7 @@
   <iframe src="https://www.youtube-nocookie.com/embed/{{ video }}" title="{{ title }}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 {% endif %}
-{% if recommendation %}<blockquote class="recommend-quote">{{ recommendation }}</blockquote>{% endif %}
+{% if recommendation %}<blockquote class="recommend-quote{{ ' has-stamp' if liked2 }}">{% if liked2 %}{{ stamp | safe }}{% endif %}{{ recommendation }}</blockquote>{% endif %}
 {#- صور المعرض موزّعة بين فقرات المقال كما في الجرايد: صورة بعد كل قسم، بالتناوب بين صورة
     بعرض الورقة وصورة بعرض العمود، ولكل صورة سطر تعليق بالإسناد. ما يزيد عن الأقسام يأتي في الآخر -#}
 {%- set gal = gallery or [] %}
@@ -93,7 +96,8 @@
 </dl>
 </aside>
 </div>
-{# الوعد «كل معلومة متحقَّق منها» يحتاج طريقاً لتصحيحها: رابط هادئ واحد #}
-<p class="np-note detail-report"><a class="report-link" href="{{ ('/en/contact.html' if isEn else '/contact.html') | url }}?report={{ title | urlencode }}&amp;section={{ sectionSlug }}">{{ t.report_wrong_info }}</a></p>
+{# الوعد «كل معلومة متحقَّق منها» يحتاج طريقاً لتصحيحها: رابط هادئ واحد إلى شرح «محلك في توريلو؟»،
+   وزرّا التصحيح والإزالة هناك يحملان اسم المكان إلى نموذج التواصل #}
+<p class="np-note detail-report"><a class="report-link" href="{{ ('/en/business.html' if isEn else '/business.html') | url }}?place={{ title | urlencode }}&amp;section={{ sectionSlug }}#owners">{{ t.place_owner_link }}</a></p>
 </div>
 </div>

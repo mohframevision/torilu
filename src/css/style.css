@@ -6519,3 +6519,76 @@ main .search-box {
     display: none;
   }
 }
+
+/* ===== ختم «أعجبني» — حبر أزرق مضغوط على الورق، مائل قليلاً كختم حقيقي.
+   الورقة تبقى فاتحة بالداكن (فلتر تعتيم فقط)، فالمزج multiply يكفي للوضعين ===== */
+.liked-stamp {
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto var(--space-2);
+  transform: rotate(-8deg);
+  mix-blend-mode: multiply;
+}
+.recommend-quote.has-stamp {
+  position: relative;
+  /* الختم يعلو الخط 46px: هامش علوي يحجز له مكاناً كي لا يغطي ما قبله */
+  margin-block-start: 60px;
+  padding-top: 60px;
+}
+.recommend-quote.has-stamp .liked-stamp {
+  position: absolute;
+  top: -46px;
+  inset-inline-end: 4px;
+  margin: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .liked-stamp {
+    animation: stamp-press 0.35s ease-out both;
+  }
+}
+@keyframes stamp-press {
+  from { transform: rotate(-8deg) scale(1.25); opacity: 0; }
+}
+
+/* ===== «محلك في توريلو؟» بصفحة business: إفصاح واحد بشكل الجريدة (خط مزدوج + عنوان بخط الصحيفة) ===== */
+.biz-owners {
+  margin: 4px 0 26px;
+  border-block: 3px double var(--color-ink-rule);
+  scroll-margin-top: calc(var(--header-h, 64px) + 16px);
+}
+.biz-owners summary {
+  cursor: pointer;
+  padding: 12px 0;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.biz-owners[open] summary {
+  border-bottom: 1px solid var(--color-ink-rule);
+  margin-bottom: 4px;
+}
+.biz-owners p {
+  margin: 10px 0;
+  line-height: 1.8;
+}
+.biz-owners-stamp {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.biz-owners-stamp img {
+  flex: none;
+  transform: rotate(-8deg);
+}
+/* بالداكن: الحبر الأزرق يختفي على الخلفية الداكنة، فيُختم على قرص ورق صغير */
+:root[data-theme="dark"] .biz-owners-stamp img {
+  background: #f4efe4;
+  border-radius: 50%;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .biz-owners-stamp img {
+    background: #f4efe4;
+    border-radius: 50%;
+  }
+}

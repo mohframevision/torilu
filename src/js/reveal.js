@@ -54,3 +54,22 @@
     });
   });
 })();
+
+// «محلك في توريلو؟»: ‎#owners‎ (من رمز البطاقة أو صفحة مكان) يفتح الشرح، و‎?place=‎ يُحمل إلى زرّي النموذج
+(() => {
+  const box = document.getElementById("owners");
+  if (!box) return;
+  const q = new URLSearchParams(location.search);
+  const place = q.get("place");
+  if (place) {
+    const extra = "&report=" + encodeURIComponent(place) + (q.get("section") ? "&section=" + encodeURIComponent(q.get("section")) : "");
+    box.querySelectorAll("a[href*='owner=']").forEach((a) => (a.href += extra));
+  }
+  const openIfTarget = () => {
+    if (location.hash !== "#owners") return;
+    box.open = true;
+    box.scrollIntoView({ block: "start" });
+  };
+  openIfTarget();
+  addEventListener("hashchange", openIfTarget);
+})();
