@@ -37,10 +37,13 @@
             android:focusable="true" />
     </LinearLayout>
 
+    <!-- خط مزدوج تحت العنوان كعناوين الجريدة -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/border" />
+        android:layout_height="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rule_double" />
 
     <LinearLayout
         android:layout_width="match_parent"

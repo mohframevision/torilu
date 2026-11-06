@@ -35,26 +35,30 @@ class BottomNav implements View.OnClickListener {
 
     private void build(LinearLayout container) {
         container.removeAllViews();
+        // شريط بلون السطح وخط حبر رفيع فوقه، بلا ظل (.bottom-nav بالموقع)
+        container.setBackgroundResource(R.drawable.nav_bar_bg);
+        container.setElevation(0);
         addTab(container, R.drawable.ic_home, activity.getString(R.string.nav_home), HOME);
         addTab(container, R.drawable.ic_search, activity.getString(R.string.nav_search), SEARCH);
-        addFab(container, PICKER);
+        // «اختار لي» تبويب عادي بالنرد كما بالموقع، لا دائرة مرفوعة
+        addTab(container, R.drawable.ic_casino, activity.getString(R.string.picker_title), PICKER);
         addTab(container, R.drawable.ic_favorite_fill, activity.getString(R.string.nav_favorites), FAVORITES);
     }
 
     private void addTab(LinearLayout container, int iconRes, String label, String tag) {
         View tab = LayoutInflater.from(activity).inflate(R.layout.nav_tab_icon, container, false);
         boolean on = tag.equals(active);
-        int color = on ? activity.getColor(R.color.on_tonal) : activity.getColor(R.color.text_muted);
+        // النشط بأزرق الحبر (أيقونة واسم) بلا حبة خلفه — نفس الموقع
+        int color = on ? activity.getColor(R.color.brand_accent) : activity.getColor(R.color.text_muted);
         ImageView iconView = tab.findViewById(R.id.tabIcon);
         iconView.setImageResource(iconRes);
         iconView.setColorFilter(color);
-        if (on) iconView.setBackgroundResource(R.drawable.nav_indicator);
         tab.setSelected(on);
         tab.setContentDescription(label);
         TextView labelView = tab.findViewById(R.id.tabLabel);
         labelView.setText(label);
-        labelView.setTextColor(on ? activity.getColor(R.color.text) : color);
-        if (on) labelView.setTypeface(null, android.graphics.Typeface.BOLD);
+        labelView.setTextColor(color);
+        if (on) labelView.setTypeface(labelView.getTypeface(), android.graphics.Typeface.BOLD);
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab.getLayoutParams();
         lp.width = 0;
         lp.weight = 1;
@@ -62,21 +66,6 @@ class BottomNav implements View.OnClickListener {
         tab.setTag(tag);
         tab.setOnClickListener(this);
         Touch.springy(tab, 0.9f);
-        container.addView(tab);
-    }
-
-    // "اختار لي" مرفوعة كدائرة بارزة — نفس المعاملة بـMainActivity.addMainNavFab()
-    private void addFab(LinearLayout container, String tag) {
-        View tab = LayoutInflater.from(activity).inflate(R.layout.nav_tab_fab, container, false);
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tab.getLayoutParams();
-        lp.width = 0;
-        lp.weight = 1;
-        tab.setLayoutParams(lp);
-        tab.setTag(tag);
-        tab.setOnClickListener(this);
-        View icon = tab.findViewById(R.id.tabIcon);
-        Touch.squishy(tab, icon);
-        if (PICKER.equals(active)) icon.post(new Land(icon));
         container.addView(tab);
     }
 
@@ -100,18 +89,5 @@ class BottomNav implements View.OnClickListener {
         // تبويب يحل محل تبويب (مكدّس ضحل) — إلا الرئيسية نفسها، تبقى بالأسفل
         if (!(activity instanceof MainActivity)) activity.finish();
         activity.overridePendingTransition(0, 0);
-    }
-
-    private static final class Land implements Runnable {
-        private final View icon;
-
-        Land(View icon) {
-            this.icon = icon;
-        }
-
-        @Override
-        public void run() {
-            Touch.squashLand(icon);
-        }
     }
 }

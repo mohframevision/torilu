@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- «اختار لي» (.pk بالموقع، فاتح): القمر حبر أزرق ثابت بالوضعين، القصاصة ورق، والكرة ورق جريدة -->
+<resources>
+    <color name="pk_ink">#1545A2</color>
+    <color name="pk_on">#1545A2</color>
+    <color name="pk_on_text">#FAF6EF</color>
+    <color name="pk_news">#F2ECDF</color>
+    <color name="pk_news_ink">#2A2F39</color>
+    <color name="pk_ball_lo">#B2A68E</color>
+    <color name="pk_ball_hi">#FCF9F1</color>
+    <color name="pk_ball_print">#26231F</color>
+    <color name="pk_shadow">#384A3C22</color>
+    <color name="pk_crease">#525C4C2E</color>
+    <color name="pk_crease_hi">#BFFFFFFF</color>
+    <color name="pk_shade_hi">#59FFFFFF</color>
+    <color name="pk_shade_lo">#613C2F17</color>
+    <!-- آثار تكسير القصاصة: الوجوه البيضاء والداكنة، الخطوط والطيّات -->
+    <color name="pk_cw">#29FFFFFF</color>
+    <color name="pk_ck">#0B5A4826</color>
+    <color name="pk_cline">#29604E2C</color>
+    <color name="pk_cline_hi">#B3FFFFFF</color>
+    <color name="pk_cfold">#33604E2C</color>
+    <color name="pk_cfold_hi">#D9FFFFFF</color>
+    <color name="pk_clip_shadow">#2E3C3019</color>
+    <color name="pk_crw">#8CFFFFFF</color>
+    <color name="pk_crk">#295A4826</color>
+    <color name="pk_cg1">#4DFFFFFF</color>
+    <color name="pk_cg2">#1A6B5426</color>
+</resources>

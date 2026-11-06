@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="story_music_play">♪ Calm music</string>
+    <string name="story_music_stop">■ Stop music</string>
+    <string name="story_music_needs_sound">Turn on sounds in Settings first.</string>
+    <string name="story_tap_next">Tap to continue</string>
+</resources>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ورقة الجريدة لصفحتي المكان والمقال — النصوص منسوخة من i18n.js والقوالب بالموقع -->
+<resources>
+    <string name="pa_articles">مقالات</string>
+    <string name="pa_by">بقلم</string>
+    <string name="pa_share_article">مشاركة المقال</string>
+    <string name="pa_share_place">مشاركة المكان</string>
+    <string name="pa_map">الخريطة</string>
+    <string name="pa_area_bahrain">%1$s، البحرين</string>
+    <string name="pa_verified">زُرته شخصياً</string>
+    <string name="pa_liked">أعجبني</string>
+    <string name="pa_fav_add">إضافة للمفضلة</string>
+    <string name="pa_fav_remove">إزالة من المفضلة</string>
+    <string name="pa_facts">معلومات المكان</string>
+    <string name="pa_hours">الأوقات</string>
+    <string name="pa_type">النوع</string>
+    <string name="pa_area">المنطقة</string>
+    <string name="pa_phone">الهاتف</string>
+    <string name="pa_location">الموقع</string>
+    <string name="pa_google_maps">خرائط قوقل</string>
+    <string name="pa_instagram">إنستقرام</string>
+    <string name="pa_website">الموقع الإلكتروني</string>
+    <string name="pa_visit">زيارة</string>
+    <string name="pa_menu_title">القائمة والأسعار</string>
+    <string name="pa_report">إبلاغ عن معلومة خاطئة</string>
+    <string name="pa_list_sep">"، "</string>
+    <!-- مناطق البحرين (src/_data/areas.js): أول تصنيف للمكان يكون منطقة -->
+    <string-array name="pa_areas" translatable="false">
+        <item>أبو بهام</item>
+        <item>أبو صيبع</item>
+        <item>أبو قوة</item>
+        <item>البديع</item>
+        <item>البرهامة</item>
+        <item>البلاد القديم</item>
+        <item>الجفير</item>
+        <item>الجنبية</item>
+        <item>الحجر</item>
+        <item>الحد</item>
+        <item>الحورة</item>
+        <item>الخميس</item>
+        <item>الدراز</item>
+        <item>الدير</item>
+        <item>الديه</item>
+        <item>الرفاع</item>
+        <item>الرفاع الشرقي</item>
+        <item>الزلاق</item>
+        <item>الزنج</item>
+        <item>السقية</item>
+        <item>السلمانية</item>
+        <item>السنابس</item>
+        <item>السهلة</item>
+        <item>السهلة الجنوبية</item>
+        <item>السهلة الشمالية</item>
+        <item>السويفية</item>
+        <item>السيف</item>
+        <item>الشاخورة</item>
+        <item>الصالحية</item>
+        <item>العدلية</item>
+        <item>العكر</item>
+        <item>الغريفة</item>
+        <item>الفاتح</item>
+        <item>القدم</item>
+        <item>القضيبية</item>
+        <item>القلعة</item>
+        <item>الكورة</item>
+        <item>الماحوز</item>
+        <item>المالكية</item>
+        <item>المحرق</item>
+        <item>المدينة الشمالية</item>
+        <item>المرخ</item>
+        <item>المُصلى</item>
+        <item>المعامير</item>
+        <item>المقشع</item>
+        <item>المنامة</item>
+        <item>المنطقة التعليمية</item>
+        <item>المنطقة الدبلوماسية</item>
+        <item>النويدرات</item>
+        <item>الهملة</item>
+        <item>أم الحصم</item>
+        <item>بسيتين</item>
+        <item>بني جمرة</item>
+        <item>بوري</item>
+        <item>بوعشيرة</item>
+        <item>بوغزال</item>
+        <item>توبلي</item>
+        <item>جبلة حبشي</item>
+        <item>جد الحاج</item>
+        <item>جد علي</item>
+        <item>جدحفص</item>
+        <item>جدعلي</item>
+        <item>جرداب</item>
+        <item>جزر أمواج</item>
+        <item>جنوسان</item>
+        <item>جو</item>
+        <item>حالة السلطة</item>
+        <item>حلة عبد الصالح</item>
+        <item>دار كليب</item>
+        <item>دلمونيا</item>
+        <item>دمستان</item>
+        <item>ديار المنامة</item>
+        <item>راس رمان</item>
+        <item>سار</item>
+        <item>سترة</item>
+        <item>سفالة</item>
+        <item>سلماباد</item>
+        <item>سماهيج</item>
+        <item>سند</item>
+        <item>شهركان</item>
+        <item>طشان</item>
+        <item>عالي</item>
+        <item>السايه</item>
+        <item>عراد</item>
+        <item>عسكر</item>
+        <item>عوالي</item>
+        <item>قلالي</item>
+        <item>كرانة</item>
+        <item>كرباباد</item>
+        <item>كرزكان</item>
+        <item>مدينة حمد</item>
+        <item>مدينة عيسى</item>
+        <item>مقابة</item>
+        <item>ميناء سلمان</item>
+    </string-array>
+</resources>

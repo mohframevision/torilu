@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- بالداكن نفس الورقة بمرشّح الموقع: brightness(.86) sepia(.12) -->
+<resources>
+    <color name="np_paper">#D1C9B8</color>
+    <color name="np_ink">#191713</color>
+    <color name="np_ink_muted">#443F37</color>
+    <color name="np_rule">#9F9786</color>
+    <color name="np_back">#CEC6B6</color>
+    <color name="np_link">#12398A</color>
+</resources>

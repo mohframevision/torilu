@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pk_q1">Where shall we go today?</string>
+    <string name="pk_s1">Tap the moon and let Torilu choose.</string>
+    <string name="pk_q2">What are you after?</string>
+    <string name="pk_s2">Choose a section, or “Anything” if you can’t decide.</string>
+    <string name="pk_moon">Pick for me</string>
+    <string name="pk_close">Close sections</string>
+    <string name="pk_searching">Finding you a place…</string>
+    <string name="pk_yours">Your pick</string>
+    <string name="pk_go">Take me there</string>
+    <string name="pk_page">Place page</string>
+    <string name="pk_again">Another</string>
+    <string name="pk_change">Change section</string>
+    <string name="pk_area_label">Where?</string>
+    <string name="pk_result">Torilu picked: %1$s</string>
+    <string name="pk_area_all">All of Bahrain (%1$s)</string>
+    <string name="pk_area_near">Nearest to me</string>
+    <string name="pk_area_near_done">Torilu will pick from the %1$s places nearest you</string>
+    <string name="pk_sec_restaurants">Restaurants</string>
+    <string name="pk_sec_cafes">Cafes</string>
+    <string name="pk_sec_bakeries">Bakeries &amp; Sweets</string>
+    <string name="pk_sec_any">Anything</string>
+    <string name="pk_sec_stores">Stores</string>
+    <string name="pk_sec_places">Places</string>
+</resources>

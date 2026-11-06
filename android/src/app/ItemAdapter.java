@@ -252,7 +252,7 @@ class ItemAdapter extends BaseAdapter implements View.OnClickListener {
             String id = item.optString("id", "");
             Prefs.toggleFavorite(context, itemSection, id);
             boolean nowFav = Prefs.isFavorite(context, itemSection, id);
-            Touch.feedback(v, nowFav ? Touch.TOGGLE_ON : Touch.TOGGLE_OFF, nowFav ? SoundPlayer.ON : SoundPlayer.OFF);
+            Touch.feedback(v, nowFav ? Touch.TOGGLE_ON : Touch.TOGGLE_OFF, nowFav ? SoundPlayer.FAV_ON : SoundPlayer.FAV_OFF);
             applyFavStyle((ImageView) v, nowFav);
             if (nowFav) popHeart(v);
         } else if (tag.startsWith("open:")) {

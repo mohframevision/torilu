@@ -70,7 +70,8 @@ public class MenuActivity extends Activity implements View.OnClickListener, Text
 
         LinearLayout bar = new LinearLayout(this);
         bar.setGravity(Gravity.CENTER_VERTICAL);
-        bar.setPadding(dp(8), dp(8), dp(16), dp(8));
+        bar.setPadding(dp(8), dp(8), dp(16), dp(12));
+        bar.setBackgroundResource(R.drawable.head_rule_bg);
         ImageView back = new ImageView(this);
         back.setImageResource(R.drawable.ic_arrow_back);
         back.setColorFilter(getColor(R.color.text));
@@ -170,24 +171,48 @@ public class MenuActivity extends Activity implements View.OnClickListener, Text
         }
     }
 
-    // صف صنف: الاسم بالبداية والسعر بالنهاية (نفس صفوف منيو تطبيقات التوصيل).
+    // صف صنف كقائمة أسعار بالجريدة (.np-menu): الاسم، خط منقّط، ثم السعر.
     // مشترك مع معاينة المنيو بصفحة المكان
     static View row(Context c, JSONObject m) {
-        LinearLayout row = new LinearLayout(c);
-        row.setGravity(Gravity.CENTER_VERTICAL);
+        final TextView[] np = new TextView[2]; // [0]=الاسم، [1]=السعر
+        LinearLayout row = new LinearLayout(c) {
+            // الاسم يأخذ ما يبقى بعد السعر (حد أقصى نصف الصف) — السعر الطويل لا يُقصّ أبداً
+            @Override
+            protected void onMeasure(int wSpec, int hSpec) {
+                if (np[1] != null && MeasureSpec.getMode(wSpec) != MeasureSpec.UNSPECIFIED) {
+                    np[1].measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+                    int room = MeasureSpec.getSize(wSpec) - getPaddingLeft() - getPaddingRight();
+                    int max = Math.max(Ui.dp(getContext(), 80), Math.min(room / 2, room - np[1].getMeasuredWidth() - Ui.dp(getContext(), 24)));
+                    if (np[0].getMaxWidth() != max) np[0].setMaxWidth(max);
+                }
+                super.onMeasure(wSpec, hSpec);
+            }
+        };
+        row.setGravity(Gravity.BOTTOM);
+        row.setBaselineAligned(false); // السعر والنقاط على آخر سطر من الاسم
         int p = Ui.dp(c, 12);
         row.setPadding(p, Ui.dp(c, 10), p, Ui.dp(c, 10));
         String name = m == null ? "" : (Lang.en(c) && !m.optString("name_en", "").isEmpty() ? m.optString("name_en") : m.optString("name", ""));
         TextView n = Ui.text(c, name, 15, c.getColor(R.color.text), false);
-        row.addView(n, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         String priceText = m == null ? "" : m.optString("price", "");
-        if (!priceText.isEmpty()) {
-            TextView pr = Ui.text(c, Ui.ltr(priceText), 14.5f, c.getColor(R.color.text), true);
-            pr.setFontFeatureSettings("tnum");
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.setMarginStart(Ui.dp(c, 12));
-            row.addView(pr, lp);
+        if (priceText.isEmpty()) {
+            row.addView(n, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+            return row;
         }
+        np[0] = n;
+        row.addView(n);
+        View dots = new View(c);
+        dots.setBackgroundResource(R.drawable.menu_leader);
+        dots.setLayerType(View.LAYER_TYPE_SOFTWARE, null); // النقاط (dash) تُرسم برمجياً بثبات
+        LinearLayout.LayoutParams dlp = new LinearLayout.LayoutParams(0, Ui.dp(c, 2), 1f);
+        dlp.setMarginStart(Ui.dp(c, 6));
+        dlp.setMarginEnd(Ui.dp(c, 6));
+        dlp.bottomMargin = Ui.dp(c, 6);
+        row.addView(dots, dlp);
+        TextView pr = Ui.text(c, Ui.ltr(priceText), 14.5f, c.getColor(R.color.text), true);
+        pr.setFontFeatureSettings("tnum");
+        np[1] = pr;
+        row.addView(pr);
         return row;
     }
 

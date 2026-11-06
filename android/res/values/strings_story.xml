@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="story_music_play">♪ موسيقى هادئة</string>
+    <string name="story_music_stop">■ أوقف الموسيقى</string>
+    <string name="story_music_needs_sound">فعّل الأصوات من الإعدادات أولاً.</string>
+    <string name="story_tap_next">اضغط للمتابعة</string>
+</resources>

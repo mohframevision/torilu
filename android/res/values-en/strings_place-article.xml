@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pa_articles">Articles</string>
+    <string name="pa_by">By</string>
+    <string name="pa_share_article">Share article</string>
+    <string name="pa_share_place">Share place</string>
+    <string name="pa_map">Map</string>
+    <string name="pa_area_bahrain">%1$s, Bahrain</string>
+    <string name="pa_verified">Personally visited</string>
+    <string name="pa_liked">Recommended</string>
+    <string name="pa_fav_add">Add to favorites</string>
+    <string name="pa_fav_remove">Remove from favorites</string>
+    <string name="pa_facts">At a glance</string>
+    <string name="pa_hours">Hours</string>
+    <string name="pa_type">Type</string>
+    <string name="pa_area">Area</string>
+    <string name="pa_phone">Phone</string>
+    <string name="pa_location">Location</string>
+    <string name="pa_google_maps">Google Maps</string>
+    <string name="pa_instagram">Instagram</string>
+    <string name="pa_website">Website</string>
+    <string name="pa_visit">Visit</string>
+    <string name="pa_menu_title">Menu &amp; prices</string>
+    <string name="pa_report">Report incorrect info</string>
+    <string name="pa_list_sep">", "</string>
+</resources>

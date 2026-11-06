@@ -55,7 +55,11 @@ class SettingsPanel implements View.OnClickListener, CompoundButton.OnCheckedCha
         dialog = new Dialog(activity);
         Window window = dialog.getWindow();
         if (window != null) window.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(panel);
+        // تمرير حين لا تتسع الشاشة (جوال صغير أو أفقي) — وإلا ضاع «الصوت» و«عن توريلو»
+        android.widget.ScrollView scroll = new android.widget.ScrollView(activity);
+        scroll.setVerticalScrollBarEnabled(false);
+        scroll.addView(panel);
+        dialog.setContentView(scroll);
         dialog.setOnDismissListener(this);
         dialog.show();
         SoundPlayer.play(activity, SoundPlayer.OPEN);
@@ -119,7 +123,7 @@ class SettingsPanel implements View.OnClickListener, CompoundButton.OnCheckedCha
                 : Prefs.THEME_AUTO;
         if (mode.equals(Prefs.getThemeMode(activity))) return;
         Prefs.setThemeMode(activity, mode);
-        Touch.feedback(v, Touch.CONFIRM, SoundPlayer.TAP);
+        Touch.feedback(v, Touch.CONFIRM, SoundPlayer.THEME);
         recreating = true;
         dialog.dismiss();
         activity.recreate();

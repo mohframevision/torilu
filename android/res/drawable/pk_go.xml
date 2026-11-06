@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- خذني له (PK_ICONS بـpicker.js) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="18dp" android:height="18dp" android:viewportWidth="960" android:viewportHeight="960" android:autoMirrored="false">
+ <group android:translateY="960"><path android:fillColor="#FFFFFFFF" android:pathData="M516-120 402-402 120-516v-56l720-268-268 720h-56Zm26-148 162-436-436 162 196 78 78 196Zm-34-240Z"/></group>
+</vector>

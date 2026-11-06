@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- رأس الشاشة كعنوان جريدة: الخلفية، وتحت العنوان خط مزدوج بلون الحبر
+     داخل هامش الصفحة (border-bottom: 3px double بالموقع) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item><shape><solid android:color="@color/bg" /></shape></item>
+    <item android:gravity="bottom" android:height="1dp" android:left="16dp" android:right="16dp" android:bottom="3dp">
+        <shape><solid android:color="@color/ink_rule" /></shape>
+    </item>
+    <item android:gravity="bottom" android:height="1dp" android:left="16dp" android:right="16dp">
+        <shape><solid android:color="@color/ink_rule" /></shape>
+    </item>
+</layer-list>

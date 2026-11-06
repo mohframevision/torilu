@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="np_tagline">A guide to places in Bahrain</string>
+    <string name="np_bahrain">Bahrain</string>
+    <string name="fold_hint">Tap to open the newspaper</string>
+    <string name="fold_close">Fold the newspaper</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="np_tagline">دليل أماكن البحرين</string>
+    <string name="np_bahrain">البحرين</string>
+    <string name="fold_hint">اضغط لفتح الجريدة</string>
+    <string name="fold_close">اطوِ الجريدة</string>
+</resources>

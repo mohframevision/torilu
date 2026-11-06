@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- «اختار لي» (PickerActivity): النصوص منقولة حرفياً من src/_data/i18n.js وsrc/picker.njk -->
+<resources>
+    <string name="pk_q1">إلى أين نذهب اليوم؟</string>
+    <string name="pk_s1">اضغط القمر، واترك الاختيار لتوريلو.</string>
+    <string name="pk_q2">ماذا تريد؟</string>
+    <string name="pk_s2">اختر قسماً، أو «أي شيء» إن لم تقرّر.</string>
+    <string name="pk_moon">اختار لي</string>
+    <string name="pk_close">إغلاق الأقسام</string>
+    <string name="pk_searching">نبحث لك…</string>
+    <string name="pk_yours">اختيارك</string>
+    <string name="pk_go">خذني له</string>
+    <string name="pk_page">صفحة المكان</string>
+    <string name="pk_again">غيره</string>
+    <string name="pk_change">تغيير القسم</string>
+    <string name="pk_area_label">من أين؟</string>
+    <string name="pk_result">اختار لك توريلو: %1$s</string>
+    <string name="pk_area_all">كل البحرين (%1$s)</string>
+    <string name="pk_area_near">الأقرب لي</string>
+    <string name="pk_area_near_done">سيختار توريلو من أقرب %1$s أماكن إليك</string>
+    <string name="pk_sec_restaurants">مطاعم</string>
+    <string name="pk_sec_cafes">كافيهات</string>
+    <string name="pk_sec_bakeries">مخبوزات وحلويات</string>
+    <string name="pk_sec_any">أي شيء</string>
+    <string name="pk_sec_stores">متاجر</string>
+    <string name="pk_sec_places">أماكن</string>
+    <!-- مناطق البحرين: نسخة من مفاتيح src/_data/areas.js (AREA_NAMES بالموقع)، أسماء عربية هي نفسها
+         مفاتيح التصنيف؛ العرض الإنجليزي من tagsEn. ponytail: نسخة يدوية، تُستبدل لو صدّر app-data.json المناطق -->
+    <string-array name="pk_areas" translatable="false">
+        <item>أبو بهام</item>
+        <item>أبو صيبع</item>
+        <item>أبو قوة</item>
+        <item>البديع</item>
+        <item>البرهامة</item>
+        <item>البلاد القديم</item>
+        <item>الجفير</item>
+        <item>الجنبية</item>
+        <item>الحجر</item>
+        <item>الحد</item>
+        <item>الحورة</item>
+        <item>الخميس</item>
+        <item>الدراز</item>
+        <item>الدير</item>
+        <item>الديه</item>
+        <item>الرفاع</item>
+        <item>الرفاع الشرقي</item>
+        <item>الزلاق</item>
+        <item>الزنج</item>
+        <item>السقية</item>
+        <item>السلمانية</item>
+        <item>السنابس</item>
+        <item>السهلة</item>
+        <item>السهلة الجنوبية</item>
+        <item>السهلة الشمالية</item>
+        <item>السويفية</item>
+        <item>السيف</item>
+        <item>الشاخورة</item>
+        <item>الصالحية</item>
+        <item>العدلية</item>
+        <item>العكر</item>
+        <item>الغريفة</item>
+        <item>الفاتح</item>
+        <item>القدم</item>
+        <item>القضيبية</item>
+        <item>القلعة</item>
+        <item>الكورة</item>
+        <item>الماحوز</item>
+        <item>المالكية</item>
+        <item>المحرق</item>
+        <item>المدينة الشمالية</item>
+        <item>المرخ</item>
+        <item>المُصلى</item>
+        <item>المعامير</item>
+        <item>المقشع</item>
+        <item>المنامة</item>
+        <item>المنطقة التعليمية</item>
+        <item>المنطقة الدبلوماسية</item>
+        <item>النويدرات</item>
+        <item>الهملة</item>
+        <item>أم الحصم</item>
+        <item>بسيتين</item>
+        <item>بني جمرة</item>
+        <item>بوري</item>
+        <item>بوعشيرة</item>
+        <item>بوغزال</item>
+        <item>توبلي</item>
+        <item>جبلة حبشي</item>
+        <item>جد الحاج</item>
+        <item>جد علي</item>
+        <item>جدحفص</item>
+        <item>جدعلي</item>
+        <item>جرداب</item>
+        <item>جزر أمواج</item>
+        <item>جنوسان</item>
+        <item>جو</item>
+        <item>حالة السلطة</item>
+        <item>حلة عبد الصالح</item>
+        <item>دار كليب</item>
+        <item>دلمونيا</item>
+        <item>دمستان</item>
+        <item>ديار المنامة</item>
+        <item>راس رمان</item>
+        <item>سار</item>
+        <item>سترة</item>
+        <item>سفالة</item>
+        <item>سلماباد</item>
+        <item>سماهيج</item>
+        <item>سند</item>
+        <item>شهركان</item>
+        <item>طشان</item>
+        <item>عالي</item>
+        <item>السايه</item>
+        <item>عراد</item>
+        <item>عسكر</item>
+        <item>عوالي</item>
+        <item>قلالي</item>
+        <item>كرانة</item>
+        <item>كرباباد</item>
+        <item>كرزكان</item>
+        <item>مدينة حمد</item>
+        <item>مدينة عيسى</item>
+        <item>مقابة</item>
+        <item>ميناء سلمان</item>
+    </string-array>
+</resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- «عن توريلو» صفحة جريدة كصفحة المقال: رأس بالشعار، سطر أزرق، عنوان بخط
-     Amiri، مقدمة، خط مزدوج، النص، التوقيع، ثم زرّا الاقتراح والمشاركة.
-     الألوان تتبع الفاتح/الداكن من الإعدادات -->
+<!-- «عن توريلو» صفحة أولى من جريدة: الورقة نفسها تُبنى بالكود (NewspaperSheet + FoldView)
+     وتُدرج أول storyContent؛ تحتها على الخلفية نص المساعدة وزرّا الاقتراح والمشاركة.
+     بالرأس: رجوع، وزر الموسيقى (تشغيل/إيقاف) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +14,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="16dp">
+        android:paddingStart="8dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <ImageView
             android:id="@+id/storyClose"
@@ -28,98 +31,59 @@
             android:focusable="true"
             android:background="?android:attr/selectableItemBackgroundBorderless" />
 
-        <TextView
-            android:id="@+id/storyMark"
+        <View
             android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/storyMusic"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="8dp"
+            android:minHeight="40dp"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@drawable/btn_pill_secondary"
+            android:text="@string/story_music_play"
             android:textColor="@color/text"
-            android:textSize="24sp"
-            android:fontFamily="@font/amiri"
+            android:textSize="13sp"
             android:textStyle="bold"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:clickable="true"
+            android:focusable="true" />
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/storyScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/storyContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="48dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="40dp"
+            android:clipToPadding="false">
 
             <TextView
+                android:id="@+id/storyHelp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/story_title"
-                android:textColor="@color/brand_accent"
-                android:textSize="12.5sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/storyHeadline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/story_headline"
-                android:textColor="@color/text"
-                android:textSize="32sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/story_deck"
-                android:textColor="@color/text_muted"
-                android:textSize="18sp"
-                android:lineSpacingExtra="2dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rule_double" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/story_body"
-                android:textColor="@color/text"
-                android:textSize="16.5sp"
-                android:lineSpacingExtra="3dp" />
-
-            <TextView
-                android:id="@+id/storySign"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/story_sign"
-                android:textColor="@color/text"
-                android:textSize="20sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:layout_marginTop="28dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/border" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@string/story_help_text"
                 android:textColor="@color/text_muted"
                 android:textSize="15sp"
                 android:lineSpacingExtra="2dp" />
 
             <LinearLayout
+                android:id="@+id/storyActions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -138,6 +102,7 @@
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    android:maxLines="1"
                     android:clickable="true"
                     android:focusable="true" />
 
@@ -155,6 +120,7 @@
                     android:textColor="@color/text"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    android:maxLines="1"
                     android:clickable="true"
                     android:focusable="true" />
             </LinearLayout>

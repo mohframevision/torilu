@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- «اختار لي» داكن: ورق ليلي وآثار تكسير أخف (نفس :root[data-theme="dark"] .pk) -->
+<resources>
+    <color name="pk_ink">#1545A2</color>
+    <color name="pk_on">#81AAF7</color>
+    <color name="pk_on_text">#0D0F15</color>
+    <color name="pk_news">#1C1F27</color>
+    <color name="pk_news_ink">#D6D2CA</color>
+    <color name="pk_ball_lo">#343842</color>
+    <color name="pk_ball_hi">#767A84</color>
+    <color name="pk_ball_print">#D9D4D7DE</color>
+    <color name="pk_shadow">#B3000000</color>
+    <color name="pk_crease">#73000000</color>
+    <color name="pk_crease_hi">#1FFFFFFF</color>
+    <color name="pk_shade_hi">#0FFFFFFF</color>
+    <color name="pk_shade_lo">#8C000000</color>
+    <color name="pk_cw">#05FFFFFF</color>
+    <color name="pk_ck">#1A000000</color>
+    <color name="pk_cline">#40000000</color>
+    <color name="pk_cline_hi">#08FFFFFF</color>
+    <color name="pk_cfold">#4D000000</color>
+    <color name="pk_cfold_hi">#0AFFFFFF</color>
+    <color name="pk_clip_shadow">#99000000</color>
+    <color name="pk_crw">#0FFFFFFF</color>
+    <color name="pk_crk">#52000000</color>
+    <color name="pk_cg1">#05FFFFFF</color>
+    <color name="pk_cg2">#26000000</color>
+</resources>

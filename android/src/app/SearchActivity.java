@@ -47,7 +47,8 @@ public class SearchActivity extends Activity implements View.OnClickListener, Te
 
         LinearLayout bar = new LinearLayout(this);
         bar.setGravity(Gravity.CENTER_VERTICAL);
-        bar.setPadding(dp(8), dp(10), dp(16), dp(10));
+        bar.setPadding(dp(8), dp(10), dp(16), dp(14));
+        bar.setBackgroundResource(R.drawable.head_rule_bg);
         ImageView back = new ImageView(this);
         back.setImageResource(R.drawable.ic_arrow_back);
         back.setColorFilter(getColor(R.color.text));

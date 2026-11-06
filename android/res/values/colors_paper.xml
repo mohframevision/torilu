@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ورق الجريدة (.np-sheet بالموقع): الورقة تبقى ورقاً بالفاتح والداكن -->
+<resources>
+    <color name="np_paper">#F2ECDF</color>
+    <color name="np_ink">#1D1B17</color>
+    <color name="np_ink_muted">#4F4A40</color>
+    <color name="np_rule">#B9B09C</color>
+    <color name="np_back">#EFE8DA</color>
+    <color name="np_link">#1545A2</color>
+</resources>
