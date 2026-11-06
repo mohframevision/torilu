@@ -28,6 +28,7 @@ pageCss: "menu"
   <div class="hm-demos"><a class="btn" href="{{ '/en/contact.html' | url }}?owner=correct">Correct your place's info</a><a class="btn secondary" href="{{ '/en/contact.html' | url }}?owner=remove">Ask to remove your place</a></div>
   <p class="biz-note">Anyone who spots a mistake can use the correction button too. Before any change or removal, I confirm with the business itself through the phone number or official Instagram shown on its Torilu page, not the number typed in the form, so nobody can change a place that isn't theirs.</p>
 </details>
+{% include "menu-price.njk" %}
 <div class="biz-demo">
   <div class="biz-demo-text">
     <h2>See how it works</h2>
@@ -61,3 +62,4 @@ pageCss: "menu"
 </section>
 <script src="{{ ('/js/menu.js') | url }}?v={{ buildVersion }}"></script>
 <script src="{{ ('/js/demo.js') | url }}?v={{ buildVersion }}"></script>
+<script src="{{ ('/js/menu-price.js') | url }}?v={{ buildVersion }}"></script>

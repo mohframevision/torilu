@@ -36,7 +36,8 @@ langSwitchUrl: "/en/contact.html"
 <option value="اقتراح قصة لمقال">اقتراح قصة لمقال</option>
 <option value="إبلاغ عن معلومة خاطئة">إبلاغ عن معلومة خاطئة</option>
 <option value="تصحيح معلومات محل">تصحيح معلومات محل</option>
-<option value="إزالة محل من توريلو">إزالة محل من توريلو</option></select>
+<option value="إزالة محل من توريلو">إزالة محل من توريلو</option>
+<option value="طلب منيو مصمَّم">طلب منيو مصمَّم</option></select>
   </div>
 
   <div class="form-group">

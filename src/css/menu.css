@@ -93,3 +93,38 @@
 .biz-before { margin: 8px auto 28px; max-width: 520px; }
 .biz-before img { width: 100%; height: auto; border-radius: 20px; display: block; }
 .biz-before figcaption { margin-top: 8px; color: var(--color-text-muted); font-size: 0.85rem; text-align: center; }
+
+/* ===== «كم يكلّف منيو محلك؟»: منيو ورقي يُسحب طرفه (js/menu-price.js) ===== */
+.mp { margin: 8px 0 32px; }
+.mp h2 { margin: 0 0 6px; }
+.mp-body { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 40px; margin-top: 14px; }
+.mp-sheet { flex: 0 1 340px; min-width: 0; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); }
+.mp-count { display: flex; align-items: baseline; gap: 8px; padding: 12px 16px 8px; border-bottom: 1px solid var(--color-border); font-weight: 700; }
+.mp-n { width: 4.2ch; padding: 2px 4px; border: 0; border-bottom: 2px dashed var(--color-primary); background: transparent; color: var(--color-primary); font: inherit; font-size: 1.5rem; font-weight: 700; line-height: 1.2; text-align: center; font-variant-numeric: tabular-nums; -moz-appearance: textfield; appearance: textfield; }
+.mp-n::-webkit-inner-spin-button, .mp-n::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.mp-rows-wrap { position: relative; overflow: hidden; transition: height 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.mp.dragging .mp-rows-wrap { transition: none; }
+.mp-rows { list-style: none; margin: 0; padding: 0 16px; }
+.mp-rows li { display: flex; align-items: baseline; gap: 6px; height: 30px; line-height: 30px; font-size: 0.9rem; white-space: nowrap; opacity: 0; transform: translateY(-8px); transition: opacity 0.25s, transform 0.25s; }
+.mp-rows li.on { opacity: 1; transform: none; }
+.mp-rows li span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.mp-rows li::after { content: ""; flex: 1; order: 1; border-bottom: 1px dotted var(--color-border-strong); }
+.mp-rows li span:last-child { order: 2; color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+/* ما بعد السقف ينضغط: سطور رفيعة كأوراق مكدّسة، والعدد الباقي فوقها */
+.mp-more { position: absolute; inset: auto 16px 0; display: grid; place-items: center; min-height: 24px; color: var(--color-primary); font-weight: 700; background: repeating-linear-gradient(to bottom, transparent 0 3px, var(--color-border) 3px 4px); }
+.mp-more[hidden] { display: none; }
+.mp-edge { display: grid; place-items: center; height: 30px; border-top: 1px solid var(--color-border); border-radius: 0 0 var(--radius-md) var(--radius-md); cursor: ns-resize; touch-action: none; user-select: none; -webkit-user-select: none; }
+.mp-edge i { width: 44px; height: 5px; border-radius: 999px; background: var(--color-border-strong); transition: width 0.2s, background 0.2s; }
+.mp-edge:hover i, .mp.dragging .mp-edge i, .mp-edge:focus-visible i { width: 64px; background: var(--color-primary); }
+.mp-edge:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+.mp-side { flex: 1 1 260px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.mp-seg { margin-top: 0; }
+.mp-check { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.mp-check input { width: 18px; height: 18px; accent-color: var(--color-primary); }
+.mp-price { margin: 4px 0 0; font-size: 1.1rem; }
+.mp-price b { font-size: 2.2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.mp-side .biz-note { margin: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .mp-rows-wrap, .mp-rows li, .mp-edge i { transition: none; }
+  .mp-rows li { transform: none; }
+}

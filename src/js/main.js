@@ -237,9 +237,10 @@ function initContactForm() {
   // تعبئة تلقائية لو الزائر جا من زر "🚩 إبلاغ عن خطأ" بأي بطاقة عنصر
   // (رابط بصيغة contact.html?report=اسم-العنصر&section=قسم)
   const params = new URLSearchParams(location.search);
-  // ‎?owner=correct|remove‎ من زرّي «محلك في توريلو؟» بصفحة business (مع ‎?report=‎ إن جاء من صفحة مكان)
+  // ‎?owner=correct|remove‎ من زرّي «محلك في توريلو؟» بصفحة business (مع ‎?report=‎ إن جاء من صفحة مكان)،
+  // و‎?owner=menu&items=60&v=both&photos=1‎ من حاسبة «كم يكلّف منيو محلك؟» (js/menu-price.js)
   const reportItem = params.get("report");
-  const owner = ["correct", "remove"].includes(params.get("owner")) ? params.get("owner") : "";
+  const owner = ["correct", "remove", "menu"].includes(params.get("owner")) ? params.get("owner") : "";
   if (reportItem || owner) {
     const typeSelect = form.querySelector('[name="request_type"]');
     const messageField = form.querySelector('[name="message"]');
@@ -248,7 +249,14 @@ function initContactForm() {
       const section = params.get("section") || "";
       const sectionSuffix = section ? ` (${t("contact_report_section_label")}: ${sectionLabel(section)})` : "";
       const about = reportItem ? `${reportItem}${sectionSuffix}` : "";
-      messageField.value = owner
+      const [vNames, yesNo] = [t("contact_menu_versions").split("|"), t("contact_menu_yesno").split("|")];
+      const menuDetails = t("contact_menu_details")
+        .replace("{items}", Math.min(Math.max(parseInt(params.get("items"), 10) || 1, 1), 999))
+        .replace("{v}", vNames[["digital", "print", "both"].indexOf(params.get("v"))] || vNames[0])
+        .replace("{photos}", yesNo[params.get("photos") === "1" ? 0 : 1]);
+      messageField.value = owner === "menu"
+        ? `${t("contact_owner_menu")}\n${menuDetails}\n${t("contact_owner_place_label")}: `
+        : owner
         ? `${t(`contact_owner_${owner}`)}\n${t("contact_owner_place_label")}: ${about}\n\n${owner === "correct" ? `${t("contact_owner_correct_label")}: ` : ""}`
         : `${t("contact_report_regarding")}: ${about}\n\n${t("contact_report_wrong_info_label")}: `;
       messageField.focus();

@@ -1,0 +1,36 @@
+{#- «كم يكلّف منيو محلك؟» (صفحة business، عربي وإنجليزي بنفس القالب حسب ar). المنطق والسعر في js/menu-price.js.
+    الصفوف أصناف المنيو التجريبي نفسه (demoMenu) بأسعاره، تتكرّر إن طال المنيو؛ لا أسعار مخترعة. -#}
+{%- set flat = [] -%}
+{%- for sec in m.data.menuSections %}{% for it in sec.items %}{% if flat.push(it) %}{% endif %}{% endfor %}{% endfor -%}
+<section class="mp" id="price" aria-labelledby="mpTitle" data-mp
+  data-cur="{{ 'د.ب' if ar else 'BD' }}"
+  data-units="{{ 'صنف|صنفان|أصناف|صنفاً|صنف' if ar else 'item|items|items|items|items' }}"
+  data-vt="{{ '{n} {u}، {p}' if ar else '{n} {u}, {p}' }}"
+  data-contact="{{ 'تواصل معنا' if ar else 'Contact us' }}"
+  data-over="{{ 'أكثر من 250 صنفاً، تواصل معنا' if ar else 'More than 250 items, contact us' }}"
+  data-photos="{{ 'منها {p} للصور' if ar else 'Includes {p} for photos' }}">
+  <h2 id="mpTitle">{{ 'كم يكلّف منيو محلك؟' if ar else 'What would your menu cost?' }}</h2>
+  <p class="biz-note">{{ 'اسحب طرف المنيو ليطول أو يقصر، أو اضغط العدد واكتبه.' if ar else 'Drag the edge of the menu to make it longer or shorter, or tap the number and type it.' }}</p>
+  <div class="mp-body">
+    <div class="mp-sheet">
+      <label class="mp-count"><input class="mp-n" type="number" inputmode="numeric" min="1" max="999" value="15" aria-label="{{ 'عدد الأصناف' if ar else 'Number of items' }}" /><span class="mp-u">{{ 'صنفاً' if ar else 'items' }}</span></label>
+      <div class="mp-rows-wrap">
+        <ol class="mp-rows" aria-hidden="true">{% for i in range(0, 40) %}{% set it = flat[i % flat.length] %}<li><span>{{ it.ar if ar else it.en }}</span><span dir="ltr">{{ it.p[0] }}</span></li>{% endfor %}</ol>
+        <div class="mp-more" aria-hidden="true" dir="ltr" hidden></div>
+      </div>
+      <div class="mp-edge" role="slider" tabindex="0" aria-label="{{ 'طول المنيو بعدد الأصناف' if ar else 'Menu length in items' }}" aria-valuemin="1" aria-valuemax="251" aria-valuenow="15"><i></i></div>
+    </div>
+    <div class="mp-side">
+      <div class="hm-themes mp-seg" role="group" aria-label="{{ 'النسخة' if ar else 'Version' }}">
+        <button type="button" data-v="digital" aria-pressed="true">{{ 'رقمية' if ar else 'Digital' }}</button>
+        <button type="button" data-v="print" aria-pressed="false">{{ 'مطبوعة' if ar else 'Print' }}</button>
+        <button type="button" data-v="both" aria-pressed="false">{{ 'الاثنتان' if ar else 'Both' }}</button>
+      </div>
+      <label class="mp-check"><input class="mp-ph" type="checkbox" /> {{ 'بصور أصناف محلك' if ar else 'With your own item photos' }}</label>
+      <p class="mp-price" aria-live="polite"><b dir="ltr">22.500</b> {{ 'د.ب' if ar else 'BD' }}</p>
+      <p class="biz-note mp-photos" hidden></p>
+      <p class="biz-note">{{ 'سعر لمرة واحدة، والعربية والإنجليزية مشمولتان.' if ar else 'A one-time price, with Arabic and English included.' }}</p>
+      <a class="btn mp-go" data-href="{{ ('/contact.html' if ar else '/en/contact.html') | url }}" href="{{ ('/contact.html' if ar else '/en/contact.html') | url }}?owner=menu&amp;items=15&amp;v=digital&amp;photos=0">{{ 'اطلب هذا المنيو' if ar else 'Order this menu' }}</a>
+    </div>
+  </div>
+</section>

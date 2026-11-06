@@ -27,6 +27,7 @@ pageCss: "menu"
   <div class="hm-demos"><a class="btn" href="{{ '/contact.html' | url }}?owner=correct">صحّح معلومات محلك</a><a class="btn secondary" href="{{ '/contact.html' | url }}?owner=remove">اطلب إزالة محلك</a></div>
   <p class="biz-note">زر التصحيح لكل من وجد خطأً أيضاً. وقبل أي تغيير أو إزالة أتأكّد من المحل نفسه عبر رقمه أو حسابه الرسمي في إنستقرام الظاهرَين في صفحته على توريلو، لا عبر الرقم المكتوب في النموذج، كي لا يغيّر أحدٌ محلاً ليس له.</p>
 </details>
+{% include "menu-price.njk" %}
 <div class="biz-demo">
   <div class="biz-demo-text">
     <h2>شاهد كيف يعمل</h2>
@@ -60,3 +61,4 @@ pageCss: "menu"
 </section>
 <script src="{{ ('/js/menu.js') | url }}?v={{ buildVersion }}"></script>
 <script src="{{ ('/js/demo.js') | url }}?v={{ buildVersion }}"></script>
+<script src="{{ ('/js/menu-price.js') | url }}?v={{ buildVersion }}"></script>

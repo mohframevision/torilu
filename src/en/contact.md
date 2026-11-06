@@ -37,7 +37,8 @@ langSwitchUrl: "/contact.html"
 <option value="Suggest a story for an article">Suggest a story for an article</option>
 <option value="Report incorrect info">Report incorrect info</option>
 <option value="Correct a place's info">Correct a place's info</option>
-<option value="Remove a place from Torilu">Remove a place from Torilu</option></select>
+<option value="Remove a place from Torilu">Remove a place from Torilu</option>
+<option value="Designed menu request">Designed menu request</option></select>
   </div>
 
   <div class="form-group">
