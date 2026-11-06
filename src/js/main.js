@@ -670,6 +670,32 @@ function initArticleShare() {
   });
 }
 
+// زر المفضلة بصفحة المكان: نفس مفتاح بطاقات القسم (القسم + اسم الملف). نسخة الجريدة
+// المطوية (fold.js) تُنسخ قبل هذا، فنحدّث كل النسخ ونربط الحقيقية فقط
+function initPlaceFav() {
+  const btn = document.querySelector(".place-fav-btn:not(.np-fold *)");
+  if (!btn) return;
+  const { section, slug: id } = btn.dataset;
+  const paint = (fav) =>
+    document.querySelectorAll(".place-fav-btn").forEach((b) => {
+      const label = fav ? t("fav_remove") : t("fav_add");
+      b.classList.toggle("active", fav);
+      b.innerHTML = fav ? ICON_SVG["heart-fill"] : ICON_SVG.heart;
+      b.title = label;
+      b.setAttribute("aria-label", label);
+      b.setAttribute("aria-pressed", String(fav));
+    });
+  paint(isFavorite(section, id));
+  btn.addEventListener("click", () => {
+    const nowFav = toggleFavorite(section, id);
+    sfx(nowFav ? "favOn" : "favOff");
+    paint(nowFav);
+    btn.classList.remove("pop");
+    void btn.offsetWidth;
+    btn.classList.add("pop");
+  });
+}
+
 function initArticleListen() {
   const btn = document.querySelector(".article-listen-btn:not(.np-fold *)");
   const player = document.querySelector(".article-audio-player:not(.np-fold *)");
@@ -1690,6 +1716,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactForm();
   initArticleShare();
   initArticleListen();
+  initPlaceFav();
 
   // تسجيل الـ service worker بكل صفحة (لا بس الرئيسية) — شرط أساسي لصلاحية
   // "إضافة للشاشة الرئيسية" (PWA) بمعظم المتصفحات

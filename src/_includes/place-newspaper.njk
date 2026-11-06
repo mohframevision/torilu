@@ -31,6 +31,7 @@
     {% if mapsLink %}<a class="btn" href="{{ mapsLink }}" target="_blank" rel="noopener">{{ svgIcon("location-pin", 16) }} {{ t.link_maps }}</a>{% else %}<span></span>{% endif %}
     <span class="np-byline-acts">
     {% if audio %}<button type="button" class="btn secondary article-listen-btn" data-audio-src="{{ audio | url }}">{{ svgIcon("volume-up", 16) }} {{ t.article_listen }}</button>{% endif %}
+    <button type="button" class="btn secondary place-fav-btn" data-section="{{ sectionSlug }}" data-slug="{{ arTwin.fileSlug if arTwin else page.fileSlug }}" title="{{ t.fav_add }}" aria-label="{{ t.fav_add }}" aria-pressed="false">{{ svgIcon("heart", 16) }}</button>
     <button type="button" class="btn secondary article-share-btn">{{ svgIcon("share", 16) }} {{ t.place_share }}</button>
     </span>
   </div>

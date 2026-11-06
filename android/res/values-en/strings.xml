@@ -61,12 +61,10 @@
     <string name="contact_title">Contact us</string>
     <string name="share_app_text">Torilu — a guide to places in Bahrain, every one of them checked</string>
 
-    <string name="story_intro">A Bahraini guide that gathers everything useful in one place: restaurants, cafés, stores, places, and articles.</string>
-    <string name="stat_items">real items</string>
-    <string name="stat_sections">sections</string>
-    <string name="stat_langs">languages: Arabic and English</string>
-    <string name="story_help_title">And I need your help</string>
-    <string name="story_help_text">If you have any suggestion for Torilu, tell me. And if you like it, share it with someone who needs it.</string>
+    <string name="story_headline">A guide that grew out of Hakolah</string>
+    <string name="story_deck">Torilu is a guide to places in Bahrain: restaurants, cafés, bakeries, stores, garages and places worth a visit, in Arabic and English.</string>
+    <string name="story_body">This guide started in summer 2026 as part of a site called Hakolah. Hakolah then widened to other things: sounds, Dilmo and tools for creators.\n\nIn November 2026 I decided the guide should stand on its own under a new name: Torilu, at torilu.com, while Hakolah stays home to sounds, Dilmo and creator tools.\n\nEvery place here is checked before it is published: that it is really open, its hours are right, its phone number works, its location is accurate, and its menu has real prices. A place with missing details is not published until it is complete.\n\nSearch by a place\'s name or by a dish on its menu, and when you can\'t decide, “Pick for me” chooses for you. Its pages look like a printed newspaper, with no ads, no accounts, and no personal data collected.</string>
+    <string name="story_help_text">If you know a place that belongs here, or you find something wrong, tell me. And if you like Torilu, share it with someone who needs it.</string>
     <string name="story_help_suggest">Send a suggestion</string>
     <string name="story_help_share">Share Torilu</string>
     <string name="story_sign">— Mohamed, maker of Torilu</string>

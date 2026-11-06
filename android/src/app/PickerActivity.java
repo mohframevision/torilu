@@ -32,6 +32,8 @@ import org.json.JSONObject;
 // بلا lambdas ولا كلاسات مجهولة — د8 بهذي البيئة يفشل عليها.
 public class PickerActivity extends Activity implements View.OnClickListener, OrbView.Listener {
     private static final String ALL = "__all__";
+    /** محلات السيارات خارج «اختار لي» (قرار المالك 2026-11-06، مثل الموقع) */
+    private static final String NOT_PICKED = "car-shops";
     private static final String PREFIX_CATEGORY = "cat:";
     private static final String ACTION_BACK = "action:back";
 
@@ -101,7 +103,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Or
         for (int i = 0; i < order.length(); i++) {
             String slug = order.optString(i);
             JSONObject section = sections.optJSONObject(slug);
-            if (!MainActivity.isBrowsable(section)) continue;
+            if (!MainActivity.isBrowsable(section) || NOT_PICKED.equals(slug)) continue;
             addChip(Lang.title(this, section), slug);
         }
         Ui.scrollToStart(categoriesScroll);
@@ -135,7 +137,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Or
         if (sections != null && order != null) {
             for (int i = 0; i < order.length(); i++) {
                 String s = order.optString(i);
-                if (!ALL.equals(slug) && !s.equals(slug)) continue;
+                if (NOT_PICKED.equals(s) || (!ALL.equals(slug) && !s.equals(slug))) continue;
                 JSONObject section = sections.optJSONObject(s);
                 JSONArray items = section == null ? null : section.optJSONArray("items");
                 if (items == null) continue;

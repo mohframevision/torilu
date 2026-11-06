@@ -7,7 +7,7 @@
    itemTitle، itemDesc، itemHours، tagLabel، sectionLabel، escapeHtml، safeUrl، sfx،
    showToast، nearestBranch). main.js يستدعي initRandomPicker. */
 
-const PK_KEYS = ["restaurants", "cafes", "bakeries", "places", "stores", "car-shops"];
+const PK_KEYS = ["restaurants", "cafes", "bakeries", "places", "stores"];
 
 // رموز الأقسام: شكل ممتلئ بنقاط نصف تونية + خط خارجي (--knock = لون خلفية الزر)
 const PK_SHAPES = {
@@ -30,10 +30,6 @@ const PK_SHAPES = {
   stores: {
     fill: '<path d="M9 17h30l-2.2 24H11.2z"/>',
     line: '<path d="M9 17h30l-2.2 24H11.2z"/><path d="M17 21v-7a7 7 0 0 1 14 0v7"/>',
-  },
-  "car-shops": {
-    fill: '<path d="M5 33v-6l4.5-9.5A4 4 0 0 1 13.1 15h21.8a4 4 0 0 1 3.6 2.5L43 27v6z"/>',
-    line: '<path d="M5 33v-6l4.5-9.5A4 4 0 0 1 13.1 15h21.8a4 4 0 0 1 3.6 2.5L43 27v6z"/><path d="M8 27h32" stroke-opacity=".6"/><circle cx="14" cy="34" r="4.5" style="fill:var(--knock)"/><circle cx="34" cy="34" r="4.5" style="fill:var(--knock)"/>',
   },
   any: {
     fill: '<rect x="8" y="8" width="32" height="32" rx="7" transform="rotate(-8 24 24)"/>',
@@ -297,7 +293,7 @@ function initRandomPicker() {
     const hidden = getComputedStyle(prompt).visibility === "hidden";
     const below = hidden ? 0 : prompt.offsetTop + prompt.offsetHeight;
     // شاشة قصيرة (جوال بالعرض، لابتوب منخفض): تصغر العجلة والقمر حتى يتّسعا فوق الشريط السفلي
-    const room = h - below - 20 - 24;
+    const room = h - below - 20 - 40; // 40: اسم البتلة السفلية تحتها
     const k = Math.min(1, Math.max(0.4, room / (2 * px("--R") + px("--p"))));
     if (k < 1) for (const v of ["--b", "--p", "--R"]) root.style.setProperty(v, `${Math.round(px(v) * k)}px`);
     const cs2 = getComputedStyle(root);

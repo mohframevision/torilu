@@ -393,7 +393,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         List<String> brands = new ArrayList<>();
         List<View> cards = new ArrayList<>();
         for (int i = 0; i < pool.size() && cards.size() < NEW_COUNT; i++) {
-            String brand = Lang.title(this, pool.get(i)).split("\\s+-\\s+")[0].trim();
+            String brand = shopKey(pool.get(i));
             if (brands.contains(brand)) continue;
             brands.add(brand);
             cards.add(card(pool.get(i), poolSlugs.get(i), null));
@@ -435,11 +435,25 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         }
         if (newItems.isEmpty()) return;
         homeSections.addView(Ui.head(this, getString(R.string.home_new)));
-        for (int i = 0; i < Math.min(NEW_COUNT, newItems.size()); i++) {
+        // محل واحد لكل بطاقة: القائمة مرتّبة من الأحدث، فأول فرع يظهر هو الأحدث ويمثّل
+        // المحل، وفروعه الباقية تُتخطّى ونكمل بما بعدها حتى نصل NEW_COUNT
+        List<String> shops = new ArrayList<>();
+        for (int i = 0; i < newItems.size() && shops.size() < NEW_COUNT; i++) {
+            String key = shopKey(newItems.get(i));
+            if (shops.contains(key)) continue;
+            shops.add(key);
             String slug = newSlugs.get(i);
             String badge = getString("guides".equals(slug) ? R.string.home_article_badge : R.string.home_new_badge);
             homeSections.addView(card(newItems.get(i), slug, badge));
         }
+    }
+
+    // «نفس المحل»: app-data.json لا يحمل حقل سلسلة أو علامة، والفروع تُكتب «الاسم - الفرع»
+    // («Kojo Restaurant - Juffair»، «Yummies - فرع الساية»، «المطعم اللبناني - الرفاع»).
+    // المفتاح ما قبل أول شَرطة محاطة بمسافتين في العنوان العربي (title) لا المترجم: الإنجليزي
+    // يكتب أحياناً «–» بدل «-». عنوان بلا شرطة = محل بفرع واحد
+    static String shopKey(JSONObject item) {
+        return item.optString("title").split("\\s+[-\u2013\u2014]\\s+")[0].trim();
     }
 
     // بطاقة «د» (.d-card): سطر أزرق صغير، الاسم بخط الجريدة، الوصف، والساعات

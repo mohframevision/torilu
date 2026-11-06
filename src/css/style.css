@@ -5980,12 +5980,22 @@ main .search-box {
   padding: 6px 14px;
   font-size: 0.85rem;
 }
+.np-place .np-byline .place-fav-btn {
+  padding-inline: 10px;
+}
+.np-sheet .np-byline .place-fav-btn.active {
+  color: var(--color-danger);
+}
+.place-fav-btn.pop svg {
+  animation: favPop 0.4s ease;
+}
 .np-byline-acts {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
-.np-sheet .np-byline .article-listen-btn {
+.np-sheet .np-byline .article-listen-btn,
+.np-sheet .np-byline .place-fav-btn {
   background: transparent;
   border-color: var(--color-ink-rule);
   color: var(--color-text);
