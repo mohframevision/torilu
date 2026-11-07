@@ -11,28 +11,8 @@
   const $ = (id) => document.getElementById(id);
   const S = typeof SEARCH_DATA === "undefined" ? { synonyms: [], popular: [], try: [] } : SEARCH_DATA;
 
-  /* ===== توحيد النص ===== */
-  const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
-  const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
-  function norm(text) {
-    return String(text || "")
-      .toLowerCase()
-      .replace(/[ً-ٰٟـ]/g, "") // التشكيل والتطويل
-      .replace(/[أإآٱ]/g, "ا")
-      .replace(/ة/g, "ه")
-      .replace(/ى/g, "ي")
-      .replace(/ؤ/g, "و")
-      .replace(/ئ/g, "ي")
-      .replace(/چ/g, "ج")
-      .replace(/گ/g, "ق")
-      .replace(/[٠-٩]/g, (d) => AR_DIGITS.indexOf(d))
-      .replace(/[۰-۹]/g, (d) => FA_DIGITS.indexOf(d))
-      .replace(/[^\p{L}\p{N}\s.]/gu, " ")
-      .split(/\s+/)
-      .filter(Boolean)
-      .map((w) => w.replace(/^(و?ال)(?=\S{2,})/, "")) // «الشاورما» = «شاورما»
-      .join(" ");
-  }
+  // توحيد النص: نفس searchNorm في main.js (القواعد هناك، مرة واحدة لفلتر القسم وصفحة البحث)
+  const norm = searchNorm;
 
   /* ===== المرادفات: كل كلمة بمجموعة توصل لباقيها ===== */
   const synGroups = S.synonyms.map((g) => g.map(norm));

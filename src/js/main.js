@@ -93,18 +93,26 @@ function levenshtein(a, b) {
   return prevRow[n];
 }
 
-/* توحيد النص للبحث: أشكال الألف والتاء المربوطة والياء والتشكيل، و«ال» بأول الكلمة
-   («الشعلة» = «شعلة») — نفس قواعد صفحة البحث (search.js) */
+/* توحيد النص للبحث (فلتر القسم وصفحة البحث search.js معاً): أشكال الألف والتاء المربوطة والياء
+   والتشكيل والتطويل، چ گ ← ج ق، الأرقام العربية والفارسية ← 0-9، والنقطة تبقى بين رقمين فقط
+   (سعر 1.800)، و«ال» بأول الكلمة («الشعلة» = «شعلة») */
+const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
+const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
 function searchNorm(text) {
   return String(text || "")
     .toLowerCase()
-    .replace(/[ً-ٰٟـ]/g, "")
+    .replace(/[ً-ٰٟـ]/g, "") // التشكيل والتطويل
     .replace(/[أإآٱ]/g, "ا")
     .replace(/ة/g, "ه")
     .replace(/ى/g, "ي")
     .replace(/ؤ/g, "و")
     .replace(/ئ/g, "ي")
-    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .replace(/چ/g, "ج")
+    .replace(/گ/g, "ق")
+    .replace(/[٠-٩]/g, (d) => AR_DIGITS.indexOf(d))
+    .replace(/[۰-۹]/g, (d) => FA_DIGITS.indexOf(d))
+    .replace(/[^\p{L}\p{N}\s.]/gu, " ")
+    .replace(/(?<!\d)\.|\.(?!\d)/g, " ")
     .split(/\s+/)
     .filter(Boolean)
     .map((w) => w.replace(/^(و?ال)(?=\S{2,})/, ""))
