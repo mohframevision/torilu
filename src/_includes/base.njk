@@ -238,7 +238,9 @@
     }
   </script>
   <script src="{{ '/js/bootstrap.js' | url }}?v={{ buildVersion }}"></script>
-  <script src="{{ '/js/data.js' | url }}?v={{ buildVersion }}"></script>
+  {# data.js (بيانات كل الأماكن) فقط للصفحات التي تقرؤه: الأقسام والمفضلة والرئيسية والبحث و«اختار لي» والخطة والترحيب،
+     والتواصل (اسم القسم في رسالة البلاغ). صفحات الأماكن والمقالات وغيرها لا تحتاجه، وعامل الخدمة يخزّنه للاستعمال بلا اتصال #}
+  {% if section or isFavoritesPage or navActive in ["home", "picker", "plan", "welcome", "search", "contact"] %}<script src="{{ '/js/data.js' | url }}?v={{ buildVersion }}"></script>{% endif %}
   <script src="{{ '/js/sfx.js' | url }}?v={{ buildVersion }}"></script>
   <script src="{{ '/js/main.js' | url }}?v={{ buildVersion }}"></script>
   {# سكربت خاص بصفحة وحدة (مثل صوتيات توريلو) — ما ينزل مع بقية الصفحات #}
