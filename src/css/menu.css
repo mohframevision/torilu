@@ -3,11 +3,11 @@
    كل ثيم = خط العناوين + ٦ ألوان فقط، فإضافة ثيم جديد = سطرين.
    يتحمّل بصفحات المنيو وصفحة «اعرض محلك» فقط (pageCss: "menu")، فالخطوط ما تثقّل باقي الموقع.
    المقاسات بـem: الحجم كله يتبع font-size حق .hm (أصغر داخل جوال العرض الحي). */
-@font-face { font-family: "Lalezar"; font-display: swap; src: url("/assets/fonts/lalezar-arabic.woff2") format("woff2"); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFC; }
+@font-face { font-family: "Lalezar"; font-display: swap; src: url("/assets/fonts/lalezar-arabic.woff2") format("woff2"); unicode-range: U+060C, U+061B, U+061F, U+0621-065F, U+0660-066D, U+0670-0671, U+067E, U+0686, U+0698, U+06A4, U+06A9, U+06AF, U+06CC, U+06D4, U+06F0-06F9; }
 @font-face { font-family: "Lalezar"; font-display: swap; src: url("/assets/fonts/lalezar-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
 @font-face { font-family: "Reem Kufi"; font-weight: 600; font-display: swap; src: url("/assets/fonts/reemkufi-arabic.woff2") format("woff2"); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFC; }
 @font-face { font-family: "Reem Kufi"; font-weight: 600; font-display: swap; src: url("/assets/fonts/reemkufi-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
-@font-face { font-family: "Amiri"; font-display: swap; src: url("/assets/fonts/amiri-arabic.woff2") format("woff2"); unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFC; }
+@font-face { font-family: "Amiri"; font-display: swap; src: url("/assets/fonts/amiri-arabic.woff2") format("woff2"); unicode-range: U+060C, U+061B, U+061F, U+0621-065F, U+0660-066D, U+0670-0671, U+067E, U+0686, U+0698, U+06A4, U+06A9, U+06AF, U+06CC, U+06D4, U+06F0-06F9; }
 @font-face { font-family: "Amiri"; font-display: swap; src: url("/assets/fonts/amiri-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
 
 /* --bg الخلفية · --ink النص · --muted النص الثانوي · --line الفواصل · --accent لون المحل (العناوين والسعر الثاني) · --hl خط التمييز تحت العناوين */
