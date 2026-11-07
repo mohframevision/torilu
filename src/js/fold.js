@@ -11,16 +11,40 @@
   const hint = T.fold_hint || "";
   const title = (sheet.querySelector("h1") || {}).textContent || "";
 
-  // الوجه الأمامي لكل قطعة: نسخة صامتة من أعلى الورقة نفسها، فتطابق الورقة الحقيقية لما تنفتح
+  // الوجه الأمامي لكل قطعة: نسخة صامتة من أعلى الورقة نفسها، فتطابق الورقة الحقيقية لما تنفتح.
+  // الطيّة لا تُظهر إلا أعلى الورقة، فالنسخة تحمل ما يبدأ ضمن مرّة ونصف من ارتفاع الجريدة فقط
+  // (لا المنيو كله)، وتُبنى مرة واحدة وتُنسخ للقطع الأربع؛ وتُعاد إن تغيّر عرض الورقة
+  let proto = null;
+  let protoW = 0;
+  // داخل أعمدة الجريدة (columns) يتوزّع النص حسب طوله كله: الحذف منه يحرّك أعلى الأعمدة، فيبقى كاملاً
+  function multiCol(el) {
+    const cs = getComputedStyle(el);
+    if (cs.columnCount === "auto" && cs.columnWidth === "auto") return false;
+    return new Set([...el.children].map((c) => Math.round(c.getBoundingClientRect().left))).size > 1;
+  }
+  function prune(orig, copy, top0, scale, limit) {
+    for (let i = orig.children.length - 1; i >= 0; i--) {
+      const el = orig.children[i];
+      if ((el.getBoundingClientRect().top - top0) / scale > limit) copy.children[i].remove();
+      else if (!multiCol(el)) prune(el, copy.children[i], top0, scale, limit);
+    }
+  }
   function face() {
-    const f = document.createElement("span");
-    f.className = "np-face";
-    const page = document.createElement("span");
-    page.className = "np-sheet np-fold-face";
-    for (const child of sheet.children) page.appendChild(child.cloneNode(true));
-    page.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
-    f.appendChild(page);
-    return f;
+    if (!proto || protoW !== sheet.offsetWidth) {
+      protoW = sheet.offsetWidth;
+      const page = document.createElement("span");
+      page.className = "np-sheet np-fold-face";
+      for (const child of sheet.children) page.appendChild(child.cloneNode(true));
+      // getBoundingClientRect بوحدات الشاشة (تختلف مع zoom الشاشات العريضة)، فنقسم على النسبة
+      const r = sheet.getBoundingClientRect();
+      const scale = r.height / sheet.offsetHeight || 1;
+      prune(sheet, page, r.top, scale, Math.max(protoW * 0.68, 460) * 1.5 + 100);
+      page.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+      proto = document.createElement("span");
+      proto.className = "np-face";
+      proto.appendChild(page);
+    }
+    return proto.cloneNode(true);
   }
   const span = (cls) => {
     const s = document.createElement("span");
@@ -87,6 +111,7 @@
     st.setProperty("--dx", -w / 2 + "px");
     st.setProperty("--dy", Math.min(24, Math.max(0, (2 * h - h * s) / 2)) + "px");
     sheet.style.setProperty("--fold-h", h + "px");
+    if (protoW && W !== protoW) paper.querySelectorAll(".np-face").forEach((f) => f.replaceWith(face()));
   }
   measure();
   sheet.classList.add("np-folded");
