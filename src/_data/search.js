@@ -50,6 +50,6 @@ module.exports = {
   popular: ["شاورما", "كرك", "مشاوي", "برجر", "قهوة مختصة", "مندي", "كراج", "حلويات"],
   popular_en: ["Shawarma", "Karak", "Grills", "Burger", "Specialty coffee", "Mandi", "Garage", "Desserts"],
   // كلمات لها نتائج فعلاً (تصنيفات موجودة بالموقع) — مثال يرجع فاضي يحبط بدل ما يعلّم
-  try: ["فطور", "مطعم عائلي", "رخيص", "قهوة مختصة", "مأكولات بحرية", "بحريني"],
-  try_en: ["Breakfast", "Family restaurant", "Cheap", "Specialty coffee", "Seafood", "Bahraini"],
+  try: ["فطور", "مطعم عائلي", "رخيص", "مأكولات بحرية", "بحريني"],
+  try_en: ["Breakfast", "Family restaurant", "Cheap", "Seafood", "Bahraini"],
 };
