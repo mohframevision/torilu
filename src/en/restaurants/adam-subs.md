@@ -16,8 +16,3 @@ Adam Subs is a burger and subs restaurant, with delivery via several apps.
 onions over a patty cooked fresh, not a frozen pre-made one. The onion and
 beef together give it a taste that's hard to describe. The **Zinger** is good
 too, and it's one of the best places for burgers and fillet steak.
-
-## Contact & Ordering
-
-[Instagram](https://www.instagram.com/adamsubs/) ·
-[Website](https://adamsubs.invopos.app)

@@ -22,7 +22,7 @@ quantities for a gathering or event order.
 
 ## Contact & Ordering
 
-[📞 17000875](tel:+97317000875) · [💬 WhatsApp 36881822](https://wa.me/97336881822) · [📸 Instagram](https://www.instagram.com/joodys_bh/)
+[💬 WhatsApp 36881822](https://wa.me/97336881822)
 
 ## Location
 
