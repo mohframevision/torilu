@@ -90,7 +90,7 @@
   {% if kinds.length %}<dt>{{ "Type" if isEn else "النوع" }}</dt><dd>{{ kinds.slice(0, 4).join(", " if isEn else "، ") }}</dd>{% endif %}
   {% if area %}<dt>{{ "Area" if isEn else "المنطقة" }}</dt><dd>{{ (tags_en[area] or area) if isEn else area }}</dd>{% endif %}
   {% if lk.phone %}<dt>{{ "Phone" if isEn else "الهاتف" }}</dt><dd><a href="tel:{{ lk.phone.split(',')[0] }}" dir="ltr">{{ lk.phone.split(',')[0] }}</a></dd>{% endif %}
-  {% if mapsLink %}<dt>{{ "Location" if isEn else "الموقع" }}</dt><dd><a href="{{ mapsLink }}" target="_blank" rel="noopener">{{ "Google Maps" if isEn else "خرائط قوقل" }}</a></dd>{% endif %}
+  {#- الخريطة ليست هنا: زرّها الأساسي في أعلى الصفحة -#}
   {% if lk.instagram %}<dt>{{ "Instagram" if isEn else "إنستقرام" }}</dt><dd><a href="{{ lk.instagram }}" target="_blank" rel="noopener" dir="ltr">@{{ lk.instagram.replace(r/^https?:\/\/(?:www\.)?instagram\.com\/([^\/?]+).*$/, "$1") }}</a></dd>{% endif %}
   {% if lk.website %}<dt>{{ "Website" if isEn else "الموقع الإلكتروني" }}</dt><dd><a href="{{ lk.website }}" target="_blank" rel="noopener">{{ t.link_website }}</a></dd>{% endif %}
 </dl>
