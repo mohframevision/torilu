@@ -36,6 +36,8 @@ const PRECACHE = [
   BASE + "js/main.js?v=" + VERSION,
   // الرئيسية تحتاج home.js لتملأ صفوفها، وخط Amiri لشعار وعناوين شكل «د»
   BASE + "js/home.js?v=" + VERSION,
+  // أيقونات الواجهة كلها في ملف واحد (src/_data/icons.js)
+  ${JSON.stringify(data.icons.href)},
   BASE + "assets/fonts/cairo-arabic.woff2",
   BASE + "assets/fonts/cairo-latin.woff2",
   BASE + "assets/fonts/amiri-arabic.woff2",

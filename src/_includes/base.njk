@@ -223,6 +223,7 @@
     <script type="application/json" id="site-config">
     {
       "lang": {{ lang | json | safe }},
+      "iconsUrl": {{ icons.href | json | safe }},
       "menusUrl": {{ (('/js/menus.js' | url) + '?v=' + buildVersion) | json | safe }},
       "page": {
         "section": {{ (section or "") | json | safe }},

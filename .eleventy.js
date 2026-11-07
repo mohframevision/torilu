@@ -78,6 +78,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.watchIgnores.add("src/*/*.11tydata.js");
 
   // ملفات ثابتة تُنسخ كما هي بدون معالجة
+  // رابط ملف الأيقونات لماكرو icon.njk (الماكرو المستورَد لا يرى بيانات الصفحة)
+  eleventyConfig.addNunjucksGlobal("iconsHref", require("./src/_data/icons.js").href);
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/admin");

@@ -14,6 +14,7 @@
   window.SITE_LANG = cfg.lang || "ar";
   window.I18N = cfg.i18n || {};
   window.PAGE = cfg.page || {};
+  window.ICONS_URL = cfg.iconsUrl || "/assets/icons.svg";
 
   /* قوائم الطعام (MENU_POOL) بملف مستقل js/menus.js: ما يتحمّل إلا لما نحتاجه (فتح قائمة طعام، صفحة البحث)،
      بدل ما يثقّل data.js بكل صفحة. menuOf يرجّع أصناف العنصر بنفس شكل menuItems القديم */
