@@ -58,27 +58,36 @@ function pkRng(seed) {
 let pkUid = 0;
 const f1 = (v) => v.toFixed(1);
 
+// النقاط كلها رسم واحد (path) بدل مئات الدوائر: كل نقطة دائرة من قوسين، ونفس المظهر بعناصر أقل
+const pkDot = (cx, cy, r) => {
+  const n = (v) => +v.toFixed(2);
+  return `M${n(cx - r)} ${cy}a${r} ${r} 0 1 0 ${n(2 * r)} 0a${r} ${r} 0 1 0 ${n(-2 * r)} 0`;
+};
+let pkGlyphDots = "";
 function pkGlyph(key) {
   const g = PK_SHAPES[key] || PK_SHAPES.any;
   const id = `pkg${++pkUid}`;
-  let dots = "";
-  for (let y = 1.55, row = 0; y < 50; y += 2.68, row++) {
-    for (let x = row % 2 ? 1.55 : 0; x < 50; x += 3.1) {
-      dots += `<circle cx="${f1(x)}" cy="${f1(y)}" r="${(0.35 + (x / 48 + y / 48) / 2).toFixed(2)}"/>`;
+  if (!pkGlyphDots) {
+    for (let y = 1.55, row = 0; y < 50; y += 2.68, row++) {
+      for (let x = row % 2 ? 1.55 : 0; x < 50; x += 3.1) {
+        pkGlyphDots += pkDot(+f1(x), f1(y), +(0.35 + (x / 48 + y / 48) / 2).toFixed(2));
+      }
     }
   }
-  return `<svg viewBox="0 0 48 48" aria-hidden="true"><defs><mask id="${id}"><g fill="#fff">${g.fill}</g></mask></defs><g mask="url(#${id})" fill="currentColor">${dots}</g><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">${g.line}</g></svg>`;
+  return `<svg viewBox="0 0 48 48" aria-hidden="true"><defs><mask id="${id}"><g fill="#fff">${g.fill}</g></mask></defs><g mask="url(#${id})" fill="currentColor"><path d="${pkGlyphDots}"/></g><g fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">${g.line}</g></svg>`;
 }
 
-// حلقة نقاط بنصف قطر r داخل مربع 200 (المقاس الفعلي من CSS)
+// حلقة نقاط بنصف قطر r داخل مربع 200 (المقاس الفعلي من CSS)؛ كل حلقة رسم واحد بشفافيتها
 function pkHalo(cls, rings) {
   let c = "";
   for (const [r, n, dot, op] of rings) {
+    let d = "";
     for (let i = 0; i < n; i++) {
       const a = (i / n) * Math.PI * 2;
       const k = 0.55 + 0.45 * Math.sin(a * 3 + 1);
-      c += `<circle cx="${f1(100 + r * Math.cos(a))}" cy="${f1(100 + r * Math.sin(a))}" r="${(dot * k).toFixed(2)}" opacity="${op}"/>`;
+      d += pkDot(+f1(100 + r * Math.cos(a)), f1(100 + r * Math.sin(a)), +(dot * k).toFixed(2));
     }
+    c += `<path d="${d}" opacity="${op}"/>`;
   }
   return `<svg class="${cls}" viewBox="0 0 200 200" aria-hidden="true"><g fill="currentColor">${c}</g></svg>`;
 }
