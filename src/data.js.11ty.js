@@ -8,6 +8,11 @@ const { buildSiteData, PRICE_TAGS, splitMenus } = require("../eleventy-app-data.
 exports.render = function (data) {
   const out = buildSiteData(data);
   splitMenus(out); // المنيو بملف مستقل: js/menus.js
+  // قيم false والنص الفارغ لا تُكتب (الصفحات تقرأ هذه الحقول كشرط فقط، فالغائب مثل false):
+  // ربع حجم البيانات أقل. app-data.json (التطبيق) يبقى كما هو من buildSiteData مباشرة
+  for (const sec of Object.values(out))
+    for (const item of sec.items || [])
+      for (const [k, v] of Object.entries(item)) if (v === false || v === "") delete item[k];
 
   return (
     "/* هذا الملف يُنشأ تلقائياً من محتوى src/<section>/*.md عبر Eleventy — لا تعدّله يدوياً هنا،" +
