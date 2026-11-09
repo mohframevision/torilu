@@ -6022,3 +6022,44 @@ main .search-box {
     border-radius: 50%;
   }
 }
+
+/* ===== ورق وحبر: ملمس الصفحة، ظلال دافئة، تذييل في أسفل النافذة ===== */
+/* حبيبات ورق خفيفة جداً على خلفية الصفحة كلها (كانت على ورقة الجريدة وحدها)؛
+   بلاطة واحدة مكرّرة بلا طبقة مزج، فلا كلفة عند التمرير */
+:root {
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .27 0 0 0 0 .2 0 0 0 .055 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --paper-grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .75 0 0 0 0 .82 0 0 0 0 1 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* ظل بدرجة الورق الدافئة بدل الرمادي المزرق، مع خط تماس رفيع يحدّد حافة البطاقة */
+  --shadow-card: 0 0 0 1px rgb(74 52 24 / 0.05), 0 1px 2px rgb(74 52 24 / 0.06), 0 10px 28px rgb(74 52 24 / 0.07);
+  --shadow-card-hover: 0 0 0 1px rgb(74 52 24 / 0.07), 0 3px 6px rgb(74 52 24 / 0.06), 0 18px 44px rgb(74 52 24 / 0.12);
+}
+:root[data-theme="light"] {
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .27 0 0 0 0 .2 0 0 0 .055 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --shadow-card: 0 0 0 1px rgb(74 52 24 / 0.05), 0 1px 2px rgb(74 52 24 / 0.06), 0 10px 28px rgb(74 52 24 / 0.07);
+  --shadow-card-hover: 0 0 0 1px rgb(74 52 24 / 0.07), 0 3px 6px rgb(74 52 24 / 0.06), 0 18px 44px rgb(74 52 24 / 0.12);
+}
+/* الداكن: حافة ضوء رفيعة تفصل البطاقة عن الصفحة (الظل الأسود وحده لا يُرى) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper-grain: var(--paper-grain-dark);
+    --shadow-card: 0 0 0 1px rgb(170 195 255 / 0.08), 0 6px 20px rgb(0 0 0 / 0.35);
+    --shadow-card-hover: 0 0 0 1px rgb(170 195 255 / 0.14), 0 16px 40px rgb(0 0 0 / 0.5);
+  }
+}
+:root[data-theme="dark"] {
+  --paper-grain: var(--paper-grain-dark);
+  --shadow-card: 0 0 0 1px rgb(170 195 255 / 0.08), 0 6px 20px rgb(0 0 0 / 0.35);
+  --shadow-card-hover: 0 0 0 1px rgb(170 195 255 / 0.14), 0 16px 40px rgb(0 0 0 / 0.5);
+}
+body {
+  background: var(--paper-grain), var(--color-bg);
+  /* الصفحات القصيرة (بحث، مفضلة فارغة، 404): التذييل يستقر في أسفل النافذة.
+     القسمة على --page-zoom لأن الصفحة مكبَّرة بالشاشات العريضة */
+  min-height: calc(100dvh / var(--page-zoom, 1));
+  display: flex;
+  flex-direction: column;
+}
+#main-content {
+  flex: 1 0 auto;
+  width: 100%;
+}
