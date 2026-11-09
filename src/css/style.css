@@ -6063,3 +6063,69 @@ body {
   flex: 1 0 auto;
   width: 100%;
 }
+
+/* ===== الشريط السفلي بلغة الجريدة + انتقال هادئ بين الصفحات ===== */
+@media (max-width: 1300px) {
+  .bottom-nav {
+    border-top: 3px double var(--color-ink-rule);
+    box-shadow: none;
+  }
+  .bottom-nav a,
+  .bottom-nav button {
+    position: relative;
+    transition: transform 0.12s ease-out;
+  }
+  .bottom-nav a:active,
+  .bottom-nav button:active {
+    transform: scale(0.94);
+  }
+  /* نقطة حبر تحت الخط المزدوج تعلّم التبويب الحالي؛ اسمها في الانتقال يجعلها
+     تنزلق من تبويب إلى آخر عند تغيير الصفحة */
+  .bottom-nav a.active::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    inset-inline-start: 50%;
+    width: 9px;
+    height: 9px;
+    margin-inline-start: -4.5px;
+    box-shadow: 0 0 0 2px var(--color-surface);
+    border-radius: 50%;
+    background: var(--color-primary);
+    view-transition-name: nav-ink-dot;
+  }
+}
+/* الهيدر والشريط السفلي يثبتان، والمحتوى يتبدّل بتلاشٍ قصير كقلب صفحة.
+   تحسين تدريجي: المتصفح الذي لا يدعمه يتنقّل كما كان */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+  .site-header {
+    view-transition-name: site-header;
+  }
+  .bottom-nav {
+    view-transition-name: bottom-nav;
+  }
+  ::view-transition-old(root) {
+    animation: 0.14s ease-in both vt-page-out;
+  }
+  ::view-transition-new(root) {
+    animation: 0.26s cubic-bezier(0.2, 0.7, 0.2, 1) 0.06s both vt-page-in;
+  }
+  ::view-transition-group(nav-ink-dot) {
+    animation-duration: 0.32s;
+    animation-timing-function: cubic-bezier(0.3, 0.8, 0.2, 1);
+  }
+}
+@keyframes vt-page-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
