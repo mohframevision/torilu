@@ -252,6 +252,7 @@ img {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
@@ -4465,6 +4466,10 @@ h2,
   gap: 40px;
   padding: 48px 0 24px;
 }
+/* عنصر شبكة: بلا هذا يتمدّد بعرض حقل البحث الأدنى فيخرج عن الشاشات الأضيق من 356px */
+.d-hero-text {
+  min-width: 0;
+}
 .d-hero-title {
   font-size: clamp(2.8rem, 8vw, 5.4rem);
   line-height: 1.1;
@@ -4765,8 +4770,13 @@ body:has(.d-hero) .site-header .header-search {
 }
 main .search-box {
   border-radius: var(--radius-pill);
-  box-shadow: 0 -12px 0 6px var(--page-fill), 0 10px 40px rgb(21 69 162 / 0.08);
+  box-shadow: 0 10px 40px rgb(21 69 162 / 0.08);
   border-color: var(--color-border);
+}
+/* القناع المعتم فوق الحقل اللاصق يُرسم بعد التمرير فقط: في أعلى الصفحة الحقل داخل ضوء الأفق
+   (--page-glow) فكان القناع المسطّح يظهر رقعة أغمق فوقه في الوضع الداكن */
+body:has(.site-header.scrolled) main .search-box {
+  box-shadow: 0 -12px 0 6px var(--page-fill), 0 10px 40px rgb(21 69 162 / 0.08);
 }
 .card-grid {
   align-items: stretch;
@@ -5713,6 +5723,16 @@ main .search-box {
 @media (prefers-reduced-motion: reduce) {
   .np-sheet:not(.np-front) {
     --crease: 0;
+  }
+}
+/* قبل أن يبني fold.js الطيّات: الورقة مخفية (لا تظهر مفتوحة ثم تنطوي). theme-init.js يضع np-wait
+   على الجذر و fold.js يزيلها؛ والإخفاء حركة مؤقتة عمداً، فلو لم يصل fold.js تظهر الورقة بعد ثوانٍ */
+.np-wait .np-article > .np-sheet:not(.np-front) {
+  animation: np-wait 6s step-end;
+}
+@keyframes np-wait {
+  from {
+    opacity: 0;
   }
 }
 .detail.np-article:has(> .np-fold) {

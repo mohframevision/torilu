@@ -4,6 +4,8 @@
    كما هي — بلا JS أو مع تقليل الحركة ما يُطبَّق شيء من هذا وتظهر الورقة مفتوحة. ===== */
 (function () {
   const sheet = document.querySelector(".np-article > .np-sheet:not(.np-front)");
+  // theme-init.js أخفى الورقة إلى أن نصل هنا (لا رسم قبل نهاية هذا السكربت، فتظهر مطويّة مباشرة)
+  document.documentElement.classList.remove("np-wait");
   if (!sheet || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const lang = window.SITE_LANG || "ar";

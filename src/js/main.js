@@ -1033,7 +1033,10 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   ]
     .filter(Boolean)
     .join(" ");
-  card.style.animationDelay = `${Math.min(index, 10) * 45}ms`;
+  // الدخول المتتابع لأول عشر بطاقات فقط: ما بعدها تحت أول الشاشة، ولو فُتحت الصفحة على موضع
+  // عميق لكانت كلها تنتظر مخفية معاً
+  if (index < 10) card.style.animationDelay = `${index * 45}ms`;
+  else card.style.animation = "none";
 
   const fav = isFavorite(section, item.id);
   const title = itemTitle(item);
@@ -1361,8 +1364,11 @@ function renderSection(section, typeFilter) {
 
   renderFilters();
   renderGrid();
-  // دخول البطاقات (sheetIn) للعرض الأول فقط: إعادة الرسم بالبحث والفلترة تظهر فوراً
-  setTimeout(() => grid.classList.add("is-settled"), 900);
+  // دخول البطاقات (sheetIn) للعرض الأول فقط: إعادة الرسم بالبحث والفلترة تظهر فوراً.
+  // وعند الرجوع أو إعادة التحميل يعود المتصفح إلى موضع التمرير السابق، فلا دخول أصلاً (كانت الصفحة تظهر فارغة لحظة)
+  const navEntry = performance.getEntriesByType("navigation")[0];
+  if (navEntry && navEntry.type !== "navigate") grid.classList.add("is-settled");
+  else setTimeout(() => grid.classList.add("is-settled"), 900);
 
   if (searchInput) {
     searchInput.addEventListener("input", renderGrid);
