@@ -1048,8 +1048,14 @@ img {
   cursor: pointer;
   color: var(--color-text-muted);
   font-family: inherit;
+  /* الرقاقة المختارة تمتلئ حبراً ينتشر من وسطها (طبقة تدرّج واحدة يكبر مقاسها) */
+  background-image: radial-gradient(closest-side, var(--color-primary-fill) 99%, transparent);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0 0;
   transition:
-    background 0.18s ease,
+    background-color 0.18s ease,
+    background-size 0.2s ease-out,
     color 0.18s ease,
     border-color 0.18s ease,
     transform 0.15s ease;
@@ -1059,7 +1065,11 @@ img {
   transform: scale(0.96);
 }
 
-.filter-chip.active,
+.filter-chip.active {
+  background-size: 160% 160%;
+  color: #fff;
+  border-color: var(--color-primary-fill);
+}
 .filter-chip:hover {
   background: var(--color-primary-fill);
   color: #fff;
@@ -1147,36 +1157,30 @@ img {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  animation: cardIn 0.45s ease both;
+  animation: sheetIn 0.36s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
   transition:
     transform 0.3s var(--ease),
     box-shadow 0.3s var(--ease);
 }
-
-.item-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-card-hover);
+/* دخول واحد لكل البطاقات: ورقة توضع على الطاولة — تصعد 16px بميل خفيف ثم تستوي. التتابع من
+   animation-delay الذي يكتبه buildItemCard (45ms للبطاقة، بحدّ 10). للعرض الأول فقط:
+   بعده تأخذ الشبكة .is-settled فلا تُعاد الحركة مع كل حرف في البحث */
+@keyframes sheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) rotate(-0.5deg);
+  }
 }
-
-/* دخول "طائر" عند التمرير (flyInCards بـmain.js، نفس منحنى shopify.design) */
-.item-card.fly-pending,
-.item-card.flown {
+.card-grid.is-settled .item-card {
   animation: none;
 }
 
-.item-card.fly-pending {
-  opacity: 0;
-  transform: translate(var(--fx, 0px), 300px) scale(1.5);
-}
-
-/* تحديد أعلى من .item-card.scroll-reveal (توهّج الدخول أسفل الملف، اللي يعرّف
-   transition خاص به فكان يلغي هذا ويخلي البطاقة تقفز لمكانها بلا حركة) —
-   ونعيد توهّجه هنا ضمن نفس القائمة عشان يشتغلان مع بعض */
-.card-grid .item-card.card-in {
-  transition:
-    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.3s ease,
-    box-shadow 1.1s ease 0.05s;
+/* الرفع للمؤشر فقط: باللمس كان يعلق بعد الضغط */
+@media (hover: hover) {
+  .item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+  }
 }
 
 /* عنصر مميز (featured) — يبرز بإطار ملوّن ويترتّب أول القائمة، مو نفس ميزة
@@ -2089,8 +2093,29 @@ a.photo-credit.card {
 .pk[data-step="wheel"] :is(.pk-moon-label, .pk-halo) {
   opacity: 0;
 }
+/* ضغطة القمر: الهالة نفسها تنداح للخارج كموجة نقاط وتتلاشى (القمر يصغر ×0.52، فالتكبير يعوّضه) */
 .pk[data-step="wheel"] .pk-halo {
-  transform: translate(-50%, -50%) scale(0.6);
+  transform: translate(-50%, -50%) scale(2.7);
+}
+/* والقمر ينتظر: الهالة تدور ببطء شديد (عقدة واحدة، بخاصية rotate المستقلة عن transform)،
+   وتقف في أي خطوة أخرى. تقليل الحركة يوقفها مع بقية حركات .pk */
+.pk[data-step="moon"] .pk-halo {
+  animation: pk-orbit 120s linear infinite;
+}
+@keyframes pk-orbit {
+  to {
+    rotate: 1turn;
+  }
+}
+/* القصاصة: الاسم أولاً ثم زر الذهاب، فتذهب العين للاسم قبل الفعل */
+.pk-clip .pk-go {
+  animation: pk-go-in 0.3s var(--ease) 0.85s both;
+}
+@keyframes pk-go-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 }
 .pk:is([data-step="ball"], [data-step="clip"]) .pk-moon {
   transform: scale(0);
@@ -2970,29 +2995,6 @@ a.photo-credit.card {
 
 [dir="rtl"] .recommend-quote::before {
   content: "\201D";
-}
-
-/* ===== توهّج دخول خفيف لبطاقة تدخل مجال الرؤية أثناء التمرير — انظر main.js
-   (cardRevealObserver) للسبب اللي خلّى هذا على transition لا animation ===== */
-/* box-shadow فقط عمداً — لا border-color: .item-card.verified يلوّن حافته
-   البادئة بالذهبي (border-inline-start)، وbox-shadow وحده لا يتعارض مع أي
-   حافة موجودة على أي بطاقة كانت */
-.item-card.scroll-reveal {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--color-primary) 28%, transparent),
-    var(--shadow-card);
-  transition: box-shadow 1.1s ease 0.05s;
-}
-
-.item-card.scroll-reveal.card-revealed {
-  box-shadow: var(--shadow-card);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .item-card.scroll-reveal {
-    transition: none;
-    box-shadow: var(--shadow-card);
-  }
 }
 
 /* ===== تجربة "موسيقى بيب هادئة" (قسم تجارب الذكاء الاصطناعي) ===== */
@@ -4397,6 +4399,47 @@ h2,
   margin: 0;
   font-size: clamp(1.6rem, 3vw, 2rem);
   line-height: 1.2;
+}
+/* الخط المزدوج يُرسم كالحبر من بداية السطر حين يدخل العنوان الشاشة، والعنوان يأخذ حبره معه.
+   الأصل (border) يبقى للمتصفح الذي لا يدعم الخط الزمني للتمرير ولمن طلب تقليل الحركة؛ هنا فقط
+   يصير الخطّان شريطين في ::before يتمدّدان بـtransform */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .d-head {
+      position: relative;
+      border-top-color: transparent;
+      view-timeline: --d-head block;
+    }
+    .d-head::before {
+      content: "";
+      position: absolute;
+      inset: -3px 0 auto;
+      height: 3px;
+      background: linear-gradient(var(--color-ink-rule) 1px, transparent 1px 2px, var(--color-ink-rule) 2px);
+      transform-origin: left;
+      animation: rule-in linear both;
+      animation-timeline: --d-head;
+      animation-range: cover 0% cover 22%;
+    }
+    [dir="rtl"] .d-head::before {
+      transform-origin: right;
+    }
+    .d-head h2 {
+      animation: ink-in linear both;
+      animation-timeline: --d-head;
+      animation-range: cover 0% cover 22%;
+    }
+  }
+}
+@keyframes rule-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes ink-in {
+  from {
+    opacity: 0.6;
+  }
 }
 .d-head a {
   color: var(--color-primary);
@@ -6246,26 +6289,103 @@ body {
   .bottom-nav {
     view-transition-name: bottom-nav;
   }
+  /* قلب صفحة هادئ: القديمة تنسحب 12px نحو كعب الجريدة (يمين بالعربية، يسار بالإنجليزية) وتتلاشى،
+     والجديدة تدخل من الحافة الأخرى */
   ::view-transition-old(root) {
-    animation: 0.14s ease-in both vt-page-out;
+    animation: 0.16s ease-in both vt-page-out;
   }
   ::view-transition-new(root) {
-    animation: 0.26s cubic-bezier(0.2, 0.7, 0.2, 1) 0.06s both vt-page-in;
+    animation: 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) 0.06s both vt-page-in;
   }
   ::view-transition-group(nav-ink-dot) {
     animation-duration: 0.32s;
     animation-timing-function: cubic-bezier(0.3, 0.8, 0.2, 1);
   }
+  /* البطاقة المضغوطة تصير الجريدة المطويّة: main.js يسمّي البطاقة paper لحظة الضغط، والجريدة
+     المطويّة تحمل الاسم نفسه هنا. الصندوق يتحرك ويكبر، والبطاقة تتلاشى سريعاً والجريدة تظهر
+     (بلا مطّ: كل لقطة بعرض الصندوق وارتفاعها الطبيعي). مفتوحةً لا اسم لها فلا يُلتقط شيء */
+  .np-fold:not(.is-half) {
+    view-transition-name: paper;
+  }
+  ::view-transition-group(paper) {
+    animation-duration: 0.42s;
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  ::view-transition-old(paper) {
+    animation: 0.14s ease-in both vt-fade-out;
+  }
+  /* لقطة البطاقة تبقى بمقاسها (لا تُكبَّر إلى عرض الجريدة فتتغبّش): هي القديمة في الذهاب
+     (الصفحة الجديدة فيها جريدة مطويّة) والجديدة في الرجوع */
+  :root:has(.np-fold)::view-transition-old(paper),
+  :root:not(:has(.np-fold))::view-transition-new(paper) {
+    inline-size: auto;
+  }
+  ::view-transition-new(paper) {
+    animation: 0.3s ease-out 0.1s both vt-fade-in;
+  }
+}
+:root {
+  --vt-dir: -1;
+}
+:root[dir="rtl"] {
+  --vt-dir: 1;
 }
 @keyframes vt-page-out {
   to {
     opacity: 0;
+    transform: translateX(calc(var(--vt-dir) * 12px));
   }
 }
 @keyframes vt-page-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateX(calc(var(--vt-dir) * -12px));
+  }
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ===== تبديل المظهر كشبكة طباعة: المظهر الجديد يظهر نقاطاً (شبكة مائلة كنقاط الصحف) تكبر حتى
+   تلتحم حبراً كاملاً. main.js يضع theme-vt على <html> مدة الانتقال فقط، فلا يمسّ انتقال الصفحات.
+   قناع واحد على لقطة واحدة لأقل من نصف ثانية؛ الهيدر والشريط السفلي يدخلان اللقطة نفسها ===== */
+@property --vt-dot {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+html.theme-vt .site-header,
+html.theme-vt .bottom-nav,
+html.theme-vt .bottom-nav a.active::before,
+html.theme-vt .np-fold {
+  view-transition-name: none;
+}
+html.theme-vt::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+html.theme-vt::view-transition-new(root) {
+  --vt-screen: radial-gradient(circle, #000 var(--vt-dot), transparent calc(var(--vt-dot) + 4%));
+  mix-blend-mode: normal;
+  -webkit-mask:
+    var(--vt-screen) 0 0 / 18px 18px,
+    var(--vt-screen) 9px 9px / 18px 18px;
+  mask:
+    var(--vt-screen) 0 0 / 18px 18px,
+    var(--vt-screen) 9px 9px / 18px 18px;
+  animation: 0.46s cubic-bezier(0.4, 0, 0.2, 1) both theme-dots;
+}
+/* النقاط المتجاورة في الشبكة المائلة تلتحم عند 71% من قطر الخانة */
+@keyframes theme-dots {
+  to {
+    --vt-dot: 76%;
   }
 }
 
