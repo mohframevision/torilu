@@ -7,6 +7,7 @@ desc_en: "A bakery in A'ali."
 nameTranslated: true
 categories:
   - عالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1759707, 50.5226772
 links:

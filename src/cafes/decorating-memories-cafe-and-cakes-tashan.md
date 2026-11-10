@@ -7,6 +7,7 @@ desc_en: "A cafe in Tashan."
 nameTranslated: true
 categories:
   - طشان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2012283, 50.561109
 links:

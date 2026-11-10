@@ -7,6 +7,7 @@ desc_en: "A restaurant in Samaheej."
 nameTranslated: true
 categories:
   - سماهيج
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2818182, 50.6326932
 links:

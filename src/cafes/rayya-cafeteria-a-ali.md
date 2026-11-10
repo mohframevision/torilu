@@ -7,6 +7,7 @@ desc_en: "A cafe in A'ali."
 nameTranslated: true
 categories:
   - عالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1581778, 50.5205706
 links:

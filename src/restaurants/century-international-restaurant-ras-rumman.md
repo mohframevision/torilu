@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - هندي
   - راس رمان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2356967, 50.5894341
 links:

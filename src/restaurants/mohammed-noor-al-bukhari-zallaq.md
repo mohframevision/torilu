@@ -6,6 +6,7 @@ title_en: "Mohammed Noor Al Bukhari"
 desc_en: "A restaurant in Zallaq."
 categories:
   - الزلاق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0495773, 50.4984443
 links:

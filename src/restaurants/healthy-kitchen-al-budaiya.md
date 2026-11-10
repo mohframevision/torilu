@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al Budaiya."
 nameTranslated: true
 categories:
   - البديع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2167956, 50.4502985
 links:

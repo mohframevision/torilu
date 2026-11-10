@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - كرزكان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1157178, 50.4814353
 links:

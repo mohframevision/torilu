@@ -7,6 +7,7 @@ desc_en: "A restaurant in Malkiya."
 nameTranslated: true
 categories:
   - المالكية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0983509, 50.4856617
 links:

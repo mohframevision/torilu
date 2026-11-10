@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - طشان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2024712, 50.5628043
 links:

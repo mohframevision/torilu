@@ -7,6 +7,7 @@ desc_en: "A cafe in Karbabad."
 nameTranslated: true
 categories:
   - كرباباد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2313942, 50.5302111
 links:

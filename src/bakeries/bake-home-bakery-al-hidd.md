@@ -7,6 +7,7 @@ desc_en: "A bakery in Arad."
 nameTranslated: true
 categories:
   - عراد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2565888, 50.6356852
 links:

@@ -7,6 +7,7 @@ desc_en: "A restaurant in Jidhafs."
 nameTranslated: true
 categories:
   - جدحفص
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2212001, 50.5360978
 links:

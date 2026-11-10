@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - برجر
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2613754, 50.6116121
 links:

@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Salmaniya."
 nameTranslated: true
 categories:
   - السلمانية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2170467, 50.5693441
 links:

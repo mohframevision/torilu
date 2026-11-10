@@ -7,6 +7,7 @@ desc_en: "A restaurant in Bu Ghazal."
 nameTranslated: true
 categories:
   - بوغزال
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2101441, 50.5752552
 links:

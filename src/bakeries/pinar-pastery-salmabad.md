@@ -7,6 +7,7 @@ desc_en: "A pastry shop in Salmabad."
 nameTranslated: true
 categories:
   - سلماباد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1794401, 50.5249032
 links:

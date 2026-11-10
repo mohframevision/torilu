@@ -7,6 +7,7 @@ desc_en: "A sweets shop in Busaiteen."
 nameTranslated: true
 categories:
   - بسيتين
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2716159, 50.6051859
 links:

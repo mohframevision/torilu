@@ -9,6 +9,7 @@ categories:
   - سندويشات
   - لبناني
   - السيف
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2379874, 50.535369
 links:

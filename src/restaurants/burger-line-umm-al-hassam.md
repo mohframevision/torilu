@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - الماحوز
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2020828, 50.5915378
 links:

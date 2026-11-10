@@ -6,6 +6,7 @@ title_en: "Villa mamas - Al Markh"
 desc_en: "A restaurant in Al Markh."
 categories:
   - المرخ
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1997878, 50.4742783
 links:

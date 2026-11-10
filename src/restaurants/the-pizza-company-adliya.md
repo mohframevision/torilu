@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - بيتزا
   - العدلية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2136895, 50.5866188
 links:

@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - سندويشات
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2471571, 50.60974
 links:

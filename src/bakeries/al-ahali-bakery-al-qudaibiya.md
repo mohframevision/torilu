@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Qudaibiya."
 nameTranslated: true
 categories:
   - القضيبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2271005, 50.5925293
 links:

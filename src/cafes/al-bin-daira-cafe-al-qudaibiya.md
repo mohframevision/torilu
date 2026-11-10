@@ -6,6 +6,7 @@ title_en: "Al Bin Daira Cafe"
 desc_en: "A cafe in Al Qudaibiya."
 categories:
   - القضيبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2191797, 50.588608
 links:

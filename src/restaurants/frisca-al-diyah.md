@@ -6,6 +6,7 @@ title_en: "Frisca"
 desc_en: "A restaurant in Al Diyah."
 categories:
   - الديه
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2282162, 50.5383135
 links:

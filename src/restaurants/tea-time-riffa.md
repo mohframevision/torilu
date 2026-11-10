@@ -7,6 +7,7 @@ desc_en: "A restaurant in Riffa."
 categories:
   - سندويشات
   - الرفاع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1150272, 50.5750149
 links:

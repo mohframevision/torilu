@@ -7,6 +7,7 @@ desc_en: "A sweets shop in Muharraq."
 nameTranslated: true
 categories:
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2482235, 50.6158453
 links:

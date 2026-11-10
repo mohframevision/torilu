@@ -7,6 +7,7 @@ desc_en: "A bakery in Galali."
 nameTranslated: true
 categories:
   - قلالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2728119, 50.6481857
 links:

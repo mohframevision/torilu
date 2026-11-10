@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Hidd."
 nameTranslated: true
 categories:
   - الحد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2370679, 50.6523132
 links:

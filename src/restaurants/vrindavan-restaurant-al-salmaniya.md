@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al Salmaniya."
 nameTranslated: true
 categories:
   - السلمانية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.226631, 50.5788167
 links:

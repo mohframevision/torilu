@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - سندويشات
   - البديع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2117411, 50.4508822
 links:

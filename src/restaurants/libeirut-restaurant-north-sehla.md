@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - إيطالي
   - المقشع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.220828, 50.5172085
 links:

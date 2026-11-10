@@ -7,6 +7,7 @@ desc_en: "A cafe in Amwaj Islands."
 nameTranslated: true
 categories:
   - جزر أمواج
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2873407, 50.6639006
 links:

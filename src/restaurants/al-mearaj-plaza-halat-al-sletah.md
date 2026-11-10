@@ -7,6 +7,7 @@ desc_en: "A restaurant in Halat Al-Sletah."
 nameTranslated: true
 categories:
   - حالة السلطة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2444054, 50.6154817
 links:

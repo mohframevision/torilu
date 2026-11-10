@@ -7,6 +7,7 @@ desc_en: "A restaurant in Ma'ameer."
 nameTranslated: true
 categories:
   - المعامير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1358202, 50.6120963
 links:

@@ -6,6 +6,7 @@ title_en: "Alshenow Cafeteria"
 desc_en: "A cafe in Bahrain."
 nameTranslated: true
 categories: []
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2309941, 50.4936299
 links:

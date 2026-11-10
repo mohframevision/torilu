@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - بوغزال
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2032088, 50.5679986
 links:

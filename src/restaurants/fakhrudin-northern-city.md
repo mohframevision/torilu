@@ -7,6 +7,7 @@ desc_en: "A restaurant in Northern City."
 nameTranslated: true
 categories:
   - المدينة الشمالية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2110912, 50.4810643
 links:

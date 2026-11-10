@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al-Suqayya."
 nameTranslated: true
 categories:
   - السقية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2150705, 50.5773218
 links:

@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Maqsha."
 nameTranslated: true
 categories:
   - المقشع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2192864, 50.5128803
 links:

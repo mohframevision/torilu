@@ -7,6 +7,7 @@ desc_en: "A restaurant in Sitra."
 nameTranslated: true
 categories:
   - سترة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1643108, 50.6141529
 links:

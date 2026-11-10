@@ -7,6 +7,7 @@ desc_en: "A bakery in Dumistan."
 nameTranslated: true
 categories:
   - دمستان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1284634, 50.478307
 links:

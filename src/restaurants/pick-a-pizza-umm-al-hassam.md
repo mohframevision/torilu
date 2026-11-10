@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - بيتزا
   - أم الحصم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2012759, 50.5922797
 links:

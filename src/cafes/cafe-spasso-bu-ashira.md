@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - إيطالي
   - بوعشيرة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2088886, 50.5759816
 links:

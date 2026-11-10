@@ -6,6 +6,7 @@ title_en: "Señor Paco's"
 desc_en: "A Mexican restaurant in Adliya."
 categories:
   - العدلية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2085422, 50.5910384
 links:

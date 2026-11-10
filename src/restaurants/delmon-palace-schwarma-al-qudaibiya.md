@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - القضيبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2262129, 50.5914831
 links:

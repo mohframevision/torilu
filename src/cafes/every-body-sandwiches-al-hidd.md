@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - سندويشات
   - عراد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2569775, 50.6336247
 links:

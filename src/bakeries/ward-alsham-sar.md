@@ -6,6 +6,7 @@ title_en: "Ward alsham"
 desc_en: "A pastry shop in Sar."
 categories:
   - سار
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2007093, 50.4979592
 links:

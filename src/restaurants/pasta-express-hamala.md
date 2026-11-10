@@ -7,6 +7,7 @@ desc_en: "A restaurant in Hamala."
 nameTranslated: true
 categories:
   - الهملة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1476254, 50.4882935
 links:

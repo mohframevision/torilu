@@ -7,6 +7,7 @@ desc_en: "A cafe in Riffa."
 nameTranslated: true
 categories:
   - الرفاع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1307364, 50.5538481
 links:

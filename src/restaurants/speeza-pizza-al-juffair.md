@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - بيتزا
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2098855, 50.6040925
 links:

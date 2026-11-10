@@ -7,6 +7,7 @@ desc_en: "A cafe in Adliya."
 nameTranslated: true
 categories:
   - العدلية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2130062, 50.5900655
 links:

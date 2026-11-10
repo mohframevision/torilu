@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al Hidd."
 nameTranslated: true
 categories:
   - الحد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2415054, 50.6568081
 links:

@@ -7,6 +7,7 @@ desc_en: "A cafe in Bu Ashira."
 nameTranslated: true
 categories:
   - بوعشيرة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2132467, 50.5920264
 links:

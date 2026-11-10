@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - الدير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2837249, 50.6222608
 links:

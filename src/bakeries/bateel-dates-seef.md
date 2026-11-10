@@ -7,6 +7,7 @@ desc_en: "A sweets shop in Seef."
 nameTranslated: true
 categories:
   - السيف
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.232693, 50.5399546
 links:

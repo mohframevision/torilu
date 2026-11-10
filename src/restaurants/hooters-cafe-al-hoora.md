@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - برجر
   - الحورة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2263797, 50.5877242
 links:

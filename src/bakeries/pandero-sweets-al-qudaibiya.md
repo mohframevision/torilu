@@ -7,6 +7,7 @@ desc_en: "A sweets shop in Al Qudaibiya."
 nameTranslated: true
 categories:
   - القضيبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2256457, 50.5909007
 links:

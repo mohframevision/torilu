@@ -7,6 +7,7 @@ desc_en: "A restaurant in Kawarah."
 nameTranslated: true
 categories:
   - الكورة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1799107, 50.5480857
 links:

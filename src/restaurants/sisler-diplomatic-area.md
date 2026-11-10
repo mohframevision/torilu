@@ -7,6 +7,7 @@ desc_en: "A restaurant in Diplomatic Area."
 nameTranslated: true
 categories:
   - المنطقة الدبلوماسية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2465173, 50.5854889
 links:

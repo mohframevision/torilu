@@ -6,6 +6,7 @@ title_en: "Sabr Ayoob Grills"
 desc_en: "A restaurant in Tashan."
 categories:
   - طشان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2029452, 50.5639335
 links:

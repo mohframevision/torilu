@@ -7,6 +7,7 @@ desc_en: "A burger restaurant in A'ali."
 categories:
   - برجر
   - عالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1561931, 50.512116
 links:

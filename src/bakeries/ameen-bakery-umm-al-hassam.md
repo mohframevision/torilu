@@ -7,6 +7,7 @@ desc_en: "A bakery in Umm Al Hassam."
 nameTranslated: true
 categories:
   - أم الحصم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2024441, 50.5945877
 links:

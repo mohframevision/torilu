@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - راس رمان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2312739, 50.5767215
 links:

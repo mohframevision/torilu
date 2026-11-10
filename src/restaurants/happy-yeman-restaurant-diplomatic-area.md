@@ -6,6 +6,7 @@ title_en: "Happy Yeman Restaurant"
 desc_en: "A restaurant in Diplomatic Area."
 categories:
   - المنطقة الدبلوماسية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2347718, 50.5934471
 links:

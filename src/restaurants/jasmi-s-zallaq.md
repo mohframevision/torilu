@@ -8,6 +8,7 @@ categories:
   - وجبات سريعة
   - برجر
   - الزلاق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0531458, 50.4875726
 links:

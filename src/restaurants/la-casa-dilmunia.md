@@ -7,6 +7,7 @@ desc_en: "A restaurant in Dilmunia."
 nameTranslated: true
 categories:
   - دلمونيا
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.290276, 50.6637306
 links:

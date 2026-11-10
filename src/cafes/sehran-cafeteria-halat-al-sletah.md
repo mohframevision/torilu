@@ -7,6 +7,7 @@ desc_en: "A cafe in Arad."
 nameTranslated: true
 categories:
   - عراد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.24646, 50.6358256
 links:

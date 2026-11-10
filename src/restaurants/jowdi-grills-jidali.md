@@ -7,6 +7,7 @@ desc_en: A grill restaurant in South Sehla.
 categories:
   - مشاوي
   - السهلة الجنوبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1859985, 50.5552614
 links:

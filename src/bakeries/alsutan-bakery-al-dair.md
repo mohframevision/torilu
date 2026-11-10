@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Dair."
 nameTranslated: true
 categories:
   - الدير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2849829, 50.626806
 links:

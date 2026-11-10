@@ -7,6 +7,7 @@ desc_en: "A bakery in Riffa."
 nameTranslated: true
 categories:
   - الرفاع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1306679, 50.5538828
 links:

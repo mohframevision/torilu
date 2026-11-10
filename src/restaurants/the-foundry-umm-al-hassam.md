@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - إيطالي
   - أم الحصم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2122273, 50.5940524
 links:

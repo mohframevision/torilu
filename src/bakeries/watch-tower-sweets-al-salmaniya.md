@@ -7,6 +7,7 @@ desc_en: "A sweets shop in Al Salmaniya."
 nameTranslated: true
 categories:
   - السلمانية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2167561, 50.5684662
 links:

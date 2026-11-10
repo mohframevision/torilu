@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - بيتزا
   - جزر أمواج
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2893838, 50.664855
 links:

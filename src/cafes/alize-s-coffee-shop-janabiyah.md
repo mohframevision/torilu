@@ -7,6 +7,7 @@ desc_en: "A cafe in Janabiyah."
 nameTranslated: true
 categories:
   - الجنبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1888462, 50.4654213
 links:

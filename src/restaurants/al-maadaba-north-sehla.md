@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al Qadam."
 nameTranslated: true
 categories:
   - القدم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2173224, 50.5175451
 links:

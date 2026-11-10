@@ -7,6 +7,7 @@ desc_en: "A cafe in Salmabad."
 nameTranslated: true
 categories:
   - سلماباد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1821727, 50.5286916
 links:

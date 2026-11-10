@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - جرداب
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1614674, 50.5662008
 links:

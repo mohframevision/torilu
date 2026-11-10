@@ -7,6 +7,7 @@ desc_en: "Fast food in Hamad Town."
 categories:
   - وجبات سريعة
   - مدينة حمد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1415645, 50.4982399
 links:

@@ -7,6 +7,7 @@ desc_en: "A restaurant in Salmabad."
 nameTranslated: true
 categories:
   - سلماباد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1861292, 50.5299266
 links:

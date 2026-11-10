@@ -7,6 +7,7 @@ desc_en: "A bakery in Sar."
 nameTranslated: true
 categories:
   - سار
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1949969, 50.4868054
 links:

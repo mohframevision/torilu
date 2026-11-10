@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - سندويشات
   - كرزكان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1152559, 50.4820541
 links:

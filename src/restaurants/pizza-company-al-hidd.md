@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - بيتزا
   - عراد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2587093, 50.6454779
 links:

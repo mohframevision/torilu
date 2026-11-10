@@ -7,6 +7,7 @@ desc_en: "A restaurant in Tashan."
 nameTranslated: true
 categories:
   - طشان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2068939, 50.5501852
 links:

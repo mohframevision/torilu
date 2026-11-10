@@ -7,6 +7,7 @@ desc_en: "A restaurant in Busaiteen."
 nameTranslated: true
 categories:
   - بسيتين
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2745605, 50.6100543
 links:

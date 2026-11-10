@@ -7,6 +7,7 @@ desc_en: "A bakery in Janusan."
 nameTranslated: true
 categories:
   - جنوسان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2215913, 50.5027661
 links:

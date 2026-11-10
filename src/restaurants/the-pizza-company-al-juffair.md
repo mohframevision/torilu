@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - بيتزا
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2114935, 50.6078206
 links:

@@ -7,6 +7,7 @@ desc_en: "A bakery in Manama."
 nameTranslated: true
 categories:
   - المنامة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2279467, 50.5730377
 links:

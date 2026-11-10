@@ -7,6 +7,7 @@ desc_en: "A bakery in Abu Saiba."
 nameTranslated: true
 categories:
   - أبو صيبع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2173985, 50.5037574
 links:

@@ -7,6 +7,7 @@ desc_en: "A restaurant in Jaww."
 nameTranslated: true
 categories:
   - جو
+incomplete: true
 dateAdded: 2026-11-10
 coords: 25.9978904, 50.6175118
 links:

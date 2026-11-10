@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - بيتزا
   - المنطقة الدبلوماسية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.241289, 50.5899713
 links:

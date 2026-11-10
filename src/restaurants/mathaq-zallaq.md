@@ -7,6 +7,7 @@ desc_en: "Fast food in Zallaq."
 categories:
   - وجبات سريعة
   - الزلاق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0710865, 50.5041765
 links:

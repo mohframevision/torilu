@@ -7,6 +7,7 @@ desc_en: "A restaurant in Amwaj Islands."
 nameTranslated: true
 categories:
   - جزر أمواج
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2879849, 50.6642013
 links:

@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - لبناني
   - راس رمان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2399069, 50.5814832
 links:

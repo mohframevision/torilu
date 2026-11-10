@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - هندي
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.266548, 50.6317922
 links:

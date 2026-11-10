@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al Fatih."
 nameTranslated: true
 categories:
   - الفاتح
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2200887, 50.6043754
 links:

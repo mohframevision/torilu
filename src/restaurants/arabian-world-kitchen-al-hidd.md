@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - عراد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2588882, 50.6453944
 links:

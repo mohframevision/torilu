@@ -7,6 +7,7 @@ desc_en: "A sweets shop in Arad."
 nameTranslated: true
 categories:
   - عراد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2533314, 50.6411475
 links:

@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Eker."
 nameTranslated: true
 categories:
   - العكر
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1434684, 50.6022342
 links:

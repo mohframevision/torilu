@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - إيطالي
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2580534, 50.6174267
 links:

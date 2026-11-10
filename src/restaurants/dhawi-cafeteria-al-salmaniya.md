@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - السلمانية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2168548, 50.5689689
 links:

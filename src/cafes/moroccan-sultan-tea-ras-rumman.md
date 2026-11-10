@@ -7,6 +7,7 @@ desc_en: "A cafe in Ras Rumman."
 nameTranslated: true
 categories:
   - راس رمان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2367489, 50.5915663
 links:

@@ -7,6 +7,7 @@ desc_en: "A restaurant in Seef."
 nameTranslated: true
 categories:
   - السيف
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2404241, 50.5425257
 links:

@@ -7,6 +7,7 @@ desc_en: "A bakery in Sitra."
 nameTranslated: true
 categories:
   - سترة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.17001, 50.6121031
 links:

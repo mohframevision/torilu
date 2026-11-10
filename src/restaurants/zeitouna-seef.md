@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - السيف
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2321882, 50.5363571
 links:

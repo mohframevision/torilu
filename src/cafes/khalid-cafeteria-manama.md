@@ -7,6 +7,7 @@ desc_en: "A cafe in Manama."
 nameTranslated: true
 categories:
   - المنامة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2319268, 50.5720729
 links:

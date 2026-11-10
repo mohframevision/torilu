@@ -6,6 +6,7 @@ title_en: "Tariq Patries"
 desc_en: "A pastry shop in Hamad Town."
 categories:
   - مدينة حمد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1409444, 50.4982781
 links:

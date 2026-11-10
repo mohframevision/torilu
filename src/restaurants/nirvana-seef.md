@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - هندي
   - السيف
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2443166, 50.538389
 links:

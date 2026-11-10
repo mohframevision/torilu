@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - برجر
   - جدحفص
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2181907, 50.5198785
 links:

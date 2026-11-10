@@ -6,6 +6,7 @@ title_en: "Kojo X"
 desc_en: "A restaurant in Bahrain."
 nameTranslated: true
 categories: []
+incomplete: true
 dateAdded: 2026-11-10
 coords: 25.8342204, 50.6195981
 links:

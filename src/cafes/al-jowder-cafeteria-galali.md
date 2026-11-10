@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - برجر
   - قلالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2726476, 50.6502157
 links:

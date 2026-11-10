@@ -7,6 +7,7 @@ desc_en: "A restaurant in Umm Al Hassam."
 nameTranslated: true
 categories:
   - أم الحصم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2002927, 50.5928614
 links:

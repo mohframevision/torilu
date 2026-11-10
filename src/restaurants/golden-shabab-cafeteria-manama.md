@@ -7,6 +7,7 @@ desc_en: "A restaurant in Manama."
 nameTranslated: true
 categories:
   - المنامة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2268827, 50.5720933
 links:

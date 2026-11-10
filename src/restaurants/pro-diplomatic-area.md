@@ -9,6 +9,7 @@ categories:
   - إيطالي
   - بيتزا
   - المنطقة الدبلوماسية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2499121, 50.5782111
 links:

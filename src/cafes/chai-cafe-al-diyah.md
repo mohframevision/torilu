@@ -7,6 +7,7 @@ desc_en: "A cafe in Al Diyah."
 nameTranslated: true
 categories:
   - الديه
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2273727, 50.5387875
 links:

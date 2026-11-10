@@ -7,6 +7,7 @@ desc_en: "A restaurant in Isa Town."
 nameTranslated: true
 categories:
   - مدينة عيسى
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1680474, 50.5572488
 links:

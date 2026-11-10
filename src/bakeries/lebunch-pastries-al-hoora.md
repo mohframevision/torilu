@@ -7,6 +7,7 @@ desc_en: "A pastry shop in Al Hoora."
 nameTranslated: true
 categories:
   - الحورة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2273569, 50.5879044
 links:

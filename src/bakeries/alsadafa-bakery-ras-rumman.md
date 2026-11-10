@@ -7,6 +7,7 @@ desc_en: "A bakery in Ras Rumman."
 nameTranslated: true
 categories:
   - راس رمان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2360953, 50.5842873
 links:

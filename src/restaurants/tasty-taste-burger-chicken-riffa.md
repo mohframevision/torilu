@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - الرفاع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1253529, 50.5705216
 links:

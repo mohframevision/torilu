@@ -6,6 +6,7 @@ title_en: "Basta"
 desc_en: "A restaurant in A'ali."
 categories:
   - عالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1560158, 50.5310888
 links:

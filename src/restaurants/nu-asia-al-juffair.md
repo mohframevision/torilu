@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - هندي
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2112331, 50.6078696
 links:

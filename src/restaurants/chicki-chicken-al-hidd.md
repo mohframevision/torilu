@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - الحد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2472146, 50.6540072
 links:

@@ -7,6 +7,7 @@ desc_en: "A restaurant in Galali."
 nameTranslated: true
 categories:
   - قلالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2726085, 50.6507573
 links:

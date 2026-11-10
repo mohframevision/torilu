@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - بيتزا
   - بوعشيرة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2145139, 50.5928363
 links:

@@ -7,6 +7,7 @@ desc_en: "A cafe in Al Qudaibiya."
 nameTranslated: true
 categories:
   - القضيبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2154872, 50.5920573
 links:

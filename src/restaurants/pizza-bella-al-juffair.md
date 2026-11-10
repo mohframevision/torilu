@@ -9,6 +9,7 @@ categories:
   - إيطالي
   - بيتزا
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2140639, 50.6001941
 links:

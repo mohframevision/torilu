@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - إيطالي
   - الرفاع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1268472, 50.57898
 links:

@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - سلماباد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.176139, 50.5250743
 links:

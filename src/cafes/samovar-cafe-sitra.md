@@ -7,6 +7,7 @@ desc_en: "A cafe in Sitra."
 nameTranslated: true
 categories:
   - سترة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1651528, 50.6072314
 links:

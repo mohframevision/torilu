@@ -7,6 +7,7 @@ desc_en: "A cafe in Al Budaiya."
 nameTranslated: true
 categories:
   - البديع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2060924, 50.4576633
 links:

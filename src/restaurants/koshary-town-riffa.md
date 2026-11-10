@@ -6,6 +6,7 @@ title_en: "Koshary Town"
 desc_en: "A restaurant in Riffa."
 categories:
   - الرفاع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1312663, 50.5580587
 links:

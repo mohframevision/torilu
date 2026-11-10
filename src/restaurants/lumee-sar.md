@@ -7,6 +7,7 @@ desc_en: "A restaurant in Sar."
 nameTranslated: true
 categories:
   - سار
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2003267, 50.4980759
 links:

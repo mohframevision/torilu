@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - سندويشات
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2114138, 50.6089813
 links:

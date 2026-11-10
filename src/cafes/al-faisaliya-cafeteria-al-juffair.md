@@ -7,6 +7,7 @@ desc_en: "A cafe in Al-Juffair."
 nameTranslated: true
 categories:
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2120322, 50.6025475
 links:

@@ -7,6 +7,7 @@ desc_en: "A pastry shop in Zallaq."
 nameTranslated: true
 categories:
   - الزلاق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0467777, 50.4882616
 links:

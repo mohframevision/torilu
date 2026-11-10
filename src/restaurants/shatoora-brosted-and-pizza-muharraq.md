@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - بيتزا
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2610287, 50.613342
 links:

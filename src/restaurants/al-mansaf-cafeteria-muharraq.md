@@ -7,6 +7,7 @@ desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2557035, 50.6057696
 links:

@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - مدينة عيسى
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1857855, 50.5419911
 links:

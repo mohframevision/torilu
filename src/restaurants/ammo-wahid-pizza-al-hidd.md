@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - بيتزا
   - عراد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.254766, 50.6454286
 links:

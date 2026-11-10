@@ -7,6 +7,7 @@ desc_en: "A restaurant in Sanabis."
 nameTranslated: true
 categories:
   - السنابس
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.225154, 50.5437611
 links:

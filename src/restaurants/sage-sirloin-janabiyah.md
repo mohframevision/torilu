@@ -7,6 +7,7 @@ desc_en: "A restaurant in Janabiyah."
 nameTranslated: true
 categories:
   - الجنبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1676471, 50.4668177
 links:

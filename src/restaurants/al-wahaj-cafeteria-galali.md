@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - قلالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2728222, 50.6497902
 links:

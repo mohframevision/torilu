@@ -7,6 +7,7 @@ desc_en: "A restaurant in Janusan."
 nameTranslated: true
 categories:
   - جنوسان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2198788, 50.4936123
 links:

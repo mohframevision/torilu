@@ -7,6 +7,7 @@ desc_en: "A restaurant in Zallaq."
 nameTranslated: true
 categories:
   - الزلاق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0488044, 50.488336
 links:

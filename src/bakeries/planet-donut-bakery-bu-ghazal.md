@@ -7,6 +7,7 @@ desc_en: "A bakery in Bu Ghazal."
 nameTranslated: true
 categories:
   - بوغزال
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2096733, 50.5751981
 links:

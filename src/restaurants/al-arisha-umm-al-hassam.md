@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - لبناني
   - أم الحصم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2057982, 50.5977256
 links:

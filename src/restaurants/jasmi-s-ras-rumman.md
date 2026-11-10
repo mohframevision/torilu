@@ -6,6 +6,7 @@ title_en: "Jasmi's - Ras Rumman"
 desc_en: "A restaurant in Ras Rumman."
 categories:
   - راس رمان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2366079, 50.5902086
 links:

@@ -6,6 +6,7 @@ title_en: "Latein Pastries"
 desc_en: "A sweets shop in Al Hidd."
 categories:
   - الحد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2499867, 50.655441
 links:

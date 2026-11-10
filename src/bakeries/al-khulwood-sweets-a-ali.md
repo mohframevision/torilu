@@ -7,6 +7,7 @@ desc_en: "A sweets shop in A'ali."
 nameTranslated: true
 categories:
   - عالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1427793, 50.4981302
 links:

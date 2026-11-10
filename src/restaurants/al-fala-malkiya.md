@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - المالكية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0948562, 50.4867798
 links:

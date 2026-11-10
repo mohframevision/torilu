@@ -7,6 +7,7 @@ desc_en: "A restaurant in A'ali."
 categories:
   - إيطالي
   - عالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1630044, 50.4731002
 links:

@@ -7,6 +7,7 @@ desc_en: "A restaurant in A'ali."
 nameTranslated: true
 categories:
   - عالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1593653, 50.5207051
 links:

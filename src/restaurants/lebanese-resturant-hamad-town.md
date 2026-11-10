@@ -6,6 +6,7 @@ title_en: "Lebanese Resturant"
 desc_en: "A restaurant in Hamad Town."
 categories:
   - مدينة حمد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1434859, 50.4956228
 links:

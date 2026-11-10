@@ -7,6 +7,7 @@ desc_en: "A cafe in Al Eker."
 nameTranslated: true
 categories:
   - العكر
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1432183, 50.6023769
 links:

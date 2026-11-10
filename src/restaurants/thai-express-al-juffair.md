@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2114657, 50.6086467
 links:

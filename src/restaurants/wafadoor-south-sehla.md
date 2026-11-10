@@ -7,6 +7,7 @@ desc_en: "A restaurant in South Sehla."
 nameTranslated: true
 categories:
   - السهلة الجنوبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1980501, 50.5441934
 links:

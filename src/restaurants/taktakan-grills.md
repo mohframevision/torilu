@@ -7,6 +7,7 @@ desc_en: A grill restaurant in Kawarah.
 categories:
   - مشاوي
   - الكورة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1847878, 50.5444053
 links:

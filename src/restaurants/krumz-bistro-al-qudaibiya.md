@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al Qudaibiya."
 nameTranslated: true
 categories:
   - القضيبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2153259, 50.5916517
 links:

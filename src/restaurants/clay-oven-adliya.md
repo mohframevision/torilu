@@ -7,6 +7,7 @@ desc_en: "A restaurant in Adliya."
 nameTranslated: true
 categories:
   - العدلية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2128221, 50.5878563
 links:

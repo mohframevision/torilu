@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Hajar."
 nameTranslated: true
 categories:
   - الحجر
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2150912, 50.5124718
 links:

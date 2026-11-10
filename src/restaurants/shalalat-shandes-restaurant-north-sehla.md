@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al Hajar."
 nameTranslated: true
 categories:
   - الحجر
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2136546, 50.512418
 links:

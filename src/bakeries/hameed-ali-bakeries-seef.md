@@ -7,6 +7,7 @@ desc_en: "A bakery in Karbabad."
 nameTranslated: true
 categories:
   - كرباباد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2313812, 50.5301803
 links:

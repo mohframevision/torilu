@@ -7,6 +7,7 @@ desc_en: "A cafe in Nuwaidrat."
 nameTranslated: true
 categories:
   - النويدرات
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1275619, 50.5959787
 links:

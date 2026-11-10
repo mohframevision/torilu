@@ -6,6 +6,7 @@ title_en: "Derby Cafe - Muharraq"
 desc_en: "A cafe in Muharraq."
 categories:
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2495302, 50.6205264
 links:

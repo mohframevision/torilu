@@ -6,6 +6,7 @@ title_en: "Lofty Donuts Cafe"
 desc_en: "A cafe in Zallaq."
 categories:
   - الزلاق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0499962, 50.4991858
 links:

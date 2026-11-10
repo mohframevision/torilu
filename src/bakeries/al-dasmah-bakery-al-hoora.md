@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Hoora."
 nameTranslated: true
 categories:
   - الحورة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2291127, 50.5896076
 links:

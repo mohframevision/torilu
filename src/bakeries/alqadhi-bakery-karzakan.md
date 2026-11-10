@@ -7,6 +7,7 @@ desc_en: "A bakery in Karzakan."
 nameTranslated: true
 categories:
   - كرزكان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1043359, 50.4829733
 links:

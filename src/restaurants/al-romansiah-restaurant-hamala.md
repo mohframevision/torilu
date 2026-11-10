@@ -6,6 +6,7 @@ title_en: "Al-Romansiah Restaurant - Hamala"
 desc_en: "A restaurant in Hamala."
 categories:
   - الهملة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1483754, 50.4875423
 links:

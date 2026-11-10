@@ -7,6 +7,7 @@ desc_en: "A cafe in Muharraq."
 nameTranslated: true
 categories:
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2612335, 50.6152913
 links:

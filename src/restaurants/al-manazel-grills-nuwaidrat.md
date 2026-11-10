@@ -7,6 +7,7 @@ desc_en: "A restaurant in Nuwaidrat."
 nameTranslated: true
 categories:
   - النويدرات
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1334573, 50.6000638
 links:

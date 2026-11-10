@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - الحورة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2345132, 50.5952178
 links:

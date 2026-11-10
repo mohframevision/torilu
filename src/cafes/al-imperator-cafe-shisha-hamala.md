@@ -6,6 +6,7 @@ title_en: "Al Imperator Cafe & Shisha"
 desc_en: "A cafe in Hamala."
 categories:
   - الهملة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1454401, 50.4903309
 links:

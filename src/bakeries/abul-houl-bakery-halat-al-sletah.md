@@ -7,6 +7,7 @@ desc_en: "A bakery in Muharraq."
 nameTranslated: true
 categories:
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2555545, 50.6175868
 links:

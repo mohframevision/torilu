@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - بيتزا
   - القضيبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2350521, 50.5956498
 links:

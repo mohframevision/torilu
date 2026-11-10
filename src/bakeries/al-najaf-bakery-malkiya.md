@@ -7,6 +7,7 @@ desc_en: "A bakery in Malkiya."
 nameTranslated: true
 categories:
   - المالكية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1030916, 50.4834105
 links:

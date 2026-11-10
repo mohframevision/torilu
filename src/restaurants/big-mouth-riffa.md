@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - برجر
   - الرفاع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1273079, 50.5761404
 links:

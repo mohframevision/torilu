@@ -7,6 +7,7 @@ desc_en: "A bakery in Al-Juffair."
 nameTranslated: true
 categories:
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.209956, 50.6016282
 links:

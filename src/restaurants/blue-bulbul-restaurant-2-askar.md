@@ -7,6 +7,7 @@ desc_en: "A restaurant in Askar."
 nameTranslated: true
 categories:
   - عسكر
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0587268, 50.617174
 links:

@@ -7,6 +7,7 @@ desc_en: "A cafe in Al Salmaniya."
 nameTranslated: true
 categories:
   - السلمانية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2189455, 50.5753825
 links:

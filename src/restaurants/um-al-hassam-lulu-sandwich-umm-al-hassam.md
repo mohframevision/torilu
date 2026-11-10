@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - أم الحصم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2046681, 50.5964574
 links:

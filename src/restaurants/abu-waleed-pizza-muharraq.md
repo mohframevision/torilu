@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - بيتزا
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2459139, 50.6112667
 links:

@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2673998, 50.6303591
 links:

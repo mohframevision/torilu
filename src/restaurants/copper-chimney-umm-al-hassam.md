@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - هندي
   - أم الحصم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2028443, 50.5971553
 links:

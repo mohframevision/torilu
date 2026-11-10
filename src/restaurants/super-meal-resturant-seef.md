@@ -7,6 +7,7 @@ desc_en: "A restaurant in Karbabad."
 nameTranslated: true
 categories:
   - كرباباد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2316914, 50.5305306
 links:

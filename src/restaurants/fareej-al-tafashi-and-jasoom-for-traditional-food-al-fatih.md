@@ -6,6 +6,7 @@ title_en: "Fareej Al-Tafashi and Jasoom for Traditional Food"
 desc_en: "A restaurant in Al Fatih."
 categories:
   - الفاتح
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2173039, 50.6075097
 links:

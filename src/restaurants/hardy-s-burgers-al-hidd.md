@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - برجر
   - عراد
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2569536, 50.648719
 links:

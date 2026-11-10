@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - الجنبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1684091, 50.4660205
 links:

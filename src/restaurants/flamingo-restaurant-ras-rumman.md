@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - مشاوي
   - راس رمان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2329647, 50.5769086
 links:

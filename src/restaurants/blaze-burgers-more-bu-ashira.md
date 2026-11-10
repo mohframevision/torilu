@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - برجر
   - بوعشيرة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2150057, 50.5919174
 links:

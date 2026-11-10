@@ -7,6 +7,7 @@ desc_en: "A cafe in Al Hoora."
 nameTranslated: true
 categories:
   - الحورة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2285164, 50.5854782
 links:

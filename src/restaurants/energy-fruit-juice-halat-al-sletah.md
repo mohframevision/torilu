@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - عصائر
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2584723, 50.6162676
 links:

@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - دلمونيا
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2646702, 50.6561363
 links:

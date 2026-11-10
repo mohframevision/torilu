@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - سندويشات
   - جزر أمواج
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2777451, 50.6622668
 links:

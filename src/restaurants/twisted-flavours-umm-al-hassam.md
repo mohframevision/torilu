@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - مشاوي
   - أم الحصم
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2021929, 50.5968892
 links:

@@ -7,6 +7,7 @@ desc_en: "A cafe in Busaiteen."
 nameTranslated: true
 categories:
   - بسيتين
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2721437, 50.607757
 links:

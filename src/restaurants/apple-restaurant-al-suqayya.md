@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - السقية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2175962, 50.5744122
 links:

@@ -7,6 +7,7 @@ desc_en: "A bakery in Nuwaidrat."
 nameTranslated: true
 categories:
   - النويدرات
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1385497, 50.5992937
 links:

@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - سندويشات
   - المالكية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.098777, 50.4855271
 links:

@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al-Juffair."
 nameTranslated: true
 categories:
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2114627, 50.6087751
 links:

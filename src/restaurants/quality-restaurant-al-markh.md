@@ -7,6 +7,7 @@ desc_en: "A restaurant in Al Markh."
 nameTranslated: true
 categories:
   - المرخ
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.198448, 50.4856569
 links:

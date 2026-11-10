@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - دمستان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1290547, 50.4786976
 links:

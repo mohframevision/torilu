@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - وجبات سريعة
   - المنطقة الدبلوماسية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2409903, 50.5871239
 links:

@@ -7,6 +7,7 @@ desc_en: "A cafe in Al Maqsha."
 nameTranslated: true
 categories:
   - المقشع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2186085, 50.5148795
 links:

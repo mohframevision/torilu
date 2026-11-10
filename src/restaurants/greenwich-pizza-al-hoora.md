@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - بيتزا
   - الحورة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.225673, 50.5847047
 links:

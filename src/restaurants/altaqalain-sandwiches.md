@@ -6,6 +6,7 @@ title_en: "Altaqalain Sandwiches"
 desc_en: "A restaurant in Bahrain."
 nameTranslated: true
 categories: []
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2291968, 50.4801725
 links:

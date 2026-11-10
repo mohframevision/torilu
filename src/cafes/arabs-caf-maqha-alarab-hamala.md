@@ -6,6 +6,7 @@ title_en: "Arabs Caf (Maqha AlArab)"
 desc_en: "A cafe in Hamala."
 categories:
   - الهملة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.145464, 50.4894928
 links:

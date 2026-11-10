@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - بيتزا
   - بسيتين
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2716713, 50.605496
 links:

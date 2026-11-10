@@ -8,6 +8,7 @@ categories:
   - وجبات سريعة
   - برجر
   - بوغزال
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2053596, 50.5752678
 links:

@@ -8,6 +8,7 @@ nameTranslated: true
 categories:
   - برجر
   - البديع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2117451, 50.4509538
 links:

@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - سندويشات
   - قلالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.272519, 50.6504611
 links:

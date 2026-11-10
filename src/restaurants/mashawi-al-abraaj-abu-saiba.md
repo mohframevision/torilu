@@ -7,6 +7,7 @@ desc_en: "A restaurant in Abu Saiba."
 nameTranslated: true
 categories:
   - أبو صيبع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2208539, 50.503296
 links:

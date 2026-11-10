@@ -8,6 +8,7 @@ categories:
   - وجبات سريعة
   - برجر
   - القضيبية
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2291035, 50.5958513
 links:

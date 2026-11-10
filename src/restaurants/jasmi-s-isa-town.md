@@ -8,6 +8,7 @@ categories:
   - وجبات سريعة
   - برجر
   - مدينة عيسى
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1682379, 50.5425607
 links:

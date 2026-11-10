@@ -7,6 +7,7 @@ desc_en: "A bakery in Al Budaiya."
 nameTranslated: true
 categories:
   - البديع
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2169598, 50.4504041
 links:

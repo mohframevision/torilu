@@ -6,6 +6,7 @@ title_en: "Abu Al-Falafil Sandwiches"
 desc_en: "A restaurant in Bahrain."
 categories:
   - سندويشات
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1652936, 50.609091
 links:

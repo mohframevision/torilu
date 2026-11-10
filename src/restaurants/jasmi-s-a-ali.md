@@ -7,6 +7,7 @@ desc_en: "Fast food in A'ali."
 categories:
   - وجبات سريعة
   - عالي
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.097499, 50.5064528
 links:

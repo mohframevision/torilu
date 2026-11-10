@@ -7,6 +7,7 @@ desc_en: "A restaurant in Karzakan."
 nameTranslated: true
 categories:
   - كرزكان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1160059, 50.4807144
 links:

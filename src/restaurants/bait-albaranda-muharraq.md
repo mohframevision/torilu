@@ -6,6 +6,7 @@ title_en: "Bait albaranda"
 desc_en: "A restaurant in Muharraq."
 categories:
   - المحرق
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2393595, 50.6337801
 links:

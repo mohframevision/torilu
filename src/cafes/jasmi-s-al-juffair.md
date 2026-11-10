@@ -6,6 +6,7 @@ title_en: "Jasmi's - Al-Juffair"
 desc_en: "A cafe in Al-Juffair."
 categories:
   - الجفير
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.216288, 50.5991319
 links:

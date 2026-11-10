@@ -9,6 +9,7 @@ categories:
   - وجبات سريعة
   - سندويشات
   - دمستان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1292516, 50.4788334
 links:

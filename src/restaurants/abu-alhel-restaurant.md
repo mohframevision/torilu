@@ -6,6 +6,7 @@ title_en: "Abu Alhel Restaurant"
 desc_en: "A restaurant in Bahrain."
 nameTranslated: true
 categories: []
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2305084, 50.5080054
 links:

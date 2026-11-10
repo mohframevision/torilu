@@ -7,6 +7,7 @@ desc_en: "A sweets shop in Ras Rumman."
 nameTranslated: true
 categories:
   - راس رمان
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2323835, 50.5792746
 links:

@@ -7,6 +7,7 @@ desc_en: "A cafe in Bu Ghazal."
 nameTranslated: true
 categories:
   - بوغزال
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2105968, 50.5731226
 links:

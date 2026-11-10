@@ -6,6 +6,7 @@ title_en: "Momo"
 desc_en: "A restaurant in Manama."
 categories:
   - المنامة
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2288295, 50.5689303
 links:
