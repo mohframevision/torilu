@@ -6,7 +6,6 @@ title_en: "Cairo restaurant"
 desc_en: "A restaurant in Adliya."
 categories:
   - العدلية
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2146588, 50.5873577
 links:

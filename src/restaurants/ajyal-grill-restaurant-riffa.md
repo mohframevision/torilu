@@ -6,7 +6,6 @@ title_en: "Ajyal Grill & Restaurant"
 desc_en: "A restaurant in Riffa."
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1209309, 50.5698469
 links:

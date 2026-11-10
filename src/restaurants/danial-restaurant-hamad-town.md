@@ -6,7 +6,6 @@ title_en: "Danial Restaurant"
 desc_en: "A restaurant in Hamad Town."
 categories:
   - مدينة حمد
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.13909, 50.4903675
 links:

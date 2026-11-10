@@ -6,7 +6,6 @@ title_en: "Rabella"
 desc_en: "A cafe in Al Markh."
 categories:
   - المرخ
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1972421, 50.4772987
 links:

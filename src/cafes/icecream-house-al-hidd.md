@@ -6,7 +6,6 @@ title_en: "Icecream house"
 desc_en: "A cafe in Al Hidd."
 categories:
   - الحد
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2501606, 50.6532947
 links:

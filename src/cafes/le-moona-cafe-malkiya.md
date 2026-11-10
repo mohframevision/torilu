@@ -6,7 +6,6 @@ title_en: "Le moona cafe"
 desc_en: "A cafe in Malkiya."
 categories:
   - المالكية
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0963926, 50.490809
 links:

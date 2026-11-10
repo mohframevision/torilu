@@ -6,7 +6,6 @@ title_en: "Marmaris Restaurant"
 desc_en: "A restaurant in Al Diyah."
 categories:
   - الديه
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2277895, 50.536357
 links:

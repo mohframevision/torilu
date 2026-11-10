@@ -6,7 +6,6 @@ title_en: "Katana Torii"
 desc_en: "A Japanese restaurant in Amwaj Islands."
 categories:
   - جزر أمواج
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2936243, 50.6587619
 links:

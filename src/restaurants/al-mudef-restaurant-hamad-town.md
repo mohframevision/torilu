@@ -8,7 +8,6 @@ categories:
   - شاورما
   - لبناني
   - مدينة حمد
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1430453, 50.4968311
 links:

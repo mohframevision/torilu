@@ -8,7 +8,6 @@ categories:
   - وجبات سريعة
   - عصائر
   - الزلاق
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.0526266, 50.4889031
 links:

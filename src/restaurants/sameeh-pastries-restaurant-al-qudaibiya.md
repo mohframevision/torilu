@@ -8,7 +8,6 @@ categories:
   - شاورما
   - بيتزا
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2268171, 50.5889981
 links:

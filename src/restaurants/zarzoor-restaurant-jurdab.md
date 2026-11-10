@@ -7,7 +7,6 @@ desc_en: "A restaurant in Jurdab."
 categories:
   - مشاوي
   - جرداب
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1655982, 50.5698195
 links:

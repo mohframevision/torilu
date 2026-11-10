@@ -8,7 +8,6 @@ categories:
   - وجبات سريعة
   - سندويشات
   - مدينة حمد
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.142461, 50.4968426
 links:

@@ -6,7 +6,6 @@ title_en: "Mama Mocha"
 desc_en: "A restaurant in Muharraq."
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2641079, 50.6243068
 links:

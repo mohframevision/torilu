@@ -6,7 +6,6 @@ title_en: "Black Drop Caff"
 desc_en: "A cafe in Manama."
 categories:
   - المنامة
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2357072, 50.5545081
 links:

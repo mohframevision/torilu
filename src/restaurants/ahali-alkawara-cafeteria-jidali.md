@@ -8,7 +8,6 @@ categories:
   - برجر
   - وجبات سريعة
   - الكورة
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1812831, 50.5499754
 links:

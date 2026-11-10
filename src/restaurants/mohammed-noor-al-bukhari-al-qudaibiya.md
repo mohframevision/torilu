@@ -6,7 +6,6 @@ title_en: "Mohammed Noor Al-Bukhari"
 desc_en: "A restaurant in Al Qudaibiya."
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.233797, 50.5959619
 links:

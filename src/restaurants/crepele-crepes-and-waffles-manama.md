@@ -7,7 +7,6 @@ desc_en: "Fast food in Manama."
 categories:
   - وجبات سريعة
   - المنامة
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1812329, 50.5918097
 links:

@@ -7,7 +7,6 @@ desc_en: "A restaurant in Hamad Town."
 categories:
   - هندي
   - مدينة حمد
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1426611, 50.4946726
 links:

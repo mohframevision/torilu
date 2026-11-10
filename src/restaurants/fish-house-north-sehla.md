@@ -6,7 +6,6 @@ title_en: "Fish house"
 desc_en: "A restaurant in North Sehla."
 categories:
   - السهلة الشمالية
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2177762, 50.5240866
 links:

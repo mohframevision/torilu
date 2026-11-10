@@ -6,7 +6,6 @@ title_en: "Cocos"
 desc_en: "A restaurant in Bu Ashira."
 categories:
   - بوعشيرة
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2150559, 50.5926363
 links:

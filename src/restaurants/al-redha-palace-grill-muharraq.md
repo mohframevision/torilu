@@ -8,7 +8,6 @@ categories:
   - مشاوي
   - شاورما
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2525895, 50.619228
 links:

@@ -6,7 +6,6 @@ title_en: "Villa mamaz - Al Markh"
 desc_en: "A restaurant in Al Markh."
 categories:
   - المرخ
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.198121, 50.4770959
 links:

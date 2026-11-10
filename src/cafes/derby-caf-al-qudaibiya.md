@@ -6,7 +6,6 @@ title_en: "Derby Caf - Al Qudaibiya"
 desc_en: "A cafe in Al Qudaibiya."
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2328076, 50.5990945
 links:

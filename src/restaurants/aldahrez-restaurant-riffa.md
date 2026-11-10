@@ -6,7 +6,6 @@ title_en: "Aldahrez restaurant"
 desc_en: "A restaurant in Riffa."
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1428809, 50.578285
 links:

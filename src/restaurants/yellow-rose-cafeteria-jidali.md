@@ -7,7 +7,6 @@ desc_en: A cafeteria in Kawarah.
 categories:
   - وجبات سريعة
   - الكورة
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1814007, 50.5500635
 links:

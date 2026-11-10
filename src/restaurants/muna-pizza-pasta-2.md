@@ -5,7 +5,6 @@ desc: "مطعم في البحرين."
 title_en: "Muna Pizza & Pasta"
 desc_en: "A restaurant in Bahrain."
 categories: []
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1652967, 50.6091434
 links:

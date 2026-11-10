@@ -6,7 +6,6 @@ title_en: "Natasha Boulevard"
 desc_en: "A restaurant in Bu Ashira."
 categories:
   - بوعشيرة
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2144172, 50.591695
 links:

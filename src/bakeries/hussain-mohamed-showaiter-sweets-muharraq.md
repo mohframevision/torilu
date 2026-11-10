@@ -7,7 +7,6 @@ desc_en: "A sweets shop in Muharraq."
 categories:
   - حلويات
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2506249, 50.6093607
 links:

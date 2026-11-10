@@ -7,7 +7,6 @@ desc_en: "A restaurant in Hamala."
 categories:
   - فطور
   - الهملة
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1458804, 50.4903333
 links:

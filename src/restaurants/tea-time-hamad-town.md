@@ -6,7 +6,6 @@ title_en: "Tea Time - Hamad Town"
 desc_en: "A restaurant in Hamad Town."
 categories:
   - مدينة حمد
-incomplete: true
 dateAdded: 2026-11-10
 coords: 26.1395462, 50.4921837
 links:
