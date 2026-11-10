@@ -1,12 +1,12 @@
 ---
 title: مطعم مشويات الجودي
 icon: 🍢
-desc: مطعم مشويات قرب جد علي.
+desc: مطعم مشويات في السهلة الجنوبية.
 title_en: Jowdi Restaurant
-desc_en: A grill restaurant near Jid Ali.
+desc_en: A grill restaurant in South Sehla.
 categories:
   - مشاوي
-  - جد علي
+  - السهلة الجنوبية
 dateAdded: 2026-11-10
 coords: 26.1859985, 50.5552614
 links:

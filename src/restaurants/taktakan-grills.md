@@ -1,12 +1,12 @@
 ---
 title: مشويات تكتكان
 icon: 🍢
-desc: مطعم مشويات قرب جد علي.
+desc: مطعم مشويات في الكورة.
 title_en: Taktakan Grills
-desc_en: A grill restaurant near Jid Ali.
+desc_en: A grill restaurant in Kawarah.
 categories:
   - مشاوي
-  - جد علي
+  - الكورة
 dateAdded: 2026-11-10
 coords: 26.1847878, 50.5444053
 links:

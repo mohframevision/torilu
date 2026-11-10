@@ -1,12 +1,12 @@
 ---
 title: كافيتيريا الوردة الصفراء
 icon: 🥪
-desc: كافيتيريا في جد علي.
+desc: كافيتيريا في الكورة.
 title_en: Yellow Rose Cafeteria
-desc_en: A cafeteria in Jid Ali.
+desc_en: A cafeteria in Kawarah.
 categories:
   - وجبات سريعة
-  - جد علي
+  - الكورة
 dateAdded: 2026-11-10
 coords: 26.1814007, 50.5500635
 links:
