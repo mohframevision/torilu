@@ -1021,6 +1021,14 @@ function sectionBadge(section) {
   return `<span class="section-badge">${span.innerHTML}</span>`;
 }
 
+/* «الاسم - الفرع»: الاسم عنواناً والفرع سطراً صغيراً تحته (.t-branch). النص كاملاً يبقى في الصفحة
+   (الشرطة مخفية بصرياً فقط). نفس ما يطبعه item-card.njk وplace-newspaper.njk */
+function titleHtml(title) {
+  const i = title.indexOf(" - ");
+  if (i < 0) return `<bdi>${escapeHtml(title)}</bdi>`;
+  return `<bdi>${escapeHtml(title.slice(0, i))}</bdi><span class="sr-only"> - </span><bdi class="t-branch">${escapeHtml(title.slice(i + 3))}</bdi>`;
+}
+
 /* ===== بناء بطاقة عنصر واحدة ===== */
 function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel = "") {
   const card = document.createElement("div");
@@ -1056,7 +1064,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
           </button>
         </div>
       </div>
-      <h3><bdi>${escapeHtml(title)}</bdi>${item.verified ? ` <span class="verified-badge" title="${t("verified_badge")}">${t("verified_badge")}</span>` : ""}${item.liked ? ` <span class="liked-badge" title="${t("liked_badge")}">${t("liked_badge")}</span>` : ""}</h3>
+      <h3>${titleHtml(title)}${item.verified ? ` <span class="verified-badge" title="${t("verified_badge")}">${t("verified_badge")}</span>` : ""}${item.liked ? ` <span class="liked-badge" title="${t("liked_badge")}">${t("liked_badge")}</span>` : ""}</h3>
       <p class="item-desc${isLongDesc ? " clamped" : ""}">${escapeHtml(desc)}</p>
       ${isLongDesc && !item.detailUrl ? `<button class="desc-toggle" aria-expanded="false">${t("read_more")}</button>` : ""}
       ${itemHours(item) ? `<p class="item-hours">${ICON_SVG.schedule} ${escapeHtml(itemHours(item))}</p>` : ""}

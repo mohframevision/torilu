@@ -27,7 +27,8 @@
   {#- ختم «أعجبني»: بجانب رأي صاحب الموقع، أو تحت العنوان إن لم يكتب رأياً -#}
   {% set stamp %}<img class="liked-stamp" src="/assets/stamp-liked.svg" alt="{{ t.liked_stamp_alt }}" width="100" height="100" decoding="async" />{% endset %}
   {% if liked2 and not recommendation %}{{ stamp | safe }}{% endif %}
-  <h1>{{ title }}</h1>
+  {#- «الاسم - الفرع»: الاسم عنواناً والفرع سطراً صغيراً تحته؛ النص كاملاً يبقى في العنوان لقارئ الشاشة والنسخ -#}
+  {% set tp = title.split(" - ") %}<h1>{% if tp.length > 1 %}{{ tp[0] }}<span class="sr-only"> - </span><span class="t-branch">{{ tp.slice(1).join(" - ") }}</span>{% else %}{{ title }}{% endif %}</h1>
   {% if desc %}<p class="np-deck">{{ desc }}</p>{% endif %}
   <div class="np-byline">
     {# الهدف الأول لزائر صفحة مكان: يروح له — فالخريطة الزر الأساسي والباقي ثانوي #}
@@ -82,7 +83,8 @@
 </article>
 </div>
 <aside class="np-facts">
-{% if not image %}<figure class="np-lead-art" aria-hidden="true"><img src="{{ '/assets/icon-square.svg' | url }}" alt="" width="512" height="512" /></figure>{% endif %}
+{% if not image %}{#- لوح طباعة بحرف المكان الأول (بعد كلمة النوع و«ال») بدل شعار الموقع المكرر في كل صفحة -#}
+<figure class="np-lead-art plate" aria-hidden="true"><span class="plate-glyph">{{ title | replace(r/^(?:(?:ال)?(?:مطعم|مقهى|مخبز|مخابز|مطبخ|مشويات|معجنات|حلويات)|كافيه|كوفي|كافي?تيريا|The|Al|El|Restaurant|Cafe|Café|Bakery)[\s-]+/i, "") | replace(r/^ال(?=.{2})/, "") | first | upper }}</span></figure>{% endif %}
 <h2>{{ "At a glance" if isEn else "معلومات المكان" }}</h2>
 <dl>
   {% if hrs %}<dt>{{ "Hours" if isEn else "الأوقات" }}</dt><dd>{{ hrs }}</dd>{% endif %}

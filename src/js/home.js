@@ -43,7 +43,11 @@
   const dateEl = document.getElementById("homeDate");
   if (dateEl) dateEl.textContent = new Intl.DateTimeFormat(isEn ? "en-GB" : "ar-BH-u-nu-latn", { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(new Date());
   const h = new Date().getHours();
-  const slot = SLOTS[h >= 5 && h < 11 ? "morning" : h >= 11 && h < 16 ? "noon" : h >= 16 && h < 20 ? "evening" : "night"];
+  const slotKey = h >= 5 && h < 11 ? "morning" : h >= 11 && h < 16 ? "noon" : h >= 16 && h < 20 ? "evening" : "night";
+  const slot = SLOTS[slotKey];
+  // اسم الطبعة حسب ساعة الزائر بدل الشعار المكرر مع سطر العنوان
+  const editionEl = document.getElementById("homeEdition");
+  if (editionEl) editionEl.textContent = (isEn ? { morning: "Morning edition", noon: "Midday edition", evening: "Evening edition", night: "Night edition" } : { morning: "طبعة الصباح", noon: "طبعة الظهيرة", evening: "طبعة المساء", night: "طبعة الليل" })[slotKey];
 
   // أزرار سريعة: وقت اليوم + كراج (حاجة مستعجلة بأي وقت)
   // شكل «د»: كلمات بلا إيموجي (الإيموجي كان يعطي إحساساً طفولياً)
@@ -96,10 +100,17 @@
     const kicker = [badge || secName(section), typeOf(item)].filter(Boolean).join(" · ");
     return `<a class="d-card" href="${hrefOf(section, item)}">
       <small class="d-kicker">${escapeHtml(kicker)}</small>
-      <b class="d-title">${escapeHtml(itemTitle(item))}</b>
+      <b class="d-title">${titleHtml(itemTitle(item))}</b>
       <span class="d-desc">${escapeHtml(itemDesc(item) || "")}</span>
       ${meta(item)}
     </a>`;
+  };
+
+  // حرف لوح «مكان الأسبوع»: أول حرف من الاسم نفسه بعد كلمة النوع و«ال»، كي لا تتكرر «م» و«ا» كل أسبوع
+  // (نفس القاعدة في place-newspaper.njk)
+  const glyphOf = (title) => {
+    const name = title.trim().replace(/^(?:(?:ال)?(?:مطعم|مقهى|مخبز|مخابز|مطبخ|مشويات|معجنات|حلويات)|كافيه|كوفي|كافي?تيريا|The|Al|El|Restaurant|Cafe|Café|Bakery)[\s-]+/i, "").replace(/^ال(?=.{2})/, "");
+    return (Array.from(name)[0] || "").toUpperCase();
   };
 
   // مكان الأسبوع: «مميز» يختاره صاحب الموقع أولاً، وإلا مكان بمنيو كامل يتبدّل كل أسبوع (نفس الأسبوع = نفس المكان)
@@ -116,9 +127,9 @@
     const menuLine = lead.menuCount ? `<span class="d-lead-menu">${escapeHtml(t("home_menu_count").replace("{n}", lead.menuCount))}</span>` : "";
     const box = document.getElementById("homeLeadCard");
     box.href = hrefOf(ls, lead);
-    box.innerHTML = `<span class="d-lead-art" aria-hidden="true"><span class="halftone"></span></span>
+    box.innerHTML = `<span class="d-lead-art plate" aria-hidden="true"><span class="plate-glyph">${escapeHtml(glyphOf(itemTitle(lead)))}</span></span>
       <span class="d-lead-text"><small class="d-kicker">${escapeHtml([secName(ls), typeOf(lead)].filter(Boolean).join(" · "))}</small>
-      <b class="d-lead-title">${escapeHtml(itemTitle(lead))}</b><span class="d-desc">${escapeHtml(itemDesc(lead) || "")}</span>${menuLine}${meta(lead)}</span>`;
+      <b class="d-lead-title">${titleHtml(itemTitle(lead))}</b><span class="d-desc">${escapeHtml(itemDesc(lead) || "")}</span>${menuLine}${meta(lead)}</span>`;
     document.getElementById("homeLead").hidden = false;
   }
 
