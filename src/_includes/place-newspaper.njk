@@ -23,7 +23,8 @@
   <div class="np-mast-row"><span>{{ "A guide to places in Bahrain" if isEn else "دليل أماكن البحرين" }}</span></div>
 </div>
 <header class="page-header np-head">
-  {% if v %}<p class="np-kicker"><span>{{ t.verified_badge }}</span></p>{% endif %}
+  {#- ختم حبر، فقط حين verified في البيانات؛ بلا تاريخ لأن البيانات لا تحمل تاريخ زيارة -#}
+  {% if v %}<p class="np-kicker np-stamp"><span>{{ t.verified_badge }}</span></p>{% endif %}
   {#- ختم «أعجبني»: بجانب رأي صاحب الموقع، أو تحت العنوان إن لم يكتب رأياً -#}
   {% set stamp %}<img class="liked-stamp" src="/assets/stamp-liked.svg" alt="{{ t.liked_stamp_alt }}" width="100" height="100" decoding="async" />{% endset %}
   {% if liked2 and not recommendation %}{{ stamp | safe }}{% endif %}
@@ -76,7 +77,9 @@
 <h2>{{ t.detail_menu_title }}</h2>
 <ul class="detail-menu np-menu">
 {%- for mi in mItems %}
-<li><span>{{ (mi.name_en or mi.name) if isEn else mi.name }}</span><i aria-hidden="true"></i><b>{{ mi.price }}</b></li>
+{#- عدة أحجام («1.300 / 2.500 BD») تأخذ سطراً ثانياً مرتباً؛ ووحدة العملة أصغر من الرقم -#}
+{%- set pr = (mi.price or "") ~ "" %}{% set pp = pr.split(" BD") %}
+<li{% if "/" in pr %} class="multi"{% endif %}><span>{{ (mi.name_en or mi.name) if isEn else mi.name }}</span><i aria-hidden="true"></i><b>{{ pp[0] }}{% if pp.length > 1 %} <small>BD</small>{{ pp.slice(1).join(" BD") }}{% endif %}</b></li>
 {%- endfor %}
 </ul>
 {%- endif %}
@@ -85,6 +88,7 @@
 <aside class="np-facts">
 {% if not image %}{#- لوح طباعة بحرف المكان الأول (بعد كلمة النوع و«ال») بدل شعار الموقع المكرر في كل صفحة -#}
 <figure class="np-lead-art plate" aria-hidden="true"><span class="plate-glyph">{{ title | replace(r/^(?:(?:ال)?(?:مطعم|مقهى|مخبز|مخابز|مطبخ|مشويات|معجنات|حلويات)|كافيه|كوفي|كافي?تيريا|The|Al|El|Restaurant|Cafe|Café|Bakery)[\s-]+/i, "") | replace(r/^ال(?=.{2})/, "") | first | upper }}</span></figure>{% endif %}
+<div class="np-facts-in">
 <h2>{{ "At a glance" if isEn else "معلومات المكان" }}</h2>
 <dl>
   {% if hrs %}<dt>{{ "Hours" if isEn else "الأوقات" }}</dt><dd>{{ hrs }}</dd>{% endif %}
@@ -96,6 +100,7 @@
   {% if lk.instagram %}<dt>{{ "Instagram" if isEn else "إنستقرام" }}</dt><dd><a href="{{ lk.instagram }}" target="_blank" rel="noopener" dir="ltr">@{{ lk.instagram.replace(r/^https?:\/\/(?:www\.)?instagram\.com\/([^\/?]+).*$/, "$1") }}</a></dd>{% endif %}
   {% if lk.website %}<dt>{{ "Website" if isEn else "الموقع الإلكتروني" }}</dt><dd><a href="{{ lk.website }}" target="_blank" rel="noopener">{{ t.link_website }}</a></dd>{% endif %}
 </dl>
+</div>
 </aside>
 </div>
 {# الوعد «كل معلومة متحقَّق منها» يحتاج طريقاً لتصحيحها: رابط هادئ واحد إلى شرح «محلك في توريلو؟»،

@@ -5234,17 +5234,9 @@ main .search-box {
   background: var(--np-paper);
   padding: 28px clamp(18px, 4vw, 56px) 36px;
   margin-block: var(--space-4) var(--space-6);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 18px 50px -18px rgb(40 30 10 / 0.35);
-}
-/* الداكن: ورق أغمق بلونه (--np-paper) وبقعة ضوء مصباح (--np-lamp) بدل فلتر على الورقة كلها،
-   فالورقة الطويلة (منيو بآلاف البكسلات) لا تُرشَّح كطبقة واحدة */
-:root[data-theme="dark"] .np-sheet {
-  box-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 18px 60px -10px rgb(0 0 0 / 0.8);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .np-sheet {
-    box-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 18px 60px -10px rgb(0 0 0 / 0.8);
-  }
+  /* الداكن: ورق أغمق بلونه (--np-paper) وبقعة ضوء مصباح (--np-lamp) بدل فلتر على الورقة كلها،
+     فالورقة الطويلة (منيو بآلاف البكسلات) لا تُرشَّح كطبقة واحدة؛ والظل من --np-sheet-shadow */
+  box-shadow: var(--np-sheet-shadow);
 }
 .np-sheet a {
   color: var(--color-primary);
@@ -5495,6 +5487,7 @@ main .search-box {
   align-items: baseline;
   gap: 6px;
   margin: 0 0 0.35em;
+  break-inside: avoid;
 }
 .np-menu li::marker {
   content: none;
@@ -5502,7 +5495,7 @@ main .search-box {
 .np-menu i {
   flex: 1;
   min-width: 16px;
-  border-bottom: 2px dotted var(--color-border);
+  border-bottom: 2px dotted color-mix(in srgb, var(--color-text) 35%, transparent);
 }
 .np-sheet .np-body .np-menu li {
   text-align: start;
@@ -5514,7 +5507,43 @@ main .search-box {
   max-width: 50%;
   text-align: end;
 }
-/* صندوق المعلومات: عمود جانبي بخطوط */
+/* وحدة العملة أصغر من الرقم */
+.np-menu b small {
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+/* صنف بعدة أحجام («1.300 / 2.500 / 3.600 BD»): الاسم سطر كامل، والأسعار سطر تحته عند طرف
+   العمود، بلا نقاط — بدل التفاف غير منتظم في ثلاثة أسطر */
+.np-menu li.multi {
+  flex-wrap: wrap;
+  row-gap: 0;
+  margin-bottom: 0.75em;
+}
+.np-menu li.multi i {
+  display: none;
+}
+.np-menu li.multi span,
+.np-menu li.multi b {
+  flex-basis: 100%;
+  max-width: none;
+}
+.np-menu li.multi b {
+  margin-top: -0.2em;
+  font-size: 0.92em;
+  color: var(--color-text-muted);
+}
+/* صندوق المعلومات: عمود جانبي بخطوط؛ على الشاشة العريضة يلتصق تحت الهيدر والمنيو يمرّ بجانبه،
+   فالأوقات والهاتف دائماً بجانب الأسعار (والخط الفاصل يمتدّ بطول العمود) */
+@media (min-width: 761px) {
+  .np-facts.np-facts {
+    align-self: stretch;
+  }
+  .np-facts-in {
+    position: sticky;
+    top: calc(var(--header-h, 64px) + 16px);
+  }
+}
 .np-facts {
   align-self: start;
   border-inline-start: 1px solid var(--color-border);
@@ -5645,10 +5674,18 @@ main .search-box {
 }
 .detail.np-article:has(> .np-fold) {
   position: relative;
+  /* الجريدة المطويّة وحدها في أول الشاشة والتذييل تحتها (القسمة على zoom الشاشات العريضة) */
+  min-height: calc(100svh / var(--page-zoom, 1) - var(--header-h, 64px));
 }
-/* وهي مطويّة: الورقة الحقيقية شفافة ومقصوصة لارتفاع الجريدة (ما تترك فراغاً طويلاً) */
+/* صندوق الطيّات المكبَّر أطول مما يُرى منه، فكان يضيف تمريراً فارغاً تحت التذييل: يُقصّ عمودياً
+   فقط وهي مطويّة (الظل الجانبي يبقى حراً، وأسفل المسرح أبعد من ظل الجريدة) */
+.detail.np-article:has(> .np-fold:not(.is-half)) {
+  overflow-y: clip;
+}
+/* وهي مطويّة: الورقة الحقيقية شفافة ومقصوصة لارتفاع الجريدة المطويّة كما تُرى (--fold-vis من
+   fold.js؛ يصير ارتفاعها مفرودة أثناء الفتح والطيّ) فلا تترك فراغاً تحتها */
 :root .np-sheet.np-folded {
-  max-height: calc(var(--fold-h) * 2);
+  max-height: var(--fold-vis, calc(var(--fold-h) * 2));
   overflow: hidden;
   background: transparent;
   box-shadow: none;
@@ -5659,8 +5696,18 @@ main .search-box {
   opacity: 0;
 }
 
-/* --w/--h نصف عرض الورقة ونصف ارتفاعها، --s تكبير الربع المطويّ، --dx/--dy توسيطه */
+/* شدّة ضوء القراءة الذي يتبع المؤشر (0 بلا مؤشر) — مسجّلة لتظهر وتختفي بانتقال ناعم */
+@property --la {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+/* --w/--h نصف عرض الورقة ونصف ارتفاعها، --s تكبير الربع المطويّ، --dx/--dy توسيطه.
+   --fold-t مدة الفتح كلها (fold.js يكتبها): الطيّة الأولى 43% منها، والثانية 48% تبدأ عند 33%
+   فتتداخلان كحركة يد واحدة، ثم تهبط الورقة في 17%. المنحنى متباطئ: تُرمى ثم تطفو حتى تستقر */
 .detail.np-article > .np-fold {
+  --fold-t: 1.45s;
+  --fold-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   position: absolute;
   z-index: 2;
   top: var(--y);
@@ -5673,7 +5720,9 @@ main .search-box {
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-  transition: opacity 0.35s ease;
+  transition:
+    opacity 0.35s ease,
+    --la 0.4s ease;
 }
 .np-fold.is-gone {
   opacity: 0;
@@ -5685,17 +5734,33 @@ main .search-box {
   transform-style: preserve-3d;
   transform-origin: 75% 0;
   transform: translate(var(--dx), var(--dy)) scale(var(--s)) rotate(-1.2deg);
-  transition: transform 1s cubic-bezier(0.45, 0.05, 0.25, 1);
+  /* ميل خفيف نحو المؤشر (fold.js، بالفأرة فقط) بخاصية rotate المستقلة فلا يتعارض مع transform */
+  rotate: var(--tilt, 0 0 1 0deg);
+  transition:
+    transform calc(var(--fold-t) * 0.48) var(--fold-ease),
+    rotate 0.3s ease-out;
 }
 .np-fold:hover:not(.is-half) .np-fold-paper,
 .np-fold:focus-visible .np-fold-paper {
   transform: translate(var(--dx), calc(var(--dy) - 4px)) scale(var(--s)) rotate(-0.6deg);
 }
+/* استجابة الضغط (اللمس لا hover له): الورقة تنضغط قليلاً تحت الإصبع */
+.np-fold:active:not(.is-half) .np-fold-paper {
+  transform: translate(var(--dx), var(--dy)) scale(calc(var(--s) * 0.985)) rotate(-1.2deg);
+  transition-duration: 90ms;
+}
 .np-fold.is-half .np-fold-paper {
   transform: translate(var(--dx), 0) scale(var(--s1));
+  rotate: none;
 }
+/* مفرودة وما زالت مرفوعة قليلاً عن الطاولة… */
 .np-fold.is-open .np-fold-paper {
+  transform: scale(1.012);
+}
+/* …ثم تهبط: تحويل وظل على الطبقة الصغيرة فقط، والورقة الحقيقية الطويلة لا تتحرك */
+.np-fold.is-landed .np-fold-paper {
   transform: none;
+  transition-duration: calc(var(--fold-t) * 0.17);
 }
 /* سماكة الطبقات المطويّة وظلّها على الطاولة — تصير ظلّ الورقة المفتوحة */
 .np-fold-paper::before {
@@ -5711,18 +5776,23 @@ main .search-box {
     -2px 2px 0 color-mix(in srgb, var(--np-paper) 85%, #000),
     -3px 3px 0 color-mix(in srgb, var(--np-paper) 98%, #000),
     -4px 4px 0 color-mix(in srgb, var(--np-paper) 82%, #000),
-    -6px 10px 22px rgb(40 30 10 / 0.35);
+    var(--np-fold-cast);
   transition:
-    all 1s cubic-bezier(0.45, 0.05, 0.25, 1),
-    box-shadow 0.4s ease;
+    all calc(var(--fold-t) * 0.48) var(--fold-ease),
+    box-shadow 0.3s ease;
 }
 .np-fold.is-half .np-fold-paper::before {
   height: calc(var(--h) * 2);
-  box-shadow: 0 18px 50px -18px rgb(40 30 10 / 0.35);
+  box-shadow: var(--np-air-shadow);
 }
 .np-fold.is-open .np-fold-paper::before {
   left: 0;
   width: calc(var(--w) * 2);
+  /* النصف الأيسر لا يتجاوز الثنية إلا بعد ربع دورته: الظل ينتظره ولا يسبقه */
+  transition-delay: calc(var(--fold-t) * 0.09), 0s;
+}
+.np-fold.is-landed .np-fold-paper::before {
+  box-shadow: var(--np-sheet-shadow);
 }
 .np-fold:focus-visible .np-fold-paper::before {
   outline: 3px solid var(--color-primary);
@@ -5748,7 +5818,7 @@ main .search-box {
   left: 0;
   transform-origin: 100% 50%;
   transform: rotateY(180deg) translateZ(-1px);
-  transition: transform 0.95s cubic-bezier(0.45, 0.05, 0.25, 1);
+  transition: transform calc(var(--fold-t) * 0.48) var(--fold-ease);
 }
 .np-piece,
 .np-flap {
@@ -5762,7 +5832,7 @@ main .search-box {
 .np-flap {
   top: var(--h);
   transform-origin: 50% 0;
-  transition: transform 0.95s cubic-bezier(0.45, 0.05, 0.25, 1);
+  transition: transform calc(var(--fold-t) * 0.43) var(--fold-ease);
 }
 .np-half.r > .np-flap {
   transform: rotateX(180deg) translateZ(-3px);
@@ -5843,13 +5913,14 @@ main .search-box {
   background: linear-gradient(270deg, rgb(40 30 10 / 0.5), rgb(40 30 10 / 0.12));
 }
 .np-fold.is-half .np-flap > ::after {
-  animation: np-shade 0.95s ease-in-out;
+  animation: np-shade calc(var(--fold-t) * 0.43) ease-out;
 }
 .np-fold.is-open .np-half.l > * > ::before {
-  animation: np-shade 0.95s ease-in-out;
+  animation: np-shade calc(var(--fold-t) * 0.48) ease-out;
 }
+/* المنحنى المتباطئ يقطع منتصف الدوران مبكراً، فذروة الظل عند ربع المدة */
 @keyframes np-shade {
-  50% {
+  25% {
     opacity: 1;
   }
 }
@@ -5868,9 +5939,44 @@ main .search-box {
   color: #1d1b17;
   text-align: center;
   background-color: var(--np-paper);
+  /* ضوء القراءة يتبع المؤشر (مطفأ، غير لامع) · الطيّتان (أسفل ويسار) مدوّرتان: لمعة رفيعة على
+     ظهر الطيّة ثم ظل ناعم بعدها، لا حافة حادّة */
   background-image:
-    var(--np-lamp), var(--np-grain), linear-gradient(0deg, rgb(60 45 20 / 0.18), transparent 7%),
-    linear-gradient(90deg, rgb(60 45 20 / 0.16), transparent 6%);
+    radial-gradient(circle at var(--lx, 50%) var(--ly, 50%), rgb(255 255 255 / calc(0.22 * var(--la))), transparent 62%),
+    var(--np-lamp), var(--np-grain),
+    linear-gradient(0deg, rgb(60 45 20 / 0.1), rgb(255 255 255 / 0.24) 1%, rgb(255 255 255 / 0) 2.6%),
+    linear-gradient(90deg, rgb(60 45 20 / 0.1), rgb(255 255 255 / 0.24) 0.8%, rgb(255 255 255 / 0) 2%),
+    linear-gradient(0deg, transparent 2%, rgb(60 45 20 / 0.16) 4%, transparent 11%),
+    linear-gradient(90deg, transparent 1.6%, rgb(60 45 20 / 0.14) 3.2%, transparent 9%);
+}
+/* الزاوية الحرّة (أعلى اليمين، عكس الطيّتين) مثنيّة قليلاً: مثلث مرسوم بوجهين (ما تحت الزاوية
+   مظلَّلاً، وظهر الورقة مثنياً فوقه) وظل صغير: دعوة ثابتة للفتح بلا وميض، وتزيد عند المرور
+   والتركيز بانتقال (لا animation: الطيّات inert وحركاتها موقوفة بقاعدة [inert] العامة) */
+.np-cover-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(var(--w) * 0.085);
+  aspect-ratio: 1;
+  transform-origin: 100% 0;
+  background: linear-gradient(
+    to bottom left,
+    color-mix(in srgb, var(--np-paper) 82%, #3c2d14) 50%,
+    color-mix(in srgb, var(--np-paper-back) 70%, #fff) 50%,
+    var(--np-paper-back) 62%,
+    color-mix(in srgb, var(--np-paper-back) 90%, #3c2d14)
+  );
+  box-shadow: -2px 2px 5px rgb(40 30 10 / 0.28);
+  transition:
+    transform 0.35s var(--fold-ease),
+    opacity 0.15s ease;
+}
+.np-fold:hover .np-cover-corner,
+.np-fold:focus-visible .np-cover-corner {
+  transform: scale(1.45);
+}
+.np-fold.is-half .np-cover-corner {
+  opacity: 0;
 }
 .np-cover-name {
   font-family: var(--font-serif);
@@ -5906,12 +6012,6 @@ main .search-box {
   font-size: max(11px, calc(var(--h) * 0.05));
   font-weight: 700;
   color: #1545a2;
-  animation: np-hint 2.4s ease-in-out infinite;
-}
-@keyframes np-hint {
-  50% {
-    opacity: 0.55;
-  }
 }
 /* شريط الجريدة: «اطوِ الجريدة» فوق الورقة */
 .np-tools {
@@ -5981,6 +6081,43 @@ main .search-box {
 }
 @keyframes stamp-press {
   from { transform: rotate(-8deg) scale(1.25); opacity: 0; }
+}
+/* ===== ختم «زُرته شخصياً» — يظهر فقط حين verified في بيانات المكان: ختم مستطيل بحبر الجريدة
+   الأزرق، مائل، فوق الخط المزدوج تحت الترويسة كختم البريد (بعيد عن ختم «أعجبني» المدوّر).
+   يُضغط بعد أن تنفتح الجريدة؛ بلا حركة يظهر ثابتاً ===== */
+.np-head:has(> .np-stamp) {
+  position: relative;
+}
+.np-head p.np-stamp {
+  position: absolute;
+  inset-block-start: calc(var(--space-4) * -1 - 11px);
+  inset-inline-end: clamp(4px, 5%, 56px);
+  display: block;
+  margin: 0;
+  padding: 3px 12px 2px;
+  border: 2px solid var(--color-primary);
+  border-radius: 5px;
+  outline: 1px solid var(--color-primary);
+  outline-offset: 2px;
+  rotate: -5deg;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: var(--np-ink);
+  mask-image: var(--np-ink);
+}
+/* نسخ الطيّات لا تحمل الختم: يُضغط على الورقة بعد أن تنفتح */
+.np-fold-face .np-stamp {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .np-sheet:not(.np-folded) > .np-head .np-stamp {
+    animation: stamp-ink 0.35s ease-out 0.25s backwards;
+  }
+}
+@keyframes stamp-ink {
+  from { scale: 1.3; opacity: 0; }
 }
 
 /* ===== «محلك في توريلو؟» بصفحة business: إفصاح واحد بشكل الجريدة (خط مزدوج + عنوان بخط الصحيفة) ===== */
@@ -6143,6 +6280,13 @@ body {
   --np-paper: #f2ecdf;
   --np-paper-back: #efe8da;
   --np-lamp: none;
+  /* ظلال الجريدة: مفرودة على الطاولة، مرفوعة في الهواء وهي تنفتح، ومطويّة (خط تماس داكن تحت
+     الحافة + ظل محيط واسع مائل عكس الضوء؛ وفي الداكن بركة ضوء أزرق خافتة حولها على الطاولة) */
+  --np-sheet-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 18px 50px -18px rgb(40 30 10 / 0.35);
+  --np-air-shadow: 0 34px 70px -22px rgb(40 30 10 / 0.45);
+  --np-fold-cast: 0 2px 3px rgb(40 30 10 / 0.45), -10px 26px 40px -12px rgb(40 30 10 / 0.35);
+  /* حبر الختم غير متساوٍ: قناع حبيبات يخفّف بقعاً من الحبر */
+  --np-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.4 0 0 0 -.25'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
   --shadow-card-press: inset 0 1px 3px rgb(74 52 24 / 0.16), 0 0 0 1px rgb(74 52 24 / 0.08);
 }
 @media (prefers-color-scheme: dark) {
@@ -6152,6 +6296,9 @@ body {
     --np-paper: #d9d1bf;
     --np-paper-back: #d5cdbb;
     --np-lamp: radial-gradient(110% 900px at 50% 0, transparent 35%, rgb(30 25 40 / 0.08));
+    --np-sheet-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 18px 60px -10px rgb(0 0 0 / 0.8);
+    --np-air-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 36px 80px -14px rgb(0 0 0 / 0.9);
+    --np-fold-cast: 0 2px 4px rgb(0 0 0 / 0.7), -10px 26px 44px -10px rgb(0 0 0 / 0.75), 0 0 120px 30px rgb(129 170 247 / 0.16);
     --shadow-card-press: inset 0 2px 5px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(170 195 255 / 0.1);
   }
 }
@@ -6161,6 +6308,9 @@ body {
   --np-paper: #d9d1bf;
   --np-paper-back: #d5cdbb;
   --np-lamp: radial-gradient(110% 900px at 50% 0, transparent 35%, rgb(30 25 40 / 0.08));
+  --np-sheet-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 18px 60px -10px rgb(0 0 0 / 0.8);
+  --np-air-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 36px 80px -14px rgb(0 0 0 / 0.9);
+  --np-fold-cast: 0 2px 4px rgb(0 0 0 / 0.7), -10px 26px 44px -10px rgb(0 0 0 / 0.75), 0 0 120px 30px rgb(129 170 247 / 0.16);
   --shadow-card-press: inset 0 2px 5px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(170 195 255 / 0.1);
 }
 /* للبطاقات التي هي روابط فقط (بطاقة القائمة فيها أزرار داخلية فلا تنغرس كلها) */
