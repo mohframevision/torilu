@@ -4,6 +4,8 @@ icon: 🍽️
 desc: مطعم قرب جد علي.
 title_en: Five Spoons Restaurant
 desc_en: A restaurant near Jid Ali.
+hours: "يومياً ١١ص - ١١:٤٥م"
+hours_en: "Daily 11am - 11:45pm"
 categories:
   - جد علي
 dateAdded: 2026-11-10
