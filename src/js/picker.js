@@ -475,11 +475,14 @@ function initRandomPicker() {
     });
     const fact = (cls, k, v) => `<div class="${cls}"><dt>${t(k)}</dt><dd>${v}</dd></div>`;
     const goCls = maps ? "pk-sub" : "pk-go";
+    // «الاسم - الفرع»: الفرع سطر صغير تحت الاسم، فلا يكبر العنوان إلى ثلاثة أسطر
+    const nm = itemTitle(item).split(" - ");
+    if (nm.length > 2) nm.splice(1, nm.length - 1, nm.slice(1).join(" - "));
     return `
       <div class="pk-creases"></div>
       <header class="pk-mast"><span class="pk-mast-pick">${t("picker_yours")} · ${secLabel}</span><span class="pk-logo">${isEn ? "Torilu" : "توريلو"}<i>.</i></span><span class="pk-mast-date">${escapeHtml(date)}</span></header>
       <p class="pk-kicker">${secLabel}${areaLabel ? `<i></i>${areaLabel}` : ""}</p>
-      <h2 class="pk-name" id="pkName" tabindex="-1">${escapeHtml(itemTitle(item))}</h2>
+      <h2 class="pk-name${nm[0].length > 16 ? " is-long" : ""}" id="pkName" tabindex="-1">${escapeHtml(nm[0])}${nm[1] && escapeHtml(nm[1]) !== areaLabel ? `<small class="pk-branch">${escapeHtml(nm[1])}</small>` : ""}</h2>
       <div class="pk-body">
         ${desc ? `<p class="pk-lead">${desc}</p>` : ""}
         <dl class="pk-facts">${areaLabel ? fact("pk-f-area", "picker_f_area", areaLabel) : ""}${hours ? fact("pk-f-hours", "picker_f_hours", PK_ICONS.clock + hours) : ""}${fact("pk-f-sec", "picker_f_section", secLabel)}</dl>
