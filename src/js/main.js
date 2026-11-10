@@ -1188,6 +1188,8 @@ function renderSection(section, typeFilter) {
   function renderFilters() {
     if (!filtersWrap) return;
     filtersWrap.innerHTML = "";
+    // «الأقرب مني» أول سطر الفلاتر بدل صف وحده (العنصر نفسه يُنقل، فمستمعه ونصّه باقيان)
+    if (nearMeBtn && hasLocations) filtersWrap.appendChild(nearMeBtn);
     const allChip = document.createElement("button");
     allChip.className = "filter-chip active";
     allChip.textContent = t("all_filter");
@@ -1420,9 +1422,10 @@ function renderFavoritesPage() {
 
   if (collected.length === 0) {
     grid.innerHTML = `
-      <div class="empty-state full-row">
-        <span class="icon">${svgIcon("heart", 40)}</span>
+      <div class="empty-state full-row fav-clip">
+        <span class="fav-clip-heart halftone" aria-hidden="true"></span>
         <p>${t("favorites_empty_html")}</p>
+        <a class="fav-clip-link" href="${SITE_ROOT_PATH}${window.SITE_LANG === "en" ? "en/" : ""}picker.html">${t("favorites_empty_pick")}</a>
       </div>
     `;
     return;
