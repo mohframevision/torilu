@@ -2,7 +2,7 @@
 title: المطعم اللبناني - الرفاع
 icon: 🍽️
 desc: مأكولات لبنانية بمنطقة الرفاع.
-title_en: The Lebanese Restaurant – Riffa
+title_en: The Lebanese Restaurant - Riffa
 desc_en: Lebanese food in Riffa.
 hours: "الأحد - الأربعاء والسبت ١١ص - ١٢:٣٠ص، الخميس والجمعة ١١ص - ١ص"
 hours_en: "Sat - Wed 11am - 12:30am, Thu & Fri 11am - 1am"
