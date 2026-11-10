@@ -1,0 +1,17 @@
+---
+title: "شوجر جاردن"
+icon: 🥖
+desc: "مخبز في قلالي."
+title_en: "Sugar Garden"
+desc_en: "A bakery in Galali."
+nameTranslated: true
+categories:
+  - قلالي
+dateAdded: 2026-11-10
+coords: 26.2728119, 50.6481857
+links:
+  website: ''
+  phone: ''
+  maps: https://www.google.com/maps/search/?api=1&query=26.2728119,50.6481857
+  instagram: ''
+---

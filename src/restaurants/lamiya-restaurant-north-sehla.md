@@ -1,0 +1,17 @@
+---
+title: "مطعم لمياء"
+icon: 🍽️
+desc: "مطعم في السهلة الشمالية."
+title_en: "Lamiya Restaurant"
+desc_en: "A restaurant in North Sehla."
+nameTranslated: true
+categories:
+  - السهلة الشمالية
+dateAdded: 2026-11-10
+coords: 26.1861292, 50.5299266
+links:
+  website: ''
+  phone: ''
+  maps: https://www.google.com/maps/search/?api=1&query=26.1861292,50.5299266
+  instagram: ''
+---

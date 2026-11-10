@@ -1,0 +1,18 @@
+---
+title: "كرك لولي ستار"
+icon: 🥪
+desc: "وجبات سريعة في سلماباد."
+title_en: "Luly Star Karak"
+desc_en: "Fast food in Salmabad."
+nameTranslated: true
+categories:
+  - وجبات سريعة
+  - سلماباد
+dateAdded: 2026-11-10
+coords: 26.17943, 50.5253872
+links:
+  website: ''
+  phone: ''
+  maps: https://www.google.com/maps/search/?api=1&query=26.17943,50.5253872
+  instagram: ''
+---

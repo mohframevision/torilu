@@ -1,0 +1,17 @@
+---
+title: "معجنات وحيد - بسيتين"
+icon: 🥖
+desc: "مخبز في بسيتين."
+title_en: "Wahis Pastries - Busaiteen"
+desc_en: "A bakery in Busaiteen."
+nameTranslated: true
+categories:
+  - بسيتين
+dateAdded: 2026-11-10
+coords: 26.2682056, 50.6088753
+links:
+  website: ''
+  phone: ''
+  maps: https://www.google.com/maps/search/?api=1&query=26.2682056,50.6088753
+  instagram: ''
+---

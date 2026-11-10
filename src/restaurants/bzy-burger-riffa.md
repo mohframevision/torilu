@@ -1,0 +1,17 @@
+---
+title: "بيزي برجر - الرفاع"
+icon: 🍽️
+desc: "مطعم في الرفاع."
+title_en: "BZY Burger - Riffa"
+desc_en: "A restaurant in Riffa."
+nameTranslated: true
+categories:
+  - الرفاع
+dateAdded: 2026-11-10
+coords: 26.1322719, 50.5605908
+links:
+  website: ''
+  phone: ''
+  maps: https://www.google.com/maps/search/?api=1&query=26.1322719,50.5605908
+  instagram: ''
+---

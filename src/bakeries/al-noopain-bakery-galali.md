@@ -1,0 +1,17 @@
+---
+title: "مخبز النورين - قلالي"
+icon: 🥖
+desc: "مخبز في قلالي."
+title_en: "Al Noopain Bakery - Galali"
+desc_en: "A bakery in Galali."
+nameTranslated: true
+categories:
+  - قلالي
+dateAdded: 2026-11-10
+coords: 26.2728202, 50.6498973
+links:
+  website: ''
+  phone: ''
+  maps: https://www.google.com/maps/search/?api=1&query=26.2728202,50.6498973
+  instagram: ''
+---

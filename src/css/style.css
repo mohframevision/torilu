@@ -4623,6 +4623,11 @@ h2,
 .item-card {
   border-radius: 22px;
 }
+/* قوائم بألف بطاقة: المتصفح لا يرسم ولا يحسب إلا البطاقات القريبة من الشاشة؛ الشكل لا يتغيّر */
+.card-grid > .item-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 230px;
+}
 .item-card .item-top .item-icon,
 .item-card .item-top .item-illus {
   display: none;

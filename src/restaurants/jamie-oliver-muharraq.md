@@ -1,0 +1,18 @@
+---
+title: "جيمي أوليفر"
+icon: 🥪
+desc: "وجبات سريعة في المحرق."
+title_en: "Jamie Oliver"
+desc_en: "Fast food in Muharraq."
+nameTranslated: true
+categories:
+  - وجبات سريعة
+  - المحرق
+dateAdded: 2026-11-10
+coords: 26.2673998, 50.6303591
+links:
+  website: ''
+  phone: ''
+  maps: https://www.google.com/maps/search/?api=1&query=26.2673998,50.6303591
+  instagram: ''
+---
