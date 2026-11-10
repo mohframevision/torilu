@@ -41,7 +41,7 @@
   };
   // التاريخ أعلى الرئيسية مثل الجريدة (بتقويم البحرين)
   const dateEl = document.getElementById("homeDate");
-  if (dateEl) dateEl.textContent = new Intl.DateTimeFormat(isEn ? "en-GB" : "ar-BH", { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(new Date());
+  if (dateEl) dateEl.textContent = new Intl.DateTimeFormat(isEn ? "en-GB" : "ar-BH-u-nu-latn", { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(new Date());
   const h = new Date().getHours();
   const slot = SLOTS[h >= 5 && h < 11 ? "morning" : h >= 11 && h < 16 ? "noon" : h >= 16 && h < 20 ? "evening" : "night"];
 

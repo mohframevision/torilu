@@ -136,16 +136,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0d0f15;
-    --color-surface: #15181f;
+    --color-bg: #0b1020;
+    --color-surface: #121a2e;
     --color-text: #ebe7e0;
     --color-text-muted: oklch(0.78 0 0); /* APCA Lc ≥60 على خلفيتي الوضع الداكن (كان #9a9a9a: Lc 46) */
     --color-primary: var(--blue-300);
     --color-primary-dark: color-mix(in srgb, var(--color-primary) 75%, black);
     --color-accent: color-mix(in oklch, var(--color-primary) 80%, white);
-    --color-border: #2a2e36;
+    --color-border: #26314a;
     --color-primary-soft: #1d2d4c;
-    --color-sunk: #1b1f27;
+    --color-sunk: #172038;
     --color-border-strong: #7a7a7a;
     --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.35);
     --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.5);
@@ -154,16 +154,16 @@
 
 /* تفعيل يدوي من زر تبديل الوضع — يتغلب على تفضيل النظام */
 :root[data-theme="dark"] {
-  --color-bg: #0d0f15;
-  --color-surface: #15181f;
+  --color-bg: #0b1020;
+  --color-surface: #121a2e;
   --color-text: #ebe7e0;
   --color-text-muted: oklch(0.78 0 0); /* APCA Lc ≥60 على خلفيتي الوضع الداكن (كان #9a9a9a: Lc 46) */
   --color-primary: var(--blue-300);
   --color-primary-dark: color-mix(in srgb, var(--color-primary) 75%, black);
   --color-accent: color-mix(in oklch, var(--color-primary) 80%, white);
-  --color-border: #2a2e36;
+  --color-border: #26314a;
   --color-primary-soft: #1d2d4c;
-  --color-sunk: #1b1f27;
+  --color-sunk: #172038;
   --color-border-strong: #7a7a7a;
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.35);
   --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.5);
@@ -765,7 +765,7 @@ img {
   /* شريط معتم خلف الحقل — بدونه يظهر نص البطاقات من حول زوايا الحقل المدوّرة
      وهو ملتصق. الهوامش السالبة تمدّ الشريط لعرض العمود كامل (٢٠ بكسل = حشو
      .container)، فلا تفلت البطاقات من الحواف */
-  background: var(--color-bg);
+  background: var(--paper-grain), var(--color-bg);
   margin-inline: -20px;
   padding: 8px 20px;
 }
@@ -4713,7 +4713,7 @@ body:has(.d-hero) .site-header .header-search {
 }
 main .search-box {
   border-radius: var(--radius-pill);
-  box-shadow: 0 -12px 0 6px var(--color-bg), 0 10px 40px rgb(21 69 162 / 0.08);
+  box-shadow: 0 -12px 0 6px var(--page-fill), 0 10px 40px rgb(21 69 162 / 0.08);
   border-color: var(--color-border);
 }
 .card-grid {
@@ -5222,19 +5222,19 @@ main .search-box {
   --color-border: #b9b09c;
   position: relative;
   color: var(--color-text);
-  background: #f2ecdf;
+  background: var(--np-paper);
   padding: 28px clamp(18px, 4vw, 56px) 36px;
   margin-block: var(--space-4) var(--space-6);
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 18px 50px -18px rgb(40 30 10 / 0.35);
 }
+/* الداكن: ورق أغمق بلونه (--np-paper) وبقعة ضوء مصباح (--np-lamp) بدل فلتر على الورقة كلها،
+   فالورقة الطويلة (منيو بآلاف البكسلات) لا تُرشَّح كطبقة واحدة */
 :root[data-theme="dark"] .np-sheet {
-  filter: brightness(0.86) sepia(0.12);
-  box-shadow: 0 18px 60px -10px rgb(0 0 0 / 0.8);
+  box-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 18px 60px -10px rgb(0 0 0 / 0.8);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .np-sheet {
-    filter: brightness(0.86) sepia(0.12);
-    box-shadow: 0 18px 60px -10px rgb(0 0 0 / 0.8);
+    box-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 18px 60px -10px rgb(0 0 0 / 0.8);
   }
 }
 .np-sheet a {
@@ -5251,6 +5251,7 @@ main .search-box {
   pointer-events: none;
   mix-blend-mode: multiply;
   background:
+    var(--np-lamp),
     linear-gradient(180deg, transparent 48.8%, rgb(60 45 20 / calc(0.1 * var(--crease))) 49.7%, rgb(60 45 20 / calc(0.22 * var(--crease))) 50%, rgb(255 255 255 / 0) 50.2%, rgb(60 45 20 / calc(0.06 * var(--crease))) 51.2%, transparent 52.4%),
     linear-gradient(90deg, transparent 49.5%, rgb(60 45 20 / calc(0.08 * var(--crease))) 49.95%, transparent 50.6%),
     radial-gradient(120% 90% at 50% 50%, transparent 60%, rgb(80 60 30 / 0.10)),
@@ -5669,14 +5670,6 @@ main .search-box {
   opacity: 0;
   pointer-events: none;
 }
-:root[data-theme="dark"] .np-fold {
-  filter: brightness(0.86) sepia(0.12);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .np-fold {
-    filter: brightness(0.86) sepia(0.12);
-  }
-}
 .np-fold-paper {
   position: absolute;
   inset: 0;
@@ -5705,10 +5698,10 @@ main .search-box {
   height: var(--h);
   transform: translateZ(-1px);
   box-shadow:
-    -1px 1px 0 #e7e0d0,
-    -2px 2px 0 #cfc6b0,
-    -3px 3px 0 #ebe5d7,
-    -4px 4px 0 #c9bfa7,
+    -1px 1px 0 color-mix(in srgb, var(--np-paper) 96%, #000),
+    -2px 2px 0 color-mix(in srgb, var(--np-paper) 85%, #000),
+    -3px 3px 0 color-mix(in srgb, var(--np-paper) 98%, #000),
+    -4px 4px 0 color-mix(in srgb, var(--np-paper) 82%, #000),
     -6px 10px 22px rgb(40 30 10 / 0.35);
   transition:
     all 1s cubic-bezier(0.45, 0.05, 0.25, 1),
@@ -5784,7 +5777,7 @@ main .search-box {
 }
 .np-back {
   transform: rotateY(180deg);
-  background-color: #efe8da;
+  background-color: var(--np-paper-back);
   /* ظهر الورقة: سطور الطباعة من الوجه الآخر باهتة */
   background-image:
     var(--np-grain),
@@ -5793,7 +5786,7 @@ main .search-box {
     auto,
     100% 100%;
   background-clip: padding-box;
-  border: calc(var(--w) * 0.06) solid #efe8da;
+  border: calc(var(--w) * 0.06) solid var(--np-paper-back);
 }
 .np-flap > .np-back {
   transform: rotateX(180deg);
@@ -5865,9 +5858,9 @@ main .search-box {
   padding: calc(var(--w) * 0.07);
   color: #1d1b17;
   text-align: center;
-  background-color: #f2ecdf;
+  background-color: var(--np-paper);
   background-image:
-    var(--np-grain), linear-gradient(0deg, rgb(60 45 20 / 0.18), transparent 7%),
+    var(--np-lamp), var(--np-grain), linear-gradient(0deg, rgb(60 45 20 / 0.18), transparent 7%),
     linear-gradient(90deg, rgb(60 45 20 / 0.16), transparent 6%);
 }
 .np-cover-name {
@@ -6052,7 +6045,7 @@ main .search-box {
   --shadow-card-hover: 0 0 0 1px rgb(170 195 255 / 0.14), 0 16px 40px rgb(0 0 0 / 0.5);
 }
 body {
-  background: var(--paper-grain), var(--color-bg);
+  background: var(--paper-grain), var(--page-glow) no-repeat top / 100% 560px, var(--color-bg);
   /* الصفحات القصيرة (بحث، مفضلة فارغة، 404): التذييل يستقر في أسفل النافذة.
      القسمة على --page-zoom لأن الصفحة مكبَّرة بالشاشات العريضة */
   min-height: calc(100dvh / var(--page-zoom, 1));
@@ -6128,4 +6121,44 @@ body {
     opacity: 0;
     transform: translateY(8px);
   }
+}
+
+/* ===== الساعة الزرقاء في الداكن + ضغطة الطباعة على البطاقات ===== */
+/* --page-glow: ضوء أفق أزرق خافت أعلى الصفحة (يمرّ مع التمرير، لا طبقة ثابتة).
+   --np-paper/--np-paper-back: لون ورق الجريدة ووجهها الخلفي. --np-lamp: بقعة ضوء القراءة.
+   --shadow-card-press: البطاقة تنغرس في الورق عند الضغط */
+:root {
+  --page-glow: none;
+  /* متوسط لون الصفحة مع حبيباتها: للأقنعة المعتمة خلف العناصر الملتصقة كي لا تظهر رقعة مسطّحة */
+  --page-fill: color-mix(in srgb, var(--color-bg), rgb(77 69 51) 2.75%);
+  --np-paper: #f2ecdf;
+  --np-paper-back: #efe8da;
+  --np-lamp: none;
+  --shadow-card-press: inset 0 1px 3px rgb(74 52 24 / 0.16), 0 0 0 1px rgb(74 52 24 / 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page-glow: radial-gradient(120% 100% at 50% -10%, rgb(21 69 162 / 0.2), transparent 70%);
+    --page-fill: color-mix(in srgb, var(--color-bg), rgb(191 209 255) 2%);
+    --np-paper: #d9d1bf;
+    --np-paper-back: #d5cdbb;
+    --np-lamp: radial-gradient(110% 900px at 50% 0, transparent 35%, rgb(30 25 40 / 0.08));
+    --shadow-card-press: inset 0 2px 5px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(170 195 255 / 0.1);
+  }
+}
+:root[data-theme="dark"] {
+  --page-glow: radial-gradient(120% 100% at 50% -10%, rgb(21 69 162 / 0.2), transparent 70%);
+  --page-fill: color-mix(in srgb, var(--color-bg), rgb(191 209 255) 2%);
+  --np-paper: #d9d1bf;
+  --np-paper-back: #d5cdbb;
+  --np-lamp: radial-gradient(110% 900px at 50% 0, transparent 35%, rgb(30 25 40 / 0.08));
+  --shadow-card-press: inset 0 2px 5px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(170 195 255 / 0.1);
+}
+/* للبطاقات التي هي روابط فقط (بطاقة القائمة فيها أزرار داخلية فلا تنغرس كلها) */
+a.d-card:active,
+a.d-lead:active,
+a.section-card:active {
+  transform: translateY(1px);
+  box-shadow: var(--shadow-card-press);
+  transition-duration: 0.08s;
 }
