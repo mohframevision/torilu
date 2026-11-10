@@ -4,6 +4,8 @@ icon: 🍢
 desc: "مشاوي في عراد."
 title_en: "Five Stars Grills"
 desc_en: "Grills in Arad."
+hours: "يومياً ٤م - ٣ص"
+hours_en: "Daily 4pm - 3am"
 categories:
   - مشاوي
   - عراد
