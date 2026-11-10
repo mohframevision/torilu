@@ -1,6 +1,6 @@
 /* ===== أصوات توريلو: ورق وحبر =====
    كل صوت مصنوع بالمتصفح (WebAudio) — بلا ملفات صوت ولا شيء مولَّد: ضجيج مفلتر يشبه
-   الورق، ونبضة منخفضة ناعمة كالختم، وجرس مكتب بعيد للنتيجة. هادئة بلا إيقاع ولا طبل.
+   الورق، ونبضة منخفضة ناعمة كالختم، وآلة كاتبة بجرسها للنتيجة. هادئة بلا إيقاع ولا طبل.
    مطفأة افتراضياً (site_sound_pref = "on" بزر السمّاعة بالهيدر)، وما يُنشأ AudioContext
    إلا بأول صوت بعد ضغطة الزائر نفسه. window.toriluSfx = { play, enabled, SOUNDS, bus }. */
 (function () {
@@ -56,11 +56,28 @@
     osc.stop(t + attack + decay + 0.02);
   }
 
-  // جرس مكتب صغير بعيد: نغمة أساسية ونغمتان فوقها تخفتان أسرع
-  function bell(ctx, out, t0, at, freq, gain, decay) {
-    tone(ctx, out, t0, { at, freq, attack: 0.01, decay, gain });
-    tone(ctx, out, t0, { at, freq: freq * 2.0, attack: 0.01, decay: decay * 0.45, gain: gain * 0.22 });
-    tone(ctx, out, t0, { at, freq: freq * 2.76, attack: 0.01, decay: decay * 0.25, gain: gain * 0.1 });
+  // مفتاح الآلة الكاتبة: ذراع الحرف يضرب الورق على الأسطوانة — نقرة حادة فوق خبطة مكتومة
+  function key(ctx, out, t0, at, freq, gain) {
+    paper(ctx, out, t0, { at, dur: 0.014, from: freq * 1.6, q: 1.2, gain: gain * 2.4, attack: 0.002 });
+    tone(ctx, out, t0, { at, freq, attack: 0.002, decay: 0.03, gain: gain * 0.5 });
+    tone(ctx, out, t0, { at, freq: freq * 2.32, attack: 0.002, decay: 0.018, gain: gain * 0.25 });
+    paper(ctx, out, t0, { at: at + 0.004, dur: 0.05, from: 330, to: 240, q: 0.7, gain: gain * 2, attack: 0.004 });
+  }
+
+  // جرس نهاية السطر في الآلة الكاتبة: جرس فولاذ صغير لامع، مطرقته نقرة ورنينه طويل
+  function ting(ctx, out, t0, at, freq, gain, decay) {
+    paper(ctx, out, t0, { at, dur: 0.008, from: freq * 1.5, q: 2, gain: gain * 1.5, attack: 0.001 });
+    [1, 2.76, 5.4].forEach((r, i) =>
+      tone(ctx, out, t0, { at, freq: freq * r, attack: 0.002, decay: decay / (1 + i * 1.5), gain: gain / (1 + i * 2.2) })
+    );
+    tone(ctx, out, t0, { at, freq: freq * 1.006, attack: 0.002, decay, gain: gain * 0.5 });
+  }
+
+  // صفيحة معدنية ناعمة (كالفيبرافون): قضيب معدن يُقرع بمطرقة لبّاد — قريب حروف الرصاص
+  function bar(ctx, out, t0, at, freq, gain, decay) {
+    tone(ctx, out, t0, { at, freq, attack: 0.006, decay, gain });
+    tone(ctx, out, t0, { at, freq: freq * 4, attack: 0.004, decay: decay * 0.18, gain: gain * 0.16 });
+    tone(ctx, out, t0, { at, freq: freq * 10, attack: 0.003, decay: decay * 0.05, gain: gain * 0.04 });
   }
 
   // حرف رصاص معدني يقرع (صندوق الحروف): أربع رنّات غير متناسقة تخفت بسرعة مع نقرة ورق
@@ -76,7 +93,7 @@
   const RI = 880;
   const LU = 739.99;
 
-  // كل موضع في الموقع له صوته الخاص، وكلها من مطبعة الجريدة: ورق، حروف رصاص، قلم، جرس المكتب
+  // كل موضع في الموقع له صوته الخاص، وكلها من مطبعة الجريدة: ورق، حروف رصاص، قلم، آلة كاتبة
   const SOUNDS = {
     // تبويب القسم: بطاقة فهرس تُقلب ثم يستقر طرفها
     tab(c, o, t) {
@@ -92,10 +109,9 @@
       paper(c, o, t, { dur: 0.2, from: 500, to: 1100, q: 0.6, gain: 0.1, attack: 0.07, grain: 0.2 });
       clack(c, o, t, 0.18, 900, 0.03, 0.05);
     },
-    // «قريب مني»: نغمة «لو» وحدها تصعد قليلاً كإبرة بوصلة تستقر
+    // «قريب مني»: صفيحة معدنية واحدة على نغمة «لو»، ترنّ وتستقر كإبرة بوصلة
     near(c, o, t) {
-      tone(c, o, t, { freq: LU, glide: 1.12, attack: 0.02, decay: 0.35, gain: 0.05 });
-      tone(c, o, t, { freq: LU * 2, glide: 1.12, attack: 0.02, decay: 0.16, gain: 0.012 });
+      bar(c, o, t, 0, LU, 0.07, 0.6);
     },
     // قائمة الموقع: قلب صفحة — خشخشة تعلو ثم نقرة طرف الورقة
     navOpen(c, o, t) {
@@ -179,10 +195,9 @@
     next(c, o, t) {
       paper(c, o, t, { dur: 0.14, from: 1200, to: 2200, q: 0.7, gain: 0.11, attack: 0.03, grain: 0.2 });
     },
-    // البحث: مفتاح آلة كاتبة يضرب الورق
+    // البحث: ضربة مفتاح واحدة على الآلة الكاتبة
     search(c, o, t) {
-      clack(c, o, t, 0, 1600, 0.05, 0.04);
-      paper(c, o, t, { at: 0.01, dur: 0.03, from: 900, to: 600, q: 0.8, gain: 0.1, attack: 0.003 });
+      key(c, o, t, 0, 1500, 0.08);
     },
     // عجلة «اختار لي» تنفتح: مروحة قصاصات تنفرد، أربع رفّات صاعدة
     wheelOpen(c, o, t) {
@@ -202,26 +217,28 @@
     petal(c, o, t) {
       paper(c, o, t, { dur: 0.1, from: 1800, to: 3200, q: 1.4, gain: 0.13, attack: 0.01, grain: 1 });
     },
-    // «مرة ثانية»: كرة الورق تُرمى وتحطّ
+    // «مرة ثانية»: سحب عربة الآلة الكاتبة لسطر جديد — سقّاطة سريعة ثم وقفة
     again(c, o, t) {
-      paper(c, o, t, { dur: 0.12, from: 2400, to: 800, q: 0.8, gain: 0.1, attack: 0.01, grain: 0.8 });
-      paper(c, o, t, { at: 0.16, dur: 0.07, from: 380, to: 280, q: 0.7, gain: 0.09, attack: 0.015 });
+      for (let i = 0; i < 9; i++) {
+        paper(c, o, t, { at: i * 0.02, dur: 0.008, from: 2700 - i * 60, q: 2.5, gain: 0.3, attack: 0.001 });
+      }
+      paper(c, o, t, { at: 0.2, dur: 0.07, from: 360, to: 260, q: 0.7, gain: 0.12, attack: 0.008 });
     },
-    // نتيجة «اختار لي»: لحن توريلو كاملاً على جرس المكتب — تو، ري، لو
+    // نتيجة «اختار لي»: لحن توريلو على الآلة الكاتبة — ضربتا مفتاح (تو، ري) ثم جرس السطر (لو)
     success(c, o, t) {
-      bell(c, o, t, 0, TO, 0.055, 0.7);
-      bell(c, o, t, 0.16, RI, 0.05, 0.75);
-      bell(c, o, t, 0.34, LU, 0.05, 0.95);
+      key(c, o, t, 0, 1300, 0.05);
+      key(c, o, t, 0.13, 1650, 0.05);
+      ting(c, o, t, 0.3, LU * 2, 0.05, 1.1);
     },
-    // سحبة «فاجئني»: أول اللحن وآخره فقط — تو، لو
+    // سحبة «فاجئني»: صفيحتان معدنيتان — تو ثم لو
     draw(c, o, t) {
-      bell(c, o, t, 0, TO, 0.05, 0.6);
-      bell(c, o, t, 0.15, LU, 0.045, 0.8);
+      bar(c, o, t, 0, TO, 0.06, 0.6);
+      bar(c, o, t, 0.16, LU, 0.055, 0.85);
     },
-    // تشغيل الأصوات: لمسة ورق ثم «ري» وحدها
+    // تشغيل الأصوات: لمسة ورق ثم صفيحة «ري» وحدها
     on(c, o, t) {
       paper(c, o, t, { dur: 0.05, from: 1800, to: 1300, q: 0.9, gain: 0.1, attack: 0.004, grain: 0.3 });
-      bell(c, o, t, 0.03, RI, 0.045, 0.5);
+      bar(c, o, t, 0.03, RI, 0.055, 0.5);
     },
     // ورقة تتكوّر بين الأصابع («اختار لي»): خمس طقطقات ورق قصيرة متقاربة، بلا نغمة
     crumple(c, o, t) {
