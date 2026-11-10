@@ -4,14 +4,15 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "3 Lines"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ١١:٣٠ص - ١:٣٠ص"
+hours_en: "Daily 11:30am - 1:30am"
 categories:
   - الرفاع
 dateAdded: 2026-11-10
 coords: 26.1307893, 50.556913
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1307893,50.556913
+  phone: "17777769"
+  maps: https://maps.app.goo.gl/175bJZeu21N8QKncA
   instagram: ''
 ---
