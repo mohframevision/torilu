@@ -1,17 +1,17 @@
 ---
-title: "تكة خمس نجوم"
-icon: 🥪
-desc: "وجبات سريعة في الحد."
-title_en: "5 Star Tekka"
-desc_en: "Fast food in Al Hidd."
+title: "مشويات خمس نجوم"
+icon: 🍢
+desc: "مشاوي في عراد."
+title_en: "Five Stars Grills"
+desc_en: "Grills in Arad."
 categories:
-  - وجبات سريعة
-  - الحد
+  - مشاوي
+  - عراد
 dateAdded: 2026-11-10
-coords: 26.257963, 50.6389623
+coords: 26.2578875, 50.6390144
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.257963,50.6389623
-  instagram: ''
+  phone: "17673326"
+  maps: https://maps.app.goo.gl/FGQrX5wshh3JFEXe6
+  instagram: https://www.instagram.com/five_stars_grills/
 ---
