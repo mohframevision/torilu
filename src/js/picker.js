@@ -370,7 +370,7 @@ function initRandomPicker() {
   }
 
   function openWheel() {
-    sfx("open");
+    sfx("wheelOpen");
     petals.forEach((b) => b.classList.remove("sel"));
     setStep("wheel");
     setPrompt("picker_q2", "picker_s2");
@@ -379,7 +379,7 @@ function initRandomPicker() {
     (petals.find((b) => b.dataset.section === section) || petals[0]).focus({ preventScroll: true });
   }
   function closeWheel() {
-    sfx("close");
+    sfx("wheelClose");
     setStep("moon");
     setPrompt("picker_q1", "picker_s1");
     moon.setAttribute("aria-expanded", "false");
@@ -575,7 +575,7 @@ function initRandomPicker() {
   }
   function again() {
     if (busy) return;
-    sfx("tap");
+    sfx("again");
     pickNow();
   }
 
@@ -611,7 +611,7 @@ function initRandomPicker() {
   petals.forEach((b) => {
     b.addEventListener("click", () => {
       if (busy || step !== "wheel") return;
-      sfx("tap");
+      sfx("petal");
       busy = true;
       section = b.dataset.section;
       b.classList.add("sel");

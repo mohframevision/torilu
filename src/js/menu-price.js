@@ -93,7 +93,7 @@
     const now = performance.now();
     if (!quiet && now - lastSound > 70) {
       lastSound = now;
-      sfx("tap");
+      sfx("tick");
     }
   }
 
@@ -153,12 +153,12 @@
     b.addEventListener("click", () => {
       v = b.dataset.v;
       vBtns.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
-      sfx("theme");
+      sfx("view");
       render();
     })
   );
   photosBox.addEventListener("change", () => {
-    sfx("tap");
+    sfx("check");
     render();
   });
 

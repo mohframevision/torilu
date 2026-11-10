@@ -418,7 +418,7 @@ function initNavToggle() {
   const nav = document.querySelector(".main-nav");
   if (!toggles.length || !nav) return;
   function setOpen(isOpen) {
-    sfx(isOpen ? "open" : "close");
+    sfx(isOpen ? "navOpen" : "navClose");
     nav.classList.toggle("open", isOpen);
     toggles.forEach((btn) => {
       btn.classList.toggle("open", isOpen);
@@ -449,7 +449,7 @@ function initSectionFilter() {
   filter.addEventListener("click", (event) => {
     const btn = event.target.closest(".section-filter-btn");
     if (!btn) return;
-    sfx("tap");
+    sfx("tab");
     const group = btn.dataset.group;
     filter
       .querySelectorAll(".section-filter-btn")
@@ -1113,7 +1113,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
       const expanded = descEl.classList.toggle("clamped") === false;
       descToggle.textContent = expanded ? t("read_less") : t("read_more");
       descToggle.setAttribute("aria-expanded", String(expanded));
-      sfx(expanded ? "open" : "close");
+      sfx(expanded ? "rowOpen" : "rowClose");
       if (expanded) {
         card.classList.add("just-expanded");
         setTimeout(() => card.classList.remove("just-expanded"), 900);
@@ -1199,7 +1199,7 @@ function renderSection(section, typeFilter) {
     allChip.dataset.tag = "all";
     allChip.setAttribute("aria-pressed", "true");
     allChip.addEventListener("click", () => {
-      sfx("tap");
+      sfx("chip");
       for (const k in active) delete active[k];
       updateActiveChip();
       renderGrid();
@@ -1217,7 +1217,7 @@ function renderSection(section, typeFilter) {
       chip.dataset.tag = tag;
       chip.setAttribute("aria-pressed", "false");
       chip.addEventListener("click", () => {
-        sfx("tap");
+        sfx("chip");
         const kind = tagKind(tag);
         if (active[kind] === tag) delete active[kind];
         else active[kind] = tag;
@@ -1235,7 +1235,7 @@ function renderSection(section, typeFilter) {
         : `${t("filters_show_more")} (+${tagsList.length - FILTER_CHIP_LIMIT}) ▼`;
       toggleChip.setAttribute("aria-expanded", String(filtersExpanded));
       toggleChip.addEventListener("click", () => {
-        sfx("tap");
+        sfx("more");
         filtersExpanded = !filtersExpanded;
         renderFilters();
         updateActiveChip();
@@ -1322,7 +1322,7 @@ function renderSection(section, typeFilter) {
   if (nearMeBtn && !hasLocations) nearMeBtn.remove();
   else if (nearMeBtn) {
     nearMeBtn.addEventListener("click", () => {
-      sfx("tap");
+      sfx("near");
       if (sortByDistance) {
         sortByDistance = false;
         nearMeBtn.classList.remove("active");
@@ -1487,7 +1487,7 @@ function openMenuOverlay(item) {
   const trigger = document.activeElement;
   const overlay = document.createElement("div");
   overlay.className = "picker-reveal-overlay menu-overlay";
-  sfx("open");
+  sfx("menuOpen");
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
   overlay.setAttribute("aria-label", `${t("link_menu")} — ${itemTitle(item)}`);
@@ -1496,7 +1496,7 @@ function openMenuOverlay(item) {
   const restoreBackground = hideBackgroundFromAT(overlay);
 
   function close() {
-    sfx("close");
+    sfx("menuClose");
     overlay.remove();
     document.body.style.overflow = "";
     restoreBackground();
@@ -1630,7 +1630,7 @@ function renderDayPlan() {
 
   btn.addEventListener("click", () => {
     draw();
-    sfx("success");
+    sfx("draw");
   });
 
   if (shareBtn) {
@@ -1658,7 +1658,7 @@ function initWelcomePicker() {
   if (!picks.length || !nextBtn) return;
   let i = 0;
   nextBtn.addEventListener("click", () => {
-    sfx("tap");
+    sfx("next");
     picks[i].classList.remove("active");
     i = (i + 1) % picks.length;
     picks[i].classList.add("active");
@@ -1770,7 +1770,7 @@ document.addEventListener("keydown", (e) => {
       /* نكمل حتى لو فشل */
     }
     dlg.showModal();
-    sfx("open");
+    sfx("photoOpen");
     if (still) return;
     busy = true;
     thumb.style.visibility = "hidden";
@@ -1784,7 +1784,7 @@ document.addEventListener("keydown", (e) => {
 
   async function close() {
     if (busy) return;
-    sfx("close");
+    sfx("photoClose");
     if (!still && thumb) {
       busy = true;
       thumb.style.visibility = "hidden";
