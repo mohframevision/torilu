@@ -1,10 +1,9 @@
 ---
-title: "جاسميز - راس رمان"
+title: "جسميز - راس رمان"
 icon: 🍽️
 desc: "مطعم في راس رمان."
 title_en: "Jasmi's - Ras Rumman"
 desc_en: "A restaurant in Ras Rumman."
-nameTranslated: true
 categories:
   - راس رمان
 dateAdded: 2026-11-10

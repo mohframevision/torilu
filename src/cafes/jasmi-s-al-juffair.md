@@ -1,10 +1,9 @@
 ---
-title: "جاسميز - الجفير"
+title: "جسميز - الجفير"
 icon: ☕
 desc: "كافيه في الجفير."
 title_en: "Jasmi's - Al-Juffair"
 desc_en: "A cafe in Al-Juffair."
-nameTranslated: true
 categories:
   - الجفير
 dateAdded: 2026-11-10

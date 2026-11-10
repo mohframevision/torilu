@@ -1,10 +1,9 @@
 ---
-title: "جاسميز - الزلاق"
+title: "جسميز - الزلاق"
 icon: 🥪
 desc: "وجبات سريعة في الزلاق."
 title_en: "Jasmi's - Zallaq"
 desc_en: "Fast food in Zallaq."
-nameTranslated: true
 categories:
   - وجبات سريعة
   - برجر

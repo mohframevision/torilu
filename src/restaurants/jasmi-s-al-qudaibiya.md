@@ -1,10 +1,9 @@
 ---
-title: "جاسميز - القضيبية"
+title: "جسميز - القضيبية"
 icon: 🥪
 desc: "وجبات سريعة في القضيبية."
 title_en: "Jasmi's - Al Qudaibiya"
 desc_en: "Fast food in Al Qudaibiya."
-nameTranslated: true
 categories:
   - وجبات سريعة
   - برجر
@@ -12,7 +11,7 @@ categories:
 dateAdded: 2026-11-10
 coords: 26.2291035, 50.5958513
 links:
-  website: "http://www.jasmis.net/"
+  website: "https://www.jasmis.com/"
   phone: ''
   maps: https://www.google.com/maps/search/?api=1&query=26.2291035,50.5958513
   instagram: ''

@@ -1,10 +1,9 @@
 ---
-title: "جاسميز - بوغزال"
+title: "جسميز - بوغزال"
 icon: 🥪
 desc: "وجبات سريعة في بوغزال."
 title_en: "Jasmi's - Bu Ghazal"
 desc_en: "Fast food in Bu Ghazal."
-nameTranslated: true
 categories:
   - وجبات سريعة
   - برجر
@@ -12,7 +11,7 @@ categories:
 dateAdded: 2026-11-10
 coords: 26.2053596, 50.5752678
 links:
-  website: "http://www.jasmis.net/"
+  website: "https://www.jasmis.com/"
   phone: ''
   maps: https://www.google.com/maps/search/?api=1&query=26.2053596,50.5752678
   instagram: ''
