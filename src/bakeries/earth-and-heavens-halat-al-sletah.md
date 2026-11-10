@@ -1,12 +1,12 @@
 ---
 title: "ايرث آند هيفنز"
 icon: 🥖
-desc: "مخبز في حالة السلطة."
+desc: "مخبز في المحرق."
 title_en: "Earth and Heavens"
-desc_en: "A bakery in Halat Al-Sletah."
+desc_en: "A bakery in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2514396, 50.6143229
 links:

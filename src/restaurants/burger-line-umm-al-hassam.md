@@ -1,13 +1,13 @@
 ---
-title: "برجر لاين - أم الحصم"
+title: "برجر لاين - الماحوز"
 icon: 🥪
-desc: "وجبات سريعة في أم الحصم."
-title_en: "Burger Line - Umm Al Hassam"
-desc_en: "Fast food in Umm Al Hassam."
+desc: "وجبات سريعة في الماحوز."
+title_en: "Burger Line - Al Mahooz"
+desc_en: "Fast food in Al Mahooz."
 nameTranslated: true
 categories:
   - وجبات سريعة
-  - أم الحصم
+  - الماحوز
 dateAdded: 2026-11-10
 coords: 26.2020828, 50.5915378
 links:

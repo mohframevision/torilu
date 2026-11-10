@@ -1,12 +1,12 @@
 ---
-title: "كافتيريا خديجة - السيف"
+title: "كافتيريا خديجة - كرباباد"
 icon: ☕
-desc: "كافيه في السيف."
-title_en: "Khadeeja Cafeteria - Seef"
-desc_en: "A cafe in Seef."
+desc: "كافيه في كرباباد."
+title_en: "Khadeeja Cafeteria - Karbabad"
+desc_en: "A cafe in Karbabad."
 nameTranslated: true
 categories:
-  - السيف
+  - كرباباد
 dateAdded: 2026-11-10
 coords: 26.2313942, 50.5302111
 links:

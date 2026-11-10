@@ -1,12 +1,12 @@
 ---
 title: "بيستريز أون ذا فلاي"
 icon: 🥖
-desc: "مخبز في حالة السلطة."
+desc: "مخبز في المحرق."
 title_en: "Pastries on the Fly"
-desc_en: "A bakery in Halat Al-Sletah."
+desc_en: "A bakery in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2557818, 50.6174096
 links:

@@ -1,12 +1,12 @@
 ---
 title: "كافتيريا جي جي ام"
 icon: ☕
-desc: "كافيه في حالة السلطة."
+desc: "كافيه في المحرق."
 title_en: "GJM Cafeteria"
-desc_en: "A cafe in Halat Al-Sletah."
+desc_en: "A cafe in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2544218, 50.6152097
 links:

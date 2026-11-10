@@ -1,12 +1,12 @@
 ---
 title: "مطعم شلالات شانديز"
 icon: 🍽️
-desc: "مطعم في السهلة الشمالية."
+desc: "مطعم في الحجر."
 title_en: "Shalalat Shandes Restaurant"
-desc_en: "A restaurant in North Sehla."
+desc_en: "A restaurant in Al Hajar."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - الحجر
 dateAdded: 2026-11-10
 coords: 26.2136546, 50.512418
 links:

@@ -1,12 +1,12 @@
 ---
 title: "مطعم عزايب"
 icon: 🍽️
-desc: "مطعم في السهلة الشمالية."
+desc: "مطعم في أبو صيبع."
 title_en: "Azayeb Restaurant"
-desc_en: "A restaurant in North Sehla."
+desc_en: "A restaurant in Abu Saiba."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - أبو صيبع
 dateAdded: 2026-11-10
 coords: 26.220873, 50.5037053
 links:

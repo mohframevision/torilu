@@ -1,12 +1,12 @@
 ---
 title: "كافتيريا درة عراد"
 icon: ☕
-desc: "كافيه في الحد."
+desc: "كافيه في عراد."
 title_en: "Durrat Arad Cafeteria"
-desc_en: "A cafe in Al Hidd."
+desc_en: "A cafe in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2486658, 50.6438841
 links:

@@ -1,12 +1,12 @@
 ---
 title: "مخابز حميد علي"
 icon: 🥖
-desc: "مخبز في السيف."
+desc: "مخبز في كرباباد."
 title_en: "Hameed Ali Bakeries"
-desc_en: "A bakery in Seef."
+desc_en: "A bakery in Karbabad."
 nameTranslated: true
 categories:
-  - السيف
+  - كرباباد
 dateAdded: 2026-11-10
 coords: 26.2313812, 50.5301803
 links:

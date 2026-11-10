@@ -1,12 +1,12 @@
 ---
 title: "المبرور"
 icon: ☕
-desc: "كافيه في السيف."
+desc: "كافيه في كرباباد."
 title_en: "Al Mabroor"
-desc_en: "A cafe in Seef."
+desc_en: "A cafe in Karbabad."
 nameTranslated: true
 categories:
-  - السيف
+  - كرباباد
 dateAdded: 2026-11-10
 coords: 26.2322294, 50.532047
 links:

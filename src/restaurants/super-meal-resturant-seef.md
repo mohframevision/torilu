@@ -1,12 +1,12 @@
 ---
 title: "مطعم سوبر ميل"
 icon: 🍽️
-desc: "مطعم في السيف."
+desc: "مطعم في كرباباد."
 title_en: "Super Meal Resturant"
-desc_en: "A restaurant in Seef."
+desc_en: "A restaurant in Karbabad."
 nameTranslated: true
 categories:
-  - السيف
+  - كرباباد
 dateAdded: 2026-11-10
 coords: 26.2316914, 50.5305306
 links:

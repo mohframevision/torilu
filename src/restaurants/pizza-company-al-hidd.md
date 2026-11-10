@@ -1,14 +1,14 @@
 ---
 title: "بيتزا كومباني"
 icon: 🥪
-desc: "وجبات سريعة في الحد."
+desc: "وجبات سريعة في عراد."
 title_en: "Pizza Company"
-desc_en: "Fast food in Al Hidd."
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
   - بيتزا
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2587093, 50.6454779
 links:

@@ -1,13 +1,13 @@
 ---
 title: "مطعم لبيروت"
 icon: 🍽️
-desc: "مطعم في السهلة الشمالية."
+desc: "مطعم في المقشع."
 title_en: "Libeirut Restaurant"
-desc_en: "A restaurant in North Sehla."
+desc_en: "A restaurant in Al Maqsha."
 nameTranslated: true
 categories:
   - إيطالي
-  - السهلة الشمالية
+  - المقشع
 dateAdded: 2026-11-10
 coords: 26.220828, 50.5172085
 links:

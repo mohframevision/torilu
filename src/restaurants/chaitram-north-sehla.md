@@ -1,12 +1,12 @@
 ---
 title: "شيترام"
 icon: 🍽️
-desc: "مطعم في السهلة الشمالية."
+desc: "مطعم في سلماباد."
 title_en: "Chaitram"
-desc_en: "A restaurant in North Sehla."
+desc_en: "A restaurant in Salmabad."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - سلماباد
 dateAdded: 2026-11-10
 coords: 26.1857169, 50.5330588
 links:

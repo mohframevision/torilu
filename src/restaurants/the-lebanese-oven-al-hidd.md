@@ -1,12 +1,12 @@
 ---
-title: "الفرن اللبناني - الحد"
+title: "الفرن اللبناني - عراد"
 icon: 🍽️
-desc: "مطعم في الحد."
-title_en: "The Lebanese Oven - Al Hidd"
-desc_en: "A restaurant in Al Hidd."
+desc: "مطعم في عراد."
+title_en: "The Lebanese Oven - Arad"
+desc_en: "A restaurant in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2563163, 50.633805
 links:

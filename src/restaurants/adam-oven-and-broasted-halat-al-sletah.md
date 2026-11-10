@@ -1,13 +1,13 @@
 ---
 title: "فرن وبروستد آدم"
 icon: 🥪
-desc: "وجبات سريعة في حالة السلطة."
+desc: "وجبات سريعة في عراد."
 title_en: "Adam Oven and Broasted"
-desc_en: "Fast food in Halat Al-Sletah."
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
-  - حالة السلطة
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2553163, 50.6327498
 links:

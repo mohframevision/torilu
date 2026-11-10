@@ -1,12 +1,12 @@
 ---
-title: "كافتيريا كينج كرك - حالة السلطة"
+title: "كافتيريا كينج كرك - المحرق"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
-title_en: "King Karak Cafeteria - Halat Al-Sletah"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc: "مطعم في المحرق."
+title_en: "King Karak Cafeteria - Muharraq"
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2445008, 50.6153814
 links:

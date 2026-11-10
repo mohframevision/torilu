@@ -1,12 +1,12 @@
 ---
 title: "حلويات ومخللات الجزيرة"
 icon: 🍰
-desc: "حلويات في الحد."
+desc: "حلويات في عراد."
 title_en: "Al Jazeera Sweets and Pickles"
-desc_en: "A sweets shop in Al Hidd."
+desc_en: "A sweets shop in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2572171, 50.6478181
 links:

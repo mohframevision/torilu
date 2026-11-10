@@ -1,13 +1,13 @@
 ---
-title: "جاسميز - الحد"
+title: "جاسميز - عراد"
 icon: 🥪
-desc: "وجبات سريعة في الحد."
-title_en: "Jasmis - Al Hidd"
-desc_en: "Fast food in Al Hidd."
+desc: "وجبات سريعة في عراد."
+title_en: "Jasmis - Arad"
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2555525, 50.6444626
 links:

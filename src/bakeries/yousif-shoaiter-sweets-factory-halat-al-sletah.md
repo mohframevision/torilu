@@ -1,12 +1,12 @@
 ---
 title: "مصنع حلويات يوسف شويطر"
 icon: 🍰
-desc: "حلويات في حالة السلطة."
+desc: "حلويات في المحرق."
 title_en: "Yousif Shoaiter Sweets Factory"
-desc_en: "A sweets shop in Halat Al-Sletah."
+desc_en: "A sweets shop in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2509055, 50.6165735
 links:

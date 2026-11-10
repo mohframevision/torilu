@@ -1,12 +1,12 @@
 ---
 title: "مخبز دلمون"
 icon: 🥖
-desc: "مخبز في حالة السلطة."
+desc: "مخبز في المحرق."
 title_en: "Delmon Bakery"
-desc_en: "A bakery in Halat Al-Sletah."
+desc_en: "A bakery in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.256909, 50.6171011
 links:

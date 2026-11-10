@@ -1,13 +1,13 @@
 ---
 title: "بيتزا إي باستا"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
+desc: "مطعم في المحرق."
 title_en: "Pizza E Pasta"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
   - إيطالي
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2580534, 50.6174267
 links:

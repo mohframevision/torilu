@@ -1,12 +1,12 @@
 ---
-title: "شاورما ركن المطر - حالة السلطة"
+title: "شاورما ركن المطر - المحرق"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
-title_en: "Al-Mattar Corner Shawarma - Halat Al-Sletah"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc: "مطعم في المحرق."
+title_en: "Al-Mattar Corner Shawarma - Muharraq"
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2503999, 50.6187487
 links:

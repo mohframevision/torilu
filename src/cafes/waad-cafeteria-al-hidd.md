@@ -1,12 +1,12 @@
 ---
-title: "كافتيريا وعد - الحد"
+title: "كافتيريا وعد - عراد"
 icon: ☕
-desc: "كافيه في الحد."
-title_en: "Waad Cafeteria - Al Hidd"
-desc_en: "A cafe in Al Hidd."
+desc: "كافيه في عراد."
+title_en: "Waad Cafeteria - Arad"
+desc_en: "A cafe in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2553184, 50.6454788
 links:

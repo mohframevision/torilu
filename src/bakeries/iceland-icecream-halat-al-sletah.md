@@ -1,12 +1,12 @@
 ---
 title: "آيسلاند آيس كريم"
 icon: 🍰
-desc: "حلويات في حالة السلطة."
+desc: "حلويات في المحرق."
 title_en: "Iceland Icecream"
-desc_en: "A sweets shop in Halat Al-Sletah."
+desc_en: "A sweets shop in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2531686, 50.6188902
 links:

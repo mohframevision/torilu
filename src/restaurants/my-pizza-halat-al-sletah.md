@@ -1,14 +1,14 @@
 ---
 title: "ماي بيتزا"
 icon: 🥪
-desc: "وجبات سريعة في حالة السلطة."
+desc: "وجبات سريعة في عراد."
 title_en: "My Pizza"
-desc_en: "Fast food in Halat Al-Sletah."
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
   - بيتزا
-  - حالة السلطة
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.255155, 50.6323831
 links:

@@ -1,12 +1,12 @@
 ---
 title: "كافتيريا عيسى"
 icon: ☕
-desc: "كافيه في الحد."
+desc: "كافيه في عراد."
 title_en: "Isa Cafeteria"
-desc_en: "A cafe in Al Hidd."
+desc_en: "A cafe in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2591925, 50.6349655
 links:

@@ -1,12 +1,12 @@
 ---
 title: "برايس برايد"
 icon: 🍽️
-desc: "مطعم في السهلة الشمالية."
+desc: "مطعم في الحجر."
 title_en: "Price Pride"
-desc_en: "A restaurant in North Sehla."
+desc_en: "A restaurant in Al Hajar."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - الحجر
 dateAdded: 2026-11-10
 coords: 26.2186071, 50.5103972
 links:

@@ -1,12 +1,12 @@
 ---
 title: "برازيل"
 icon: 🍽️
-desc: "مطعم في العدلية."
+desc: "مطعم في الماحوز."
 title_en: "Brazil!"
-desc_en: "A restaurant in Adliya."
+desc_en: "A restaurant in Al Mahooz."
 nameTranslated: true
 categories:
-  - العدلية
+  - الماحوز
 dateAdded: 2026-11-10
 coords: 26.2085981, 50.5919617
 links:

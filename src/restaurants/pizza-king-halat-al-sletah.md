@@ -1,13 +1,13 @@
 ---
-title: "بيتزا كينج - حالة السلطة"
+title: "بيتزا كينج - المحرق"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
-title_en: "Pizza King - Halat Al-Sletah"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc: "مطعم في المحرق."
+title_en: "Pizza King - Muharraq"
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
   - بيتزا
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.22453, 50.6321236
 links:

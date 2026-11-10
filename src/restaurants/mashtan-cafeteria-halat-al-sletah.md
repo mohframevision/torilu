@@ -1,12 +1,12 @@
 ---
 title: "كافتيريا مشتان"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
+desc: "مطعم في المحرق."
 title_en: "Mashtan Cafeteria"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2581743, 50.6176983
 links:

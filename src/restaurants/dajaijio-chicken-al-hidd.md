@@ -1,13 +1,13 @@
 ---
-title: "دجاجيو تشيكن - الحد"
+title: "دجاجيو تشيكن - عراد"
 icon: 🥪
-desc: "وجبات سريعة في الحد."
-title_en: "Dajaijio Chicken - Al Hidd"
-desc_en: "Fast food in Al Hidd."
+desc: "وجبات سريعة في عراد."
+title_en: "Dajaijio Chicken - Arad"
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2554988, 50.6444594
 links:

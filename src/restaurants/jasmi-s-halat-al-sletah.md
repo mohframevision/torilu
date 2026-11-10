@@ -1,14 +1,14 @@
 ---
-title: "جاسميز - حالة السلطة"
+title: "جاسميز - المحرق"
 icon: 🥪
-desc: "وجبات سريعة في حالة السلطة."
-title_en: "Jasmi's - Halat Al-Sletah"
-desc_en: "Fast food in Halat Al-Sletah."
+desc: "وجبات سريعة في المحرق."
+title_en: "Jasmi's - Muharraq"
+desc_en: "Fast food in Muharraq."
 nameTranslated: true
 categories:
   - وجبات سريعة
   - برجر
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2589683, 50.6280034
 links:

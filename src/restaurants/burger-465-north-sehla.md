@@ -1,12 +1,12 @@
 ---
 title: "برجر 465"
 icon: 🍽️
-desc: "مطعم في السهلة الشمالية."
+desc: "مطعم في الحجر."
 title_en: "Burger 465"
-desc_en: "A restaurant in North Sehla."
+desc_en: "A restaurant in Al Hajar."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - الحجر
 dateAdded: 2026-11-10
 coords: 26.2136864, 50.5125724
 links:

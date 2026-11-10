@@ -1,12 +1,12 @@
 ---
-title: "فريج بن عاقول - حالة السلطة"
+title: "فريج بن عاقول - المحرق"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
-title_en: "Fareeq Bin Aqool - Halat Al-Sletah"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc: "مطعم في المحرق."
+title_en: "Fareeq Bin Aqool - Muharraq"
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2538021, 50.6184484
 links:

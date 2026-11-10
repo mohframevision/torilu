@@ -1,13 +1,13 @@
 ---
 title: "تيكي مينغ"
 icon: 🥪
-desc: "وجبات سريعة في الحد."
+desc: "وجبات سريعة في عراد."
 title_en: "Tiki Ming"
-desc_en: "Fast food in Al Hidd."
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2561744, 50.6360963
 links:

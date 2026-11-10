@@ -1,12 +1,12 @@
 ---
 title: "الصباح"
 icon: 🍽️
-desc: "مطعم في الحد."
+desc: "مطعم في عراد."
 title_en: "Al Sabah"
-desc_en: "A restaurant in Al Hidd."
+desc_en: "A restaurant in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2570912, 50.6486027
 links:

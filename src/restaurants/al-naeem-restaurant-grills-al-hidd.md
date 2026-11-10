@@ -1,12 +1,12 @@
 ---
-title: "مطعم ومشاوي النعيم - الحد"
+title: "مطعم ومشاوي النعيم - عراد"
 icon: 🍽️
-desc: "مطعم في الحد."
-title_en: "Al Naeem Restaurant & Grills - Al Hidd"
-desc_en: "A restaurant in Al Hidd."
+desc: "مطعم في عراد."
+title_en: "Al Naeem Restaurant & Grills - Arad"
+desc_en: "A restaurant in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2552773, 50.6319916
 links:

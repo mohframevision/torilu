@@ -1,13 +1,13 @@
 ---
 title: "تويستر لاند"
 icon: 🥪
-desc: "وجبات سريعة في حالة السلطة."
+desc: "وجبات سريعة في عراد."
 title_en: "Twister Land"
-desc_en: "Fast food in Halat Al-Sletah."
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
-  - حالة السلطة
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.255066, 50.632162
 links:

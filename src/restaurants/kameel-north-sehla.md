@@ -1,12 +1,12 @@
 ---
 title: "كميل"
 icon: 🍽️
-desc: "مطعم في السهلة الشمالية."
+desc: "مطعم في سلماباد."
 title_en: "Kameel"
-desc_en: "A restaurant in North Sehla."
+desc_en: "A restaurant in Salmabad."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - سلماباد
 dateAdded: 2026-11-10
 coords: 26.1858387, 50.5285471
 links:

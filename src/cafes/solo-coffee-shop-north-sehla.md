@@ -1,12 +1,12 @@
 ---
 title: "كوفي شوب سولو"
 icon: ☕
-desc: "كافيه في السهلة الشمالية."
+desc: "كافيه في المقشع."
 title_en: "Solo Coffee Shop"
-desc_en: "A cafe in North Sehla."
+desc_en: "A cafe in Al Maqsha."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - المقشع
 dateAdded: 2026-11-10
 coords: 26.2186085, 50.5148795
 links:

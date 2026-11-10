@@ -1,13 +1,13 @@
 ---
 title: "سندويشات إيفري بدي"
 icon: ☕
-desc: "كافيه في الحد."
+desc: "كافيه في عراد."
 title_en: "Every Body Sandwiches"
-desc_en: "A cafe in Al Hidd."
+desc_en: "A cafe in Arad."
 nameTranslated: true
 categories:
   - سندويشات
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2569775, 50.6336247
 links:

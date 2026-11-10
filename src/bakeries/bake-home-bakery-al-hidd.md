@@ -1,12 +1,12 @@
 ---
 title: "مخبز بيك هوم"
 icon: 🥖
-desc: "مخبز في الحد."
+desc: "مخبز في عراد."
 title_en: "Bake Home Bakery"
-desc_en: "A bakery in Al Hidd."
+desc_en: "A bakery in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2565888, 50.6356852
 links:

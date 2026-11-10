@@ -1,12 +1,12 @@
 ---
 title: "مطعم كرامي"
 icon: 🍽️
-desc: "مطعم في الحد."
+desc: "مطعم في عراد."
 title_en: "Karami Restaurant"
-desc_en: "A restaurant in Al Hidd."
+desc_en: "A restaurant in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2545114, 50.6292175
 links:

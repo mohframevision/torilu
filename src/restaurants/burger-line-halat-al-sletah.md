@@ -1,14 +1,14 @@
 ---
-title: "برجر لاين - حالة السلطة"
+title: "برجر لاين - عراد"
 icon: 🥪
-desc: "وجبات سريعة في حالة السلطة."
-title_en: "Burger Line - Halat Al-Sletah"
-desc_en: "Fast food in Halat Al-Sletah."
+desc: "وجبات سريعة في عراد."
+title_en: "Burger Line - Arad"
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
   - برجر
-  - حالة السلطة
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2551351, 50.631438
 links:

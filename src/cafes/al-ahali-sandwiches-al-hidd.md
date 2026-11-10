@@ -1,13 +1,13 @@
 ---
-title: "سندويشات الأهالي - الحد"
+title: "سندويشات الأهالي - عراد"
 icon: ☕
-desc: "كافيه في الحد."
-title_en: "Al Ahali Sandwiches - Al Hidd"
-desc_en: "A cafe in Al Hidd."
+desc: "كافيه في عراد."
+title_en: "Al Ahali Sandwiches - Arad"
+desc_en: "A cafe in Arad."
 nameTranslated: true
 categories:
   - سندويشات
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2570211, 50.6486465
 links:

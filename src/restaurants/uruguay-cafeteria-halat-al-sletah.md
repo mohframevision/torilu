@@ -1,12 +1,12 @@
 ---
 title: "كافتيريا أوروغواي"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
+desc: "مطعم في المحرق."
 title_en: "Uruguay Cafeteria"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2581915, 50.617378
 links:

@@ -1,12 +1,12 @@
 ---
 title: "بريد توك"
 icon: 🥖
-desc: "مخبز في الحد."
+desc: "مخبز في عراد."
 title_en: "Bread Talk"
-desc_en: "A bakery in Al Hidd."
+desc_en: "A bakery in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2582154, 50.6459581
 links:

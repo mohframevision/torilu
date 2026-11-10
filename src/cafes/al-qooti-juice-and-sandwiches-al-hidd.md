@@ -1,13 +1,13 @@
 ---
 title: "عصائر وسندويشات القوتي"
 icon: ☕
-desc: "كافيه في الحد."
+desc: "كافيه في عراد."
 title_en: "Al Qooti Juice and Sandwiches"
-desc_en: "A cafe in Al Hidd."
+desc_en: "A cafe in Arad."
 nameTranslated: true
 categories:
   - سندويشات
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2546209, 50.6491518
 links:

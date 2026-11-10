@@ -1,12 +1,12 @@
 ---
 title: "كافيه إيزيس"
 icon: ☕
-desc: "كافيه في العدلية."
+desc: "كافيه في الماحوز."
 title_en: "Isis Cafe"
-desc_en: "A cafe in Adliya."
+desc_en: "A cafe in Al Mahooz."
 nameTranslated: true
 categories:
-  - العدلية
+  - الماحوز
 dateAdded: 2026-11-10
 coords: 26.2071589, 50.5922831
 links:

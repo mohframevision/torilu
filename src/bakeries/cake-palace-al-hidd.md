@@ -1,12 +1,12 @@
 ---
 title: "كيك بالاس"
 icon: 🍰
-desc: "حلويات في الحد."
+desc: "حلويات في عراد."
 title_en: "Cake Palace"
-desc_en: "A sweets shop in Al Hidd."
+desc_en: "A sweets shop in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2565497, 50.6334515
 links:

@@ -1,12 +1,12 @@
 ---
-title: "ولائم المجالس الشرقية - حالة السلطة"
+title: "ولائم المجالس الشرقية - المحرق"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
-title_en: "Al Majalis Alsharqiya Banquets - Halat Al-Sletah"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc: "مطعم في المحرق."
+title_en: "Al Majalis Alsharqiya Banquets - Muharraq"
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2503736, 50.6150529
 links:

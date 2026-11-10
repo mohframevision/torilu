@@ -1,12 +1,12 @@
 ---
-title: "معجنات طارق - حالة السلطة"
+title: "معجنات طارق - المحرق"
 icon: 🥖
-desc: "مخبز في حالة السلطة."
-title_en: "Tariq Pastries - Halat Al-Sletah"
-desc_en: "A bakery in Halat Al-Sletah."
+desc: "مخبز في المحرق."
+title_en: "Tariq Pastries - Muharraq"
+desc_en: "A bakery in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.255189, 50.6200172
 links:

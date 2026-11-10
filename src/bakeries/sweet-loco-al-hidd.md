@@ -1,12 +1,12 @@
 ---
 title: "سويت لوكو"
 icon: 🍰
-desc: "حلويات في الحد."
+desc: "حلويات في عراد."
 title_en: "Sweet loco"
-desc_en: "A sweets shop in Al Hidd."
+desc_en: "A sweets shop in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2563539, 50.6338019
 links:

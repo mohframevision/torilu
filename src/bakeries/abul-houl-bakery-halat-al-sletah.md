@@ -1,12 +1,12 @@
 ---
 title: "مخبز أبو الهول"
 icon: 🥖
-desc: "مخبز في حالة السلطة."
+desc: "مخبز في المحرق."
 title_en: "Abul Houl Bakery"
-desc_en: "A bakery in Halat Al-Sletah."
+desc_en: "A bakery in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2555545, 50.6175868
 links:

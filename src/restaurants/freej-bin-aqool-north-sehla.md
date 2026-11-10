@@ -1,12 +1,12 @@
 ---
-title: "فريج بن عاقول - السهلة الشمالية"
+title: "فريج بن عاقول - القدم"
 icon: 🍽️
-desc: "مطعم في السهلة الشمالية."
-title_en: "Freej Bin Aqool - North Sehla"
-desc_en: "A restaurant in North Sehla."
+desc: "مطعم في القدم."
+title_en: "Freej Bin Aqool - Al Qadam"
+desc_en: "A restaurant in Al Qadam."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - القدم
 dateAdded: 2026-11-10
 coords: 26.2173741, 50.5234862
 links:

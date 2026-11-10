@@ -1,12 +1,12 @@
 ---
 title: "كافتيريا الوعد"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
+desc: "مطعم في المحرق."
 title_en: "Al Waed Cafeteria"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2522918, 50.617934
 links:

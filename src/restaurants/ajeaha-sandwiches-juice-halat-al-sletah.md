@@ -1,12 +1,12 @@
 ---
 title: "سندويشات وعصائر أجيها"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
+desc: "مطعم في المحرق."
 title_en: "Ajeaha Sandwiches & Juice"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2560883, 50.6168614
 links:

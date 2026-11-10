@@ -1,12 +1,12 @@
 ---
 title: "مطعم أحمد الأنصاري"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
+desc: "مطعم في المحرق."
 title_en: "Ahmed Al Ansari Restaurant"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2514394, 50.6169546
 links:

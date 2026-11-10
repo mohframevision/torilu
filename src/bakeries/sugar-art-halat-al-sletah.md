@@ -1,12 +1,12 @@
 ---
 title: "شوجر آرت"
 icon: 🍰
-desc: "حلويات في حالة السلطة."
+desc: "حلويات في المحرق."
 title_en: "Sugar Art"
-desc_en: "A sweets shop in Halat Al-Sletah."
+desc_en: "A sweets shop in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2566449, 50.6192175
 links:

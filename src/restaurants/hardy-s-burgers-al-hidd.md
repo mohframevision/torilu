@@ -1,14 +1,14 @@
 ---
 title: "هارديز برجر"
 icon: 🥪
-desc: "وجبات سريعة في الحد."
+desc: "وجبات سريعة في عراد."
 title_en: "Hardy's Burgers"
-desc_en: "Fast food in Al Hidd."
+desc_en: "Fast food in Arad."
 nameTranslated: true
 categories:
   - وجبات سريعة
   - برجر
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2569536, 50.648719
 links:

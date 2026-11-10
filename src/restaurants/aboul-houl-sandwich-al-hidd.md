@@ -1,13 +1,13 @@
 ---
-title: "سندويشات أبو الهول - الحد"
+title: "سندويشات أبو الهول - عراد"
 icon: 🍽️
-desc: "مطعم في الحد."
-title_en: "Aboul Houl Sandwich - Al Hidd"
-desc_en: "A restaurant in Al Hidd."
+desc: "مطعم في عراد."
+title_en: "Aboul Houl Sandwich - Arad"
+desc_en: "A restaurant in Arad."
 nameTranslated: true
 categories:
   - سندويشات
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2558046, 50.6338669
 links:

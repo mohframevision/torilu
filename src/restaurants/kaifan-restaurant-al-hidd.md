@@ -1,12 +1,12 @@
 ---
 title: "مطعم كيفان"
 icon: 🍽️
-desc: "مطعم في الحد."
+desc: "مطعم في عراد."
 title_en: "Kaifan Restaurant"
-desc_en: "A restaurant in Al Hidd."
+desc_en: "A restaurant in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2554749, 50.6320119
 links:

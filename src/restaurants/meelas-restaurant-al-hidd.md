@@ -1,12 +1,12 @@
 ---
 title: "مطعم ميلاس"
 icon: 🍽️
-desc: "مطعم في الحد."
+desc: "مطعم في عراد."
 title_en: "Meelas Restaurant"
-desc_en: "A restaurant in Al Hidd."
+desc_en: "A restaurant in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2569905, 50.6483282
 links:

@@ -1,13 +1,13 @@
 ---
 title: "بيتزا عمو وحيد"
 icon: 🍽️
-desc: "مطعم في الحد."
+desc: "مطعم في عراد."
 title_en: "Ammo Wahid Pizza"
-desc_en: "A restaurant in Al Hidd."
+desc_en: "A restaurant in Arad."
 nameTranslated: true
 categories:
   - بيتزا
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.254766, 50.6454286
 links:

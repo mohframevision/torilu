@@ -1,13 +1,13 @@
 ---
 title: "عصائر إنرجي فروت"
 icon: 🍽️
-desc: "مطعم في حالة السلطة."
+desc: "مطعم في المحرق."
 title_en: "Energy Fruit Juice"
-desc_en: "A restaurant in Halat Al-Sletah."
+desc_en: "A restaurant in Muharraq."
 nameTranslated: true
 categories:
   - عصائر
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2584723, 50.6162676
 links:

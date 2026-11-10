@@ -1,12 +1,12 @@
 ---
-title: "معجنات طارق - السهلة الشمالية"
+title: "معجنات طارق - المقشع"
 icon: 🥖
-desc: "مخبز في السهلة الشمالية."
-title_en: "Tario Pastries - North Sehla"
-desc_en: "A bakery in North Sehla."
+desc: "مخبز في المقشع."
+title_en: "Tario Pastries - Al Maqsha"
+desc_en: "A bakery in Al Maqsha."
 nameTranslated: true
 categories:
-  - السهلة الشمالية
+  - المقشع
 dateAdded: 2026-11-10
 coords: 26.2192864, 50.5128803
 links:

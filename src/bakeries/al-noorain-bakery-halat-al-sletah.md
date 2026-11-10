@@ -1,12 +1,12 @@
 ---
-title: "مخبز النورين - حالة السلطة"
+title: "مخبز النورين - المحرق"
 icon: 🥖
-desc: "مخبز في حالة السلطة."
-title_en: "Al Noorain Bakery - Halat Al-Sletah"
-desc_en: "A bakery in Halat Al-Sletah."
+desc: "مخبز في المحرق."
+title_en: "Al Noorain Bakery - Muharraq"
+desc_en: "A bakery in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2576787, 50.6155895
 links:

@@ -1,12 +1,12 @@
 ---
 title: "كافتيريا أنيس"
 icon: ☕
-desc: "كافيه في حالة السلطة."
+desc: "كافيه في المحرق."
 title_en: "Anees Cafeteria"
-desc_en: "A cafe in Halat Al-Sletah."
+desc_en: "A cafe in Muharraq."
 nameTranslated: true
 categories:
-  - حالة السلطة
+  - المحرق
 dateAdded: 2026-11-10
 coords: 26.2528301, 50.6187169
 links:

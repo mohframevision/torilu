@@ -1,12 +1,12 @@
 ---
 title: "مخبز الكرامة"
 icon: 🥖
-desc: "مخبز في الحد."
+desc: "مخبز في عراد."
 title_en: "Al Karama Bakery"
-desc_en: "A bakery in Al Hidd."
+desc_en: "A bakery in Arad."
 nameTranslated: true
 categories:
-  - الحد
+  - عراد
 dateAdded: 2026-11-10
 coords: 26.2565309, 50.6480391
 links:
