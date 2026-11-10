@@ -18,7 +18,7 @@ I have eaten here twice.
 **The first visit** was with my friends. I ordered the Mongolian Chicken Sizzling
 for BD 3.500. It was tasty, but it is not the best dish they have.
 
-**The second visit** was with my mother and my brother. I ordered the Chicken Kurma
+**The second visit** was with my family. I ordered the Chicken Kurma
 for BD 2.950, an Indian chicken dish with rice. This one was much better: the flavour
 is deep, it smells fragrant, and everything on the plate goes together. I recommend it.
 
