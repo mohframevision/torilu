@@ -388,15 +388,27 @@ function initThemeToggle() {
 
   apply(getPref());
 
+  // المظهر الفعلي (التلقائي يتبع النظام): إن لم يتغيّر اللون فلا انتقال يجمّد الصفحة بلا سبب
+  const isDark = (pref) => (pref === "auto" ? window.matchMedia("(prefers-color-scheme: dark)").matches : pref === "dark");
+
   btn.addEventListener("click", () => {
-    const next = NEXT[getPref()];
+    const cur = getPref();
+    const next = NEXT[cur];
     if (next === "auto") {
       lsRemove(KEY);
     } else {
       lsSet(KEY, next);
     }
-    apply(next);
     sfx("theme");
+    // المظهر الجديد يظهر كشبكة نقاط طباعة تكبر حتى تلتحم (style.css: theme-vt). تحسين تدريجي:
+    // بلا الواجهة أو مع تقليل الحركة يتبدّل فوراً كما كان
+    const root = document.documentElement;
+    if (!document.startViewTransition || isDark(cur) === isDark(next) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      apply(next);
+      return;
+    }
+    root.classList.add("theme-vt");
+    document.startViewTransition(() => apply(next)).finished.finally(() => root.classList.remove("theme-vt"));
   });
 }
 
@@ -986,26 +998,6 @@ function pinRank(item) {
   return item.featured ? 1 : 0;
 }
 
-/* ===== توهّج دخول خفيف عند ظهور البطاقة بمجال الرؤية (قائمة طويلة تظل حيّة
-   أثناء التمرير، لا مجرد دفعة واحدة عند التحميل). عمداً على box-shadow/
-   border-color لا opacity/transform — .item-card عندها animation shorthand
-   خاص بها (cardIn) بالفعل، وتعريف animation ثانٍ على نفس العنصر يلغي الأول
-   ويعيد الدخول من الصفر (خلل حقيقي حصل هنا قبل)؛ transition على خاصية مختلفة
-   يتجنّبه كلياً ===== */
-const cardRevealObserver =
-  "IntersectionObserver" in window
-    ? new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("card-revealed");
-            cardRevealObserver.unobserve(entry.target);
-          });
-        },
-        { threshold: 0.15 }
-      )
-    : null;
-
 /* شارة القسم — تظهر فقط حين تختلط الأقسام ببعضها (الرئيسية، المفضلة،
    "اختار لي"): هناك يصعب تمييز مطعم بحريني من أداة رقمية بنظرة واحدة.
    بصفحة القسم نفسه كل العناصر من قسم واحد فالشارة ضجيج بلا فائدة. */
@@ -1021,6 +1013,14 @@ function sectionBadge(section) {
   return `<span class="section-badge">${span.innerHTML}</span>`;
 }
 
+/* «الاسم - الفرع»: الاسم عنواناً والفرع سطراً صغيراً تحته (.t-branch). النص كاملاً يبقى في الصفحة
+   (الشرطة مخفية بصرياً فقط). نفس ما يطبعه item-card.njk وplace-newspaper.njk */
+function titleHtml(title) {
+  const i = title.indexOf(" - ");
+  if (i < 0) return `<bdi>${escapeHtml(title)}</bdi>`;
+  return `<bdi>${escapeHtml(title.slice(0, i))}</bdi><span class="sr-only"> - </span><bdi class="t-branch">${escapeHtml(title.slice(i + 3))}</bdi>`;
+}
+
 /* ===== بناء بطاقة عنصر واحدة ===== */
 function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel = "") {
   const card = document.createElement("div");
@@ -1028,14 +1028,15 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   // شكل البطاقة قبل تشغيل جافاسكربت وبعده (وبوّابة التطابق بالبناء تكشفها)
   card.className = [
     "item-card",
-    "scroll-reveal",
     item.featured ? "featured" : "",
     item.verified ? "verified" : "",
   ]
     .filter(Boolean)
     .join(" ");
-  card.style.animationDelay = `${Math.min(index, 10) * 45}ms`;
-  cardRevealObserver?.observe(card);
+  // الدخول المتتابع لأول عشر بطاقات فقط: ما بعدها تحت أول الشاشة، ولو فُتحت الصفحة على موضع
+  // عميق لكانت كلها تنتظر مخفية معاً
+  if (index < 10) card.style.animationDelay = `${index * 45}ms`;
+  else card.style.animation = "none";
 
   const fav = isFavorite(section, item.id);
   const title = itemTitle(item);
@@ -1056,7 +1057,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
           </button>
         </div>
       </div>
-      <h3><bdi>${escapeHtml(title)}</bdi>${item.verified ? ` <span class="verified-badge" title="${t("verified_badge")}">${t("verified_badge")}</span>` : ""}${item.liked ? ` <span class="liked-badge" title="${t("liked_badge")}">${t("liked_badge")}</span>` : ""}</h3>
+      <h3>${titleHtml(title)}${item.verified ? ` <span class="verified-badge" title="${t("verified_badge")}">${t("verified_badge")}</span>` : ""}${item.liked ? ` <span class="liked-badge" title="${t("liked_badge")}">${t("liked_badge")}</span>` : ""}</h3>
       <p class="item-desc${isLongDesc ? " clamped" : ""}">${escapeHtml(desc)}</p>
       ${isLongDesc && !item.detailUrl ? `<button class="desc-toggle" aria-expanded="false">${t("read_more")}</button>` : ""}
       ${itemHours(item) ? `<p class="item-hours">${ICON_SVG.schedule} ${escapeHtml(itemHours(item))}</p>` : ""}
@@ -1153,57 +1154,6 @@ function wireItemActions(root, item) {
    typeFilter (اختياري): يقصر القسم على عناصر تاجها يحتوي هالقيمة — تستخدمه
    صفحة نوع محل السيارات (car-shop-type.njk) عشان تعرض غسيل بس مثلاً، بدل
    كل محلات السيارات. التاج نفسه يُستبعد من رقاقات الفلتر لأنه بديهي بالفعل. */
-/* دخول البطاقات "طائرة" من خارج الشاشة عند التمرير (مستوحى من shopify.design):
-   كل بطاقة تبدأ مخفية، أكبر ×1.5 ومزاحة للخارج حسب عمودها (يسار/يمين/تحت)،
-   وأول ما يوصلها التمرير تنزلق لمكانها. للعرض الأول للصفحة بس — إعادة
-   الرسم بالبحث/الفلترة تظهر عادي، وإلا كل حرف تكتبه يعيد العرض كله. */
-function flyInCards(grid) {
-  if (!("IntersectionObserver" in window)) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const cards = [...grid.querySelectorAll(".item-card")];
-  if (!cards.length) return;
-
-  // قراءة كل أبعاد البطاقات أولاً (دفعة واحدة) قبل أي كتابة style/class — تفادياً
-  // لإعادة تخطيط قسري متكرر (layout thrashing) لو تداخلت القراءة والكتابة بكل تكرار
-  const gridBox = grid.getBoundingClientRect();
-  const gridCx = gridBox.left + gridBox.width / 2;
-  const offsets = cards.map((card) => {
-    const r = card.getBoundingClientRect();
-    return Math.max(-350, Math.min(350, r.left + r.width / 2 - gridCx));
-  });
-  cards.forEach((card, i) => {
-    card.style.setProperty("--fx", `${offsets[i]}px`);
-    card.classList.add("fly-pending");
-  });
-
-  // المراقبة على البطاقة وهي مزاحة لتحت ومكبّرة، فالهامش السفلي يعوّض
-  // الإزاحة — وإلا بطاقات أسفل الشاشة تبقى مخفية وقت فتح الصفحة
-  // البطاقة الطرفية مزاحة ±350px فتنقصّ بالكامل خارج حاوية مقصوصة ولا "تتقاطع" أبداً —
-  // فلما تظهر بطاقة نُظهر معها كل بطاقات صفّها وما فوقه (offsetTop لا يتأثر بالـtransform)
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(({ target, isIntersecting }) => {
-        if (!isIntersecting) return;
-        cards.forEach((card) => {
-          if (!card.classList.contains("fly-pending") || card.offsetTop > target.offsetTop + 1) return;
-          observer.unobserve(card);
-          card.classList.remove("fly-pending");
-          card.classList.add("card-in", "flown");
-        });
-      });
-    },
-    { rootMargin: "0px 0px 250px 0px" }
-  );
-  cards.forEach((card) => {
-    observer.observe(card);
-    // بعد ما تستقر نشيل انتقال الـ1.2 ثانية، عشان حركة المرور (hover) ترجع سريعة
-    card.addEventListener("transitionend", function done(e) {
-      if (e.target !== card || e.propertyName !== "transform") return;
-      card.classList.remove("card-in");
-      card.removeEventListener("transitionend", done);
-    });
-  });
-}
 
 function renderSection(section, typeFilter) {
   const data = SITE_DATA[section];
@@ -1241,6 +1191,8 @@ function renderSection(section, typeFilter) {
   function renderFilters() {
     if (!filtersWrap) return;
     filtersWrap.innerHTML = "";
+    // «الأقرب مني» أول سطر الفلاتر بدل صف وحده (العنصر نفسه يُنقل، فمستمعه ونصّه باقيان)
+    if (nearMeBtn && hasLocations) filtersWrap.appendChild(nearMeBtn);
     const allChip = document.createElement("button");
     allChip.className = "filter-chip active";
     allChip.textContent = t("all_filter");
@@ -1412,7 +1364,11 @@ function renderSection(section, typeFilter) {
 
   renderFilters();
   renderGrid();
-  flyInCards(grid);
+  // دخول البطاقات (sheetIn) للعرض الأول فقط: إعادة الرسم بالبحث والفلترة تظهر فوراً.
+  // وعند الرجوع أو إعادة التحميل يعود المتصفح إلى موضع التمرير السابق، فلا دخول أصلاً (كانت الصفحة تظهر فارغة لحظة)
+  const navEntry = performance.getEntriesByType("navigation")[0];
+  if (navEntry && navEntry.type !== "navigate") grid.classList.add("is-settled");
+  else setTimeout(() => grid.classList.add("is-settled"), 900);
 
   if (searchInput) {
     searchInput.addEventListener("input", renderGrid);
@@ -1472,9 +1428,10 @@ function renderFavoritesPage() {
 
   if (collected.length === 0) {
     grid.innerHTML = `
-      <div class="empty-state full-row">
-        <span class="icon">${svgIcon("heart", 40)}</span>
+      <div class="empty-state full-row fav-clip">
+        <span class="fav-clip-heart halftone" aria-hidden="true"></span>
         <p>${t("favorites_empty_html")}</p>
+        <a class="fav-clip-link" href="${SITE_ROOT_PATH}${window.SITE_LANG === "en" ? "en/" : ""}picker.html">${t("favorites_empty_pick")}</a>
       </div>
     `;
     return;
@@ -1707,6 +1664,29 @@ function initWelcomePicker() {
     picks[i].classList.add("active");
   });
 }
+
+/* البطاقة المضغوطة تصير الجريدة المطويّة في الصفحة التالية (انتقال بين الصفحات، style.css: paper):
+   الاسم على بطاقة واحدة فقط، وهي التي ضُغط رابطها الداخلي. يبقى عليها للرجوع (الصفحة المحفوظة
+   bfcache) فتنكمش الجريدة إلى بطاقتها، ثم يُزال. متصفح بلا هذا الانتقال لا يتأثر */
+let vtCard = null;
+function clearVtCard() {
+  if (vtCard) vtCard.style.viewTransitionName = "";
+  vtCard = null;
+}
+document.addEventListener(
+  "click",
+  (e) => {
+    clearVtCard();
+    const a = e.target.closest?.("a[href]");
+    if (!a || a.target || a.origin !== location.origin) return;
+    vtCard = a.closest(".item-card, .d-card, .d-lead, .pk-clip");
+    if (vtCard) vtCard.style.viewTransitionName = "paper";
+  },
+  true
+);
+window.addEventListener("pageshow", (e) => {
+  if (e.persisted) setTimeout(clearVtCard, 700);
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();

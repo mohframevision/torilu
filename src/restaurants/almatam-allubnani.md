@@ -2,7 +2,7 @@
 title: المطعم اللبناني - سند
 icon: "🍽️"
 desc: مأكولات لبنانية بمنطقة سند.
-title_en: The Lebanese Restaurant – Sanad
+title_en: The Lebanese Restaurant - Sanad
 desc_en: Lebanese food in Sanad.
 hours: "يومياً ١١ص - ١٢:٣٠ص"
 hours_en: "Daily 11am - 12:30am"

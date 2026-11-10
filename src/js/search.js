@@ -165,7 +165,7 @@
       ["more", t("search_tab_more"), groups.more.length],
     ];
     tabsBox.innerHTML = TABS.filter(([k, , n]) => k === "all" || n)
-      .map(([k, label, n]) => `<button type="button" role="tab" aria-selected="${k === tab}" aria-controls="searchList" class="search-tab${k === tab ? " on" : ""}" data-tab="${k}">${label} <span>${n.toLocaleString(isEn ? "en" : "ar")}</span></button>`)
+      .map(([k, label, n]) => `<button type="button" role="tab" aria-selected="${k === tab}" aria-controls="searchList" class="search-tab${k === tab ? " on" : ""}" data-tab="${k}">${label} <span>${n.toLocaleString(isEn ? "en" : "ar-u-nu-latn")}</span></button>`)
       .join("");
     sortBox.innerHTML = groups.menu.length > 1 && (tab === "all" || tab === "menu") ? `<button type="button" class="filter-chip${cheapFirst ? " active" : ""}" data-sort="cheap">${t("search_sort_cheap")}</button>` : "";
     const block = (key, head) => {
@@ -173,7 +173,7 @@
       if (!rows.length || (tab !== "all" && tab !== key)) return "";
       const shown = tab === "all" ? rows.slice(0, 8) : rows;
       return `<section class="search-group"><h2>${head}</h2>${shown.map((r) => rowHtml(r, query)).join("")}${
-        tab === "all" && rows.length > shown.length ? `<button type="button" class="link-btn search-more" data-tab="${key}">${t("search_show_all")} (${rows.length.toLocaleString(isEn ? "en" : "ar")})</button>` : ""
+        tab === "all" && rows.length > shown.length ? `<button type="button" class="link-btn search-more" data-tab="${key}">${t("search_show_all")} (${rows.length.toLocaleString(isEn ? "en" : "ar-u-nu-latn")})</button>` : ""
       }</section>`;
     };
     // المنيو أولاً لما يكون البحث عن طبق (أغلب النتائج منيو)، وإلا الأماكن أولاً
@@ -214,7 +214,7 @@
     resultsBox.hidden = false;
     lastResults = search(query);
     if (tab !== "all" && !lastResults.some((r) => r.e.kind === tab)) tab = "all";
-    status.textContent = lastResults.length ? t("search_count").replace("{n}", lastResults.length.toLocaleString(isEn ? "en" : "ar")) : "";
+    status.textContent = lastResults.length ? t("search_count").replace("{n}", lastResults.length.toLocaleString(isEn ? "en" : "ar-u-nu-latn")) : "";
     if (lastResults.length) renderResults(query);
     else renderNone(query);
   }

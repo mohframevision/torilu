@@ -467,7 +467,7 @@ function initRandomPicker() {
     const maps = item.links?.maps || item.mapsUrl || "";
     const page =
       (isEn && item.detailUrlEn) || item.detailUrl || `${sec}.html?q=${encodeURIComponent(itemTitle(item))}`;
-    const date = new Date().toLocaleDateString(isEn ? "en-GB" : "ar-BH", {
+    const date = new Date().toLocaleDateString(isEn ? "en-GB" : "ar-BH-u-nu-latn", {
       weekday: "long",
       day: "numeric",
       month: "long",

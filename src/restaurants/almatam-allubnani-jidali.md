@@ -2,7 +2,7 @@
 title: المطعم اللبناني - جد علي
 icon: 🍽️
 desc: مأكولات لبنانية بمنطقة جد علي.
-title_en: The Lebanese Restaurant – Jid Ali
+title_en: The Lebanese Restaurant - Jid Ali
 desc_en: Lebanese food in Jid Ali.
 hours: "يومياً ١١ص - ١٢ص (الخميس والجمعة حتى ١٢:٣٠ص)"
 hours_en: "Daily 11am - 12am (Thu & Fri until 12:30am)"

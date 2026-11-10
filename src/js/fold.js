@@ -4,6 +4,8 @@
    كما هي — بلا JS أو مع تقليل الحركة ما يُطبَّق شيء من هذا وتظهر الورقة مفتوحة. ===== */
 (function () {
   const sheet = document.querySelector(".np-article > .np-sheet:not(.np-front)");
+  // theme-init.js أخفى الورقة إلى أن نصل هنا (لا رسم قبل نهاية هذا السكربت، فتظهر مطويّة مباشرة)
+  document.documentElement.classList.remove("np-wait");
   if (!sheet || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const lang = window.SITE_LANG || "ar";
@@ -66,7 +68,8 @@
   head.textContent = title;
   const hintEl = span("np-cover-hint");
   hintEl.textContent = hint;
-  cover.append(name, head, span("np-cover-lines"), hintEl);
+  // زاوية الورقة الحرّة مرفوعة قليلاً: دعوة للفتح بلا وميض
+  cover.append(name, head, span("np-cover-lines"), hintEl, span("np-cover-corner"));
 
   const right = span("np-half r");
   right.append(piece("np-piece"), piece("np-flap", cover));
@@ -94,13 +97,27 @@
   closeBtn.hidden = true;
   tools.append(closeBtn);
 
+  // مدة الفتح كلها بالمللي ثانية؛ الطيّتان متداخلتان، ونِسب كل مرحلة منها هنا وفي style.css (--fold-t)
+  const DUR = 1450;
+  const STAGE2 = DUR * 0.33; // تبدأ الطيّة الثانية قبل أن تنتهي الأولى
+  const LAND = DUR * 0.81; // الورقة انفردت كلها وتهبط على الطاولة
+  fold.style.setProperty("--fold-t", DUR + "ms");
+
   // المقاسات من الورقة نفسها (offset* بوحدات CSS، فتصحّ مع zoom الشاشات العريضة)
+  // stretched: أثناء الفتح والطيّ تحجز الورقة ارتفاع الجريدة مفرودة كي لا تغطي التذييل
+  let stretched = false;
   function measure() {
     const W = sheet.offsetWidth;
     const H = Math.min(sheet.scrollHeight, Math.max(W * 0.68, 460));
     const w = W / 2;
     const h = Math.round(H / 2);
-    const s = Math.min(1.88, Math.max(1, 620 / w));
+    // ما يتّسع له أول الشاشة تحت الورقة (getBoundingClientRect و innerHeight بوحدات الشاشة، فنقسم على zoom)
+    const z = sheet.getBoundingClientRect().width / W || 1;
+    const top = (sheet.getBoundingClientRect().top + window.scrollY) / z;
+    const room = window.innerHeight / z - top - (window.innerWidth <= 760 ? 84 : 56);
+    const s = Math.min(1.88, Math.max(1, Math.min(760 / w, room / h)));
+    // الجريدة المطويّة في وسط ما بقي من الشاشة
+    const dy = Math.min(120, Math.max(12, (room - h * s) / 2));
     const st = fold.style;
     st.setProperty("--x", sheet.offsetLeft + "px");
     st.setProperty("--y", sheet.offsetTop + "px");
@@ -109,8 +126,9 @@
     st.setProperty("--s", s);
     st.setProperty("--s1", 1 + (s - 1) * 0.35);
     st.setProperty("--dx", -w / 2 + "px");
-    st.setProperty("--dy", Math.min(24, Math.max(0, (2 * h - h * s) / 2)) + "px");
+    st.setProperty("--dy", dy + "px");
     sheet.style.setProperty("--fold-h", h + "px");
+    sheet.style.setProperty("--fold-vis", (stretched ? 2 * h : Math.min(2 * h, h * s + 2 * dy)) + "px");
     if (protoW && W !== protoW) paper.querySelectorAll(".np-face").forEach((f) => f.replaceWith(face()));
   }
   measure();
@@ -118,6 +136,30 @@
   sheet.before(tools, fold);
   measure();
   window.addEventListener("resize", measure);
+
+  // بالفأرة فقط: الجريدة المطويّة تميل درجة ونصفاً نحو المؤشر وضوء القراءة يتبعه. النِّسب من
+  // getBoundingClientRect (لا بكسلات) فتصحّ مع zoom الشاشات العريضة
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    let raf = 0;
+    fold.addEventListener("pointermove", (e) => {
+      if (raf || fold.classList.contains("is-half")) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const r = fold.getBoundingClientRect();
+        const nx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const ny = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        const st = fold.style;
+        st.setProperty("--tilt", `${-ny} ${nx} 0 ${(1.5 * Math.min(1, Math.hypot(nx, ny))).toFixed(2)}deg`);
+        st.setProperty("--lx", (50 + nx * 50).toFixed(1) + "%");
+        st.setProperty("--ly", (50 + ny * 50).toFixed(1) + "%");
+        st.setProperty("--la", "1");
+      });
+    });
+    fold.addEventListener("pointerleave", () => {
+      fold.style.removeProperty("--tilt");
+      fold.style.setProperty("--la", "0");
+    });
+  }
 
   // خشخشة الجريدة وهي تنفرد: من أصوات الموقع (sfx.js)، وتتبع زر السمّاعة بالهيدر
   const sound = () => window.toriluSfx && window.toriluSfx.play("fold");
@@ -128,8 +170,11 @@
     busy = true;
     const hadFocus = document.activeElement === fold;
     sound();
+    stretched = true;
+    measure();
     fold.classList.add("is-half");
-    setTimeout(() => fold.classList.add("is-open"), 1050);
+    setTimeout(() => fold.classList.add("is-open"), STAGE2);
+    setTimeout(() => fold.classList.add("is-landed"), LAND);
     setTimeout(() => {
       window.removeEventListener("resize", measure);
       sheet.classList.remove("np-folded");
@@ -145,7 +190,7 @@
       }, 400);
       // بعد ما تنفتح بثلاث ثوانٍ تتلاشى علامات الطيّ فما تزعج القارئ
       setTimeout(() => sheet.classList.add("np-clean"), 3000);
-    }, 2050);
+    }, DUR);
   }
   // الطيّ من جديد: نفس الحركة بالعكس — تظهر الطيّات مفتوحة فوق الورقة ثم تنطوي
   function close() {
@@ -154,7 +199,7 @@
     closeBtn.hidden = true;
     tools.scrollIntoView({ behavior: "smooth", block: "start" });
     sheet.classList.remove("np-clean");
-    fold.classList.add("is-half", "is-open", "is-gone");
+    fold.classList.add("is-half", "is-open", "is-landed", "is-gone");
     fold.hidden = false;
     measure();
     window.addEventListener("resize", measure);
@@ -164,12 +209,14 @@
       sheet.classList.add("np-folded");
       measure();
       sound();
-      fold.classList.remove("is-open");
-      setTimeout(() => fold.classList.remove("is-half"), 1050);
+      fold.classList.remove("is-open", "is-landed");
+      setTimeout(() => fold.classList.remove("is-half"), STAGE2);
       setTimeout(() => {
+        stretched = false;
+        measure();
         busy = false;
         if (closeBtn === document.activeElement) fold.focus({ preventScroll: true });
-      }, 2100);
+      }, LAND);
     }, 400);
   }
   closeBtn.addEventListener("click", close);

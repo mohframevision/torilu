@@ -47,3 +47,15 @@
     // بعض المتصفحات ترمي استثناء عند منع الكوكيز/التخزين — نتجاهله بأمان
   }
 })();
+
+/* صفحة الجريدة المطويّة (base.njk يضع <link rel="expect"> قبل هذا الملف): أول رسم ينتظر fold.js
+   كي تُلتقط الجريدة مطويّة في الانتقال بين الصفحات، لكن لا أكثر من لحظة: على اتصال بطيء يُرفع
+   الانتظار فتُرسم الصفحة والسكربتات ما زالت تنزل. np-wait تخفي الورقة إلى أن يطويها fold.js */
+(function () {
+  var ex = document.querySelector('link[rel="expect"]');
+  if (!ex || !window.matchMedia(ex.media).matches) return;
+  document.documentElement.classList.add("np-wait");
+  setTimeout(function () {
+    ex.remove();
+  }, 300);
+})();

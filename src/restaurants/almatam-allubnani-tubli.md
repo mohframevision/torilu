@@ -2,7 +2,7 @@
 title: المطعم اللبناني - توبلي
 icon: 🍽️
 desc: مأكولات لبنانية بمنطقة توبلي.
-title_en: The Lebanese Restaurant – Tubli
+title_en: The Lebanese Restaurant - Tubli
 desc_en: Lebanese food in Tubli.
 hours: "يومياً ١١ص - ١٢:٣٠ص"
 hours_en: "Daily 11am - 12:30am"

@@ -122,10 +122,10 @@
         paper(c, o, t, { at: i * 0.1 + Math.random() * 0.04, dur: 0.08 + Math.random() * 0.06, from: f, to: f * 0.7, q: 0.8, gain: 0.1 - i * 0.012, attack: 0.006, grain: 1 });
       }
     },
-    // الجريدة تنفرد طيّتين (fold.js): خشخشتان أطول
+    // الجريدة تنفرد طيّتين متداخلتين (fold.js، نحو ثانية ونصف): خشخشتان أطول، الثانية تبدأ قبل نهاية الأولى
     fold(c, o, t) {
-      paper(c, o, t, { dur: 0.9, from: 1600, q: 0.6, gain: 0.07, attack: 0.12, hold: 0.6, grain: 1 });
-      paper(c, o, t, { at: 1.05, dur: 0.95, from: 1600, q: 0.6, gain: 0.07, attack: 0.12, hold: 0.6, grain: 1 });
+      paper(c, o, t, { dur: 0.6, from: 1600, q: 0.6, gain: 0.07, attack: 0.08, hold: 0.6, grain: 1 });
+      paper(c, o, t, { at: 0.48, dur: 0.7, from: 1600, q: 0.6, gain: 0.07, attack: 0.08, hold: 0.6, grain: 1 });
     },
   };
 

@@ -13,7 +13,7 @@ langSwitchUrl: "/index.html"
    ثم «مكان الأسبوع» كخبر رئيسي، وصف حسب الوقت، و«جديد في توريلو»، و«محتار؟».
    الصفوف يملؤها home.js من بيانات data.js؛ بلا جافاسكربت يبقى البحث وروابط الأقسام شغّالة #}
 {% set t = i18n.en %}
-<div class="d-dateline"><span id="homeDate"></span><span>{{ t.home_tagline }}</span></div>
+<div class="d-dateline"><span id="homeDate"></span><span id="homeEdition">{{ t.home_tagline }}</span></div>
 <section class="d-hero">
   <div class="d-hero-text">
     <h1 class="d-hero-title">{{ t.home_hero_title }}</h1>
@@ -25,7 +25,7 @@ langSwitchUrl: "/index.html"
     </form>
     <div class="chip-row home-chips" id="homeChips"></div>
   </div>
-  <div class="d-moon halftone" aria-hidden="true"></div>
+  <div class="d-moon" aria-hidden="true"></div>
 </section>
 
 <section class="home-row" id="homeLead" hidden>

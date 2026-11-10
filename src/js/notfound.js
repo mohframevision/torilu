@@ -8,16 +8,18 @@
   document.documentElement.dir = "ltr";
   document.title = "Page Not Found | Torilu";
 
-  var header = document.getElementById("notFoundHeader");
-  if (header) {
-    var h1 = header.querySelector("h1");
-    var p = header.querySelector("p");
-    if (h1) h1.textContent = "404 — Page not found";
-    if (p) p.textContent = "The link you opened doesn't exist or was moved.";
-  }
-
-  var hint = document.getElementById("notFoundHint");
-  if (hint) hint.textContent = "Go back to the homepage, or browse a section from the menu.";
+  var set = function (id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
+    return el;
+  };
+  // الرقم وسمة data-n معاً: الطبعة المنزاحة تُرسم من السمة
+  var num = set("notFoundNum", "404");
+  if (num) num.setAttribute("data-n", "404");
+  set("notFoundCap", "Misprint");
+  var h1 = document.querySelector("#notFoundHeader h1");
+  if (h1) h1.textContent = "Page not found";
+  set("notFoundText", "The link you opened doesn't exist or was moved. Go back to the homepage, or browse a section from the menu.");
 
   var homeLink = document.getElementById("notFoundHomeLink");
   if (homeLink) {

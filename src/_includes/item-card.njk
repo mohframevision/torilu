@@ -30,7 +30,7 @@
       {%- set ill = "" if d.image else d.categories | illusFor(sectionSlug) %}
       {%- if ill %}<img class="item-illus" src="/assets/illus/{{ ill }}.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />{% else %}<span class="item-icon" aria-hidden="true">{{ d.icon or "⭐" }}</span>{% endif %}
     </div>
-    <h3><bdi>{{ title }}</bdi>{% if d.verified %} <span class="verified-badge">{{ t.verified_badge }}</span>{% endif %}{% if d.liked %} <span class="liked-badge">{{ t.liked_badge }}</span>{% endif %}{% if d.video %} <span class="video-badge">{{ t.video_badge }}</span>{% endif %}</h3>
+    {% set tp = title.split(" - ") %}<h3>{% if tp.length > 1 %}<bdi>{{ tp[0] }}</bdi><span class="sr-only"> - </span><bdi class="t-branch">{{ tp.slice(1).join(" - ") }}</bdi>{% else %}<bdi>{{ title }}</bdi>{% endif %}{% if d.verified %} <span class="verified-badge">{{ t.verified_badge }}</span>{% endif %}{% if d.liked %} <span class="liked-badge">{{ t.liked_badge }}</span>{% endif %}{% if d.video %} <span class="video-badge">{{ t.video_badge }}</span>{% endif %}</h3>
     <p class="item-desc">{{ desc }}</p>
     {%- set hours = (d.hours_en or d.hours) if isEn else d.hours %}
     {%- if hours %}<p class="item-hours">{{ icon("schedule", 16) }} {{ hours }}</p>{%- endif %}

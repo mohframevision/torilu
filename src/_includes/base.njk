@@ -35,10 +35,6 @@
   #}
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://api.web3forms.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; manifest-src 'self'; worker-src 'self'; media-src 'self' blob:" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  {# ملف خارجي (وليس سكربت مضمّن) عمداً — يسمح بسياسة CSP صارمة script-src
-     بدون unsafe-inline. يُحمَّل بدون defer/async فيشتغل قبل أول رسم للصفحة
-     (يمنع "وميض" المظهر الفاتح قبل تطبيق المظهر الداكن المحفوظ) #}
-  <script src="{{ '/js/theme-init.js' | url }}"></script>
   {% set metaDescription = (description or desc or "") | truncate(150, false, "…") %}
   {% set pageUrl = site.origin + (page.url | url) %}
   {% set ogType = "article" if sectionSlug else "website" %}
@@ -100,6 +96,14 @@
   <link rel="stylesheet" href="{{ '/theme.css' | url }}?v={{ buildVersion }}" />
   {# ملف تنسيق خاص بصفحة (مثل menu.css لقوالب المنيو وخطوطها) — بس بالصفحات اللي تطلبه #}
   {% if pageCss %}<link rel="stylesheet" href="{{ ('/css/' + pageCss + '.css') | url }}?v={{ buildVersion }}" />{% endif %}
+  {# ملف خارجي (وليس سكربت مضمّن) عمداً — يسمح بسياسة CSP صارمة script-src
+     بدون unsafe-inline. يُحمَّل بدون defer/async فيشتغل قبل أول رسم للصفحة
+     (يمنع "وميض" المظهر الفاتح قبل تطبيق المظهر الداكن المحفوظ) #}
+  {# صفحة الجريدة: أول رسم ينتظر fold.js (آخر الـbody) كي تُلتقط الجريدة مطويّة في الانتقال بين الصفحات
+     لا مفتوحة ثم تقفز. المتصفح الذي لا يعرف rel=expect يتجاهله، ومع تقليل الحركة لا طيّ فلا انتظار #}
+  {% if pageScript == "fold" %}<link rel="expect" href="#np-ready" blocking="render" media="(prefers-reduced-motion: no-preference)" />{% endif %}
+  {# بعد ملفات التنسيق عمداً: لو سبقها لقرّر كروم تعطيل انتقال الصفحات (@view-transition) قبل أن يقرأ style.css #}
+  <script src="{{ '/js/theme-init.js' | url }}"></script>
 
   <script type="application/ld+json">
   {
@@ -246,5 +250,6 @@
   <script src="{{ '/js/main.js' | url }}?v={{ buildVersion }}"></script>
   {# سكربت خاص بصفحة وحدة (مثل صوتيات توريلو) — ما ينزل مع بقية الصفحات #}
   {% if pageScript %}<script src="{{ ('/js/' + pageScript + '.js') | url }}?v={{ buildVersion }}"></script>{% endif %}
+  {% if pageScript == "fold" %}<i id="np-ready" hidden></i>{% endif %}
 </body>
 </html>

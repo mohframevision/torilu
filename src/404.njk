@@ -5,14 +5,14 @@ title: "الصفحة غير موجودة | توريلو"
 description: "الصفحة التي تبحث عنها غير موجودة أو نُقلت."
 noindex: true
 ---
-<section class="page-header" id="notFoundHeader">
-  <h1>404 — الصفحة غير موجودة</h1>
-  <p>الرابط الذي فتحته غير موجود أو نُقل.</p>
+{# رقم الصفحة مطبوعاً بطبعتين غير متطابقتين (حبر داكن + طبعة نقطية زرقاء منزاحة) كخطأ مطبعة.
+   الرقم زينة (aria-hidden) والعنوان الحقيقي h1؛ notfound.js يبدّل الأرقام والنصوص للإنجليزية #}
+<section class="nf" id="notFoundHeader">
+  <p class="nf-num" id="notFoundNum" aria-hidden="true" data-n="٤٠٤">٤٠٤</p>
+  <p class="nf-cap" id="notFoundCap">خطأ مطبعي</p>
+  <h1>الصفحة غير موجودة</h1>
+  <p id="notFoundText">الرابط الذي فتحته غير موجود أو نُقل. ارجع إلى الرئيسية أو تصفّح أحد الأقسام من القائمة.</p>
 </section>
-
-<div class="empty-state">
-  <p id="notFoundHint">ارجع إلى الرئيسية أو تصفّح أحد الأقسام من القائمة.</p>
-</div>
 
 <div class="text-center">
   <a href="{{ '/index.html' | url }}" class="btn" id="notFoundHomeLink">الرجوع إلى الرئيسية</a>

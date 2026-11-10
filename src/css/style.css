@@ -136,16 +136,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0d0f15;
-    --color-surface: #15181f;
+    --color-bg: #0b1020;
+    --color-surface: #121a2e;
     --color-text: #ebe7e0;
     --color-text-muted: oklch(0.78 0 0); /* APCA Lc ≥60 على خلفيتي الوضع الداكن (كان #9a9a9a: Lc 46) */
     --color-primary: var(--blue-300);
     --color-primary-dark: color-mix(in srgb, var(--color-primary) 75%, black);
     --color-accent: color-mix(in oklch, var(--color-primary) 80%, white);
-    --color-border: #2a2e36;
+    --color-border: #26314a;
     --color-primary-soft: #1d2d4c;
-    --color-sunk: #1b1f27;
+    --color-sunk: #172038;
     --color-border-strong: #7a7a7a;
     --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.35);
     --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.5);
@@ -154,16 +154,16 @@
 
 /* تفعيل يدوي من زر تبديل الوضع — يتغلب على تفضيل النظام */
 :root[data-theme="dark"] {
-  --color-bg: #0d0f15;
-  --color-surface: #15181f;
+  --color-bg: #0b1020;
+  --color-surface: #121a2e;
   --color-text: #ebe7e0;
   --color-text-muted: oklch(0.78 0 0); /* APCA Lc ≥60 على خلفيتي الوضع الداكن (كان #9a9a9a: Lc 46) */
   --color-primary: var(--blue-300);
   --color-primary-dark: color-mix(in srgb, var(--color-primary) 75%, black);
   --color-accent: color-mix(in oklch, var(--color-primary) 80%, white);
-  --color-border: #2a2e36;
+  --color-border: #26314a;
   --color-primary-soft: #1d2d4c;
-  --color-sunk: #1b1f27;
+  --color-sunk: #172038;
   --color-border-strong: #7a7a7a;
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.35);
   --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.5);
@@ -252,6 +252,7 @@ img {
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
@@ -765,7 +766,7 @@ img {
   /* شريط معتم خلف الحقل — بدونه يظهر نص البطاقات من حول زوايا الحقل المدوّرة
      وهو ملتصق. الهوامش السالبة تمدّ الشريط لعرض العمود كامل (٢٠ بكسل = حشو
      .container)، فلا تفلت البطاقات من الحواف */
-  background: var(--color-bg);
+  background: var(--paper-grain), var(--color-bg);
   margin-inline: -20px;
   padding: 8px 20px;
 }
@@ -1048,8 +1049,14 @@ img {
   cursor: pointer;
   color: var(--color-text-muted);
   font-family: inherit;
+  /* الرقاقة المختارة تمتلئ حبراً ينتشر من وسطها (طبقة تدرّج واحدة يكبر مقاسها) */
+  background-image: radial-gradient(closest-side, var(--color-primary-fill) 99%, transparent);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0 0;
   transition:
-    background 0.18s ease,
+    background-color 0.18s ease,
+    background-size 0.2s ease-out,
     color 0.18s ease,
     border-color 0.18s ease,
     transform 0.15s ease;
@@ -1059,7 +1066,11 @@ img {
   transform: scale(0.96);
 }
 
-.filter-chip.active,
+.filter-chip.active {
+  background-size: 160% 160%;
+  color: #fff;
+  border-color: var(--color-primary-fill);
+}
 .filter-chip:hover {
   background: var(--color-primary-fill);
   color: #fff;
@@ -1147,36 +1158,30 @@ img {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  animation: cardIn 0.45s ease both;
+  animation: sheetIn 0.36s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
   transition:
     transform 0.3s var(--ease),
     box-shadow 0.3s var(--ease);
 }
-
-.item-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-card-hover);
+/* دخول واحد لكل البطاقات: ورقة توضع على الطاولة — تصعد 16px بميل خفيف ثم تستوي. التتابع من
+   animation-delay الذي يكتبه buildItemCard (45ms للبطاقة، بحدّ 10). للعرض الأول فقط:
+   بعده تأخذ الشبكة .is-settled فلا تُعاد الحركة مع كل حرف في البحث */
+@keyframes sheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) rotate(-0.5deg);
+  }
 }
-
-/* دخول "طائر" عند التمرير (flyInCards بـmain.js، نفس منحنى shopify.design) */
-.item-card.fly-pending,
-.item-card.flown {
+.card-grid.is-settled .item-card {
   animation: none;
 }
 
-.item-card.fly-pending {
-  opacity: 0;
-  transform: translate(var(--fx, 0px), 300px) scale(1.5);
-}
-
-/* تحديد أعلى من .item-card.scroll-reveal (توهّج الدخول أسفل الملف، اللي يعرّف
-   transition خاص به فكان يلغي هذا ويخلي البطاقة تقفز لمكانها بلا حركة) —
-   ونعيد توهّجه هنا ضمن نفس القائمة عشان يشتغلان مع بعض */
-.card-grid .item-card.card-in {
-  transition:
-    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.3s ease,
-    box-shadow 1.1s ease 0.05s;
+/* الرفع للمؤشر فقط: باللمس كان يعلق بعد الضغط */
+@media (hover: hover) {
+  .item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+  }
 }
 
 /* عنصر مميز (featured) — يبرز بإطار ملوّن ويترتّب أول القائمة، مو نفس ميزة
@@ -2089,8 +2094,29 @@ a.photo-credit.card {
 .pk[data-step="wheel"] :is(.pk-moon-label, .pk-halo) {
   opacity: 0;
 }
+/* ضغطة القمر: الهالة نفسها تنداح للخارج كموجة نقاط وتتلاشى (القمر يصغر ×0.52، فالتكبير يعوّضه) */
 .pk[data-step="wheel"] .pk-halo {
-  transform: translate(-50%, -50%) scale(0.6);
+  transform: translate(-50%, -50%) scale(2.7);
+}
+/* والقمر ينتظر: الهالة تدور ببطء شديد (عقدة واحدة، بخاصية rotate المستقلة عن transform)،
+   وتقف في أي خطوة أخرى. تقليل الحركة يوقفها مع بقية حركات .pk */
+.pk[data-step="moon"] .pk-halo {
+  animation: pk-orbit 120s linear infinite;
+}
+@keyframes pk-orbit {
+  to {
+    rotate: 1turn;
+  }
+}
+/* القصاصة: الاسم أولاً ثم زر الذهاب، فتذهب العين للاسم قبل الفعل */
+.pk-clip .pk-go {
+  animation: pk-go-in 0.3s var(--ease) 0.85s both;
+}
+@keyframes pk-go-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 }
 .pk:is([data-step="ball"], [data-step="clip"]) .pk-moon {
   transform: scale(0);
@@ -2986,29 +3012,6 @@ a.photo-credit.card {
 
 [dir="rtl"] .recommend-quote::before {
   content: "\201D";
-}
-
-/* ===== توهّج دخول خفيف لبطاقة تدخل مجال الرؤية أثناء التمرير — انظر main.js
-   (cardRevealObserver) للسبب اللي خلّى هذا على transition لا animation ===== */
-/* box-shadow فقط عمداً — لا border-color: .item-card.verified يلوّن حافته
-   البادئة بالذهبي (border-inline-start)، وbox-shadow وحده لا يتعارض مع أي
-   حافة موجودة على أي بطاقة كانت */
-.item-card.scroll-reveal {
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--color-primary) 28%, transparent),
-    var(--shadow-card);
-  transition: box-shadow 1.1s ease 0.05s;
-}
-
-.item-card.scroll-reveal.card-revealed {
-  box-shadow: var(--shadow-card);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .item-card.scroll-reveal {
-    transition: none;
-    box-shadow: var(--shadow-card);
-  }
 }
 
 /* ===== تجربة "موسيقى بيب هادئة" (قسم تجارب الذكاء الاصطناعي) ===== */
@@ -4414,6 +4417,47 @@ h2,
   font-size: clamp(1.6rem, 3vw, 2rem);
   line-height: 1.2;
 }
+/* الخط المزدوج يُرسم كالحبر من بداية السطر حين يدخل العنوان الشاشة، والعنوان يأخذ حبره معه.
+   الأصل (border) يبقى للمتصفح الذي لا يدعم الخط الزمني للتمرير ولمن طلب تقليل الحركة؛ هنا فقط
+   يصير الخطّان شريطين في ::before يتمدّدان بـtransform */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .d-head {
+      position: relative;
+      border-top-color: transparent;
+      view-timeline: --d-head block;
+    }
+    .d-head::before {
+      content: "";
+      position: absolute;
+      inset: -3px 0 auto;
+      height: 3px;
+      background: linear-gradient(var(--color-ink-rule) 1px, transparent 1px 2px, var(--color-ink-rule) 2px);
+      transform-origin: left;
+      animation: rule-in linear both;
+      animation-timeline: --d-head;
+      animation-range: cover 0% cover 22%;
+    }
+    [dir="rtl"] .d-head::before {
+      transform-origin: right;
+    }
+    .d-head h2 {
+      animation: ink-in linear both;
+      animation-timeline: --d-head;
+      animation-range: cover 0% cover 22%;
+    }
+  }
+}
+@keyframes rule-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes ink-in {
+  from {
+    opacity: 0.6;
+  }
+}
 .d-head a {
   color: var(--color-primary);
   font-size: 0.9rem;
@@ -4438,6 +4482,10 @@ h2,
   gap: 40px;
   padding: 48px 0 24px;
 }
+/* عنصر شبكة: بلا هذا يتمدّد بعرض حقل البحث الأدنى فيخرج عن الشاشات الأضيق من 356px */
+.d-hero-text {
+  min-width: 0;
+}
 .d-hero-title {
   font-size: clamp(2.8rem, 8vw, 5.4rem);
   line-height: 1.1;
@@ -4457,15 +4505,28 @@ h2,
 .d-hero .home-chips {
   margin: var(--space-4) 0 0;
 }
+/* القمر الوحيد في الرئيسية: نفس قمر «اختار لي» (نقاط تكبر وتصغر كطباعة حقيقية) بحبر أزرق على الورق،
+   وتحته نسخة منزاحة قليلاً بحبر أفتح كخطأ تطابق الألوان في المطبعة. القناع على ::before و::after
+   لا على العنصر، وإلا قُصّت النسخة المنزاحة بالنقاط نفسها */
 .d-moon {
+  position: relative;
   width: 100%;
   max-width: 340px;
   aspect-ratio: 1;
-  border-radius: 50%;
   justify-self: center;
-  background-size: 6px 6px;
-  -webkit-mask: radial-gradient(circle at 35% 35%, #000 30%, rgb(0 0 0 / 0.55) 62%, rgb(0 0 0 / 0.2) 72%);
-  mask: radial-gradient(circle at 35% 35%, #000 30%, rgb(0 0 0 / 0.55) 62%, rgb(0 0 0 / 0.2) 72%);
+}
+.d-moon::before,
+.d-moon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  -webkit-mask: url("../assets/moon-paper.svg") center / contain no-repeat;
+  mask: url("../assets/moon-paper.svg") center / contain no-repeat;
+}
+.d-moon::before {
+  background: var(--moon-ghost);
+  translate: 2px 1.5px;
 }
 
 /* مكان الأسبوع: خبر رئيسي */
@@ -4485,18 +4546,7 @@ h2,
   transform: translateY(-2px);
 }
 .d-lead-art {
-  background: var(--color-primary-soft);
-  display: grid;
-  place-items: center;
   min-height: 260px;
-}
-.d-lead-art .halftone {
-  width: 62%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background-size: 6px 6px;
-  -webkit-mask: radial-gradient(circle at 40% 40%, #000 35%, transparent 72%);
-  mask: radial-gradient(circle at 40% 40%, #000 35%, transparent 72%);
 }
 .d-lead-text {
   padding: 34px 34px 28px;
@@ -4615,8 +4665,18 @@ h2,
     padding: 28px 0 8px;
     gap: 0;
   }
+  /* الجوال: القمر خلف آخر العنوان، نصفه خارج الحافة، بحبر خفيف كي يبقى النص على ورق نظيف */
+  .d-hero {
+    position: relative;
+    isolation: isolate;
+  }
   .d-moon {
-    display: none;
+    position: absolute;
+    z-index: -1;
+    inset-block-start: -18px;
+    inset-inline-end: -84px;
+    width: 210px;
+    opacity: 0.32;
   }
   .d-lead {
     grid-template-columns: 1fr;
@@ -4626,9 +4686,6 @@ h2,
   }
   .d-lead-text {
     padding: 24px 22px 22px;
-  }
-  .d-dateline span:last-child {
-    display: none;
   }
   .logo {
     font-size: 1.7rem;
@@ -4734,8 +4791,13 @@ body:has(.d-hero) .site-header .header-search {
 }
 main .search-box {
   border-radius: var(--radius-pill);
-  box-shadow: 0 -12px 0 6px var(--color-bg), 0 10px 40px rgb(21 69 162 / 0.08);
+  box-shadow: 0 10px 40px rgb(21 69 162 / 0.08);
   border-color: var(--color-border);
+}
+/* القناع المعتم فوق الحقل اللاصق يُرسم بعد التمرير فقط: في أعلى الصفحة الحقل داخل ضوء الأفق
+   (--page-glow) فكان القناع المسطّح يظهر رقعة أغمق فوقه في الوضع الداكن */
+body:has(.site-header.scrolled) main .search-box {
+  box-shadow: 0 -12px 0 6px var(--page-fill), 0 10px 40px rgb(21 69 162 / 0.08);
 }
 .card-grid {
   align-items: stretch;
@@ -5243,20 +5305,12 @@ main .search-box {
   --color-border: #b9b09c;
   position: relative;
   color: var(--color-text);
-  background: #f2ecdf;
+  background: var(--np-paper);
   padding: 28px clamp(18px, 4vw, 56px) 36px;
   margin-block: var(--space-4) var(--space-6);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 18px 50px -18px rgb(40 30 10 / 0.35);
-}
-:root[data-theme="dark"] .np-sheet {
-  filter: brightness(0.86) sepia(0.12);
-  box-shadow: 0 18px 60px -10px rgb(0 0 0 / 0.8);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .np-sheet {
-    filter: brightness(0.86) sepia(0.12);
-    box-shadow: 0 18px 60px -10px rgb(0 0 0 / 0.8);
-  }
+  /* الداكن: ورق أغمق بلونه (--np-paper) وبقعة ضوء مصباح (--np-lamp) بدل فلتر على الورقة كلها،
+     فالورقة الطويلة (منيو بآلاف البكسلات) لا تُرشَّح كطبقة واحدة؛ والظل من --np-sheet-shadow */
+  box-shadow: var(--np-sheet-shadow);
 }
 .np-sheet a {
   color: var(--color-primary);
@@ -5272,6 +5326,7 @@ main .search-box {
   pointer-events: none;
   mix-blend-mode: multiply;
   background:
+    var(--np-lamp),
     linear-gradient(180deg, transparent 48.8%, rgb(60 45 20 / calc(0.1 * var(--crease))) 49.7%, rgb(60 45 20 / calc(0.22 * var(--crease))) 50%, rgb(255 255 255 / 0) 50.2%, rgb(60 45 20 / calc(0.06 * var(--crease))) 51.2%, transparent 52.4%),
     linear-gradient(90deg, transparent 49.5%, rgb(60 45 20 / calc(0.08 * var(--crease))) 49.95%, transparent 50.6%),
     radial-gradient(120% 90% at 50% 50%, transparent 60%, rgb(80 60 30 / 0.10)),
@@ -5506,6 +5561,7 @@ main .search-box {
   align-items: baseline;
   gap: 6px;
   margin: 0 0 0.35em;
+  break-inside: avoid;
 }
 .np-menu li::marker {
   content: none;
@@ -5513,7 +5569,7 @@ main .search-box {
 .np-menu i {
   flex: 1;
   min-width: 16px;
-  border-bottom: 2px dotted var(--color-border);
+  border-bottom: 2px dotted color-mix(in srgb, var(--color-text) 35%, transparent);
 }
 .np-sheet .np-body .np-menu li {
   text-align: start;
@@ -5525,7 +5581,43 @@ main .search-box {
   max-width: 50%;
   text-align: end;
 }
-/* صندوق المعلومات: عمود جانبي بخطوط */
+/* وحدة العملة أصغر من الرقم */
+.np-menu b small {
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+/* صنف بعدة أحجام («1.300 / 2.500 / 3.600 BD»): الاسم سطر كامل، والأسعار سطر تحته عند طرف
+   العمود، بلا نقاط — بدل التفاف غير منتظم في ثلاثة أسطر */
+.np-menu li.multi {
+  flex-wrap: wrap;
+  row-gap: 0;
+  margin-bottom: 0.75em;
+}
+.np-menu li.multi i {
+  display: none;
+}
+.np-menu li.multi span,
+.np-menu li.multi b {
+  flex-basis: 100%;
+  max-width: none;
+}
+.np-menu li.multi b {
+  margin-top: -0.2em;
+  font-size: 0.92em;
+  color: var(--color-text-muted);
+}
+/* صندوق المعلومات: عمود جانبي بخطوط؛ على الشاشة العريضة يلتصق تحت الهيدر والمنيو يمرّ بجانبه،
+   فالأوقات والهاتف دائماً بجانب الأسعار (والخط الفاصل يمتدّ بطول العمود) */
+@media (min-width: 761px) {
+  .np-facts.np-facts {
+    align-self: stretch;
+  }
+  .np-facts-in {
+    position: sticky;
+    top: calc(var(--header-h, 64px) + 16px);
+  }
+}
 .np-facts {
   align-self: start;
   border-inline-start: 1px solid var(--color-border);
@@ -5654,12 +5746,30 @@ main .search-box {
     --crease: 0;
   }
 }
+/* قبل أن يبني fold.js الطيّات: الورقة مخفية (لا تظهر مفتوحة ثم تنطوي). theme-init.js يضع np-wait
+   على الجذر و fold.js يزيلها؛ والإخفاء حركة مؤقتة عمداً، فلو لم يصل fold.js تظهر الورقة بعد ثوانٍ */
+.np-wait .np-article > .np-sheet:not(.np-front) {
+  animation: np-wait 6s step-end;
+}
+@keyframes np-wait {
+  from {
+    opacity: 0;
+  }
+}
 .detail.np-article:has(> .np-fold) {
   position: relative;
+  /* الجريدة المطويّة وحدها في أول الشاشة والتذييل تحتها (القسمة على zoom الشاشات العريضة) */
+  min-height: calc(100svh / var(--page-zoom, 1) - var(--header-h, 64px));
 }
-/* وهي مطويّة: الورقة الحقيقية شفافة ومقصوصة لارتفاع الجريدة (ما تترك فراغاً طويلاً) */
+/* صندوق الطيّات المكبَّر أطول مما يُرى منه، فكان يضيف تمريراً فارغاً تحت التذييل: يُقصّ عمودياً
+   فقط وهي مطويّة (الظل الجانبي يبقى حراً، وأسفل المسرح أبعد من ظل الجريدة) */
+.detail.np-article:has(> .np-fold:not(.is-half)) {
+  overflow-y: clip;
+}
+/* وهي مطويّة: الورقة الحقيقية شفافة ومقصوصة لارتفاع الجريدة المطويّة كما تُرى (--fold-vis من
+   fold.js؛ يصير ارتفاعها مفرودة أثناء الفتح والطيّ) فلا تترك فراغاً تحتها */
 :root .np-sheet.np-folded {
-  max-height: calc(var(--fold-h) * 2);
+  max-height: var(--fold-vis, calc(var(--fold-h) * 2));
   overflow: hidden;
   background: transparent;
   box-shadow: none;
@@ -5670,8 +5780,18 @@ main .search-box {
   opacity: 0;
 }
 
-/* --w/--h نصف عرض الورقة ونصف ارتفاعها، --s تكبير الربع المطويّ، --dx/--dy توسيطه */
+/* شدّة ضوء القراءة الذي يتبع المؤشر (0 بلا مؤشر) — مسجّلة لتظهر وتختفي بانتقال ناعم */
+@property --la {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+/* --w/--h نصف عرض الورقة ونصف ارتفاعها، --s تكبير الربع المطويّ، --dx/--dy توسيطه.
+   --fold-t مدة الفتح كلها (fold.js يكتبها): الطيّة الأولى 43% منها، والثانية 48% تبدأ عند 33%
+   فتتداخلان كحركة يد واحدة، ثم تهبط الورقة في 17%. المنحنى متباطئ: تُرمى ثم تطفو حتى تستقر */
 .detail.np-article > .np-fold {
+  --fold-t: 1.45s;
+  --fold-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   position: absolute;
   z-index: 2;
   top: var(--y);
@@ -5684,19 +5804,13 @@ main .search-box {
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-  transition: opacity 0.35s ease;
+  transition:
+    opacity 0.35s ease,
+    --la 0.4s ease;
 }
 .np-fold.is-gone {
   opacity: 0;
   pointer-events: none;
-}
-:root[data-theme="dark"] .np-fold {
-  filter: brightness(0.86) sepia(0.12);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .np-fold {
-    filter: brightness(0.86) sepia(0.12);
-  }
 }
 .np-fold-paper {
   position: absolute;
@@ -5704,17 +5818,33 @@ main .search-box {
   transform-style: preserve-3d;
   transform-origin: 75% 0;
   transform: translate(var(--dx), var(--dy)) scale(var(--s)) rotate(-1.2deg);
-  transition: transform 1s cubic-bezier(0.45, 0.05, 0.25, 1);
+  /* ميل خفيف نحو المؤشر (fold.js، بالفأرة فقط) بخاصية rotate المستقلة فلا يتعارض مع transform */
+  rotate: var(--tilt, 0 0 1 0deg);
+  transition:
+    transform calc(var(--fold-t) * 0.48) var(--fold-ease),
+    rotate 0.3s ease-out;
 }
 .np-fold:hover:not(.is-half) .np-fold-paper,
 .np-fold:focus-visible .np-fold-paper {
   transform: translate(var(--dx), calc(var(--dy) - 4px)) scale(var(--s)) rotate(-0.6deg);
 }
+/* استجابة الضغط (اللمس لا hover له): الورقة تنضغط قليلاً تحت الإصبع */
+.np-fold:active:not(.is-half) .np-fold-paper {
+  transform: translate(var(--dx), var(--dy)) scale(calc(var(--s) * 0.985)) rotate(-1.2deg);
+  transition-duration: 90ms;
+}
 .np-fold.is-half .np-fold-paper {
   transform: translate(var(--dx), 0) scale(var(--s1));
+  rotate: none;
 }
+/* مفرودة وما زالت مرفوعة قليلاً عن الطاولة… */
 .np-fold.is-open .np-fold-paper {
+  transform: scale(1.012);
+}
+/* …ثم تهبط: تحويل وظل على الطبقة الصغيرة فقط، والورقة الحقيقية الطويلة لا تتحرك */
+.np-fold.is-landed .np-fold-paper {
   transform: none;
+  transition-duration: calc(var(--fold-t) * 0.17);
 }
 /* سماكة الطبقات المطويّة وظلّها على الطاولة — تصير ظلّ الورقة المفتوحة */
 .np-fold-paper::before {
@@ -5726,22 +5856,27 @@ main .search-box {
   height: var(--h);
   transform: translateZ(-1px);
   box-shadow:
-    -1px 1px 0 #e7e0d0,
-    -2px 2px 0 #cfc6b0,
-    -3px 3px 0 #ebe5d7,
-    -4px 4px 0 #c9bfa7,
-    -6px 10px 22px rgb(40 30 10 / 0.35);
+    -1px 1px 0 color-mix(in srgb, var(--np-paper) 96%, #000),
+    -2px 2px 0 color-mix(in srgb, var(--np-paper) 85%, #000),
+    -3px 3px 0 color-mix(in srgb, var(--np-paper) 98%, #000),
+    -4px 4px 0 color-mix(in srgb, var(--np-paper) 82%, #000),
+    var(--np-fold-cast);
   transition:
-    all 1s cubic-bezier(0.45, 0.05, 0.25, 1),
-    box-shadow 0.4s ease;
+    all calc(var(--fold-t) * 0.48) var(--fold-ease),
+    box-shadow 0.3s ease;
 }
 .np-fold.is-half .np-fold-paper::before {
   height: calc(var(--h) * 2);
-  box-shadow: 0 18px 50px -18px rgb(40 30 10 / 0.35);
+  box-shadow: var(--np-air-shadow);
 }
 .np-fold.is-open .np-fold-paper::before {
   left: 0;
   width: calc(var(--w) * 2);
+  /* النصف الأيسر لا يتجاوز الثنية إلا بعد ربع دورته: الظل ينتظره ولا يسبقه */
+  transition-delay: calc(var(--fold-t) * 0.09), 0s;
+}
+.np-fold.is-landed .np-fold-paper::before {
+  box-shadow: var(--np-sheet-shadow);
 }
 .np-fold:focus-visible .np-fold-paper::before {
   outline: 3px solid var(--color-primary);
@@ -5767,7 +5902,7 @@ main .search-box {
   left: 0;
   transform-origin: 100% 50%;
   transform: rotateY(180deg) translateZ(-1px);
-  transition: transform 0.95s cubic-bezier(0.45, 0.05, 0.25, 1);
+  transition: transform calc(var(--fold-t) * 0.48) var(--fold-ease);
 }
 .np-piece,
 .np-flap {
@@ -5781,7 +5916,7 @@ main .search-box {
 .np-flap {
   top: var(--h);
   transform-origin: 50% 0;
-  transition: transform 0.95s cubic-bezier(0.45, 0.05, 0.25, 1);
+  transition: transform calc(var(--fold-t) * 0.43) var(--fold-ease);
 }
 .np-half.r > .np-flap {
   transform: rotateX(180deg) translateZ(-3px);
@@ -5805,7 +5940,7 @@ main .search-box {
 }
 .np-back {
   transform: rotateY(180deg);
-  background-color: #efe8da;
+  background-color: var(--np-paper-back);
   /* ظهر الورقة: سطور الطباعة من الوجه الآخر باهتة */
   background-image:
     var(--np-grain),
@@ -5814,7 +5949,7 @@ main .search-box {
     auto,
     100% 100%;
   background-clip: padding-box;
-  border: calc(var(--w) * 0.06) solid #efe8da;
+  border: calc(var(--w) * 0.06) solid var(--np-paper-back);
 }
 .np-flap > .np-back {
   transform: rotateX(180deg);
@@ -5862,13 +5997,14 @@ main .search-box {
   background: linear-gradient(270deg, rgb(40 30 10 / 0.5), rgb(40 30 10 / 0.12));
 }
 .np-fold.is-half .np-flap > ::after {
-  animation: np-shade 0.95s ease-in-out;
+  animation: np-shade calc(var(--fold-t) * 0.43) ease-out;
 }
 .np-fold.is-open .np-half.l > * > ::before {
-  animation: np-shade 0.95s ease-in-out;
+  animation: np-shade calc(var(--fold-t) * 0.48) ease-out;
 }
+/* المنحنى المتباطئ يقطع منتصف الدوران مبكراً، فذروة الظل عند ربع المدة */
 @keyframes np-shade {
-  50% {
+  25% {
     opacity: 1;
   }
 }
@@ -5886,10 +6022,45 @@ main .search-box {
   padding: calc(var(--w) * 0.07);
   color: #1d1b17;
   text-align: center;
-  background-color: #f2ecdf;
+  background-color: var(--np-paper);
+  /* ضوء القراءة يتبع المؤشر (مطفأ، غير لامع) · الطيّتان (أسفل ويسار) مدوّرتان: لمعة رفيعة على
+     ظهر الطيّة ثم ظل ناعم بعدها، لا حافة حادّة */
   background-image:
-    var(--np-grain), linear-gradient(0deg, rgb(60 45 20 / 0.18), transparent 7%),
-    linear-gradient(90deg, rgb(60 45 20 / 0.16), transparent 6%);
+    radial-gradient(circle at var(--lx, 50%) var(--ly, 50%), rgb(255 255 255 / calc(0.22 * var(--la))), transparent 62%),
+    var(--np-lamp), var(--np-grain),
+    linear-gradient(0deg, rgb(60 45 20 / 0.1), rgb(255 255 255 / 0.24) 1%, rgb(255 255 255 / 0) 2.6%),
+    linear-gradient(90deg, rgb(60 45 20 / 0.1), rgb(255 255 255 / 0.24) 0.8%, rgb(255 255 255 / 0) 2%),
+    linear-gradient(0deg, transparent 2%, rgb(60 45 20 / 0.16) 4%, transparent 11%),
+    linear-gradient(90deg, transparent 1.6%, rgb(60 45 20 / 0.14) 3.2%, transparent 9%);
+}
+/* الزاوية الحرّة (أعلى اليمين، عكس الطيّتين) مثنيّة قليلاً: مثلث مرسوم بوجهين (ما تحت الزاوية
+   مظلَّلاً، وظهر الورقة مثنياً فوقه) وظل صغير: دعوة ثابتة للفتح بلا وميض، وتزيد عند المرور
+   والتركيز بانتقال (لا animation: الطيّات inert وحركاتها موقوفة بقاعدة [inert] العامة) */
+.np-cover-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(var(--w) * 0.085);
+  aspect-ratio: 1;
+  transform-origin: 100% 0;
+  background: linear-gradient(
+    to bottom left,
+    color-mix(in srgb, var(--np-paper) 82%, #3c2d14) 50%,
+    color-mix(in srgb, var(--np-paper-back) 70%, #fff) 50%,
+    var(--np-paper-back) 62%,
+    color-mix(in srgb, var(--np-paper-back) 90%, #3c2d14)
+  );
+  box-shadow: -2px 2px 5px rgb(40 30 10 / 0.28);
+  transition:
+    transform 0.35s var(--fold-ease),
+    opacity 0.15s ease;
+}
+.np-fold:hover .np-cover-corner,
+.np-fold:focus-visible .np-cover-corner {
+  transform: scale(1.45);
+}
+.np-fold.is-half .np-cover-corner {
+  opacity: 0;
 }
 .np-cover-name {
   font-family: var(--font-serif);
@@ -5925,12 +6096,6 @@ main .search-box {
   font-size: max(11px, calc(var(--h) * 0.05));
   font-weight: 700;
   color: #1545a2;
-  animation: np-hint 2.4s ease-in-out infinite;
-}
-@keyframes np-hint {
-  50% {
-    opacity: 0.55;
-  }
 }
 /* شريط الجريدة: «اطوِ الجريدة» فوق الورقة */
 .np-tools {
@@ -6000,6 +6165,43 @@ main .search-box {
 }
 @keyframes stamp-press {
   from { transform: rotate(-8deg) scale(1.25); opacity: 0; }
+}
+/* ===== ختم «زُرته شخصياً» — يظهر فقط حين verified في بيانات المكان: ختم مستطيل بحبر الجريدة
+   الأزرق، مائل، فوق الخط المزدوج تحت الترويسة كختم البريد (بعيد عن ختم «أعجبني» المدوّر).
+   يُضغط بعد أن تنفتح الجريدة؛ بلا حركة يظهر ثابتاً ===== */
+.np-head:has(> .np-stamp) {
+  position: relative;
+}
+.np-head p.np-stamp {
+  position: absolute;
+  inset-block-start: calc(var(--space-4) * -1 - 11px);
+  inset-inline-end: clamp(4px, 5%, 56px);
+  display: block;
+  margin: 0;
+  padding: 3px 12px 2px;
+  border: 2px solid var(--color-primary);
+  border-radius: 5px;
+  outline: 1px solid var(--color-primary);
+  outline-offset: 2px;
+  rotate: -5deg;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: var(--np-ink);
+  mask-image: var(--np-ink);
+}
+/* نسخ الطيّات لا تحمل الختم: يُضغط على الورقة بعد أن تنفتح */
+.np-fold-face .np-stamp {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .np-sheet:not(.np-folded) > .np-head .np-stamp {
+    animation: stamp-ink 0.35s ease-out 0.25s backwards;
+  }
+}
+@keyframes stamp-ink {
+  from { scale: 1.3; opacity: 0; }
 }
 
 /* ===== «محلك في توريلو؟» بصفحة business: إفصاح واحد بشكل الجريدة (خط مزدوج + عنوان بخط الصحيفة) ===== */
@@ -6073,7 +6275,7 @@ main .search-box {
   --shadow-card-hover: 0 0 0 1px rgb(170 195 255 / 0.14), 0 16px 40px rgb(0 0 0 / 0.5);
 }
 body {
-  background: var(--paper-grain), var(--color-bg);
+  background: var(--paper-grain), var(--page-glow) no-repeat top / 100% 560px, var(--color-bg);
   /* الصفحات القصيرة (بحث، مفضلة فارغة، 404): التذييل يستقر في أسفل النافذة.
      القسمة على --page-zoom لأن الصفحة مكبَّرة بالشاشات العريضة */
   min-height: calc(100dvh / var(--page-zoom, 1));
@@ -6128,25 +6330,639 @@ body {
   .bottom-nav {
     view-transition-name: bottom-nav;
   }
+  /* قلب صفحة هادئ: القديمة تنسحب 12px نحو كعب الجريدة (يمين بالعربية، يسار بالإنجليزية) وتتلاشى،
+     والجديدة تدخل من الحافة الأخرى */
   ::view-transition-old(root) {
-    animation: 0.14s ease-in both vt-page-out;
+    animation: 0.16s ease-in both vt-page-out;
   }
   ::view-transition-new(root) {
-    animation: 0.26s cubic-bezier(0.2, 0.7, 0.2, 1) 0.06s both vt-page-in;
+    animation: 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) 0.06s both vt-page-in;
   }
   ::view-transition-group(nav-ink-dot) {
     animation-duration: 0.32s;
     animation-timing-function: cubic-bezier(0.3, 0.8, 0.2, 1);
   }
+  /* البطاقة المضغوطة تصير الجريدة المطويّة: main.js يسمّي البطاقة paper لحظة الضغط، والجريدة
+     المطويّة تحمل الاسم نفسه هنا. الصندوق يتحرك ويكبر، والبطاقة تتلاشى سريعاً والجريدة تظهر
+     (بلا مطّ: كل لقطة بعرض الصندوق وارتفاعها الطبيعي). مفتوحةً لا اسم لها فلا يُلتقط شيء */
+  .np-fold:not(.is-half) {
+    view-transition-name: paper;
+  }
+  ::view-transition-group(paper) {
+    animation-duration: 0.42s;
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  ::view-transition-old(paper) {
+    animation: 0.14s ease-in both vt-fade-out;
+  }
+  /* لقطة البطاقة تبقى بمقاسها (لا تُكبَّر إلى عرض الجريدة فتتغبّش): هي القديمة في الذهاب
+     (الصفحة الجديدة فيها جريدة مطويّة) والجديدة في الرجوع */
+  :root:has(.np-fold)::view-transition-old(paper),
+  :root:not(:has(.np-fold))::view-transition-new(paper) {
+    inline-size: auto;
+  }
+  ::view-transition-new(paper) {
+    animation: 0.3s ease-out 0.1s both vt-fade-in;
+  }
+}
+:root {
+  --vt-dir: -1;
+}
+:root[dir="rtl"] {
+  --vt-dir: 1;
 }
 @keyframes vt-page-out {
   to {
     opacity: 0;
+    transform: translateX(calc(var(--vt-dir) * 12px));
   }
 }
 @keyframes vt-page-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateX(calc(var(--vt-dir) * -12px));
   }
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ===== تبديل المظهر كشبكة طباعة: المظهر الجديد يظهر نقاطاً (شبكة مائلة كنقاط الصحف) تكبر حتى
+   تلتحم حبراً كاملاً. main.js يضع theme-vt على <html> مدة الانتقال فقط، فلا يمسّ انتقال الصفحات.
+   قناع واحد على لقطة واحدة لأقل من نصف ثانية؛ الهيدر والشريط السفلي يدخلان اللقطة نفسها ===== */
+@property --vt-dot {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+html.theme-vt .site-header,
+html.theme-vt .bottom-nav,
+html.theme-vt .bottom-nav a.active::before,
+html.theme-vt .np-fold {
+  view-transition-name: none;
+}
+html.theme-vt::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+html.theme-vt::view-transition-new(root) {
+  --vt-screen: radial-gradient(circle, #000 var(--vt-dot), transparent calc(var(--vt-dot) + 4%));
+  mix-blend-mode: normal;
+  -webkit-mask:
+    var(--vt-screen) 0 0 / 18px 18px,
+    var(--vt-screen) 9px 9px / 18px 18px;
+  mask:
+    var(--vt-screen) 0 0 / 18px 18px,
+    var(--vt-screen) 9px 9px / 18px 18px;
+  animation: 0.46s cubic-bezier(0.4, 0, 0.2, 1) both theme-dots;
+}
+/* النقاط المتجاورة في الشبكة المائلة تلتحم عند 71% من قطر الخانة */
+@keyframes theme-dots {
+  to {
+    --vt-dot: 76%;
+  }
+}
+
+/* ===== الساعة الزرقاء في الداكن + ضغطة الطباعة على البطاقات ===== */
+/* --page-glow: ضوء أفق أزرق خافت أعلى الصفحة (يمرّ مع التمرير، لا طبقة ثابتة).
+   --np-paper/--np-paper-back: لون ورق الجريدة ووجهها الخلفي. --np-lamp: بقعة ضوء القراءة.
+   --shadow-card-press: البطاقة تنغرس في الورق عند الضغط */
+:root {
+  --page-glow: none;
+  /* متوسط لون الصفحة مع حبيباتها: للأقنعة المعتمة خلف العناصر الملتصقة كي لا تظهر رقعة مسطّحة */
+  --page-fill: color-mix(in srgb, var(--color-bg), rgb(77 69 51) 2.75%);
+  --np-paper: #f2ecdf;
+  --np-paper-back: #efe8da;
+  --np-lamp: none;
+  /* ظلال الجريدة: مفرودة على الطاولة، مرفوعة في الهواء وهي تنفتح، ومطويّة (خط تماس داكن تحت
+     الحافة + ظل محيط واسع مائل عكس الضوء؛ وفي الداكن بركة ضوء أزرق خافتة حولها على الطاولة) */
+  --np-sheet-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 18px 50px -18px rgb(40 30 10 / 0.35);
+  --np-air-shadow: 0 34px 70px -22px rgb(40 30 10 / 0.45);
+  --np-fold-cast: 0 2px 3px rgb(40 30 10 / 0.45), -10px 26px 40px -12px rgb(40 30 10 / 0.35);
+  /* حبر الختم غير متساوٍ: قناع حبيبات يخفّف بقعاً من الحبر */
+  --np-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.4 0 0 0 -.25'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  --shadow-card-press: inset 0 1px 3px rgb(74 52 24 / 0.16), 0 0 0 1px rgb(74 52 24 / 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page-glow: radial-gradient(120% 100% at 50% -10%, rgb(21 69 162 / 0.2), transparent 70%);
+    --page-fill: color-mix(in srgb, var(--color-bg), rgb(191 209 255) 2%);
+    --np-paper: #d9d1bf;
+    --np-paper-back: #d5cdbb;
+    --np-lamp: radial-gradient(110% 900px at 50% 0, transparent 35%, rgb(30 25 40 / 0.08));
+    --np-sheet-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 18px 60px -10px rgb(0 0 0 / 0.8);
+    --np-air-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 36px 80px -14px rgb(0 0 0 / 0.9);
+    --np-fold-cast: 0 2px 4px rgb(0 0 0 / 0.7), -10px 26px 44px -10px rgb(0 0 0 / 0.75), 0 0 120px 30px rgb(129 170 247 / 0.16);
+    --shadow-card-press: inset 0 2px 5px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(170 195 255 / 0.1);
+  }
+}
+:root[data-theme="dark"] {
+  --page-glow: radial-gradient(120% 100% at 50% -10%, rgb(21 69 162 / 0.2), transparent 70%);
+  --page-fill: color-mix(in srgb, var(--color-bg), rgb(191 209 255) 2%);
+  --np-paper: #d9d1bf;
+  --np-paper-back: #d5cdbb;
+  --np-lamp: radial-gradient(110% 900px at 50% 0, transparent 35%, rgb(30 25 40 / 0.08));
+  --np-sheet-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 18px 60px -10px rgb(0 0 0 / 0.8);
+  --np-air-shadow: 0 0 0 1px rgb(129 170 247 / 0.06), 0 36px 80px -14px rgb(0 0 0 / 0.9);
+  --np-fold-cast: 0 2px 4px rgb(0 0 0 / 0.7), -10px 26px 44px -10px rgb(0 0 0 / 0.75), 0 0 120px 30px rgb(129 170 247 / 0.16);
+  --shadow-card-press: inset 0 2px 5px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(170 195 255 / 0.1);
+}
+/* للبطاقات التي هي روابط فقط (بطاقة القائمة فيها أزرار داخلية فلا تنغرس كلها) */
+a.d-card:active,
+a.d-lead:active,
+a.section-card:active {
+  transform: translateY(1px);
+  box-shadow: var(--shadow-card-press);
+  transition-duration: 0.08s;
+}
+
+/* =====================================================================
+   الرئيسية: لوح طباعة بحرف المكان، سطر الطبعة، خبر رئيسي وأخبار قصيرة، وعنوان + سطر الفرع
+   ===================================================================== */
+/* --moon-ghost: حبر النسخة المنزاحة من القمر. --plate-bg/--plate-dot: لوح «مكان الأسبوع» ونقاطه */
+:root {
+  --moon-ghost: rgb(129 170 247 / 0.5);
+  --plate-bg: var(--blue-700);
+  --plate-dot: #faf6ef;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --moon-ghost: rgb(54 96 190 / 0.6);
+    --plate-bg: #16316f;
+    --plate-dot: #c3d2f2;
+  }
+}
+:root[data-theme="dark"] {
+  --moon-ghost: rgb(54 96 190 / 0.6);
+  --plate-bg: #16316f;
+  --plate-dot: #c3d2f2;
+}
+:root[data-theme="light"] {
+  --moon-ghost: rgb(129 170 247 / 0.5);
+  --plate-bg: var(--blue-700);
+  --plate-dot: #faf6ef;
+}
+
+/* لوح الطباعة: مربع حبر أزرق عليه الحرف الأول من اسم المكان بنقاط الطباعة، كبيراً ومقصوصاً عند
+   الحافة كنقش مطبوع (لا حرفاً في دائرة). بلا صور، ويتبدّل مع المكان */
+.plate {
+  position: relative;
+  overflow: hidden;
+  background: var(--plate-bg);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.16);
+}
+.plate-glyph {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  padding: 0.35em 0.2em;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 21rem;
+  line-height: 1;
+  color: var(--plate-dot);
+  white-space: nowrap;
+  user-select: none;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .plate-glyph {
+    color: transparent;
+    background-image: radial-gradient(circle, var(--plate-dot) 44%, transparent 48%);
+    background-size: 5px 5px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-mask: linear-gradient(160deg, #000 45%, rgb(0 0 0 / 0.4));
+    mask: linear-gradient(160deg, #000 45%, rgb(0 0 0 / 0.4));
+  }
+}
+@media (forced-colors: active) {
+  .plate-glyph {
+    color: CanvasText;
+    background: none;
+  }
+}
+/* ورقة المكان: اللوح مربع بلون الحبر الثابت (الورقة تبقى ورقاً في الوضع الداكن) */
+.np-lead-art.plate {
+  aspect-ratio: 1;
+  --plate-bg: #1545a2;
+  --plate-dot: #faf6ef;
+}
+.np-lead-art.plate .plate-glyph {
+  font-size: 13rem;
+  background-size: 4px 4px;
+}
+
+/* سطر الطبعة: التاريخ واسم الطبعة بين خطين، مثل ترويسة ورقة الجريدة */
+.d-dateline {
+  border-block-end: 1px solid var(--color-ink-rule);
+  padding: 5px 2px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* عنوان + سطر الفرع */
+.t-branch {
+  display: block;
+  font-family: "Cairo", "Tahoma", system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.d-lead-title .t-branch,
+.np-head h1 .t-branch {
+  font-size: 1rem;
+  margin-top: 4px;
+}
+.np-head h1 .t-branch {
+  margin-top: 14px;
+}
+.d-title,
+.d-lead-title,
+.d-hero-title {
+  text-wrap: balance;
+}
+.d-meta,
+.item-card .item-hours {
+  font-variant-numeric: tabular-nums;
+}
+
+/* الصفّان: أخبار قصيرة في أعمدة مسطّرة بدل ست بطاقات متطابقة. «جديد في توريلو» وحده له خبر رئيسي
+   (الأول فيه هو الأحدث فعلاً؛ ترتيب صف الوقت عشوائي فلا معنى لتمييز أوله) */
+#homeTimeRow,
+#homeNewRow {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 0;
+}
+#homeTimeRow .d-card,
+#homeNewRow .d-card:not(:first-child) {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 2px 24px;
+  border-inline-start: 1px solid var(--color-border);
+  transform: none;
+}
+#homeTimeRow .d-card:nth-child(3n + 1),
+#homeNewRow .d-card:nth-child(even) {
+  border-inline-start: 0;
+  padding-inline-start: 0;
+}
+#homeTimeRow .d-card .d-title,
+#homeNewRow .d-card:not(:first-child) .d-title {
+  font-size: 1.4rem;
+  transition: color 0.2s var(--ease);
+}
+#homeTimeRow .d-card .d-desc,
+#homeNewRow .d-card:not(:first-child) .d-desc {
+  -webkit-line-clamp: 1;
+}
+#homeTimeRow .d-card:hover .d-title,
+#homeNewRow .d-card:not(:first-child):hover .d-title {
+  color: var(--color-primary);
+}
+#homeTimeRow .d-card:active,
+#homeNewRow .d-card:not(:first-child):active {
+  opacity: 0.7;
+}
+#homeNewRow .d-card:first-child {
+  grid-row: span 2;
+  margin-inline-end: 24px;
+  padding: 28px 30px 24px;
+  justify-content: center;
+}
+/* خبر رئيسي + أربعة أخبار قصيرة = مستطيل تام؛ السادس يبقى للجوال */
+#homeNewRow .d-card:nth-child(6) {
+  display: none;
+}
+#homeNewRow .d-card:only-child {
+  grid-column: 1 / -1;
+  margin-inline-end: 0;
+}
+#homeNewRow .d-card:first-child .d-title {
+  font-size: clamp(1.7rem, 2.6vw, 2rem);
+  line-height: 1.2;
+}
+#homeNewRow .d-card:first-child .d-desc {
+  -webkit-line-clamp: 3;
+}
+#homeNewRow .d-card:first-child .d-meta {
+  margin-top: 0;
+}
+@media (max-width: 760px) {
+  .plate-glyph {
+    font-size: 14rem;
+  }
+  .np-lead-art.plate .plate-glyph {
+    font-size: 6rem;
+    background-size: 3px 3px;
+  }
+  #homeTimeRow,
+  #homeNewRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  #homeTimeRow .d-card,
+  #homeNewRow .d-card:not(:first-child) {
+    padding: 16px 0;
+    border-inline-start: 0;
+    border-block-start: 1px solid var(--color-border);
+  }
+  #homeTimeRow .d-card:first-child {
+    border-block-start: 0;
+    padding-block-start: 0;
+  }
+  #homeNewRow .d-card:first-child {
+    grid-column: auto;
+    grid-row: auto;
+    margin-inline-end: 0;
+    margin-block-end: 16px;
+    padding: 22px 24px 20px;
+  }
+  #homeNewRow .d-card:nth-child(2) {
+    border-block-start: 0;
+  }
+  #homeNewRow .d-card:nth-child(6) {
+    display: flex;
+  }
+}
+/* القمر يرتفع قليلاً مع أول التمرير (تحسين تدريجي: transform فقط، وبلا حركة لمن طلب تقليلها) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .d-moon {
+      animation: moon-rise linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 600px;
+    }
+  }
+}
+@keyframes moon-rise {
+  to { transform: translateY(-36px); }
+}
+
+/* ===== القوائم والحالات الفارغة (2026-11-10) ===== */
+
+/* --- هيدر الجوال: الشعار يقود. أزرار الأدوات الثلاثة حبر بلا حلقات (منطقة اللمس ٤٤ بكسل باقية)،
+   والحلقة لزر القائمة وحده. أعلى الصفحة بلا خط؛ مع أول تمرير يصغر الشعار ويُرسم خط الحبر من
+   بداية السطر. transform فقط: ارتفاع الهيدر ثابت، فـ--header-h وما يلتصق تحته لا يتأثران --- */
+@media (max-width: 560px) {
+  .site-header .lang-switch,
+  .site-header .sound-toggle,
+  .site-header .theme-toggle {
+    border-color: transparent;
+  }
+  .logo {
+    font-size: clamp(1.5rem, 7.5vw, 1.8rem);
+    transform-origin: right center;
+  }
+  [dir="ltr"] .logo {
+    transform-origin: left center;
+  }
+  .site-header {
+    border-bottom-color: transparent;
+  }
+  /* أعلى الصفحة: الشعار على الورق مباشرة، والشريط الزجاجي يعود مع التمرير */
+  .site-header:not(.scrolled) {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .site-header::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--color-ink-rule);
+    transform: scaleX(0);
+    transform-origin: right center;
+    pointer-events: none;
+  }
+  [dir="ltr"] .site-header::after {
+    transform-origin: left center;
+  }
+  .site-header.scrolled .logo {
+    transform: scale(0.84);
+  }
+  .site-header.scrolled::after {
+    transform: scaleX(1);
+  }
+}
+@media (max-width: 560px) and (prefers-reduced-motion: no-preference) {
+  .logo {
+    transition: transform 0.3s var(--ease);
+  }
+  .site-header::after {
+    transition: transform 0.45s var(--ease);
+  }
+}
+
+/* --- رأس صفحة القسم على الجوال: أول بطاقة تظهر في الشاشة الأولى. النص كما هو (لا قصّ ولا حذف)،
+   المسافات فقط أضيق، و«الأقرب مني» ينتقل إلى أول سطر الفلاتر (main.js) --- */
+.page-header p {
+  text-wrap: pretty;
+}
+.filters .near-me-btn {
+  margin-top: 0;
+  padding: 7px 16px;
+}
+@media (max-width: 700px) {
+  .breadcrumb {
+    padding-top: 10px;
+    margin-bottom: 0;
+  }
+  .breadcrumb + .page-header {
+    padding-top: 4px;
+  }
+  .page-header {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .page-header h1 {
+    margin-bottom: 4px;
+  }
+  .page-header p.review-note {
+    margin-top: 6px;
+    font-size: 0.8rem;
+  }
+  .review-note a {
+    white-space: nowrap;
+  }
+  .filters {
+    padding: 10px 0 12px;
+  }
+}
+
+/* --- بطاقات القسم: أربعة أعمدة أهدأ على ١٤٤٠ (كانت خمسة ضيقة تلفّ الأسماء سطرين)،
+   والزر الأساسي إطار حبر يمتلئ من أسفله عند المرور أو الضغط، فالاسم أولاً والفعل ثانياً.
+   والبطاقة تنغرس في الورق بكسلاً واحداً بدل أن ترتفع --- */
+@media (min-width: 1024px) and (pointer: fine) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
+  }
+}
+.card-grid .item-card .item-actions .btn:not(.secondary) {
+  background: linear-gradient(var(--color-primary-fill) 0 0) no-repeat 50% 100% / 100% 0;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
+  color: var(--color-primary);
+  box-shadow: none;
+}
+.card-grid .item-card .item-actions .btn:not(.secondary):active,
+.card-grid .item-card .item-actions .btn:not(.secondary):focus-visible {
+  background-size: 100% 100%;
+  border-color: var(--color-primary-fill);
+  color: #fff;
+}
+@media (hover: hover) {
+  .card-grid .item-card .item-actions .btn:not(.secondary):hover {
+    background-size: 100% 100%;
+    border-color: var(--color-primary-fill);
+    color: #fff;
+  }
+  .card-grid .item-card:hover {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgb(26 31 41 / 0.1), 0 4px 12px rgb(26 31 41 / 0.05);
+  }
+  .card-grid .item-card:hover .item-actions .btn:not(.secondary) {
+    border-color: var(--color-primary);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card-grid .item-card .item-actions .btn:not(.secondary) {
+    transition:
+      background-size 0.25s var(--ease),
+      color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.12s var(--ease);
+  }
+}
+
+/* --- ٤٠٤ خطأ مطبعي: الرقم بطبعتين غير متطابقتين. الطبعة النقطية الزرقاء نسخة خلف الحبر الداكن
+   (::before من data-n، بلا مزج طبقات)، تنزلق مرة واحدة نحو مكانها عند التحميل ولا تصله --- */
+.nf {
+  padding: 40px 0 24px;
+  text-align: center;
+}
+.nf-num {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  margin: 0;
+  font: 700 clamp(7rem, 34vw, 14rem) / 1.25 var(--font-serif);
+  color: var(--color-text);
+  direction: ltr;
+}
+.nf-num::before {
+  content: attr(data-n);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: var(--color-primary);
+  opacity: 0.5;
+  transform: translate(0.085em, 0.06em);
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .nf-num::before {
+    color: transparent;
+    opacity: 1;
+    background: radial-gradient(circle, var(--color-primary) 42%, transparent 46%) 0 0 / 7px 7px;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+@media (forced-colors: active) {
+  .nf-num::before {
+    content: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nf-num::before {
+    animation: nf-register 1.1s var(--ease) 0.25s both;
+  }
+}
+@keyframes nf-register {
+  from { transform: translate(0.2em, 0.14em); }
+}
+.nf-cap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 20px;
+  max-width: 320px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.nf-cap::before,
+.nf-cap::after {
+  content: "";
+  flex: 1;
+  border-top: 3px double var(--color-ink-rule);
+}
+.nf h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.3;
+}
+.nf > p:last-child {
+  margin: 0 auto 8px;
+  max-width: 34em;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+/* --- المفضلة الفارغة قصاصة جريدة: إطار «قُصّ هنا» متقطع، وقلب من نقاط الطباعة يبهت نحو أسفله
+   كطبعة لم تكتمل. القناع صورة data: (CSP يسمح بها في img-src) لأن رموز ملف الأيقونات لا تصلح قناعاً --- */
+.empty-state.fav-clip {
+  max-width: 440px;
+  margin: 28px auto 0;
+  padding: 36px 24px 30px;
+  border: 1.5px dashed var(--color-ink-rule);
+  border-radius: 4px;
+}
+.fav-clip-heart {
+  display: block;
+  width: 96px;
+  aspect-ratio: 1;
+  margin: 0 auto 14px;
+  --heart: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z'/%3E%3C/svg%3E");
+  -webkit-mask:
+    var(--heart) center / contain no-repeat,
+    linear-gradient(#000 35%, rgb(0 0 0 / 0.25));
+  -webkit-mask-composite: source-in;
+  mask:
+    var(--heart) center / contain no-repeat,
+    linear-gradient(#000 35%, rgb(0 0 0 / 0.25));
+  mask-composite: intersect;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fav-clip-heart {
+    animation: fav-ink-in 0.9s var(--ease) 0.15s both;
+  }
+}
+@keyframes fav-ink-in {
+  from { clip-path: circle(0% at 50% 45%); }
+  to { clip-path: circle(75% at 50% 45%); }
+}
+.fav-clip p {
+  margin: 0;
+  text-wrap: balance;
+}
+.fav-clip-link {
+  display: inline-block;
+  margin-top: 14px;
+  padding-block: 10px;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
