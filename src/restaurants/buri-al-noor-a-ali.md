@@ -2,17 +2,17 @@
 title: "برج النور"
 icon: 🍽️
 desc: "مطعم في عالي."
-title_en: "Buri Al Noor"
+title_en: "Burj Al Noor"
 desc_en: "A restaurant in A'ali."
-nameTranslated: true
+hours: "يومياً ٧ص - ٣ص"
+hours_en: "Daily 7am - 3am"
 categories:
   - عالي
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1761395, 50.5266067
+coords: 26.1761414, 50.5265788
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1761395,50.5266067
+  phone: "35685600"
+  maps: https://maps.app.goo.gl/cgpAwQhsLwXeLbbG9
   instagram: ''
 ---

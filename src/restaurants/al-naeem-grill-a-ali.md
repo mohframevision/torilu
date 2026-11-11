@@ -1,18 +1,18 @@
 ---
-title: "مشاوي النعيم"
+title: "مطعم النعيم العالي"
 icon: 🍽️
 desc: "مطعم في عالي."
 title_en: "Al Naeem Grill"
 desc_en: "A restaurant in A'ali."
-nameTranslated: true
+hours: "يومياً ١١ص - ١٢:٣٠ص"
+hours_en: "Daily 11am - 12:30am"
 categories:
   - عالي
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1589938, 50.5208741
+coords: 26.158971, 50.5209131
 links:
-  website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1589938,50.5208741
+  website: https://www.alnaeemalaalirestaurant.com/
+  phone: "17643299"
+  maps: https://maps.app.goo.gl/iD8StXYFzdQKP5rL7
   instagram: ''
 ---
