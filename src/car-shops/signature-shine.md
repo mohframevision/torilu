@@ -13,6 +13,6 @@ coords: 26.201373142855815, 50.532233777325516
 links:
   website: ''
   phone: '39998532'
-  maps: https://www.google.com/maps/search/?api=1&query=6G2J%2BHV4+Sehla+Bahrain
+  maps: https://www.google.com/maps?cid=4262965467481709289
   instagram: https://www.instagram.com/signature_car_care_bh/
 ---
