@@ -1,18 +1,18 @@
 ---
-title: "مشاوي المنازل"
+title: "مشويات المنازل"
 icon: 🍽️
 desc: "مطعم في النويدرات."
 title_en: "Al Manazel Grills"
 desc_en: "A restaurant in Nuwaidrat."
-nameTranslated: true
+hours: "يومياً ١٢م - ١٢ص"
+hours_en: "Daily 12pm - 12am"
 categories:
   - النويدرات
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1334573, 50.6000638
+coords: 26.1334325, 50.6000271
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1334573,50.6000638
+  phone: "17704010"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1334325,50.6000271
   instagram: ''
 ---

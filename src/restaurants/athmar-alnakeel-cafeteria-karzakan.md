@@ -4,17 +4,17 @@ icon: 🥪
 desc: "وجبات سريعة في كرزكان."
 title_en: "Athmar Alnakeel Cafeteria"
 desc_en: "Fast food in Karzakan."
-nameTranslated: true
+hours: "يومياً ٦ص - ١ص"
+hours_en: "Daily 6am - 1am"
 categories:
   - وجبات سريعة
   - سندويشات
   - كرزكان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1152559, 50.4820541
+coords: 26.1151539, 50.482161
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1152559,50.4820541
+  phone: "35346151"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1151539,50.482161
   instagram: ''
 ---

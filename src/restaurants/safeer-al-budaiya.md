@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في البديع."
 title_en: "Safeer"
 desc_en: "A restaurant in Al Budaiya."
-nameTranslated: true
+hours: "يومياً ٥ص - ٤ص"
+hours_en: "Daily 5am - 4am"
 categories:
   - البديع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2130313, 50.4509182
+coords: 26.2129848, 50.4509655
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2130313,50.4509182
+  phone: "17694957"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2129848,50.4509655
   instagram: ''
 ---

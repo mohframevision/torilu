@@ -1,18 +1,18 @@
 ---
-title: "الزوراء"
+title: "مطعم الزوراء"
 icon: 🍽️
 desc: "مطعم في طشان."
 title_en: "Al Zawra"
 desc_en: "A restaurant in Tashan."
-nameTranslated: true
+hours: "يومياً ٦ص - ٦م"
+hours_en: "Daily 6am - 6pm"
 categories:
   - طشان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2058063, 50.5501586
+coords: 26.2058551, 50.5501131
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2058063,50.5501586
+  phone: "33790839"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2058551,50.5501131
   instagram: ''
 ---

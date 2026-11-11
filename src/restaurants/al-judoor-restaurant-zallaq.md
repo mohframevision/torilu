@@ -1,18 +1,18 @@
 ---
-title: "مطعم الجذور"
+title: "مطعم الجدور"
 icon: 🍽️
 desc: "مطعم في الزلاق."
 title_en: "Al Judoor Restaurant"
 desc_en: "A restaurant in Zallaq."
-nameTranslated: true
+hours: "يومياً ٦ص - ١١م"
+hours_en: "Daily 6am - 11pm"
 categories:
   - الزلاق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.0466358, 50.4882688
+coords: 26.0466539, 50.4882407
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.0466358,50.4882688
+  phone: "17631710"
+  maps: https://www.google.com/maps/search/?api=1&query=26.0466539,50.4882407
   instagram: ''
 ---

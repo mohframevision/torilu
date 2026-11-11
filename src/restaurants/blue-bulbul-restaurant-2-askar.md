@@ -1,18 +1,18 @@
 ---
-title: "مطعم بلو بلبل 2"
+title: "مطعم البلبل الأزرق"
 icon: 🍽️
 desc: "مطعم في عسكر."
 title_en: "Blue Bulbul Restaurant 2"
 desc_en: "A restaurant in Askar."
-nameTranslated: true
+hours: "يومياً ٦ص - ١١م"
+hours_en: "Daily 6am - 11pm"
 categories:
   - عسكر
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.0587268, 50.617174
+coords: 26.0587688, 50.6171022
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.0587268,50.617174
+  phone: "32156076"
+  maps: https://www.google.com/maps/search/?api=1&query=26.0587688,50.6171022
   instagram: ''
 ---

@@ -1,18 +1,18 @@
 ---
-title: "مطعم الركن اليمني"
+title: "مطعم الركن اليماني"
 icon: 🍽️
 desc: "مطعم في المالكية."
 title_en: "Yemeni Corner Restaurant"
 desc_en: "A restaurant in Malkiya."
-nameTranslated: true
+hours: "يومياً ١٠ص - ١٢ص"
+hours_en: "Daily 10am - 12am"
 categories:
   - المالكية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.0985941, 50.4856022
+coords: 26.0987568, 50.4854001
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.0985941,50.4856022
+  phone: "33372944"
+  maps: https://www.google.com/maps/search/?api=1&query=26.0987568,50.4854001
   instagram: ''
 ---

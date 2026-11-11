@@ -1,18 +1,18 @@
 ---
-title: "مشاوي الفران"
+title: "مشويات الفران"
 icon: 🍽️
 desc: "مطعم في كرزكان."
 title_en: "Alfaran Grills"
 desc_en: "A restaurant in Karzakan."
-nameTranslated: true
+hours: "يومياً ١٠ص - ١٢ص"
+hours_en: "Daily 10am - 12am"
 categories:
   - كرزكان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1191213, 50.4783605
+coords: 26.1191636, 50.4784013
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1191213,50.4783605
+  phone: "17601255"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1191636,50.4784013
   instagram: ''
 ---

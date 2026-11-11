@@ -1,18 +1,16 @@
 ---
-title: "كافيه وكيك ديكوريتنج ميموريز"
+title: "ديكوريتنج ميموريز"
 icon: ☕
 desc: "كافيه في طشان."
 title_en: "Decorating Memories Cafe and Cakes"
 desc_en: "A cafe in Tashan."
-nameTranslated: true
 categories:
   - طشان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2012283, 50.561109
+coords: 26.2011758, 50.5609858
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2012283,50.561109
+  phone: "17009009"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2011758,50.5609858
   instagram: ''
 ---

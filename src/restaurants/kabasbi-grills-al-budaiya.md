@@ -1,18 +1,18 @@
 ---
-title: "مشاوي كبابجي"
+title: "مطعم كبابي"
 icon: 🍽️
 desc: "مطعم في البديع."
 title_en: "Kabasbi Grills"
 desc_en: "A restaurant in Al Budaiya."
-nameTranslated: true
+hours: "يومياً ٦م - ١ص"
+hours_en: "Daily 6pm - 1am"
 categories:
   - البديع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2117589, 50.4510553
+coords: 26.2117201, 50.4511336
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2117589,50.4510553
+  phone: "17691116"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2117201,50.4511336
   instagram: ''
 ---

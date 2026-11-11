@@ -4,16 +4,16 @@ icon: 🍽️
 desc: "مطعم في البديع."
 title_en: "Al Karama Gate Sandwiches"
 desc_en: "A restaurant in Al Budaiya."
-nameTranslated: true
+hours: "يومياً ٨ص - ١٢ص"
+hours_en: "Daily 8am - 12am"
 categories:
   - سندويشات
   - البديع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2117411, 50.4508822
+coords: 26.2117259, 50.4508985
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2117411,50.4508822
+  phone: "17281755"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2117259,50.4508985
   instagram: ''
 ---

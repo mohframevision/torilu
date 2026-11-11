@@ -1,18 +1,16 @@
 ---
-title: "مطعم ومشاوي بوابة المضياف"
+title: "مطعم بوابة المضيف"
 icon: 🍽️
 desc: "مطعم في الزلاق."
 title_en: "Almedhuaf Gate Restaurant and Grills"
 desc_en: "A restaurant in Zallaq."
-nameTranslated: true
 categories:
   - الزلاق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.047132, 50.4883072
+coords: 26.0471291, 50.4882402
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.047132,50.4883072
+  phone: "33233698"
+  maps: https://www.google.com/maps/search/?api=1&query=26.0471291,50.4882402
   instagram: ''
 ---

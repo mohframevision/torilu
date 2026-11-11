@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في النويدرات."
 title_en: "Moods Karak - Nuwaidrat"
 desc_en: "A restaurant in Nuwaidrat."
-nameTranslated: true
+hours: "يومياً ٥ص - ١٢ص"
+hours_en: "Daily 5am - 12am"
 categories:
   - النويدرات
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1321883, 50.6004054
+coords: 26.1324964, 50.6002393
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1321883,50.6004054
+  phone: "34580457"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1324964,50.6002393
   instagram: ''
 ---

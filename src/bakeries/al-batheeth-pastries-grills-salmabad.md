@@ -4,15 +4,15 @@ icon: 🥐
 desc: "معجنات في سلماباد."
 title_en: "Al Batheeth Pastries & Grills"
 desc_en: "A pastry shop in Salmabad."
-nameTranslated: true
+hours: "يومياً ١٢م - ١ص"
+hours_en: "Daily 12pm - 1am"
 categories:
   - سلماباد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1821738, 50.5286457
+coords: 26.1821721, 50.52845
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1821738,50.5286457
+  phone: "36524153"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1821721,50.52845
   instagram: ''
 ---

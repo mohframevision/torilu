@@ -1,18 +1,18 @@
 ---
-title: "مطعم ماماز"
+title: "مطعم ماماس"
 icon: 🍽️
 desc: "مطعم في المعامير."
 title_en: "Maamaas Restaurant"
 desc_en: "A restaurant in Ma'ameer."
-nameTranslated: true
+hours: "يومياً ٣ص - ١٢ص"
+hours_en: "Daily 3am - 12am"
 categories:
   - المعامير
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1378866, 50.6107131
+coords: 26.1379175, 50.6106653
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1378866,50.6107131
+  phone: "36973447"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1379175,50.6106653
   instagram: ''
 ---

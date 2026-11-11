@@ -1,18 +1,18 @@
 ---
-title: "معجنات بينار"
+title: "بينار للمعجنات والشوارما"
 icon: 🥐
 desc: "معجنات في سلماباد."
 title_en: "Pinar Pastery"
 desc_en: "A pastry shop in Salmabad."
-nameTranslated: true
+hours: "يومياً ٨:٣٠ص - ٢ص"
+hours_en: "Daily 8:30am - 2am"
 categories:
   - سلماباد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1794401, 50.5249032
+coords: 26.1793594, 50.5250277
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1794401,50.5249032
+  phone: "17877260"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1793594,50.5250277
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في العكر."
 title_en: "Black Gold Restaurant"
 desc_en: "A restaurant in Al Eker."
-nameTranslated: true
+hours: "يومياً ٥ص - ١٠م"
+hours_en: "Daily 5am - 10pm"
 categories:
   - العكر
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1406624, 50.6043154
+coords: 26.1407326, 50.6042719
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1406624,50.6043154
+  phone: "35424567"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1407326,50.6042719
   instagram: ''
 ---
