@@ -1,18 +1,18 @@
 ---
-title: "كافيه إكستروفرت"
+title: "اكستروفرت مقهى ومطعم"
 icon: ☕
 desc: "كافيه في القضيبية."
 title_en: "Extrovert Cafe"
 desc_en: "A cafe in Al Qudaibiya."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2187425, 50.5889135
+coords: 26.2185948, 50.5892123
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2187425,50.5889135
+  phone: "17742248"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2185948,50.5892123
   instagram: ''
 ---

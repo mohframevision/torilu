@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في القضيبية."
 title_en: "Zulu"
 desc_en: "A restaurant in Al Qudaibiya."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2142776, 50.5929226
+coords: 26.2143283, 50.5929451
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2142776,50.5929226
+  phone: "33112663"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2143283,50.5929451
   instagram: ''
 ---

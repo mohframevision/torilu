@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في القضيبية."
 title_en: "Arirang & Edo Restaurant"
 desc_en: "A restaurant in Al Qudaibiya."
-nameTranslated: true
+hours: "يومياً ١١:٣٠ص - ١١:٣٠م"
+hours_en: "Daily 11:30am - 11:30pm"
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.23294, 50.5969842
+coords: 26.2330506, 50.5969267
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.23294,50.5969842
+  phone: "17290945"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2330506,50.5969267
   instagram: ''
 ---

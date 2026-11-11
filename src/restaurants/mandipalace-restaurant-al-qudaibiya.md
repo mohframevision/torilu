@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في القضيبية."
 title_en: "MandiPalace Restaurant"
 desc_en: "A restaurant in Al Qudaibiya."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2314534, 50.5954608
+coords: 26.2313388, 50.5954394
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2314534,50.5954608
+  phone: "17292050"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2313388,50.5954394
   instagram: ''
 ---

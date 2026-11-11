@@ -1,18 +1,16 @@
 ---
-title: "ذا ميت كومباني"
+title: "ذي ميت كومبني"
 icon: 🍽️
 desc: "مطعم في القضيبية."
 title_en: "The Meat Company"
 desc_en: "A restaurant in Al Qudaibiya."
-nameTranslated: true
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2155269, 50.5917995
+coords: 26.2155139, 50.591783
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2155269,50.5917995
+  phone: "17742080"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2155139,50.591783
   instagram: ''
 ---

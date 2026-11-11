@@ -1,18 +1,18 @@
 ---
-title: "كافتيريا نور المعارض"
+title: "كفتيريا نور المعارض"
 icon: ☕
 desc: "كافيه في القضيبية."
 title_en: "Exhibition Light Cafeteria"
 desc_en: "A cafe in Al Qudaibiya."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2274555, 50.5941806
+coords: 26.2275161, 50.5941081
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2274555,50.5941806
+  phone: "34142593"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2275161,50.5941081
   instagram: ''
 ---

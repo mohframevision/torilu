@@ -4,15 +4,13 @@ icon: ☕
 desc: "كافيه في القضيبية."
 title_en: "Lavazza"
 desc_en: "A cafe in Al Qudaibiya."
-nameTranslated: true
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2273857, 50.5965565
+coords: 26.227426, 50.5964671
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2273857,50.5965565
+  phone: "77033333"
+  maps: https://www.google.com/maps/search/?api=1&query=26.227426,50.5964671
   instagram: ''
 ---

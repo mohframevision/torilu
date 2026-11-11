@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في القضيبية."
 title_en: "Sky Palace Cafeteria"
 desc_en: "A restaurant in Al Qudaibiya."
-nameTranslated: true
+hours: "يومياً ٧ص - ١٠م"
+hours_en: "Daily 7am - 10pm"
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2243073, 50.5887242
+coords: 26.224354, 50.5886222
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2243073,50.5887242
+  phone: "35602140"
+  maps: https://www.google.com/maps/search/?api=1&query=26.224354,50.5886222
   instagram: ''
 ---

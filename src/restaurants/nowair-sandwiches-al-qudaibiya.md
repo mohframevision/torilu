@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في القضيبية."
 title_en: "Nowair Sandwiches"
 desc_en: "A restaurant in Al Qudaibiya."
-nameTranslated: true
 categories:
   - القضيبية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2255765, 50.5894769
+coords: 26.2255976, 50.5894501
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2255765,50.5894769
+  maps: https://www.google.com/maps/search/?api=1&query=26.2255976,50.5894501
   instagram: ''
 ---
