@@ -1,19 +1,17 @@
 ---
-title: "عصائر آيس تاون"
+title: "آيس تاون للعصائر"
 icon: 🥪
 desc: "وجبات سريعة في الرفاع."
 title_en: "Ice Town Juices"
 desc_en: "Fast food in Riffa."
-nameTranslated: true
 categories:
   - وجبات سريعة
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1258304, 50.5718568
+coords: 26.1258254, 50.5719028
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1258304,50.5718568
+  phone: "33382041"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1258254,50.5719028
   instagram: ''
 ---

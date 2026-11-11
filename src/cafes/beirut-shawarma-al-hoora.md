@@ -1,17 +1,18 @@
 ---
-title: "مطعم البيروتي"
+title: "شاورما بيروت"
 icon: ☕
 desc: "كافيه في الحورة."
 title_en: "Beirut Shawarma"
 desc_en: "A cafe in Al Hoora."
+nameTranslated: true
 categories:
   - الحورة
 incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2314779, 50.5884899
+coords: 26.2316662, 50.5886634
 links:
   website: ''
-  phone: "17280788"
-  maps: https://www.google.com/maps/search/?api=1&query=26.2314779,50.5884899
+  phone: ''
+  maps: https://www.google.com/maps/search/?api=1&query=26.2316662,50.5886634
   instagram: ''
 ---

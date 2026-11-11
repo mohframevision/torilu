@@ -1,18 +1,18 @@
 ---
-title: "مطعم ومشاوي عبق الماضي"
+title: "مشويات عبق الماضي العراقي"
 icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Abaq Almadhi Restaurant & Grills"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ١٠ص - ٣ص"
+hours_en: "Daily 10am - 3am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1216522, 50.5715765
+coords: 26.1216528, 50.5716186
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1216522,50.5715765
+  phone: "17760978"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1216528,50.5716186
   instagram: ''
 ---

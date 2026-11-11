@@ -1,18 +1,18 @@
 ---
-title: "معجنات عسلي"
+title: "معجنات العسلي"
 icon: 🥖
 desc: "مخبز في الرفاع."
 title_en: "Asali Pasteries"
 desc_en: "A bakery in Riffa."
-nameTranslated: true
+hours: "يومياً ١:٣٠م - ١:٣٠ص"
+hours_en: "Daily 1:30pm - 1:30am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1269043, 50.5748275
+coords: 26.1269546, 50.5749034
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1269043,50.5748275
+  phone: "33447008"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1269546,50.5749034
   instagram: ''
 ---

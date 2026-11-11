@@ -1,18 +1,18 @@
 ---
-title: "مطعم كونغ فو"
+title: "مطعم كنغ فو"
 icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Kung Fu Restaurant"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ١١ص - ١ص"
+hours_en: "Daily 11am - 1am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1219732, 50.5726952
+coords: 26.1219745, 50.5726868
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1219732,50.5726952
+  phone: "17774430"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1219745,50.5726868
   instagram: ''
 ---

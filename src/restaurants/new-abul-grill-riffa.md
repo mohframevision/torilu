@@ -1,18 +1,18 @@
 ---
-title: "مشاوي أبل الجديدة"
+title: "مشويات أبل الجديدة"
 icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "New Abul Grill"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ٦م - ١:٥٠ص"
+hours_en: "Daily 6pm - 1:50am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1151113, 50.5754553
+coords: 26.115099, 50.5753902
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1151113,50.5754553
+  phone: "17776527"
+  maps: https://www.google.com/maps/search/?api=1&query=26.115099,50.5753902
   instagram: ''
 ---

@@ -1,18 +1,18 @@
 ---
-title: "ماليزيا اكسبريس - الرفاع"
+title: "ماليزيا اكسبرس - الرفاع"
 icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Malaysia Express - Riffa"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ٨ص - ٥ص"
+hours_en: "Daily 8am - 5am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1323301, 50.5607327
+coords: 26.1323213, 50.5607064
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1323301,50.5607327
+  phone: "17760575"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1323213,50.5607064
   instagram: ''
 ---

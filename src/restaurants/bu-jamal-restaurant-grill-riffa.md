@@ -1,18 +1,16 @@
 ---
-title: "مطعم ومشاوي بو جمال"
+title: "تكة ابو جمال"
 icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Bu Jamal Restaurant Grill"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1163321, 50.5721601
+coords: 26.1163481, 50.5721253
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1163321,50.5721601
+  phone: "17779644"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1163481,50.5721253
   instagram: ''
 ---

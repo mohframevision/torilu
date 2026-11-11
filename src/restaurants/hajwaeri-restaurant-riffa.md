@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Hajwaeri Restaurant - Riffa"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1165948, 50.5713848
+coords: 26.1165832, 50.5714722
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1165948,50.5713848
+  phone: "34441940"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1165832,50.5714722
   instagram: ''
 ---

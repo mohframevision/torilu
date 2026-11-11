@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "D9 Restaurant"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ١٠:٣٠ص - ١١:٣٠م"
+hours_en: "Daily 10:30am - 11:30pm"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1136742, 50.5768324
+coords: 26.1137386, 50.5767963
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1136742,50.5768324
+  phone: "17789456"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1137386,50.5767963
   instagram: ''
 ---

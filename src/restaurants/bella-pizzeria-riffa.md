@@ -1,18 +1,18 @@
 ---
-title: "بيلا بيتزيريا"
+title: "بيلا بيزاريا"
 icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Bella Pizzeria"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ١٢م - ١ص"
+hours_en: "Daily 12pm - 1am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1323828, 50.5550575
+coords: 26.1324495, 50.5548971
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1323828,50.5550575
+  phone: "17300800"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1324495,50.5548971
   instagram: ''
 ---

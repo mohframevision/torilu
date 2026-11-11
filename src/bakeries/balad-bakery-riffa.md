@@ -1,18 +1,18 @@
 ---
-title: "مخبز البلد"
+title: "خباز البلد"
 icon: 🥖
 desc: "مخبز في الرفاع."
 title_en: "Balad Bakery"
 desc_en: "A bakery in Riffa."
-nameTranslated: true
+hours: "يومياً ٦:٣٠ص - ١٢ص"
+hours_en: "Daily 6:30am - 12am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1269328, 50.5749011
+coords: 26.1269514, 50.5748884
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1269328,50.5749011
+  phone: "33756167"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1269514,50.5748884
   instagram: ''
 ---

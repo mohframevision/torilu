@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Bake or Take"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ١١ص - ١٢ص"
+hours_en: "Daily 11am - 12am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1346086, 50.5507031
+coords: 26.1346447, 50.5507839
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1346086,50.5507031
+  phone: "17270737"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1346447,50.5507839
   instagram: ''
 ---

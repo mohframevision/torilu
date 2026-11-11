@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Hi-Look Burger"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ٤ص - ١٢ص"
+hours_en: "Daily 4am - 12am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.137826, 50.5701141
+coords: 26.1377963, 50.5700281
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.137826,50.5701141
+  phone: "17624472"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1377963,50.5700281
   instagram: ''
 ---

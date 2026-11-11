@@ -1,18 +1,18 @@
 ---
-title: "مطعم البوكمال"
+title: "مطعم البوكمال للولائم والمشويات"
 icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Albu Kamal Restaurant"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ٨ص - ١٢:٠٥ص"
+hours_en: "Daily 8am - 12:05am"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1169438, 50.5709226
+coords: 26.1169403, 50.5709005
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1169438,50.5709226
+  phone: "17771135"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1169403,50.5709005
   instagram: ''
 ---

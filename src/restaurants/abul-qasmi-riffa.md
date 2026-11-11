@@ -1,18 +1,18 @@
 ---
-title: "أبو القاسمي"
+title: "مطعم أبل قاسمي للولائم"
 icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Abul Qasmi"
 desc_en: "A restaurant in Riffa."
-nameTranslated: true
+hours: "يومياً ١٠:٣٠ص - ١١م"
+hours_en: "Daily 10:30am - 11pm"
 categories:
   - الرفاع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.115172, 50.575362
+coords: 26.1151608, 50.5753047
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.115172,50.575362
+  phone: "17769383"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1151608,50.5753047
   instagram: ''
 ---
