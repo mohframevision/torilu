@@ -1,18 +1,18 @@
 ---
-title: "مشاوي المحترم"
+title: "مشويات المحترم تكه ريش"
 icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Al Muhtaram Grills"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ٥:٠٢م - ٤:٠٢ص"
+hours_en: "Daily 5:02pm - 4:02am"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2275334, 50.5825313
+coords: 26.227534, 50.5824625
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2275334,50.5825313
+  phone: "33692700"
+  maps: https://www.google.com/maps/search/?api=1&query=26.227534,50.5824625
   instagram: ''
 ---

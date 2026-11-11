@@ -1,18 +1,18 @@
 ---
-title: "الأسرة - الحورة"
+title: "مطعم الأسرة - الحورة"
 icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Al Osra - Al Hoora"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ١٠ص - ١٢ص"
+hours_en: "Daily 10am - 12am"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2338165, 50.593682
+coords: 26.2339472, 50.5936299
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2338165,50.593682
+  phone: "17297771"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2339472,50.5936299
   instagram: ''
 ---

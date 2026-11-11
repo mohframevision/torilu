@@ -4,16 +4,16 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Hooters Cafe"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ١٢م - ٢ص"
+hours_en: "Daily 12pm - 2am"
 categories:
   - برجر
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2263797, 50.5877242
+coords: 26.2263551, 50.5876699
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2263797,50.5877242
+  maps: https://www.google.com/maps/search/?api=1&query=26.2263551,50.5876699
   instagram: ''
 ---

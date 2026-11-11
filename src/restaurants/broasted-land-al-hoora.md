@@ -1,18 +1,16 @@
 ---
-title: "بروستد لاند"
+title: "أرض البروستد"
 icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Broasted Land"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2288607, 50.5880746
+coords: 26.2288326, 50.587958
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2288607,50.5880746
+  phone: "17233302"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2288326,50.587958
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Ramsis Star"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ٨ص - ١٠:٣٣م"
+hours_en: "Daily 8am - 10:33pm"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2297447, 50.5905851
+coords: 26.2297497, 50.5905343
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2297447,50.5905851
+  phone: "17295633"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2297497,50.5905343
   instagram: ''
 ---

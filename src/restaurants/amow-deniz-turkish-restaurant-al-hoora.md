@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Amow Deniz Turkish Restaurant"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ٣م - ٣ص"
+hours_en: "Daily 3pm - 3am"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2291881, 50.589573
+coords: 26.2291875, 50.5895625
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2291881,50.589573
+  phone: "13698444"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2291875,50.5895625
   instagram: ''
 ---

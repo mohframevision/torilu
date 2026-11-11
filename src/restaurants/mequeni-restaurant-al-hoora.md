@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Mequeni Restaurant"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ٩ص - ١٠م"
+hours_en: "Daily 9am - 10pm"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2326154, 50.5909798
+coords: 26.2326745, 50.5909842
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2326154,50.5909798
+  phone: "34456029"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2326745,50.5909842
   instagram: ''
 ---

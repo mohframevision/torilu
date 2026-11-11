@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Starly Fast Food"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ٨ص - ٢ص"
+hours_en: "Daily 8am - 2am"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2294904, 50.5906765
+coords: 26.229483, 50.5905168
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2294904,50.5906765
+  phone: "17310113"
+  maps: https://www.google.com/maps/search/?api=1&query=26.229483,50.5905168
   instagram: ''
 ---

@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Noor Albahrain Bukhari Restaurant"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2327726, 50.5874104
+coords: 26.2327388, 50.587533
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2327726,50.5874104
+  phone: "35071992"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2327388,50.587533
   instagram: ''
 ---

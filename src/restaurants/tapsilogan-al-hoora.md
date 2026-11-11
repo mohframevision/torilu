@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Tapsilogan"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ١٠ص - ٤ص"
+hours_en: "Daily 10am - 4am"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2301009, 50.5881959
+coords: 26.2301252, 50.5881202
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2301009,50.5881959
+  maps: https://www.google.com/maps/search/?api=1&query=26.2301252,50.5881202
   instagram: ''
 ---

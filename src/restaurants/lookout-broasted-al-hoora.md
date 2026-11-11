@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Lookout Broasted"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2262591, 50.5847272
+coords: 26.226219, 50.5846254
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2262591,50.5847272
+  phone: "17700285"
+  maps: https://www.google.com/maps/search/?api=1&query=26.226219,50.5846254
   instagram: ''
 ---

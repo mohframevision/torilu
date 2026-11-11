@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Al Jasmi Broasted"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2322657, 50.5943097
+coords: 26.2323203, 50.5943544
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2322657,50.5943097
+  phone: "17297746"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2323203,50.5943544
   instagram: ''
 ---

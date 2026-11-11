@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Pong's"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
+hours: "يومياً ١٢م - ٣:٣٠ص"
+hours_en: "Daily 12pm - 3:30am"
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2359563, 50.5912218
+coords: 26.2359785, 50.5911608
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2359563,50.5912218
+  phone: "17530800"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2359785,50.5911608
   instagram: ''
 ---

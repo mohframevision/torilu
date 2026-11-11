@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Papillon Restaurant"
 desc_en: "A restaurant in Al Hoora."
-nameTranslated: true
 categories:
   - الحورة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2280941, 50.5835236
+coords: 26.2281239, 50.5835036
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2280941,50.5835236
+  phone: "17250206"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2281239,50.5835036
   instagram: ''
 ---
