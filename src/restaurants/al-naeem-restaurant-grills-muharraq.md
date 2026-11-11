@@ -1,5 +1,5 @@
 ---
-title: "مطعم مشويات النعيم المحرق"
+title: "مطعم مشويات النعيم - المحرق"
 icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Al Naeem Restaurant & Grills - Muharraq"

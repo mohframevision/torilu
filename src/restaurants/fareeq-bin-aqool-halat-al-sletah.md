@@ -1,5 +1,5 @@
 ---
-title: "مطعم فريج بن عاقول"
+title: "مطعم فريج بن عاقول - المحرق"
 icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Fareeq Bin Aqool - Muharraq"

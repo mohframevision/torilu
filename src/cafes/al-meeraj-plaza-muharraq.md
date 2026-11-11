@@ -1,5 +1,5 @@
 ---
-title: "كفتريا المعراج المحرق"
+title: "كفتريا المعراج - المحرق"
 icon: ☕
 desc: "كافيه في المحرق."
 title_en: "Al Meeraj Plaza - Muharraq"

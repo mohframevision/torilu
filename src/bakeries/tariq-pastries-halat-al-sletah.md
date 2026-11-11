@@ -1,5 +1,5 @@
 ---
-title: "معجنات طارق"
+title: "معجنات طارق - المحرق"
 icon: 🥖
 desc: "مخبز في المحرق."
 title_en: "Tariq Pastries - Muharraq"
