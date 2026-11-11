@@ -4,15 +4,15 @@ icon: 🥖
 desc: "مخبز في قلالي."
 title_en: "Al Khlood Bakery"
 desc_en: "A bakery in Galali."
-nameTranslated: true
+hours: "يومياً ٥:٣٠ص - ١١م"
+hours_en: "Daily 5:30am - 11pm"
 categories:
   - قلالي
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.274412, 50.6471211
+coords: 26.274416, 50.6471745
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.274412,50.6471211
+  phone: "35019504"
+  maps: https://www.google.com/maps/search/?api=1&query=26.274416,50.6471745
   instagram: ''
 ---

@@ -4,15 +4,13 @@ icon: 🍰
 desc: "حلويات في قلالي."
 title_en: "Wahid Patries - Galali"
 desc_en: "A sweets shop in Galali."
-nameTranslated: true
 categories:
   - قلالي
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2722848, 50.6508147
+coords: 26.2723004, 50.6507727
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2722848,50.6508147
+  phone: "17478555"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2723004,50.6507727
   instagram: ''
 ---

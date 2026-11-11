@@ -1,18 +1,16 @@
 ---
-title: "كافتيريا كينج كرك - الحد"
+title: "ملك الكرك - الحد"
 icon: ☕
 desc: "كافيه في الحد."
 title_en: "King Karak Cafeteria - Al Hidd"
 desc_en: "A cafe in Al Hidd."
-nameTranslated: true
 categories:
   - الحد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2415145, 50.6552219
+coords: 26.2414823, 50.6552754
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2415145,50.6552219
+  maps: https://www.google.com/maps/search/?api=1&query=26.2414823,50.6552754
   instagram: ''
 ---

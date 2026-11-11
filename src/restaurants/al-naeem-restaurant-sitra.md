@@ -1,18 +1,18 @@
 ---
-title: "مطعم النعيم"
+title: "مطعم ومشويات النعيم"
 icon: 🍽️
 desc: "مطعم في سترة."
 title_en: "Al Naeem Restaurant"
 desc_en: "A restaurant in Sitra."
-nameTranslated: true
+hours: "يومياً ١١ص - ١ص"
+hours_en: "Daily 11am - 1am"
 categories:
   - سترة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1647692, 50.6067713
+coords: 26.1647518, 50.6067814
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1647692,50.6067713
+  phone: "17737661"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1647518,50.6067814
   instagram: ''
 ---

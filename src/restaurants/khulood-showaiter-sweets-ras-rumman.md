@@ -1,18 +1,18 @@
 ---
-title: "حلويات خلود شويطر - راس رمان"
+title: "حلويات خلود شويطر الحورة - راس رمان"
 icon: 🍽️
 desc: "مطعم في راس رمان."
 title_en: "Khulood Showaiter Sweets - Ras Rumman"
 desc_en: "A restaurant in Ras Rumman."
-nameTranslated: true
+hours: "يومياً ٩:٣٠ص - ١م، ٤:٣٠م - ١٠م"
+hours_en: "Daily 9:30am - 1pm, 4:30pm - 10pm"
 categories:
   - راس رمان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2340716, 50.5935771
+coords: 26.2340507, 50.5935659
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2340716,50.5935771
+  phone: "77560001"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2340507,50.5935659
   instagram: ''
 ---

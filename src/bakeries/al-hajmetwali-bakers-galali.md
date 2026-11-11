@@ -1,18 +1,18 @@
 ---
-title: "مخابز الحاج متولي"
+title: "خباز الحاج متولي"
 icon: 🥖
 desc: "مخبز في قلالي."
 title_en: "Al Hajmetwali Bakers"
 desc_en: "A bakery in Galali."
-nameTranslated: true
+hours: "يومياً ٥ص - ١١م"
+hours_en: "Daily 5am - 11pm"
 categories:
   - قلالي
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2722896, 50.6542299
+coords: 26.2723452, 50.6542632
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2722896,50.6542299
+  phone: "35381923"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2723452,50.6542632
   instagram: ''
 ---

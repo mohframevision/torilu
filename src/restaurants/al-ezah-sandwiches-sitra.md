@@ -4,16 +4,14 @@ icon: 🥪
 desc: "وجبات سريعة في سترة."
 title_en: "Al Ezah Sandwiches"
 desc_en: "Fast food in Sitra."
-nameTranslated: true
 categories:
   - وجبات سريعة
   - سترة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1544789, 50.6205116
+coords: 26.1544965, 50.6204503
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1544789,50.6205116
+  phone: "39645382"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1544965,50.6204503
   instagram: ''
 ---

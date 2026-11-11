@@ -1,18 +1,16 @@
 ---
-title: "كافتيريا القناطر - قلالي"
+title: "كافتريا القناطر - قلالي"
 icon: ☕
 desc: "كافيه في قلالي."
 title_en: "Al Qanater Cafeteria - Galali"
 desc_en: "A cafe in Galali."
-nameTranslated: true
 categories:
   - قلالي
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2706873, 50.6513796
+coords: 26.2707326, 50.6514328
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2706873,50.6513796
+  phone: "17478355"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2707326,50.6514328
   instagram: ''
 ---

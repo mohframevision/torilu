@@ -1,18 +1,18 @@
 ---
-title: "مشاوي المضيف التركية"
+title: "مطعم المضيف"
 icon: 🍽️
 desc: "مطعم في الحد."
 title_en: "Al Mudeef Turkish Grill"
 desc_en: "A restaurant in Al Hidd."
-nameTranslated: true
+hours: "يومياً ١٠:٣٠ص - ١٢:٣٠ص"
+hours_en: "Daily 10:30am - 12:30am"
 categories:
   - الحد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2415054, 50.6568081
+coords: 26.2415064, 50.6567976
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2415054,50.6568081
+  phone: "17678771"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2415064,50.6567976
   instagram: ''
 ---

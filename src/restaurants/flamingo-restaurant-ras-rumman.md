@@ -4,16 +4,16 @@ icon: 🍽️
 desc: "مطعم في راس رمان."
 title_en: "Flamingo Restaurant"
 desc_en: "A restaurant in Ras Rumman."
-nameTranslated: true
+hours: "يومياً ٩ص - ٩م"
+hours_en: "Daily 9am - 9pm"
 categories:
   - مشاوي
   - راس رمان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2329647, 50.5769086
+coords: 26.2330205, 50.5768771
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2329647,50.5769086
+  phone: "38944470"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2330205,50.5768771
   instagram: ''
 ---

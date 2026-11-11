@@ -1,18 +1,18 @@
 ---
-title: "مخبز أبو أيمن"
+title: "مخبز ابو ايمن"
 icon: 🥖
 desc: "مخبز في راس رمان."
 title_en: "Abu Aymaan Bakery"
 desc_en: "A bakery in Ras Rumman."
-nameTranslated: true
+hours: "يومياً ٦:٣٠ص - ١٠م"
+hours_en: "Daily 6:30am - 10pm"
 categories:
   - راس رمان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2358173, 50.5913375
+coords: 26.2357177, 50.5913507
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2358173,50.5913375
+  phone: "17294047"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2357177,50.5913507
   instagram: ''
 ---

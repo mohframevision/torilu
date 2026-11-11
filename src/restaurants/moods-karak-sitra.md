@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في سترة."
 title_en: "Moods Karak - Sitra"
 desc_en: "A restaurant in Sitra."
-nameTranslated: true
+hours: "يومياً ٦ص - ١١:٣٠م"
+hours_en: "Daily 6am - 11:30pm"
 categories:
   - سترة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1616308, 50.6158661
+coords: 26.1616658, 50.6157782
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1616308,50.6158661
+  phone: "34300372"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1616658,50.6157782
   instagram: ''
 ---

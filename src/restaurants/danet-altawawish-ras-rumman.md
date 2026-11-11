@@ -1,18 +1,18 @@
 ---
-title: "دانة الطواويش"
+title: "مطعم دانة الطواويش"
 icon: 🍽️
 desc: "مطعم في راس رمان."
 title_en: "Danet Altawawish"
 desc_en: "A restaurant in Ras Rumman."
-nameTranslated: true
+hours: "يومياً ٧ص - ١٢ص"
+hours_en: "Daily 7am - 12am"
 categories:
   - راس رمان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2328797, 50.5765632
+coords: 26.232847, 50.576674
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2328797,50.5765632
+  phone: "66753266"
+  maps: https://www.google.com/maps/search/?api=1&query=26.232847,50.576674
   instagram: ''
 ---

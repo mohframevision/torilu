@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في سترة."
 title_en: "Nelly Broasted Oven"
 desc_en: "A restaurant in Sitra."
-nameTranslated: true
+hours: "يومياً ٨ص - ١٢ص"
+hours_en: "Daily 8am - 12am"
 categories:
   - سترة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.164816, 50.6076135
+coords: 26.1648466, 50.6074912
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.164816,50.6076135
+  phone: "17737476"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1648466,50.6074912
   instagram: ''
 ---

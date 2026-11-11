@@ -1,19 +1,19 @@
 ---
-title: "مشاوي ديار الحد"
+title: "ديار الحد للمشويات"
 icon: 🥪
 desc: "وجبات سريعة في الحد."
 title_en: "Diyar Hidd Grills"
 desc_en: "Fast food in Al Hidd."
-nameTranslated: true
+hours: "يومياً ٤م - ٤ص"
+hours_en: "Daily 4pm - 4am"
 categories:
   - وجبات سريعة
   - الحد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2447861, 50.6555204
+coords: 26.2446364, 50.6555667
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2447861,50.6555204
+  phone: "34173200"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2446364,50.6555667
   instagram: ''
 ---

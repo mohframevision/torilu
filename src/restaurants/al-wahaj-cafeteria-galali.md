@@ -1,19 +1,19 @@
 ---
-title: "كافتيريا الوهج"
+title: "كفتيريا الوهــاج"
 icon: 🥪
 desc: "وجبات سريعة في قلالي."
 title_en: "Al Wahaj Cafeteria"
 desc_en: "Fast food in Galali."
-nameTranslated: true
+hours: "يومياً ٩ص - ٢:٣٠ص"
+hours_en: "Daily 9am - 2:30am"
 categories:
   - وجبات سريعة
   - قلالي
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2728222, 50.6497902
+coords: 26.2728186, 50.6499038
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2728222,50.6497902
+  phone: "34020540"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2728186,50.6499038
   instagram: ''
 ---

@@ -4,16 +4,16 @@ icon: 🥪
 desc: "وجبات سريعة في الحد."
 title_en: "Sambosa Magic Karak"
 desc_en: "Fast food in Al Hidd."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - وجبات سريعة
   - الحد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2355997, 50.655488
+coords: 26.2356311, 50.6555008
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2355997,50.655488
+  phone: "34241062"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2356311,50.6555008
   instagram: ''
 ---

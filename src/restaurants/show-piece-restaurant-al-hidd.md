@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الحد."
 title_en: "Show Piece Restaurant - Al Hidd"
 desc_en: "A restaurant in Al Hidd."
-nameTranslated: true
+hours: "يومياً ١١ص - ٢ص"
+hours_en: "Daily 11am - 2am"
 categories:
   - الحد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2393008, 50.6554532
+coords: 26.2393712, 50.6554916
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2393008,50.6554532
+  phone: "17466722"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2393712,50.6554916
   instagram: ''
 ---

@@ -1,18 +1,18 @@
 ---
-title: "كافتيريا الأقدار"
+title: "كفتريا الأقدار"
 icon: 🍽️
 desc: "مطعم في سترة."
 title_en: "Al Aqdar Cafeteria"
 desc_en: "A restaurant in Sitra."
-nameTranslated: true
+hours: "يومياً ٦ص - ١٢:٣٠ص"
+hours_en: "Daily 6am - 12:30am"
 categories:
   - سترة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.1616828, 50.6161183
+coords: 26.1617163, 50.616135
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1616828,50.6161183
+  phone: "34300372"
+  maps: https://www.google.com/maps/search/?api=1&query=26.1617163,50.616135
   instagram: ''
 ---

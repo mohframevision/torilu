@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في راس رمان."
 title_en: "Kei Japanese Restaurant"
 desc_en: "A restaurant in Ras Rumman."
-nameTranslated: true
+hours: "يومياً ١٢م - ٣م، ٦م - ١١م"
+hours_en: "Daily 12pm - 3pm, 6pm - 11pm"
 categories:
   - راس رمان
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2401759, 50.5847977
+coords: 26.2401547, 50.5846336
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2401759,50.5847977
+  phone: "17533450"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2401547,50.5846336
   instagram: ''
 ---
