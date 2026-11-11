@@ -1,18 +1,18 @@
 ---
-title: "سندويشات أبو الهول - بسيتين"
+title: "سندويشات ابو الهول - بسيتين"
 icon: 🍽️
 desc: "مطعم في بسيتين."
 title_en: "Abul Houl Sandwiches - Busaiteen"
 desc_en: "A restaurant in Busaiteen."
-nameTranslated: true
+hours: "يومياً ٨ص - ١٢ص"
+hours_en: "Daily 8am - 12am"
 categories:
   - بسيتين
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2695969, 50.6091955
+coords: 26.2695679, 50.6092424
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2695969,50.6091955
+  phone: "17330585"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2695679,50.6092424
   instagram: ''
 ---

@@ -1,18 +1,18 @@
 ---
-title: "مطعم كرامي"
+title: "مطعم كرامي عراد"
 icon: 🍽️
 desc: "مطعم في عراد."
 title_en: "Karami Restaurant"
 desc_en: "A restaurant in Arad."
-nameTranslated: true
+hours: "يومياً ١١ص - ١٢ص"
+hours_en: "Daily 11am - 12am"
 categories:
   - عراد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2545114, 50.6292175
+coords: 26.2545101, 50.6289804
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2545114,50.6292175
+  phone: "17471313"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2545101,50.6289804
   instagram: ''
 ---

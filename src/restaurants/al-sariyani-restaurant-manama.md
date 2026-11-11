@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المنامة."
 title_en: "Al Sariyani Restaurant"
 desc_en: "A restaurant in Manama."
-nameTranslated: true
+hours: "يومياً ٥ص - ١ص"
+hours_en: "Daily 5am - 1am"
 categories:
   - المنامة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2295487, 50.5714812
+coords: 26.229567, 50.571393
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2295487,50.5714812
+  phone: "34457760"
+  maps: https://www.google.com/maps/search/?api=1&query=26.229567,50.571393
   instagram: ''
 ---

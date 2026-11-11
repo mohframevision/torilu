@@ -1,19 +1,19 @@
 ---
-title: "سندويشات الأهالي - عراد"
+title: "سندويشات الاهالي - عراد"
 icon: ☕
 desc: "كافيه في عراد."
 title_en: "Al Ahali Sandwiches - Arad"
 desc_en: "A cafe in Arad."
-nameTranslated: true
+hours: "يومياً ٦:٣٠ص - ١٠:٣٠م"
+hours_en: "Daily 6:30am - 10:30pm"
 categories:
   - سندويشات
   - عراد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2570211, 50.6486465
+coords: 26.2571086, 50.6486494
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2570211,50.6486465
+  phone: "17678030"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2571086,50.6486494
   instagram: ''
 ---

@@ -1,18 +1,16 @@
 ---
-title: "سندويشات وفلافل بنين"
+title: "بنين فول وطعمية"
 icon: 🍽️
 desc: "مطعم في بسيتين."
 title_en: "Baneen Sandwiches & Falafel"
 desc_en: "A restaurant in Busaiteen."
-nameTranslated: true
 categories:
   - بسيتين
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.270902, 50.6095399
+coords: 26.2708859, 50.6094385
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.270902,50.6095399
+  phone: "17322041"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2708859,50.6094385
   instagram: ''
 ---

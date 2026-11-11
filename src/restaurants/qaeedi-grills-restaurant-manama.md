@@ -1,18 +1,16 @@
 ---
-title: "مطعم ومشاوي القائدي"
+title: "مطعم و مشويات قائدي ايراني"
 icon: 🍽️
 desc: "مطعم في المنامة."
 title_en: "Qaeedi Grills & Restaurant"
 desc_en: "A restaurant in Manama."
-nameTranslated: true
 categories:
   - المنامة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2291808, 50.5688704
+coords: 26.2291987, 50.5688493
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2291808,50.5688704
+  phone: "17277282"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2291987,50.5688493
   instagram: ''
 ---

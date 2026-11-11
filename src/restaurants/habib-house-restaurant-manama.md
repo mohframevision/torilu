@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المنامة."
 title_en: "Habib House Restaurant"
 desc_en: "A restaurant in Manama."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - المنامة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2271656, 50.5723134
+coords: 26.2272098, 50.5722842
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2271656,50.5723134
+  phone: "33509494"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2272098,50.5722842
   instagram: ''
 ---

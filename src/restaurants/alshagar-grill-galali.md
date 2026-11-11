@@ -1,18 +1,18 @@
 ---
-title: "مشاوي الشجر"
+title: "مطعم ومشويات أم الشجر قلالي"
 icon: 🍽️
 desc: "مطعم في عراد."
 title_en: "Alshagar Grill"
 desc_en: "A restaurant in Arad."
-nameTranslated: true
+hours: "يومياً ١١ص - ١ص"
+hours_en: "Daily 11am - 1am"
 categories:
   - عراد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2702453, 50.6521227
+coords: 26.2702669, 50.6521572
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2702453,50.6521227
+  phone: "33931681"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2702669,50.6521572
   instagram: ''
 ---

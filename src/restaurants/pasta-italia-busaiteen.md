@@ -4,17 +4,17 @@ icon: 🥪
 desc: "وجبات سريعة في بسيتين."
 title_en: "Pasta Italia"
 desc_en: "Fast food in Busaiteen."
-nameTranslated: true
+hours: "يومياً ١١ص - ١ص"
+hours_en: "Daily 11am - 1am"
 categories:
   - وجبات سريعة
   - إيطالي
   - بسيتين
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2718342, 50.6093082
+coords: 26.2717493, 50.6092575
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2718342,50.6093082
+  phone: "33882129"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2717493,50.6092575
   instagram: ''
 ---

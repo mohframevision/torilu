@@ -1,18 +1,18 @@
 ---
-title: "مطعم الصويفية"
+title: "مطعم مندي السويفية"
 icon: 🍽️
 desc: "مطعم في المنامة."
 title_en: "Al Sowaifya Restaurant"
 desc_en: "A restaurant in Manama."
-nameTranslated: true
+hours: "يومياً ٧ص - ٧م"
+hours_en: "Daily 7am - 7pm"
 categories:
   - المنامة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2288334, 50.5654662
+coords: 26.2287941, 50.5654137
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2288334,50.5654662
+  phone: "17242428"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2287941,50.5654137
   instagram: ''
 ---

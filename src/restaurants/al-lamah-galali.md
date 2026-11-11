@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في عراد."
 title_en: "Al Lamah"
 desc_en: "A restaurant in Arad."
-nameTranslated: true
+hours: "يومياً ٩ص - ٤م"
+hours_en: "Daily 9am - 4pm"
 categories:
   - عراد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2684772, 50.653837
+coords: 26.26846, 50.653907
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2684772,50.653837
+  phone: "35971484"
+  maps: https://www.google.com/maps/search/?api=1&query=26.26846,50.653907
   instagram: ''
 ---

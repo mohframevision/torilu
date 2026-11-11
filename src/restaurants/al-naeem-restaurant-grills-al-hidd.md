@@ -1,18 +1,18 @@
 ---
-title: "مطعم ومشاوي النعيم - عراد"
+title: "مطعم و مشويات النعيم - عراد"
 icon: 🍽️
 desc: "مطعم في عراد."
 title_en: "Al Naeem Restaurant & Grills - Arad"
 desc_en: "A restaurant in Arad."
-nameTranslated: true
+hours: "يومياً ١١ص - ١ص"
+hours_en: "Daily 11am - 1am"
 categories:
   - عراد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2552773, 50.6319916
+coords: 26.2552308, 50.6320121
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2552773,50.6319916
+  phone: "17676521"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2552308,50.6320121
   instagram: ''
 ---

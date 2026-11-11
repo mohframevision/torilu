@@ -1,18 +1,18 @@
 ---
-title: "مخبز مالك"
+title: "خباز مالك"
 icon: 🥖
 desc: "مخبز في بسيتين."
 title_en: "Malik Bakery"
 desc_en: "A bakery in Busaiteen."
-nameTranslated: true
+hours: "يومياً ٦ص - ١م"
+hours_en: "Daily 6am - 1pm"
 categories:
   - بسيتين
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2661251, 50.6073905
+coords: 26.2660863, 50.60739
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2661251,50.6073905
+  phone: "33822747"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2660863,50.60739
   instagram: ''
 ---

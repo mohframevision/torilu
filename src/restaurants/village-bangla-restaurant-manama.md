@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المنامة."
 title_en: "Village Bangla Restaurant"
 desc_en: "A restaurant in Manama."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - المنامة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2291346, 50.5754866
+coords: 26.2291935, 50.5755797
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2291346,50.5754866
+  phone: "36116060"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2291935,50.5755797
   instagram: ''
 ---

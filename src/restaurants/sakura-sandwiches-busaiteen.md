@@ -1,18 +1,16 @@
 ---
-title: "سندويشات ساكورا"
+title: "كفتيريا ساكورا"
 icon: 🍽️
 desc: "مطعم في بسيتين."
 title_en: "Sakura Sandwiches"
 desc_en: "A restaurant in Busaiteen."
-nameTranslated: true
 categories:
   - بسيتين
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2643727, 50.609284
+coords: 26.2643981, 50.6092458
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2643727,50.609284
+  phone: "17343553"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2643981,50.6092458
   instagram: ''
 ---

@@ -1,18 +1,16 @@
 ---
-title: "كافتيريا وعد - عراد"
+title: "كفتيريا وعد - عراد"
 icon: ☕
 desc: "كافيه في عراد."
 title_en: "Waad Cafeteria - Arad"
 desc_en: "A cafe in Arad."
-nameTranslated: true
 categories:
   - عراد
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2553184, 50.6454788
+coords: 26.2552685, 50.6455372
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2553184,50.6454788
+  phone: "17671990"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2552685,50.6455372
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المنامة."
 title_en: "Al Katkoot Restaurant"
 desc_en: "A restaurant in Manama."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - المنامة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2288713, 50.5748661
+coords: 26.2288234, 50.5747466
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2288713,50.5748661
+  phone: "39113108"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2288234,50.5747466
   instagram: ''
 ---

@@ -4,15 +4,13 @@ icon: 🥖
 desc: "مخبز في بسيتين."
 title_en: "Cakes & Bakes"
 desc_en: "A bakery in Busaiteen."
-nameTranslated: true
 categories:
   - بسيتين
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.264766, 50.6089993
+coords: 26.2647943, 50.6089725
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.264766,50.6089993
+  phone: "17322101"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2647943,50.6089725
   instagram: ''
 ---
