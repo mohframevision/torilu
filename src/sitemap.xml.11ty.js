@@ -39,7 +39,6 @@ exports.render = function (data) {
 
   const bilingualPairs = [
     ["", "en/index.html"],
-    ["favorites.html", "en/favorites.html"],
     ["picker.html", "en/picker.html"],
     ["map.html", "en/map.html"],
     ["business.html", "en/business.html"],
