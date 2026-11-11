@@ -11,6 +11,6 @@ coords: 26.1428809, 50.578285
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1428809,50.578285
+  maps: https://www.google.com/maps/search/Aldahrez%20restaurant/@26.1428809,50.578285,17z
   instagram: ''
 ---

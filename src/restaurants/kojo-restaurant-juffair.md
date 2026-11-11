@@ -16,7 +16,7 @@ links:
   instagram: https://www.instagram.com/kojorestaurant/
   website: "https://kojorestaurant.com/juffair/"
   phone: "77225225"
-  maps: https://www.google.com/maps/search/?api=1&query=26.219612,50.604387
+  maps: https://www.google.com/maps/search/Kojo%20Restaurant/@26.2196124,50.6043872,17z
 menuItems:
   - name: "كازوكو بوكس"
     name_en: "Kazoku Box"

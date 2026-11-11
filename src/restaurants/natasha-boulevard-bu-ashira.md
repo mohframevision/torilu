@@ -11,6 +11,6 @@ coords: 26.2144172, 50.591695
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2144172,50.591695
+  maps: https://www.google.com/maps/search/Natasha%20Boulevard/@26.2144172,50.591695,17z
   instagram: ''
 ---

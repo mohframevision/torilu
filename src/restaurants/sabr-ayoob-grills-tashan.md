@@ -11,6 +11,6 @@ coords: 26.2029452, 50.5639335
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2029452,50.5639335
+  maps: https://www.google.com/maps/search/Sabr%20Ayoob%20Grills/@26.2029452,50.5639335,17z
   instagram: ''
 ---

@@ -12,6 +12,6 @@ coords: 26.1561931, 50.512116
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1561931,50.512116
+  maps: https://www.google.com/maps/search/Burger%20Express/@26.1561931,50.512116,17z
   instagram: ''
 ---

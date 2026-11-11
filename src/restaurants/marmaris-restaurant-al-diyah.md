@@ -11,6 +11,6 @@ coords: 26.2277895, 50.536357
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2277895,50.536357
+  maps: https://www.google.com/maps/search/Marmaris%20Restaurant/@26.2277895,50.536357,17z
   instagram: ''
 ---

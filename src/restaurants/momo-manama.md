@@ -11,6 +11,6 @@ coords: 26.2288295, 50.5689303
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2288295,50.5689303
+  maps: https://www.google.com/maps/search/Momo/@26.2288295,50.5689303,17z
   instagram: ''
 ---

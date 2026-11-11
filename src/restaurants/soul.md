@@ -16,7 +16,7 @@ links:
   instagram: https://www.instagram.com/soulbahrain/
   website: "https://soulbh.com/"
   phone: "17795171"
-  maps: https://www.google.com/maps/search/?api=1&query=26.165525,50.541816
+  maps: https://www.google.com/maps?cid=18359929717960732957
 menuItems:
   - name: "صندوق التجمّع - مشكّل"
     name_en: "Gathering Box - Mix"

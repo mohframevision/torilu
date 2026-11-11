@@ -15,6 +15,6 @@ coords: 26.2589683, 50.6280034
 links:
   website: "https://www.jasmis.com/"
   phone: "17111100"
-  maps: https://www.google.com/maps/search/?api=1&query=26.2589683,50.6280034
+  maps: https://www.google.com/maps?cid=16101493359841343019
   instagram: ''
 ---

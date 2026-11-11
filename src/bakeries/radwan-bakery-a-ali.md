@@ -13,6 +13,6 @@ coords: 26.1593076, 50.52072
 links:
   website: ''
   phone: "17646545"
-  maps: https://www.google.com/maps/search/?api=1&query=26.1593076,50.52072
+  maps: https://www.google.com/maps/search/Radwan%20Bakery/@26.1593076,50.52072,17z
   instagram: ''
 ---

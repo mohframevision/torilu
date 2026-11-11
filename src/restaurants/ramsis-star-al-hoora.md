@@ -13,6 +13,6 @@ coords: 26.2297497, 50.5905343
 links:
   website: ''
   phone: "17295633"
-  maps: https://www.google.com/maps/search/?api=1&query=26.2297497,50.5905343
+  maps: https://www.google.com/maps?cid=5075663276185679493
   instagram: ''
 ---

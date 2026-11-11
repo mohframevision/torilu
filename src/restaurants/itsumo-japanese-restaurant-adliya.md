@@ -11,6 +11,6 @@ coords: 26.2145585, 50.586393
 links:
   website: "https://www.itsumobahrain.com/"
   phone: "17230669"
-  maps: https://www.google.com/maps/search/?api=1&query=26.2145585,50.586393
+  maps: https://www.google.com/maps?cid=684432731017992932
   instagram: ''
 ---

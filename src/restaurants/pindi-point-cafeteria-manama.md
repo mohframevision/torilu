@@ -13,6 +13,6 @@ coords: 26.2283494, 50.5744613
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2283494,50.5744613
+  maps: https://www.google.com/maps/search/Pindi%20Point%20Cafeteria/@26.2283494,50.5744613,17z
   instagram: ''
 ---

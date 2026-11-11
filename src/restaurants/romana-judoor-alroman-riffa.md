@@ -13,6 +13,6 @@ coords: 26.1310639, 50.5583555
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1310639,50.5583555
+  maps: https://www.google.com/maps/search/Romana/@26.1310639,50.5583555,17z
   instagram: ''
 ---

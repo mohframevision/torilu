@@ -11,6 +11,6 @@ coords: 26.1434859, 50.4956228
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1434859,50.4956228
+  maps: https://www.google.com/maps/search/Lebanese%20Resturant/@26.1434859,50.4956228,17z
   instagram: ''
 ---

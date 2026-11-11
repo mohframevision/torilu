@@ -11,6 +11,6 @@ coords: 26.2417607, 50.5883866
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2417607,50.5883866
+  maps: https://www.google.com/maps/search/Cine%20Cafe/@26.2417607,50.5883866,17z
   instagram: ''
 ---

@@ -13,6 +13,6 @@ coords: 26.1323213, 50.5607064
 links:
   website: ''
   phone: "17760575"
-  maps: https://www.google.com/maps/search/?api=1&query=26.1323213,50.5607064
+  maps: https://www.google.com/maps/search/Malaysia%20Express/@26.1323213,50.5607064,17z
   instagram: ''
 ---

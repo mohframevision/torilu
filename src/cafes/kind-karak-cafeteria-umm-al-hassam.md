@@ -13,6 +13,6 @@ coords: 26.2017302, 50.5916716
 links:
   website: ''
   phone: "35004791"
-  maps: https://www.google.com/maps/search/?api=1&query=26.2017302,50.5916716
+  maps: https://www.google.com/maps/search/Kind%20Karak%20Cafeteria/@26.2017302,50.5916716,17z
   instagram: ''
 ---

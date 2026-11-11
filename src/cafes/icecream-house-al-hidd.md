@@ -11,6 +11,6 @@ coords: 26.2501606, 50.6532947
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2501606,50.6532947
+  maps: https://www.google.com/maps/search/Icecream%20house/@26.2501606,50.6532947,17z
   instagram: ''
 ---

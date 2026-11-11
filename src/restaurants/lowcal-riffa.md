@@ -11,6 +11,6 @@ coords: 26.13145, 50.544716
 links:
   website: "http://www.lowcalbh.com"
   phone: "17832222"
-  maps: https://www.google.com/maps/search/?api=1&query=26.13145,50.544716
+  maps: https://www.google.com/maps?cid=4936568199669646924
   instagram: ''
 ---

@@ -13,6 +13,6 @@ coords: 26.1812831, 50.5499754
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1812831,50.5499754
+  maps: https://www.google.com/maps/search/Ahali%20Alkawara%20Cafeteria/@26.1812831,50.5499754,17z
   instagram: ''
 ---

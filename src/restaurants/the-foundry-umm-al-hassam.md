@@ -12,6 +12,6 @@ coords: 26.2123094, 50.5943546
 links:
   website: "https://www.tfr15.com/"
   phone: "17223223"
-  maps: https://www.google.com/maps/search/?api=1&query=26.2123094,50.5943546
+  maps: https://www.google.com/maps?cid=1132949064763363402
   instagram: ''
 ---

@@ -16,7 +16,7 @@ links:
   instagram: https://www.instagram.com/kojorestaurant/
   website: "https://kojorestaurant.com/zayed-town/"
   phone: "17449055"
-  maps: https://www.google.com/maps/search/?api=1&query=26.165435,50.541800
+  maps: https://www.google.com/maps/search/Kojo%20Restaurant/@26.1654348,50.5417998,17z
 menuItems:
   - name: "كازوكو بوكس"
     name_en: "Kazoku Box"

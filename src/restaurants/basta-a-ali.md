@@ -11,6 +11,6 @@ coords: 26.1560158, 50.5310888
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1560158,50.5310888
+  maps: https://www.google.com/maps/search/Basta/@26.1560158,50.5310888,17z
   instagram: ''
 ---

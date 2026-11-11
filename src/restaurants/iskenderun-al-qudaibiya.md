@@ -11,6 +11,6 @@ coords: 26.2343049, 50.5967298
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2343049,50.5967298
+  maps: https://www.google.com/maps/search/Iskenderun/@26.2343049,50.5967298,17z
   instagram: ''
 ---

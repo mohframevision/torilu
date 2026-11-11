@@ -11,6 +11,6 @@ coords: 26.2862071, 50.6633154
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2862071,50.6633154
+  maps: https://www.google.com/maps/search/Levante/@26.2862071,50.6633154,17z
   instagram: ''
 ---

@@ -11,6 +11,6 @@ coords: 26.13909, 50.4903675
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.13909,50.4903675
+  maps: https://www.google.com/maps/search/Danial%20Restaurant/@26.13909,50.4903675,17z
   instagram: ''
 ---

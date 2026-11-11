@@ -11,6 +11,6 @@ coords: 26.2193825, 50.4941647
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2193825,50.4941647
+  maps: https://www.google.com/maps/search/Amoush/@26.2193825,50.4941647,17z
   instagram: ''
 ---

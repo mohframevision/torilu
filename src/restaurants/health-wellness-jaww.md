@@ -11,6 +11,6 @@ coords: 26.0056494, 50.6195404
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.0056494,50.6195404
+  maps: https://www.google.com/maps/search/Health%20%26%20wellness/@26.0056494,50.6195404,17z
   instagram: ''
 ---

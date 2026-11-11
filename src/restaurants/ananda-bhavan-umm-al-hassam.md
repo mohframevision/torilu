@@ -14,6 +14,6 @@ coords: 26.2036593, 50.5964231
 links:
   website: "http://anandabhavanbahrain.com"
   phone: "77506070"
-  maps: https://www.google.com/maps/search/?api=1&query=26.2036593,50.5964231
+  maps: https://www.google.com/maps?cid=11952519295863440
   instagram: ''
 ---

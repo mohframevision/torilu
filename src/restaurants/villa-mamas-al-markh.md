@@ -11,6 +11,6 @@ coords: 26.1997878, 50.4742783
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1997878,50.4742783
+  maps: https://www.google.com/maps/search/Villa%20mamas/@26.1997878,50.4742783,17z
   instagram: ''
 ---

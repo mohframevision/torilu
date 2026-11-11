@@ -12,6 +12,6 @@ coords: 26.0710865, 50.5041765
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.0710865,50.5041765
+  maps: https://www.google.com/maps/search/Mathaq/@26.0710865,50.5041765,17z
   instagram: ''
 ---

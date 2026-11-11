@@ -14,7 +14,7 @@ dateAdded: 2026-10-19
 links:
   website: ''
   phone: '17683378'
-  maps: https://www.google.com/maps/search/?api=1&query=26.176500,50.555237
+  maps: https://www.google.com/maps/search/Al%20Shoala%20Restaurant/@26.176500,50.555237,17z
   instagram: https://www.instagram.com/alshoalarestaurant/
 lat: 26.176500
 lng: 50.555237

@@ -12,6 +12,6 @@ coords: 26.1812329, 50.5918097
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1812329,50.5918097
+  maps: https://www.google.com/maps/search/Crepele%20Crepes%20and%20Waffles/@26.1812329,50.5918097,17z
   instagram: ''
 ---

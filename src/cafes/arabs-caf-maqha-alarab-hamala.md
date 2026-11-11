@@ -11,6 +11,6 @@ coords: 26.145464, 50.4894928
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.145464,50.4894928
+  maps: https://www.google.com/maps/search/Arabs%20Caf%20%28Maqha%20AlArab%29/@26.145464,50.4894928,17z
   instagram: ''
 ---

@@ -16,7 +16,7 @@ links:
   instagram: https://www.instagram.com/kojorestaurant/
   website: "https://kojorestaurant.com/saar/"
   phone: "17406692"
-  maps: https://www.google.com/maps/search/?api=1&query=26.200712,50.497865
+  maps: https://www.google.com/maps/search/Kojo%20Restaurant/@26.2007120,50.4978653,17z
 menuItems:
   - name: "كازوكو بوكس"
     name_en: "Kazoku Box"

@@ -11,6 +11,6 @@ coords: 26.2008693, 50.5605716
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2008693,50.5605716
+  maps: https://www.google.com/maps/search/AlSamdi%20Cafe%20and%20resturant/@26.2008693,50.5605716,17z
   instagram: ''
 ---

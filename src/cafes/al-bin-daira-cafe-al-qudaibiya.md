@@ -11,6 +11,6 @@ coords: 26.2191797, 50.588608
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2191797,50.588608
+  maps: https://www.google.com/maps/search/Al%20Bin%20Daira%20Cafe/@26.2191797,50.588608,17z
   instagram: ''
 ---

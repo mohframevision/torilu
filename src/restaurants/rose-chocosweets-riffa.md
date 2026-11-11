@@ -13,6 +13,6 @@ coords: 26.1312844, 50.5642707
 links:
   website: ''
   phone: "39867171"
-  maps: https://www.google.com/maps/search/?api=1&query=26.1312844,50.5642707
+  maps: https://www.google.com/maps?cid=18235059657968814813
   instagram: "rose_chocosweet"
 ---

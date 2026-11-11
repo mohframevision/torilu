@@ -11,6 +11,6 @@ coords: 26.2345177, 50.5956038
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2345177,50.5956038
+  maps: https://www.google.com/maps/search/Al%20Samadi%20Cafe/@26.2345177,50.5956038,17z
   instagram: ''
 ---

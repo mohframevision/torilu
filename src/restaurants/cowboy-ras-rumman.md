@@ -11,6 +11,6 @@ coords: 26.234512, 50.5913066
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.234512,50.5913066
+  maps: https://www.google.com/maps/search/Cowboy/@26.234512,50.5913066,17z
   instagram: ''
 ---

@@ -12,6 +12,6 @@ coords: 26.1426611, 50.4946726
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.1426611,50.4946726
+  maps: https://www.google.com/maps/search/Lahore%20Restaurant/@26.1426611,50.4946726,17z
   instagram: ''
 ---
