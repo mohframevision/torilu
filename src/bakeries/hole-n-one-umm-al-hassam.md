@@ -4,15 +4,13 @@ icon: 🥖
 desc: "مخبز في أم الحصم."
 title_en: "Hole-N-One"
 desc_en: "A bakery in Umm Al Hassam."
-nameTranslated: true
 categories:
   - أم الحصم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2083811, 50.5952362
+coords: 26.2084731, 50.5951135
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2083811,50.5952362
+  phone: "17725804"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2084731,50.5951135
   instagram: ''
 ---

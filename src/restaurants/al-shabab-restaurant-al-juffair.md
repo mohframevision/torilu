@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في الجفير."
 title_en: "Al Shabab Restaurant"
 desc_en: "A restaurant in Al-Juffair."
-nameTranslated: true
 categories:
   - الجفير
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2120563, 50.60179
+coords: 26.2121173, 50.6016207
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2120563,50.60179
+  phone: "17727841"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2121173,50.6016207
   instagram: ''
 ---

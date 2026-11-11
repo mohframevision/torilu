@@ -4,16 +4,16 @@ icon: 🍽️
 desc: "مطعم في أم الحصم."
 title_en: "Appachi"
 desc_en: "A restaurant in Umm Al Hassam."
-nameTranslated: true
+hours: "يومياً ٦ص - ١٢ص"
+hours_en: "Daily 6am - 12am"
 categories:
   - هندي
   - أم الحصم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2025081, 50.5959444
+coords: 26.2024889, 50.5959383
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2025081,50.5959444
+  phone: "17741310"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2024889,50.5959383
   instagram: ''
 ---

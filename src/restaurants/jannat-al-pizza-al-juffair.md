@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الجفير."
 title_en: "Jannat Al Pizza"
 desc_en: "A restaurant in Al-Juffair."
-nameTranslated: true
+hours: "يومياً ١٢م - ٥ص"
+hours_en: "Daily 12pm - 5am"
 categories:
   - الجفير
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2099654, 50.6016638
+coords: 26.2099927, 50.6016561
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2099654,50.6016638
+  phone: "33448138"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2099927,50.6016561
   instagram: ''
 ---

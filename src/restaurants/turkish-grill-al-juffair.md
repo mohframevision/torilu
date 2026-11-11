@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الجفير."
 title_en: "Turkish Grill - Al-Juffair"
 desc_en: "A restaurant in Al-Juffair."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - الجفير
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2112538, 50.6065431
+coords: 26.2113286, 50.6065618
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2112538,50.6065431
+  phone: "17369494"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2113286,50.6065618
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الجفير."
 title_en: "Gulshan Restaurant"
 desc_en: "A restaurant in Al-Juffair."
-nameTranslated: true
+hours: "يومياً ٦ص - ١٢ص"
+hours_en: "Daily 6am - 12am"
 categories:
   - الجفير
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2099063, 50.6013878
+coords: 26.2099399, 50.6013389
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2099063,50.6013878
+  phone: "17728731"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2099399,50.6013389
   instagram: ''
 ---

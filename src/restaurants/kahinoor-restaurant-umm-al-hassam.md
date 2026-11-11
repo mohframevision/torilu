@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في أم الحصم."
 title_en: "Kahinoor Restaurant"
 desc_en: "A restaurant in Umm Al Hassam."
-nameTranslated: true
+hours: "يومياً ٦ص - ١١م"
+hours_en: "Daily 6am - 11pm"
 categories:
   - أم الحصم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2053716, 50.5965698
+coords: 26.2053821, 50.5965467
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2053716,50.5965698
+  phone: "17692729"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2053821,50.5965467
   instagram: ''
 ---

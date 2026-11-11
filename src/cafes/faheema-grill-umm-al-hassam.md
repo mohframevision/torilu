@@ -4,15 +4,15 @@ icon: ☕
 desc: "كافيه في أم الحصم."
 title_en: "Faheema Grill"
 desc_en: "A cafe in Umm Al Hassam."
-nameTranslated: true
+hours: "يومياً ١٠:٣٣ص - ١١:٣٠م"
+hours_en: "Daily 10:33am - 11:30pm"
 categories:
   - أم الحصم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2013554, 50.5951258
+coords: 26.2014171, 50.5951651
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2013554,50.5951258
+  phone: "34005763"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2014171,50.5951651
   instagram: ''
 ---

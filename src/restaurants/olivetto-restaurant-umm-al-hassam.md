@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في أم الحصم."
 title_en: "Olivetto Restaurant"
 desc_en: "A restaurant in Umm Al Hassam."
-nameTranslated: true
 categories:
   - أم الحصم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2111097, 50.593131
+coords: 26.2111619, 50.5934715
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2111097,50.593131
+  phone: "39919093"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2111619,50.5934715
   instagram: ''
 ---

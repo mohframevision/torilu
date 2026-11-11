@@ -4,15 +4,15 @@ icon: ☕
 desc: "كافيه في الجفير."
 title_en: "Al Faisaliya Cafeteria - Al-Juffair"
 desc_en: "A cafe in Al-Juffair."
-nameTranslated: true
+hours: "يومياً ٦ص - ١٢ص"
+hours_en: "Daily 6am - 12am"
 categories:
   - الجفير
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2120322, 50.6025475
+coords: 26.2120388, 50.6025238
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2120322,50.6025475
+  phone: "17826113"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2120388,50.6025238
   instagram: ''
 ---

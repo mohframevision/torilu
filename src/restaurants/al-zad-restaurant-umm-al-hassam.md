@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في أم الحصم."
 title_en: "Al Zad Restaurant"
 desc_en: "A restaurant in Umm Al Hassam."
-nameTranslated: true
 categories:
   - أم الحصم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2010313, 50.5938272
+coords: 26.2011281, 50.59373
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2010313,50.5938272
+  phone: "33209604"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2011281,50.59373
   instagram: ''
 ---

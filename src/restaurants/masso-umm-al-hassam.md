@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في أم الحصم."
 title_en: "Masso"
 desc_en: "A restaurant in Umm Al Hassam."
-nameTranslated: true
 categories:
   - أم الحصم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2085598, 50.5956885
+coords: 26.2085258, 50.5957648
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2085598,50.5956885
+  phone: "17721061"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2085258,50.5957648
   instagram: ''
 ---
