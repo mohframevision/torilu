@@ -4,6 +4,8 @@ icon: 💊
 desc: متجر مكملات غذائية وفيتامينات، بعالي قرب نفق بوري، مع خدمة توصيل.
 title_en: LeanWay Supplements
 desc_en: A supplements and vitamins store, in Aali near Buri tunnel, with delivery service.
+hours: "السبت والجمعة ٤م - ٩م؛ الأحد - الخميس ١م - ١٠م"
+hours_en: "Sat & Fri 4pm - 9pm; Sun - Thu 1pm - 10pm"
 categories:
   - مكملات غذائية
   - عالي

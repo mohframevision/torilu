@@ -4,6 +4,8 @@ icon: 🛍️
 desc: متجر بحريني للتجارة العامة — أدوات مطبخ، مستلزمات منزلية، هدايا، ألعاب، ومنتجات عناية وجمال، بأبو صيبع.
 title_en: The Loft General Trading
 desc_en: "A Bahraini general trading store in Abu Saiba selling kitchenware, homeware, gifts, toys and beauty products."
+hours: "يومياً ٩ص - ١١م"
+hours_en: "Daily 9am - 11pm"
 categories:
   - المستلزمات المنزلية
   - عناية وجمال

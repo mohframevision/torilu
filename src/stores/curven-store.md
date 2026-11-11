@@ -5,6 +5,8 @@ desc: 'متجر بحريني متخصص في معدات التصوير الفو�
 title_en: Curven Store
 desc_en: 'A Bahraini store specializing in professional photography and video equipment, offering a wide range including: cameras (mirrorless, cinema, and action), lenses and accessories, lighting and studio equipment, tripods and gimbals, professional video audio gear, bags and cases, batteries and power accessories, and memory cards. The store carries well-known global brands like Canon, Sony, Nikon, DJI, Godox, SanDisk, Rode, Benro, Phottix, Boya, and Nanlite, and offers custom quotes for large projects.'
 image: ''
+hours: "السبت - الأربعاء ١٠ص - ١م و٣م - ٩م؛ الخميس ١٠ص - ٩م؛ الجمعة مغلق"
+hours_en: "Sat - Wed 10am - 1pm & 3pm - 9pm; Thu 10am - 9pm; Fri Closed"
 categories:
   - إلكترونيات
   - إكسسوارات
@@ -14,6 +16,7 @@ categories:
 categoriesCustom: []
 cta: ''
 links:
+  phone: "17000173"
   website: https://www.curven.net/
   maps: https://maps.app.goo.gl/GjxovmNUpqtEQwYh6
   instagram: https://www.instagram.com/curven.store/?hl=ar

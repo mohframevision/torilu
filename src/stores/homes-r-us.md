@@ -4,6 +4,8 @@ icon: 🛋️
 desc: متجر أثاث وديكور ومستلزمات منزلية، بالسهلة.
 title_en: Homes r Us
 desc_en: A furniture, home decor and home essentials store, in Sehla.
+hours: "يومياً ١٠ص - ١٠م"
+hours_en: "Daily 10am - 10pm"
 categories:
   - ديكور منزلي
   - المستلزمات المنزلية

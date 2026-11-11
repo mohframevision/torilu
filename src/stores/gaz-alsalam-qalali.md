@@ -4,6 +4,8 @@ icon: 🧴
 desc: أكبر موزع مكيفات وإلكترونيات بالبحرين — مكيفات (سبليت، شباك، متنقلة)، أجهزة منزلية كبيرة (غسالات، ثلاجات، مجمّدات، غسالات صحون)، أجهزة مطبخ صغيرة، أجهزة تنظيف وعناية بالهواء، تلفزيونات وأنظمة ترفيه، ومطابخ مدمجة.
 title_en: Al Salam Gas - Qalali Branch
 desc_en: "The largest AC and electronics distributor in Bahrain. Sells air conditioners (split, window, portable), large home appliances (washing machines, fridges, freezers, dishwashers), small kitchen appliances, air care and cleaning devices, TVs and entertainment systems, and built-in kitchens."
+hours: "السبت - الخميس ٨ص - ١٠م؛ الجمعة ٤م - ٩م"
+hours_en: "Sat - Thu 8am - 10pm; Fri 4pm - 9pm"
 categories:
   - إلكترونيات
 dateAdded: 2026-08-03

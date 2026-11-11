@@ -4,6 +4,8 @@ icon: 🍽️
 desc: مطعم مأكولات بحرية بمنطقة الهملة، فرع لسلسلة خليجية أصلها من السعودية. يقدّم الأسماك والمأكولات البحرية مشوية ومقلية إلى جانب المقبلات العربية والسلطات، ويتوفر التوصيل عبر تطبيقات الطلب.
 title_en: Asmak Taza
 desc_en: A seafood restaurant in Hamala, part of a Gulf chain originally from Saudi Arabia. Serves grilled and fried fish and seafood alongside Arabic mezze and salads, with delivery available through ordering apps.
+hours: "السبت - الأربعاء ١١:٣٠ص - ١ص؛ الخميس ١١:٣٠ص - ٢ص؛ الجمعة ١٢م - ٢ص"
+hours_en: "Sat - Wed 11:30am - 1am; Thu 11:30am - 2am; Fri 12pm - 2am"
 categories:
   - مأكولات بحرية
   - مشاوي

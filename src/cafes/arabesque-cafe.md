@@ -8,6 +8,7 @@ categories:
   - فطور
   - أبو قوة
 links:
+  phone: "33004245"
   maps: https://maps.app.goo.gl/AjmMBR3cPVwRzHaa7
   instagram: ''
   website: ''

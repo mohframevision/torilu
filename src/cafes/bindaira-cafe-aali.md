@@ -8,6 +8,7 @@ categories:
   - فطور
   - عالي
 links:
+  phone: "17587587"
   maps: https://maps.app.goo.gl/zhe6P6hFAECqsADn6
   instagram: ''
   website: ''

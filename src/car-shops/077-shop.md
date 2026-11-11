@@ -4,6 +4,8 @@ icon: 🚗
 desc: بيع وشراء سيارات ودراجات نارية، تصليح وصباغة، غسيل وتلميع، تنجيد مقاعد، وإكسسوارات وديكورات داخلية (تكييف، شمسيات، وغيرها). بالهملة.
 title_en: 007 Car Services
 desc_en: Buying and selling cars and motorcycles, repair and painting, washing and polishing, seat upholstery, and interior accessories/decor (AC parts, sunshades, and more). In Hamala.
+hours: "السبت ٨ص - ١م و٣م - ١١م؛ الأحد - الخميس ٨ص - ١١م؛ الجمعة ٤م - ٩م"
+hours_en: "Sat 8am - 1pm & 3pm - 11pm; Sun - Thu 8am - 11pm; Fri 4pm - 9pm"
 categories:
   - معرض سيارات
   - غسيل

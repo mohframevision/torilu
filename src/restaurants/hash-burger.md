@@ -4,6 +4,8 @@ icon: "🍔"
 desc: مطعم برجر حلال بمنطقة البلاد القديم، يفتح مساءً حتى ساعات متأخرة.
 title_en: Hash Burger
 desc_en: A halal burger restaurant in Bilad Al Qadeem, open evenings until late.
+hours: "يومياً ٦م - ١ص"
+hours_en: "Daily 6pm - 1am"
 categories:
   - برجر
   - البلاد القديم

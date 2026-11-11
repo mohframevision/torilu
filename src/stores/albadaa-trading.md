@@ -4,6 +4,8 @@ icon: 🛒
 desc: شركة بحرينية لتوزيع المواد الغذائية بالجملة، تأسست عام 1999. عروض يومية على مواد غذائية متنوعة، مع خدمة توصيل عبر واتساب.
 title_en: Al-Badaa Trading Company
 desc_en: A Bahraini wholesale food distribution company, founded in 1999. Daily offers on a variety of food items, with WhatsApp delivery service.
+hours: "السبت - الاثنين والأربعاء - الخميس ٧:٣٠ص - ١٠م؛ الثلاثاء ٧:٣٠ص - ١٠:٣٠م؛ الجمعة ٧:٣٠ص - ١١:٣٠ص و٣:٣٠م - ١٠:٣٠م"
+hours_en: "Sat - Mon & Wed - Thu 7:30am - 10pm; Tue 7:30am - 10:30pm; Fri 7:30am - 11:30am & 3:30pm - 10:30pm"
 categories:
   - مواد غذائية بالجملة
   - جنوسان

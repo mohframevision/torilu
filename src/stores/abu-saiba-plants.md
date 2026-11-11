@@ -4,6 +4,8 @@ icon: 🌱
 desc: مشتل نباتات وزهور داخل أبو صيبع، مع خدمة توصيل عبر واتساب. أوقات العمل طوال أيام الأسبوع من 6:30 صباحاً إلى 7:00 مساءً.
 title_en: Abu Saiba Plants & Flowers
 desc_en: A plant and flower nursery in Abu Saiba, with WhatsApp delivery service. Open daily from 6:30 AM to 7:00 PM.
+hours: "يومياً ٦:٣٠ص - ٧م"
+hours_en: "Daily 6:30am - 7pm"
 categories:
   - مشتل
   - أبو صيبع

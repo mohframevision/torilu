@@ -4,6 +4,8 @@ icon: 🌳
 desc: شجرة عمرها نحو 400 سنة تقف وحدها وسط الصحراء جنوب البحرين، مكان طبيعي عام ودخوله مجاني، ومضاءة ليلاً، وحولها مقاهٍ ومطاعم ومخيمات للإيجار.
 title_en: Tree of Life
 desc_en: A roughly 400-year-old tree standing alone in the desert of southern Bahrain, a free public natural site, lit at night, with cafes, restaurants and camps for rent around it.
+hours: "يومياً ٦ص - ١٠م"
+hours_en: "Daily 6am - 10pm"
 categories:
   - طبيعة
   - إطلالة

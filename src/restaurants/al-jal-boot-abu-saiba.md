@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في أبو صيبع."
 title_en: "Al Jal Boot - Abu Saiba"
 desc_en: "A restaurant in Abu Saiba."
+hours: "يومياً ١١:٣٠ص - ١١م"
+hours_en: "Daily 11:30am - 11pm"
 categories:
   - أبو صيبع
 dateAdded: 2026-11-11

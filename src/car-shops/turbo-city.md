@@ -4,6 +4,8 @@ icon: 🧽
 desc: محل تجزئة لمنتجات العناية بالسيارات (تلميع، شمع، نانو سيراميك)، وكلاء شركات برو كار برودكتس وتوني ان وماكس شاين، بسلماباد.
 title_en: Turbo City
 desc_en: A retail shop for car care products (polish, wax, nano ceramic), agents for Pro Car Products, Tonyin, and Maxshine, in Salmabad.
+hours: "السبت - الخميس ٩ص - ١م و٤م - ١٠م؛ الجمعة مغلق"
+hours_en: "Sat - Thu 9am - 1pm & 4pm - 10pm; Fri Closed"
 categories:
   - إكسسوارات السيارات
   - سلماباد

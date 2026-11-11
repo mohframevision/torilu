@@ -7,6 +7,7 @@ desc_en: "A cafe with lunch and dinner meals in Saar."
 categories:
   - سار
 links:
+  phone: "17277755"
   maps: https://maps.app.goo.gl/giefSxeCs1S5mm6VA
   instagram: ''
   website: ''

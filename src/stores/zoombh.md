@@ -5,6 +5,8 @@ desc: متجر إلكتروني بحريني متخصص في معدات التص
 title_en: ZoomBH
 desc_en: A Bahraini online store specializing in professional photography and video equipment, offering a wide range of cameras, lenses, and lens filters, plus lighting and studio equipment (flash, continuous lighting, backdrops), camera mounting and stabilization gear (tripods, gimbals, sliders), audio/video production tools (microphones, recorders, monitors), as well as bags, storage media, and batteries. Targets photographers and content creators, and also has a used-products section.
 image: ''
+hours: "السبت - الخميس ٩ص - ٩م؛ الجمعة مغلق"
+hours_en: "Sat - Thu 9am - 9pm; Fri Closed"
 categories:
   - إلكترونيات
   - إكسسوارات
@@ -14,6 +16,7 @@ categories:
 categoriesCustom: []
 cta: ''
 links:
+  phone: "33577711"
   website: https://www.zoom.bh/
   maps: https://maps.app.goo.gl/9jugpBTCkaTnB6jh8
   instagram: https://www.instagram.com/zoom.bhr/

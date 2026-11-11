@@ -12,6 +12,7 @@ categories:
 dateAdded: 2026-10-20
 coords: 26.127167, 50.545333
 links:
+  phone: "36558833"
   website: https://linktr.ee/Sakbatchai.bh
   maps: https://maps.app.goo.gl/xgG7XpoScmZjueSL7
   instagram: https://www.instagram.com/sakbatchai.bh/

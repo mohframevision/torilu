@@ -4,6 +4,8 @@ icon: 🛠️
 desc: قسم الصيانة الرسمي لغاز السلام — أكبر موزع مكيفات وإلكترونيات بالبحرين، لصيانة وخدمة المكيفات والأجهزة المنزلية بعد البيع.
 title_en: Al Salam Gas - Service Centre
 desc_en: "The official maintenance department of Al Salam Gas, the largest AC and electronics distributor in Bahrain. Handles after-sales maintenance and service for air conditioners and home appliances."
+hours: "السبت - الخميس ٧ص - ٥م؛ الجمعة مغلق"
+hours_en: "Sat - Thu 7am - 5pm; Fri Closed"
 categories:
   - إلكترونيات
 dateAdded: 2026-08-03

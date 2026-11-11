@@ -4,6 +4,8 @@ icon: 🪟
 desc: شركة متخصصة في زجاج السيارات والشاحنات، وتفصيل مرايا جانبية. فرع سلماباد.
 title_en: Altairi Glass Company (Salmabad)
 desc_en: A company specialized in auto and truck glass, and custom side-mirror work. Salmabad branch.
+hours: "السبت - الخميس ٧:٣٠ص - ٧م؛ الجمعة مغلق"
+hours_en: "Sat - Thu 7:30am - 7pm; Fri Closed"
 categories:
   - زجاج سيارات
   - سلماباد
