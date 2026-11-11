@@ -4,6 +4,8 @@ icon: 🥖
 desc: "مخبز في المحرق."
 title_en: "Mustafa Pastries"
 desc_en: "A bakery in Muharraq."
+hours: "السبت - الأربعاء ٨ص - ١ص؛ الخميس ٨ص - ١:٣٠ص؛ الجمعة ٤:٣٠م - ١:٣٠ص"
+hours_en: "Sat - Wed 8am - 1am; Thu 8am - 1:30am; Fri 4:30pm - 1:30am"
 categories:
   - المحرق
 dateAdded: 2026-11-10

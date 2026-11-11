@@ -4,6 +4,8 @@ icon: 🚿
 desc: خدمات العناية بالسيارات — غسيل، تلميع، نانو سيراميك، وحماية داخلية وخارجية، بالسهلة الشمالية.
 title_en: Signature Shine
 desc_en: "Car washing, polishing, nano ceramic coating, and interior and exterior protection, in North Sehla."
+hours: "السبت - الأربعاء ٨ص - ١م و٣م - ٨م؛ الخميس ١٠ص - ١م و٣م - ١٠م؛ الجمعة مغلق"
+hours_en: "Sat - Wed 8am - 1pm & 3pm - 8pm; Thu 10am - 1pm & 3pm - 10pm; Fri Closed"
 categories:
   - غسيل
   - تلميع

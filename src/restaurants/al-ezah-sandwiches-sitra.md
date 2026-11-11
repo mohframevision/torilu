@@ -4,6 +4,8 @@ icon: 🥪
 desc: "وجبات سريعة في سترة."
 title_en: "Al Ezah Sandwiches"
 desc_en: "Fast food in Sitra."
+hours: "السبت - الخميس ٥ص - ١٢م؛ الجمعة مغلق"
+hours_en: "Sat - Thu 5am - 12pm; Fri Closed"
 categories:
   - وجبات سريعة
   - سترة

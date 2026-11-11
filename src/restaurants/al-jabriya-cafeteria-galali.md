@@ -4,6 +4,8 @@ icon: 🥪
 desc: "وجبات سريعة في عراد."
 title_en: "Al Jabriya Cafeteria - Arad"
 desc_en: "Fast food in Arad."
+hours: "السبت - الخميس ١م - ١ص؛ الجمعة ٣م - ١ص"
+hours_en: "Sat - Thu 1pm - 1am; Fri 3pm - 1am"
 categories:
   - وجبات سريعة
   - عراد

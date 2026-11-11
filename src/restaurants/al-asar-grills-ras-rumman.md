@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في راس رمان."
 title_en: "Al Asar Grills"
 desc_en: "A restaurant in Ras Rumman."
+hours: "السبت - الأربعاء ٦م - ٢ص؛ الخميس - الجمعة ٥:٣٠م - ٢:٣٠ص"
+hours_en: "Sat - Wed 6pm - 2am; Thu - Fri 5:30pm - 2:30am"
 categories:
   - راس رمان
 dateAdded: 2026-11-10

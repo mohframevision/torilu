@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "King of Liver"
 desc_en: "A restaurant in Riffa."
+hours: "السبت - الخميس ٨ص - ١١م؛ الجمعة ٨ص - ١٢م"
+hours_en: "Sat - Thu 8am - 11pm; Fri 8am - 12pm"
 categories:
   - الرفاع
 dateAdded: 2026-11-10

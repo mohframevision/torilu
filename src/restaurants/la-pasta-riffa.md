@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "La Pasta"
 desc_en: "A restaurant in Riffa."
+hours: "السبت - الأربعاء ١٢م - ١٢ص؛ الخميس ١٢م - ١ص؛ الجمعة ١٢م - ١٢:٣٠ص"
+hours_en: "Sat - Wed 12pm - 12am; Thu 12pm - 1am; Fri 12pm - 12:30am"
 categories:
   - الرفاع
 dateAdded: 2026-11-10

@@ -4,6 +4,8 @@ icon: 🌮
 desc: "مطعم مكسيكي في العدلية."
 title_en: "Señor Paco's"
 desc_en: "A Mexican restaurant in Adliya."
+hours: "السبت مغلق؛ الأحد - الجمعة ١١:٣٠ص - ٣م و٦م - ١٢ص"
+hours_en: "Sat Closed; Sun - Fri 11:30am - 3pm & 6pm - 12am"
 categories:
   - العدلية
 dateAdded: 2026-11-10

@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في سترة."
 title_en: "Cafeteria Alu Naseeb"
 desc_en: "A restaurant in Sitra."
+hours: "السبت - الخميس ٦ص - ١١ص و٤م - ١٠:٣٠م؛ الجمعة ٥:٤٥ص - ١٠ص و٤م - ١٠:٣٠م"
+hours_en: "Sat - Thu 6am - 11am & 4pm - 10:30pm; Fri 5:45am - 10am & 4pm - 10:30pm"
 categories:
   - سترة
 dateAdded: 2026-11-10

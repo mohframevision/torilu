@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Noor Albahrain Bukhari Restaurant"
 desc_en: "A restaurant in Al Hoora."
+hours: "السبت - الثلاثاء والجمعة ١٠:٣٠ص - ١٢ص؛ الأربعاء ١٠:٣٠ص - ١ص؛ الخميس ١٠ص - ١٢ص"
+hours_en: "Sat - Tue & Fri 10:30am - 12am; Wed 10:30am - 1am; Thu 10am - 12am"
 categories:
   - الحورة
 dateAdded: 2026-11-10

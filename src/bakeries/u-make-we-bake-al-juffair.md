@@ -4,6 +4,8 @@ icon: 🥖
 desc: "مخبز في الجفير."
 title_en: "U Make We Bake"
 desc_en: "A bakery in Al-Juffair."
+hours: "السبت - الأربعاء ١١ص - ٣ص؛ الخميس - الجمعة ١١ص - ٤ص"
+hours_en: "Sat - Wed 11am - 3am; Thu - Fri 11am - 4am"
 categories:
   - الجفير
 dateAdded: 2026-11-10

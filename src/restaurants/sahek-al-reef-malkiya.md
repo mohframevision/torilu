@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في المالكية."
 title_en: "Sahek Al Reef"
 desc_en: "A restaurant in Malkiya."
+hours: "السبت - الأربعاء ١١:٣٠ص - ١٢:٣٠ص؛ الخميس - الجمعة ١١:٣٠ص - ١ص"
+hours_en: "Sat - Wed 11:30am - 12:30am; Thu - Fri 11:30am - 1am"
 categories:
   - المالكية
 dateAdded: 2026-11-10

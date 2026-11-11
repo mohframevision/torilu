@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في القضيبية."
 title_en: "Thailand Restaurant"
 desc_en: "A restaurant in Al Qudaibiya."
+hours: "السبت - الأحد والثلاثاء - الجمعة ١٢م - ١٢ص؛ الاثنين ٢٤ ساعة"
+hours_en: "Sat - Sun & Tue - Fri 12pm - 12am; Mon 24 hours"
 categories:
   - القضيبية
 dateAdded: 2026-11-10

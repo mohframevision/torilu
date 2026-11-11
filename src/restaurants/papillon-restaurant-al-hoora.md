@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Papillon Restaurant"
 desc_en: "A restaurant in Al Hoora."
+hours: "السبت - الخميس ١١ص - ٣م و٦:٣٠م - ١:٣٠ص؛ الجمعة ١١ص - ١:٣٠ص"
+hours_en: "Sat - Thu 11am - 3pm & 6:30pm - 1:30am; Fri 11am - 1:30am"
 categories:
   - الحورة
 dateAdded: 2026-11-10

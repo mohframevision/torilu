@@ -4,6 +4,8 @@ icon: 🍰
 desc: "حلويات في العدلية."
 title_en: "Ward El-sham confectionery"
 desc_en: "A sweets shop in Adliya."
+hours: "السبت - الخميس ٩ص - ١٢ص؛ الجمعة ١٠:٣٠ص - ١٢ص"
+hours_en: "Sat - Thu 9am - 12am; Fri 10:30am - 12am"
 categories:
   - العدلية
 dateAdded: 2026-11-10

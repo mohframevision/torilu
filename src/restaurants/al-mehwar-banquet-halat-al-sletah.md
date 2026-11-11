@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Al Mehwar Banquet"
 desc_en: "A restaurant in Muharraq."
+hours: "السبت - الخميس ٧ص - ٣م؛ الجمعة ٧ص - ١٢ص"
+hours_en: "Sat - Thu 7am - 3pm; Fri 7am - 12am"
 categories:
   - المحرق
 dateAdded: 2026-11-10

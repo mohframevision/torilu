@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في أم الحصم."
 title_en: "Al Zad Restaurant"
 desc_en: "A restaurant in Umm Al Hassam."
+hours: "السبت ٦ص - ١٠:٣٠م؛ الأحد - الجمعة ٦ص - ١١م"
+hours_en: "Sat 6am - 10:30pm; Sun - Fri 6am - 11pm"
 categories:
   - أم الحصم
 dateAdded: 2026-11-10

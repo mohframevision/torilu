@@ -4,6 +4,8 @@ icon: 🥪
 desc: "وجبات سريعة في المنطقة الدبلوماسية."
 title_en: "Make Mine"
 desc_en: "Fast food in Diplomatic Area."
+hours: "السبت والجمعة ١م - ١٠م؛ الأحد - الخميس ١٠ص - ١٠م"
+hours_en: "Sat & Fri 1pm - 10pm; Sun - Thu 10am - 10pm"
 categories:
   - وجبات سريعة
   - المنطقة الدبلوماسية

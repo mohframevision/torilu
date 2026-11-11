@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "TRABZON ISTANBUL RESTAURANT"
 desc_en: "A restaurant in Muharraq."
+hours: "السبت والاثنين - الجمعة ١١ص - ١ص؛ الأحد ١١ص - ١٢ص"
+hours_en: "Sat & Mon - Fri 11am - 1am; Sun 11am - 12am"
 categories:
   - المحرق
 dateAdded: 2026-11-10

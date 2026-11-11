@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في السيف."
 title_en: "Bushido"
 desc_en: "A restaurant in Seef."
+hours: "السبت - الأربعاء ١٢م - ٢ص؛ الخميس ١٢م - ٢:٣٠ص؛ الجمعة ١٢:٣٠م - ٢:٣٠ص"
+hours_en: "Sat - Wed 12pm - 2am; Thu 12pm - 2:30am; Fri 12:30pm - 2:30am"
 categories:
   - السيف
 dateAdded: 2026-11-10

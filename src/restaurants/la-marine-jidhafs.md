@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في جدحفص."
 title_en: "La Marine"
 desc_en: "A restaurant in Jidhafs."
+hours: "السبت والجمعة ١٢م - ١١:٣٠م؛ الأحد - الأربعاء مغلق؛ الخميس ٥م - ١١:٣٠م"
+hours_en: "Sat & Fri 12pm - 11:30pm; Sun - Wed Closed; Thu 5pm - 11:30pm"
 categories:
   - جدحفص
 dateAdded: 2026-11-10

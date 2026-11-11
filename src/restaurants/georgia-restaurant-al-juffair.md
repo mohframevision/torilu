@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الجفير."
 title_en: "Georgia Restaurant"
 desc_en: "A restaurant in Al-Juffair."
+hours: "السبت - الأربعاء ١١ص - ١٢ص؛ الخميس - الجمعة ١١ص - ١ص"
+hours_en: "Sat - Wed 11am - 12am; Thu - Fri 11am - 1am"
 categories:
   - الجفير
 dateAdded: 2026-11-10

@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في عراد."
 title_en: "Wahran Restaurant"
 desc_en: "A restaurant in Arad."
+hours: "السبت - الثلاثاء والخميس - الجمعة ٨:٣٠ص - ٢ص؛ الأربعاء ٨:٤٠ص - ٢:٣٠ص"
+hours_en: "Sat - Tue & Thu - Fri 8:30am - 2am; Wed 8:40am - 2:30am"
 categories:
   - عراد
 dateAdded: 2026-11-10

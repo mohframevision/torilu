@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Bu Jamal Restaurant Grill"
 desc_en: "A restaurant in Riffa."
+hours: "السبت - الأربعاء ٤:٣٠م - ٢ص؛ الخميس - الجمعة ٤:٣٠م - ٣ص"
+hours_en: "Sat - Wed 4:30pm - 2am; Thu - Fri 4:30pm - 3am"
 categories:
   - الرفاع
 dateAdded: 2026-11-10

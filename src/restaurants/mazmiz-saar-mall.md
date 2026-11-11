@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم عربي في سار مول، الطابق الأول. جلسات داخلية وطلبات خارجية."
 title_en: "Mazmiz - Saar Mall"
 desc_en: "Arab restaurant in Saar Mall, first floor. Dine-in and takeaway."
+hours: "يومياً ١٠:٣٠ص - ١١:٣٠م"
+hours_en: "Daily 10:30am - 11:30pm"
 categories:
   - سار
 dateAdded: 2026-11-10

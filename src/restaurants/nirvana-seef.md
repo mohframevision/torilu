@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في السيف."
 title_en: "Nirvana"
 desc_en: "A restaurant in Seef."
+hours: "السبت - الأحد والثلاثاء - الجمعة ١٢م - ٣م و٧م - ١١م؛ الاثنين مغلق"
+hours_en: "Sat - Sun & Tue - Fri 12pm - 3pm & 7pm - 11pm; Mon Closed"
 categories:
   - هندي
   - السيف

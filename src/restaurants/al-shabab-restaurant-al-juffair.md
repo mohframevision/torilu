@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الجفير."
 title_en: "Al Shabab Restaurant"
 desc_en: "A restaurant in Al-Juffair."
+hours: "السبت ٥ص - ١٢ص؛ الأحد - الجمعة ٦ص - ١٢ص"
+hours_en: "Sat 5am - 12am; Sun - Fri 6am - 12am"
 categories:
   - الجفير
 dateAdded: 2026-11-10

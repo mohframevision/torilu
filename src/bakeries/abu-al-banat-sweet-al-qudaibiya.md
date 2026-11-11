@@ -4,6 +4,8 @@ icon: 🍰
 desc: "حلويات في القضيبية."
 title_en: "Abu Al Banat Sweet"
 desc_en: "A sweets shop in Al Qudaibiya."
+hours: "السبت والاثنين ٩ص - ١٢ص؛ الأحد والثلاثاء - الخميس ٢٤ ساعة؛ الجمعة ١٢ص - ٩ص"
+hours_en: "Sat & Mon 9am - 12am; Sun & Tue - Thu 24 hours; Fri 12am - 9am"
 categories:
   - القضيبية
 dateAdded: 2026-11-10

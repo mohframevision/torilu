@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Food Lab"
 desc_en: "A restaurant in Riffa."
+hours: "السبت والجمعة ٨ص - ١٠م؛ الأحد - الخميس ٦:٣٠ص - ١٠م"
+hours_en: "Sat & Fri 8am - 10pm; Sun - Thu 6:30am - 10pm"
 categories:
   - الرفاع
 dateAdded: 2026-11-10

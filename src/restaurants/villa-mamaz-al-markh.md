@@ -10,7 +10,7 @@ dateAdded: 2026-11-10
 coords: 26.198121, 50.4770959
 links:
   website: ''
-  phone: ''
+  phone: "17305031"
   maps: https://www.google.com/maps?cid=8717543795826679037
   instagram: ''
 ---

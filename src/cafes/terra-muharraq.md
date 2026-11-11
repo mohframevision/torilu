@@ -4,6 +4,8 @@ icon: ☕
 desc: "كافيه في المحرق."
 title_en: "Terra"
 desc_en: "A cafe in Muharraq."
+hours: "السبت - الأحد والثلاثاء - الجمعة ٢م - ١١م؛ الاثنين ٥م - ١١م"
+hours_en: "Sat - Sun & Tue - Fri 2pm - 11pm; Mon 5pm - 11pm"
 categories:
   - المحرق
 dateAdded: 2026-11-10

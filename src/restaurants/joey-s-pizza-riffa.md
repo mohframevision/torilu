@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Joey's Pizza"
 desc_en: "A restaurant in Riffa."
+hours: "السبت - الخميس ١١ص - ١١:٣٠م؛ الجمعة ١م - ١١:٣٠م"
+hours_en: "Sat - Thu 11am - 11:30pm; Fri 1pm - 11:30pm"
 categories:
   - الرفاع
 dateAdded: 2026-11-10

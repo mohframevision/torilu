@@ -4,6 +4,8 @@ icon: 🥪
 desc: "وجبات سريعة في قلالي."
 title_en: "Lamsi Cafeteria"
 desc_en: "Fast food in Galali."
+hours: "السبت ٨ص - ١ص؛ الأحد - الأربعاء والجمعة ٧:٣٠ص - ١ص؛ الخميس ٧ص - ١:٣٠ص"
+hours_en: "Sat 8am - 1am; Sun - Wed & Fri 7:30am - 1am; Thu 7am - 1:30am"
 categories:
   - وجبات سريعة
   - قلالي

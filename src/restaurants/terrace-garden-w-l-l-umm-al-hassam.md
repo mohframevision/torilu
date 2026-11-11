@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في أم الحصم."
 title_en: "Terrace Garden W.L.L"
 desc_en: "A restaurant in Umm Al Hassam."
+hours: "السبت والثلاثاء والخميس ١٠ص - ١٢ص؛ الأحد - الاثنين والأربعاء والجمعة ١١ص - ١٢ص"
+hours_en: "Sat & Tue & Thu 10am - 12am; Sun - Mon & Wed & Fri 11am - 12am"
 categories:
   - أم الحصم
 dateAdded: 2026-11-10

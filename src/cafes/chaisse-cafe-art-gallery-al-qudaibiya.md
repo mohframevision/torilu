@@ -4,6 +4,8 @@ icon: ☕
 desc: "كافيه في القضيبية."
 title_en: "Chaisse Cafe & Art Gallery"
 desc_en: "A cafe in Al Qudaibiya."
+hours: "السبت - الأربعاء ٧ص - ١ص؛ الخميس - الجمعة ٧ص - ٢ص"
+hours_en: "Sat - Wed 7am - 1am; Thu - Fri 7am - 2am"
 categories:
   - القضيبية
 dateAdded: 2026-11-10

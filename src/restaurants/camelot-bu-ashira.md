@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في بوعشيرة."
 title_en: "Camelot"
 desc_en: "A restaurant in Bu Ashira."
+hours: "السبت - الخميس ٥م - ٢ص؛ الجمعة ١٢م - ٢ص"
+hours_en: "Sat - Thu 5pm - 2am; Fri 12pm - 2am"
 categories:
   - بوعشيرة
 dateAdded: 2026-11-10

@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في السيف."
 title_en: "Nu Asia - Seef"
 desc_en: "A restaurant in Seef."
+hours: "السبت - الأربعاء ١١:٣٠ص - ١١:٤٥م؛ الخميس - الجمعة ١١:٣٠ص - ١٢:١٥ص"
+hours_en: "Sat - Wed 11:30am - 11:45pm; Thu - Fri 11:30am - 12:15am"
 categories:
   - السيف
 dateAdded: 2026-11-10

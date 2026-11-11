@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الجفير."
 title_en: "Isfahani"
 desc_en: "A restaurant in Al-Juffair."
+hours: "السبت - الأربعاء ١٢م - ١١:٣٠م؛ الخميس - الجمعة ١٢م - ١ص"
+hours_en: "Sat - Wed 12pm - 11:30pm; Thu - Fri 12pm - 1am"
 categories:
   - الجفير
 dateAdded: 2026-11-10

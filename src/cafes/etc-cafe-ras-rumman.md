@@ -4,6 +4,8 @@ icon: ☕
 desc: "كافيه في راس رمان."
 title_en: "Etc Cafe"
 desc_en: "A cafe in Ras Rumman."
+hours: "السبت والجمعة ٩ص - ٧م؛ الأحد - الخميس ٧ص - ٧م"
+hours_en: "Sat & Fri 9am - 7pm; Sun - Thu 7am - 7pm"
 categories:
   - راس رمان
 dateAdded: 2026-11-10

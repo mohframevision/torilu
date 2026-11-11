@@ -4,6 +4,8 @@ icon: 🥖
 desc: "مخبز في أم الحصم."
 title_en: "Hole-N-One"
 desc_en: "A bakery in Umm Al Hassam."
+hours: "السبت - الأربعاء ٦ص - ١٠:٣٠م؛ الخميس - الجمعة ٦ص - ١ص"
+hours_en: "Sat - Wed 6am - 10:30pm; Thu - Fri 6am - 1am"
 categories:
   - أم الحصم
 dateAdded: 2026-11-10

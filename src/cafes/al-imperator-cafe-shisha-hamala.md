@@ -4,6 +4,8 @@ icon: ☕
 desc: "كافيه في الهملة."
 title_en: "Al Imperator Cafe & Shisha"
 desc_en: "A cafe in Hamala."
+hours: "يومياً ٦ص - ٣م"
+hours_en: "Daily 6am - 3pm"
 categories:
   - الهملة
 dateAdded: 2026-11-10

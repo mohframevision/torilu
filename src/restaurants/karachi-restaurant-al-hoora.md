@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الحورة."
 title_en: "Karachi Restaurant"
 desc_en: "A restaurant in Al Hoora."
+hours: "السبت - الخميس ١١:٤٥ص - ٤ص؛ الجمعة ١١:٣٠ص - ٤ص"
+hours_en: "Sat - Thu 11:45am - 4am; Fri 11:30am - 4am"
 categories:
   - الحورة
 dateAdded: 2026-11-10

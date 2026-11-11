@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في الرفاع."
 title_en: "Sameeh Restaurant"
 desc_en: "A restaurant in Riffa."
+hours: "السبت - الأربعاء ٧:٣٠ص - ٢ص؛ الخميس - الجمعة ٧:٣٠ص - ٢:٣٠ص"
+hours_en: "Sat - Wed 7:30am - 2am; Thu - Fri 7:30am - 2:30am"
 categories:
   - الرفاع
 dateAdded: 2026-11-10

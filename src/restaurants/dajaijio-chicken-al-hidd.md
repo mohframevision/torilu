@@ -4,6 +4,8 @@ icon: 🥪
 desc: "وجبات سريعة في عراد."
 title_en: "Dajaijio Chicken - Arad"
 desc_en: "Fast food in Arad."
+hours: "السبت والاثنين - الجمعة ١١ص - ١٢ص؛ الأحد ١١ص - ١٢:٠٦ص"
+hours_en: "Sat & Mon - Fri 11am - 12am; Sun 11am - 12:06am"
 categories:
   - وجبات سريعة
   - عراد

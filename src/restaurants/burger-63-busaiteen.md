@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في بسيتين."
 title_en: "Burger 63"
 desc_en: "A restaurant in Busaiteen."
+hours: "السبت - الأربعاء ٤م - ١ص؛ الخميس - الجمعة ٤م - ٣ص"
+hours_en: "Sat - Wed 4pm - 1am; Thu - Fri 4pm - 3am"
 categories:
   - بسيتين
 dateAdded: 2026-11-10

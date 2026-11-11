@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في العدلية."
 title_en: "Burger Land - Adliya"
 desc_en: "A restaurant in Adliya."
+hours: "السبت والخميس - الجمعة ٥م - ٤ص؛ الأحد - الأربعاء ٤:٣٠م - ٣ص"
+hours_en: "Sat & Thu - Fri 5pm - 4am; Sun - Wed 4:30pm - 3am"
 categories:
   - العدلية
 dateAdded: 2026-11-10

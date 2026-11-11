@@ -4,6 +4,8 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Al Ehsan Cafeteria"
 desc_en: "A restaurant in Muharraq."
+hours: "السبت - الأحد والثلاثاء - الخميس ٥ص - ١ص؛ الاثنين والجمعة ٥ص - ١١:٣٠ص و٢م - ١ص"
+hours_en: "Sat - Sun & Tue - Thu 5am - 1am; Mon & Fri 5am - 11:30am & 2pm - 1am"
 categories:
   - المحرق
 dateAdded: 2026-11-10
