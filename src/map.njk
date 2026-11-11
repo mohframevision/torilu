@@ -1,0 +1,37 @@
+---
+layout: base.njk
+permalink: "map.html"
+title: "خريطة الأماكن | توريلو"
+description: "خريطة ورقية مجسّمة للبحرين: أدر الخريطة واضغط أي منطقة لترى أماكنها."
+navActive: "map"
+pageScript: "map"
+pageCss: "map"
+langSwitchUrl: "/en/map.html"
+---
+{% set m = bahrainMap %}
+<section class="mp" id="mp" data-w="{{ m.w }}" data-h="{{ m.h }}" data-lon0="{{ m.lon0 }}" data-lat1="{{ m.lat1 }}" data-kx="{{ m.kx }}" data-ky="{{ m.ky }}"
+  data-t-more="و{n} بقربها" data-t-pick="اختر منطقة">
+  <header class="page-header mp-head">
+    <h1>خريطة الأماكن</h1>
+    <p>أدر الخريطة بإصبعك، واضغط منطقة لترى أماكنها.</p>
+  </header>
+  <div class="mp-stage" id="mpStage" role="group" aria-label="خريطة البحرين المجسّمة. استعمل السهمين الأيمن والأيسر لتدويرها.">
+    <svg class="mp-defs" width="0" height="0" aria-hidden="true"><defs><path id="mpLand" vector-effect="non-scaling-stroke" d="{{ m.d }}" /></defs></svg>
+    <div class="mp-sheet mp-closed mp-flat" id="mpSheet" style="aspect-ratio: {{ m.w }} / {{ m.h }}">
+      {% for side in ["l", "r"] %}
+      <div class="mp-half mp-{{ side }}">
+        <svg class="mp-land" viewBox="{{ 0 if side == 'l' else m.w / 2 }} 0 {{ m.w / 2 }} {{ m.h }}" preserveAspectRatio="none" aria-hidden="true"><use class="mp-shade" href="#mpLand" transform="translate(4 5)" /></svg>
+        <svg class="mp-land mp-up" viewBox="{{ 0 if side == 'l' else m.w / 2 }} 0 {{ m.w / 2 }} {{ m.h }}" preserveAspectRatio="none" aria-hidden="true">
+          <defs><pattern id="mpDots{{ side }}" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.1" /></pattern></defs>
+          <use class="mp-ground" href="#mpLand" /><use class="mp-dots" href="#mpLand" fill="url(#mpDots{{ side }})" />
+        </svg>
+      </div>
+      {% endfor %}
+    </div>
+    <button type="button" class="btn secondary mp-back" id="mpBack" hidden>كل البحرين</button>
+  </div>
+  <label class="mp-pick"><span class="sr-only">اختر منطقة</span><select id="mpSelect" class="pk-area"></select></label>
+  <p class="sr-only" id="mpSay" role="status"></p>
+  <div class="mp-panel" id="mpPanel"></div>
+  <p class="mp-credit">حدود الخريطة: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© مساهمو OpenStreetMap</a></p>
+</section>

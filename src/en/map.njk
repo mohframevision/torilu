@@ -1,0 +1,38 @@
+---
+layout: base.njk
+lang: "en"
+permalink: "en/map.html"
+title: "Places Map | Torilu"
+description: "A pop-up paper map of Bahrain: turn the map and tap any area to see its places."
+navActive: "map"
+pageScript: "map"
+pageCss: "map"
+langSwitchUrl: "/map.html"
+---
+{% set m = bahrainMap %}
+<section class="mp" id="mp" data-w="{{ m.w }}" data-h="{{ m.h }}" data-lon0="{{ m.lon0 }}" data-lat1="{{ m.lat1 }}" data-kx="{{ m.kx }}" data-ky="{{ m.ky }}"
+  data-t-more="+{n} nearby" data-t-pick="Choose an area">
+  <header class="page-header mp-head">
+    <h1>Places Map</h1>
+    <p>Turn the map with your finger, and tap an area to see its places.</p>
+  </header>
+  <div class="mp-stage" id="mpStage" role="group" aria-label="Pop-up map of Bahrain. Use the left and right arrow keys to turn it.">
+    <svg class="mp-defs" width="0" height="0" aria-hidden="true"><defs><path id="mpLand" vector-effect="non-scaling-stroke" d="{{ m.d }}" /></defs></svg>
+    <div class="mp-sheet mp-closed mp-flat" id="mpSheet" style="aspect-ratio: {{ m.w }} / {{ m.h }}">
+      {% for side in ["l", "r"] %}
+      <div class="mp-half mp-{{ side }}">
+        <svg class="mp-land" viewBox="{{ 0 if side == 'l' else m.w / 2 }} 0 {{ m.w / 2 }} {{ m.h }}" preserveAspectRatio="none" aria-hidden="true"><use class="mp-shade" href="#mpLand" transform="translate(4 5)" /></svg>
+        <svg class="mp-land mp-up" viewBox="{{ 0 if side == 'l' else m.w / 2 }} 0 {{ m.w / 2 }} {{ m.h }}" preserveAspectRatio="none" aria-hidden="true">
+          <defs><pattern id="mpDots{{ side }}" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.1" /></pattern></defs>
+          <use class="mp-ground" href="#mpLand" /><use class="mp-dots" href="#mpLand" fill="url(#mpDots{{ side }})" />
+        </svg>
+      </div>
+      {% endfor %}
+    </div>
+    <button type="button" class="btn secondary mp-back" id="mpBack" hidden>All of Bahrain</button>
+  </div>
+  <label class="mp-pick"><span class="sr-only">Choose an area</span><select id="mpSelect" class="pk-area"></select></label>
+  <p class="sr-only" id="mpSay" role="status"></p>
+  <div class="mp-panel" id="mpPanel"></div>
+  <p class="mp-credit">Map outline: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a></p>
+</section>

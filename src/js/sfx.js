@@ -240,6 +240,32 @@
       paper(c, o, t, { dur: 0.05, from: 1800, to: 1300, q: 0.9, gain: 0.1, attack: 0.004, grain: 0.3 });
       bar(c, o, t, 0.03, RI, 0.055, 0.5);
     },
+    // الخريطة تنفتح: ورقة كبيرة تنفرد ببطء ثم تطقّ ثنيتها
+    mapOpen(c, o, t) {
+      paper(c, o, t, { dur: 0.7, from: 300, to: 1400, q: 0.6, gain: 0.1, attack: 0.25, grain: 0.5 });
+      paper(c, o, t, { at: 0.56, dur: 0.05, from: 900, to: 650, q: 1.2, gain: 0.14, attack: 0.004 });
+    },
+    // ألسنة المناطق تقف: خمس طرقات ورق مقوّى قصيرة بلا ترتيب
+    mapPop(c, o, t) {
+      for (let i = 0; i < 5; i++) {
+        paper(c, o, t, { at: i * 0.05 + Math.random() * 0.02, dur: 0.028, from: 600 + Math.random() * 500, q: 2.2, gain: 0.22, attack: 0.003 });
+      }
+    },
+    // اختيار منطقة: دبوس يُغرز في الخريطة — خبطة مكتومة ثم رنّة معدن قصيرة
+    mapPin(c, o, t) {
+      paper(c, o, t, { dur: 0.05, from: 480, to: 340, q: 0.8, gain: 0.16, attack: 0.004 });
+      bar(c, o, t, 0.012, LU * 2, 0.03, 0.16);
+    },
+    // تقريب الخريطة: عدسة تنزلق على الورق ثم تُوضع
+    mapZoom(c, o, t) {
+      paper(c, o, t, { dur: 0.2, from: 700, to: 1900, q: 0.7, gain: 0.08, attack: 0.06, grain: 0.1 });
+      clack(c, o, t, 0.2, 1400, 0.03, 0.04);
+    },
+    // الرجوع لكل البحرين: العدسة تبتعد والورقة تستقر
+    mapBack(c, o, t) {
+      paper(c, o, t, { dur: 0.22, from: 1900, to: 600, q: 0.7, gain: 0.08, attack: 0.03, grain: 0.1 });
+      paper(c, o, t, { at: 0.2, dur: 0.08, from: 320, to: 240, q: 0.7, gain: 0.1, attack: 0.02 });
+    },
     // ورقة تتكوّر بين الأصابع («اختار لي»): خمس طقطقات ورق قصيرة متقاربة، بلا نغمة
     crumple(c, o, t) {
       for (let i = 0; i < 5; i++) {
@@ -260,7 +286,9 @@
   const still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function buzz(name) {
     try {
-      if (!still && navigator.vibrate) navigator.vibrate(BUZZ[name] || 8);
+      // قبل أول لمسة يرفض المتصفح الاهتزاز ويكتب خطأ، فلا نطلبه
+      const ua = navigator.userActivation;
+      if (!still && navigator.vibrate && (!ua || ua.hasBeenActive)) navigator.vibrate(BUZZ[name] || 8);
     } catch {
       /* بلا اهتزاز */
     }
@@ -297,6 +325,9 @@
     if (!SOUNDS[name]) return;
     if (!force) buzz(name);
     if (!force && !enabled()) return;
+    // قبل أول لمسة يبقى الصوت معلّقاً ثم ينفجر كله عند اللمسة الأولى: نتركه
+    const act = navigator.userActivation;
+    if (act && !act.hasBeenActive) return;
     try {
       if (!ctx) {
         ctx = new (window.AudioContext || window.webkitAudioContext)();

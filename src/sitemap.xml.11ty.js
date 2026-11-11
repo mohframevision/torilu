@@ -41,6 +41,7 @@ exports.render = function (data) {
     ["", "en/index.html"],
     ["favorites.html", "en/favorites.html"],
     ["picker.html", "en/picker.html"],
+    ["map.html", "en/map.html"],
     ["business.html", "en/business.html"],
     // صفحة البحث (search.njk/en/search.njk) كانت مفقودة من الخريطة منذ إضافتها
     // بكومِت ed9eecf — نفس فئة فجوة car-shop-type: صفحة ثابتة جديدة لم تُضَف
