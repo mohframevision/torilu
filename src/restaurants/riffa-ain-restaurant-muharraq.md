@@ -1,18 +1,18 @@
 ---
-title: "مطعم رفاعين"
+title: "مطعم الرفاعين"
 icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Riffa'ain Restaurant"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ١١ص - ٢ص"
+hours_en: "Daily 11am - 2am"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2618652, 50.6131702
+coords: 26.2618547, 50.6131017
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2618652,50.6131702
+  phone: "17333767"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2618547,50.6131017
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Al Monasaq Grills"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ١٢م - ٤ص"
+hours_en: "Daily 12pm - 4am"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2565101, 50.6168762
+coords: 26.2566141, 50.6169655
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2565101,50.6168762
+  phone: "39171555"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2566141,50.6169655
   instagram: ''
 ---

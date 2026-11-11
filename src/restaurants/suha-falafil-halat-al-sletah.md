@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Suha Falafil"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ٥ص - ١٢م، ٤م - ١١م"
+hours_en: "Daily 5am - 12pm, 4pm - 11pm"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2543778, 50.6181559
+coords: 26.2543801, 50.6183107
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2543778,50.6181559
+  phone: "17342511"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2543801,50.6183107
   instagram: ''
 ---

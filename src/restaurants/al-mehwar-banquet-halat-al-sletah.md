@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Al Mehwar Banquet"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2578756, 50.6186801
+coords: 26.2579504, 50.6185999
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2578756,50.6186801
+  phone: "17346373"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2579504,50.6185999
   instagram: ''
 ---

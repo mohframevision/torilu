@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "TRABZON ISTANBUL RESTAURANT"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.246913, 50.6130124
+coords: 26.2468581, 50.6129566
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.246913,50.6130124
+  phone: "17342992"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2468581,50.6129566
   instagram: ''
 ---

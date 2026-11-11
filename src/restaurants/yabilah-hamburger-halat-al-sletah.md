@@ -1,18 +1,18 @@
 ---
-title: "همبرجر يبيله"
+title: "كفتيريا يبيله همبرجر"
 icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Yabilah Hamburger"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ٧ص - ١١:٤٥م"
+hours_en: "Daily 7am - 11:45pm"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2445766, 50.6157109
+coords: 26.2445255, 50.6155665
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2445766,50.6157109
+  phone: "17223454"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2445255,50.6155665
   instagram: ''
 ---

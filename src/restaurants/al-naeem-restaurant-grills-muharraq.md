@@ -1,18 +1,18 @@
 ---
-title: "مطعم ومشاوي النعيم - المحرق"
+title: "مطعم مشويات النعيم المحرق"
 icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Al Naeem Restaurant & Grills - Muharraq"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ١١ص - ١ص"
+hours_en: "Daily 11am - 1am"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2597859, 50.615921
+coords: 26.259708, 50.615916
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2597859,50.615921
+  phone: "17331321"
+  maps: https://www.google.com/maps/search/?api=1&query=26.259708,50.615916
   instagram: ''
 ---

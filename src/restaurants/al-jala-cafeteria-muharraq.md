@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Al Jala Cafeteria"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2670237, 50.6158859
+coords: 26.2669693, 50.6158805
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2670237,50.6158859
+  phone: "35950770"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2669693,50.6158805
   instagram: ''
 ---

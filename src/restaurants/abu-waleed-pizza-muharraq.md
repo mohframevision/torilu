@@ -1,19 +1,19 @@
 ---
-title: "بيتزا أبو وليد"
+title: "بيتزا ابو وليد"
 icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Abu Waleed Pizza"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ٤م - ١٢ص"
+hours_en: "Daily 4pm - 12am"
 categories:
   - بيتزا
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2459139, 50.6112667
+coords: 26.2458749, 50.6111583
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2459139,50.6112667
+  phone: "17342212"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2458749,50.6111583
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: ☕
 desc: "كافيه في المحرق."
 title_en: "Al Amana"
 desc_en: "A cafe in Muharraq."
-nameTranslated: true
+hours: "يومياً ٧:٣٠ص - ٤ص"
+hours_en: "Daily 7:30am - 4am"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2608616, 50.6124806
+coords: 26.2608628, 50.6124231
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2608616,50.6124806
+  phone: "17323607"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2608628,50.6124231
   instagram: ''
 ---

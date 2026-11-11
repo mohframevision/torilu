@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "King Karak Cafeteria - Muharraq"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ٤:٣٠ص - ١١م"
+hours_en: "Daily 4:30am - 11pm"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2445008, 50.6153814
+coords: 26.2445827, 50.6154131
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2445008,50.6153814
+  maps: https://www.google.com/maps/search/?api=1&query=26.2445827,50.6154131
   instagram: ''
 ---

@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Al-Manal Cafeteria"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2524644, 50.6138692
+coords: 26.2527125, 50.6140324
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2524644,50.6138692
+  phone: "39647655"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2527125,50.6140324
   instagram: ''
 ---

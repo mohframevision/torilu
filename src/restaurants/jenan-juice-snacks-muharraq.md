@@ -1,18 +1,16 @@
 ---
-title: "جنان للعصائر والوجبات الخفيفة"
+title: "مطعم جنان البسيتين"
 icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Jenan Juice & Snacks"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2633957, 50.6097318
+coords: 26.263489, 50.6096208
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2633957,50.6097318
+  phone: "17320164"
+  maps: https://www.google.com/maps/search/?api=1&query=26.263489,50.6096208
   instagram: ''
 ---

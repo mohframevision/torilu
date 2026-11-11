@@ -1,18 +1,18 @@
 ---
-title: "ولائم أم رهام"
+title: "أم رهام للولائم"
 icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Um Raham Banquets"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ٧ص - ١٢ص"
+hours_en: "Daily 7am - 12am"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2586678, 50.6142971
+coords: 26.2586787, 50.61413
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2586678,50.6142971
+  phone: "39883330"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2586787,50.61413
   instagram: ''
 ---

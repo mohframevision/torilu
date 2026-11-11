@@ -1,18 +1,18 @@
 ---
-title: "بو جمال فلزين وحلويات"
+title: "فلزين وحلويات بوجمال"
 icon: 🍰
 desc: "حلويات في المحرق."
 title_en: "Bujamal Falzeen and Sweets"
 desc_en: "A sweets shop in Muharraq."
-nameTranslated: true
+hours: "يومياً ٥:٣٠ص - ٩م"
+hours_en: "Daily 5:30am - 9pm"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2583976, 50.6047586
+coords: 26.2583974, 50.6046494
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2583976,50.6047586
+  phone: "17335298"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2583974,50.6046494
   instagram: ''
 ---

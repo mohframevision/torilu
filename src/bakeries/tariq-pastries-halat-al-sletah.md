@@ -1,18 +1,18 @@
 ---
-title: "معجنات طارق - المحرق"
+title: "معجنات طارق"
 icon: 🥖
 desc: "مخبز في المحرق."
 title_en: "Tariq Pastries - Muharraq"
 desc_en: "A bakery in Muharraq."
-nameTranslated: true
+hours: "يومياً ٨ص - ١٠م"
+hours_en: "Daily 8am - 10pm"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.255189, 50.6200172
+coords: 26.2551692, 50.6200738
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.255189,50.6200172
+  phone: "17343498"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2551692,50.6200738
   instagram: ''
 ---

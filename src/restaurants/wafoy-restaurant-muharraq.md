@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Wafoy Restaurant"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2482836, 50.6114668
+coords: 26.248276, 50.6114237
 links:
   website: ''
   phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2482836,50.6114668
+  maps: https://www.google.com/maps/search/?api=1&query=26.248276,50.6114237
   instagram: ''
 ---

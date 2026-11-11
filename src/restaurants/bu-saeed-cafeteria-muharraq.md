@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المحرق."
 title_en: "Bu Saeed Cafeteria"
 desc_en: "A restaurant in Muharraq."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - المحرق
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2502308, 50.6081805
+coords: 26.2500962, 50.608068
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2502308,50.6081805
+  phone: "17343761"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2500962,50.608068
   instagram: ''
 ---
