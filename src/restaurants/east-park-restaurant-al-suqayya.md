@@ -4,15 +4,13 @@ icon: 🍽️
 desc: "مطعم في السقية."
 title_en: "East Park Restaurant"
 desc_en: "A restaurant in Al-Suqayya."
-nameTranslated: true
 categories:
   - السقية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2174678, 50.5767529
+coords: 26.2174037, 50.5767836
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2174678,50.5767529
+  phone: "17251761"
+  maps: https://www.google.com/maps?cid=5352096745876352812
   instagram: ''
 ---

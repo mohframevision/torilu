@@ -1,18 +1,18 @@
 ---
-title: "مشاوي ومطعم المرتضى"
+title: "مشويات المرتضى"
 icon: 🍽️
 desc: "مطعم في جدحفص."
 title_en: "Al Murtadha Grill & Restaurant"
 desc_en: "A restaurant in Jidhafs."
-nameTranslated: true
+hours: "يومياً ٧ص - ١٢ص"
+hours_en: "Daily 7am - 12am"
 categories:
   - جدحفص
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2212001, 50.5360978
+coords: 26.2211977, 50.5360362
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2212001,50.5360978
+  phone: "17555986"
+  maps: https://www.google.com/maps?cid=1907446994398169646
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في الدير."
 title_en: "Um Mohamed Kitchen"
 desc_en: "A restaurant in Al Dair."
-nameTranslated: true
+hours: "يومياً ٩ص - ٤م"
+hours_en: "Daily 9am - 4pm"
 categories:
   - الدير
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2864259, 50.6270267
+coords: 26.2863726, 50.6270342
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2864259,50.6270267
+  phone: "33249555"
+  maps: https://www.google.com/maps?cid=16889790347211343505
   instagram: ''
 ---

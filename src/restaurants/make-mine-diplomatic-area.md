@@ -4,16 +4,14 @@ icon: 🥪
 desc: "وجبات سريعة في المنطقة الدبلوماسية."
 title_en: "Make Mine"
 desc_en: "Fast food in Diplomatic Area."
-nameTranslated: true
 categories:
   - وجبات سريعة
   - المنطقة الدبلوماسية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2409903, 50.5871239
+coords: 26.2409883, 50.5871132
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2409903,50.5871239
+  phone: "77900194"
+  maps: https://www.google.com/maps?cid=12072540820001134494
   instagram: ''
 ---

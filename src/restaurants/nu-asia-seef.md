@@ -1,18 +1,16 @@
 ---
-title: "نو آسيا - السيف"
+title: "نيو اسيا - السيف"
 icon: 🍽️
 desc: "مطعم في السيف."
 title_en: "Nu Asia - Seef"
 desc_en: "A restaurant in Seef."
-nameTranslated: true
 categories:
   - السيف
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2325112, 50.5412511
+coords: 26.2325189, 50.541305
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2325112,50.5412511
+  phone: "17104925"
+  maps: https://www.google.com/maps?cid=9942195140907679172
   instagram: ''
 ---

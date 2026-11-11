@@ -1,18 +1,18 @@
 ---
-title: "قصر الجود"
+title: "مطعم قصر الجود"
 icon: 🍽️
 desc: "مطعم في سماهيج."
 title_en: "Aljood Palace"
 desc_en: "A restaurant in Samaheej."
-nameTranslated: true
+hours: "يومياً ١٠ص - ١ص"
+hours_en: "Daily 10am - 1am"
 categories:
   - سماهيج
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2811325, 50.6366985
+coords: 26.2813101, 50.6368681
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2811325,50.6366985
+  phone: "37441470"
+  maps: https://www.google.com/maps?cid=18022012010930934342
   instagram: ''
 ---

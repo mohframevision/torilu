@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في القدم."
 title_en: "Anwar Alghadeer Grills"
 desc_en: "A restaurant in Al Qadam."
-nameTranslated: true
+hours: "يومياً ١٢ص - ١١ص، ٥م - ١٢ص"
+hours_en: "Daily 12am - 11am, 5pm - 12am"
 categories:
   - القدم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2169191, 50.5177229
+coords: 26.216895, 50.5176546
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2169191,50.5177229
+  phone: "35190770"
+  maps: https://www.google.com/maps?cid=819513115009661460
   instagram: ''
 ---

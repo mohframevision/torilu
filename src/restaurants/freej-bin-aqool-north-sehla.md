@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في القدم."
 title_en: "Freej Bin Aqool - Al Qadam"
 desc_en: "A restaurant in Al Qadam."
-nameTranslated: true
+hours: "يومياً ٦ص - ١١م"
+hours_en: "Daily 6am - 11pm"
 categories:
   - القدم
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2173741, 50.5234862
+coords: 26.2174375, 50.5231875
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2173741,50.5234862
+  phone: "17300808"
+  maps: https://www.google.com/maps?cid=12646591022581553941
   instagram: ''
 ---

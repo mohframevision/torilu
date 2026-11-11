@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في العدلية."
 title_en: "Da Rae Jung"
 desc_en: "A restaurant in Adliya."
-nameTranslated: true
+hours: "يومياً ١١ص - ١١م"
+hours_en: "Daily 11am - 11pm"
 categories:
   - العدلية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2155426, 50.5884024
+coords: 26.215428, 50.588608
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2155426,50.5884024
+  phone: "17402168"
+  maps: https://www.google.com/maps/search/?api=1&query=26.215428,50.588608
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في العدلية."
 title_en: "Cico's"
 desc_en: "A restaurant in Adliya."
-nameTranslated: true
+hours: "يومياً ١٢م - ١٢ص"
+hours_en: "Daily 12pm - 12am"
 categories:
   - العدلية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2131989, 50.5874307
+coords: 26.2131766, 50.5873838
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2131989,50.5874307
+  phone: "17713710"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2131766,50.5873838
   instagram: ''
 ---

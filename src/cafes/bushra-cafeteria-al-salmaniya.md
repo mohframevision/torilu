@@ -1,18 +1,16 @@
 ---
-title: "كافتيريا بشرى"
+title: "مطعم بشرى"
 icon: ☕
 desc: "كافيه في السلمانية."
 title_en: "Bushra Cafeteria"
 desc_en: "A cafe in Al Salmaniya."
-nameTranslated: true
 categories:
   - السلمانية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2169985, 50.5692703
+coords: 26.2171268, 50.5694154
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2169985,50.5692703
+  phone: "39288028"
+  maps: https://www.google.com/maps?cid=6447993199313876625
   instagram: ''
 ---

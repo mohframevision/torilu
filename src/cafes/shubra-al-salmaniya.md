@@ -1,18 +1,18 @@
 ---
-title: "شبرا"
+title: "مطعم ومشويات شبرا"
 icon: ☕
 desc: "كافيه في السلمانية."
 title_en: "Shubra"
 desc_en: "A cafe in Al Salmaniya."
-nameTranslated: true
+hours: "يومياً ٧:٣٠ص - ١ص"
+hours_en: "Daily 7:30am - 1am"
 categories:
   - السلمانية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2171308, 50.5694817
+coords: 26.2171128, 50.5694535
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2171308,50.5694817
+  phone: "17231374"
+  maps: https://www.google.com/maps?cid=5463139466229691842
   instagram: ''
 ---

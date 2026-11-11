@@ -4,15 +4,15 @@ icon: ☕
 desc: "كافيه في بوعشيرة."
 title_en: "Cafe Italia"
 desc_en: "A cafe in Bu Ashira."
-nameTranslated: true
+hours: "يومياً ١٢ص - ٦ص، ٦م - ١٢ص"
+hours_en: "Daily 12am - 6am, 6pm - 12am"
 categories:
   - بوعشيرة
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2132467, 50.5920264
+coords: 26.2131401, 50.5919309
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2132467,50.5920264
+  phone: "17744774"
+  maps: https://www.google.com/maps/search/?api=1&query=26.2131401,50.5919309
   instagram: ''
 ---

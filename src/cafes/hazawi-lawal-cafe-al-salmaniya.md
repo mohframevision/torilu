@@ -4,15 +4,15 @@ icon: ☕
 desc: "كافيه في السلمانية."
 title_en: "Hazawi Lawal Cafe"
 desc_en: "A cafe in Al Salmaniya."
-nameTranslated: true
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - السلمانية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2186209, 50.567969
+coords: 26.2186201, 50.5681154
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2186209,50.567969
+  phone: "36644660"
+  maps: https://www.google.com/maps?cid=3310871156602092466
   instagram: ''
 ---

@@ -4,15 +4,15 @@ icon: 🍰
 desc: "حلويات في السلمانية."
 title_en: "Watch Tower Sweets"
 desc_en: "A sweets shop in Al Salmaniya."
-nameTranslated: true
+hours: "يومياً ٨ص - ١١م"
+hours_en: "Daily 8am - 11pm"
 categories:
   - السلمانية
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2167561, 50.5684662
+coords: 26.2169041, 50.5685868
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2167561,50.5684662
+  phone: "38223456"
+  maps: https://www.google.com/maps?cid=545235047394501050
   instagram: ''
 ---

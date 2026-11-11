@@ -1,18 +1,18 @@
 ---
-title: "معجنات طارق - المقشع"
+title: "حلويات طارق - المقشع"
 icon: 🥖
 desc: "مخبز في المقشع."
 title_en: "Tario Pastries - Al Maqsha"
 desc_en: "A bakery in Al Maqsha."
-nameTranslated: true
+hours: "يومياً ٨ص - ١٠م"
+hours_en: "Daily 8am - 10pm"
 categories:
   - المقشع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2192864, 50.5128803
+coords: 26.2192971, 50.5127499
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2192864,50.5128803
+  phone: "17592063"
+  maps: https://www.google.com/maps?cid=5795701341788160381
   instagram: ''
 ---

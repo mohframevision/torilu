@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في أبو صيبع."
 title_en: "Zayt Zaytoon"
 desc_en: "A restaurant in Abu Saiba."
-nameTranslated: true
+hours: "يومياً ٧ص - ٤م"
+hours_en: "Daily 7am - 4pm"
 categories:
   - أبو صيبع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2208727, 50.5032046
+coords: 26.2208612, 50.5031345
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2208727,50.5032046
+  phone: "16662666"
+  maps: https://www.google.com/maps?cid=2828888515275913716
   instagram: ''
 ---

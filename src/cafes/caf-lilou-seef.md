@@ -1,18 +1,16 @@
 ---
-title: "كافيه ليلو"
+title: "ليلو كافي السيف"
 icon: ☕
 desc: "كافيه في السيف."
 title_en: "Caf Lilou"
 desc_en: "A cafe in Seef."
-nameTranslated: true
 categories:
   - السيف
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2331843, 50.5410025
+coords: 26.2331713, 50.5409269
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2331843,50.5410025
+  phone: "17583939"
+  maps: https://www.google.com/maps?cid=8284157202500418693
   instagram: ''
 ---

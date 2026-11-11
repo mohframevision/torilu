@@ -4,15 +4,15 @@ icon: 🍽️
 desc: "مطعم في المقشع."
 title_en: "Alnajaf Sea Restaurant"
 desc_en: "A restaurant in Al Maqsha."
-nameTranslated: true
+hours: "يومياً ١١ص - ٦م"
+hours_en: "Daily 11am - 6pm"
 categories:
   - المقشع
-incomplete: true
 dateAdded: 2026-11-10
-coords: 26.2186822, 50.5146871
+coords: 26.2187184, 50.5146375
 links:
   website: ''
-  phone: ''
-  maps: https://www.google.com/maps/search/?api=1&query=26.2186822,50.5146871
+  phone: "17592215"
+  maps: https://www.google.com/maps?cid=4204855530885412988
   instagram: ''
 ---
