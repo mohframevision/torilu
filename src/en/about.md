@@ -24,7 +24,7 @@ langSwitchUrl: "/about.html"
 
 ## How do we collect the information?
 
-We collect place data from public sources: the places' own accounts, their ordering systems and some open maps, then organize it with AI assistance, and the site owner reviews it. We don't publish a place until its details are complete. If you see outdated or wrong information, please tell us so we can fix it.
+We collect place data from public sources: the places' own accounts, their ordering systems and some open maps, then organize it with AI assistance, and the site owner reviews it. We don't publish a place before confirming it exists, is open, and sits at the right spot on the map. Hours, phone numbers and menus are added as we go. If you see outdated or wrong information, please tell us so we can fix it.
 
 ## Is the current content final?
 

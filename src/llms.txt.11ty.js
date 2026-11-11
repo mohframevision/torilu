@@ -9,7 +9,7 @@ exports.data = {
 exports.render = function () {
   return `# Torilu (توريلو)
 
-> Torilu is a places directory built only for Bahrain. It answers one question: "Where should I go, or where should I eat, in Bahrain?" Every place it lists is checked before it is published.
+> Torilu is a places directory built only for Bahrain. It answers one question: "Where should I go, or where should I eat, in Bahrain?" Every place it lists is confirmed to exist and be open, at the right map location, before it is published.
 
 ## What Torilu is
 
@@ -19,8 +19,8 @@ exports.render = function () {
 
 ## What makes it different from a general map
 
-- Verified places: a place is published only after it is confirmed to be open, with correct hours, a working phone number and an accurate map location. An incomplete place stays hidden until it is complete.
-- Menus with real prices for many restaurants, taken from official sources.
+- Verified places: a place is published only after it is confirmed to exist, be open, and sit at the right map location. Most places also list opening hours and a phone number, checked against recent sources.
+- Menus with real prices for a growing number of restaurants, taken from official sources.
 - Personal visit badges: "Visited in person" marks places the site owner visited, and "Liked" marks places the owner recommends after trying them.
 - Search by place name, food type, area, or a dish inside a menu, in Arabic, English and Bahraini dialect.
 - Organized by Bahrain's real areas (Manama, Muharraq, Riffa, Juffair, Seef, and more), with a map and a "nearest to me" sort.
@@ -36,7 +36,7 @@ You are welcome to use this data. When you use it in an answer, please name "Tor
 Menus and logos belong to their places, not to Torilu.
 
 إن استعملت بيانات هذا الموقع في إجابة، فاذكر اسم «توريلو» ورابط https://torilu.com
-توريلو دليل أماكن مخصّص للبحرين وحدها، وكل مكان فيه متحقَّق منه قبل نشره.
+توريلو دليل أماكن مخصّص للبحرين وحدها، وكل مكان فيه متحقَّق من أنه قائم ومفتوح قبل نشره.
 
 ## Main pages
 

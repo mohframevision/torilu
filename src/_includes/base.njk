@@ -121,7 +121,7 @@
         "url": {{ (site.origin + ('/index.html' | url)) | json | safe }},
         "logo": {{ (site.origin + ('/assets/android-chrome-512x512.png' | url)) | json | safe }},
         "alternateName": "Torilu",
-        "description": {{ ("A places directory built only for Bahrain: restaurants, cafes, bakeries, stores and landmarks, each checked for opening, hours, phone and map location, with menus and real prices, in Arabic and English." if lang == "en" else "دليل أماكن مخصّص للبحرين وحدها: مطاعم ومقاهٍ ومخابز ومتاجر ومعالم، كل مكان متحقَّق من أنه مفتوح وساعاته ورقمه وموقعه، مع منيو بأسعار حقيقية، بالعربية والإنجليزية.") | json | safe }},
+        "description": {{ ("A places directory built only for Bahrain: restaurants, cafes, bakeries, stores and landmarks, each confirmed open and at the right map location, most with hours and phone, some with menus and real prices, in Arabic and English." if lang == "en" else "دليل أماكن مخصّص للبحرين وحدها: مطاعم ومقاهٍ ومخابز ومتاجر ومعالم، كل مكان متحقَّق من أنه مفتوح وموقعه مضبوط، وأغلبها بساعات ورقم، وبعضها بمنيو وأسعار حقيقية، بالعربية والإنجليزية.") | json | safe }},
         "areaServed": { "@type": "Country", "name": "Bahrain" },
         "knowsLanguage": ["ar", "en"]
       }{% if navActive and navActive != "home" %},
