@@ -4,6 +4,8 @@ icon: 🛍️
 desc: أكبر مركز تجاري بالبحرين، على الواجهة البحرية بقلب المنامة — تسوق، مطاعم، وترفيه.
 title_en: The Avenues Bahrain
 desc_en: "The largest mall in Bahrain, on the Manama waterfront, with shops, restaurants and entertainment."
+hours: "السبت - الأربعاء ١٠ص - ١٠م؛ الخميس - الجمعة ١٠ص - ١٢ص"
+hours_en: "Sat - Wed 10am - 10pm; Thu - Fri 10am - 12am"
 categories:
   - ترفيهي
   - عائلي

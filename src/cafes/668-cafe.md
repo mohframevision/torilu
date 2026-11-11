@@ -4,6 +4,8 @@ icon: "☕"
 desc: كافيه قهوة مختصة ١٠٠٪ أرابيكا بمدينة عيسى، ومشروباتهم الخاصة بسيرب 668، وماتشا فرابيه وكولد برو، ومخبوزات طازجة. عندهم فروع ثانية بالسايه وسار (ميركادو).
 title_en: 668 Cafe
 desc_en: A specialty coffee cafe in Isa Town serving 100% Arabica, with signature drinks made with their 668 syrup, matcha frappe, cold brew and fresh bakery items. Other branches in Al Sayah and Saar (Mercado).
+hours: "يومياً ٢٤ ساعة"
+hours_en: "Open 24 hours"
 categories:
   - قهوة مختصة
   - مدينة عيسى
