@@ -34,6 +34,7 @@ eleventyComputed:
 
 {# البطاقات مطبوعة هنا وقت البناء عشان محركات البحث تقرأ المحتوى فعلاً.
    main.js يستبدلها بنسخة تفاعلية مفلترة بنفس النوع (typeFilter أعلاه). #}
+<h2 class="sr-only">قائمة محلات {{ shopType.label }}</h2>
 <div class="card-grid">
 {%- for entry in (collections['car-shops'] or []) %}
 {%- if shopType.label in (entry.data.categories or []).concat(entry.data.categoriesCustom or []) %}
