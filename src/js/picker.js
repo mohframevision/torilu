@@ -725,6 +725,7 @@ function initRandomPicker() {
   }
   // القصاصة الحالية تُكرمش باليد كرةً في مكان الكرة
   async function ppCrumple(c) {
+    sfx("crumple");
     const snap = await ppSnapshot(c.clip, c.torn);
     scene.setPaper(snap, ppBack(c.clip), true);
     const rot0 = ppRot(c.clip.parentElement);
@@ -742,14 +743,16 @@ function initRandomPicker() {
     ppBall = { x: to[0], y: to[1], R, spin: 0.7 };
   }
   // الكرة تُفرد القصاصة الجديدة: من مكان الكرة إلى مكان القصاصة
-  async function ppUnfold(clip, torn) {
-    const snap = await ppSnapshot(clip, torn);
-    const fresh = !ppBall;
-    if (fresh) {
-      const [x, y] = ppBallAt();
-      ppBall = { x, y, R: ppBallR(), spin: 0 };
+  async function ppUnfold(clip, torn, ready) {
+    if (!ready) {
+      const snap = await ppSnapshot(clip, torn);
+      const fresh = !ppBall;
+      if (fresh) {
+        const [x, y] = ppBallAt();
+        ppBall = { x, y, R: ppBallR(), spin: 0 };
+      }
+      scene.setPaper(snap, ppBack(clip), !fresh);
     }
-    scene.setPaper(snap, ppBack(clip), !fresh);
     cancelAnimationFrame(ppHoldRaf);
     ballBox.style.visibility = "hidden";
     scene.show();
@@ -763,6 +766,45 @@ function initRandomPicker() {
     });
     clip.style.visibility = "";
     ppDone();
+  }
+  const ppWait = (ms) => new Promise((ok) => setTimeout(ok, Math.max(0, ms)));
+  const backOut = (p) => 1 + 2.2 * (p - 1) ** 3 + 1.2 * (p - 1) ** 2;
+  async function ppPick(winner) {
+    if (step === "clip" && current) await ppCrumple(current);
+    showBall();
+    ballBox.style.visibility = "hidden"; // كرة الجريدة المسطّحة لا تظهر أبداً: الكرة هي الورقة نفسها
+    const t0 = performance.now();
+    // القصاصة الجديدة تُبنى خارج النظر وتُصوَّر، فالكرة من أولها هي هذه الورقة
+    const made = makeClip(winner, () => {
+      resultBox.style.display = "block";
+      resultBox.style.visibility = "hidden";
+    });
+    const shot = ppSnapshot(made.clip, made.torn); // القياس يتم الآن (قبل أول انتظار)
+    resultBox.style.removeProperty("display");
+    resultBox.style.removeProperty("visibility");
+    const snap = await shot;
+    if (!ppBall) {
+      const R = ppBallR();
+      ppBall = { x: 0, y: 0, R, spin: 0 };
+      scene.setPaper(snap, ppBack(made.clip), false);
+      scene.show();
+      await ppRun(560, (p) => {
+        [ppBall.x, ppBall.y] = ppBallAt();
+        ppBall.R = R * (0.2 + 0.8 * backOut(p));
+        ppBall.spin = 1.4 * p;
+        scene.draw({ k: 1, x: ppBall.x, y: ppBall.y, R: ppBall.R, rot: 0, spin: ppBall.spin });
+      });
+      ppBall.R = R;
+      ppHold();
+    } else scene.setPaper(snap, ppBack(made.clip), true); // تُطبع على الكرة التي في اليد وهي تدور
+    await ppWait(1050 - (performance.now() - t0));
+    const from = centerOf(ballBox);
+    setStep("clip");
+    made.clip.style.visibility = "hidden";
+    finishClip(winner, made, from);
+    await ppUnfold(made.clip, made.torn, true);
+    made.clip.style.visibility = "";
+    clipDone(made.clip);
   }
   const BALL_WORDS = isEn
     ? ["Torilu", "Bahrain", "Today", "News", "Manama", "Menu"]
@@ -980,8 +1022,8 @@ function initRandomPicker() {
   }
 
   // الكرة تنفرد قصاصة: clip-path من شكل الكرة (بمكانها) إلى الحافة الممزقة
-  function unfold(item) {
-    const from = centerOf(ballBox);
+  // تُبنى القصاصة في مكانها (show: يُظهر مكانها للقياس)
+  function makeClip(item, show) {
     const wrap = document.createElement("div");
     wrap.className = "pk-clipwrap";
     const clip = document.createElement("article");
@@ -990,7 +1032,7 @@ function initRandomPicker() {
     clip.innerHTML = clipHtml(item);
     wrap.append(clip);
     resultBox.replaceChildren(wrap);
-    setStep("clip");
+    show();
     const w = clip.offsetWidth;
     const h = clip.offsetHeight;
     const seed = Math.floor(Math.random() * 1e9);
@@ -998,34 +1040,30 @@ function initRandomPicker() {
     clip.querySelector(".pk-crumple").innerHTML = pkCreases(w, h, seed + 7);
     const torn = pkTorn(seed);
     clip.style.clipPath = pkPoly(torn);
-    current = { clip, torn, w, h, seed };
-    clip.querySelector(".pk-again").addEventListener("click", again);
-    const to = centerOf(clip);
+    return { clip, torn, w, h, seed };
+  }
+  function finishClip(item, made, from) {
+    current = made;
+    made.clip.querySelector(".pk-again").addEventListener("click", again);
+    const to = centerOf(made.clip);
     current.dx = from[0] - to[0];
     current.dy = from[1] - to[1];
     live.textContent = t("picker_result").replace("{name}", itemTitle(item));
     later(420, () => sfx("success"));
-    const done = () => {
-      busy = false;
-      areaSelect.disabled = false;
-      (clip.querySelector(".pk-go") || clip.querySelector("a")).focus({ preventScroll: true });
-    };
+  }
+  function clipDone(clip) {
+    busy = false;
+    areaSelect.disabled = false;
+    (clip.querySelector(".pk-go") || clip.querySelector("a")).focus({ preventScroll: true });
+  }
+  function unfold(item) {
+    const from = centerOf(ballBox);
+    const made = makeClip(item, () => setStep("clip"));
+    finishClip(item, made, from);
+    const done = () => clipDone(made.clip);
     if (reduceMotion) {
-      clip.animate({ opacity: [0, 1] }, 250);
+      made.clip.animate({ opacity: [0, 1] }, 250);
       return done();
-    }
-    if (ppGet()) {
-      clip.style.visibility = "hidden";
-      // كرة الجريدة تبقى ظاهرة حتى تحلّ الورقة محلها (لا فراغ أثناء التصوير)
-      Object.assign(ballBox.style, { transition: "none", opacity: "1", transform: "none" });
-      ppUnfold(clip, torn)
-        .then(done)
-        .catch(() => {
-          clip.style.visibility = "";
-          ppDone();
-          crumpleFrames(current, false).onfinish = done;
-        });
-      return;
     }
     crumpleFrames(current, false).onfinish = done;
   }
@@ -1064,23 +1102,22 @@ function initRandomPicker() {
     busy = true;
     areaSelect.disabled = true;
     const winner = pickWinner();
+    if (!reduceMotion && ppGet()) {
+      ppPick(winner).catch(() => {
+        // أي عطل في الورقة: تعود الحركة القديمة من حيث كانت
+        ppDone();
+        if (current?.clip) current.clip.style.visibility = "";
+        showBall();
+        later(1050, () => unfold(winner));
+      });
+      return;
+    }
     const go = () => {
       showBall();
       later(1050, () => unfold(winner));
     };
     if (step === "clip" && current && !reduceMotion) {
       sfx("crumple");
-      if (ppGet()) {
-        const c = current;
-        ppCrumple(c)
-          .then(go)
-          .catch(() => {
-            c.clip.style.visibility = "";
-            ppDone();
-            crumpleFrames(c, true).onfinish = go;
-          });
-        return;
-      }
       const anim = crumpleFrames(current, true);
       anim.onfinish = go;
     } else go();
