@@ -6966,3 +6966,13 @@ a.section-card:active {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+
+/* الورقة (WebGL) فوق القصاصة وقت التكرمش والفرد فقط؛ ظلها يُرسم داخلها (فلتر ظل على لوحة بحجم المسرح ثقيل) */
+.pk-paper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+}

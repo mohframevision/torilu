@@ -267,6 +267,380 @@ function pkBlob(pts, w, h, r, seed) {
 }
 const pkPoly = (pts) => `polygon(${pts.map(([x, y]) => `${x.toFixed(2)}% ${y.toFixed(2)}%`).join(",")})`;
 
+// ===== الورقة: القصاصة تُكرمش باليد كرةً وتُفرد من جديد (WebGL) =====
+// القصاصة تُرسم مرة واحدة صورةً (من عناصر الصفحة نفسها)، ثم تُشدّ على شبكة ثلاثية الأبعاد تنضغط كرة:
+// الأطراف أولاً، بضغطتين، والطباعة تنثني مع الورق، والضوء من ميل كل وجه. بلا WebGL تبقى الحركة القديمة.
+const PP = { GX: 14, GY: 16, REST: 0.05 };
+const ppSn = (x, y, s) => Math.sin(x * 0.011 + s) * Math.cos(y * 0.009 - s * 1.3) + 0.5 * Math.sin((x + y) * 0.021 + s * 2.1);
+
+// صورة القصاصة كما تظهر: الخلفية والحدود والأيقونات والكلمات بخطوط الصفحة، داخل حافتها الممزقة
+async function ppSnapshot(clip, torn) {
+  const wrap = clip.parentElement;
+  const keepT = wrap.style.transform;
+  const keepV = clip.style.visibility;
+  wrap.style.transform = "none"; // القياس بلا الميل الخفيف
+  clip.style.visibility = "visible"; // القصاصة قد تكون مخفية تنتظر الفرد؛ لا تُرسم الشاشة بين هذين السطرين
+  try {
+    return await ppPaint(clip, torn);
+  } finally {
+    wrap.style.transform = keepT;
+    clip.style.visibility = keepV;
+  }
+}
+async function ppPaint(clip, torn) {
+  for (const a of clip.getAnimations({ subtree: true })) {
+    if (a.effect?.target === clip || a.effect?.getComputedTiming().iterations === Infinity) continue;
+    a.finish(); // الشكل الأخير (مثل زر يظهر متأخراً)
+  }
+  const box = clip.getBoundingClientRect();
+  const w = clip.offsetWidth;
+  const h = clip.offsetHeight;
+  const s = box.width / w || 1; // zoom الشاشات العريضة
+  const dpr = Math.min(3, (window.devicePixelRatio || 1) * s); // بدقة الشاشة (ومعها zoom الشاشات العريضة)
+  const cv = document.createElement("canvas");
+  cv.width = Math.round(w * dpr);
+  cv.height = Math.round(h * dpr);
+  const g = cv.getContext("2d");
+  g.scale(dpr, dpr);
+  const rel = (r) => [(r.left - box.left) / s, (r.top - box.top) / s, r.width / s, r.height / s];
+  const opacityOf = (el) => {
+    let o = 1;
+    for (let e = el; e && e !== clip.parentElement; e = e.parentElement) o *= parseFloat(getComputedStyle(e).opacity) || 0;
+    return o;
+  };
+  const svgs = [];
+  const under = [];
+  const jobs = [];
+  const tasks = [];
+  g.beginPath();
+  torn.forEach(([x, y], i) => (i ? g.lineTo : g.moveTo).call(g, (x / 100) * w, (y / 100) * h));
+  g.closePath();
+  g.clip();
+  g.fillStyle = getComputedStyle(clip).backgroundColor;
+  g.fillRect(0, 0, w, h);
+  const creases = clip.querySelector(".pk-creases svg");
+  if (creases) {
+    const [x, y, ew, eh] = rel(creases.getBoundingClientRect());
+    under.push({ el: creases, x, y, ew, eh, op: 1 });
+  }
+  for (const el of clip.querySelectorAll("*")) {
+    if (el.closest(".pk-crumple") || (el.ownerSVGElement && el.closest("svg") !== el)) continue;
+    const cs = getComputedStyle(el);
+    if (cs.visibility === "hidden" || cs.display === "none") continue;
+    const [x, y, ew, eh] = rel(el.getBoundingClientRect());
+    if (!ew || !eh) continue;
+    const op = opacityOf(el);
+    if (op <= 0.01) continue;
+    if (el.tagName.toLowerCase() === "svg") {
+      if (!el.closest(".pk-creases")) svgs.push({ el, x, y, ew, eh, op });
+      continue;
+    }
+    tasks.push(() => {
+    g.globalAlpha = op;
+    const bg = cs.backgroundColor;
+    if (bg && !/rgba\(.*,\s*0\)$|transparent/.test(bg)) {
+      g.fillStyle = bg;
+      const rad = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, ew / 2, eh / 2);
+      g.beginPath();
+      if (g.roundRect) g.roundRect(x, y, ew, eh, rad);
+      else g.rect(x, y, ew, eh);
+      g.fill();
+    }
+    for (const [side, x0, y0, x1, y1] of [
+      ["Top", x, y, x + ew, y],
+      ["Bottom", x, y + eh, x + ew, y + eh],
+      ["Left", x, y, x, y + eh],
+      ["Right", x + ew, y, x + ew, y + eh],
+    ]) {
+      const bw = parseFloat(cs[`border${side}Width`]) || 0;
+      const st = cs[`border${side}Style`];
+      if (!bw || st === "none" || st === "hidden") continue;
+      g.strokeStyle = cs[`border${side}Color`];
+      g.lineWidth = st === "double" ? Math.max(1, bw / 3) : bw;
+      g.setLineDash(st === "dashed" ? [bw * 3, bw * 2] : st === "dotted" ? [bw, bw * 1.6] : []);
+      const off = side === "Top" || side === "Left" ? bw / 2 : -bw / 2;
+      const hz = side === "Top" || side === "Bottom";
+      const line = (o) => {
+        g.beginPath();
+        g.moveTo(x0 + (hz ? 0 : o), y0 + (hz ? o : 0));
+        g.lineTo(x1 + (hz ? 0 : o), y1 + (hz ? o : 0));
+        g.stroke();
+      };
+      if (st === "double") {
+        line(off > 0 ? bw / 6 : -bw / 6);
+        line(off > 0 ? bw - bw / 6 : -bw + bw / 6);
+      } else line(off);
+    }
+    g.setLineDash([]);
+    });
+    // الكلمات: كل كلمة في مكانها الحقيقي (فالأسطر والاتجاه والتشكيل كما في الصفحة)
+    const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+    for (const node of el.childNodes) {
+      if (node.nodeType !== 3 || !node.textContent.trim()) continue;
+      const txt = node.textContent;
+      const tf = cs.textTransform;
+      const re = /\S+/g;
+      let m;
+      g.font = font;
+      g.fillStyle = cs.color;
+      g.direction = cs.direction;
+      g.textAlign = "left";
+      g.textBaseline = "alphabetic";
+      if ("letterSpacing" in g) g.letterSpacing = cs.letterSpacing === "normal" ? "0px" : cs.letterSpacing;
+      // نص مقصوص بـ line-clamp: الكلمات خارج صندوق العنصر لا تظهر في الصفحة، فلا تُرسم
+      const clipBox = cs.overflow !== "visible" ? rel(el.getBoundingClientRect()) : null;
+      while ((m = re.exec(txt))) {
+        const r = document.createRange();
+        r.setStart(node, m.index);
+        r.setEnd(node, m.index + m[0].length);
+        const rects = r.getClientRects();
+        const rect = rects[0];
+        if (!rect) continue;
+        if (rects.length > 1) {
+          for (let ci = m.index; ci < m.index + m[0].length; ci++) {
+            const rc = document.createRange();
+            rc.setStart(node, ci);
+            rc.setEnd(node, ci + 1);
+            const cr = rc.getClientRects()[0];
+            if (!cr) continue;
+            const [cx2, cy2] = rel(cr);
+            const ch = txt[ci];
+            jobs.push({ word: ch, x: cx2, y: cy2 + (g.measureText(ch).fontBoundingBoxAscent || parseFloat(cs.fontSize) * 0.85), font, color: cs.color, dir: cs.direction, ls: g.letterSpacing, op });
+          }
+          continue;
+        }
+        const [wx, wy, ww, wh] = rel(rect);
+        if (clipBox && (wy + wh > clipBox[1] + clipBox[3] + 1 || wx + ww > clipBox[0] + clipBox[2] + 1 || wx < clipBox[0] - 1)) continue;
+        const word = tf === "uppercase" ? m[0].toUpperCase() : tf === "lowercase" ? m[0].toLowerCase() : m[0];
+        const mt = g.measureText(word);
+        const asc = mt.fontBoundingBoxAscent || parseFloat(cs.fontSize) * 0.85;
+        jobs.push({ word, x: wx, y: wy + asc, font, color: cs.color, dir: cs.direction, ls: g.letterSpacing, op });
+      }
+    }
+  }
+  await ppDrawSvgs(g, under);
+  for (const task of tasks) task();
+  for (const j of jobs) {
+    g.globalAlpha = j.op;
+    g.font = j.font;
+    g.fillStyle = j.color;
+    g.direction = j.dir;
+    if ("letterSpacing" in g) g.letterSpacing = j.ls;
+    g.fillText(j.word, j.x, j.y);
+  }
+  await ppDrawSvgs(g, svgs);
+  return { cv, w, h };
+}
+// الأيقونات وخطوط التجعيد (SVG): تُنسخ بألوانها المحسوبة وتُرسم صوراً
+function ppDrawSvgs(g, svgs) {
+  const props = ["fill", "fill-opacity", "stroke", "stroke-width", "stroke-opacity", "opacity", "stroke-linecap", "stroke-linejoin", "stroke-dasharray", "stop-color", "color", "mix-blend-mode"];
+  return Promise.all(
+    svgs.map(
+      ({ el, x, y, ew, eh, op }) =>
+        new Promise((ok) => {
+          const copy = el.cloneNode(true);
+          const src = [el, ...el.querySelectorAll("*")];
+          const dst = [copy, ...copy.querySelectorAll("*")];
+          src.forEach((n, i) => {
+            const cs = getComputedStyle(n);
+            dst[i].setAttribute("style", props.map((p) => `${p}:${cs.getPropertyValue(p)}`).join(";"));
+          });
+          copy.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+          copy.setAttribute("width", ew);
+          copy.setAttribute("height", eh);
+          const img = new Image();
+          img.onload = () => {
+            g.globalAlpha = op;
+            g.drawImage(img, x, y, ew, eh);
+            ok();
+          };
+          img.onerror = ok;
+          img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(new XMLSerializer().serializeToString(copy))}`;
+        })
+    )
+  );
+}
+
+// المشهد: شبكة الورقة وظلّها، فوق القصاصة، بحجم المسرح
+function ppScene(host) {
+  const cv = document.createElement("canvas");
+  cv.className = "pk-paper";
+  cv.setAttribute("aria-hidden", "true");
+  const gl = cv.getContext("webgl", { alpha: true, antialias: true, premultipliedAlpha: true });
+  if (!gl) return null;
+  let lost = false; // كرت الشاشة قد يُسحب (جوال بالخلفية)؛ عندها تعود الحركة القديمة
+  cv.addEventListener("webglcontextlost", () => (lost = true));
+  const sh = (type, src) => {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  };
+  const pr = gl.createProgram();
+  gl.attachShader(pr, sh(gl.VERTEX_SHADER, "attribute vec3 p;attribute vec2 u;attribute vec3 n;uniform vec2 res;uniform vec2 off;varying vec2 v;varying vec3 m;void main(){v=u;m=n;vec2 q=p.xy+off;gl_Position=vec4(q.x/res.x*2.-1.,1.-q.y/res.y*2.,-p.z/3000.,1.);}"));
+  gl.attachShader(
+    pr,
+    sh(
+      gl.FRAGMENT_SHADER,
+      "precision mediump float;uniform sampler2D t;uniform vec3 bk;uniform float amt;uniform vec4 sc;varying vec2 v;varying vec3 m;" +
+        "void main(){vec4 c=texture2D(t,v);if(c.a<.5)discard;if(sc.a>0.){gl_FragColor=sc;return;}vec3 col=gl_FrontFacing?c.rgb:bk;vec3 L=normalize(vec3(-.45,-.55,.7));" +
+        "float l=(dot(normalize(m),L)-L.z)*1.15*amt-(gl_FrontFacing?0.:.06);" +
+        "col=l>0.?mix(col,vec3(1.,.99,.965),min(.5,l)):mix(col,vec3(.22,.18,.12),min(.32,-l));gl_FragColor=vec4(col,1.);}"
+    )
+  );
+  gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return null;
+  gl.useProgram(pr);
+  const { GX, GY } = PP;
+  const grid = [];
+  for (let j = 0; j <= GY; j++)
+    for (let i = 0; i <= GX; i++) {
+      const inner = i > 0 && i < GX && j > 0 && j < GY;
+      const n = j * 99 + i;
+      const r1 = Math.sin(n * 12.9898) * 43758.5453;
+      const r2 = Math.sin(n * 78.233) * 43758.5453;
+      grid.push([i / GX + (inner ? (r1 - Math.floor(r1) - 0.5) * 0.7 / GX : 0), j / GY + (inner ? (r2 - Math.floor(r2) - 0.5) * 0.7 / GY : 0)]);
+    }
+  const tris = [];
+  for (let j = 0; j < GY; j++)
+    for (let i = 0; i < GX; i++) {
+      const a = j * (GX + 1) + i;
+      const b = a + 1;
+      const c = a + GX + 1;
+      const d = c + 1;
+      tris.push(...((i + j) % 2 ? [a, b, d, a, d, c] : [a, b, c, b, d, c]));
+    }
+  const uv = new Float32Array(tris.length * 2);
+  tris.forEach((k, i) => uv.set(grid[k], i * 2));
+  const pos = new Float32Array(tris.length * 3);
+  const nrm = new Float32Array(tris.length * 3);
+  const buf = (data, name, size) => {
+    const b = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, b);
+    gl.bufferData(gl.ARRAY_BUFFER, data, data === uv ? gl.STATIC_DRAW : gl.DYNAMIC_DRAW);
+    const loc = gl.getAttribLocation(pr, name);
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0);
+    return b;
+  };
+  buf(uv, "u", 2);
+  const pB = buf(pos, "p", 3);
+  const nB = buf(nrm, "n", 3);
+  const tex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  for (const [k, v] of [
+    [gl.TEXTURE_MIN_FILTER, gl.LINEAR],
+    [gl.TEXTURE_MAG_FILTER, gl.LINEAR],
+    [gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE],
+    [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE],
+  ])
+    gl.texParameteri(gl.TEXTURE_2D, k, v);
+  const U = (n) => gl.getUniformLocation(pr, n);
+  gl.enable(gl.DEPTH_TEST);
+  gl.depthFunc(gl.LEQUAL);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+  let shadow = [0.24, 0.19, 0.1];
+  gl.frontFace(gl.CW); // y يُقلب إلى الأعلى في WebGL، فالوجه المطبوع يُرسم مع عقارب الساعة
+  let paper = null; // { w, h, balls }
+  host.append(cv);
+  // كرة مختلفة كل مرة: لكل نقطة مكانها على الكرة (الحواف تنطوي للداخل فلا زعانف)
+  const makeBall = (w, h, seed) =>
+    grid.map(([gx, gy]) => {
+      const x = (gx - 0.5) * w;
+      const y = (gy - 0.5) * h;
+      const nd = Math.min(1, Math.hypot(x / (w / 2), y / (h / 2)) / Math.SQRT2);
+      const a = Math.atan2(y, x) + 0.5 * ppSn(x, y, seed);
+      let r = Math.pow(nd, 0.6) * (0.84 + 0.18 * ppSn(y, x, seed + 2.5));
+      if (nd > 0.8) r *= 1 - 0.22 * ((nd - 0.8) / 0.2);
+      return { x, y, nd, bx: Math.cos(a) * Math.min(r, 0.95), by: Math.sin(a) * Math.min(r, 0.95), wz: ppSn(x, y, seed + 5.3), wx: ppSn(x, y, seed + 0.7), wy: ppSn(y, x, seed + 3.9) };
+    });
+  return {
+    cv,
+    get lost() {
+      return lost || gl.isContextLost();
+    },
+    // keep: نفس شكل الكرة (القصاصة الجديدة تُطبع على الكرة التي في اليد)، وإلا كرة جديدة
+    setPaper(snap, back, keep) {
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, snap.cv);
+      const seed = keep && paper ? paper.seed : 1.7 + Math.random() * 9;
+      paper = { w: snap.w, h: snap.h, seed, ball: makeBall(snap.w, snap.h, seed) };
+      gl.uniform3fv(U("bk"), back);
+      shadow = back[0] + back[1] + back[2] < 1 ? [0, 0, 0] : [0.24, 0.19, 0.1]; // ظل بني على الورق الفاتح، أسود على الداكن
+    },
+    // k: 0 مفرودة .. 1 كرة؛ x,y مركزها بمقاس المسرح؛ R نصف قطر الكرة؛ rot ميل القصاصة؛ spin دوران الكرة
+    draw({ k, x: cx, y: cy, R, rot, spin }) {
+      const dpr = Math.min(3, (window.devicePixelRatio || 1) * (parseFloat(document.documentElement.style.zoom) || 1));
+      const W = host.clientWidth;
+      const H = host.clientHeight;
+      if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) {
+        cv.width = Math.round(W * dpr);
+        cv.height = Math.round(H * dpr);
+      }
+      gl.viewport(0, 0, cv.width, cv.height);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      if (!paper) return;
+      const P = paper.ball.map((b) => {
+        const kv = Math.min(1, Math.max(0, k * 1.3 - 0.3 * (1 - b.nd)));
+        const e = 0.5 - 0.5 * Math.cos(Math.PI * kv);
+        const wob = Math.sin(Math.PI * kv) * R * 0.2;
+        let x = b.x + (b.bx * R - b.x) * e + b.wx * wob;
+        let y = b.y + (b.by * R - b.y) * e + b.wy * wob;
+        const rr = Math.hypot(x, y);
+        const z = Math.sqrt(Math.max(0, (R * 1.05) ** 2 - rr * rr)) * e + b.wz * (wob * 1.6 + R * 0.4 * e) + b.wz * 3 * (1 - e) * Math.min(1, k * 12); // مفرودة تماماً = مسطّحة تماماً
+        const a = rot + spin * e;
+        const c = Math.cos(a);
+        const s = Math.sin(a);
+        return [cx + x * c - y * s, cy + x * s + y * c, z];
+      });
+      for (let i = 0; i < tris.length; i += 3) {
+        const A = P[tris[i]];
+        const Bv = P[tris[i + 1]];
+        const C = P[tris[i + 2]];
+        const ux = Bv[0] - A[0];
+        const uy = Bv[1] - A[1];
+        const uz = Bv[2] - A[2];
+        const vx = C[0] - A[0];
+        const vy = C[1] - A[1];
+        const vz = C[2] - A[2];
+        let nx = uy * vz - uz * vy;
+        let ny = uz * vx - ux * vz;
+        let nz = ux * vy - uy * vx;
+        if (nz < 0) [nx, ny, nz] = [-nx, -ny, -nz];
+        for (let q = 0; q < 3; q++) {
+          pos.set(P[tris[i + q]], (i + q) * 3);
+          nrm.set([nx, ny, nz], (i + q) * 3);
+        }
+      }
+      gl.bindBuffer(gl.ARRAY_BUFFER, pB);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, pos);
+      gl.bindBuffer(gl.ARRAY_BUFFER, nB);
+      gl.bufferSubData(gl.ARRAY_BUFFER, 0, nrm);
+      gl.uniform2f(U("res"), W, H);
+      gl.uniform1f(U("amt"), (0.4 + 0.6 * Math.min(1, k * 5)) * Math.min(1, k * 12));
+      // الظل: نفس الورقة مزاحة للأسفل بطبقات شفافة (أرخص من فلتر ظل على لوحة بحجم المسرح)
+      gl.disable(gl.DEPTH_TEST);
+      for (const [dy, a] of [[18, 0.07], [11, 0.08], [5, 0.09]]) {
+        gl.uniform2f(U("off"), 0, dy);
+        gl.uniform4f(U("sc"), shadow[0] * a, shadow[1] * a, shadow[2] * a, a);
+        gl.drawArrays(gl.TRIANGLES, 0, tris.length);
+      }
+      gl.enable(gl.DEPTH_TEST);
+      gl.uniform2f(U("off"), 0, 0);
+      gl.uniform4f(U("sc"), 0, 0, 0, 0);
+      gl.drawArrays(gl.TRIANGLES, 0, tris.length);
+    },
+    hide() {
+      cv.hidden = true;
+    },
+    show() {
+      cv.hidden = false;
+    },
+  };
+}
+
 function initRandomPicker() {
   const root = document.getElementById("picker");
   if (!root) return;
@@ -281,6 +655,115 @@ function initRandomPicker() {
   const prompt = root.querySelector(".pk-prompt");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isEn = window.SITE_LANG === "en";
+  // الورقة بـWebGL (تُنشأ عند أول حاجة؛ بلا WebGL أو مع تقليل الحركة تبقى الحركة القديمة)
+  let scene = null;
+  let sceneTried = false;
+  let ppBall = null; // الكرة الظاهرة الآن: { x, y, R, spin }
+  let ppHoldRaf = 0;
+  const ppGet = () => {
+    if (!sceneTried) {
+      sceneTried = true;
+      try {
+        if (!reduceMotion) scene = ppScene(root);
+      } catch {
+        scene = null;
+      }
+      scene?.hide();
+    }
+    if (scene?.lost) {
+      scene.cv.remove();
+      scene = null;
+    }
+    return scene;
+  };
+  const ppRun = (ms, fn) =>
+    new Promise((ok) => {
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / ms);
+        fn(p);
+        if (p < 1) requestAnimationFrame(tick);
+        else ok();
+      };
+      requestAnimationFrame(tick);
+    });
+  const ppEase = (p) => 0.5 - 0.5 * Math.cos(Math.PI * p);
+  const ppSqueeze = (p) => 0.5 * (1 - (1 - Math.min(1, p / 0.55)) ** 3) + 0.5 * ppEase(Math.max(0, (p - 0.4) / 0.6)); // ضغطتان
+  const ppLocal = ([x, y]) => {
+    const r = root.getBoundingClientRect();
+    const z = parseFloat(document.documentElement.style.zoom) || 1;
+    return [x - r.left / z, y - r.top / z];
+  };
+  const ppRot = (el) => {
+    const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+    return Math.atan2(m.b, m.a);
+  };
+  const ppBack = (clip) => {
+    const c = getComputedStyle(clip).backgroundColor.match(/[\d.]+/g) || [242, 236, 223];
+    return [0, 1, 2].map((i) => (c[i] / 255) * 0.95);
+  };
+  function ppHold() {
+    cancelAnimationFrame(ppHoldRaf);
+    const t0 = performance.now();
+    const s0 = ppBall.spin;
+    const tick = (now) => {
+      if (!ppBall || step !== "ball") return;
+      ppBall.spin = s0 + ((now - t0) / 1000) * 0.9;
+      [ppBall.x, ppBall.y] = ppBallAt(); // يتبع المسرح إن تغيّر المقاس
+      scene.draw({ k: 1, x: ppBall.x, y: ppBall.y, R: ppBall.R, rot: 0, spin: ppBall.spin });
+      ppHoldRaf = requestAnimationFrame(tick);
+    };
+    ppHoldRaf = requestAnimationFrame(tick);
+  }
+  const ppBallR = () => (parseFloat(getComputedStyle(root).getPropertyValue("--ball")) || 220) * 0.4; // بحجم كرة الجريدة
+  const ppBallAt = () => ppLocal(centerOf(ballBox));
+  function ppDone() {
+    cancelAnimationFrame(ppHoldRaf);
+    ppBall = null;
+    scene?.hide();
+    for (const p of ["visibility", "opacity", "transform", "transition"]) ballBox.style.removeProperty(p);
+  }
+  // القصاصة الحالية تُكرمش باليد كرةً في مكان الكرة
+  async function ppCrumple(c) {
+    const snap = await ppSnapshot(c.clip, c.torn);
+    scene.setPaper(snap, ppBack(c.clip), true);
+    const rot0 = ppRot(c.clip.parentElement);
+    const R = ppBallR();
+    c.clip.style.visibility = "hidden";
+    scene.show();
+    let to = [0, 0];
+    await ppRun(680, (p) => {
+      const from = ppLocal(centerOf(c.clip)); // كل إطار: يتبع المسرح إن تغيّر المقاس
+      to = [from[0] + c.dx, from[1] + c.dy];
+      const k = ppSqueeze(p);
+      const m = ppEase(Math.min(1, p * 1.15));
+      scene.draw({ k, x: from[0] + (to[0] - from[0]) * m, y: from[1] + (to[1] - from[1]) * m, R, rot: rot0 * (1 - m), spin: 0.7 * p });
+    });
+    ppBall = { x: to[0], y: to[1], R, spin: 0.7 };
+  }
+  // الكرة تُفرد القصاصة الجديدة: من مكان الكرة إلى مكان القصاصة
+  async function ppUnfold(clip, torn) {
+    const snap = await ppSnapshot(clip, torn);
+    const fresh = !ppBall;
+    if (fresh) {
+      const [x, y] = ppBallAt();
+      ppBall = { x, y, R: ppBallR(), spin: 0 };
+    }
+    scene.setPaper(snap, ppBack(clip), !fresh);
+    cancelAnimationFrame(ppHoldRaf);
+    ballBox.style.visibility = "hidden";
+    scene.show();
+    const rot1 = ppRot(clip.parentElement);
+    const b = ppBall;
+    await ppRun(900, (p) => {
+      const to = ppLocal(centerOf(clip));
+      const k = (1 - p) ** 2.2;
+      const m = ppEase(Math.min(1, p * 1.1));
+      scene.draw({ k, x: b.x + (to[0] - b.x) * m, y: b.y + (to[1] - b.y) * m, R: b.R, rot: rot1 * m, spin: b.spin });
+    });
+    clip.style.visibility = "";
+    ppDone();
+  }
   const BALL_WORDS = isEn
     ? ["Torilu", "Bahrain", "Today", "News", "Manama", "Menu"]
     : ["توريلو", "البحرين", "اليوم", "أخبار", "المنامة", "قهوة"];
@@ -357,6 +840,7 @@ function initRandomPicker() {
 
   function setStep(s) {
     step = s;
+    if (s === "moon" || s === "wheel") ppDone();
     root.dataset.step = s;
     wheel.inert = s !== "wheel";
     moon.inert = s === "ball" || s === "clip";
@@ -448,6 +932,10 @@ function initRandomPicker() {
   function showBall() {
     ballBox.innerHTML = pkBall(Math.floor(Math.random() * 1e9), BALL_WORDS);
     setStep("ball");
+    if (ppBall) {
+      ballBox.style.visibility = "hidden";
+      ppHold();
+    }
     later(380, () => sfx("crumple"));
   }
   const zoomOf = () => parseFloat(document.documentElement.style.zoom) || 1;
@@ -526,6 +1014,19 @@ function initRandomPicker() {
       clip.animate({ opacity: [0, 1] }, 250);
       return done();
     }
+    if (ppGet()) {
+      clip.style.visibility = "hidden";
+      // كرة الجريدة تبقى ظاهرة حتى تحلّ الورقة محلها (لا فراغ أثناء التصوير)
+      Object.assign(ballBox.style, { transition: "none", opacity: "1", transform: "none" });
+      ppUnfold(clip, torn)
+        .then(done)
+        .catch(() => {
+          clip.style.visibility = "";
+          ppDone();
+          crumpleFrames(current, false).onfinish = done;
+        });
+      return;
+    }
     crumpleFrames(current, false).onfinish = done;
   }
 
@@ -569,6 +1070,17 @@ function initRandomPicker() {
     };
     if (step === "clip" && current && !reduceMotion) {
       sfx("crumple");
+      if (ppGet()) {
+        const c = current;
+        ppCrumple(c)
+          .then(go)
+          .catch(() => {
+            c.clip.style.visibility = "";
+            ppDone();
+            crumpleFrames(c, true).onfinish = go;
+          });
+        return;
+      }
       const anim = crumpleFrames(current, true);
       anim.onfinish = go;
     } else go();
