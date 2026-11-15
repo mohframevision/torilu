@@ -39,7 +39,23 @@
   {% set pageUrl = site.origin + (page.url | url) %}
   {% set ogType = "article" if sectionSlug else "website" %}
   {% set ogImageUrl = site.origin + image if image else site.origin + ('/assets/og-image.png' | url) %}
-  <title>{{ title }}</title>
+  {#- صفحة المكان: عنوان نتيجة قوقل يقول ما في الصفحة (من بياناتها فقط) واسم الموقع -#}
+  {% set docTitle = title %}
+  {% if sectionSlug and sectionSlug != "guides" and not (" | " in title) %}
+  {% set en = lang == "en" %}
+  {% set tw = (collections.all | pageByUrl(langSwitchUrl)) if en else none %}
+  {% set td = tw.data if tw else {} %}
+  {% set tlk = links or td.links or {} %}
+  {% set bits = [] %}
+  {% if (hours_en or td.hours_en) if en else hours %}{% set bits = (bits.push("Hours" if en else "الساعات"), bits) %}{% endif %}
+  {% if lat or td.lat or coords or td.coords or tlk.maps %}{% set bits = (bits.push("Location" if en else "الموقع"), bits) %}{% endif %}
+  {% set tmi = menuItems or td.menuItems %}
+  {% if tmi and tmi.length %}{% set bits = (bits.push("Menu & Prices" if en else "المنيو والأسعار"), bits) %}{% endif %}
+  {% if (imageCredit or td.imageCredit) == "© Mohamed" %}{% set bits = (bits.push("Real Photos" if en else "صور حقيقية"), bits) %}{% endif %}
+  {% if en and bits.length > 1 %}{% set what = bits.slice(0, -1).join(", ") + " & " + bits[bits.length - 1] %}{% else %}{% set what = bits.join(" و") %}{% endif %}
+  {% set docTitle = title + ((": " + what) if what else "") + (" | Torilu" if en else " | توريلو") %}
+  {% endif %}
+  <title>{{ docTitle }}</title>
   {% if metaDescription %}<meta name="description" content="{{ metaDescription }}" />{% endif %}
   {% if noindex %}<meta name="robots" content="noindex, nofollow" />{% endif %}
   <link rel="canonical" href="{{ pageUrl }}" />
