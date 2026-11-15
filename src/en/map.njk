@@ -14,9 +14,9 @@ langSwitchUrl: "/map.html"
   data-t-more="+{n} nearby" data-t-pick="Choose an area">
   <header class="page-header mp-head">
     <h1>Places Map</h1>
-    <p>Turn the map with your finger, and tap an area to see its places.</p>
+    <p>Drag the map, pinch to zoom, and tap an area to see its places.</p>
   </header>
-  <div class="mp-stage" id="mpStage" role="group" aria-label="Pop-up map of Bahrain. Use the left and right arrow keys to turn it.">
+  <div class="mp-stage" id="mpStage" role="group" aria-label="Pop-up map of Bahrain. The left and right arrow keys turn it, and the + and − keys zoom.">
     <svg class="mp-defs" width="0" height="0" aria-hidden="true"><defs><path id="mpLand" vector-effect="non-scaling-stroke" d="{{ m.d }}" /></defs></svg>
     <div class="mp-sheet mp-closed mp-flat" id="mpSheet" style="aspect-ratio: {{ m.w }} / {{ m.h }}">
       {% for side in ["l", "r"] %}
@@ -30,6 +30,7 @@ langSwitchUrl: "/map.html"
       {% endfor %}
     </div>
     <button type="button" class="btn secondary mp-back" id="mpBack" hidden>All of Bahrain</button>
+    <div class="mp-zoom"><button type="button" id="mpIn" aria-label="Zoom in" title="Zoom in">+</button><button type="button" id="mpOut" aria-label="Zoom out" title="Zoom out">−</button></div>
   </div>
   <label class="mp-pick"><span class="sr-only">Choose an area</span><select id="mpSelect" class="pk-area"></select></label>
   <p class="sr-only" id="mpSay" role="status"></p>

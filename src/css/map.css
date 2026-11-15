@@ -20,8 +20,9 @@
   perspective-origin: 50% 30%;
   /* clip لا hidden: المشهد لا يصير حاوية تمرير، فالتركيز على لسان بعيد لا يزيح الخريطة */
   overflow: clip;
-  /* السحب الأفقي يدير الخريطة، والعمودي يبقى لتمرير الصفحة، وتكبير الإصبعين يبقى للمتصفح */
-  touch-action: pan-y pinch-zoom;
+  /* كل لمسة داخل المشهد للخريطة (سحب وتقريب وتدوير) مثل خرائط قوقل؛ الصفحة تُمرَّر من خارجه */
+  touch-action: none;
+  overscroll-behavior: contain;
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
@@ -190,9 +191,48 @@
 }
 .mp-back {
   position: absolute;
-  inset-inline-start: 12px;
+  /* خارج حافتي المشهد الذائبتين (mask 7%) فلا يبهت */
+  inset-inline-start: calc(7% + 4px);
   top: 12px;
   z-index: 2;
+}
+/* الألسنة تمر تحته حين تتحرك الخريطة: مصمت لا شفاف، مثل زرّي التقريب */
+.mp-stage .mp-back {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+.mp-zoom {
+  position: absolute;
+  inset-inline-end: calc(7% + 4px);
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+.mp-zoom button {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text);
+  font: 700 22px/1 "Cairo", "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+.mp-zoom button + button {
+  border-top: 1px solid var(--color-border);
+}
+.mp-zoom button:hover {
+  background: var(--color-primary-soft);
+}
+.mp-zoom button:focus-visible {
+  outline: 3px solid var(--mp-ink);
+  outline-offset: -3px;
 }
 .mp-pick {
   display: block;

@@ -2,7 +2,8 @@
    تقرأ الأماكن من data.js (SITE_DATA) وتجمعها حسب المنطقة، وتضع كل منطقة لساناً ورقياً واقفاً
    على خريطة البحرين. المناطق المتقاربة تندمج في لسان واحد حتى لا تتزاحم، وتنفصل عند التقريب.
    إضافة مكان جديد = ملف جديد فقط: الخريطة تحسب كل شيء من البيانات.
-   الحالة أربعة أرقام: rz (دوران)، z (تقريب)، fx/fy (النقطة التي في وسط المشهد بوحدات الخريطة). */
+   الحالة أربعة أرقام: rz (دوران)، z (تقريب متصل من 1 إلى 6)، fx/fy (النقطة التي في وسط المشهد بوحدات الخريطة).
+   التحكم مثل خرائط قوقل: سحب، وإصبعان للتقريب والتدوير، وعجلة، وضغطتان. */
 (function () {
   const root = document.getElementById("mp");
   if (!root || typeof SITE_DATA === "undefined") return;
@@ -88,20 +89,29 @@
   placed.sort((p, q) => q.n - p.n);
 
   // ---------- الحالة والرسم ----------
-  const LEVELS = [1, 2.3, 4.6];
+  const ZMIN = 1;
+  const ZMAX = 6;
   const TILT = 50;
+  const COS = Math.cos((TILT * Math.PI) / 180);
+  const SIN = Math.sin((TILT * Math.PI) / 180);
+  const PERSP = 1100; // نفس perspective في map.css
   const view = { rz: -14, z: 1, fx: W / 2, fy: H / 2 };
-  let level = 0;
+  const clampZ = (z) => Math.min(ZMAX, Math.max(ZMIN, z));
   let picked = null; // المناطق المعروضة في اللوحة
   let px = 1; // بكسل لكل وحدة خريطة عند التقريب 1
   let base = 0; // عرض الورقة بالبكسل عند التقريب 1
-  let drawn = 1; // التقريب المرسوم فعلاً بحجم الورقة؛ الباقي تحويل مؤقت أثناء الانتقال
+  let drawn = 1; // التقريب المرسوم فعلاً بحجم الورقة؛ الباقي تحويل مؤقت أثناء الحركة
   function apply() {
+    view.z = clampZ(view.z);
+    view.fx = Math.min(W, Math.max(0, view.fx));
+    view.fy = Math.min(H, Math.max(0, view.fy));
     const s = view.z / drawn;
     sheet.style.transform =
       `rotateX(${TILT}deg) rotateZ(${view.rz}deg) scale(${s}) translate(${(W / 2 - view.fx) * px * drawn}px, ${(H / 2 - view.fy) * px * drawn}px)`;
     sheet.style.setProperty("--rz", view.rz);
     sheet.style.setProperty("--iz", 1 / s);
+    const home = view.z < 1.05 && Math.hypot(view.fx - W / 2, view.fy - H / 2) < W * 0.06;
+    if (back.hidden !== home) back.hidden = home;
   }
   // بعد الوقوف نرسم الورقة بحجمها الحقيقي بدل تكبير صورتها، فتبقى الخطوط حادّة عند التقريب
   function sharpen() {
@@ -127,15 +137,18 @@
     }
     return out;
   }
+  // الألسنة تُعاد بنصف درجة تقريب (×1.41)، لا مع كل إطار
+  const bucket = (z) => Math.max(0, Math.min(4, Math.floor(Math.log2(z) * 2 + 1e-6)));
 
   const halves = [...sheet.querySelectorAll(".mp-half")];
   let tabs = [];
-  let shown = 0; // المستوى الذي رُسمت له الألسنة فعلاً (رحلة مقطوعة تتركه مختلفاً عن level)
+  let shown = -1; // درجة التقريب التي رُسمت لها الألسنة
   function draw() {
     const had = tabs.find((t) => t.node.contains(document.activeElement));
     const keep = had && had.c.members[0];
     tabs.forEach((t) => t.node.remove());
-    tabs = clusters(LEVELS[level]).map((c, i) => {
+    shown = bucket(view.z);
+    tabs = clusters(2 ** (shown / 2)).map((c, i) => {
       const node = el("div", "mp-tab");
       const right = c.x >= W / 2;
       node.style.left = ((c.x - (right ? W / 2 : 0)) / (W / 2)) * 100 + "%";
@@ -150,13 +163,12 @@
       btn.addEventListener("click", () => tap(c));
       // لوحة المفاتيح: اللسان الذي خارج المشهد يأتي إلى الوسط حين يأخذ التركيز
       btn.addEventListener("focus", () => {
-        if (btn.matches(":focus-visible") && !sheet.classList.contains("mp-flat")) fly(level, c.x, c.y);
+        if (btn.matches(":focus-visible") && !sheet.classList.contains("mp-flat")) fly({ fx: c.x, fy: c.y });
       });
       node.append(btn);
       halves[right ? 1 : 0].append(node);
       return { node, c };
     });
-    shown = level;
     if (keep) {
       const t = tabs.find((k) => k.c.members.includes(keep));
       if (t) t.node.firstChild.focus({ preventScroll: true });
@@ -166,40 +178,96 @@
   function mark() {
     for (const t of tabs) t.node.classList.toggle("is-on", !!picked && t.c.members.some((a) => picked.includes(a)));
   }
+  // بعد كل حركة: الورقة حادّة، وإن تغيّرت درجة التقريب تنطوي الألسنة ثم تقف من جديد
+  let settleT = 0;
+  function settle() {
+    sharpen();
+    clearTimeout(settleT);
+    if (bucket(view.z) === shown) {
+      sheet.classList.remove("mp-flat");
+      return mark();
+    }
+    const wait = still || sheet.classList.contains("mp-flat") ? 0 : 180;
+    sheet.classList.add("mp-flat");
+    settleT = setTimeout(() => {
+      draw();
+      // إطاران: الأول يرسم الألسنة مطوية، والثاني يرفعها
+      requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.remove("mp-flat")));
+      snd("mapPop");
+    }, wait);
+  }
 
   // ---------- الانتقال ----------
   let flying = 0;
-  function fly(toLevel, x, y, done) {
+  let spin = 0;
+  function fly(to, done) {
+    cancelAnimationFrame(spin);
     const from = { ...view };
-    const to = { z: LEVELS[toLevel], fx: x, fy: y };
-    const changed = toLevel !== shown;
-    level = toLevel;
-    back.hidden = level === 0;
-    if (changed) sheet.classList.add("mp-flat");
+    const goal = { ...view, ...to };
+    goal.z = clampZ(goal.z);
+    goal.rz = from.rz + ((((goal.rz - from.rz) % 360) + 540) % 360) - 180; // أقصر دورة
+    if (bucket(goal.z) !== shown) sheet.classList.add("mp-flat");
     const t0 = performance.now();
     const dur = still ? 0 : 650;
     const id = ++flying;
-    const end = () => {
-      sharpen();
-      if (changed) {
-        draw();
-        // إطاران: الأول يرسم الألسنة مطوية، والثاني يرفعها
-        requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.remove("mp-flat")));
-        snd("mapPop");
-      } else mark();
-      if (done) done();
-    };
     (function step(now) {
       if (id !== flying) return;
       const k = dur ? Math.min(1, Math.max(0, (now - t0) / dur)) : 1;
       const e = 1 - Math.pow(1 - k, 3);
-      view.z = from.z + (to.z - from.z) * e;
-      view.fx = from.fx + (to.fx - from.fx) * e;
-      view.fy = from.fy + (to.fy - from.fy) * e;
+      for (const p of ["z", "fx", "fy", "rz"]) view[p] = from[p] + (goal[p] - from[p]) * e;
       apply();
-      if (k < 1) requestAnimationFrame(step);
-      else end();
+      if (k < 1) return requestAnimationFrame(step);
+      settle();
+      if (done) done();
     })(t0);
+  }
+
+  // نقطة على الشاشة ← نقطة على الخريطة: عكس المنظور والميل والدوران تماماً،
+  // فالنقطة التي تحت الإصبع تبقى تحته في السحب والتقريب (مثل خرائط قوقل)
+  function local(ev) {
+    const r = stage.getBoundingClientRect();
+    const k = r.width / stage.offsetWidth || 1; // الشاشات العريضة عليها zoom للصفحة
+    return [(ev.clientX - r.left) / k, (ev.clientY - r.top) / k];
+  }
+  function under(s, rz, z) {
+    const w = stage.offsetWidth;
+    const h = stage.offsetHeight;
+    const cx = w / 2;
+    const cy = h / 2 - 16; // مركز الورقة (top: calc(50% - 16px))
+    const oy = h * 0.3; // perspective-origin
+    const v = (PERSP * (s[1] - cy)) / (COS * PERSP + (s[1] - oy) * SIN);
+    const u = (s[0] - cx) * (1 - (v * SIN) / PERSP);
+    const a = (rz * Math.PI) / 180;
+    const f = px * z;
+    return [(u * Math.cos(a) + v * Math.sin(a)) / f, (-u * Math.sin(a) + v * Math.cos(a)) / f];
+  }
+  const mapAt = (s) => {
+    const [a, b] = under(s, view.rz, view.z);
+    return [view.fx + a, view.fy + b];
+  };
+  function pin(m, s) {
+    const [a, b] = under(s, view.rz, view.z);
+    view.fx = m[0] - a;
+    view.fy = m[1] - b;
+  }
+  function zoomAt(s, factor) {
+    const m = mapAt(s);
+    const z = clampZ(view.z * factor);
+    const [a, b] = under(s, view.rz, z);
+    fly({ z, fx: m[0] - a, fy: m[1] - b });
+  }
+
+  function tap(c) {
+    if (moved || sheet.classList.contains("mp-flat")) return;
+    if (c.members.length > 1 && view.z < ZMAX) {
+      snd("mapZoom");
+      say.textContent = c.members[0].label + " " + D.tMore.replace("{n}", c.members.length - 1);
+      fly({ z: Math.max(view.z * 2, 2), fx: c.x, fy: c.y });
+      return;
+    }
+    snd("mapPin");
+    show(c.members);
+    fly({ z: Math.max(view.z, 2.3), fx: c.x, fy: c.y });
   }
 
   function show(list) {
@@ -230,19 +298,6 @@
     mark();
   }
 
-  function tap(c) {
-    if (moved || sheet.classList.contains("mp-flat")) return;
-    if (c.members.length > 1 && level < LEVELS.length - 1) {
-      snd("mapZoom");
-      say.textContent = c.members[0].label + " " + D.tMore.replace("{n}", c.members.length - 1);
-      fly(level + 1, c.x, c.y);
-      return;
-    }
-    snd("mapPin");
-    show(c.members);
-    fly(Math.max(level, 1), c.x, c.y);
-  }
-
   // القائمة المنسدلة: طريق ثانٍ لكل منطقة (لوحة المفاتيح، وقارئ الشاشة، والمناطق المتلاصقة)
   select.append(new Option(D.tPick, ""));
   for (const a of areas.slice().sort((p, q) => p.label.localeCompare(q.label, en ? "en" : "ar"))) select.append(new Option(a.label + " (" + a.n + ")", a.name));
@@ -251,60 +306,131 @@
     if (!a) return;
     snd("mapPin");
     show([a]);
-    if (a.x != null) fly(LEVELS.length - 1, a.x, a.y);
+    if (a.x != null) fly({ z: 4.6, fx: a.x, fy: a.y });
   });
   back.addEventListener("click", () => {
     snd("mapBack");
-    fly(0, W / 2, H / 2);
+    fly({ z: 1, fx: W / 2, fy: H / 2, rz: -14 });
     select.focus({ preventScroll: true }); // الزر يختفي الآن، فلا نترك التركيز يضيع
   });
+  $("mpIn").addEventListener("click", () => fly({ z: view.z * 2 }));
+  $("mpOut").addEventListener("click", () => fly({ z: view.z / 2 }));
 
-  // ---------- السحب: يدير الخريطة حول النقطة التي في الوسط، مع قصور ذاتي قصير ----------
+  // ---------- اللمس والفأرة، مثل خرائط قوقل ----------
+  // إصبع واحد يسحب الخريطة (مع انزلاق بعد الإفلات)، وإصبعان يقرّبان ويدوّران حول نقطتهما،
+  // والعجلة تقرّب نحو المؤشر، والضغطتان السريعتان تقرّبان. السحب الطويل لا يُحسب ضغطة على منطقة.
+  const pts = new Map();
+  let g = null;
   let moved = false;
-  let drag = null;
-  let spin = 0;
+  let hist = [];
+  let lastTap = null;
+  const mid = () => {
+    const l = [...pts.values()];
+    return l.length > 1 ? [(l[0][0] + l[1][0]) / 2, (l[0][1] + l[1][1]) / 2] : l[0];
+  };
+  const pair = () => {
+    const [p, q] = [...pts.values()];
+    return { d: Math.hypot(q[0] - p[0], q[1] - p[1]) || 1, ang: Math.atan2(q[1] - p[1], q[0] - p[0]) };
+  };
+  function begin() {
+    const s = mid();
+    g = { m: mapAt(s), s, z: view.z, rz: view.rz, two: pts.size > 1, ...(pts.size > 1 ? pair() : {}) };
+    hist = [];
+  }
   stage.addEventListener("pointerdown", (ev) => {
-    if (!ev.isPrimary || ev.button) return;
-    drag = { x: ev.clientX, last: ev.clientX, v: 0 };
-    moved = false;
+    if (ev.button || pts.size >= 2 || ev.target.closest(".mp-zoom, .mp-back")) return;
+    flying++;
     cancelAnimationFrame(spin);
+    if (!pts.size) moved = false;
+    pts.set(ev.pointerId, local(ev));
+    begin();
   });
   stage.addEventListener("pointermove", (ev) => {
-    if (!drag || !ev.isPrimary) return;
-    if (!moved && Math.abs(ev.clientX - drag.x) < 7) return;
+    if (!pts.has(ev.pointerId)) return;
+    pts.set(ev.pointerId, local(ev));
+    const s = mid();
     if (!moved) {
+      if (pts.size < 2 && Math.hypot(s[0] - g.s[0], s[1] - g.s[1]) < 7) return;
       moved = true;
       stage.setPointerCapture(ev.pointerId);
       stage.classList.add("is-drag");
     }
-    drag.v = (drag.last - ev.clientX) * 0.38;
-    drag.last = ev.clientX;
-    view.rz += drag.v;
+    if (g.two && pts.size > 1) {
+      const p = pair();
+      view.z = clampZ((g.z * p.d) / g.d);
+      view.rz = g.rz + ((p.ang - g.ang) * 180) / Math.PI;
+    }
+    pin(g.m, s);
     apply();
+    hist.push({ fx: view.fx, fy: view.fy, t: ev.timeStamp });
+    if (hist.length > 6) hist.shift();
   });
-  const drop = () => {
-    if (!drag) return;
-    let v = still ? 0 : drag.v;
-    drag = null;
+  function lift(ev) {
+    if (!pts.has(ev.pointerId)) return;
+    const s = pts.get(ev.pointerId);
+    pts.delete(ev.pointerId);
+    if (pts.size) {
+      g.two = false; // الإصبع الباقي يكمل سحباً من حيث هو، بلا قفزة
+      return begin();
+    }
     stage.classList.remove("is-drag");
+    if (!moved) {
+      // ضغطتان سريعتان على الأرض (لا على لسان) تقرّبان نحو موضعهما
+      const onTab = ev.target instanceof Element && ev.target.closest(".mp-tab");
+      if (!onTab && lastTap && ev.timeStamp - lastTap.t < 320 && Math.hypot(s[0] - lastTap.s[0], s[1] - lastTap.s[1]) < 30) {
+        lastTap = null;
+        snd("mapZoom");
+        zoomAt(s, 2);
+      } else lastTap = onTab ? null : { t: ev.timeStamp, s };
+      return;
+    }
     // الضغطة التي تلي السحب مباشرة ليست اختياراً
     setTimeout(() => (moved = false), 0);
+    const a = hist.find((h) => ev.timeStamp - h.t < 100);
+    const b = hist[hist.length - 1];
+    if (still || g.two || !a || b === a || ev.timeStamp - b.t > 60) return settle();
+    let vx = ((b.fx - a.fx) / (b.t - a.t)) * 16;
+    let vy = ((b.fy - a.fy) / (b.t - a.t)) * 16;
     (function glide() {
-      if (Math.abs(v) < 0.05) return;
-      view.rz += v;
-      v *= 0.93;
+      vx *= 0.92;
+      vy *= 0.92;
+      view.fx += vx;
+      view.fy += vy;
       apply();
+      if (Math.hypot(vx, vy) * px * view.z < 0.3) return settle();
       spin = requestAnimationFrame(glide);
     })();
-  };
+  }
   // على النافذة لا على المشهد: الإفلات خارج الخريطة يجب أن ينهي السحب أيضاً
-  window.addEventListener("pointerup", drop);
-  window.addEventListener("pointercancel", drop);
+  window.addEventListener("pointerup", lift);
+  window.addEventListener("pointercancel", lift);
+  let wheelT = 0;
+  stage.addEventListener(
+    "wheel",
+    (ev) => {
+      ev.preventDefault();
+      flying++;
+      cancelAnimationFrame(spin);
+      const s = local(ev);
+      const m = mapAt(s);
+      const dy = ev.deltaY * (ev.deltaMode === 1 ? 16 : ev.deltaMode === 2 ? 400 : 1);
+      // ctrlKey: قرص لوحة اللمس في الحاسوب، دفعاته صغيرة فتحتاج معاملاً أكبر
+      view.z = clampZ(view.z * Math.exp(-dy * (ev.ctrlKey ? 0.01 : 0.0018)));
+      pin(m, s);
+      apply();
+      clearTimeout(wheelT);
+      wheelT = setTimeout(settle, 160);
+    },
+    { passive: false }
+  );
   stage.addEventListener("keydown", (ev) => {
-    if (ev.key !== "ArrowLeft" && ev.key !== "ArrowRight") return;
+    if (ev.target.closest("button")?.id === "mpBack") return;
+    const k = ev.key;
+    if (k === "ArrowLeft" || k === "ArrowRight") fly({ rz: view.rz + (k === "ArrowLeft" ? 15 : -15) });
+    else if (k === "+" || k === "=") fly({ z: view.z * 2 });
+    else if (k === "-" || k === "_") fly({ z: view.z / 2 });
+    else return;
     ev.preventDefault();
-    view.rz += ev.key === "ArrowLeft" ? 12 : -12;
-    apply();
   });
 
   // ---------- البداية: الورقة تنفتح ككتاب، ثم تقف الألسنة ----------
