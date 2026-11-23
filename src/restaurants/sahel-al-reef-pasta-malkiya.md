@@ -4,10 +4,8 @@ icon: 🍽️
 desc: "فرع الباستا من مطعم ساحل الريف في المالكية."
 title_en: "Sahel Al Reef Restaurant (Pasta) - Malkiya"
 desc_en: "The pasta branch of Sahel Al Reef Restaurant in Malkiya."
-nameTranslated: true
 categories:
   - المالكية
-incomplete: true
 dateAdded: 2026-11-16
 coords: 26.0953980, 50.4869000
 links:
