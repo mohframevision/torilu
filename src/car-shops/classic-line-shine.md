@@ -14,6 +14,6 @@ coords: 26.198903704033395, 50.53269963974421
 links:
   website: ''
   phone: '33508887'
-  maps: https://maps.app.goo.gl/ek3qDkwsVwAW67f9A
+  maps: https://www.google.com/maps?q=26.198903704033395,50.53269963974421
   instagram: https://www.instagram.com/classic_line_shine/
 ---

@@ -5,6 +5,7 @@ desc: مطعم إيراني بمنطقة الجنبية، يقدم المأكو�
 title_en: Homa Restaurant (Iranian)
 desc_en: An Iranian restaurant in Janabiyah, serving authentic Persian cuisine with traditional recipes.
 categories:
+  - الجنبية
   - إيراني
 dateAdded: 2026-08-02
 links:

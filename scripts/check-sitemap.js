@@ -34,7 +34,7 @@ for (const f of allHtmlFiles) {
   const isNoindex = /<meta\s+name="robots"[^>]*noindex/i.test(html);
   if (isNoindex) continue;
   // index.html الجذر يُمثَّل بالخريطة كـ "/" لا "index.html"
-  indexablePages.add(rel === "index.html" ? "" : rel);
+  indexablePages.add(rel.replace(/(^|\/)index\.html$/, "$1"));
 }
 
 const sitemapFiles = fs
@@ -64,7 +64,7 @@ for (const sf of sitemapFiles) {
 
   const missing = [...indexablePages].filter((p) => !urlPaths.has(p)).sort();
   const orphans = [...urlPaths]
-    .filter((p) => p && !allHtmlFiles.some((f) => path.relative(SITE, f).split(path.sep).join("/") === p))
+    .filter((p) => p && !allHtmlFiles.some((f) => path.relative(SITE, f).split(path.sep).join("/") === (p.endsWith("/") ? p + "index.html" : p)))
     .sort();
 
   console.log(`\n== ${sf}: ${locs.length} رابط، ${indexablePages.size} صفحة قابلة للفهرسة فعلياً ==`);

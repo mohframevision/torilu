@@ -80,7 +80,7 @@
   <meta name="apple-mobile-web-app-title" content="{{ 'Torilu' if lang == 'en' else 'توريلو' }}" />
 
   <meta property="og:type" content="{{ ogType }}" />
-  <meta property="og:site_name" content="{{ site.name }}" />
+  <meta property="og:site_name" content="{{ 'Torilu' if lang == 'en' else site.name }}" />
   <meta property="og:locale" content="{{ 'en_US' if lang == 'en' else site.locale }}" />
   {% if langSwitchUrl %}<meta property="og:locale:alternate" content="{{ site.locale if lang == 'en' else 'en_US' }}" />{% endif %}
   <meta property="og:url" content="{{ pageUrl }}" />
@@ -105,13 +105,13 @@
      غالباً أكبر عنصر مرئي بالصفحة. لا أثر مرئي، ملف عادي مسبقاً في <img>
      بجسم الصفحة (detail-item.njk)، هذا فقط يبدأ تحميله أبكر. #}
   {% if image %}<link rel="preload" as="image" href="{{ image }}" fetchpriority="high" />{% endif %}
-  <link rel="stylesheet" href="{{ '/css/style.css' | url }}?v={{ buildVersion }}" />
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}?v={{ assetV['css/style.css'] }}" />
   {# لون الموقع من لوحة التحكم (مجموعة "شكل الموقع") — ملف خارجي منفصل عمداً،
      لأن سياسة CSP (style-src) ما تسمح بوسم <style> مضمّن، بس تسمح بملف من
      نفس الموقع. يُحمَّل بعد style.css مباشرة فيتغلّب على قيمته الافتراضية. #}
   <link rel="stylesheet" href="{{ '/theme.css' | url }}?v={{ buildVersion }}" />
   {# ملف تنسيق خاص بصفحة (مثل menu.css لقوالب المنيو وخطوطها) — بس بالصفحات اللي تطلبه #}
-  {% if pageCss %}<link rel="stylesheet" href="{{ ('/css/' + pageCss + '.css') | url }}?v={{ buildVersion }}" />{% endif %}
+  {% if pageCss %}<link rel="stylesheet" href="{{ ('/css/' + pageCss + '.css') | url }}?v={{ assetV['css/' + pageCss + '.css'] }}" />{% endif %}
   {# ملف خارجي (وليس سكربت مضمّن) عمداً — يسمح بسياسة CSP صارمة script-src
      بدون unsafe-inline. يُحمَّل بدون defer/async فيشتغل قبل أول رسم للصفحة
      (يمنع "وميض" المظهر الفاتح قبل تطبيق المظهر الداكن المحفوظ) #}
@@ -119,7 +119,7 @@
      لا مفتوحة ثم تقفز. المتصفح الذي لا يعرف rel=expect يتجاهله، ومع تقليل الحركة لا طيّ فلا انتظار #}
   {% if pageScript == "fold" %}<link rel="expect" href="#np-ready" blocking="render" media="(prefers-reduced-motion: no-preference)" />{% endif %}
   {# بعد ملفات التنسيق عمداً: لو سبقها لقرّر كروم تعطيل انتقال الصفحات (@view-transition) قبل أن يقرأ style.css #}
-  <script src="{{ '/js/theme-init.js' | url }}"></script>
+  <script src="{{ '/js/theme-init.js' | url }}?v={{ assetV['js/theme-init.js'] }}"></script>
 
   <script type="application/ld+json">
   {
@@ -127,14 +127,14 @@
     "@graph": [
       {
         "@type": "WebSite",
-        "name": {{ site.name | json | safe }},
-        "url": {{ (site.origin + ('/index.html' | url)) | json | safe }},
+        "name": {{ ('Torilu' if lang == 'en' else site.name) | json | safe }},
+        "url": {{ (site.origin + ('/' | url)) | json | safe }},
         "inLanguage": "{{ lang }}"
       },
       {
         "@type": "Organization",
         "name": {{ site.name | json | safe }},
-        "url": {{ (site.origin + ('/index.html' | url)) | json | safe }},
+        "url": {{ (site.origin + ('/' | url)) | json | safe }},
         "logo": {{ (site.origin + ('/assets/android-chrome-512x512.png' | url)) | json | safe }},
         "alternateName": "Torilu",
         "description": {{ ("A places directory built only for Bahrain: restaurants, cafes, bakeries, stores and landmarks, each confirmed open and at the right map location, most with hours and phone, some with menus and real prices, in Arabic and English." if lang == "en" else "دليل أماكن مخصّص للبحرين وحدها: مطاعم ومقاهٍ ومخابز ومتاجر ومعالم، كل مكان متحقَّق من أنه مفتوح وموقعه مضبوط، وأغلبها بساعات ورقم، وبعضها بمنيو وأسعار حقيقية، بالعربية والإنجليزية.") | json | safe }},
@@ -150,7 +150,7 @@
             "@type": "ListItem",
             "position": 1,
             "name": {{ t.nav_home | json | safe }},
-            "item": {{ (site.origin + (('/en/index.html' if lang == 'en' else '/index.html') | url)) | json | safe }}
+            "item": {{ (site.origin + (('/en/' if lang == 'en' else '/') | url)) | json | safe }}
           },
           {
             "@type": "ListItem",
@@ -193,7 +193,7 @@
         <a class="icon-btn icon-btn-picker{% if navActive == "picker" %} active{% endif %}"{% if navActive == "picker" %} aria-current="page"{% endif %} href="{{ (('/en/picker.html' if lang == 'en' else '/picker.html')) | url }}" title="{{ t.nav_picker }}" aria-label="{{ t.nav_picker }}">{{ icon("dice") }}</a>
         <span class="header-divider" aria-hidden="true"></span>
         {# على الشاشات الضيقة نعرض الاختصار بدل الاسم الكامل عشان يضل الهيدر بصف واحد #}
-        <a class="lang-switch" href="{{ (langSwitchUrl or ('/index.html' if lang == 'en' else '/en/index.html')) | url }}" title="{{ t.lang_switch }}" aria-label="{{ t.lang_switch }}"><span class="lang-full">{{ t.lang_switch }}</span><span class="lang-short" aria-hidden="true">{{ t.lang_switch_short }}</span></a>
+        <a class="lang-switch" lang="{{ 'ar' if lang == 'en' else 'en' }}" hreflang="{{ 'ar' if lang == 'en' else 'en' }}" href="{{ (langSwitchUrl or ('/index.html' if lang == 'en' else '/en/index.html')) | url }}" title="{{ t.lang_switch }}" aria-label="{{ t.lang_switch }}"><span class="lang-full">{{ t.lang_switch }}</span><span class="lang-short" aria-hidden="true">{{ t.lang_switch_short }}</span></a>
         {# مخفي افتراضياً — يظهره الجافاسكربت فقط لو المتصفح أعلن فعلاً إن
            الموقع قابل للتثبيت (beforeinstallprompt). زر تثبيت لا يعمل أسوأ
            من غيابه #}
@@ -263,14 +263,14 @@
       "i18n": { {{ lang | json | safe }}: {{ i18n[lang] | json | safe }} }
     }
   </script>
-  <script src="{{ '/js/bootstrap.js' | url }}?v={{ buildVersion }}"></script>
+  <script src="{{ '/js/bootstrap.js' | url }}?v={{ assetV['js/bootstrap.js'] }}"></script>
   {# data.js (بيانات كل الأماكن) فقط للصفحات التي تقرؤه: الأقسام والمفضلة والرئيسية والبحث و«اختار لي» والخطة والترحيب،
      والتواصل (اسم القسم في رسالة البلاغ). صفحات الأماكن والمقالات وغيرها لا تحتاجه، وعامل الخدمة يخزّنه للاستعمال بلا اتصال #}
   {% if section or isFavoritesPage or navActive in ["home", "picker", "plan", "welcome", "search", "contact", "map"] %}<script src="{{ '/js/data.js' | url }}?v={{ buildVersion }}"></script>{% endif %}
-  <script src="{{ '/js/sfx.js' | url }}?v={{ buildVersion }}"></script>
-  <script src="{{ '/js/main.js' | url }}?v={{ buildVersion }}"></script>
+  <script src="{{ '/js/sfx.js' | url }}?v={{ assetV['js/sfx.js'] }}"></script>
+  <script src="{{ '/js/main.js' | url }}?v={{ assetV['js/main.js'] }}"></script>
   {# سكربت خاص بصفحة وحدة (مثل صوتيات توريلو) — ما ينزل مع بقية الصفحات #}
-  {% if pageScript %}<script src="{{ ('/js/' + pageScript + '.js') | url }}?v={{ buildVersion }}"></script>{% endif %}
+  {% if pageScript %}<script src="{{ ('/js/' + pageScript + '.js') | url }}?v={{ assetV['js/' + pageScript + '.js'] }}"></script>{% endif %}
   {% if pageScript == "fold" %}<i id="np-ready" hidden></i>{% endif %}
 </body>
 </html>

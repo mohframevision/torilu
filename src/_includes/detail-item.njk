@@ -48,10 +48,14 @@ pageScript: fold
   "description": {{ desc | json | safe }},
   "inLanguage": "{{ lang }}",
   {% if image %}"image": {{ (site.origin + image) | json | safe }},{% endif %}
+  {#- الإنجليزية تأخذ تاريخ نظيرتها العربية، كما في article-newspaper.njk -#}
+  {% set pubDate = dateAdded or (((collections.all | pageByUrl(langSwitchUrl)) or {}).data or {}).dateAdded if lang == "en" else dateAdded %}
+  {% if pubDate %}"datePublished": {{ pubDate | isoDate | json | safe }},{% endif %}
+  "publisher": {"@type": "Organization", "name": {{ ('Torilu' if lang == 'en' else site.name) | json | safe }}, "url": {{ (site.origin + ('/' | url)) | json | safe }}},
   "isPartOf": {
     "@type": "WebSite",
-    "name": {{ site.name | json | safe }},
-    "url": {{ (site.origin + ('/index.html' | url)) | json | safe }}
+    "name": {{ ('Torilu' if lang == 'en' else site.name) | json | safe }},
+    "url": {{ (site.origin + ('/' | url)) | json | safe }}
   }
 }
 </script>

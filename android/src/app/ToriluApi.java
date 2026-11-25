@@ -1,6 +1,7 @@
 package bh.mohframevision.torilu;
 
 import android.app.Activity;
+import android.net.http.HttpResponseCache;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,6 +35,14 @@ class ToriluApi {
     // Context العادي ما يوفّره — تضييق التوقيع هنا يمنع استثناء تحويل نوع
     // (ClassCastException) لاحقاً بدل ما يُكتشف وقت التصريف
     static void fetch(Activity activity, Callback callback) {
+        // كاش HTTP للنظام: يعيد التحقق بـETag/Last-Modified فيرجع 304 بدل تنزيل
+        // الملف كاملاً (~1MB) مع كل تشغيل. الفشل هنا لا يوقف الجلب.
+        if (HttpResponseCache.getInstalled() == null) {
+            try {
+                HttpResponseCache.install(new File(activity.getCacheDir(), "http"), 5L << 20);
+            } catch (Exception ignored) {
+            }
+        }
         new FetchThread(activity, callback).start();
     }
 

@@ -5,6 +5,7 @@ desc: أكبر موزع مكيفات وإلكترونيات بالبحرين —
 title_en: Al Salam Gas - Malkiya Branch
 desc_en: "The largest AC and electronics distributor in Bahrain. Sells air conditioners (split, window, portable), large home appliances (washing machines, fridges, freezers, dishwashers), small kitchen appliances, air care and cleaning devices, TVs and entertainment systems, and built-in kitchens."
 categories:
+  - المالكية
   - إلكترونيات
 dateAdded: 2026-08-03
 links:

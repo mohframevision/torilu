@@ -148,32 +148,75 @@
     const keep = had && had.c.members[0];
     tabs.forEach((t) => t.node.remove());
     shown = bucket(view.z);
-    tabs = clusters(2 ** (shown / 2)).map((c, i) => {
-      const node = el("div", "mp-tab");
-      const right = c.x >= W / 2;
-      node.style.left = ((c.x - (right ? W / 2 : 0)) / (W / 2)) * 100 + "%";
-      node.style.top = (c.y / H) * 100 + "%";
-      const btn = el("button");
-      btn.type = "button";
-      const extra = c.members.length - 1;
-      btn.append(el("span", "", c.members[0].label), el("b", "", String(c.n)));
-      btn.setAttribute("aria-label", c.members[0].label + (extra ? " " + D.tMore.replace("{n}", extra) : "") + (en ? ", " : "، ") + count(c.n));
-      btn.style.setProperty("--st", Math.round(10 + Math.min(34, 6 * Math.sqrt(c.n))) + "px");
-      btn.style.setProperty("--d", (still ? 0 : 0.03 * i) + "s");
-      btn.addEventListener("click", () => tap(c));
-      // لوحة المفاتيح: اللسان الذي خارج المشهد يأتي إلى الوسط حين يأخذ التركيز
-      btn.addEventListener("focus", () => {
-        if (btn.matches(":focus-visible") && !sheet.classList.contains("mp-flat")) fly({ fx: c.x, fy: c.y });
-      });
-      node.append(btn);
-      halves[right ? 1 : 0].append(node);
-      return { node, c };
-    });
+    const z = 2 ** (shown / 2);
+    let cs = clusters(z);
+    for (;;) {
+      tabs = cs.map(build);
+      const hit = clash(z);
+      if (!hit) break;
+      // بطاقتان تتراكبان على الشاشة (البيضاوي تقدير): الأصغر تنضم للأكبر ونعيد الرسم
+      const [host, guest] = hit[0].n >= hit[1].n ? hit : [hit[1], hit[0]];
+      host.members.push(...guest.members);
+      host.n += guest.n;
+      cs = cs.filter((k) => k !== guest);
+      tabs.forEach((t) => t.node.remove());
+    }
     if (keep) {
       const t = tabs.find((k) => k.c.members.includes(keep));
       if (t) t.node.firstChild.focus({ preventScroll: true });
     }
     mark();
+  }
+  // مكان البطاقة الواقفة على الشاشة تقريباً: عكس under() (الدوران ثم الميل ثم المنظور)، والبطاقة والساق مائلتان بزاوية الميل
+  function clash(z) {
+    const a = (view.rz * Math.PI) / 180;
+    const f = px * z;
+    const oy = stage.offsetHeight * 0.3 - (stage.offsetHeight / 2 - 16); // perspective-origin نسبةً لمركز الورقة
+    const box = ({ node, c }) => {
+      const b = node.firstChild;
+      const x = (c.x - view.fx) * f;
+      const y = (c.y - view.fy) * f;
+      const v = x * Math.sin(a) + y * Math.cos(a);
+      const d = 1 - (v * SIN) / PERSP; // البعيد أصغر والقريب أكبر
+      const sx = (x * Math.cos(a) - y * Math.sin(a)) / d;
+      const sy = (v * COS * PERSP - v * oy * SIN) / (PERSP - v * SIN);
+      const w = b.offsetWidth / d / 2;
+      const st = (parseFloat(b.style.getPropertyValue("--st")) * SIN) / d;
+      return { c, l: sx - w, r: sx + w, t: sy - st - (b.offsetHeight * SIN) / d, b: sy - st };
+    };
+    const bs = tabs.map(box);
+    for (let i = 0; i < bs.length; i++)
+      for (let j = i + 1; j < bs.length; j++) {
+        const p = bs[i];
+        const q = bs[j];
+        // هامش 6px: النموذج تقريبي، فيبقى بين البطاقات فراغ ظاهر
+        if (p.l < q.r + 6 && q.l < p.r + 6 && p.t < q.b + 6 && q.t < p.b + 6) return [p.c, q.c];
+      }
+    return null;
+  }
+  function build(c, i) {
+    const node = el("div", "mp-tab");
+    const right = c.x >= W / 2;
+    node.style.left = ((c.x - (right ? W / 2 : 0)) / (W / 2)) * 100 + "%";
+    node.style.top = (c.y / H) * 100 + "%";
+    const btn = el("button");
+    btn.type = "button";
+    const extra = c.members.length - 1;
+    btn.append(el("span", "", c.members[0].label));
+    // العدد للمجموعة كلها، فيظهر أن معها مناطق قريبة حتى لا يُنسب كله للمنطقة المسمّاة
+    if (extra) btn.append(el("i", "", "+" + extra));
+    btn.append(el("b", "", String(c.n)));
+    btn.setAttribute("aria-label", c.members[0].label + (extra ? " " + D.tMore.replace("{n}", extra) : "") + (en ? ", " : "، ") + count(c.n));
+    btn.style.setProperty("--st", Math.round(10 + Math.min(34, 6 * Math.sqrt(c.n))) + "px");
+    btn.style.setProperty("--d", (still ? 0 : 0.03 * i) + "s");
+    btn.addEventListener("click", () => tap(c));
+    // لوحة المفاتيح: اللسان الذي خارج المشهد يأتي إلى الوسط حين يأخذ التركيز
+    btn.addEventListener("focus", () => {
+      if (btn.matches(":focus-visible") && !sheet.classList.contains("mp-flat")) fly({ fx: c.x, fy: c.y });
+    });
+    node.append(btn);
+    halves[right ? 1 : 0].append(node);
+    return { node, c };
   }
   function mark() {
     for (const t of tabs) t.node.classList.toggle("is-on", !!picked && t.c.members.some((a) => picked.includes(a)));
@@ -183,7 +226,8 @@
   function settle() {
     sharpen();
     clearTimeout(settleT);
-    if (bucket(view.z) === shown) {
+    // الدوران يغيّر تراكب البطاقات على الشاشة: نعيد الدمج فقط إن تراكبت بطاقتان
+    if (bucket(view.z) === shown && !clash(2 ** (shown / 2))) {
       sheet.classList.remove("mp-flat");
       return mark();
     }

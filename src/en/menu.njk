@@ -18,4 +18,4 @@ eleventyComputed:
 {% if m.data.demo %}<p class="menu-demo-note">{{ "نموذج تجريبي لمنيو توريلو الرقمي" if ar else "A demo of Torilu's digital menu" }} · {{ m.data.category if ar else m.data.category_en }}</p>{% endif %}
 {% set hmTag = "h1" %}
 {% include "menu-body.njk" %}
-<script src="{{ ('/js/menu.js') | url }}?v={{ buildVersion }}"></script>
+<script src="{{ ('/js/menu.js') | url }}?v={{ assetV['js/menu.js'] }}"></script>

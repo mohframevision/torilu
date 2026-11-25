@@ -69,11 +69,55 @@ class SearchUtil {
         return p;
     }
 
+    /* قاموس المرادفات واللهجة (searchSynonyms بـapp-data.json، نفس src/_data/search.js
+       الذي يستعمله بحث الموقع): أي كلمة بمجموعة توصل لنتائج باقي المجموعة.
+       منفذ من expand() بـsrc/js/search.js */
+    private static String[][] synGroups = new String[0][];
+    private static String lastQuery;
+    private static String[] lastSyns = new String[0];
+
+    static synchronized void setSynonyms(org.json.JSONArray groups) {
+        java.util.List<String[]> out = new java.util.ArrayList<>();
+        for (int i = 0; groups != null && i < groups.length(); i++) {
+            org.json.JSONArray g = groups.optJSONArray(i);
+            if (g == null) continue;
+            String[] terms = new String[g.length()];
+            for (int j = 0; j < terms.length; j++) terms[j] = normalizeArabic(g.optString(j, "").trim().toLowerCase());
+            out.add(terms);
+        }
+        synGroups = out.toArray(new String[0][]);
+        lastQuery = null;
+    }
+
+    // مرادفات البحث (بلا البحث نفسه)، تُحسب مرة لكل نص بحث لا لكل عنصر
+    private static synchronized String[] synonymsOf(String q) {
+        if (q.equals(lastQuery)) return lastSyns;
+        String[] words = q.split("\\s+");
+        java.util.LinkedHashSet<String> set = new java.util.LinkedHashSet<>();
+        for (String[] g : synGroups) {
+            boolean hit = false;
+            for (String term : g) {
+                if (term.equals(q)) hit = true;
+                for (int k = 0; !hit && k < words.length; k++) {
+                    String w = words[k];
+                    hit = w.equals(term) || (w.length() > 4 && Math.abs(w.length() - term.length()) <= 1 && levenshtein(w, term) <= 1);
+                }
+                if (hit) break;
+            }
+            if (hit) for (String term : g) if (!term.isEmpty() && !term.equals(q)) set.add(term);
+        }
+        lastQuery = q;
+        lastSyns = set.toArray(new String[0]);
+        return lastSyns;
+    }
+
     static boolean fuzzyIncludes(String haystack, String query) {
         String q = normalizeArabic(query == null ? "" : query.trim().toLowerCase());
         if (q.isEmpty()) return true;
         Prepared hay = prepared(haystack == null ? "" : haystack);
         if (hay.norm.contains(q)) return true;
+        // المرادف يُطابَق حرفياً فقط، بلا تقريب إملائي (مثل الموقع: «ورشه» كانت تطابق «ورده»)
+        for (String syn : synonymsOf(q)) if (hay.norm.contains(syn)) return true;
 
         String[] qWords = q.split("\\s+");
         for (String qw : qWords) {

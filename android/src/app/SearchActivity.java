@@ -23,6 +23,8 @@ import org.json.JSONObject;
 // نمط Material: لوحة المفاتيح تفتح فوراً، وتنغلق أول ما تمرّر النتائج.
 public class SearchActivity extends Activity implements View.OnClickListener, TextWatcher, AbsListView.OnScrollListener {
     private static final int MAX_RESULTS = 80;
+    // نص بحث جاهز (رابط search.html?q=... من خارج التطبيق)
+    static final String EXTRA_QUERY = "q";
 
     private EditText box;
     private ListView list;
@@ -94,6 +96,11 @@ public class SearchActivity extends Activity implements View.OnClickListener, Te
 
         setContentView(root);
         Ui.edgeToEdge(this, getColor(R.color.bg), getColor(R.color.surface));
+        String q0 = getIntent().getStringExtra(EXTRA_QUERY);
+        if (q0 != null && !q0.isEmpty()) {
+            box.setText(q0);
+            box.setSelection(q0.length());
+        }
         box.requestFocus();
         getWindow().setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
                 | android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);

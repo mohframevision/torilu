@@ -20,7 +20,7 @@ pageCss: "menu"
 <details class="biz-owners" id="owners">
   <summary>Is your place on Torilu? Why and how</summary>
   <p><b>Why is your place here?</b> Because people search for it, and I want them to find it with correct information. Being listed on Torilu is free.</p>
-  <p><b>Why didn't I ask first?</b> Everything I show is information your business published itself so people can find it: name, location, hours, business phone and prices. I bring it together in one place, as maps and directories do, and I'm always glad to hear from you.</p>
+  <p><b>Why didn't I ask first?</b> Everything I show is publicly published, by your business itself or on open maps: name, location, hours, business phone and prices. I bring it together in one place, as maps and directories do, and I'm always glad to hear from you.</p>
   <p><b>What I never do:</b> I don't copy your photos, logo or menu design, I don't publish personal numbers, I don't invent information, and nobody can buy a higher spot in search.</p>
   <p><b>How do I check?</b> I visit places myself and take every detail from its official source: the business's own account, website or phone, or a recent map.</p>
   <p class="biz-owners-stamp"><img src="{{ '/assets/stamp-liked.svg' | url }}" alt="" width="44" height="44" loading="lazy" /><span><b>The "Recommended" stamp:</b> a place only gets it when I genuinely liked it, and it appears on its Torilu page next to my own words about it.</span></p>
@@ -60,6 +60,6 @@ pageCss: "menu"
   <p>Press the button and reach us directly.</p>
   <button type="button" class="btn">Contact us</button>
 </section>
-<script src="{{ ('/js/menu.js') | url }}?v={{ buildVersion }}"></script>
-<script src="{{ ('/js/demo.js') | url }}?v={{ buildVersion }}"></script>
-<script src="{{ ('/js/menu-price.js') | url }}?v={{ buildVersion }}"></script>
+<script src="{{ ('/js/menu.js') | url }}?v={{ assetV['js/menu.js'] }}"></script>
+<script src="{{ ('/js/demo.js') | url }}?v={{ assetV['js/demo.js'] }}"></script>
+<script src="{{ ('/js/menu-price.js') | url }}?v={{ assetV['js/menu-price.js'] }}"></script>

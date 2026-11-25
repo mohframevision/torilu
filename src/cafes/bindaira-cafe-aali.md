@@ -6,7 +6,7 @@ title_en: Bindaira Cafe - A'ali Complex
 desc_en: "A cafe inside A'ali Complex serving breakfast, lunch and dinner."
 categories:
   - فطور
-  - عالي
+  - السيف
 links:
   phone: "17587587"
   maps: https://maps.app.goo.gl/zhe6P6hFAECqsADn6

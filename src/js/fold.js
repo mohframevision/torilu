@@ -133,6 +133,8 @@
   }
   measure();
   sheet.classList.add("np-folded");
+  // مطويّة: أزرار الورقة مخفية تحت الطيّات، فلا تصلها Tab ولا قارئ الشاشة حتى تنفتح
+  sheet.inert = true;
   sheet.before(tools, fold);
   measure();
   window.addEventListener("resize", measure);
@@ -177,6 +179,7 @@
     setTimeout(() => fold.classList.add("is-landed"), LAND);
     setTimeout(() => {
       window.removeEventListener("resize", measure);
+      sheet.inert = false;
       sheet.classList.remove("np-folded");
       fold.classList.add("is-gone");
       if (hadFocus) {
@@ -207,6 +210,7 @@
     fold.classList.remove("is-gone");
     setTimeout(() => {
       sheet.classList.add("np-folded");
+      sheet.inert = true;
       measure();
       sound();
       fold.classList.remove("is-open", "is-landed");

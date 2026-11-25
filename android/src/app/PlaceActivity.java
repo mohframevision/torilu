@@ -250,7 +250,7 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
 
         // على الجوال كما بالموقع: الصورة أولاً، ثم المعلومات قبل النص الطويل والمنيو
         String image = item.optString("image", "");
-        if (!image.isEmpty() && !"null".equals(image)) s.addView(photo(this, image, Lang.title(this, item), item.optString("imageCredit", "")));
+        if (!image.isEmpty() && !"null".equals(image)) s.addView(photo(this, image, Lang.title(this, item), item));
         buildFacts(s, area);
         String html = Lang.content(this, item);
         if (!html.isEmpty()) s.addView(ArticleActivity.body(this, flattenTables(html), false), match(this, 18));
@@ -267,7 +267,11 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
     }
 
     // صورة الجريدة: بعرض الورقة بلا زوايا، وتحتها تعليق بالاسم والإسناد وخط حبر رفيع
-    static View photo(Context c, String path, String title, String credit) {
+    static View photo(Context c, String path, String title, JSONObject item) {
+        // الإسناد + الترخيص (صور صاحب الموقع: CC BY 4.0) كما بتعليق الصورة بالموقع
+        String credit = item.optString("imageCredit", "");
+        String license = item.optString("imageLicense", "");
+        if (!credit.isEmpty() && !license.isEmpty()) credit += " · " + license;
         LinearLayout box = new LinearLayout(c);
         box.setOrientation(LinearLayout.VERTICAL);
         ImageView img = new ImageView(c);
@@ -278,6 +282,11 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
         TextView cap = Ui.text(c, credit.isEmpty() ? title : title + " — " + Ui.ltr(credit), 13, NewspaperSheet.inkMuted(c), false);
         serif(cap, false);
         cap.setPadding(0, Ui.dp(c, 6), 0, Ui.dp(c, 6));
+        String creditUrl = item.optString("imageCreditUrl", "");
+        if (!credit.isEmpty() && creditUrl.startsWith("http")) {
+            cap.setTag("url:" + creditUrl);
+            cap.setOnClickListener(new OpenTag());
+        }
         box.addView(cap);
         View r = new View(c);
         r.setBackgroundColor(NewspaperSheet.ink(c));
@@ -286,6 +295,14 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
         String url = path.startsWith("http") ? path : ToriluApi.ORIGIN + path.replaceFirst("^/", "");
         new ImageLoad(img, url, c.getResources().getDisplayMetrics().widthPixels).start();
         return box;
+    }
+
+    // يفتح مصدر الصورة (imageCreditUrl) من تعليقها، بنفس معالجة روابط LinkButtons
+    private static final class OpenTag implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            LinkButtons.handleClick(v.getContext(), (String) v.getTag());
+        }
     }
 
     // تحميل الصورة من الموقع بخيط منفصل، مصغّرة لعرض الشاشة. بلا اتصال: تبقى مساحة بلون ظهر الورق.

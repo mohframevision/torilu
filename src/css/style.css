@@ -534,18 +534,23 @@ img {
     opacity: 0;
     overflow: hidden;
     pointer-events: none;
+    /* مغلقة: خارج ترتيب Tab وقارئ الشاشة، وتختفي بعد انتهاء حركة الإغلاق */
+    visibility: hidden;
     padding-top: 0;
     margin-inline-start: 0;
     transition:
       max-height 0.35s ease,
       opacity 0.25s ease,
-      padding-top 0.25s ease;
+      padding-top 0.25s ease,
+      visibility 0s linear 0.35s;
   }
   .main-nav.open {
     max-height: min(75vh, 900px);
     overflow-y: auto;
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
+    transition-delay: 0s;
     padding-top: var(--space-3);
   }
   .main-nav a {
@@ -810,7 +815,8 @@ img {
   transition: background 0.12s ease;
 }
 
-.search-suggestion:hover {
+.search-suggestion:hover,
+.search-suggestion.active {
   background: color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
@@ -1952,9 +1958,10 @@ a.photo-credit.card {
 .pk-prompt.swap {
   animation: pkFade 0.35s var(--ease) both;
 }
+/* تختفي بصرياً فقط (بلا visibility:hidden): يبقى عنوان h1 للصفحة عند قارئ الشاشة في خطوة النتيجة */
 .pk:is([data-step="ball"], [data-step="clip"]) .pk-prompt {
   opacity: 0;
-  visibility: hidden;
+  pointer-events: none;
 }
 
 .pk-center {
@@ -2901,6 +2908,8 @@ a.photo-credit.card {
 }
 
 .plan-step-label {
+  margin: 0;
+  font: inherit;
   font-size: 1.05rem;
 }
 
@@ -4142,12 +4151,48 @@ li {
 .home-chips {
   margin-bottom: var(--space-4);
 }
+html:not(.home-js) .home-chips:empty {
+  min-height: 40px;
+}
 
 .home-row {
   margin-top: var(--space-5);
 }
-.home-row[hidden] {
-  display: none;
+/* home.js يملأ الصفوف بعد data.js: مكانها محجوز وهي مخفية كي لا يقفز «محتار؟» والتذييل (CLS).
+   الارتفاعات تقريبية من القياس، أقل قليلاً من المملوء. أول سطر في home.js يضع .home-js على <html>
+   فيسقط الحجز أيّاً كان المخرج (data.js لم يُحمَّل، خطأ، صف فارغ)؛ وبلا جافاسكربت تختفي كما كانت */
+html:not(.home-js) .home-row[hidden] {
+  display: block;
+  visibility: hidden;
+  min-height: 360px;
+}
+html:not(.home-js) #homeTime[hidden] {
+  min-height: 400px;
+}
+html:not(.home-js) #homeNew[hidden] {
+  min-height: 350px;
+}
+@media (max-width: 480px) {
+  html:not(.home-js) .home-chips:empty {
+    min-height: 88px;
+  }
+}
+@media (max-width: 760px) {
+  html:not(.home-js) .home-row[hidden] {
+    min-height: 500px;
+  }
+  html:not(.home-js) #homeTime[hidden],
+  html:not(.home-js) #homeNew[hidden] {
+    min-height: 1000px;
+  }
+}
+@media (scripting: none) {
+  html:not(.home-js) .home-row[hidden] {
+    display: none;
+  }
+  html:not(.home-js) .home-chips:empty {
+    min-height: 0;
+  }
 }
 
 /* صورة حقيقية (معالم، مقالات) تعبّي رأس البطاقة، ورسمة النوع (ألوان مائية) فوق لون البطاقة الهادئ:

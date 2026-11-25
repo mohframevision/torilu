@@ -82,7 +82,7 @@
     });
 
   /* ===== المطابقة والتقييم ===== */
-  function fieldScore(field, term) {
+  function fieldScore(field, term, exactOnly) {
     if (!field || !term) return 0;
     if (field === term) return 6;
     const words = field.split(" ");
@@ -90,16 +90,17 @@
     if (words.some((w) => w.startsWith(term))) return 4;
     if (field.includes(term)) return 3;
     // أخطاء إملائية: كل كلمة بالبحث تقرب من كلمة بالحقل — حرف واحد حتى ٦ أحرف وحرفان بعدها،
-    // وأول حرف لازم يطابق (بدونه «karak» كانت تطابق «kabab»)
+    // وأول حرف لازم يطابق (بدونه «karak» كانت تطابق «kabab»)، والكلمة ٤ أحرف فأكثر (بدونه «كرك» تطابق «كيك» و«كعك»).
+    // المرادف (exactOnly) يطابق كلماته كاملة بلا تقريب: «ورشه» كانت تطابق «ورده»
     const tw = term.split(" ");
-    const ok = tw.every((t) => t.length >= 3 && words.some((w) => w[0] === t[0] && Math.abs(w.length - t.length) <= 2 && levenshtein(w, t) <= (t.length <= 6 ? 1 : 2)));
+    const ok = tw.every((t) => t.length >= 3 && words.some((w) => w === t || (!exactOnly && t.length >= 4 && w[0] === t[0] && Math.abs(w.length - t.length) <= 2 && levenshtein(w, t) <= (t.length <= 6 ? 1 : 2))));
     return ok ? 2 : 0;
   }
   function scoreEntry(e, variants) {
     let best = 0;
     variants.forEach((v, i) => {
       const weight = i === 0 ? 1 : 0.85; // المرادف أضعف شوي من الكلمة نفسها
-      const s = Math.max(fieldScore(e.title, v) * 3, fieldScore(e.tags, v) * 2, fieldScore(e.desc, v)) * weight;
+      const s = Math.max(fieldScore(e.title, v, i > 0) * 3, fieldScore(e.tags, v, i > 0) * 2, fieldScore(e.desc, v, i > 0)) * weight;
       if (s > best) best = s;
     });
     return best;
@@ -214,7 +215,7 @@
     resultsBox.hidden = false;
     lastResults = search(query);
     if (tab !== "all" && !lastResults.some((r) => r.e.kind === tab)) tab = "all";
-    status.textContent = lastResults.length ? t("search_count").replace("{n}", lastResults.length.toLocaleString(isEn ? "en" : "ar-u-nu-latn")) : "";
+    status.textContent = lastResults.length ? t("search_count").replace("{n}", lastResults.length.toLocaleString(isEn ? "en" : "ar-u-nu-latn")) : t("search_none_title").replace("{q}", query);
     if (lastResults.length) renderResults(query);
     else renderNone(query);
   }
@@ -229,7 +230,7 @@
     clearTimeout(timer);
     run();
     remember(input.value);
-    input.blur(); // يخفي لوحة مفاتيح الجوال فتظهر النتائج كاملة
+    if (matchMedia("(pointer: coarse)").matches) input.blur(); // يخفي لوحة مفاتيح الجوال فتظهر النتائج كاملة
   });
 
   /* ===== بحوثك الأخيرة — بالجهاز فقط ===== */
@@ -266,9 +267,7 @@
   });
 
   /* ===== الكلمات المقترحة ===== */
-  const chip = (label, q) => `<button type="button" class="filter-chip" data-q="${escapeHtml(q)}">${escapeHtml(label)}</button>`;
-  $("searchPopular").innerHTML = ((isEn ? S.popular_en : S.popular) || []).map((p) => chip(p, p)).join("");
-  $("searchTry").innerHTML = ((isEn ? S.try_en : S.try) || []).map((p) => chip(p, p)).join("");
+  // تُبنى وقت البناء في search.njk (بلا إزاحة للصفحة)
 
   /* ===== النقرات ===== */
   document.querySelector(".search-page").addEventListener("click", (e) => {

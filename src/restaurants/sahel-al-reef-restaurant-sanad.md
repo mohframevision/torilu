@@ -7,6 +7,7 @@ desc_en: "The Sanad branch of Sahel Al Reef Restaurant."
 categories:
   - سند
 dateAdded: 2026-11-16
+coords: 26.1493668, 50.583716
 links:
   website: ''
   phone: "17693369"

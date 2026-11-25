@@ -13,7 +13,7 @@ dateAdded: 2026-09-03
 coords: 26.22080268155172, 50.49957844470742
 links:
   website: ''
-  phone: '07053611,36110705'
+  phone: '36110705'
   maps: https://maps.app.goo.gl/EBdaLW89zkcw6Wx48?g_st=ic
   instagram: https://www.instagram.com/albadaa_trading_co/
 ---

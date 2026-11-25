@@ -158,6 +158,13 @@
   height: var(--st, 18px);
   background: var(--color-text);
 }
+.mp-tab i {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
 .mp-tab b {
   color: var(--mp-ink);
   font-variant-numeric: tabular-nums;

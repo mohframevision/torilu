@@ -8,6 +8,7 @@ hours: "السبت والأربعاء - الجمعة ١١ص - ١٢:٣٠ص؛ ال
 hours_en: "Sat & Wed - Fri 11am - 12:30am; Sun - Tue 11am - 12am"
 categories:
   - بسيتين
+incomplete: true
 dateAdded: 2026-11-10
 coords: 26.2721318, 50.6076469
 links:

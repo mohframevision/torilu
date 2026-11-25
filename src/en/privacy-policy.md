@@ -23,7 +23,7 @@ When you send a message from the [contact page]({{ '/en/contact.html' | url }}),
 
 ## What is stored in your browser
 
-Your preferences, such as theme, favorites, recent searches and your "Pick for me" vehicle, are stored only in your browser (localStorage) and are never sent anywhere. You can delete them at any time by clearing this site's data in your browser settings.
+Your preferences, such as theme, favorites, recent searches and site sounds on/off, are stored only in your browser storage and are never sent anywhere. Your browser also keeps a copy of the pages you visited so they open offline. You can delete them at any time by clearing this site's data in your browser settings.
 
 ## Location (optional)
 

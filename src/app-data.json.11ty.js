@@ -18,5 +18,7 @@ exports.render = function (data) {
     sections,
     tagsEn: data.tags_en,
     tagIcons: data.tag_icons,
+    // قاموس المرادفات واللهجة نفسه الذي يستعمله بحث الموقع (src/_data/search.js)
+    searchSynonyms: (data.search && data.search.synonyms) || [],
   });
 };

@@ -8,7 +8,7 @@ aiDisclosure: "Written with help from AI (Claude), based on the site owner's ide
 
 ## Why do we write?
 
-Torilu is a guide to places in Bahrain, and we check every place before we publish it: that it's open, that its hours are right, and that its phone number works. But a place is more than an address and opening hours. Behind every bakery are hands kneading dough before dawn, behind every small restaurant is a brave decision, and behind every dish we love is a story.
+Torilu is a guide to places in Bahrain, and before we publish a place we make sure it exists, is open and is in the right location, and we keep adding hours and phone numbers as we go. But a place is more than an address and opening hours. Behind every bakery are hands kneading dough before dawn, behind every small restaurant is a brave decision, and behind every dish we love is a story.
 
 Those stories don't fit on a directory card, and that is why the articles section exists.
 

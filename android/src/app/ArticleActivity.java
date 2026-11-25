@@ -105,7 +105,7 @@ public class ArticleActivity extends Activity implements View.OnClickListener {
         s.addView(dbl);
         JSONObject item = findItem(detailUrl);
         String image = item == null ? "" : item.optString("image", "");
-        if (!image.isEmpty() && !"null".equals(image)) s.addView(PlaceActivity.photo(this, image, title, item.optString("imageCredit", "")));
+        if (!image.isEmpty() && !"null".equals(image)) s.addView(PlaceActivity.photo(this, image, title, item));
         if (html != null && !html.isEmpty()) s.addView(body(this, html, true), PlaceActivity.match(this, 16));
 
         setContentView(page);

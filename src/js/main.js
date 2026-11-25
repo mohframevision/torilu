@@ -111,6 +111,7 @@ function searchNorm(text) {
     .replace(/گ/g, "ق")
     .replace(/[٠-٩]/g, (d) => AR_DIGITS.indexOf(d))
     .replace(/[۰-۹]/g, (d) => FA_DIGITS.indexOf(d))
+    .replace(/٫/g, ".") // الفاصلة العشرية العربية: ١٫٨٠٠ = 1.800
     .replace(/[^\p{L}\p{N}\s.]/gu, " ")
     .replace(/(?<!\d)\.|\.(?!\d)/g, " ")
     .split(/\s+/)
@@ -184,9 +185,21 @@ function initSearchSuggestions(searchInput, items, onSelect) {
     dropdown.className = "search-suggestions";
     wrap.appendChild(dropdown);
   }
+  // قائمة اقتراحات قابلة للاختيار بالأسهم وEnter، ومفهومة لقارئ الشاشة
+  dropdown.id ||= "search-suggestions";
+  dropdown.setAttribute("role", "listbox");
+  searchInput.setAttribute("role", "combobox");
+  searchInput.setAttribute("aria-autocomplete", "list");
+  searchInput.setAttribute("aria-controls", dropdown.id);
+  searchInput.setAttribute("aria-expanded", "false");
+  let current = [];
+  let activeIdx = -1;
 
   function close() {
     dropdown.classList.remove("open");
+    searchInput.setAttribute("aria-expanded", "false");
+    searchInput.removeAttribute("aria-activedescendant");
+    activeIdx = -1;
     dropdown.innerHTML = "";
   }
 
@@ -211,22 +224,39 @@ function initSearchSuggestions(searchInput, items, onSelect) {
 
     dropdown.innerHTML = matches
       .map(
-        (item) =>
-          `<div class="search-suggestion" data-id="${escapeHtml(item.id)}">
+        (item, i) =>
+          `<div class="search-suggestion" role="option" id="${dropdown.id}-${i}" aria-selected="false" data-id="${escapeHtml(item.id)}">
             <span>${escapeHtml(itemTitle(item))}</span>
           </div>`
       )
       .join("");
     dropdown.classList.add("open");
+    searchInput.setAttribute("aria-expanded", "true");
+    current = matches;
+    setActive(-1);
 
     dropdown.querySelectorAll(".search-suggestion").forEach((el, i) => {
       el.addEventListener("mousedown", (e) => {
         e.preventDefault();
-        searchInput.value = itemTitle(matches[i]);
-        close();
-        onSelect();
+        choose(i);
       });
     });
+  }
+
+  function choose(i) {
+    searchInput.value = itemTitle(current[i]);
+    close();
+    onSelect();
+  }
+
+  function setActive(i) {
+    activeIdx = i;
+    dropdown.querySelectorAll(".search-suggestion").forEach((el, j) => {
+      el.classList.toggle("active", j === i);
+      el.setAttribute("aria-selected", String(j === i));
+    });
+    if (i < 0) searchInput.removeAttribute("aria-activedescendant");
+    else searchInput.setAttribute("aria-activedescendant", `${dropdown.id}-${i}`);
   }
 
   searchInput.addEventListener("input", renderSuggestions);
@@ -234,6 +264,15 @@ function initSearchSuggestions(searchInput, items, onSelect) {
   searchInput.addEventListener("blur", close);
   searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();
+    if (!dropdown.classList.contains("open")) return;
+    const n = current.length;
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive(e.key === "ArrowDown" ? (activeIdx + 1) % n : (Math.max(activeIdx, 0) - 1 + n) % n);
+    } else if (e.key === "Enter" && activeIdx >= 0) {
+      e.preventDefault();
+      choose(activeIdx);
+    }
   });
 }
 
@@ -427,7 +466,12 @@ function initNavToggle() {
     });
   }
   toggles.forEach((toggle) => {
-    toggle.addEventListener("click", () => setOpen(!nav.classList.contains("open")));
+    toggle.addEventListener("click", (e) => {
+      const isOpen = !nav.classList.contains("open");
+      setOpen(isOpen);
+      // من لوحة المفاتيح (detail = 0): القائمة قبل الزر في ترتيب الصفحة، فننقل التركيز لأول رابط فيها
+      if (isOpen && e.detail === 0) [...nav.querySelectorAll("a")].find((a) => a.offsetParent)?.focus();
+    });
   });
   // Escape يغلق القائمة كما يغلق نافذة المنيو وكشف «اختار لي»، ويعيد التركيز للزر
   document.addEventListener("keydown", (e) => {
@@ -976,7 +1020,8 @@ function buildActionsHtml(item) {
 
 /* ===== رسالة تأكيد عابرة (Toast) ===== */
 let toastTimer = null;
-function showToast(message) {
+// المنطقة الحيّة تُنشأ فارغة عند التحميل: قارئ الشاشة لا يعلن رسالة منطقة وُلدت معها
+function toastEl() {
   let toast = document.getElementById("site-toast");
   if (!toast) {
     toast = document.createElement("div");
@@ -986,6 +1031,10 @@ function showToast(message) {
     toast.setAttribute("aria-live", "polite");
     document.body.appendChild(toast);
   }
+  return toast;
+}
+function showToast(message) {
+  const toast = toastEl();
   toast.textContent = message;
   toast.classList.add("open");
   clearTimeout(toastTimer);
@@ -1044,7 +1093,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   const isLongDesc = desc.length > 100;
 
   card.innerHTML = `
-    ${item.image ? `<img class="item-photo" src="${escapeHtml(item.image)}" alt="${escapeHtml(title)}" loading="${index < 4 ? "eager" : "lazy"}" decoding="async" />${item.imageCredit ? `<a class="photo-credit card" dir="ltr" href="${escapeHtml(item.imageCreditUrl)}" target="_blank" rel="noopener">${escapeHtml(item.imageCredit)}</a>` : ""}` : ""}
+    ${item.image ? `<img class="item-photo" src="${escapeHtml(item.image)}" alt="${escapeHtml(title)}" ${index === 0 ? `loading="eager" fetchpriority="high"` : `loading="lazy"`} decoding="async" />${item.imageCredit ? `<a class="photo-credit card" dir="ltr" href="${escapeHtml(item.imageCreditUrl)}" target="_blank" rel="noopener">${escapeHtml(item.imageCredit)}</a>` : ""}` : ""}
     ${item.featured ? `<span class="featured-badge">${t("featured_badge")}</span>` : ""}
     <div class="item-body">
       ${sectionBadge(section)}
@@ -1187,6 +1236,25 @@ function renderSection(section, typeFilter) {
   const FILTER_CHIP_LIMIT = matchMedia("(max-width: 700px)").matches ? 5 : 10;
   let userCoords = null;
   let sortByDistance = false;
+  // تُعلن عدد النتائج لقارئ الشاشة بعد البحث والفلترة (تُنشأ فارغة قبل أي إعلان)
+  const status = document.createElement("p");
+  status.className = "sr-only";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  grid.before(status);
+  // كل بطاقة تُبنى مرة واحدة ثم يُعاد ترتيبها: إعادة البناء مع كل حرف كانت تكلّف مئات الأجزاء من الثانية بالجوال.
+  // بطاقة المسافة («الأقرب مني») تختلف مع موقع الزائر فتُبنى من جديد
+  const cardCache = new Map();
+  const cardFor = (item, index, distanceKm = null, branchLabel = "") => {
+    if (distanceKm !== null) {
+      cardCache.delete(item); // قد تتغيّر المفضلة على البطاقة الجديدة، فالمخزّنة تصير قديمة
+      return buildItemCard(section, item, index, distanceKm, branchLabel);
+    }
+    let card = cardCache.get(item);
+    if (!card) cardCache.set(item, (card = buildItemCard(section, item, index)));
+    return card;
+  };
+  let renderGen = 0;
 
   function renderFilters() {
     if (!filtersWrap) return;
@@ -1208,7 +1276,10 @@ function renderSection(section, typeFilter) {
 
     const tagsList = [...allTags];
     const hasMore = tagsList.length > FILTER_CHIP_LIMIT;
-    const visibleTags = filtersExpanded ? tagsList : tagsList.slice(0, FILTER_CHIP_LIMIT);
+    // الرقاقة المفعّلة تبقى ظاهرة بعد «عرض أقل»، وإلا بقي الفلتر شغالاً بلا سبب ظاهر
+    const visibleTags = filtersExpanded
+      ? tagsList
+      : [...new Set([...tagsList.slice(0, FILTER_CHIP_LIMIT), ...Object.values(active)])];
 
     visibleTags.forEach((tag) => {
       const chip = document.createElement("button");
@@ -1255,9 +1326,9 @@ function renderSection(section, typeFilter) {
     });
   }
 
-  function renderGrid() {
+  function renderGrid(announce = true) {
+    renderGen++;
     const query = (searchInput?.value || "").trim();
-    grid.innerHTML = "";
 
     // الاسم والوصف والتصنيفات باللغتين (رابط مشاركة إنجليزي ?q= يشتغل بالصفحة العربية)
     const relevance = new Map();
@@ -1291,6 +1362,7 @@ function renderSection(section, typeFilter) {
               (query ? relevance.get(b.item) - relevance.get(a.item) : 0) || pinRank(b.item) - pinRank(a.item)
           );
 
+    if (announce !== false) status.textContent = ranked.length ? t("search_count").replace("{n}", ranked.length) : "";
     if (ranked.length === 0) {
       const isSectionEmpty = items.length === 0;
       grid.innerHTML = isSectionEmpty
@@ -1304,12 +1376,11 @@ function renderSection(section, typeFilter) {
           <p>${t("empty_search")}</p>
         </div>
       `;
+      if (announce !== false) status.textContent = grid.textContent.trim();
       return;
     }
 
-    ranked.forEach(({ item, distanceKm, branchLabel }, index) =>
-      grid.appendChild(buildItemCard(section, item, index, distanceKm, branchLabel))
-    );
+    grid.replaceChildren(...ranked.map(({ item, distanceKm, branchLabel }, index) => cardFor(item, index, distanceKm, branchLabel)));
   }
 
   const sharedQuery = new URLSearchParams(location.search).get("q");
@@ -1363,7 +1434,23 @@ function renderSection(section, typeFilter) {
   }
 
   renderFilters();
-  renderGrid();
+  if (searchInput?.value.trim()) renderGrid(false);
+  else {
+    // أول عرض: بطاقات الخادم ظاهرة، والبطاقات التفاعلية تُبنى على دفعات صغيرة فلا تتجمّد الصفحة،
+    // ثم تُبدَّل دفعة واحدة. لو بحث الزائر أو فلتر قبل الانتهاء، فعرضه يكمل البناء ويُلغي هذا
+    const order = [...items].sort((a, b) => pinRank(b) - pinRank(a));
+    const gen = renderGen;
+    let i = 0;
+    (function warm() {
+      if (gen !== renderGen) return;
+      for (const end = Math.min(i + 40, order.length); i < end; i++) cardFor(order[i], i);
+      if (i < order.length) setTimeout(warm);
+      else {
+        grid.classList.add("is-settled"); // بطاقات الخادم ظهرت بحركتها، فالتبديل لا يعيدها
+        renderGrid(false);
+      }
+    })();
+  }
   // دخول البطاقات (sheetIn) للعرض الأول فقط: إعادة الرسم بالبحث والفلترة تظهر فوراً.
   // وعند الرجوع أو إعادة التحميل يعود المتصفح إلى موضع التمرير السابق، فلا دخول أصلاً (كانت الصفحة تظهر فارغة لحظة)
   const navEntry = performance.getEntriesByType("navigation")[0];
@@ -1371,7 +1458,11 @@ function renderSection(section, typeFilter) {
   else setTimeout(() => grid.classList.add("is-settled"), 900);
 
   if (searchInput) {
-    searchInput.addEventListener("input", renderGrid);
+    let typingTimer;
+    searchInput.addEventListener("input", () => {
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(renderGrid, 120);
+    });
     initSearchSuggestions(searchInput, items, renderGrid);
   }
 }
@@ -1618,7 +1709,7 @@ function renderDayPlan() {
 
       const head = document.createElement("div");
       head.className = "plan-step-head";
-      head.innerHTML = `<span class="plan-step-label">${t("plan_" + step.key)}</span>`;
+      head.innerHTML = `<h2 class="plan-step-label">${t("plan_" + step.key)}</h2>`;
       row.appendChild(head);
 
       row.appendChild(buildItemCard(step.slug, step.item, i));
@@ -1704,6 +1795,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // "إضافة للشاشة الرئيسية" (PWA) بمعظم المتصفحات
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js");
 
+  toastEl();
+
   // ما يخص كل صفحة على حدة — كانت سكربتات مضمّنة بـ base.njk، صارت تُقرأ من
   // إعدادات الصفحة (#site-config) عشان تشتغل سياسة CSP بدون unsafe-inline
   const page = window.PAGE || {};
@@ -1717,7 +1810,7 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ===== «/» يفتح البحث من أي صفحة (عُرف Google وGitHub)؛ بصفحة البحث نفسها يركّز على الحقل ===== */
 document.addEventListener("keydown", (e) => {
   if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
-  if (e.target.closest("input, textarea, select, [contenteditable]")) return;
+  if (e.target.closest("input, textarea, select, button, a, [role=slider], [contenteditable]")) return;
   e.preventDefault();
   const field = document.getElementById("searchInput");
   if (field) return field.focus();
@@ -1764,6 +1857,7 @@ document.addEventListener("keydown", (e) => {
     thumb = img;
     big.src = img.currentSrc || img.src;
     big.alt = img.alt;
+    dlg.setAttribute("aria-label", big.alt || (window.SITE_LANG === "en" ? "Photo" : "صورة"));
     try {
       await big.decode(); // فك ترميز الصورة قبل الحركة، مو في نصها
     } catch {

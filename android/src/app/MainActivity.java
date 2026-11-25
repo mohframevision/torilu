@@ -120,6 +120,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         cachedSections = sections;
         cachedSectionOrder = sectionOrder;
         cachedTagsEn = data.optJSONObject("tagsEn");
+        SearchUtil.setSynonyms(data.optJSONArray("searchSynonyms"));
         findViewById(R.id.offlineNote).setVisibility(fromCache ? View.VISIBLE : View.GONE);
         buildHome();
         loadingView.setVisibility(View.GONE);
@@ -146,7 +147,23 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         String path = data.getPath();
         String rel = path.replaceFirst("^/", "");
         if (rel.startsWith("en/")) rel = rel.substring(3);
-        if (rel.isEmpty() || !rel.endsWith(".html")) return;
+        if (rel.isEmpty() || rel.equals("en") || rel.equals("index.html")) return;
+        if (!rel.endsWith(".html")) {
+            openInWebView(data);
+            return;
+        }
+        if (rel.equals("search.html")) {
+            startActivity(new android.content.Intent(this, SearchActivity.class).putExtra(SearchActivity.EXTRA_QUERY, data.getQueryParameter("q")));
+            return;
+        }
+        if (rel.equals("picker.html")) {
+            startActivity(new android.content.Intent(this, PickerActivity.class));
+            return;
+        }
+        if (rel.equals("favorites.html")) {
+            startActivity(new android.content.Intent(this, FavoritesActivity.class));
+            return;
+        }
         if (rel.contains("/")) {
             String[] parts = rel.split("/", 2);
             JSONObject sec = sections.optJSONObject(parts[0]);
@@ -162,13 +179,25 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
                     return;
                 }
             }
+            openInWebView(data);
             return;
         }
         String slug = rel.substring(0, rel.length() - 5);
         if (isBrowsable(sections.optJSONObject(slug))) {
             startActivity(SectionActivity.intent(this, slug, data.getQueryParameter("q")));
             overridePendingTransition(0, 0);
+        } else {
+            openInWebView(data);
         }
+    }
+
+    // صفحة لا شاشة لها بالتطبيق (من نحن، المنيو، أنواع الكراجات...) تُفتح كما هي
+    // بدل أن يضيع الرابط وتظهر الرئيسية
+    private void openInWebView(Uri data) {
+        android.content.Intent i = new android.content.Intent(this, WebViewActivity.class);
+        i.putExtra(WebViewActivity.EXTRA_TITLE, getString(R.string.brand));
+        i.putExtra(WebViewActivity.EXTRA_URL, data.toString());
+        startActivity(i);
     }
 
     static boolean isBrowsable(JSONObject section) {

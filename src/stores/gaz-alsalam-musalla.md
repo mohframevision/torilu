@@ -7,6 +7,7 @@ desc_en: "The largest AC and electronics distributor in Bahrain. Sells air condi
 hours: "السبت - الخميس ٨ص - ١٠م؛ الجمعة ٤م - ٩م"
 hours_en: "Sat - Thu 8am - 10pm; Fri 4pm - 9pm"
 categories:
+  - المُصلى
   - إلكترونيات
 dateAdded: 2026-08-03
 links:

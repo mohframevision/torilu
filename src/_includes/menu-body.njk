@@ -4,6 +4,7 @@
     بالعربي: الاسم عربي وتحته الإنجليزي. بالإنجليزي: الإنجليزي فقط (صفحات EN بلا عربي). -#}
 {%- set d = m.data -%}
 {%- set cur = 'د.ب' if ar else 'BD' -%}
+{%- set subTag = 'h2' if hmTag == 'h1' else 'h3' -%}
 <div class="hm" data-theme="{{ d.menuTheme or 'classic' }}" data-menu data-wa="{{ d.whatsapp }}" data-cur="{{ cur }}" data-intro="{{ ('مرحباً، أريد الطلب من ' + d.title + ':') if ar else ('Hello, I would like to order from ' + d.title_en + ':') }}" data-total-label="{{ 'الإجمالي' if ar else 'Total' }}">
   <header class="hm-head">
     <svg class="hm-logo" viewBox="0 0 48 42" aria-hidden="true"><circle cx="24" cy="21" r="19" class="a" /><circle cx="24" cy="21" r="11" class="b" /><circle cx="24" cy="21" r="4" class="c" /></svg>
@@ -14,7 +15,7 @@
   </header>
   {%- if d.stars %}
   <div class="hm-stars">
-    <h3>{{ 'الأشهر عندنا' if ar else 'Our most loved' }}{% if ar %} <small>Our most loved</small>{% endif %}</h3>
+    <{{ subTag }}>{{ 'الأشهر عندنا' if ar else 'Our most loved' }}{% if ar %} <small>Our most loved</small>{% endif %}</{{ subTag }}>
     {%- for s in d.stars %}
     <div class="hm-star">
       {%- if s.img %}<img src="{{ s.img | url }}" alt="" loading="lazy" width="56" height="56" />{% endif %}
@@ -31,7 +32,7 @@
     {%- set col = ((sec.cols[loop.index0] if ar else sec.cols_en[loop.index0]) if sec.cols and it.p.length > 1 else '') %}
     <span class="hm-p" data-item data-name="{{ it.ar if ar else it.en }}{% if col %} ({{ col }}){% endif %}" data-price="{{ p | replace('+', '') }}">
       <button type="button" class="hm-add" data-step="1" aria-label="{{ ('أضف ' if ar else 'Add ') + (it.ar if ar else it.en) }}{% if col %} {{ col }}{% endif %}"><span dir="ltr">{{ p }}</span></button>
-      <span class="hm-q"><button type="button" data-step="-1" aria-label="{{ 'إنقاص' if ar else 'Remove one' }}">−</button><b class="qty-n">0</b></span>
+      <span class="hm-q"><button type="button" data-step="-1" aria-label="{{ ('إنقاص ' if ar else 'Remove one ') + (it.ar if ar else it.en) }}{% if col %} {{ col }}{% endif %}">−</button><b class="qty-n">0</b></span>
     </span>
     {%- endfor %}
     {%- if sec.cols and it.p.length == 1 and not extra %}<span class="hm-p hm-gap" aria-hidden="true"></span>{% endif %}
@@ -40,7 +41,7 @@
   {%- for sec in d.menuSections %}
   <section class="hm-sec">
     {%- if sec.img %}<div class="hm-banner"><img src="{{ sec.img | url }}" alt="" loading="lazy" /></div>{% endif %}
-    <h3><span>{{ sec.ar if ar else sec.en }}</span>{% if ar %} <em dir="ltr">{{ sec.en }}</em>{% endif %}</h3>
+    <{{ subTag }}><span>{{ sec.ar if ar else sec.en }}</span>{% if ar %} <em dir="ltr">{{ sec.en }}</em>{% endif %}</{{ subTag }}>
     {%- if sec.cols %}<div class="hm-heads">{% for c in (sec.cols if ar else sec.cols_en) %}<span>{{ c }}</span>{% endfor %}</div>{% endif %}
     <ul>{% for it in sec.items %}{{ row(it, sec, false, ar) }}{% endfor %}</ul>
     {%- if sec.extras %}<ul class="hm-extras">{% for it in sec.extras %}{{ row(it, sec, true, ar) }}{% endfor %}</ul>{% endif %}
@@ -52,8 +53,9 @@
   </footer>
   <p class="hm-tip">{{ 'اضغط على أي سعر لإضافته إلى طلبك.' if ar else 'Tap any price to add it to your order.' }}</p>
   <div class="cart-bar" hidden>
-    <span>{{ 'طلبك' if ar else 'Your order' }} (<b class="cart-count">0</b>) · <b class="cart-total"></b></span>
+    <span class="cart-sum">{{ 'طلبك' if ar else 'Your order' }} (<b class="cart-count">0</b>) · <b class="cart-total"></b></span>
     <a class="btn cart-order" href="#" target="_blank" rel="noopener">{{ 'اطلب عبر واتساب' if ar else 'Order on WhatsApp' }}</a>
   </div>
+  <p class="sr-only cart-live" role="status" aria-live="polite"></p>
   {%- if d.demo %}<p class="menu-demo-note">{{ 'هذا منيو تجريبي: الزر يفتح واتساب برسالة جاهزة لتختار لمن ترسلها.' if ar else 'This is a demo menu: the button opens WhatsApp with a ready message so you pick who to send it to.' }}</p>{% endif %}
 </div>

@@ -12,7 +12,7 @@
 
 /* --bg الخلفية · --ink النص · --muted النص الثانوي · --line الفواصل · --accent لون المحل (العناوين والسعر الثاني) · --hl خط التمييز تحت العناوين */
 .hm, .hm[data-theme="classic"] { --display: "Lalezar", "Cairo", sans-serif; --dw: 400; --lh: 1.1; --bg: #fff; --ink: #2A1A0F; --muted: #7a6a5c; --line: rgba(42, 26, 15, 0.14); --accent: #C4231B; --hl: #F7C51E; }
-.hm[data-theme="cafe"] { --display: "Reem Kufi", "Cairo", sans-serif; --dw: 600; --lh: 1.15; --bg: #fff; --ink: #2B2A26; --muted: #6f7a73; --line: rgba(43, 42, 38, 0.14); --accent: #2F5D50; --hl: #E8D5B5; }
+.hm[data-theme="cafe"] { --display: "Reem Kufi", "Cairo", sans-serif; --dw: 600; --lh: 1.15; --bg: #fff; --ink: #2B2A26; --muted: #6a756e; --line: rgba(43, 42, 38, 0.14); --accent: #2F5D50; --hl: #E8D5B5; }
 .hm[data-theme="luxe"] { --display: "Amiri", "Cairo", serif; --dw: 400; --lh: 1.45; --bg: #fff; --ink: #1B1B1B; --muted: #7d7462; --line: rgba(27, 27, 27, 0.13); --accent: #8C6A2F; --hl: #EADCB7; }
 .hm[data-theme="sea"] { --display: "Reem Kufi", "Cairo", sans-serif; --dw: 600; --lh: 1.15; --bg: #fff; --ink: #14263A; --muted: #5d6f82; --line: rgba(20, 38, 58, 0.14); --accent: #1F4E79; --hl: #BFDDF2; }
 .hm[data-theme="orange"] { --display: "Lalezar", "Cairo", sans-serif; --dw: 400; --lh: 1.1; --bg: #fff; --ink: #2B1D14; --muted: #7e6b5d; --line: rgba(43, 29, 20, 0.14); --accent: #D9661F; --hl: #FFD9B8; }
@@ -32,8 +32,8 @@
 
 /* «الأشهر عندنا»: صندوق بإطار بلون المحل مثل نسخة الطباعة */
 .hm-stars { margin-top: 1.3em; padding: 0.9em 1.1em 0.8em; border-radius: 18px; border: 2.5px solid var(--accent); }
-.hm-stars h3 { margin: 0 0 0.4em; font-family: var(--display); font-weight: var(--dw); font-size: 1.55em; line-height: var(--lh); color: var(--accent); }
-.hm-stars h3 small { font-family: "Cairo", sans-serif; font-size: 0.5em; font-weight: 700; color: var(--ink); margin-inline-start: 0.4em; }
+.hm-stars :is(h2, h3) { margin: 0 0 0.4em; font-family: var(--display); font-weight: var(--dw); font-size: 1.55em; line-height: var(--lh); color: var(--accent); }
+.hm-stars :is(h2, h3) small { font-family: "Cairo", sans-serif; font-size: 0.5em; font-weight: 700; color: var(--ink); margin-inline-start: 0.4em; }
 .hm-star { display: flex; align-items: center; gap: 0.7em; padding: 0.45em 0; }
 .hm-star + .hm-star { border-top: 1px solid var(--line); }
 .hm-star img { width: 2.6em; height: 2.6em; object-fit: cover; border-radius: 10px; flex: none; }
@@ -44,10 +44,10 @@
 .hm-sec { margin-top: 1.6em; }
 .hm-banner { height: 6.5em; border-radius: 16px; overflow: hidden; margin-bottom: 0.9em; }
 .hm-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.hm-sec h3 { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 0.3em; padding-bottom: 0.35em; border-bottom: 3px solid var(--ink); font-family: var(--display); font-weight: var(--dw); font-size: 1.7em; line-height: var(--lh); color: var(--accent); }
+.hm-sec :is(h2, h3) { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 0.3em; padding-bottom: 0.35em; border-bottom: 3px solid var(--ink); font-family: var(--display); font-weight: var(--dw); font-size: 1.7em; line-height: var(--lh); color: var(--accent); }
 /* خط التمييز تحت العنوان (مثل قلم التظليل بنسخة الطباعة) */
-.hm-sec h3 > span { background: linear-gradient(transparent 58%, var(--hl) 58%, var(--hl) 92%, transparent 92%); padding-inline: 0.1em; }
-.hm-sec h3 em { font-style: normal; font-family: "Cairo", sans-serif; font-weight: 700; font-size: 0.45em; color: var(--ink); }
+.hm-sec :is(h2, h3) > span { background: linear-gradient(transparent 58%, var(--hl) 58%, var(--hl) 92%, transparent 92%); padding-inline: 0.1em; }
+.hm-sec :is(h2, h3) em { font-style: normal; font-family: "Cairo", sans-serif; font-weight: 700; font-size: 0.45em; color: var(--ink); }
 .hm-heads { display: flex; justify-content: flex-end; font-size: 0.75em; font-weight: 700; color: var(--ink); }
 .hm-heads span { width: 5.6em; text-align: end; }
 .hm ul { list-style: none; margin: 0; padding: 0; }

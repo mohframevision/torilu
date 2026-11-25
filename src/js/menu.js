@@ -30,6 +30,8 @@ document.querySelectorAll("[data-menu]").forEach((root) => {
     const el = b.closest("[data-item]");
     qty.set(el, Math.max(0, (qty.get(el) || 0) + Number(b.dataset.step)));
     render();
+    // يعلن المجموع لقارئ الشاشة من خارج الشريط المخفي (فيُسمع أول إضافة وتفريغ السلة)؛ نقرات العرض التجريبي البرمجية لا تُعلن
+    if (e.isTrusted) root.querySelector(".cart-live").textContent = bar.querySelector(".cart-sum").textContent;
   });
   render();
 });

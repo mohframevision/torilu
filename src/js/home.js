@@ -3,6 +3,8 @@
    عشاء الليل)، وترتيبه يتبدّل كل يوم ببذرة التاريخ — نفس اليوم يعطي نفس الترتيب (ما يتنطط مع
    كل تحديث للصفحة)، واليوم الثاني ترتيب جديد. «جديد في توريلو» = آخر ما أضافه صاحب الموقع. */
 (() => {
+  // يُلغي حجز مكان الصفوف في style.css أيّاً كان المخرج (data.js لم يُحمَّل، خطأ، أو صف فارغ): الصف المخفي يعود display:none
+  document.documentElement.classList.add("home-js");
   const chipsBox = document.getElementById("homeChips");
   if (!chipsBox || typeof SITE_DATA === "undefined") return;
   const isEn = window.SITE_LANG === "en";
@@ -121,7 +123,7 @@
   const choices = featured.length ? featured : withMenu.length ? withMenu : leadPool;
   const shown = new Set(); // ما يتكرر مكان بين مكان الأسبوع والصفّين
   if (choices.length) {
-    const week = Math.floor((Date.now() / 86400000 + 3) / 7); // يتبدّل كل أحد
+    const week = Math.floor((Date.now() / 86400000 + 4.125) / 7); // يتبدّل كل أحد ٠٠:٠٠ بتوقيت البحرين (يوم ٠ خميس، و٠٫١٢٥ = ٣ ساعات)
     const [ls, lead] = choices[week % choices.length];
     shown.add(lead.id);
     const menuLine = lead.menuCount ? `<span class="d-lead-menu">${escapeHtml(t("home_menu_count").replace("{n}", lead.menuCount))}</span>` : "";
