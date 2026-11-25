@@ -23,7 +23,7 @@
 {% set desc = (d.desc_en or d.desc) if isEn else d.desc %}
 {% set t = i18n[lang or "ar"] %}
 <div class="item-card{% if d.featured %} featured{% endif %}{% if d.verified %} verified{% endif %}">
-  {% set cardIndex = index if (index is defined and index is not none) else 999 %}{% if d.image %}<img class="item-photo" src="{{ d.image }}" alt="{{ title }}"{% if cardIndex == 0 %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" />{% if d.imageCredit and d.imageCreditUrl %}<a class="photo-credit card" dir="ltr" href="{{ d.imageCreditUrl }}" target="_blank" rel="noopener">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</a>{% elif d.imageCredit %}<span class="photo-credit card" dir="ltr">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</span>{% endif %}{% endif %}
+  {% set cardIndex = index if (index is defined and index is not none) else 999 %}{% if d.image %}<img class="item-photo" src="{{ d.image }}" sizes="(max-width: 400px) 100vw, 320px" alt="{{ title }}"{% if cardIndex == 0 %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" />{% if d.imageCredit and d.imageCreditUrl %}<a class="photo-credit card" dir="ltr" href="{{ d.imageCreditUrl }}" target="_blank" rel="noopener">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</a>{% elif d.imageCredit %}<span class="photo-credit card" dir="ltr">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</span>{% endif %}{% endif %}
   {% if d.featured %}<span class="featured-badge">{{ t.featured_badge }}</span>{% endif %}
   <div class="item-body">
     <div class="item-top">

@@ -1083,6 +1083,15 @@ function titleHtml(title) {
 }
 
 /* ===== بناء بطاقة عنصر واحدة ===== */
+// نسخ webp المصغّرة (<اسم>-480w/-960w.webp) يبنيها scripts/minify.js لكل صورة مرفوعة؛
+// لو ناقصة (eleventy --serve بلا minify) يرجع المتصفح للأصل بحذف srcset
+function photoSrcset(src) {
+  if (!src.startsWith("/assets/uploads/") || /[\s,%]/.test(src)) return "";
+  const set = [480, 960].map((w) => `${src.replace(/\.[^./]+$/, `-${w}w.webp`)} ${w}w`).join(", ");
+  return `srcset="${escapeHtml(set)}" sizes="(max-width: 400px) 100vw, 320px" `;
+}
+document.addEventListener("error", (e) => e.target.srcset && e.target.removeAttribute("srcset"), true);
+
 function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel = "") {
   const card = document.createElement("div");
   // نفس منطق item-card.njk بالضبط — أي تغيير هنا لازم ينعكس هناك، وإلا اختلف
@@ -1107,7 +1116,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   const credit = escapeHtml(item.imageLicense ? `${item.imageCredit} · ${item.imageLicense}` : item.imageCredit);
 
   card.innerHTML = `
-    ${item.image ? `<img class="item-photo" src="${escapeHtml(item.image)}" alt="${escapeHtml(title)}" ${index === 0 ? `loading="eager" fetchpriority="high"` : `loading="lazy"`} decoding="async" />${!item.imageCredit ? "" : item.imageCreditUrl ? `<a class="photo-credit card" dir="ltr" href="${safeUrl(item.imageCreditUrl)}" target="_blank" rel="noopener">${credit}</a>` : `<span class="photo-credit card" dir="ltr">${credit}</span>`}` : ""}
+    ${item.image ? `<img class="item-photo" src="${escapeHtml(item.image)}" ${photoSrcset(item.image)}alt="${escapeHtml(title)}" ${index === 0 ? `loading="eager" fetchpriority="high"` : `loading="lazy"`} decoding="async" />${!item.imageCredit ? "" : item.imageCreditUrl ? `<a class="photo-credit card" dir="ltr" href="${safeUrl(item.imageCreditUrl)}" target="_blank" rel="noopener">${credit}</a>` : `<span class="photo-credit card" dir="ltr">${credit}</span>`}` : ""}
     ${item.featured ? `<span class="featured-badge">${t("featured_badge")}</span>` : ""}
     <div class="item-body">
       ${sectionBadge(section)}
@@ -1905,7 +1914,7 @@ document.addEventListener("keydown", (e) => {
   async function open(img) {
     if (busy) return;
     thumb = img;
-    big.src = img.currentSrc || img.src;
+    big.src = img.closest("a")?.href || img.src;
     big.alt = img.alt;
     dlg.setAttribute("aria-label", big.alt || (window.SITE_LANG === "en" ? "Photo" : "صورة"));
     try {

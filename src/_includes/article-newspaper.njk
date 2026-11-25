@@ -24,7 +24,7 @@
     <button type="button" class="btn secondary article-share-btn">{{ svgIcon("share", 16) }} {{ t.article_share }}</button>
   </div>
 </header>
-{% if image %}<img class="detail-hero-photo" src="{{ image }}" alt="{{ title }}" />{% if imageCredit %}<p class="photo-credit" dir="ltr">{% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if not isEn else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</p>{% endif %}{% endif %}
+{% if image %}<img class="detail-hero-photo" src="{{ image }}" sizes="(max-width: 720px) 100vw, (min-width: 1601px) 60vw, 960px" alt="{{ title }}" fetchpriority="high" />{% if imageCredit %}<p class="photo-credit" dir="ltr">{% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/by/4.0/{{ 'deed.ar' if not isEn else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}</p>{% endif %}{% endif %}
 {% if video %}
 <div class="detail-video">
   <iframe src="https://www.youtube-nocookie.com/embed/{{ video }}" title="{{ title }}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

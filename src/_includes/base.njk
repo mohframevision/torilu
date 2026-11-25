@@ -104,7 +104,7 @@
   {# صورة العنصر الرئيسية (LCP بصفحات التفاصيل) — أولوية تحميل عالية لأنها
      غالباً أكبر عنصر مرئي بالصفحة. لا أثر مرئي، ملف عادي مسبقاً في <img>
      بجسم الصفحة (detail-item.njk)، هذا فقط يبدأ تحميله أبكر. #}
-  {% if image %}<link rel="preload" as="image" href="{{ image }}" fetchpriority="high" />{% endif %}
+  {% if image %}<link rel="preload" as="image" href="{{ image }}" imagesizes="(max-width: 720px) 100vw, (min-width: 1601px) 60vw, 960px" fetchpriority="high" />{% endif %}
   <link rel="stylesheet" href="{{ '/css/style.css' | url }}?v={{ assetV['css/style.css'] }}" />
   {# لون الموقع من لوحة التحكم (مجموعة "شكل الموقع") — ملف خارجي منفصل عمداً،
      لأن سياسة CSP (style-src) ما تسمح بوسم <style> مضمّن، بس تسمح بملف من

@@ -47,7 +47,7 @@
 {%- set licLink %}{% if imageLicense %} · <a href="https://creativecommons.org/licenses/{{ 'by-sa' if 'SA' in imageLicense else 'by' }}/4.0/{{ 'deed.ar' if not isEn else '' }}" target="_blank" rel="noopener license">{{ imageLicense }}</a>{% endif %}{% endset %}
 {% if image %}
 <figure class="np-photo">
-  <img class="detail-hero-photo" src="{{ image }}" alt="{{ title }}" />
+  <img class="detail-hero-photo" src="{{ image }}" sizes="(max-width: 720px) 100vw, (min-width: 1601px) 60vw, 960px" alt="{{ title }}" fetchpriority="high" />
   <figcaption>{{ title }}{% if imageCredit %} — <span class="photo-credit" dir="ltr">{% if imageCreditUrl %}<a href="{{ imageCreditUrl }}" target="_blank" rel="noopener">{{ imageCredit }}</a>{% else %}{{ imageCredit }}{% endif %}{{ licLink | safe }}</span>{% endif %}</figcaption>
 </figure>
 {% endif %}
@@ -62,7 +62,7 @@
 {%- set gal = gallery or [] %}
 {%- set parts = (content ~ "").split("<h2") %}
 {%- macro npPic(src, n) -%}
-<figure class="np-inline-photo{{ ' np-wide' if n % 2 == 1 else '' }}"><a href="{{ src }}" target="_blank" rel="noopener"><img src="{{ src }}" alt="{{ title }} {{ n + 1 }}" loading="lazy" decoding="async" /></a><figcaption>{{ title }}{% if imageCredit %} — <span class="photo-credit" dir="ltr">{{ imageCredit }}{{ licLink | safe }}</span>{% endif %}</figcaption></figure>
+<figure class="np-inline-photo{{ ' np-wide' if n % 2 == 1 else '' }}"><a href="{{ src }}" target="_blank" rel="noopener"><img src="{{ src }}" sizes="(max-width: 720px) 100vw, {{ '(min-width: 1601px) 60vw, ' if n % 2 == 1 }}960px" alt="{{ title }} {{ n + 1 }}" loading="lazy" decoding="async" /></a><figcaption>{{ title }}{% if imageCredit %} — <span class="photo-credit" dir="ltr">{{ imageCredit }}{{ licLink | safe }}</span>{% endif %}</figcaption></figure>
 {%- endmacro %}
 <article class="prose np-body">
 {%- for part in parts %}

@@ -121,7 +121,20 @@ async function staleWhileRevalidate(request) {
       return res;
     })
     .catch(() => null);
-  return cached || (await fetching) || Response.error();
+  return cached || (await fetching) || (await uploadSibling(cache, request)) || Response.error();
+}
+
+/* صورة مرفوعة بلا اتصال: المتصفح يطلب مقاساً (480w/960w/الأصل) حسب عرض الشاشة الحالي،
+   والمخزَّن قد يكون مقاساً آخر لنفس الصورة (دوران الجوال أو تغيير حجم النافذة) — يكفي بدل صورة مكسورة */
+async function uploadSibling(cache, request) {
+  const stem = (p) => p.slice(0, p.lastIndexOf(".")).replace(/-[0-9]+w$/, "");
+  const path = new URL(request.url).pathname;
+  if (!path.startsWith(BASE + "assets/uploads/")) return null;
+  for (const key of await cache.keys()) {
+    const p = new URL(key.url).pathname;
+    if (p !== path && p.startsWith(BASE + "assets/uploads/") && stem(p) === stem(path)) return cache.match(key);
+  }
+  return null;
 }
 
 self.addEventListener("fetch", (event) => {
