@@ -81,7 +81,10 @@ function signature(file) {
     // فيقارن نصاً عربياً على أنه معرّف عنصر ويفشل بلا سبب حقيقي
     ids: new Set([...h.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1])),
     classes: new Set(
-      [...h.matchAll(/\bclass="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/)).filter(Boolean)
+      [...h.matchAll(/\bclass="([^"]+)"/g)]
+        .flatMap((m) => m[1].split(/\s+/))
+        // «اقرأ المزيد» يتبع طول الوصف بلغته (item-card.njk): قد يطول الوصف بلغة ويقصر بالأخرى
+        .filter((c) => c && c !== "desc-toggle" && c !== "clamped")
     ),
     scripts: new Set(
       [...h.matchAll(/>\s*(render\w+\(\)|init\w+\(\)|renderSection\("[^"]+"\))/g)].map((m) => m[1])

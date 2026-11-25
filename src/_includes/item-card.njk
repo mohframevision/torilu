@@ -5,10 +5,11 @@
   "مطاعم" ما كان فيه ولا اسم مطعم واحد. يعني من يبحث بقوقل عن اسم مطعم
   معيّن ما يوصل للموقع إطلاقاً.
 
-  main.js يعيد بناء الشبكة بعد التحميل ويستبدل هذي البطاقات بنسخة تفاعلية
-  (إعجاب/مفضلة/مشاركة/فلترة). فهذي النسخة عمداً بلا أزرار تفاعلية — تحتوي
-  فقط ما يهم محرك البحث والزائر بدون جافاسكربت: الاسم، الوصف، التصنيفات،
-  والروابط. والكلاسات نفسها عشان الشكل يكون مطابقاً قبل تدخّل جافاسكربت.
+  interactive (صفحات الأقسام): البطاقة نفس ما يبنيه buildItemCard بـmain.js
+  (أزرار المفضلة والمشاركة، «اقرأ المزيد»، زر المنيو ونسخ الرقم، رابط الإبلاغ)، وmain.js
+  يتبنّاها كما هي بدل أن يعيد بناءها — أي تغيير هناك لازم ينعكس هنا. الأزرار التي تحتاج
+  جافاسكربت تختفي بدونه (style.css: html:not(.js))، وبدائلها هنا: الاتصال رابط tel عادي (main.js
+  يحوّله إلى نسخ الرقم)، والمنيو <details>. بلا interactive («اقتراح أول زيارة»): نسخة ثابتة بلا أزرار.
 #}
 {% from "icon.njk" import icon %}
 {# index (اختياري): ترتيب البطاقة بالشبكة (loop.index0) — أول 4 بطاقات
@@ -16,28 +17,45 @@
    عنصر ظاهر بأول تحميل يؤخر اكتشاف الصورة ويضر مقياس LCP لو كانت هي
    أكبر عنصر مرئي بالصفحة. بلا index (افتراضي 999) تبقى كل الصور lazy
    كالسابق — بلا أي تغيير سلوك لصفحات لا تمرر ترتيباً. #}
-{% macro card(entry, sectionSlug, lang, hasDetailPages, tagsEn, i18n, tagIcons, index) %}
+{% macro card(entry, sectionSlug, lang, hasDetailPages, tagsEn, i18n, tagIcons, index, interactive) %}
 {% set d = entry.data %}
 {% set isEn = (lang == "en") %}
 {% set title = (d.title_en or d.title) if isEn else d.title %}
 {% set desc = (d.desc_en or d.desc) if isEn else d.desc %}
 {% set t = i18n[lang or "ar"] %}
-<div class="item-card{% if d.featured %} featured{% endif %}{% if d.verified %} verified{% endif %}">
-  {% set cardIndex = index if (index is defined and index is not none) else 999 %}{% if d.image %}<img class="item-photo" src="{{ d.image }}" sizes="(max-width: 400px) 100vw, 320px" alt="{{ title }}"{% if cardIndex == 0 %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" />{% if d.imageCredit and d.imageCreditUrl %}<a class="photo-credit card" dir="ltr" href="{{ d.imageCreditUrl }}" target="_blank" rel="noopener">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</a>{% elif d.imageCredit %}<span class="photo-credit card" dir="ltr">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</span>{% endif %}{% endif %}
+{%- set f = d | cardFacts %}
+{%- set hasDetail = hasDetailPages or d.hasDetailPage %}
+{%- set cardIndex = index if (index is defined and index is not none) else 999 %}
+<div class="item-card{% if d.featured %} featured{% endif %}{% if d.verified %} verified{% endif %}"{% if interactive %} data-key="{{ sectionSlug }}/{{ entry.fileSlug }}" style="{{ ('animation-delay: ' + cardIndex * 45 + 'ms;') if cardIndex < 10 else 'animation: none;' }}"{% endif %}>
+  {% if d.image %}<img class="item-photo" src="{{ d.image }}" sizes="(max-width: 400px) 100vw, 320px" alt="{{ title }}"{% if cardIndex == 0 %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" />{% if d.imageCredit and d.imageCreditUrl %}<a class="photo-credit card" dir="ltr" href="{{ d.imageCreditUrl }}" target="_blank" rel="noopener">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</a>{% elif d.imageCredit %}<span class="photo-credit card" dir="ltr">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</span>{% endif %}{% endif %}
   {% if d.featured %}<span class="featured-badge">{{ t.featured_badge }}</span>{% endif %}
   <div class="item-body">
     <div class="item-top">
       {%- set ill = "" if d.image else d.categories | illusFor(sectionSlug) %}
       {%- if ill %}<img class="item-illus" src="/assets/illus/{{ ill }}.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />{% else %}<span class="item-icon" aria-hidden="true">{{ d.icon or "⭐" }}</span>{% endif %}
-      {#- مكان زرّي المشاركة والمفضلة (main.js يضعهما): فارغ هنا ليحجز ارتفاعهما فلا تطول البطاقة عند التبديل -#}
+      {%- if interactive %}
+      {#- قلب فارغ؛ theme-init.js يملأ قلوب المفضلة قبل أول رسم -#}
+      <div class="item-top-actions">
+        <button class="share-btn" title="{{ t.share_whatsapp }}" aria-label="{{ t.share_whatsapp }}">{{ icon("share", 16) }}</button>
+        <button class="fav-btn " title="{{ t.fav_add }}" aria-label="{{ t.fav_add }}" aria-pressed="false">
+          {{ icon("heart") }}
+        </button>
+      </div>
+      {%- else -%}
       <div class="item-top-actions" aria-hidden="true"><span class="share-btn"></span><span class="fav-btn"></span></div>
+      {%- endif %}
     </div>
-    {% set tp = title.split(" - ") %}<h3>{% if tp.length > 1 %}<bdi>{{ tp[0] }}</bdi><span class="sr-only"> - </span><bdi class="t-branch">{{ tp.slice(1).join(" - ") }}</bdi>{% else %}<bdi>{{ title }}</bdi>{% endif %}{% if d.verified %} <span class="verified-badge">{{ t.verified_badge }}</span>{% endif %}{% if d.liked %} <span class="liked-badge">{{ t.liked_badge }}</span>{% endif %}{% if d.video %} <span class="video-badge">{{ t.video_badge }}</span>{% endif %}</h3>
-    <p class="item-desc">{{ desc }}</p>
+    {% set tp = title.split(" - ") %}<h3>{% if tp.length > 1 %}<bdi>{{ tp[0] }}</bdi><span class="sr-only"> - </span><bdi class="t-branch">{{ tp.slice(1).join(" - ") }}</bdi>{% else %}<bdi>{{ title }}</bdi>{% endif %}{% if d.verified %} <span class="verified-badge"{% if interactive %} title="{{ t.verified_badge }}"{% endif %}>{{ t.verified_badge }}</span>{% endif %}{% if d.liked %} <span class="liked-badge"{% if interactive %} title="{{ t.liked_badge }}"{% endif %}>{{ t.liked_badge }}</span>{% endif %}{% if d.video %} <span class="video-badge">{{ t.video_badge }}</span>{% endif %}</h3>
+    {%- set isLongDesc = interactive and desc and desc.length > 100 %}
+    <p class="item-desc{% if isLongDesc %} clamped{% endif %}">{{ desc }}</p>
+    {%- if isLongDesc and not hasDetail %}
+    <button class="desc-toggle" aria-expanded="false">{{ t.read_more }}</button>
+    {%- endif %}
     {%- set hours = (d.hours_en or d.hours) if isEn else d.hours %}
     {%- if hours %}<p class="item-hours">{{ icon("schedule", 16) }} {{ hours }}</p>{%- endif %}
     <div class="item-meta">
-      {%- for tag in (d.categories or []).concat(d.categoriesCustom or []) %}
+      {%- if interactive and f.isNew %}<span class="tag new-tag">{{ t.new_badge }}</span>{% endif %}
+      {%- for tag in (f.tags if interactive else (d.categories or []).concat(d.categoriesCustom or [])) %}
       <span class="tag">{% if tagIcons[tag] %}<span class="tag-icon" aria-hidden="true">{{ tagIcons[tag] }}</span>{% endif %}{{ (tagsEn[tag] or tag) if isEn else tag }}</span>
       {%- endfor %}
     </div>
@@ -64,7 +82,7 @@
         بصفحة القسم — main.js يجيبه من js/menus.js عند الفتح. -#}
     {%- set menuItems = d.menuItems or [] %}
     {%- if menuItems.length and not (hasDetailPages or d.hasDetailPage) %}
-    <details class="menu-list">
+    <details class="menu-list{% if interactive %} nojs-menu{% endif %}">
       <summary>{{ t.link_menu }}</summary>
       <ul class="menu-items">
         {%- for mi in menuItems %}
@@ -74,9 +92,45 @@
     </details>
     {%- endif %}
     <div class="item-actions">
+      {%- if interactive %}
+      {#- مطابق لـbuildActionsHtml بـmain.js: الزر الأزرق أول رابط بترتيب LINK_ORDER (والهاتف زر لكل رقم)،
+          ثم صفحة التفاصيل والمنيو التفاعلي وباقي الروابط — ثانويان كحد أقصى، وبلا رابط يصير أول ثانوي أزرق -#}
+      {%- set links = d.links or {} %}
+      {%- set nums = [] %}
+      {%- if links.phone %}{% for p in (links.phone | string).split(",") %}{% if p | trim %}{% set nums = (nums.push(p | trim), nums) %}{% endif %}{% endfor %}{% endif %}
+      {%- set keys = [] %}
+      {%- for k in ["maps", "phone", "website", "instagram", "menu"] %}{% if links[k] and not (k == "menu" and f.menuCount) %}{% set keys = (keys.push(k), keys) %}{% endif %}{% endfor %}
+      {%- set primary = [] %}
+      {%- set secondary = [] %}
+      {%- if hasDetail %}{% set secondary = (secondary.push({ k: "details", cls: "btn secondary" }), secondary) %}{% endif %}
+      {%- if f.menuCount %}{% set secondary = (secondary.push({ k: "menu-open", cls: "btn secondary" }), secondary) %}{% endif %}
+      {%- for k in keys %}
+      {%- set isPrimary = loop.first %}
+      {%- if k == "phone" %}{% for n in nums %}{% set b = { k: k, n: n, i: loop.index0, cls: ("btn" if (isPrimary and loop.first) else "btn secondary") } %}{% if isPrimary %}{% set primary = (primary.push(b), primary) %}{% else %}{% set secondary = (secondary.push(b), secondary) %}{% endif %}{% endfor %}
+      {%- elif isPrimary %}{% set primary = (primary.push({ k: k, cls: "btn" }), primary) %}
+      {%- else %}{% set secondary = (secondary.push({ k: k, cls: "btn secondary" }), secondary) %}{% endif %}
+      {%- endfor %}
+      {#- زر المنيو مخفي بلا جافاسكربت ويأخذ مكاناً: الزر التالي بعد الحد يُطبع داخل <noscript> بدلاً منه -#}
+      {%- set limit = 2 if primary.length else 3 %}
+      {#- (زر المنيو ثاني ثانوي على الأكثر، فهو دائماً ضمن الحد) -#}
+      {%- set extraSlot = f.menuCount and secondary.length > limit %}
+      {%- for b in primary.concat(secondary.slice(0, limit + (1 if extraSlot else 0))) %}
+      {%- set extra = extraSlot and loop.last %}
+      {%- set cls = "btn" if (loop.first and not primary.length) else b.cls %}
+      {%- if extra %}<noscript>{% endif %}
+      {%- if b.k == "details" %}<a class="{{ cls }}" href="{{ (('/en/' if isEn else '/') + sectionSlug + '/' + (d.slug_en if (isEn and d.slug_en) else entry.fileSlug) + '.html') | url }}">{{ icon("menu-book", 16) }} {{ t.read_details }}</a>
+      {%- elif b.k == "menu-open" %}<button type="button" class="{{ cls }} menu-open-btn">{{ icon("menu-book", 16) }} {{ t.link_menu }}</button>
+      {%- elif b.k == "phone" %}{% set label = t.link_phone + ((" " + (b.i + 1)) if nums.length > 1 else "") %}<a class="{{ cls }} phone-copy-btn" href="tel:{{ ('+' if (b.n.startsWith('973') and b.n.length > 8) else '+973') + b.n }}" data-phone="{{ b.n }}">{{ icon("call", 16) }} {{ label }}</a>
+      {%- elif b.k == "website" %}<a class="{{ cls }}" href="{{ links.website }}" target="_blank" rel="noopener noreferrer{{ ' sponsored' if d.affiliate }}">{{ icon("language", 16) }} {{ ((d.cta_en or d.cta) if isEn else d.cta) or t.link_website }}</a>
+      {%- elif b.k == "maps" %}<a class="{{ cls }}" href="{{ links.maps }}" target="_blank" rel="noopener noreferrer">{{ icon("location-pin", 16) }} {{ t.link_maps }}</a>
+      {%- elif b.k == "instagram" %}<a class="{{ cls }}" href="{{ links.instagram }}" target="_blank" rel="noopener noreferrer">{{ icon("photo-camera", 16) }} {{ t.link_instagram }}</a>
+      {%- elif b.k == "menu" %}<a class="{{ cls }}" href="{{ links.menu }}" target="_blank" rel="noopener noreferrer">{{ icon("menu-book", 16) }} {{ t.link_menu }}</a>
+      {%- endif %}
+      {%- if extra %}</noscript>{% endif %}
+      {%- endfor %}
+      {%- else %}
       {#- مطابق لـbuildActionsHtml بـmain.js: الخريطة الزر الأزرق الوحيد (أول رابط بالترتيب)،
           ثم صفحة التفاصيل، ثم الباقي — رابطان ثانويان كحد أقصى -#}
-      {%- set hasDetail = hasDetailPages or d.hasDetailPage %}
       {%- set links = d.links or {} %}
       {%- set keys = [] %}
       {%- for k in ["maps", "phone", "website", "instagram", "menu"] %}{% if links[k] and not (k == "menu" and menuItems.length) %}{% set keys = (keys.push(k), keys) %}{% endif %}{% endfor %}
@@ -94,9 +148,13 @@
       {%- elif k == "menu" %}<a class="{{ cls }}" href="{{ links.menu }}" target="_blank" rel="noopener noreferrer">{{ icon("menu-book", 16) }} {{ t.link_menu }}</a>
       {%- endif %}
       {%- endfor %}
+      {%- endif %}
     </div>
     {%- if d.affiliate %}
     <p class="affiliate-note">{{ t.promo_affiliate_note }}</p>
+    {%- endif %}
+    {%- if interactive %}
+    <a class="report-link" href="/{{ 'en/' if isEn }}contact.html?report={{ title | urlencode }}&section={{ sectionSlug | urlencode }}">{{ t.report_wrong_info }}</a>
     {%- endif %}
   </div>
 </div>

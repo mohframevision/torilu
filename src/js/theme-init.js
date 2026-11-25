@@ -62,3 +62,60 @@ document.documentElement.classList.add("js");
     ex.remove();
   }, 300);
 })();
+
+/* قلوب المفضلة قبل أول رسم: بطاقات الأقسام مطبوعة وقت البناء بقلب فارغ (item-card.njk)، وmain.js
+   يصل بعد أن يرسم المتصفح أولها. مراقب التحليل يملأ قلب كل بطاقة مفضلة قبل الرسم. يراقب الصفحة كلها
+   فقط حتى تظهر .card-grid، ثم أبناءها المباشرين وحدهم (سجل لكل بطاقة لا لكل عقدة)، ويفحص البطاقات
+   الجديدة فقط مقابل مجموعة المفاتيح، فكلفته لا تكبر بعدد المفضلة. يعمل فقط لمن عنده مفضلة، ويتوقف
+   مع اكتمال الصفحة */
+(function () {
+  var keys = new Set();
+  try {
+    var favs = JSON.parse(localStorage.getItem("site_favorites_v1")) || {};
+    for (var s in favs) for (var id in favs[s]) if (favs[s][id]) keys.add(s + "/" + id);
+  } catch {
+    return;
+  }
+  if (!keys.size) return;
+  var grid,
+    done = 0;
+  function mark() {
+    if (!grid) {
+      grid = document.querySelector(".card-grid");
+      if (!grid) return;
+      mo.disconnect();
+      mo.observe(grid, { childList: true });
+    }
+    var cards = grid.children;
+    // آخر بطاقة قد لا يكون قلبها قد وصل بعد، فتُفحص ثانية مع الدفعة التالية
+    for (var i = done; i < cards.length; i++) {
+      var c = cards[i];
+      if (!keys.has(c.getAttribute("data-key"))) continue;
+      var b = c.querySelector(".fav-btn:not(.active)");
+      var use = b && b.querySelector("use");
+      if (!use) continue;
+      b.classList.add("active");
+      b.setAttribute("aria-pressed", "true");
+      use.setAttribute("href", use.getAttribute("href").replace(/#heart$/, "#heart-fill"));
+    }
+    done = Math.max(0, cards.length - 1);
+  }
+  var mo = new MutationObserver(mark);
+  mo.observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener("DOMContentLoaded", function () {
+    mo.disconnect();
+    mark();
+  });
+})();
+
+/* نقرات أزرار البطاقة قبل وصول main.js (على اتصال بطيء تظهر الأزرار قبله بثوانٍ): تُحفظ هنا ولا تضيع،
+   وmain.js يعيد تنفيذها بعد أن يتبنّى البطاقات (replayEarlyTaps) */
+window.__cardTaps = [];
+document.addEventListener(
+  "click",
+  function (e) {
+    var b = window.__cardTaps && e.target.closest && e.target.closest(".item-card button");
+    if (b) window.__cardTaps.push(b);
+  },
+  true
+);

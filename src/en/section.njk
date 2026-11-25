@@ -49,7 +49,7 @@ eleventyComputed:
 <h2 class="sr-only">{{ sectionEntry.title_en }} list</h2>
 <div class="card-grid">
 {%- for entry in collections[sectionEntry.slug] %}
-{{ cards.card(entry, sectionEntry.slug, "en", sectionEntry.hasDetailPages, tags_en, i18n, tag_icons, loop.index0) }}
+{{ cards.card(entry, sectionEntry.slug, "en", sectionEntry.hasDetailPages, tags_en, i18n, tag_icons, loop.index0, true) }}
 {%- endfor %}
 </div>
 {% endif %}

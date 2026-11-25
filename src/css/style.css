@@ -1064,6 +1064,36 @@ html:not(.js) .theme-toggle {
   padding: 16px 0;
 }
 
+/* main.js يملأ الفلاتر وينقل «الأقرب مني» إليها: مكانهما محجوز قبله فلا تنزل البطاقات بعد أول رسم.
+   الارتفاع المحجوز من قياس صفحة المطاعم (صف، صفان، ثلاثة صفوف رقاقات) */
+html.js .filters:empty {
+  min-height: 74px;
+}
+html.js :not(.filters) > .near-me-btn {
+  display: none;
+}
+/* وحقل البحث يأخذ تحته مسافة غلافه (.search-wrap: ٨ بكسل فوق وتحت)؛ العلوية تنطوي في هامش رأس الصفحة،
+   فتُحجز تحته كلها: الحقل وحده ينزل ٨ بكسل عند لفّه، والفلاتر والبطاقات تحته لا تتحرك */
+html.js input.search-box {
+  margin-bottom: 16px;
+}
+html.js .search-wrap input.search-box {
+  margin-bottom: 0;
+}
+@media (max-width: 1279px) {
+  html.js .filters:empty {
+    min-height: 124px;
+  }
+}
+@media (max-width: 700px) {
+  html.js .filters:empty {
+    min-height: 170px;
+  }
+}
+html.js .filters.filters-one-row:empty {
+  min-height: 66px;
+}
+
 .filter-chip {
   border: 1px solid var(--color-border);
   background: var(--color-surface);
@@ -1582,6 +1612,24 @@ a.photo-credit:hover {
 
 .welcome-pick .item-top-actions[aria-hidden] {
   display: none;
+}
+
+/* بطاقة القسم المطبوعة وقت البناء بلا جافاسكربت: أزرارها لا تعمل، فتختفي (المفضلة والمشاركة تُخفى
+   بلا أن يتغيّر ارتفاع الرأس)، والوصف كاملاً بلا «اقرأ المزيد».
+   ومع جافاسكربت: المنيو زر يفتح البطاقة المنبثقة، فقائمته الثابتة (للبحث وبلا جافاسكربت) تختفي */
+html:not(.js) .item-top-actions button {
+  visibility: hidden;
+}
+html:not(.js) .desc-toggle,
+html:not(.js) .menu-open-btn,
+html.js .nojs-menu {
+  display: none;
+}
+html:not(.js) .item-card .item-desc.clamped {
+  max-height: none;
+}
+html:not(.js) .item-card .item-desc.clamped::after {
+  content: none;
 }
 
 .share-btn {

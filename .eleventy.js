@@ -92,7 +92,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("carShopCount", (entries, label) =>
     (entries || []).filter((e) => (e.data.categories || []).concat(e.data.categoriesCustom || []).includes(label)).length
   );
+  // hours_en ← openingHoursSpecification لـJSON-LD (null لو النص غامض) — eleventy-opening-hours.js
+  eleventyConfig.addFilter("openingHours", (text) => require("./eleventy-opening-hours.js").parseOpeningHours(text));
   eleventyConfig.addFilter("illusFor", (categories, section) => require("./src/_data/illus.js").illusFor(section, categories));
+  eleventyConfig.addFilter("cardFacts", (d) => require("./eleventy-app-data.js").cardFacts(d));
   // صفحة من مجموعة برابطها (العربي مكتوب أحياناً بلا ترميز) — الإنجليزية تقرا شارات صفحتها العربية منها
   eleventyConfig.addFilter("pageByUrl", (pages, url) => url && (pages || []).find((p) => decodeURI(p.url) === decodeURI(url)));
   // أول رابط خرائط قوقل داخل نص الصفحة — الصفحات الإنجليزية ما فيها links.maps بالبيانات

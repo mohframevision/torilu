@@ -43,6 +43,8 @@ pageScript: fold
   {% if la and ln %}"geo": {"@type": "GeoCoordinates", "latitude": {{ la }}, "longitude": {{ ln }}},{% endif %}
   {% if lk.maps %}"hasMap": {{ lk.maps | json | safe }},{% endif %}
   {% if ldType in ["Restaurant", "CafeOrCoffeeShop", "Bakery"] and cList %}"servesCuisine": {{ cList.split("|").slice(0, -1) | json | safe }},{% endif %}
+  {% set ldHours = (hours_en or d0.hours_en) | openingHours %}
+  {% if ldHours %}"openingHoursSpecification": {{ ldHours | json | safe }},{% endif %}
   {% if ldMenu and ldMenu.length %}"hasMenu": {{ (site.origin + (page.url | url)) | json | safe }},{% endif %}
   "address": {"@type": "PostalAddress", {% if ldArea %}"addressLocality": {{ ((tags_en[ldArea] or ldArea) if lang == "en" else ldArea) | json | safe }}, {% endif %}"addressCountry": "BH"}
 }

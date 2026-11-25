@@ -31,15 +31,16 @@ eleventyComputed:
 
 <input type="text" class="search-box" placeholder="Search {{ shopType.label_en }} shops…" aria-label="Search {{ shopType.label_en }}" />
 <button type="button" class="near-me-btn" aria-pressed="false">{{ t.near_me }}</button>
-<div class="filters"></div>
+{%- set shown = [] %}
+{%- for entry in (collections['car-shops'] or []) %}{% if shopType.label in (entry.data.categories or []).concat(entry.data.categoriesCustom or []) %}{% set shown = (shown.push(entry), shown) %}{% endif %}{% endfor %}
+{#- بلا محلات: الفلاتر رقاقة «الكل» وحدها، فيُحجز لها صف واحد (style.css) -#}
+<div class="filters{% if not shown.length %} filters-one-row{% endif %}"></div>
 
 {# البطاقات مطبوعة هنا وقت البناء عشان محركات البحث تقرأ المحتوى فعلاً #}
 <h2 class="sr-only">{{ shopType.label_en }} list</h2>
 <div class="card-grid">
-{%- for entry in (collections['car-shops'] or []) %}
-{%- if shopType.label in (entry.data.categories or []).concat(entry.data.categoriesCustom or []) %}
-{{ cards.card(entry, "car-shops", "en", false, tags_en, i18n, tag_icons, loop.index0) }}
-{%- endif %}
+{%- for entry in shown %}
+{{ cards.card(entry, "car-shops", "en", false, tags_en, i18n, tag_icons, loop.index0, true) }}
 {%- endfor %}
 </div>
 

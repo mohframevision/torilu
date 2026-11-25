@@ -129,15 +129,26 @@ function priceLevel(menuItems) {
   return { median, tag: PRICE_TAGS[level] };
 }
 
+/* ما تحتاجه بطاقة المكان من بيانات محسوبة: هنا لـdata.js، وفلتر cardFacts لـitem-card.njk،
+   فتطابق البطاقة المطبوعة وقت البناء ما يبنيه main.js (شارة «مضاف مؤخراً» ووسم السعر وزر المنيو) */
+function cardFacts(d) {
+  const addedAt = d.dateAdded ? new Date(d.dateAdded).getTime() : NaN;
+  const menu = (d.menuItems || []).filter((mi) => mi && mi.name);
+  const tags = [...(d.categories || []), ...(d.categoriesCustom || [])];
+  const price = priceLevel(menu);
+  if (price && !tags.includes(price.tag)) tags.push(price.tag);
+  return { addedAt, isNew: !Number.isNaN(addedAt) && BUILD_TIME - addedAt < NEW_BADGE_DAYS * 86400000, tags, menuCount: menu.length };
+}
+
 function buildSiteData(data, options = {}) {
   const includeContent = Boolean(options.includeContent);
   const sections = data.sections;
   const out = {};
-  const now = BUILD_TIME;
 
   for (const meta of sections) {
     const items = (data.collections[meta.slug] || []).map((entry) => {
-      const addedAt = entry.data.dateAdded ? new Date(entry.data.dateAdded).getTime() : NaN;
+      const facts = cardFacts(entry.data);
+      const addedAt = facts.addedAt;
       const branches = parseBranches(entry.data.coords);
       const coords = branches[0] || null;
       const item = {
@@ -169,18 +180,16 @@ function buildSiteData(data, options = {}) {
         verified: Boolean(entry.data.verified),
         liked: Boolean(entry.data.liked),
         hideFromNewest: Boolean(entry.data.hideFromNewest),
-        isNew: !Number.isNaN(addedAt) && now - addedAt < NEW_BADGE_DAYS * 86400000,
+        isNew: facts.isNew,
         addedAt: Number.isNaN(addedAt) ? null : addedAt,
         lat: coords ? coords.lat : typeof entry.data.lat === "number" ? entry.data.lat : null,
         lng: coords ? coords.lng : typeof entry.data.lng === "number" ? entry.data.lng : null,
-        tags: [...(entry.data.categories || []), ...(entry.data.categoriesCustom || [])],
+        tags: facts.tags,
       };
       if (branches.length > 1) item.branches = branches;
       // مرادفات بحث مخفية (ما تنعرض)
       const kw = entry.data.keywords;
       if (kw) item.keywords = kw;
-      const price = priceLevel(item.menuItems);
-      if (price && !item.tags.includes(price.tag)) item.tags.push(price.tag);
 
       const meat = entry.data.meatSource;
       if (meat && meat.text) {
@@ -249,7 +258,7 @@ function splitMenus(out) {
   return pool;
 }
 
-module.exports = { buildSiteData, priceLevel, PRICE_TAGS, splitMenus };
+module.exports = { buildSiteData, cardFacts, priceLevel, PRICE_TAGS, splitMenus };
 
 // فحص سريع: node eleventy-app-data.js
 if (require.main === module) {

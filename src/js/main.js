@@ -1010,7 +1010,9 @@ function buildActionsHtml(item) {
         .filter(Boolean);
       return numbers.map((num, idx) => {
         const label = numbers.length > 1 ? `${metaLabel} ${idx + 1}` : metaLabel;
-        return `<button type="button" class="${idx ? "btn secondary" : cls} phone-copy-btn" data-phone="${escapeHtml(num)}">${meta.icon} ${escapeHtml(label)}</button>`;
+        // رابط tel حقيقي (يتصل قبل وصول هذا الملف وبلا جافاسكربت)، ومستمع onCardClick يحوّله إلى نسخ الرقم
+        const tel = `tel:${num.startsWith("973") && num.length > 8 ? "+" : "+973"}${num}`;
+        return `<a class="${idx ? "btn secondary" : cls} phone-copy-btn" href="${safeUrl(tel)}" data-phone="${escapeHtml(num)}">${meta.icon} ${escapeHtml(label)}</a>`;
       });
     }
     const cta = isEn ? item.cta_en || item.cta : item.cta;
@@ -1095,10 +1097,14 @@ function photoSrcset(src) {
 }
 document.addEventListener("error", (e) => e.target.srcset && e.target.removeAttribute("srcset"), true);
 
+// كل بطاقة ← [القسم، العنصر]: مستمع نقر واحد للصفحة (onCardClick) بدل مستمعات لكل بطاقة،
+// فبطاقات item-card.njk المطبوعة وقت البناء تعمل كما هي بلا إعادة بناء (adoptCards)
+const cardItems = new WeakMap();
+
 function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel = "") {
   const card = document.createElement("div");
-  // نفس منطق item-card.njk بالضبط — أي تغيير هنا لازم ينعكس هناك، وإلا اختلف
-  // شكل البطاقة قبل تشغيل جافاسكربت وبعده (وبوّابة التطابق بالبناء تكشفها)
+  // نفس منطق item-card.njk (interactive) بالضبط — أي تغيير هنا لازم ينعكس هناك، وإلا
+  // اختلفت بطاقات صفحة القسم المطبوعة وقت البناء عن المبنية هنا (الأقرب مني، المفضلة)
   card.className = [
     "item-card",
     item.featured ? "featured" : "",
@@ -1106,6 +1112,7 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   ]
     .filter(Boolean)
     .join(" ");
+  card.dataset.key = `${section}/${item.id}`;
   // الدخول المتتابع لأول عشر بطاقات فقط: ما بعدها تحت أول الشاشة، ولو فُتحت الصفحة على موضع
   // عميق لكانت كلها تنتظر مخفية معاً
   if (index < 10) card.style.animationDelay = `${index * 45}ms`;
@@ -1150,8 +1157,29 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
     </div>
   `;
 
-  const favBtn = card.querySelector(".fav-btn");
-  favBtn.addEventListener("click", () => {
+  cardItems.set(card, [section, item]);
+  return card;
+}
+
+function setFavBtn(favBtn, on) {
+  // القلب المملوء مسبقاً (theme-init.js) لا يُعاد رسمه: بقي له العنوان وaria-label فقط
+  if (favBtn.classList.contains("active") !== on) favBtn.innerHTML = on ? ICON_SVG["heart-fill"] : ICON_SVG.heart;
+  favBtn.classList.toggle("active", on);
+  const label = on ? t("fav_remove") : t("fav_add");
+  favBtn.title = label;
+  favBtn.setAttribute("aria-label", label);
+  favBtn.setAttribute("aria-pressed", String(on));
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest?.("button, a.phone-copy-btn");
+  const card = btn?.closest(".item-card");
+  const ref = card && cardItems.get(card);
+  if (!ref) return;
+  const [section, item] = ref;
+  const is = (cls) => btn.classList.contains(cls);
+
+  if (is("fav-btn")) {
     const nowFav = toggleFavorite(section, item.id);
     sfx(nowFav ? "favOn" : "favOff");
     // بصفحة المفضلة: البطاقة المُزالة تختفي، وآخر بطاقة تُظهر رسالة القائمة الفارغة
@@ -1162,76 +1190,42 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
       else { renderFavoritesPage(); document.querySelector(".fav-clip-link")?.focus(); }
       return;
     }
-    favBtn.classList.toggle("active", nowFav);
-    favBtn.innerHTML = nowFav ? ICON_SVG["heart-fill"] : ICON_SVG.heart;
-    const label = nowFav ? t("fav_remove") : t("fav_add");
-    favBtn.title = label;
-    favBtn.setAttribute("aria-label", label);
-    favBtn.setAttribute("aria-pressed", String(nowFav));
-    favBtn.classList.remove("pop");
-    void favBtn.offsetWidth;
-    favBtn.classList.add("pop");
-  });
-
-  const shareBtn = card.querySelector(".share-btn");
-  shareBtn.addEventListener("click", () => {
-    const text = buildShareText(section, item);
-    const subtitle = (item.tags || []).map((tag) => tagLabel(tag)).join(" · ");
+    setFavBtn(btn, nowFav);
+    btn.classList.remove("pop");
+    void btn.offsetWidth;
+    btn.classList.add("pop");
+  } else if (is("share-btn")) {
     shareText(
-      text,
+      buildShareText(section, item),
       { section, item_name: itemTitle(item) },
       {
         icon: item.icon,
-        title,
-        subtitle,
+        title: itemTitle(item),
+        subtitle: (item.tags || []).map((tag) => tagLabel(tag)).join(" · "),
         photo: item.image,
       }
     );
-  });
-
-  const descToggle = card.querySelector(".desc-toggle");
-  if (descToggle) {
-    const descEl = card.querySelector(".item-desc");
-    descToggle.addEventListener("click", () => {
-      const expanded = descEl.classList.toggle("clamped") === false;
-      descToggle.textContent = expanded ? t("read_less") : t("read_more");
-      descToggle.setAttribute("aria-expanded", String(expanded));
-      sfx(expanded ? "rowOpen" : "rowClose");
-      if (expanded) {
-        card.classList.add("just-expanded");
-        setTimeout(() => card.classList.remove("just-expanded"), 900);
-      }
-    });
+  } else if (is("desc-toggle")) {
+    const expanded = card.querySelector(".item-desc").classList.toggle("clamped") === false;
+    btn.textContent = expanded ? t("read_less") : t("read_more");
+    btn.setAttribute("aria-expanded", String(expanded));
+    sfx(expanded ? "rowOpen" : "rowClose");
+    if (expanded) {
+      card.classList.add("just-expanded");
+      setTimeout(() => card.classList.remove("just-expanded"), 900);
+    }
+  } else if (is("phone-copy-btn")) {
+    e.preventDefault();
+    const phone = btn.dataset.phone;
+    // async: بلا clipboard (صفحة غير آمنة) يرمي الاستدعاء نفسه، فيلتقطه catch
+    (async () => navigator.clipboard.writeText(phone))().then(
+      () => (sfx("copy"), showToast(t("phone_copied"))),
+      () => showToast(`${t("phone_copy_failed")} ${phone}`)
+    );
+  } else if (is("menu-open-btn")) {
+    openMenuOverlay(item);
   }
-
-  wireItemActions(card, item);
-
-  return card;
-}
-
-// أزرار buildActionsHtml اللي تحتاج JS (نسخ الرقم، المنيو التفاعلي) — مشتركة بين
-// بطاقة القائمة ونتيجة "اختار لي"
-function wireItemActions(root, item) {
-  root.querySelectorAll(".phone-copy-btn").forEach((phoneBtn) => {
-    phoneBtn.addEventListener("click", async () => {
-      const phone = phoneBtn.dataset.phone;
-      try {
-        await navigator.clipboard.writeText(phone);
-      } catch {
-        showToast(`${t("phone_copy_failed")} ${phone}`);
-        return;
-      }
-      sfx("copy");
-      showToast(t("phone_copied"));
-    });
-  });
-  const menuBtn = root.querySelector(".menu-open-btn");
-  if (menuBtn) {
-    menuBtn.addEventListener("click", () => {
-      openMenuOverlay(item);
-    });
-  }
-}
+});
 
 /* ===== عرض قسم كامل: بحث + فلاتر + شبكة بطاقات =====
    typeFilter (اختياري): يقصر القسم على عناصر تاجها يحتوي هالقيمة — تستخدمه
@@ -1293,7 +1287,24 @@ function renderSection(section, typeFilter) {
     if (!card) cardCache.set(item, (card = buildItemCard(section, item, index)));
     return card;
   };
-  let renderGen = 0;
+  // بطاقات الخادم (item-card.njk) هي نفس ما يبنيه buildItemCard، فتدخل المخزن كما هي.
+  // مصدر اللحم وحده يُبنى هنا: عمر التحقق فيه («قبل أشهر») يُحسب بتاريخ اليوم لا تاريخ البناء
+  const byKey = new Map(items.map((item) => [`${section}/${item.id}`, item]));
+  const favs = getFavorites()[section] || {};
+  for (const el of grid.querySelectorAll(":scope > .item-card[data-key]")) {
+    const item = byKey.get(el.dataset.key);
+    if (!item) continue;
+    if (item.meatSource) {
+      const fresh = buildItemCard(section, item, [...grid.children].indexOf(el));
+      el.replaceWith(fresh);
+      cardCache.set(item, fresh);
+      continue;
+    }
+    cardItems.set(el, [section, item]);
+    cardCache.set(item, el);
+    // theme-init.js ملأ القلب قبل أول رسم؛ هنا العنوان وaria-label (نصوصهما من I18N)
+    if (favs[item.id]) setFavBtn(el.querySelector(".fav-btn"), true);
+  }
 
   function renderFilters() {
     if (!filtersWrap) return;
@@ -1366,7 +1377,6 @@ function renderSection(section, typeFilter) {
   }
 
   function renderGrid(announce = true) {
-    renderGen++;
     const query = (searchInput?.value || "").trim();
 
     // الاسم والوصف والتصنيفات باللغتين (رابط مشاركة إنجليزي ?q= يشتغل بالصفحة العربية)
@@ -1490,29 +1500,13 @@ function renderSection(section, typeFilter) {
   }
 
   renderFilters();
-  if (searchInput?.value.trim()) {
+  // أول عرض: بطاقات الخادم تبقى كما هي. الشبكة تُرسم من جديد فقط لو اختلفت عمّا يعرضه renderGrid
+  // (بحث ?q= مشترك، أو ترتيب/عناصر غير متطابقة) — والبطاقات المتبنّاة لا يُعاد بناؤها حتى عندها
+  const order = [...items].sort((a, b) => pinRank(b) - pinRank(a));
+  const kids = grid.children;
+  if (searchInput?.value.trim() || kids.length !== order.length || order.some((item, i) => cardCache.get(item) !== kids[i]))
     renderGrid(false);
-    restoreTappedCard();
-  } else {
-    // أول عرض: بطاقات الخادم ظاهرة، والبطاقات التفاعلية تُبنى على دفعات صغيرة فلا تتجمّد الصفحة،
-    // ثم تُبدَّل دفعة واحدة. لو بحث الزائر أو فلتر قبل الانتهاء، فعرضه يكمل البناء ويُلغي هذا
-    const order = [...items].sort((a, b) => pinRank(b) - pinRank(a));
-    const gen = renderGen;
-    let i = 0;
-    (function warm() {
-      if (gen !== renderGen) return;
-      for (const end = Math.min(i + 40, order.length); i < end; i++) cardFor(order[i], i);
-      if (i < order.length) setTimeout(warm);
-      else {
-        grid.classList.add("is-settled"); // بطاقات الخادم ظهرت بحركتها، فالتبديل لا يعيدها
-        // التبديل يحذف بطاقة الخادم المركّز عليها، فنعيد التركيز لنفس الرابط بالبطاقة الجديدة
-        const focusHref = grid.contains(document.activeElement) && document.activeElement.getAttribute("href");
-        renderGrid(false);
-        if (focusHref) grid.querySelector(`a[href="${CSS.escape(focusHref)}"]`)?.focus({ preventScroll: true });
-        restoreTappedCard();
-      }
-    })();
-  }
+  restoreTappedCard();
   // دخول البطاقات (sheetIn) للعرض الأول فقط: إعادة الرسم بالبحث والفلترة تظهر فوراً.
   // وعند الرجوع أو إعادة التحميل يعود المتصفح إلى موضع التمرير السابق، فلا دخول أصلاً (كانت الصفحة تظهر فارغة لحظة)
   const navEntry = performance.getEntriesByType("navigation")[0];
@@ -1870,6 +1864,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page.picker) initRandomPicker();
   if (page.plan) renderDayPlan();
   if (page.welcome) initWelcomePicker();
+  // نقرات أزرار البطاقات قبل وصول هذا الملف (theme-init.js)، بعد أن تبنّت renderSection البطاقات.
+  // المشاركة لا تُعاد: تحتاج نقرة حيّة من الزائر (navigator.share والنافذة الجديدة يرفضانها بعد مهلة)
+  const taps = window.__cardTaps || [];
+  window.__cardTaps = null;
+  taps.forEach((b) => b.isConnected && !b.classList.contains("share-btn") && b.click());
 });
 
 /* ===== «/» يفتح البحث من أي صفحة (عُرف Google وGitHub)؛ بصفحة البحث نفسها يركّز على الحقل ===== */
