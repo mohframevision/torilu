@@ -256,6 +256,8 @@ function itemFields(entry) {
             hint: "بدونه لن يُنشر التعديل.",
           },
           { label: "السعر (نص حر، مثال: 1.500 BD)", name: "price", widget: "string", required: false },
+          { label: "ملاحظة السعر بدل الرقم (مثال: حسب السوق)", name: "priceNote", widget: "string", required: false },
+          { label: "ملاحظة السعر بالإنجليزية (مثال: market price)", name: "priceNote_en", widget: "string", required: false },
         ],
       },
       {

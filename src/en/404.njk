@@ -1,0 +1,19 @@
+---
+layout: base.njk
+lang: "en"
+permalink: "en/404.html"
+title: "Page Not Found | Torilu"
+description: "The page you're looking for doesn't exist or was moved."
+noindex: true
+---
+{# notfound.js in the root 404.html sends /en/* misses here, so the whole page chrome is English #}
+<section class="nf" id="notFoundHeader">
+  <p class="nf-num" id="notFoundNum" aria-hidden="true" data-n="404">404</p>
+  <p class="nf-cap" id="notFoundCap">Misprint</p>
+  <h1>Page not found</h1>
+  <p id="notFoundText">The link you opened doesn't exist or was moved. Go back to the homepage, or browse a section from the menu.</p>
+</section>
+
+<div class="text-center">
+  <a href="{{ '/en/index.html' | url }}" class="btn" id="notFoundHomeLink">Back to Home</a>
+</div>

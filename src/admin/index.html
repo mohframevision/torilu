@@ -2,6 +2,14 @@
 <html lang="ar">
   <head>
     <meta charset="UTF-8" />
+    <!-- منع تأطير لوحة التحكم (GitHub Pages لا يرسل frame-ancestors)، مثل js/theme-init.js:
+         نحاول كسر الإطار، ونخفي اللوحة دائماً لأن المتصفح يمنع غالباً تنقّل النافذة العليا من نطاق آخر -->
+    <script>
+      if (top !== self) {
+        document.documentElement.style.display = "none";
+        try { top.location.href = location.href; } catch {}
+      }
+    </script>
     <title>لوحة تحكم توريلو</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />

@@ -1345,7 +1345,7 @@ a.photo-credit {
 a.photo-credit:hover {
   text-decoration: underline;
 }
-a.photo-credit.card {
+.photo-credit.card {
   display: block;
   padding: 3px 12px 0;
 }

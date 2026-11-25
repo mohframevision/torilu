@@ -16,7 +16,7 @@ langSwitchUrl: "/about.html"
 
 ## What will you find on Torilu?
 
-- **A guide to places:** cards with the location, map, phone, hours and contact accounts, and for many restaurants a **menu with prices**.
+- **A guide to places:** cards with the location, map, phone, hours and contact accounts, and for some restaurants a **menu with prices**.
 - **Smart search:** search by place name, kind of food, or even the name of a dish inside a menu, and filter by area and category.
 - **"Pick for me":** if you can't decide where to eat, it chooses a place for you with a simple game.
 - **"Near me":** sorts places by how close they are to you (if you allow location, and we don't store it).

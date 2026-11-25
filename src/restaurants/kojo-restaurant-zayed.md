@@ -1,5 +1,5 @@
 ---
-title: "Kojo Restaurant - Zayed"
+title: "مطعم كوجو - زايد"
 icon: "🍽️"
 desc: "مطعم كوجو الياباني: سوشي وماكي ونيغيري وساشيمي، وتيبانياكي ونودلز ورز مقلي فرع مدينة زايد."
 title_en: "Kojo Restaurant - Zayed"
@@ -16,7 +16,7 @@ links:
   instagram: https://www.instagram.com/kojorestaurant/
   website: "https://kojorestaurant.com/zayed-town/"
   phone: "17449055"
-  maps: https://www.google.com/maps/search/Kojo%20Restaurant/@26.1654348,50.5417998,17z
+  maps: https://www.google.com/maps/search/?api=1&query=26.1654348,50.5417998
 menuItems:
   - name: "كازوكو بوكس"
     name_en: "Kazoku Box"

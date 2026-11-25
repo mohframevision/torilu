@@ -1,7 +1,7 @@
 ---
-title: "Bait AlMashrabiya"
+title: "بيت المشربية"
 icon: "🍽️"
-desc: "Bait AlMashrabiya: مطعم إيطالي في الحورة، البحرين."
+desc: "بيت المشربية: مطعم إيطالي في الحورة، البحرين."
 title_en: "Bait AlMashrabiya"
 desc_en: "Bait AlMashrabiya: italian restaurant in Al Hoora, Bahrain."
 categories:

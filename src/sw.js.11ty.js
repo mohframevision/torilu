@@ -17,6 +17,7 @@ const PRECACHE = [
   BASE,
   BASE + "index.html",
   BASE + "en/index.html",
+  BASE + "en/",
   OFFLINE_AR,
   OFFLINE_EN,
   // نفس روابط base.njk حرفياً (مع ?v=النسخة): هكذا تتطابق بالكاش بلا تجاهل للمعاملات
@@ -60,7 +61,8 @@ self.addEventListener("install", (event) => {
     caches.open(CACHE).then((cache) =>
       // addAll تفشل كلها لو فشل ملف واحد — نخزّن كلاً على حدة عشان ملف
       // واحد ناقص ما يمنع التثبيت بالكامل
-      Promise.all(PRECACHE.map((url) => cache.add(url).catch(() => null)))
+      // cache: "reload" يتجاوز كاش HTTP: وإلا جاءت الرئيسية نسخة قديمة تشير إلى ?v= حذفها purgeOldVersions
+      Promise.all(PRECACHE.map((url) => cache.add(new Request(url, { cache: "reload" })).catch(() => null)))
     )
   );
   self.skipWaiting();
@@ -94,7 +96,9 @@ async function networkFirst(request, offlineUrl) {
   const cache = await caches.open(CACHE);
   try {
     const fresh = await fetch(request);
-    if (fresh && fresh.ok) cache.put(request, fresh.clone());
+    // بلا المعاملات: كل ?q= أو ?place= كان يُخزَّن نسخة كاملة، والبحث بلا اتصال يتجاهلها أصلاً
+    const u = new URL(request.url);
+    if (fresh && fresh.ok) cache.put(u.origin + u.pathname, fresh.clone());
     return fresh;
   } catch {
     // ignoreSearch: الصفحات تُطلب أحياناً بمعاملات بحث (?q=...) ونفس

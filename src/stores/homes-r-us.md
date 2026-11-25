@@ -13,7 +13,7 @@ categories:
 dateAdded: 2026-10-08
 coords: 26.2037291, 50.5351925
 links:
-  website: http://www.homesrus.ae/
+  website: https://www.homesrus.ae/
   phone: '17556001'
   maps: https://maps.app.goo.gl/YvrSyaYj25S9Fue48
   instagram: https://www.instagram.com/homesrusbahrain/

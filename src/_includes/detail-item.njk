@@ -24,6 +24,12 @@ pageScript: fold
 {% set la = lat or d0.lat %}{% set ln = lng or d0.lng %}
 {% set cc = coords or d0.coords %}
 {% if not la and cc %}{% set la = cc.split(",")[0] | trim %}{% set ln = cc.split(",")[1] | trim %}{% endif %}
+{#- المنطقة = أول تصنيف في areas، والباقي نوع الأكل (كما في place-newspaper.njk) -#}
+{% set cts = categories or d0.categories or [] %}
+{% set aList %}{% for c in cts %}{% if areas[c] %}{{ c }}|{% endif %}{% endfor %}{% endset %}
+{% set cList %}{% for c in cts %}{% if not areas[c] %}{{ (tags_en[c] or c) if lang == "en" else c }}|{% endif %}{% endfor %}{% endset %}
+{% set ldArea = aList.split("|")[0] %}
+{% set ldMenu = menuItems or d0.menuItems %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -36,7 +42,9 @@ pageScript: fold
   {% if ph %}"telephone": {{ (("+" if ph.startsWith("973") and ph.length > 8 else "+973") + ph) | json | safe }},{% endif %}
   {% if la and ln %}"geo": {"@type": "GeoCoordinates", "latitude": {{ la }}, "longitude": {{ ln }}},{% endif %}
   {% if lk.maps %}"hasMap": {{ lk.maps | json | safe }},{% endif %}
-  "address": {"@type": "PostalAddress", "addressCountry": "BH"}
+  {% if ldType in ["Restaurant", "CafeOrCoffeeShop", "Bakery"] and cList %}"servesCuisine": {{ cList.split("|").slice(0, -1) | json | safe }},{% endif %}
+  {% if ldMenu and ldMenu.length %}"hasMenu": {{ (site.origin + (page.url | url)) | json | safe }},{% endif %}
+  "address": {"@type": "PostalAddress", {% if ldArea %}"addressLocality": {{ ((tags_en[ldArea] or ldArea) if lang == "en" else ldArea) | json | safe }}, {% endif %}"addressCountry": "BH"}
 }
 </script>
 {% else %}
@@ -47,11 +55,12 @@ pageScript: fold
   "headline": {{ title | json | safe }},
   "description": {{ desc | json | safe }},
   "inLanguage": "{{ lang }}",
-  {% if image %}"image": {{ (site.origin + image) | json | safe }},{% endif %}
+  "image": {{ (site.origin + (image or ('/assets/og-image.png' | url))) | json | safe }},
   {#- الإنجليزية تأخذ تاريخ نظيرتها العربية، كما في article-newspaper.njk -#}
   {% set pubDate = dateAdded or (((collections.all | pageByUrl(langSwitchUrl)) or {}).data or {}).dateAdded if lang == "en" else dateAdded %}
   {% if pubDate %}"datePublished": {{ pubDate | isoDate | json | safe }},{% endif %}
   "publisher": {"@type": "Organization", "name": {{ ('Torilu' if lang == 'en' else site.name) | json | safe }}, "url": {{ (site.origin + ('/' | url)) | json | safe }}},
+  "author": {"@type": "Organization", "name": {{ ('Torilu' if lang == 'en' else site.name) | json | safe }}, "url": {{ (site.origin + ('/' | url)) | json | safe }}},
   "isPartOf": {
     "@type": "WebSite",
     "name": {{ ('Torilu' if lang == 'en' else site.name) | json | safe }},

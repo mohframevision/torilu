@@ -6,7 +6,7 @@ desc: |-
 title_en: Safe Way Express Cargo
 desc_en: |-
   A shipping and cargo transport company in Bahrain, based in Muharraq. Pickup couriers work until 4:00 PM.
-hours: "السبت–الخميس 8:00 صباحاً – 6:00 مساءً"
+hours: "السبت - الخميس ٨ص - ٦م"
 hours_en: "Saturday–Thursday 8:00 AM – 6:00 PM"
 categories:
   - شحن ولوجستيات

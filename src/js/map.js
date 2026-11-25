@@ -34,6 +34,14 @@
     const r = n % 100;
     return n + (r >= 3 && r <= 10 ? " أماكن" : r >= 11 ? " مكاناً" : " مكان");
   };
+  // «ومنطقتان بقربها»، «و3 مناطق بقربها»: المناطق المضمومة إلى اللسان
+  const nearby = (n) => {
+    if (en) return D.tMore.replace("{n}", n);
+    if (n === 1) return "ومنطقة أخرى بقربها";
+    if (n === 2) return "ومنطقتان بقربها";
+    const r = n % 100;
+    return "و" + n + (r >= 3 && r <= 10 ? " مناطق" : r >= 11 ? " منطقةً" : " منطقة") + " بقربها";
+  };
 
   // ---------- المناطق من البيانات ----------
   // اسم القسم القصير كما في قائمة الموقع («مطاعم» لا «مطاعم البحرين»)
@@ -206,7 +214,7 @@
     // العدد للمجموعة كلها، فيظهر أن معها مناطق قريبة حتى لا يُنسب كله للمنطقة المسمّاة
     if (extra) btn.append(el("i", "", "+" + extra));
     btn.append(el("b", "", String(c.n)));
-    btn.setAttribute("aria-label", c.members[0].label + (extra ? " " + D.tMore.replace("{n}", extra) : "") + (en ? ", " : "، ") + count(c.n));
+    btn.setAttribute("aria-label", c.members[0].label + (extra ? " " + nearby(extra) : "") + (en ? ", " : "، ") + count(c.n));
     btn.style.setProperty("--st", Math.round(10 + Math.min(34, 6 * Math.sqrt(c.n))) + "px");
     btn.style.setProperty("--d", (still ? 0 : 0.03 * i) + "s");
     btn.addEventListener("click", () => tap(c));
@@ -305,7 +313,7 @@
     if (moved || sheet.classList.contains("mp-flat")) return;
     if (c.members.length > 1 && view.z < ZMAX) {
       snd("mapZoom");
-      say.textContent = c.members[0].label + " " + D.tMore.replace("{n}", c.members.length - 1);
+      say.textContent = c.members[0].label + " " + nearby(c.members.length - 1);
       fly({ z: Math.max(view.z * 2, 2), fx: c.x, fy: c.y });
       return;
     }

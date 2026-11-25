@@ -49,7 +49,7 @@
   const slot = SLOTS[slotKey];
   // اسم الطبعة حسب ساعة الزائر بدل الشعار المكرر مع سطر العنوان
   const editionEl = document.getElementById("homeEdition");
-  if (editionEl) editionEl.textContent = (isEn ? { morning: "Morning edition", noon: "Midday edition", evening: "Evening edition", night: "Night edition" } : { morning: "طبعة الصباح", noon: "طبعة الظهيرة", evening: "طبعة المساء", night: "طبعة الليل" })[slotKey];
+  if (editionEl) editionEl.textContent = (isEn ? { morning: "Morning edition", noon: "Midday edition", evening: "Afternoon edition", night: "Night edition" } : { morning: "طبعة الصباح", noon: "طبعة الظهيرة", evening: "طبعة العصر", night: "طبعة الليل" })[slotKey];
 
   // أزرار سريعة: وقت اليوم + كراج (حاجة مستعجلة بأي وقت)
   // شكل «د»: كلمات بلا إيموجي (الإيموجي كان يعطي إحساساً طفولياً)

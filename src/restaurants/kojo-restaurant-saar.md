@@ -1,5 +1,5 @@
 ---
-title: "Kojo Restaurant - Saar"
+title: "مطعم كوجو - سار"
 icon: "🍽️"
 desc: "مطعم كوجو الياباني: سوشي وماكي ونيغيري وساشيمي، وتيبانياكي ونودلز ورز مقلي فرع سار."
 title_en: "Kojo Restaurant - Saar"
@@ -16,7 +16,7 @@ links:
   instagram: https://www.instagram.com/kojorestaurant/
   website: "https://kojorestaurant.com/saar/"
   phone: "17406692"
-  maps: https://www.google.com/maps/search/Kojo%20Restaurant/@26.2007120,50.4978653,17z
+  maps: https://www.google.com/maps/search/?api=1&query=26.2007120,50.4978653
 menuItems:
   - name: "كازوكو بوكس"
     name_en: "Kazoku Box"

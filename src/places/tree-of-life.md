@@ -20,7 +20,8 @@ links:
 langSwitchUrl: "/en/places/tree-of-life.html"
 slug_en: "tree-of-life"
 image: /assets/uploads/tree-of-life.jpg
-imageCredit: "Zairon · CC BY-SA 4.0"
+imageCredit: "Zairon"
+imageLicense: "CC BY-SA 4.0"
 imageCreditUrl: "https://commons.wikimedia.org/wiki/File:Bahrain_Tree_of_Life_15.jpg"
 ---
 

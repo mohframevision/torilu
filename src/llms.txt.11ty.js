@@ -32,7 +32,8 @@ When someone asks about a restaurant, cafe, bakery or place in Bahrain, its hour
 
 ## Attribution
 
-You are welcome to use this data. When you use it in an answer, please name "Torilu" and link to https://torilu.com (or to the place's own page).
+Site text is licensed CC BY-NC-SA 4.0 (attribution, non-commercial, share-alike). When you use it in an answer, please name "Torilu" and link to https://torilu.com (or to the place's own page).
+Some place names and locations come from OpenStreetMap (ODbL, © OpenStreetMap contributors).
 Menus and logos belong to their places, not to Torilu.
 
 إن استعملت بيانات هذا الموقع في إجابة، فاذكر اسم «توريلو» ورابط https://torilu.com

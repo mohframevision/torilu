@@ -146,7 +146,7 @@
       const sub = [areaLabel(it), e.secName].filter(Boolean).join(" · ");
       return `<a class="search-row" href="${hrefOf(e.section, it)}" data-q="${escapeHtml(input.value.trim())}">
         <span class="search-row-text"><b>${escapeHtml(itemTitle(it))}</b><small>«${mark(name, query)}» · ${escapeHtml(sub)}</small></span>
-        ${e.menu.price ? `<span class="search-price">${escapeHtml(e.menu.price)}</span>` : ""}
+        ${e.menu.price ? `<span class="search-price">${escapeHtml(isEn ? e.menu.price : e.menu.price.replace(/ BD/g, " د.ب"))}</span>` : ""}
       </a>`;
     }
     const sub = [e.secName, areaLabel(it)].filter(Boolean).join(" · ");
@@ -215,7 +215,7 @@
     resultsBox.hidden = false;
     lastResults = search(query);
     if (tab !== "all" && !lastResults.some((r) => r.e.kind === tab)) tab = "all";
-    status.textContent = lastResults.length ? t("search_count").replace("{n}", lastResults.length.toLocaleString(isEn ? "en" : "ar-u-nu-latn")) : t("search_none_title").replace("{q}", query);
+    status.textContent = lastResults.length ? countText(lastResults.length, "search_count") : t("search_none_title").replace("{q}", query);
     if (lastResults.length) renderResults(query);
     else renderNone(query);
   }

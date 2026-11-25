@@ -50,7 +50,7 @@
   {% if (hours_en or td.hours_en) if en else hours %}{% set bits = (bits.push("Hours" if en else "الساعات"), bits) %}{% endif %}
   {% if lat or td.lat or coords or td.coords or tlk.maps %}{% set bits = (bits.push("Location" if en else "الموقع"), bits) %}{% endif %}
   {% set tmi = menuItems or td.menuItems %}
-  {% if tmi and tmi.length %}{% set bits = (bits.push("Menu & Prices" if en else "المنيو والأسعار"), bits) %}{% endif %}
+  {% if tmi and tmi.length %}{% set bits = (bits.push(("Menu with Prices" if en else "المنيو والأسعار") if (tmi | selectattr("price") | length) else ("Menu" if en else "المنيو")), bits) %}{% endif %}
   {% if (imageCredit or td.imageCredit) == "© Mohamed" %}{% set bits = (bits.push("Real Photos" if en else "صور حقيقية"), bits) %}{% endif %}
   {% if en and bits.length > 1 %}{% set what = bits.slice(0, -1).join(", ") + " & " + bits[bits.length - 1] %}{% else %}{% set what = bits.join(" و") %}{% endif %}
   {% set docTitle = title + ((": " + what) if what else "") + (" | Torilu" if en else " | توريلو") %}
@@ -152,9 +152,16 @@
             "name": {{ t.nav_home | json | safe }},
             "item": {{ (site.origin + (('/en/' if lang == 'en' else '/') | url)) | json | safe }}
           },
+          {% set bcPos = 2 %}{% if sectionSlug and sectionTitle %}{% set bcPos = 3 %}
           {
             "@type": "ListItem",
             "position": 2,
+            "name": {{ sectionTitle | json | safe }},
+            "item": {{ (site.origin + ((('/en/' if lang == 'en' else '/') + sectionSlug + '.html') | url)) | json | safe }}
+          },{% endif %}
+          {
+            "@type": "ListItem",
+            "position": {{ bcPos }},
             "name": {{ (title | replace(" | توريلو", "") | replace(" | Torilu", "")) | json | safe }},
             "item": {{ pageUrl | json | safe }}
           }

@@ -20,7 +20,7 @@
     <div class="hm-star">
       {%- if s.img %}<img src="{{ s.img | url }}" alt="" loading="lazy" width="56" height="56" />{% endif %}
       <b>{{ s.ar if ar else s.en }}</b>{% if ar %}<i dir="ltr">{{ s.en }}</i>{% endif %}
-      <span dir="ltr">{{ s.p }} BD</span>
+      <span dir="ltr">{{ s.p }} {{ cur }}</span>
     </div>
     {%- endfor %}
   </div>

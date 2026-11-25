@@ -157,7 +157,12 @@ function buildSiteData(data, options = {}) {
         hours_en: entry.data.hours_en || "",
         menuItems: (entry.data.menuItems || [])
           .filter((mi) => mi && mi.name)
-          .map((mi) => ({ name: mi.name, name_en: mi.name_en || "", price: mi.price || "" })),
+          // priceNote (مثل «حسب السوق») بلا خانة بالتطبيق وjs/menus.js، فيلحق بالاسم كما كان
+          .map((mi) => ({
+            name: mi.priceNote ? `${mi.name} - ${mi.priceNote}` : mi.name,
+            name_en: mi.name_en && mi.priceNote_en ? `${mi.name_en} - ${mi.priceNote_en}` : mi.name_en || "",
+            price: mi.price || "",
+          })),
         featured: Boolean(entry.data.featured),
         sponsored: Boolean(entry.data.sponsored),
         affiliate: Boolean(entry.data.affiliate),

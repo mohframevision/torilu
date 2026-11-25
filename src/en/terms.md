@@ -27,6 +27,8 @@ The site contains links to external sites, stores, and social media accounts tha
 
 The site's content (text and design) is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/): you may share the content with attribution to Torilu and without commercial use, and any derivative works are published under the same license.
 
+Exceptions: place data taken from OpenStreetMap is under the ODbL (© OpenStreetMap contributors), each photo is under the license shown with it, and menus and logos belong to their places.
+
 ## Suggesting additions
 
 Any restaurant, store, or place you suggest adding via the [contact page]({{ '/en/contact.html' | url }}) is reviewed before publishing, and we reserve the right to accept, reject, or edit it without giving reasons.

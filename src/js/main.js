@@ -7,6 +7,18 @@ function t(key) {
   return (window.I18N && window.I18N[lang] && window.I18N[lang][key]) || key;
 }
 
+// «نتيجة واحدة، نتيجتان، 3 نتائج، 11 نتيجةً»: صيغ العدد من مفتاح i18n مفصول بـ|
+// (عربي: واحد|اثنان|3-10|11+|غير ذلك، إنجليزي: مفرد|جمع)
+function countText(n, key) {
+  const f = t(key).split("|");
+  const num = n.toLocaleString(window.SITE_LANG === "en" ? "en" : "ar-u-nu-latn");
+  if (f.length === 2) return num + " " + f[n === 1 ? 0 : 1];
+  if (n === 1) return f[0];
+  if (n === 2) return f[1];
+  const r = n % 100;
+  return num + " " + f[r >= 3 && r <= 10 ? 2 : r >= 11 ? 3 : 4];
+}
+
 function itemTitle(item) {
   return window.SITE_LANG === "en" && item.title_en ? item.title_en : item.title;
 }
@@ -1091,9 +1103,11 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   const title = itemTitle(item);
   const desc = itemDesc(item);
   const isLongDesc = desc.length > 100;
+  // صورة بلا رابط مصدر (صور صاحب الموقع): نص لا رابط، مع الترخيص
+  const credit = escapeHtml(item.imageLicense ? `${item.imageCredit} · ${item.imageLicense}` : item.imageCredit);
 
   card.innerHTML = `
-    ${item.image ? `<img class="item-photo" src="${escapeHtml(item.image)}" alt="${escapeHtml(title)}" ${index === 0 ? `loading="eager" fetchpriority="high"` : `loading="lazy"`} decoding="async" />${item.imageCredit ? `<a class="photo-credit card" dir="ltr" href="${escapeHtml(item.imageCreditUrl)}" target="_blank" rel="noopener">${escapeHtml(item.imageCredit)}</a>` : ""}` : ""}
+    ${item.image ? `<img class="item-photo" src="${escapeHtml(item.image)}" alt="${escapeHtml(title)}" ${index === 0 ? `loading="eager" fetchpriority="high"` : `loading="lazy"`} decoding="async" />${!item.imageCredit ? "" : item.imageCreditUrl ? `<a class="photo-credit card" dir="ltr" href="${safeUrl(item.imageCreditUrl)}" target="_blank" rel="noopener">${credit}</a>` : `<span class="photo-credit card" dir="ltr">${credit}</span>`}` : ""}
     ${item.featured ? `<span class="featured-badge">${t("featured_badge")}</span>` : ""}
     <div class="item-body">
       ${sectionBadge(section)}
@@ -1128,6 +1142,14 @@ function buildItemCard(section, item, index = 0, distanceKm = null, branchLabel 
   favBtn.addEventListener("click", () => {
     const nowFav = toggleFavorite(section, item.id);
     sfx(nowFav ? "favOn" : "favOff");
+    // بصفحة المفضلة: البطاقة المُزالة تختفي، وآخر بطاقة تُظهر رسالة القائمة الفارغة
+    if (!nowFav && window.PAGE?.favorites) {
+      const next = card.nextElementSibling || card.previousElementSibling;
+      card.remove();
+      if (next) next.querySelector(".fav-btn")?.focus();
+      else { renderFavoritesPage(); document.querySelector(".fav-clip-link")?.focus(); }
+      return;
+    }
     favBtn.classList.toggle("active", nowFav);
     favBtn.innerHTML = nowFav ? ICON_SVG["heart-fill"] : ICON_SVG.heart;
     const label = nowFav ? t("fav_remove") : t("fav_add");
@@ -1243,13 +1265,18 @@ function renderSection(section, typeFilter) {
   status.setAttribute("aria-live", "polite");
   grid.before(status);
   // كل بطاقة تُبنى مرة واحدة ثم يُعاد ترتيبها: إعادة البناء مع كل حرف كانت تكلّف مئات الأجزاء من الثانية بالجوال.
-  // بطاقة المسافة («الأقرب مني») تختلف مع موقع الزائر فتُبنى من جديد
+  // بطاقة المسافة («الأقرب مني») لها مخزن خاص يُفرَّغ مع كل موقع جديد للزائر.
+  // استعمال أحد المخزنين يحذف البطاقة من الآخر: قد تتغيّر المفضلة عليها فتصير الأخرى قديمة
   const cardCache = new Map();
+  const distCache = new Map();
   const cardFor = (item, index, distanceKm = null, branchLabel = "") => {
     if (distanceKm !== null) {
-      cardCache.delete(item); // قد تتغيّر المفضلة على البطاقة الجديدة، فالمخزّنة تصير قديمة
-      return buildItemCard(section, item, index, distanceKm, branchLabel);
+      cardCache.delete(item);
+      let c = distCache.get(item);
+      if (!c) distCache.set(item, (c = buildItemCard(section, item, index, distanceKm, branchLabel)));
+      return c;
     }
+    distCache.delete(item);
     let card = cardCache.get(item);
     if (!card) cardCache.set(item, (card = buildItemCard(section, item, index)));
     return card;
@@ -1362,7 +1389,7 @@ function renderSection(section, typeFilter) {
               (query ? relevance.get(b.item) - relevance.get(a.item) : 0) || pinRank(b.item) - pinRank(a.item)
           );
 
-    if (announce !== false) status.textContent = ranked.length ? t("search_count").replace("{n}", ranked.length) : "";
+    if (announce !== false) status.textContent = ranked.length ? countText(ranked.length, "search_count") : "";
     if (ranked.length === 0) {
       const isSectionEmpty = items.length === 0;
       grid.innerHTML = isSectionEmpty
@@ -1381,6 +1408,22 @@ function renderSection(section, typeFilter) {
     }
 
     grid.replaceChildren(...ranked.map(({ item, distanceKm, branchLabel }, index) => cardFor(item, index, distanceKm, branchLabel)));
+  }
+
+  /* الرجوع من صفحة مكان بلا bfcache: البطاقات فوق الشاشة لم تُرسم (content-visibility) فارتفاعها التقديري
+     أقصر من الحقيقي بالجوال، والتمرير المستعاد يقع على بطاقة غيرها؛ نعيد البطاقة المضغوطة إلى الوسط */
+  function restoreTappedCard() {
+    const [page, href] = (ssGet("tappedCard") || "").split(" ");
+    if (page !== location.pathname) return;
+    ssSet("tappedCard", "");
+    if (performance.getEntriesByType("navigation")[0]?.type !== "back_forward") return;
+    const card = [...grid.querySelectorAll(".item-card a[href]")].find((l) => l.pathname === href)?.closest(".item-card");
+    // بعد load: المتصفح يستعيد موضعه القديم عندها فيلغي تمريرنا لو سبقه. instant: الصفحة فيها scroll-behavior: smooth.
+    // مرتين: الأولى ترسم البطاقات حولها بارتفاعها الحقيقي فتزيحها، والثانية تضبطها
+    const go = () => card?.scrollIntoView({ block: "center", behavior: "instant" });
+    const twice = () => setTimeout(() => (go(), requestAnimationFrame(() => requestAnimationFrame(go))));
+    if (document.readyState === "complete") twice();
+    else addEventListener("load", twice, { once: true });
   }
 
   const sharedQuery = new URLSearchParams(location.search).get("q");
@@ -1410,10 +1453,11 @@ function renderSection(section, typeFilter) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           userCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          distCache.clear();
           sortByDistance = true;
           nearMeBtn.classList.add("active");
           nearMeBtn.setAttribute("aria-pressed", "true");
-          nearMeBtn.textContent = t("near_me_active");
+          nearMeBtn.innerHTML = `${t("near_me_active")} <span aria-hidden="true">✕</span>`;
           renderGrid();
           // بالجوال القائمة تحت الشاشة: ننزل لأول بطاقة ونقول كم وحدة ترتّبت، عشان يبان إن شي تغيّر
           const sorted = grid.querySelectorAll(".distance-tag").length;
@@ -1434,8 +1478,10 @@ function renderSection(section, typeFilter) {
   }
 
   renderFilters();
-  if (searchInput?.value.trim()) renderGrid(false);
-  else {
+  if (searchInput?.value.trim()) {
+    renderGrid(false);
+    restoreTappedCard();
+  } else {
     // أول عرض: بطاقات الخادم ظاهرة، والبطاقات التفاعلية تُبنى على دفعات صغيرة فلا تتجمّد الصفحة،
     // ثم تُبدَّل دفعة واحدة. لو بحث الزائر أو فلتر قبل الانتهاء، فعرضه يكمل البناء ويُلغي هذا
     const order = [...items].sort((a, b) => pinRank(b) - pinRank(a));
@@ -1448,6 +1494,7 @@ function renderSection(section, typeFilter) {
       else {
         grid.classList.add("is-settled"); // بطاقات الخادم ظهرت بحركتها، فالتبديل لا يعيدها
         renderGrid(false);
+        restoreTappedCard();
       }
     })();
   }
@@ -1638,7 +1685,7 @@ function openMenuOverlay(item) {
         .menuOf(item)
         .map((mi) => {
           const name = window.SITE_LANG === "en" && mi.name_en ? mi.name_en : mi.name;
-          return `<li><span class="menu-item-name">${escapeHtml(name)}</span>${mi.price ? `<span class="menu-item-price">${escapeHtml(mi.price)}</span>` : ""}</li>`;
+          return `<li><span class="menu-item-name">${escapeHtml(name)}</span>${mi.price ? `<span class="menu-item-price">${escapeHtml(window.SITE_LANG === "en" ? mi.price : mi.price.replace(/ BD/g, " د.ب"))}</span>` : ""}</li>`;
         })
         .join("");
       card.querySelector(".menu-items").innerHTML = rows;
@@ -1772,12 +1819,15 @@ document.addEventListener(
     if (!a || a.target || a.origin !== location.origin) return;
     vtCard = a.closest(".item-card, .d-card, .d-lead, .pk-clip");
     if (vtCard) vtCard.style.viewTransitionName = "paper";
+    if (vtCard?.matches(".card-grid > .item-card")) ssSet("tappedCard", location.pathname + " " + a.pathname);
   },
   true
 );
 window.addEventListener("pageshow", (e) => {
   if (e.persisted) setTimeout(clearVtCard, 700);
 });
+// صفحة «لا يوجد اتصال» تُعرض بعنوان الصفحة المطلوبة نفسه: حين يعود الاتصال نحمّلها فتظهر الصفحة الحقيقية
+window.addEventListener("online", () => document.querySelector("[data-offline]") && location.reload());
 
 document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();

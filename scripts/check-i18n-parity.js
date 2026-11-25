@@ -45,6 +45,7 @@ const rel = (f) =>
 //   admin  — لوحة تحكم Sveltia (واجهة الأداة نفسها، مو محتوى موقع)
 //   404    — GitHub Pages يخدم ملف واحد لكل الموقع، واللغة تُكتشف بجافاسكربت
 const EXCLUDED = new Set(["admin/index.html", "404.html"]);
+const EN_ONLY = new Set(["404.html"]); // en/404.html: notfound.js sends /en/* misses there
 
 // أسماء ملفات إنجليزية تختلف عن مقابلها العربي (لما اسم الملف العربي بالعربي)
 const SLUG_ALIASES = {
@@ -75,7 +76,7 @@ for (const p of expectedEn) {
   if (!enPages.includes(p)) fail("الصفحة الإنجليزية ناقصة: en/" + p);
 }
 for (const p of enPages) {
-  if (!expectedEn.includes(p)) fail("صفحة إنجليزية بلا مقابل عربي: en/" + p);
+  if (!expectedEn.includes(p) && !EN_ONLY.has(p)) fail("صفحة إنجليزية بلا مقابل عربي: en/" + p);
 }
 console.log(`  فُحص ${arPages.length} زوج صفحات`);
 

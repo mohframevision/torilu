@@ -23,7 +23,7 @@
 {% set desc = (d.desc_en or d.desc) if isEn else d.desc %}
 {% set t = i18n[lang or "ar"] %}
 <div class="item-card{% if d.featured %} featured{% endif %}{% if d.verified %} verified{% endif %}">
-  {% set cardIndex = index if (index is defined and index is not none) else 999 %}{% if d.image %}<img class="item-photo" src="{{ d.image }}" alt="{{ title }}"{% if cardIndex == 0 %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" />{% if d.imageCredit %}<a class="photo-credit card" dir="ltr" href="{{ d.imageCreditUrl }}" target="_blank" rel="noopener">{{ d.imageCredit }}</a>{% endif %}{% endif %}
+  {% set cardIndex = index if (index is defined and index is not none) else 999 %}{% if d.image %}<img class="item-photo" src="{{ d.image }}" alt="{{ title }}"{% if cardIndex == 0 %} loading="eager" fetchpriority="high"{% else %} loading="lazy"{% endif %} decoding="async" />{% if d.imageCredit and d.imageCreditUrl %}<a class="photo-credit card" dir="ltr" href="{{ d.imageCreditUrl }}" target="_blank" rel="noopener">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</a>{% elif d.imageCredit %}<span class="photo-credit card" dir="ltr">{{ d.imageCredit }}{{ " · " + d.imageLicense if d.imageLicense }}</span>{% endif %}{% endif %}
   {% if d.featured %}<span class="featured-badge">{{ t.featured_badge }}</span>{% endif %}
   <div class="item-body">
     <div class="item-top">
@@ -66,7 +66,7 @@
       <summary>{{ t.link_menu }}</summary>
       <ul class="menu-items">
         {%- for mi in menuItems %}
-        <li><span class="menu-item-name">{{ (mi.name_en or mi.name) if isEn else mi.name }}</span>{% if mi.price %}<span class="menu-item-price">{{ mi.price }}</span>{% endif %}</li>
+        <li><span class="menu-item-name">{{ (mi.name_en or mi.name) if isEn else mi.name }}</span>{% if mi.price %}<span class="menu-item-price">{{ mi.price if isEn else mi.price | replace(" BD", " د.ب") }}</span>{% elif mi.priceNote %}<span class="menu-item-price">{{ (mi.priceNote_en or mi.priceNote) if isEn else mi.priceNote }}</span>{% endif %}</li>
         {%- endfor %}
       </ul>
     </details>
@@ -86,7 +86,7 @@
       {%- set cls = "btn" if loop.first else "btn secondary" %}
       {%- if k == "details" %}<a class="{{ cls }}" href="{{ (('/en/' if isEn else '/') + sectionSlug + '/' + (d.slug_en if (isEn and d.slug_en) else entry.fileSlug) + '.html') | url }}">{{ icon("menu-book", 16) }} {{ t.read_details }}</a>
       {%- elif k == "website" %}<a class="{{ cls }}" href="{{ links.website }}" target="_blank" rel="noopener noreferrer{{ ' sponsored' if d.affiliate }}">{{ icon("language", 16) }} {{ ((d.cta_en or d.cta) if isEn else d.cta) or t.link_website }}</a>
-      {%- elif k == "phone" %}<a class="{{ cls }}" href="tel:{{ links.phone.split(',')[0] }}">{{ icon("call", 16) }} {{ t.link_phone }}</a>
+      {%- elif k == "phone" %}<a class="{{ cls }}" href="tel:{% set ph = (links.phone | string).split(',')[0] | trim %}{{ ('+' if ph.startsWith('973') and ph.length > 8 else '+973') + ph }}">{{ icon("call", 16) }} {{ t.link_phone }}</a>
       {%- elif k == "maps" %}<a class="{{ cls }}" href="{{ links.maps }}" target="_blank" rel="noopener noreferrer">{{ icon("location-pin", 16) }} {{ t.link_maps }}</a>
       {%- elif k == "instagram" %}<a class="{{ cls }}" href="{{ links.instagram }}" target="_blank" rel="noopener noreferrer">{{ icon("photo-camera", 16) }} {{ t.link_instagram }}</a>
       {%- elif k == "menu" %}<a class="{{ cls }}" href="{{ links.menu }}" target="_blank" rel="noopener noreferrer">{{ icon("menu-book", 16) }} {{ t.link_menu }}</a>

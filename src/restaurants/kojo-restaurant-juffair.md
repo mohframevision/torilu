@@ -1,5 +1,5 @@
 ---
-title: "Kojo Restaurant - Juffair"
+title: "مطعم كوجو - الجفير"
 icon: "🍽️"
 desc: "مطعم كوجو الياباني: سوشي وماكي ونيغيري وساشيمي، وتيبانياكي ونودلز ورز مقلي فرع الجفير."
 title_en: "Kojo Restaurant - Juffair"
@@ -16,7 +16,7 @@ links:
   instagram: https://www.instagram.com/kojorestaurant/
   website: "https://kojorestaurant.com/juffair/"
   phone: "77225225"
-  maps: https://www.google.com/maps/search/Kojo%20Restaurant/@26.2196124,50.6043872,17z
+  maps: https://www.google.com/maps/search/?api=1&query=26.2196124,50.6043872
 menuItems:
   - name: "كازوكو بوكس"
     name_en: "Kazoku Box"

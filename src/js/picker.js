@@ -906,10 +906,16 @@ function initRandomPicker() {
   }
   function closeWheel() {
     sfx("wheelClose");
-    setStep("moon");
-    setPrompt("picker_q1", "picker_s1");
     moon.setAttribute("aria-expanded", "false");
     moon.removeAttribute("aria-label");
+    // إلغاء «تغيير القسم» يعيد القصاصة الحالية كما كانت
+    if (current) {
+      setStep("clip");
+      chip.focus({ preventScroll: true });
+      return;
+    }
+    setStep("moon");
+    setPrompt("picker_q1", "picker_s1");
     moon.focus({ preventScroll: true });
   }
   moon.addEventListener("click", () => busy || (step === "wheel" ? closeWheel() : openWheel()));
@@ -1176,10 +1182,7 @@ function initRandomPicker() {
   });
 
   chip.addEventListener("click", () => {
-    if (busy) return;
-    resultBox.replaceChildren();
-    current = null;
-    openWheel();
+    if (!busy) openWheel();
   });
 
   function resetArea(msg) {
@@ -1204,8 +1207,8 @@ function initRandomPicker() {
           .slice(0, NEAR_COUNT)
           .map((x) => x.it);
         applyPool();
-        showToast(t("picker_area_near_done").replace("{n}", nearPool.length));
-        if (items.length) again();
+        showToast(t("picker_area_near_done").replace("{n}", countText(nearPool.length, "picker_near_count")));
+        if (items.length && step !== "wheel") again();
       },
       () => resetArea(t("geolocation_denied")),
       { enableHighAccuracy: false, timeout: 10000 }
