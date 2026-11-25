@@ -16,7 +16,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const SITE = "_site";
+const SITE = process.argv[2] || "_site"; // optional: a different build dir
 const ARABIC = /[؀-ۿ]/;
 
 let failures = 0;
@@ -35,11 +35,7 @@ function walk(dir) {
     .flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]));
 }
 
-const rel = (f) =>
-  f
-    .split(path.sep)
-    .join("/")
-    .replace(SITE + "/", "");
+const rel = (f) => path.relative(SITE, f).split(path.sep).join("/");
 
 // صفحات مستثناة عمداً من مبدأ "لكل صفحة نسخة بلغتين":
 //   admin  — لوحة تحكم Sveltia (واجهة الأداة نفسها، مو محتوى موقع)
@@ -47,22 +43,19 @@ const rel = (f) =>
 const EXCLUDED = new Set(["admin/index.html", "404.html"]);
 const EN_ONLY = new Set(["404.html"]); // en/404.html: notfound.js sends /en/* misses there
 
-// أسماء ملفات إنجليزية تختلف عن مقابلها العربي (لما اسم الملف العربي بالعربي)
-const SLUG_ALIASES = {
-  "places/ممشى-توبلي.html": "places/tubli-bay-walkway.html",
-  "restaurants/مطعم-الجابرية.html": "restaurants/al-jabriya-restaurant.html",
-  "restaurants/معجنات-آدم.html": "restaurants/adam-pastries.html",
-  "bakeries/مخابز-المنار.html": "bakeries/al-manar-bakeries.html",
-  "bakeries/ميلتوز.html": "bakeries/meltose.html",
-  "restaurants/adam-subs-1.html": "restaurants/adam-subs.html",
-  "restaurants/مطعم-الشعلة.html": "restaurants/al-shola-restaurant.html",
-  "bakeries/مخبز-الجزيرة.html": "bakeries/al-jazira-bakery.html",
-  "restaurants/مدينة-الشواء.html": "restaurants/madinat-al-shiwa.html",
-  "restaurants/مطبخ-سفرة-الصفار.html": "restaurants/sufrat-alsaffar-jeblat-hebshi.html",
-  "restaurants/مطعم-الزهور.html": "restaurants/al-zuhoor-restaurant.html",
-  "restaurants/مطعم-المحور.html": "restaurants/al-mihwar-restaurant.html",
-  "restaurants/مطعم-قصر-الطير.html": "restaurants/bird-palace-musalla.html",
-};
+// أسماء ملفات إنجليزية تختلف عن مقابلها العربي: تُقرأ من slug_en بالـfront matter،
+// فالعنصر الجديد بـslug_en لا يحتاج تعديل هذا الملف
+const SLUG_ALIASES = {};
+for (const sec of fs.readdirSync("src", { withFileTypes: true })) {
+  if (!sec.isDirectory() || sec.name === "en") continue;
+  for (const f of fs.readdirSync(path.join("src", sec.name))) {
+    if (!f.endsWith(".md")) continue;
+    const fm = fs.readFileSync(path.join("src", sec.name, f), "utf8").match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    const m = fm && fm[1].match(/^slug_en:\s*["']?([^"'\r\n]+?)["']?\s*$/m);
+    const base = f.slice(0, -3);
+    if (m && m[1] !== base) SLUG_ALIASES[`${sec.name}/${base}.html`] = `${sec.name}/${m[1]}.html`;
+  }
+}
 
 const allHtml = walk(SITE)
   .filter((f) => f.endsWith(".html"))
@@ -123,6 +116,10 @@ const dataJs = fs.readFileSync(path.join(SITE, "js/data.js"), "utf8");
 // data.js يعرّف `const SITE_DATA = {...}` — نحوّله لتعبير يرجع الكائن مباشرة
 // (eval عادي ما يسرّب const للنطاق الخارجي)
 const SITE_DATA = new Function(dataJs + "\nreturn SITE_DATA;")();
+const menusJs = path.join(SITE, "js/menus.js");
+const MENU_POOL = fs.existsSync(menusJs)
+  ? new Function(fs.readFileSync(menusJs, "utf8") + "\nreturn MENU_POOL;")()
+  : [];
 // قاموس ترجمة التصنيفات — مصدر واحد يستخدمه القوالب وقت البناء وmain.js بالمتصفح
 const TAGS_EN = require(path.resolve("src/_data/tags_en.js"));
 let items = 0;
@@ -134,6 +131,11 @@ for (const [slug, sec] of Object.entries(SITE_DATA)) {
     if (!item.title_en) fail(`${slug}/${item.id}: بلا title_en`);
     if (item.desc && !item.desc_en) fail(`${slug}/${item.id}: بلا desc_en`);
     if (item.cta && !item.cta_en) fail(`${slug}/${item.id}: عنده cta عربي بلا cta_en`);
+    // main.js/home.js ترجع للساعات العربية بالنسخة الإنجليزية لو hours_en فاضي
+    if (item.hours && !item.hours_en) fail(`${slug}/${item.id}: عنده hours بلا hours_en`);
+    for (const [name, nameEn] of MENU_POOL[item.menuRef] || []) {
+      if (name && !nameEn) fail(`${slug}/${item.id}: طبق بلا name_en: ${name}`);
+    }
     for (const tag of item.tags || []) {
       if (!TAGS_EN[tag]) untranslatedTags.add(tag);
     }

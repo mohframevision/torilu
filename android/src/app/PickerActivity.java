@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.location.Location;
@@ -97,6 +96,10 @@ public class PickerActivity extends Activity implements View.OnClickListener, Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (MainActivity.cachedSections == null) { // بعد موت العملية: الرئيسية تحت تُعاد وتجلب البيانات
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_picker);
         Ui.edgeToEdge(this, getColor(R.color.bg), getColor(R.color.surface));
         motion = !FoldView.reducedMotion(this);
@@ -1035,7 +1038,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Vi
             again();
             return;
         }
-        if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (Ui.hasLoc(this)) {
             locate();
         } else {
             new AlertDialog.Builder(this)
@@ -1062,7 +1065,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Vi
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            a.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
+            a.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST);
         }
     }
 
@@ -1070,7 +1073,7 @@ public class PickerActivity extends Activity implements View.OnClickListener, Vi
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode != LOCATION_REQUEST) return;
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) locate();
+        if (Ui.hasLoc(this)) locate();
         else Toast.makeText(this, R.string.loc_fail, Toast.LENGTH_LONG).show();
     }
 

@@ -5,7 +5,7 @@ const path = require("path");
 
 const SITE = process.argv[2] || "_site";
 // المسار الأساسي كما بـ.eleventy.js (pathPrefix) — تحتاج لتبقى مطابقة لو تغيّر هناك
-const BASE_PREFIX = "/torilu";
+const BASE_PREFIX = "";
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -135,3 +135,5 @@ for (const i of ogImageIssues.slice(0, 30)) console.log(`  ${i}`);
 
 console.log(`\n== صفحات بلا meta viewport: ${viewportIssues.length} ==`);
 for (const i of viewportIssues.slice(0, 30)) console.log(`  ${i}`);
+
+if (brokenLinksByFile.size || ldJsonIssues.length) process.exit(1);

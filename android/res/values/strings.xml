@@ -94,7 +94,15 @@
     <string name="home_new">جديد في توريلو</string>
     <string name="search_intro">ابحث في كل الأقسام دفعة واحدة: أسماء الأماكن، وأصناف المنيو، والتصنيفات.</string>
     <string name="search_none">لم نجد شيئاً بهذا الاسم، جرّب كلمة أخرى</string>
-    <string name="search_count">%1$d نتيجة</string>
+    <!-- مثل الموقع: «نتيجة واحدة، نتيجتان، 3 نتائج، 11 نتيجةً»؛ %1$s بأرقام لاتينية -->
+    <plurals name="search_count">
+        <item quantity="zero">%1$s نتيجة</item>
+        <item quantity="one">نتيجة واحدة</item>
+        <item quantity="two">نتيجتان</item>
+        <item quantity="few">%1$s نتائج</item>
+        <item quantity="many">%1$s نتيجةً</item>
+        <item quantity="other">%1$s نتيجة</item>
+    </plurals>
     <string name="favorites_browse">تصفّح الأقسام</string>
 
     <string name="home_hero_title">وين نروح اليوم؟</string>

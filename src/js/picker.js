@@ -919,6 +919,7 @@ function initRandomPicker() {
     moon.focus({ preventScroll: true });
   }
   moon.addEventListener("click", () => busy || (step === "wheel" ? closeWheel() : openWheel()));
+  moon.removeAttribute("aria-busy");
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && step === "wheel" && !busy) closeWheel();
   });
@@ -1216,4 +1217,9 @@ function initRandomPicker() {
   });
 
   setStep("moon");
+  // نقرة سُجّلت قبل وصول البيانات: تُنفَّذ بعد ضبط الخطوة الأولى حتى لا تُلغى
+  if (moon.dataset.early) {
+    delete moon.dataset.early;
+    openWheel();
+  }
 }

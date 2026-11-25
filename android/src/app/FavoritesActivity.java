@@ -22,6 +22,10 @@ public class FavoritesActivity extends Activity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (MainActivity.cachedSections == null) { // بعد موت العملية: الرئيسية تحت تُعاد وتجلب البيانات
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_favorites);
         Ui.edgeToEdge(this, getColor(R.color.bg), getColor(R.color.surface));
         findViewById(R.id.favoritesBrowse).setOnClickListener(this);
@@ -51,7 +55,7 @@ public class FavoritesActivity extends Activity implements View.OnClickListener 
         }
     }
 
-    private void render() {
+    void render() {
         ListView list = findViewById(R.id.favoritesList);
         View empty = findViewById(R.id.favoritesEmpty);
 
@@ -87,7 +91,11 @@ public class FavoritesActivity extends Activity implements View.OnClickListener 
             empty.setVisibility(View.VISIBLE);
         } else {
             empty.setVisibility(View.GONE);
+            // حذف مفضلة من هنا يعيد البناء: نُبقي مكان التمرير بدل القفز للأعلى
+            int pos = list.getFirstVisiblePosition();
+            View first = list.getChildAt(0);
             list.setAdapter(new ItemAdapter(this, "", merged));
+            list.setSelectionFromTop(pos, first == null ? 0 : first.getTop());
             list.setVisibility(View.VISIBLE);
         }
     }

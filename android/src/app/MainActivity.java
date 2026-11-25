@@ -32,7 +32,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
     private JSONObject sections;
     private JSONArray sectionOrder;
     private long lastFetchTime;
-    private boolean deepLinkHandled;
     private static final long STALE_AFTER_MS = 30 * 60 * 1000;
     private static final int NEW_COUNT = 6;
 
@@ -48,6 +47,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // بعد موت العملية يعود الـIntent الأصلي من السجل: لا نفتح الرابط مرة ثانية
+        if (savedInstanceState != null && savedInstanceState.getBoolean("dl")) clearDeepLink();
         setContentView(R.layout.activity_main);
         Ui.edgeToEdge(this, getColor(R.color.bg), getColor(R.color.surface));
         createdLang = Prefs.getLang(this);
@@ -108,6 +109,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
 
     @Override
     public void onSuccess(JSONObject data, boolean fromCache) {
+        if (isDestroyed()) return;
         lastFetchTime = System.currentTimeMillis();
         JSONObject newSections = data.optJSONObject("sections");
         JSONArray newOrder = data.optJSONArray("sectionOrder");
@@ -126,14 +128,26 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
         loadingView.setVisibility(View.GONE);
         errorView.setVisibility(View.GONE);
         homeScroll.setVisibility(View.VISIBLE);
-        if (!deepLinkHandled) {
-            deepLinkHandled = true;
-            handleDeepLink();
+        Uri dl = getIntent().getData();
+        if (dl != null) {
+            clearDeepLink(); // recreate() (الثيم/اللغة) يعيد نفس الـIntent
+            handleDeepLink(dl);
         }
+    }
+
+    private void clearDeepLink() {
+        setIntent(new android.content.Intent(getIntent()).setData(null));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("dl", getIntent().getData() == null);
     }
 
     @Override
     public void onError(String message) {
+        if (isDestroyed()) return;
         if (sections != null) return;
         errorText.setText(message);
         loadingView.setVisibility(View.GONE);
@@ -141,9 +155,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Tori
     }
 
     // رابط توريلو (مثلاً من الواتساب) يفتح القسم أو العنصر المطلوب فوق الرئيسية
-    private void handleDeepLink() {
-        Uri data = getIntent().getData();
-        if (data == null || data.getPath() == null) return;
+    private void handleDeepLink(Uri data) {
+        if (data.getPath() == null) return;
         String path = data.getPath();
         String rel = path.replaceFirst("^/", "");
         if (rel.startsWith("en/")) rel = rel.substring(3);

@@ -83,3 +83,4 @@ for (const sf of sitemapFiles) {
 }
 
 if (!hadIssue) console.log("\nكل ملفات sitemap*.xml مطابقة لقائمة الصفحات الفعلية القابلة للفهرسة.");
+if (hadIssue) process.exit(1);

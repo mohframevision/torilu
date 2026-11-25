@@ -114,6 +114,13 @@ async function run() {
     const ext = path.extname(file).toLowerCase();
 
     if (isUpload(file)) {
+      const srcFile = path.join(SRC_UPLOADS_DIR, path.relative(UPLOADS_DIR, file));
+      // صورة حُذفت من src/ وبقيت بـ_site محلياً (Eleventy لا يحذف): نحذفها ونسخها بدل إعادة ضغطها كل بناء
+      if (!fs.existsSync(srcFile)) {
+        for (const w of VARIANT_WIDTHS) fs.rmSync(variantPath(file, w), { force: true });
+        fs.rmSync(file);
+        continue;
+      }
       const before = fs.readFileSync(file);
       let pipeline = sharp(before)
         .rotate()
@@ -132,8 +139,9 @@ async function run() {
       const exif = before.includes("Copyright Mohamed - CC BY 4.0") ? { IFD0: { Artist: "Mohamed", Copyright: PHOTO_COPYRIGHT } } : null;
       if (exif) pipeline = pipeline.withExif(exif);
       // النسخ المصغّرة تُبنى فقط لو ناقصة أو أقدم من الصورة الأصلية بـsrc/ (البناء يبقى سريعاً)
-      const srcFile = path.join(SRC_UPLOADS_DIR, path.relative(UPLOADS_DIR, file));
-      const srcTime = fs.existsSync(srcFile) ? fs.statSync(srcFile).mtimeMs : Infinity;
+      // ctime أيضاً: ويندوز يُبقي mtime القديم عند نسخ صورة بديلة، لكن ctime يتغيّر
+      const st = fs.statSync(srcFile);
+      const srcTime = Math.max(st.mtimeMs, st.ctimeMs);
       for (const w of VARIANT_WIDTHS) {
         const out = variantPath(file, w);
         if (fs.existsSync(out) && fs.statSync(out).mtimeMs >= srcTime) continue;

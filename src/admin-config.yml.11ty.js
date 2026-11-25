@@ -84,7 +84,7 @@ function itemFields(entry) {
     {
       name: "dateAdded",
       widget: "hidden",
-      default: "{{now}}",
+      default: "{{datetime}}",
       required: false,
     },
     {
@@ -265,6 +265,8 @@ function itemFields(entry) {
           "📖 عطِ هذا العنصر صفحة مقال مستقلة (بدل بطاقة روابط بس) — فعّله فقط لو عبّيت المقال تحته بمعلومات حقيقية، ما تسويها لعنصر ناقص المعلومات",
         name: "hasDetailPage",
         widget: "boolean",
+        hint:
+          "⚠️ الصفحة المستقلة تحتاج نظيرة إنجليزية تُضاف بالكود (src/en/…)، وبدونها يفشل النشر. لا تفعّله من هنا قبل إضافتها.",
         required: false,
         default: false,
       },
@@ -309,7 +311,8 @@ exports.render = function (data) {
     name: entry.slug,
     label: entry.title,
     folder: `src/${entry.slug}`,
-    create: true,
+    // Detail-page sections need a hand-written English twin in src/en/, which the CMS cannot create.
+    create: !entry.hasDetailPages,
     slug: "{{slug}}",
     fields: itemFields(entry),
   }));

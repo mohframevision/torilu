@@ -289,6 +289,7 @@
     if (row) return remember(row.dataset.q);
     const q = e.target.closest("[data-q]");
     if (q) {
+      e.preventDefault(); // الاقتراحات روابط ?q= تعمل بلا JS؛ هنا نبحث في مكانها
       input.value = q.dataset.q;
       run();
       remember(q.dataset.q);

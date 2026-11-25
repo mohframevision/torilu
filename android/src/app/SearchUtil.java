@@ -123,10 +123,11 @@ class SearchUtil {
         for (String qw : qWords) {
             if (qw.isEmpty()) continue;
             boolean matched = false;
-            int maxDist = qw.length() <= 4 ? 1 : 2;
             for (String hw : hay.words) {
-                // فرق الطول وحده أكبر من المسموح = مستحيل يتطابق، بلا حساب المسافة
-                if (hw.contains(qw) || (Math.abs(hw.length() - qw.length()) <= maxDist && levenshtein(hw, qw) <= maxDist)) {
+                // نفس قاعدة الموقع (search.js fieldScore): ٤ أحرف فأكثر وأول حرف يطابق
+                // (بدونها «كرك» تطابق «كيك» و«karak» تطابق «kabab»)، حرف واحد حتى ٦ وحرفان بعدها
+                if (hw.contains(qw) || (qw.length() >= 4 && !hw.isEmpty() && hw.charAt(0) == qw.charAt(0)
+                        && Math.abs(hw.length() - qw.length()) <= 2 && levenshtein(hw, qw) <= (qw.length() <= 6 ? 1 : 2))) {
                     matched = true;
                     break;
                 }

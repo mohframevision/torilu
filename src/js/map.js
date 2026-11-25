@@ -487,7 +487,12 @@
 
   // ---------- البداية: الورقة تنفتح ككتاب، ثم تقف الألسنة ----------
   function start() {
+    // الصفحة تُرسم والورقة مفتوحة (بلا JS أو أثناء انتظار البيانات)؛ نطويها هنا فوراً بلا حركة ثم تنفتح
+    const halves = sheet.querySelectorAll(".mp-half");
+    halves.forEach((h) => (h.style.transition = "none"));
+    sheet.classList.add("mp-closed");
     base = sheet.offsetWidth;
+    halves.forEach((h) => (h.style.transition = ""));
     px = base / W;
     draw();
     apply();

@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -425,8 +424,7 @@ public class SectionActivity extends Activity implements View.OnClickListener, T
             applyFilters();
             return;
         }
-        if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (!Ui.hasLoc(this)) {
             showLocationRationale();
             return;
         }
@@ -456,17 +454,16 @@ public class SectionActivity extends Activity implements View.OnClickListener, T
 
         @Override
         public void onClick(android.content.DialogInterface dialog, int which) {
-            activity.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST);
+            activity.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_PERMISSION_REQUEST
-                && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            locateAndSort();
-        }
+        if (requestCode != LOCATION_PERMISSION_REQUEST) return;
+        if (Ui.hasLoc(this)) locateAndSort();
+        else Toast.makeText(this, R.string.loc_fail, Toast.LENGTH_LONG).show();
     }
 
     // ponytail: يعتمد على آخر موقع معروف بس (getLastKnownLocation) بدل طلب

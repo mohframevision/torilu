@@ -550,7 +550,10 @@ function initInstallPrompt() {
 function initHeaderScroll() {
   const header = document.querySelector(".site-header");
   if (!header) return;
-  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 8);
+  const onScroll = () => {
+    header.classList.toggle("scrolled", window.scrollY > 8);
+    header.classList.toggle("at-top", window.scrollY <= 8);
+  };
   document.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
@@ -1339,7 +1342,7 @@ function renderSection(section, typeFilter) {
       toggleChip.className = "filter-chip filter-toggle";
       toggleChip.textContent = filtersExpanded
         ? `${t("filters_show_less")} ▲`
-        : `${t("filters_show_more")} (+${tagsList.length - FILTER_CHIP_LIMIT}) ▼`;
+        : `${t("filters_show_more")} (+${tagsList.length - visibleTags.length}) ▼`;
       toggleChip.setAttribute("aria-expanded", String(filtersExpanded));
       toggleChip.addEventListener("click", () => {
         sfx("more");
@@ -1502,7 +1505,10 @@ function renderSection(section, typeFilter) {
       if (i < order.length) setTimeout(warm);
       else {
         grid.classList.add("is-settled"); // بطاقات الخادم ظهرت بحركتها، فالتبديل لا يعيدها
+        // التبديل يحذف بطاقة الخادم المركّز عليها، فنعيد التركيز لنفس الرابط بالبطاقة الجديدة
+        const focusHref = grid.contains(document.activeElement) && document.activeElement.getAttribute("href");
         renderGrid(false);
+        if (focusHref) grid.querySelector(`a[href="${CSS.escape(focusHref)}"]`)?.focus({ preventScroll: true });
         restoreTappedCard();
       }
     })();
@@ -1869,7 +1875,7 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ===== «/» يفتح البحث من أي صفحة (عُرف Google وGitHub)؛ بصفحة البحث نفسها يركّز على الحقل ===== */
 document.addEventListener("keydown", (e) => {
   if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
-  if (e.target.closest("input, textarea, select, button, a, [role=slider], [contenteditable]")) return;
+  if (e.target.closest("input, textarea, select, [role=slider], [contenteditable]")) return;
   e.preventDefault();
   const field = document.getElementById("searchInput");
   if (field) return field.focus();
@@ -1914,7 +1920,23 @@ document.addEventListener("keydown", (e) => {
   async function open(img) {
     if (busy) return;
     thumb = img;
-    big.src = img.closest("a")?.href || img.src;
+    // النسخة المحمّلة (المصغّرة) تفتح فوراً بأبعاد الأصل (width من minify.js) فلا يقفز حجمها،
+    // والأصل يحلّ محلها متى نزل — كان الفتح ينتظر تنزيل الأصل كاملاً بلا أي أثر على الشاشة
+    const lo = img.currentSrc || img.src;
+    const hi = img.closest("a")?.href || img.src;
+    const w = +img.getAttribute("width");
+    const h = +img.getAttribute("height");
+    big.style.width = "";
+    big.src = w && h ? lo : hi;
+    if (big.src !== hi) {
+      const p = new Image();
+      p.src = hi;
+      p.decode().then(() => {
+        if (thumb !== img || big.src !== lo) return;
+        big.style.width = "";
+        big.src = hi;
+      }, () => {});
+    }
     big.alt = img.alt;
     dlg.setAttribute("aria-label", big.alt || (window.SITE_LANG === "en" ? "Photo" : "صورة"));
     try {
@@ -1923,6 +1945,7 @@ document.addEventListener("keydown", (e) => {
       /* نكمل حتى لو فشل */
     }
     dlg.showModal();
+    if (big.src !== hi) big.style.width = `${Math.min(w, dlg.clientWidth, (dlg.clientHeight * w) / h)}px`;
     sfx("photoOpen");
     if (still) return;
     busy = true;

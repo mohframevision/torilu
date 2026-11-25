@@ -36,6 +36,12 @@ final class Ui {
         }
     }
 
+    // أندرويد 12+ يتجاهل طلب الدقيق وحده، والمستخدم قد يمنح «تقريبي» فقط — أيّهما يكفي «الأقرب مني»
+    static boolean hasLoc(Context c) {
+        return c.checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == android.content.pm.PackageManager.PERMISSION_GRANTED
+                || c.checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == android.content.pm.PackageManager.PERMISSION_GRANTED;
+    }
+
     static int dp(Context c, float v) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v, c.getResources().getDisplayMetrics());
     }
@@ -273,6 +279,12 @@ final class Ui {
                         | android.view.WindowInsets.Type.displayCutout());
                 t = bars.top;
                 b = bars.bottom;
+                // setDecorFitsSystemWindows(false) يعطّل adjustResize، فنضيف ارتفاع الكيبورد بأنفسنا
+                int mode = ((android.app.Activity) column.getContext()).getWindow().getAttributes().softInputMode
+                        & android.view.WindowManager.LayoutParams.SOFT_INPUT_MASK_ADJUST;
+                if (mode != android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING) {
+                    b = Math.max(b, in.getInsets(android.view.WindowInsets.Type.ime()).bottom);
+                }
                 l = bars.left;
                 r = bars.right;
             } else {

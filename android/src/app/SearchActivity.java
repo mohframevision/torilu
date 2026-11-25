@@ -130,7 +130,7 @@ public class SearchActivity extends Activity implements View.OnClickListener, Te
                 results.put(item);
             }
         }
-        status.setText(total == 0 ? getString(R.string.search_none) : getString(R.string.search_count, total));
+        status.setText(total == 0 ? getString(R.string.search_none) : getResources().getQuantityString(R.plurals.search_count, total, String.valueOf(total)));
         list.setAdapter(new ItemAdapter(this, "", results, q));
     }
 

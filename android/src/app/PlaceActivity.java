@@ -293,7 +293,10 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
         box.addView(r, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Ui.dp(c, 1)));
         box.setLayoutParams(match(c, 18));
         String url = path.startsWith("http") ? path : ToriluApi.ORIGIN + path.replaceFirst("^/", "");
-        new ImageLoad(img, url, c.getResources().getDisplayMetrics().widthPixels).start();
+        int screenW = c.getResources().getDisplayMetrics().widthPixels;
+        // نسخة webp المصغّرة التي يبنيها minify.js بجانب كل صورة مرفوعة (أخف بكثير)؛ الأصل احتياط
+        String small = path.startsWith("http") ? url : url.replaceFirst("\\.(jpe?g|png|webp)$", screenW <= 600 ? "-480w.webp" : "-960w.webp");
+        new ImageLoad(img, small, url, screenW).start();
         return box;
     }
 
@@ -310,12 +313,14 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
     private static final class ImageLoad extends Thread {
         private final WeakReference<ImageView> ref;
         private final String url;
+        private final String fallback;
         private final int maxW;
 
-        ImageLoad(ImageView v, String url, int maxW) {
+        ImageLoad(ImageView v, String url, String fallback, int maxW) {
             super("torilu-photo");
             ref = new WeakReference<>(v);
             this.url = url;
+            this.fallback = fallback;
             this.maxW = Math.max(320, maxW);
         }
 
@@ -323,7 +328,13 @@ public class PlaceActivity extends Activity implements View.OnClickListener, Vie
         public void run() {
             Bitmap bmp;
             try {
-                byte[] data = read(url);
+                byte[] data;
+                try {
+                    data = read(url);
+                } catch (Exception e) { // لا نسخة مصغّرة (404) أو صورة خارجية: الأصل
+                    if (url.equals(fallback)) throw e;
+                    data = read(fallback);
+                }
                 BitmapFactory.Options o = new BitmapFactory.Options();
                 o.inJustDecodeBounds = true;
                 BitmapFactory.decodeByteArray(data, 0, data.length, o);

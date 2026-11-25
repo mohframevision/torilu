@@ -501,6 +501,12 @@ img {
   flex-shrink: 0;
 }
 
+/* أزرار يشغّلها main.js فقط: بلا JS (theme-init.js يضع .js) لا تُعرض أزراراً ميتة */
+html:not(.js) .nav-toggle,
+html:not(.js) .sound-toggle,
+html:not(.js) .theme-toggle {
+  display: none;
+}
 .nav-toggle {
   display: none;
 }
@@ -551,6 +557,18 @@ img {
     pointer-events: auto;
     visibility: visible;
     transition-delay: 0s;
+    padding-top: var(--space-3);
+  }
+  /* بلا JS لا يعمل زر القائمة، فتبقى الأقسام ظاهرة كشبكة تحت الشعار،
+     والهيدر لا يلتصق كي لا تغطي الشبكة نصف الشاشة أثناء التمرير */
+  html:not(.js) .site-header {
+    position: relative;
+  }
+  html:not(.js) .main-nav {
+    max-height: none;
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
     padding-top: var(--space-3);
   }
   .main-nav a {
@@ -610,7 +628,7 @@ img {
 
 @media (max-width: 1300px) {
   body {
-    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(3.75rem + env(safe-area-inset-bottom, 0px));
   }
 
   .bottom-nav {
@@ -619,7 +637,7 @@ img {
     inset-inline: 0;
     bottom: 0;
     z-index: 70;
-    height: 60px;
+    min-height: 3.75rem;
     padding-bottom: env(safe-area-inset-bottom, 0px);
     background: var(--color-surface);
     border-top: 1px solid var(--color-border);
@@ -1556,6 +1574,16 @@ a.photo-credit:hover {
   gap: 2px;
 }
 
+/* حاجز مكان الزرّين في البطاقة المبنية مسبقاً (item-card.njk): لا مؤشر يد فوق فراغ،
+   ولا حاجز في «اقتراح أول زيارة» لأن main.js لا يبدّل بطاقاتها */
+.item-top-actions[aria-hidden] {
+  pointer-events: none;
+}
+
+.welcome-pick .item-top-actions[aria-hidden] {
+  display: none;
+}
+
 .share-btn {
   background: none;
   border: none;
@@ -1999,6 +2027,11 @@ a.photo-credit:hover {
     opacity 0.25s,
     visibility 0.25s;
 }
+/* قبل أن يجهز picker.js (البيانات ما زالت تنزل) القمر باهت؛ الضغطة المبكرة تُحفظ وتُنفَّذ عند الجاهزية */
+.pk-moon[aria-busy="true"] {
+  opacity: 0.6;
+  cursor: progress;
+}
 .pk-moon:focus-visible {
   outline: none;
 }
@@ -2221,7 +2254,8 @@ a.photo-credit:hover {
 .pk-petal-label {
   max-width: calc(var(--p) * 0.84);
   font-weight: 600;
-  font-size: calc(var(--p) * 0.145);
+  /* أرضية بـrem: تكبر مع حجم خط المستخدم */
+  font-size: max(calc(var(--p) * 0.145), 0.7rem);
   line-height: 1.2;
   text-align: center;
   color: var(--color-text);
@@ -6123,7 +6157,7 @@ body:has(.site-header.scrolled) main .search-box {
   margin-top: calc(var(--w) * 0.05);
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: calc(var(--h) * 0.085);
+  font-size: max(calc(var(--h) * 0.085), 1.2rem);
   line-height: 1.35;
   max-height: 4.05em;
   overflow: hidden;
@@ -6138,7 +6172,7 @@ body:has(.site-header.scrolled) main .search-box {
 }
 .np-cover-hint {
   margin-top: calc(var(--w) * 0.03);
-  font-size: max(11px, calc(var(--h) * 0.05));
+  font-size: max(0.6875rem, calc(var(--h) * 0.05));
   font-weight: 700;
   color: #1545a2;
 }
@@ -6774,8 +6808,9 @@ a.section-card:active {
   .site-header {
     border-bottom-color: transparent;
   }
-  /* أعلى الصفحة: الشعار على الورق مباشرة، والشريط الزجاجي يعود مع التمرير */
-  .site-header:not(.scrolled) {
+  /* أعلى الصفحة: الشعار على الورق مباشرة، والشريط الزجاجي يعود مع التمرير.
+     at-top يضعها main.js؛ قبله أو بلا JS يبقى الهيدر زجاجياً فلا يمرّ المحتوى تحت الشعار */
+  .site-header.at-top {
     background: transparent;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;

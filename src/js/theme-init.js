@@ -1,5 +1,8 @@
 /* يطبّق المظهر المحفوظ قبل أول رسم للصفحة (يمنع وميض المظهر الفاتح).
    ملف خارجي عمداً — عشان تشتغل سياسة CSP بدون unsafe-inline. */
+// علامة «JS يعمل»: style.css يخفي بدونها الأزرار التي لا تعمل إلا بـmain.js
+document.documentElement.classList.add("js");
+
 /* حماية دفاعية من clickjacking: GitHub Pages ما يدعم ترويسة X-Frame-Options
    أو frame-ancestors بـCSP (يعمل فقط بترويسة HTTP، مو meta tag — موثّق
    بتعليق الـCSP بـbase.njk). هذا احتياط JS بديل: لو الصفحة محمّلة داخل

@@ -92,7 +92,10 @@
     <string name="home_new">New on Torilu</string>
     <string name="search_intro">Search every section at once: place names, menu items and tags.</string>
     <string name="search_none">Nothing found by that name. Try another word.</string>
-    <string name="search_count">%1$d results</string>
+    <plurals name="search_count">
+        <item quantity="one">%1$s result</item>
+        <item quantity="other">%1$s results</item>
+    </plurals>
     <string name="favorites_browse">Browse sections</string>
 
     <string name="home_hero_title">Where to today?</string>

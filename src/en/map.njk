@@ -18,7 +18,7 @@ langSwitchUrl: "/map.html"
   </header>
   <div class="mp-stage" id="mpStage" role="group" aria-label="Pop-up map of Bahrain. The left and right arrow keys turn it, and the + and − keys zoom.">
     <svg class="mp-defs" width="0" height="0" aria-hidden="true"><defs><path id="mpLand" vector-effect="non-scaling-stroke" d="{{ m.d }}" /></defs></svg>
-    <div class="mp-sheet mp-closed mp-flat" id="mpSheet" style="aspect-ratio: {{ m.w }} / {{ m.h }}">
+    <div class="mp-sheet mp-flat" id="mpSheet" style="aspect-ratio: {{ m.w }} / {{ m.h }}">
       {% for side in ["l", "r"] %}
       <div class="mp-half mp-{{ side }}">
         <svg class="mp-land" viewBox="{{ 0 if side == 'l' else m.w / 2 }} 0 {{ m.w / 2 }} {{ m.h }}" preserveAspectRatio="none" aria-hidden="true"><use class="mp-shade" href="#mpLand" transform="translate(4 5)" /></svg>

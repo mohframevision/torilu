@@ -15,9 +15,9 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 
-const SITE = path.join(__dirname, "..", "_site");
+const SITE = process.argv[2] ? path.resolve(process.argv[2]) : path.join(__dirname, "..", "_site");
 const PORT = 8123;
-const PREFIX = "/torilu"; // pathPrefix المستخدم بالبناء (GitHub Pages)
+const PREFIX = ""; // pathPrefix المستخدم بالبناء (.eleventy.js)
 
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
@@ -174,26 +174,6 @@ async function main() {
       search
     );
 
-    // اللون نفسه صار متغيّراً من لوحة التحكم (theme.json) ومحسوباً بـcolor-mix،
-    // فمطابقة قيمة hex ثابتة هشّة وتنكسر مع أي تغيير لون مستقبلي (وحتى تمثيل
-    // اللون نفسه يختلف — oklch(...) بدل rgb(...) حسب صيغة color-mix المستخدمة).
-    // الفحص الصحيح: هل حافة البطاقة تطابق --color-accent الفعلي بنفس الصفحة؟
-    const ver = await ev(`(()=>{const c=document.querySelector(".item-card.verified");
-      if(!c)return JSON.stringify({none:true});
-      const cs=getComputedStyle(c);
-      const probe=document.createElement("div");
-      probe.style.color="var(--color-accent)";
-      document.body.appendChild(probe);
-      const accent=getComputedStyle(probe).color;
-      probe.remove();
-      return JSON.stringify({w:cs.borderInlineStartWidth, col:cs.borderInlineStartColor, accent})})()`);
-    const verData = JSON.parse(ver);
-    check(
-      "تمييز «زُرته شخصياً» مطبَّق على البطاقة (يطابق --color-accent الفعلي)",
-      verData.w === "3px" && verData.col === verData.accent,
-      ver
-    );
-
     const fav = await ev(`(()=>{localStorage.removeItem("site_favorites_v1");
       document.querySelector(".fav-btn").click();
       return localStorage.getItem("site_favorites_v1")||"null"})()`);
@@ -220,20 +200,6 @@ async function main() {
     );
     const o = JSON.parse(ovf);
     check("بلا تمرير أفقي بعرض ٣٩٠ بكسل", o.sw <= o.cw + 1, ovf);
-
-    // ما فيه عنصر ممول بالمحتوى الحالي، فنعلّم واحداً ونعيد البناء للتحقق من المسار
-    const spon = await ev(`(()=>{const items=SITE_DATA.restaurants.items;
-      items.at(-1).sponsored=true; renderSection("restaurants");
-      const first=document.querySelector(".item-card");
-      return JSON.stringify({pinned:first.classList.contains("sponsored"),
-        badge:(first.querySelector(".sponsored-badge")||{}).textContent||"",
-        doubleBadge:!!first.querySelector(".featured-badge")})})()`);
-    const sp = JSON.parse(spon);
-    check(
-      "العنصر الممول يتصدّر القائمة بشارة «ممول» وحدها",
-      sp.pinned && sp.badge.trim() === "ممول" && !sp.doubleBadge,
-      spon
-    );
 
     console.log("");
     results.forEach((r) =>

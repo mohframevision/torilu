@@ -41,4 +41,20 @@
     });
   };
 
+  /* صفحة البحث: ?q= يظهر في الحقل فوراً، قبل أن تصل data.js ويعمل search.js،
+     بدل أن تبدو الصفحة كأن البحث لم يحدث */
+  var sq = document.getElementById("searchInput");
+  var q0 = sq && new URLSearchParams(location.search).get("q");
+  if (q0) {
+    sq.value = q0;
+    var se = document.getElementById("searchEmpty");
+    if (se) se.hidden = true;
+  }
+
+  /* «اختار لي»: ضغطة على القمر قبل أن يجهز picker.js تُحفظ، وpicker.js يفتح العجلة حين يجهز */
+  var pm = document.getElementById("pkMoon");
+  if (pm)
+    pm.addEventListener("click", function () {
+      if (pm.getAttribute("aria-busy") === "true") pm.dataset.early = "1";
+    });
 })();

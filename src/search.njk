@@ -25,11 +25,11 @@ langSwitchUrl: "/en/search.html"
     </div>
     <div class="search-block">
       <h2>{{ i18n.ar.search_popular }}</h2>
-      <div class="chip-row" id="searchPopular">{% for p in search.popular %}<button type="button" class="filter-chip" data-q="{{ p }}">{{ p }}</button>{% endfor %}</div>
+      <div class="chip-row" id="searchPopular">{% for p in search.popular %}<a class="filter-chip" href="{{ '/search.html' | url }}?q={{ p | urlencode }}" data-q="{{ p }}">{{ p }}</a>{% endfor %}</div>
     </div>
     <div class="search-block">
       <h2>{{ i18n.ar.search_try }}</h2>
-      <div class="chip-row" id="searchTry">{% for p in search.try %}<button type="button" class="filter-chip" data-q="{{ p }}">{{ p }}</button>{% endfor %}</div>
+      <div class="chip-row" id="searchTry">{% for p in search.try %}<a class="filter-chip" href="{{ '/search.html' | url }}?q={{ p | urlencode }}" data-q="{{ p }}">{{ p }}</a>{% endfor %}</div>
     </div>
     <div class="search-block">
       <h2>{{ i18n.ar.search_browse }}</h2>
