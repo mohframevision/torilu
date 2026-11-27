@@ -50,6 +50,7 @@ exports.render = function (data) {
     // noindex حتى لا تُفهرَس وهي ناقصة
     ["about.html", "en/about.html"],
     ["contact.html", "en/contact.html"],
+    ["community-delivery.html", "en/community-delivery.html"],
     ["privacy-policy.html", "en/privacy-policy.html"],
     ["terms.html", "en/terms.html"],
     ...EN_SECTION_SLUGS.map((slug) => [`${slug}.html`, `en/${slug}.html`]),
